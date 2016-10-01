@@ -43,14 +43,12 @@ def post_detail(request, slug=None):  # retrieve
         if not (request.user.is_staff or request.user.is_superuser):
             raise Http404
 
-
-
     initial_data = {
         "content_type": instance.get_content_type,
         "object_id": instance.id,
     }
     comment_form = CommentForm(request.POST or None, initial=initial_data)
-    if comment_form.is_valid():
+    if comment_form.is_valid() and request.user.is_authenticated():
         content_type = comment_form.cleaned_data.get("content_type")
         content_type = ContentType.objects.get(model=content_type)
         obj_id = comment_form.cleaned_data.get("object_id")

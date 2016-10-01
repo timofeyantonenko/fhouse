@@ -13,6 +13,7 @@
     <img src="{{ instance.image.url }}" class='img-responsive'/>
     {% endif %}
 <h1>{{title}} <small> {% if instance.draft %}<span style="color:red;">Draft</span>{% endif %} {{instance.publish}}</small></h1>
+<p>Read time: {% if instance.read_time <= 1 %} < 1 Minute {% elif instance.read_time <= 10 %} < 10 Minutes {% else %} {{instance.read_time|time:"i"}} Minutes {% endif %}</p>
     {% if instance.user.get_full_name %}
 <p>Author: {{ instance.user.get_full_name }}</p>
     {% endif %}
@@ -47,10 +48,14 @@
 
             <div>
                 <p class="lead">Comments</p>
+                {% if request.user.is_authenticated %}
                 <form method="POST" action="."> {% csrf_token %}
                     {{ comment_form|crispy }}
                     <input type="submit" value="Post comment" class="btn btn-default">
                 </form>
+                {% else %}
+                <p>You must login to comment</p>
+                {% endif %}
                 <hr/>
                 {% for comment in comments %}
 
@@ -66,12 +71,15 @@
 
                          </blockquote>
                     {% endfor %}
-
-                <form method="POST" action="."> {% csrf_token %}
-                    {{ comment_form|crispy }}
-                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                    <input type="submit" value="Reply" class="btn btn-default">
-                </form>
+                    {% if request.user.is_authenticated %}
+                        <form method="POST" action="."> {% csrf_token %}
+                            {{ comment_form|crispy }}
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                            <input type="submit" value="Reply" class="btn btn-default">
+                        </form>
+                    {% else %}
+                        <p>You must login to comment</p>
+                    {% endif %}
                     </div>
 
                 </blockquote>
