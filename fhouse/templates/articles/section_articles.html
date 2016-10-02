@@ -2,7 +2,8 @@
 {% block head_title %}{{ title }}{% endblock head_title %}
 {% block content %}
 
-{% for record_group in groups %}
-  <h3><a href = '{{record_group.get_absolute_url}}'>{{ record_group }} </a></h3>
+
+{% for article in articles %}
+  <h3><a href = '{{article.get_absolute_url}}'>{{ article }} </a></h3>
 {% endfor %}
 {% endblock content %}
