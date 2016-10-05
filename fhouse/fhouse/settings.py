@@ -46,6 +46,11 @@ INSTALLED_APPS = [
     # local apps
     'comments',
     'posts',
+    'records',
+    'football_object',
+    'bettournament',
+    'gallery',
+    'article',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -61,6 +66,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGIN_URL = '/login/'
 ROOT_URLCONF = 'fhouse.urls'
 
 TEMPLATES = [

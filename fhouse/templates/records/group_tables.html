@@ -1,0 +1,8 @@
+{% extends  "base.html" %}
+{% block head_title %}{{ title }}{% endblock head_title %}
+{% block content %}
+
+{% for records_table in tables %}
+  <h3><a href = '{{records_table.get_absolute_url}}'>{{ records_table }} </a></h3>
+{% endfor %}
+{% endblock content %}
