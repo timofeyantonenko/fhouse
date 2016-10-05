@@ -1,0 +1,521 @@
+.statsCard {
+    margin-bottom: 2rem
+}
+
+.statsList {
+    overflow: hidden
+}
+
+.statsCard .statsList a {
+    color: #242424;
+    text-decoration: none;
+    display: block
+}
+
+.statsCard .statsList a:focus,
+.statsCard .statsList a:hover {
+    text-decoration: underline
+}
+
+.statsCard .statsList .statsRow {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 1rem;
+    font-size: 1.2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: 4.7rem
+}
+
+.statsCard .statsList .statsRow a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.statsCard .statsList .statsRow .statName {
+    margin-bottom: 0
+}
+
+.statsCard .statsList .stat {
+    margin-left: auto
+}
+
+.statsCard .statsList .stat [class*=badge],
+.statsCard .statsList .stat a,
+.statsCard .statsList .statsBadge {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.statsCard .statsList .statsBadge {
+    position: relative;
+    top: -1px
+}
+
+.statsHero {
+    padding: 1rem 1rem 5rem;
+    background: #eaeaea;
+    background-image: url(../i/bg-elements/stats-card.png);
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    position: relative;
+    border-bottom: 1px solid #e8e8e8
+}
+
+@media (-moz-min-device-pixel-ratio:2),
+(-webkit-min-device-pixel-ratio:2) {
+    .statsCard .statsHero {
+        background-image: url(../i/bg-elements/stats-card@x2.png);
+        background-size: 250 215
+    }
+}
+
+
+.statsCard .statsHero .pos {
+    font-size: 1.2em;
+    margin-bottom: .5rem
+}
+
+.statsCard .statsHero .statName {
+    min-height: 4rem;
+    font-size: 1.4em;
+    line-height: 1.4
+}
+
+.statsCard .statsHero .statNameSecondary {
+    margin-bottom: .5rem;
+    font-size: 1em;
+    white-space: nowrap
+}
+
+.statsCard .statsHero .stat {
+    font-size: 1.6em;
+    float: none;
+    font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif
+}
+
+.statsCard .statsHero .heroBadgeContainer {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    top: .4rem;
+    left: .5rem;
+    border-radius: 100%;
+    background: #fff;
+    z-index: 10
+}
+
+.statsCard .statsHero .statsBadge {
+    float: none;
+    position: absolute;
+    width: 100%;
+    height: 100%
+}
+
+.statsCard .statsHero .badge-20 {
+    margin: .7rem .6rem
+}
+
+.statsCard .statsHero .statCardImg {
+    position: absolute;
+    right: -1rem;
+    bottom: 0;
+    max-width: 60%;
+    max-height: 95%
+}
+
+.statsCard .statsHero.inactive .imgCropContainer {
+    position: absolute;
+    top: .8rem;
+    right: .5rem;
+    width: 11rem;
+    height: 11rem;
+    overflow: hidden;
+    border-radius: 100%;
+    background: #fff;
+    border: 4px solid #fff
+}
+
+.statsCard .statsHero.inactive .imgCropContainer .statCardImg {
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    position: static
+}
+
+.statsCard {
+    background: #fff;
+    font-size: 1em;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    clear: both
+}
+
+.statsCard header {
+    position: relative
+}
+
+.statsCard .statsTitle {
+    padding: 1rem;
+    font-size: 1.4rem
+}
+
+/*.statsCard .statsTitle:after {
+    content: " ";
+    display: block;
+    clear: both
+}*/
+
+.statsCard .statsTitle .socialShare {
+    margin-right: -.5rem
+}
+
+.statsCard .statsTitle a {
+    color: #242424;
+    text-decoration: none;
+    display: block
+}
+
+.statsCard .statsTitle a:focus,
+.statsCard .statsTitle a:hover {
+    text-decoration: underline
+}
+
+.statsCard .socialShare {
+    position: absolute;
+    top: .6rem;
+    right: .6rem
+}
+
+.statsCard .statsList {
+    overflow: hidden
+}
+
+.statsCard .statsList a {
+    color: #242424;
+    text-decoration: none;
+    display: block
+}
+
+.statsCard .statsList a:focus,
+.statsCard .statsList a:hover {
+    text-decoration: underline
+}
+
+.statsCard .statsList .statsRow {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 1rem;
+    font-size: 1.2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: 4.7rem
+}
+
+.statsCard .statsList .statsRow a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.statsCard .statsList .statsRow .statName {
+    margin-bottom: 0
+}
+
+.statsCard .statsList .stat {
+    margin-left: auto
+}
+
+.statsCard .statsList .stat [class*=badge],
+.statsCard .statsList .stat a,
+.statsCard .statsList .statsBadge {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.statsCard .statsList .statsBadge {
+    position: relative;
+    top: -1px
+}
+
+.statsCard .badge-20 {
+    margin-right: .5rem
+}
+
+.statsCard .pos {
+    margin-right: .5rem;
+    font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif
+}
+
+.statsCard .pos,
+.statsCard .teamInfo {
+    display: inline-block;
+    vertical-align: middle
+}
+
+.statsCard .teamInfo {
+    max-width: 60%
+}
+
+.statsCard .position {
+    margin-bottom: .5rem
+}
+
+.statsCard .stat {
+    float: right
+}
+
+.statsCard .statName {
+    font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: .3rem
+}
+
+.statsCard .statNameSecondary {
+    min-height: 11px;
+    font-weight: 400;
+    font-size: .9em;
+    color: #76766f
+}
+
+.statsCard .stat {
+    color: #e90052;
+}
+
+.statsCard .statsHero {
+    padding: 1rem 1rem 1rem;
+    height: 12.5rem;
+    background: #eaeaea;
+    background-image: url(../i/bg-elements/stats-card.png);
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    position: relative;
+    border-bottom: 1px solid #e8e8e8
+}
+
+@media (-moz-min-device-pixel-ratio:2),
+(-webkit-min-device-pixel-ratio:2) {
+    .statsCard .statsHero {
+        background-image: url(../i/bg-elements/stats-card@x2.png);
+        background-size: 250 215
+    }
+}
+
+.statsCard .statsHero .statInfo {
+    max-width: 6rem;
+    position: relative;
+    z-index: 10;
+    white-space: normal;
+    position: absolute;
+    top:3rem;
+    /*top: 50%;*/
+   
+}
+
+.statsCard .statsHero .pos {
+    font-size: 1.2rem;
+    margin-bottom: .5rem
+}
+
+.statsCard .statsHero .statName {
+    min-height: 4rem;
+    font-size: 1.4rem;
+    line-height: 1.4
+}
+
+.statsCard .statsHero .statNameSecondary {
+    margin-bottom: .5rem;
+    font-size: 1rem;
+    white-space: nowrap
+}
+
+.statsCard .statsHero .stat {
+    font-size: 1.6em;
+    float: none;
+    font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif
+}
+
+/*.statsCard .statsHero .cardClubColour,
+.statsCard .statsHero.inactive:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4rem
+}*/
+
+.statsCard .statsHero .heroBadgeContainer {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    top: .4rem;
+    left: .5rem;
+    border-radius: 100%;
+    background: #fff;
+    z-index: 10
+}
+
+.statsCard .statsHero .statsBadge {
+    float: none;
+    position: absolute;
+    width: 100%;
+    height: 100%
+}
+
+.statsCard .statsHero .badge-20 {
+    margin: .7rem .6rem
+}
+
+.statsCard .statsHero .statCardImg {
+    position: absolute;
+    right: -1rem;
+    bottom: 0;
+    max-width: 60%;
+    max-height: 95%
+}
+
+.statsCard .statsHero.inactive .imgCropContainer {
+    position: absolute;
+    top: .8rem;
+    right: .5rem;
+    width: 11rem;
+    height: 11rem;
+    overflow: hidden;
+    border-radius: 100%;
+    background: #fff;
+    border: 4px solid #fff
+}
+
+.statsCard .statsHero.inactive .imgCropContainer .statCardImg {
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    position: static
+}
+
+.statsCard .btn {
+    margin: 1rem
+}
+
+.statsCard .badge-100 {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem
+}
+
+.statsCard .playerClub {
+    margin-right: .5rem
+}
+
+.statsCard .flag {
+    vertical-align: middle;
+    margin-right: 5px
+}
+
+.statsCard .flag-name {
+    margin-top: 5px
+}
+
+/*@media (max-width:63.9375em) {
+    .statsCard .statInfo {
+        margin-bottom: 3rem
+    }*/
+}
+
+ul#otis {
+    list-style-type: none;
+}
+
+#list-group {
+    margin-bottom: 0px;
+}
+
+#caption {
+    padding: 0px;
+}
+
+#caption h3 {
+    margin-top: 10px;
+}
+
+#btn-record {
+    margin-right: 10%;
+}
+
+
+/*hover for thumbnail */
+
+.thumbnail {
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
+}
+
+
+/*.thumbnail:hover {
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    transition-duration: 5s;
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
+}
+*/
+
+.full_list_record {
+    box-sizing: border-box;
+    float: left;
+    background-color: #ebebeb;
+    display: inline-block;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    margin: 3%;
+    padding: 2% 3%;
+    border-radius: 3px;
+    width: 94%;
+}
+
+.full_list_record:hover {
+    background-color: #e90052;
+    color: white;
+}
+
+#arrow_record {
+    float: right;
+}
+
+#record_card:hover {
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    transition-duration: 5s;
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
+    -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
+}
+
+#statInfo {
+	padding-bottom: 10%;
+}
