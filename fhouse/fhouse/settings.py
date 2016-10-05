@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'records',
     'football_object',
     'bettournament',
+    'gallery',
+    'article',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

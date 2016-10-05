@@ -1,8 +1,68 @@
 {% extends  "base.html" %}
+{% load staticfiles%}
 {% block head_title %}{{ title }}{% endblock head_title %}
+{% block head_extra %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Record</title>
+    <link rel="stylesheet" href='{% static "css/record.css" %}'>
+{% endblock head_extra %}
 {% block content %}
 
-{% for record_group in groups %}
-  <h3><a href = '{{record_group.get_absolute_url}}'>{{ record_group }} </a></h3>
+{% for record_group in groups_tables %}
+  <h3><a href = '{{record_group.group.get_absolute_url}}'>{{ record_group.group }} </a></h3>
+    {% for records_table in record_group.tables %}
+        <h3><a href = '{{records_table.get_absolute_url}}'>{{ records_table.table }} </a></h3>
+            <div data-stat-header="recordPlayers" class="statsCard">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+
+            </div>
+            <div class="col-sm-4 col-lg-3">
+                <div class="thumbnail">
+                    <div class="caption" id="caption">
+                        <h3>{{ records_table.table }}</h3>
+                    </div>
+
+                    <ul class="statsList list-group" id="list-group">
+                        {% for record in records_table.records %}
+                            {% if forloop.counter == 1 %}
+                            <li class="statsHero inactive">
+                                <div class="statInfo" id="statInfo">
+                            {% else %}
+                            <li class="statsRow">
+                                <div class="pos">
+                                    {{forloop.counter}}.</div>
+                                <div class="teamInfo">
+                            {% endif %}
+                                <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
+                                    </div>
+                                <div class="stat"> {{ record.record_value }} </div>
+                                {% if forloop.counter == 1 %}
+                                    <div class="imgCropContainer">
+                                        <img class="img statCardImg"  src="{{record.record_owner.image.url}}" alt="">
+                                    </div>
+                                {% endif %}
+                        {% endfor %}
+                        <li class="full_list_record"  id="btn-record">Полный Cписок <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></li>
+                            </ul>
+                                <div class="col-lg-3">
+
+        	</div>
+        	<div class="col-lg-3">
+
+        	</div>
+        	<div class="col-lg-2">
+
+        	</div>
+
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 {% endfor %}
 {% endblock content %}

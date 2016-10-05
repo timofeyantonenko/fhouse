@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from utils.files_preparing import upload_location
 
 
 # Create your models here.
@@ -7,12 +8,13 @@ from django.db import models
 class FootballObject(models.Model):
 
     name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to=upload_location,
+                              null=True, blank=True,
+                              height_field="height_field",
+                              width_field="width_field")
 
-    # who added a record
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
-    # when record was added and updated
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

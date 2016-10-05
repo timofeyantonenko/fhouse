@@ -14,6 +14,8 @@ from django.db.models import Q
 from .forms import PostForm
 from .models import Post
 
+from utils.prepare_methods import create_comment_data
+
 
 def post_create(request):
     """
@@ -34,7 +36,7 @@ def post_create(request):
     context = {
         "form": form,
     }
-    return render(request, "post_form.html", context)
+    return render(request, "posts/post_form.html", context)
 
 
 def post_detail(request, slug=None):  # retrieve
@@ -50,27 +52,8 @@ def post_detail(request, slug=None):  # retrieve
     comment_form = CommentForm(request.POST or None, initial=initial_data)
     if comment_form.is_valid() and request.user.is_authenticated():
         content_type = comment_form.cleaned_data.get("content_type")
-        content_type = ContentType.objects.get(model=content_type)
-        obj_id = comment_form.cleaned_data.get("object_id")
-        content_data = comment_form.cleaned_data.get("content")
-        parent_object = None
-        try:
-            parent_id = int(request.POST.get("parent_id"))
-        except:
-            parent_id = None
-
-        if parent_id:
-            parent_qs = Comment.objects.filter(id=parent_id)
-            if parent_qs.exists() and parent_qs.count() == 1:
-                parent_object = parent_qs.first()
-
-        new_comment, created = Comment.objects.get_or_create(
-            user=request.user,
-            content_type=content_type,
-            object_id=obj_id,
-            content=content_data,
-            parent=parent_object
-        )
+        new_comment, created = create_comment_data(request=request, content_type=content_type,
+                                                   comment_form=comment_form)
         return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 
     comments = instance.comments
@@ -81,7 +64,7 @@ def post_detail(request, slug=None):  # retrieve
         'comments': comments,
         'comment_form': comment_form,
     }
-    return render(request, "post_detail.html", context)
+    return render(request, "posts/post_detail.html", context)
 
 
 def post_list(request):  # list items
@@ -117,7 +100,7 @@ def post_list(request):  # list items
         "page_request_var": page_request_var,
         "today": today,
     }
-    return render(request, "post_list.html", context)
+    return render(request, "posts/post_list.html", context)
 
 
 def post_update(request, slug=None):
@@ -137,7 +120,7 @@ def post_update(request, slug=None):
         "title": instance.title,
         "form": form,
     }
-    return render(request, "post_form.html", context)
+    return render(request, "posts/post_form.html", context)
 
 
 def post_delete(request, slug=None):

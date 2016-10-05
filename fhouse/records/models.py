@@ -30,14 +30,10 @@ class RecordGroup(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        # print(reverse("records:groups", kwargs={"slug": self.slug}))
-        # return 'nice'
         return reverse("records:group_tables", kwargs={"slug": self.slug})
-        # return "/posts/%s/" % self.id
 
     @property
     def tables(self):
-        instance = self
         query_set = RecordTable.objects.filter(record_group=self)
         return query_set
 
@@ -94,7 +90,7 @@ class Record(models.Model):
     # what record is mean
     record_table = models.ForeignKey(RecordTable, on_delete=models.CASCADE)
     record_owner = models.ForeignKey(FootballObject, on_delete=models.CASCADE)
-    record_value = models.CharField(max_length=120)
+    record_value = models.IntegerField()
     record_description = models.TextField()
 
     # slug for absolute url
@@ -112,6 +108,9 @@ class Record(models.Model):
 
     def __str__(self):
         return self.record_owner.name
+
+    class Meta:
+        ordering = ["-record_value"]
 
 
 def create_slug(instance, new_slug=None):

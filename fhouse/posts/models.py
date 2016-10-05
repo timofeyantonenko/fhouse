@@ -5,13 +5,13 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 
 
 # Create your models here.
 from markdown_deux import markdown
-from comments.models import Comment
 from .utils import get_read_time
+from utils.files_preparing import upload_location
+from utils.abstract_classes import CommentedClass
 
 
 class PostManager(models.Manager):
@@ -19,11 +19,7 @@ class PostManager(models.Manager):
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 
-def upload_location(instance, filename):
-    return "{}/{}".format(instance.id, filename)
-
-
-class Post(models.Model):
+class Post(CommentedClass):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
@@ -56,18 +52,6 @@ class Post(models.Model):
     def get_markdown(self):
         mark_text = markdown(self.content)
         return mark_safe(mark_text)
-
-    @property
-    def comments(self):
-        instance = self
-        query_set = Comment.objects.filter_by_instance(instance)
-        return query_set
-
-    @property
-    def get_content_type(self):
-        instance = self
-        content_type = ContentType.objects.get_for_model(instance.__class__)
-        return content_type
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
