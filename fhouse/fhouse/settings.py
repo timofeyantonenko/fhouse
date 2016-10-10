@@ -93,12 +93,8 @@ WSGI_APPLICATION = 'fhouse.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fhouse',
-        'USER': 'tantonenko',
-        'PASSWORD': 'fhousetimofey',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
 
     }
 }

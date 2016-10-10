@@ -205,17 +205,55 @@ h1 {
     font-weight: bold;
 }
 
-.navbar-nav a:hover {
-    -webkit-box-shadow: inset 3px -23px 0px -17px #e90052;
-    -moz-box-shadow: inset 3px -23px 0px -17px #e90052;
-    box-shadow: inset 3px -23px 0px -17px #e90052;
-    transition-delay: 0.2s;
+
+/*Menu hover*/
+
+@media (min-width: 768px) {
+    .navbar-nav .liMenuHover0:hover .liMenuHover {
+        bottom: 0px;
+        -moz-transition: all 0.2s ease-out;
+        -o-transition: all 0.2s ease-out;
+        -webkit-transition: all 0.2s ease-out;
+        transition: all 0.2s ease-out;
+    }
 }
 
-.navbar-nav a:active {
-    -webkit-box-shadow: inset 3px -23px 0px -17px #e90052;
-    -moz-box-shadow: inset 3px -23px 0px -17px #e90052;
-    box-shadow: inset 3px -23px 0px -17px #e90052;
+.nav > li {
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav a:hover {
+        color: #e90052;
+        -moz-transition: all 1.2s ease-out;
+        -o-transition: all 1.2s ease-out;
+        -webkit-transition: all 1.2s ease-out;
+        transition: all 1.2s ease-out;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-nav a:hover {
+        color: #e90052;
+        -moz-transition: all 1.2s ease-out;
+        -o-transition: all 1.2s ease-out;
+        -webkit-transition: all 1.2s ease-out;
+        transition: all 1.2s ease-out;
+    }
+}
+
+.liMenuHover {
+    position: absolute;
+    bottom: -5px;
+    left: 0px;
+    width: 100%;
+    height: 5px;
+    background-color: #e90052;
+    /*-moz-transition: all 1.2s ease-out;
+    -o-transition: all 1.2s ease-out;
+    -webkit-transition: all 1.2s ease-out;
+    transition: all 1.2s ease-out;*/
 }
 
 .navbar-nav li:hover {
@@ -264,4 +302,6 @@ h1 {
     }
 }
 
-
+#menu_fixedTop {
+    position: relative;
+}
