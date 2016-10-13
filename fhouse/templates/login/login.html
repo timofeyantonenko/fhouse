@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
+{% extends  "base.html" %}
+{% load staticfiles%}
+{% block head_title %}{{ title }}{% endblock head_title %}
+{% block head_extra %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
-</head>
+    <link rel="stylesheet" href='{% static "css/login.css" %}'>
+{% endblock head_extra %}
+{% block content %}
 
-<body>
     <div class="container">
         <div class="row">
             <div class="col-lg-3"></div>
@@ -1035,17 +1036,5 @@
         </div>
         <div class="col-lg-3"></div>
     </div>
-    </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="login.css">
-    <script src="login.js"></script>
-</body>
 
-</html>
+{% endblock %}
