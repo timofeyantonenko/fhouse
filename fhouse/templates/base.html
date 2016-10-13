@@ -42,135 +42,142 @@
                     </div>
                     <div class="collapse navbar-collapse" id="responsive-menu">
                         <ul class="nav navbar-nav">
-                            <li><a href="/posts">НОВОСТИ</a></li>
-                            <li><a href="#">ПРОГНОЗЫ</a></li>
-                            <li><a href="/gallery">ГАЛЕРЕЯ</a></li>
-                            <li><a href="/articles">СТАТЬИ</a></li>
-                            <li><a href="/records">РЕКОРДЫ</a></li>
+                            <li class="liMenuHover0"><a href="#">Новости</a>
+                                <div class="liMenuHover"></div>
+                            </li>
+                            <li class="liMenuHover0"><a href="#">Прогнозы</a>
+                                <div class="liMenuHover">
+                            </li>
+                            <li class="liMenuHover0"><a href="#">Галерея</a>
+                                <div class="liMenuHover">
+                            </li>
+                            <li class="liMenuHover0"><a href="#">Статьи</a>
+                                <div class="liMenuHover">
+                            </li>
+                            <li class="liMenuHover0"><a href="#">Рекорды</a>
+                                <div class="liMenuHover">
+                            </li>
                         </ul>
+                        <div class="loginScheckIn">
+                            <a href="" data-toggle="modal" data-target="#LOGIN"><i class="fa fa-sign-in" aria-hidden="true"></i> Вход</a> |
+                            <a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> Регистрация</a>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    <!-- End Menu fixed top -->
-    <div id="fb-root"></div>
-    <script>
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
-    {% include "messages_display.html" %}
-    <div class="container">
-        {% block content %} {% endblock content %}
-    </div>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js" /></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        console.log("here")
-        $(".content-markdown").each(function() {
-            var content = $(this).text()
-                //console.log(content)
-            var markedContent = marked(content)
-                //console.log(markedContent)
-            $(this).html(markedContent)
-        })
-        $(".post-detail-item img").each(function() {
-            console.log("here")
-            $(this).addClass("img-responsive")
-        })
+                    <br>
+                    <br>
+                    <br>
+                    <!-- End Menu fixed top -->
+                    <div id="fb-root"></div>
+                    <script>
+                    (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                    </script>
+                    {% include "messages_display.html" %}
+                    <div class="container">
+                        {% block content %} {% endblock content %}
+                    </div>
+                    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+                    <!-- Latest compiled and minified JavaScript -->
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js" /></script>
+                    <script type="text/javascript">
+                    $(document).ready(function() {
+                        console.log("here")
+                        $(".content-markdown").each(function() {
+                            var content = $(this).text()
+                                //console.log(content)
+                            var markedContent = marked(content)
+                                //console.log(markedContent)
+                            $(this).html(markedContent)
+                        })
+                        $(".post-detail-item img").each(function() {
+                            console.log("here")
+                            $(this).addClass("img-responsive")
+                        })
+                        var contentItem = $("#id_content");
+                        $("#preview-content").html(marked(contentItem.val()))
 
+                        function setContent(value) {
+                            var markedContent = marked(value)
+                            $("#preview-content").html(markedContent)
+                            $("#preview-content img").each(function() {
+                                $(this).addClass("img-responsive")
+                            })
+                        }
+                        setContent(contentItem.val())
+                        contentItem.keyup(function() {
+                            var newContent = $(this).val()
+                            setContent(newContent)
+                        })
+                        var titleInput = $("#id_title");
 
-        var contentItem = $("#id_content");
-        $("#preview-content").html(marked(contentItem.val()))
-
-        function setContent(value) {
-            var markedContent = marked(value)
-            $("#preview-content").html(markedContent)
-            $("#preview-content img").each(function() {
-                $(this).addClass("img-responsive")
-            })
-        }
-        setContent(contentItem.val())
-
-        contentItem.keyup(function() {
-            var newContent = $(this).val()
-            setContent(newContent)
-        })
-
-
-        var titleInput = $("#id_title");
-
-        function setTitle(value) {
-            $("#preview-title").html(value)
-        }
-        setTitle(titleInput.val())
-        $("#preview-title").text(titleInput.val())
-
-        titleInput.keyup(function() {
-            var newTitle = $(this).val()
-            setTitle(newTitle)
-        })
-
-        $(".comment-reply-btn").click(function(event) {
-                event.preventDefault();
-                $(this).parent().next(".comment-reply").fadeToggle()
-            })
-            //preview-title
-            //preview-content
-    })
-    </script>
-    <!-- Footer -->
-    <footer class="footer-distributed">
-        <div class="footer-left">
-            <h3>Company<span>logo</span></h3>
-            <p class="footer-links">
-                <a href="#">НОВОСТИ</a> ·
-                <a href="#">ПРОГНОЗЫ</a> ·
-                <a href="#">ГАЛЕРЕЯ</a> ·
-                <a href="#">СТАЬИ</a> ·
-                <a href="#">РЕКОРДЫ</a>
-            </p>
-            <p class="footer-company-name">FootballHouse &copy; 2016</p>
-        </div>
-        <div class="footer-center">
-            <div>
-                <i class="fa fa-map-marker"></i>
-                <p><span></span> Kharkiv, Ukraine</p>
-            </div>
-            <div>
-                <i class="fa fa-phone"></i>
-                <p>+380-999-371-519</p>
-            </div>
-            <div>
-                <i class="fa fa-envelope"></i>
-                <p><a href="mailto:support@company.com">dimamangura@gmail.com</a></p>
-            </div>
-        </div>
-        <div class="footer-right">
-            <p class="footer-company-about">
-                <span>About the company</span> Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
-            </p>
-            <div class="footer-icons">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-vk"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer end -->
+                        function setTitle(value) {
+                            $("#preview-title").html(value)
+                        }
+                        setTitle(titleInput.val())
+                        $("#preview-title").text(titleInput.val())
+                        titleInput.keyup(function() {
+                            var newTitle = $(this).val()
+                            setTitle(newTitle)
+                        })
+                        $(".comment-reply-btn").click(function(event) {
+                                event.preventDefault();
+                                $(this).parent().next(".comment-reply").fadeToggle()
+                            })
+                            //preview-title
+                            //preview-content
+                    })
+                    </script>
+                    <!-- Footer -->
+                    <footer class="footer-distributed">
+                        <div class="footer-left">
+                            <h3>Company<span>logo</span></h3>
+                            <p class="footer-links">
+                                <a href="#">НОВОСТИ</a> ·
+                                <a href="#">ПРОГНОЗЫ</a> ·
+                                <a href="#">ГАЛЕРЕЯ</a> ·
+                                <a href="#">СТАЬИ</a> ·
+                                <a href="#">РЕКОРДЫ</a>
+                            </p>
+                            <p class="footer-company-name">FootballHouse &copy; 2016</p>
+                        </div>
+                        <div class="footer-center">
+                            <div>
+                                <i class="fa fa-map-marker"></i>
+                                <p><span></span> Kharkiv, Ukraine</p>
+                            </div>
+                            <div>
+                                <i class="fa fa-phone"></i>
+                                <p>+380-999-371-519</p>
+                            </div>
+                            <div>
+                                <i class="fa fa-envelope"></i>
+                                <p><a href="mailto:support@company.com">dimamangura@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="footer-right">
+                            <p class="footer-company-about">
+                                <span>About the company</span> Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                            </p>
+                            <div class="footer-icons">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-vk"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- Footer end -->
 </body>
 <div class="modal fade" id="login_modal" tabindex="-1">
     <div class="modal-dialog modal-sm modal-login">
@@ -220,6 +227,58 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Вход для юзера -->
+    <div id="LOGIN" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3>ВХОД</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Имя рользователя">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Запомнить меня
+                            </label>
+                        </div>
+                    </form>
+                    <div class="buttonLogin">Войти</div>
+                    <div class="ism-or">
+                        <span>or login with</span>
+                    </div>
+                    <div class="socialLogin">
+                        <div class="loginFacebook">
+                            <p>FACEBOOK</p>
+                        </div>
+                        <div class="loginGoogle">
+                            <p>GOOGLE</p>
+                        </div>
+                        <div class="loginTwitter">
+                            <p>TWITTER</p>
+                        </div>
+                        <div class="loginVk">
+                            <p>VKONTAKTE</p>
+                        </div>
+                    </div>
+                    <div class="otherActions">
+                        <div class="donthaveAcaunt">
+                            <a href="#">У МЕНЯ ЕЩЕ НЕТ АККАУНТА</a>
+                        </div>
+                    </div>
+                    <div class="otherActions">
+                        <div class="recoveryPassword">
+                            <a href="#">ВОССТАНОВИТЬ ПАРОЛЬ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Конец всплывающего окна для юзеровского логина -->
     </body>
 
 </html>
