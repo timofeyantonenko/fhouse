@@ -1,9 +1,8 @@
 from django.conf import settings
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db import models
-
-from football_object.models import FootballObject
 
 # Create your models here.
 from django.db.models.signals import pre_save
@@ -65,6 +64,7 @@ class RecordTable(models.Model):
         return query_set
 
     def get_absolute_url(self):
+        print('here')
         group = self.record_group.slug
         context = {
             "group_slug": group,
@@ -72,6 +72,18 @@ class RecordTable(models.Model):
         }
         return reverse("records:table_records", kwargs=context)
         # return "/posts/%s/" % self.id
+
+
+class RecordManager(models.Manager):
+    def all(self):
+        qs = super(RecordManager, self).filter(parent=None)
+        return qs
+
+    def filter_by_instance(self, instance):
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        obj_id = instance.id
+        query_set = super(RecordManager, self).filter(content_type=content_type, object_id=obj_id).filter(parent=None)
+        return query_set
 
 
 class Record(models.Model):
@@ -89,12 +101,19 @@ class Record(models.Model):
 
     # what record is mean
     record_table = models.ForeignKey(RecordTable, on_delete=models.CASCADE)
-    record_owner = models.ForeignKey(FootballObject, on_delete=models.CASCADE)
     record_value = models.IntegerField()
     record_description = models.TextField()
 
+    owner_type = models.ForeignKey(ContentType,
+                                   limit_choices_to={"model__in": ("footballer", "footballcountry", "footballclub")},
+                                   on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('owner_type', 'object_id')
+
     # slug for absolute url
     slug = models.SlugField(unique=True)
+
+    objects = RecordManager()
 
     def get_absolute_url(self):
         table = self.record_table
@@ -107,7 +126,7 @@ class Record(models.Model):
         return reverse("records:record", kwargs=context)
 
     def __str__(self):
-        return self.record_owner.name
+        return self.content_object.name
 
     class Meta:
         ordering = ["-record_value"]

@@ -50,7 +50,7 @@ def register_view(request):
         'title': title,
         'form': form
     }
-    return render(request, 'form.html', context)
+    return render(request, 'login/login.html', context)
 
 
 def logout_view(request):

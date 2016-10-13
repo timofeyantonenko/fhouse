@@ -6,56 +6,151 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Record</title>
-    <link rel="stylesheet" href='{% static "css/record.css" %}'>
+    <link rel="stylesheet" href='{% static "css/recordTable.css" %}'>
 {% endblock head_extra %}
 {% block content %}
-<div data-stat-header="recordPlayers" class="statsCard">
-    <div class="container">
+<div class="container">
         <div class="row">
-            <div class="col-lg-2">
-
-            </div>
-            <div class="col-sm-4 col-lg-3">
-                <div class="thumbnail">
-                    <div class="caption" id="caption">
-                        <h3>Best Players</h3>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-9 nameTableSsearch">
+                <h2>{{record_name}}</h2>
+                <div class="searchRecord">
+                    <div class="input-group" id="adv-search">
+                        <input type="text" class="form-control" placeholder="Найди Рекорд..." />
+                        <div class="input-group-btn">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
                     </div>
-
-                    <ul class="statsList list-group" id="list-group">
-                        {% for record in records %}
-                            {% if forloop.counter = 1 %}
-                            <li class="statsHero inactive">
-                                <div class="statInfo" id="statInfo">
-                            {% else %}
-                            <li class="statsRow">
-                                <div class="pos">
-                                    {{forloop.counter}}.</div>
-                                <div class="teamInfo">
-                            {% endif %}
-                                <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
-                                    </div>
-                                <div class="stat"> {{ record.record_value }} </div>
-                                {% if forloop.counter = 1 %}
-                                    <div class="imgCropContainer">
-                                        <img class="img statCardImg"  src="{{record.record_owner.image.url}}" alt="">
-                                    </div>
-                                {% endif %}
-                        {% endfor %}
-                        <li class="full_list_record"  id="btn-record">Полный Cписок <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></li>
-                            </ul>
-                                <div class="col-lg-3">
-
-        	</div>
-        	<div class="col-lg-3">
-
-        	</div>
-        	<div class="col-lg-2">
-
-        	</div>
-
-        </div>
                 </div>
             </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <!-- Table Record -->
+        <div class="col-lg-1"></div>
+        <div class=" col-lg-9 divForTable">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="thTableRecord">#</th>
+                        <th>Имя Фамилия</th>
+                        <th>
+                            Клуб</th>
+                        <th>Национальность</th>
+                        <th>Стат</th>
+                    </tr>
+                </thead>
+                <tbody class="tableRecord">
+                {% for record in records %}
+                    <tr class="linkRecord">
+                        <th>{{forloop.counter}}</th>
+                        <th><a href="">{{record.content_object.name}}</a></th>
+                        <th>
+                            <a href=""><img class="imageTableRecord" src="{{record.content_object.club.image.url}}" alt="">{{record.content_object.club}}</a>
+                        </th>
+                        <th>
+                            <a href=""><img class="imageTableRecord" src="{{record.content_object.country.image.url}}" alt="">{{record.content_object.country}}</a>
+                        </th>
+                        <th>{{record.record_value}}</th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+<div class="container">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="table-responsive col-lg-3">
+                <table class="table otherRecords">
+                    <thead class="recordNeartableRecord">
+                        <tr>
+                            <th>Клубы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr class="fullRecord">
+                            <td><a href="#" class="ndsfds">Посмотреть все (15)</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive col-lg-3">
+                <table class="table otherRecords">
+                    <thead class="recordNeartableRecord">
+                        <tr>
+                            <th>Сборные</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr class="fullRecord">
+                            <td><a href="#" class="ndsfds">Посмотреть все (15)</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive col-lg-3">
+                <table class="table otherRecords">
+                    <thead class="recordNeartableRecord">
+                        <tr>
+                            <th>Трансферы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                        </tr>
+                        <tr class="fullRecord">
+                            <td><a href="#" class="ndsfds">Посмотреть все (15)</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-2"></div>
         </div>
     </div>
 
