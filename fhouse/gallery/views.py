@@ -5,10 +5,17 @@ from .models import GallerySection, SectionAlbum, AlbumPhoto
 # Create your views here.
 def gallery_sections(request):  # list items
     sections_set = GallerySection.objects.all()
+    section_result_dict = {}
+    for section in sections_set:
+        albums = section.albums
+        print(len(albums))
+        section_result_dict[section] = {
+            "updated": section.updated,
+        }
     title = "Gallery"
 
     context = {
-        "sections": sections_set,
+        "sections": section_result_dict,
         "title": title,
     }
     return render(request, "gallery/gallery_sections.html", context)

@@ -16,7 +16,8 @@ def record_groups(request):  # list items
                 "table": table,
                 "records": table.records,
             })
-            print(table.records)
+            for record in table.records:
+                print(record.content_object)
         group_table_list.append({
             'group': group,
             'tables': tables_records_list,
@@ -45,6 +46,7 @@ def table_records(request, group_slug=None, table_slug=None):
     # table = get_object_or_404(group, slug=table_slug)
     records = table.records
     context = {
+        "record_name": table.title,
         "records": records,
         "title": table.title,
     }

@@ -4,12 +4,18 @@ from django.core.urlresolvers import reverse
 # Create your models here.
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from utils.files_preparing import upload_location
 
 
 class GallerySection(models.Model):
     section_title = models.TextField(max_length=120)
     # slug for absolute url
     slug = models.SlugField(unique=True)
+
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+    image = models.ImageField(upload_to=upload_location,
+                              null=True, blank=True)
 
     def __str__(self):
         return self.section_title

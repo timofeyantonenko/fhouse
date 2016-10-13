@@ -13,7 +13,7 @@
 {% for record_group in groups_tables %}
   <h3><a href = '{{record_group.group.get_absolute_url}}'>{{ record_group.group }} </a></h3>
     {% for records_table in record_group.tables %}
-        <h3><a href = '{{records_table.get_absolute_url}}'>{{ records_table.table }} </a></h3>
+        <h3><a href = '{{records_table.get_absolute_url}}'>{{ records_table.table }}{{records_table.get_absolute_url}} </a></h3>
             <div data-stat-header="recordPlayers" class="statsCard">
     <div class="container">
         <div class="row">
@@ -42,11 +42,11 @@
                                 <div class="stat"> {{ record.record_value }} </div>
                                 {% if forloop.counter == 1 %}
                                     <div class="imgCropContainer">
-                                        <img class="img statCardImg"  src="{{record.record_owner.image.url}}" alt="">
+                                        <img class="img statCardImg"  src="{{record.content_object.image.url}}" alt="">
                                     </div>
                                 {% endif %}
                         {% endfor %}
-                        <li class="full_list_record"  id="btn-record">Полный Cписок <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></li>
+                        <a href="{{records_table.get_absolute_url}}"> <li class="full_list_record"  id="btn-record">Полный Cписок <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></li></a>
                             </ul>
                                 <div class="col-lg-3">
 
