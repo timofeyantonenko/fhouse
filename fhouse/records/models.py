@@ -64,6 +64,7 @@ class RecordTable(models.Model):
         return query_set
 
     def get_absolute_url(self):
+        print('here')
         group = self.record_group.slug
         context = {
             "group_slug": group,
