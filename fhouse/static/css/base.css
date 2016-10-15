@@ -1,4 +1,18 @@
 /*Основные стили*/
+.navbar{
+    margin-bottom: 20px !important;
+    position: absolute;
+} 
+
+.containerForMenu {
+    position: relative;
+    width: 100%;
+    min-height: 50px;
+}
+
+.modal-open {
+    overflow: auto !important;
+}
 
 body {
     background-color: #fff;
@@ -31,8 +45,8 @@ h1 {
     width: 100%;
     text-align: left;
     font: bold 16px sans-serif;
-    padding: 55px 50px;
-    margin-top: 80px;
+    padding: 15px 50px;
+    margin-top: 20px;
 }
 
 .footer-distributed .footer-left,
@@ -210,6 +224,16 @@ h1 {
 
 @media (min-width: 768px) {
     .navbar-nav .liMenuHover0:hover .liMenuHover {
+        bottom: 0px;
+        -moz-transition: all 0.2s ease-out;
+        -o-transition: all 0.2s ease-out;
+        -webkit-transition: all 0.2s ease-out;
+        transition: all 0.2s ease-out;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-nav .liMenuHover0:active .liMenuHover {
         bottom: 0px;
         -moz-transition: all 0.2s ease-out;
         -o-transition: all 0.2s ease-out;
@@ -455,4 +479,8 @@ form [type="password"] {
     -ms-appearance: none;
     -o-appearance: none;
     appearance: none;
+}
+
+.modal-open {
+    padding-right: 0px !important;
 }

@@ -17,10 +17,9 @@
     vertical-align: middle;
     margin-right: 1rem;
     width: auto;
-    max-height: 30px;
     line-height: 38px;
     box-sizing: border-box;
-    /*   padding: -3px;*/
+    max-height: 20px;
 }
 
 .recordArrow {
@@ -33,6 +32,7 @@
 
 table {
     border-bottom: 1px solid #ddd;
+    font-size: 14px;
 }
 
 .otherRecords tr > th {
