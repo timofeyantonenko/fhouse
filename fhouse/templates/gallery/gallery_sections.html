@@ -1,26 +1,24 @@
 {% extends  "base.html" %}
-{% load staticfiles%}
+{% load staticfiles %}
 {% block head_title %}{{ title }}{% endblock head_title %}
 {% block head_extra %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="Cross Browser Image Gallery Work Showcase with CSS3 Transition Effect on Hover by Web3canvas.com">
-    <meta name="keywords" content="html5, css3, gallery, pure, image gallery, css3 transition, hover effect, cross browser, animation, css3 animation, thumb image gallery, work showcase, 2013, latest technology, latest trend, photo">
     <link rel="stylesheet" href='{% static "css/gallery_style.css" %}'>
 {% endblock head_extra %}
 {% block content %}
-    <div class="container">
+    <div class="container custom-div">
         <div class="row">
             <div class="col-md-1 col-lg-1 galleryDiv"></div>
                 {% for section in sections %}
-                    <div class="col-md-3 col-lg-3 galleryDiv">
+                    <div class="col-md-3 col-lg-3 galleryDiv custom-div">
                         <img class="imgSectionGallery" src="{{section.image.url}}" alt="" />
                         <h3 class="albumName">{{ section.section_title }} </h3>
                         <h3 class="albumIcon">
                         <span><img src="https://cdn2.iconfinder.com/data/icons/flaticons-solid/16/image-gallery-1-512.png" alt="" /></span>
                         </h3>
                         <div class="infaAlbum">
-                            <p>Альбомов ({{section.albums|length }})</p>
-                            <p>Обновлен {{section.updated}}</p>
+                            <p class="font-p">Альбомов ({{section.albums|length }})</p>
+                            <p class="font-p">Обновлен {{section.updated}}</p>
                         </div>
                     </div>
                 {% endfor %}

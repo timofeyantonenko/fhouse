@@ -6,7 +6,11 @@
     {% for section in sections %}
         {% if forloop.counter0|divisibleby:2 %}
           <div class="row">
-          <div class="col-lg-2"></div>
+              {%if sections|length == 1%}
+          <div class="col-lg-4"></div>
+              {% else %}
+              <div class="col-lg-2"></div>
+              {% endif %}
          {% endif %}
          <div class="col-lg-4">
             <h3><a href = '{{section.get_absolute_url}}'>{{ section }} </a></h3>
@@ -14,6 +18,13 @@
          </div>
          {% if forloop.counter|divisibleby:2 %}
             <div class="col-lg-2"></div>
+            </div>
+         {% else %}
+            {%if sections|length == 1%}
+                <div class="col-lg-4"></div>
+            {% else %}
+              <div class="col-lg-2"></div>
+            {% endif %}
             </div>
          {% endif %}
     {% endfor %}

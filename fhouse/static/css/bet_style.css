@@ -1,0 +1,431 @@
+body {
+    background-color: #eaeaea !important;
+}
+
+.rightColum {
+    margin: 0px !important;
+}
+
+.col-lg-12 {}
+
+.col-lg-9 {
+    width: 73% !important;
+    margin: 2% 1% 0% 1% !important;
+}
+
+.col-lg-6 {
+    width: 46% !important;
+    margin: 2% 2% 2% 2% !important;
+}
+
+.col-lg-3 {
+    width: 23% !important;
+    margin: 2% 1% 0% 1% !important;
+}
+
+.whiteDiv {
+    background-color: white !important;
+    box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px;
+}
+
+.DivForarticlePrognosis {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    clear: right;
+}
+
+.articlePrognosis {
+    max-width: 100%;
+    float: left;
+}
+
+.articlePrognosis img {
+    width: 100%;
+    align: left;
+}
+
+.ArticleText {
+    width: 100%;
+    margin: 0% 0% 0% 0% !important;
+}
+
+.ArticleText p {
+    text-align: justify;
+}
+
+.ArticleImg {
+    position: relative;
+    float: left;
+    vertical-align: top;
+    width: 30%;
+    margin: 0% 2% 0% 0% !important;
+}
+
+.ArticleName {
+    margin: 0% 0% 0% 0% !important;
+}
+
+h2 {
+    margin: 0px !important;
+}
+
+h3 {
+    margin: 0px !important;
+}
+
+.onePrognosis {
+    margin: 0% 0% 0% 0% !important;
+    padding: 4% 4% 0% 4% !important;
+}
+
+
+/*Right colum for prognosis*/
+
+.oneChmpionship {
+    padding: 4%;
+    position: relative;
+    clear: right;
+    min-height: 1%;
+    float: left;
+    width: 100%;
+}
+
+.divForimgAllprognosis {
+    width: 15%;
+    height: auto;
+    margin: 0% 4% 0% 0% !important;
+    vertical-align: top;
+    position: relative;
+    float: left;
+}
+
+.divForimgAllprognosis img {
+    float: left;
+    width: 100%;
+    text-align: left;
+}
+
+.divForimgAllprognosis p {
+    text-align: right;
+}
+
+.divForTurAllprognosis {
+    width: 100%;
+    margin: 0% 0% 4% 0% !important;
+}
+
+.divForNameAllprognosis {
+    width: 100%;
+    margin: 0% !important;
+}
+
+.divForNameAllprognosis0 h3 {
+    font-size: 17px !important;
+    font-weight: bolder !important;
+}
+
+.divForNameAllprognosis h3 {
+    font-size: 14px !important;
+    font-weight: bolder !important;
+    text-align: right !important;
+}
+
+.divForNameAllprognosis p {
+    text-align: right !important;
+}
+
+.divForNameAllprognosis p {
+    color: #7f8992 !important;
+    margin-bottom: 0px !important;
+}
+
+.infoPrognosis {
+    margin-bottom: 0px;
+}
+
+.imgAllprognosis {
+    width: 100%;
+}
+
+.divForAllRecordsCol {}
+
+.divForChampionatAllprognosis {
+    margin: 2%;
+    position: relative;
+    float: left;
+}
+
+.divForChampionatAllprognosis a:hover .oneChmpionship {
+    background-color: #eaeaea;
+}
+
+
+/*.oneChmpionship0 {
+border-bottom: 2px solid silver;
+}*/
+
+
+/*Table top-10*/
+
+.table>thead>tr>th {
+    vertical-align: middle !important;
+}
+
+table {
+    margin-bottom: 0px !important;
+}
+
+thead {
+    background-color: #f2f2f2 !important;
+}
+
+th:nth-child(1) {
+    background: #4384a8 !important;
+    width: 60px !important;
+    text-align: center;
+    line-height: 34px;
+    padding: 2px !important;
+}
+
+th:nth-child(4) {
+    text-align: right;
+}
+
+.numberTable {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin-top: 4px;
+    padding-top: 4px;
+    color: #fff;
+    font-weight: bold;
+    background-color: #003555;
+    text-align: center;
+    display: inline-block;
+}
+
+#nuberTop {
+    background-color: #f2f2f2 !important;
+    padding: 0px !important;
+}
+
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    line-height: 24px !important;
+    white-space: nowrap;
+}
+
+table thead tr th {
+    color: #57585A;
+    border: 1px solid #e4e4e4 !important;
+}
+
+table tfoot tr th {
+    border: 1px solid #e4e4e4 !important;
+}
+
+table tbody tr th {
+    color: #57585A;
+    border: 1px solid #e4e4e4 !important;
+}
+
+.tableRecord {
+    font-family: PremierSans-Regular, Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.tableRecord a {
+    color: #242424;
+}
+
+.imageTableRecord {
+    display: inline-block;
+    /*    vertical-align: middle;*/
+    margin-right: 1rem;
+    width: auto;
+    max-height: 15px;
+    /*    line-height: 38px;*/
+    box-sizing: border-box;
+    /*   padding: -3px;*/
+}
+
+.recordNeartableRecord {
+    border-top: solid #38003c 5px;
+}
+
+#EndTable {
+    text-align: right;
+    background-color: #fafafa !important;
+}
+
+#EndTable a {
+    margin-right: 4px;
+}
+
+
+/*End table top-10*/
+
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    /* margin: 2% 1% 0% 1% !important;*/
+}
+
+.onePrognosisLast {
+    margin: 0% 0% 0% 0% !important;
+    padding: 4% 4% 4% 4% !important;
+}
+
+.container {
+    padding: 0px !important;
+}
+
+.avatarUsers {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+    margin: 0px !important;
+}
+
+.avatarUsers img {
+    width: 100%;
+    height: auto;
+}
+
+.infoPrognosisResult {
+    margin-bottom: 0px !important;
+    font-weight: bolder;
+}
+
+.witoutMargin {
+    margin: 0px !important;
+    width: 100%;
+}
+
+.withMargin {
+    margin: 2% 1% 0% 1% !important;
+    width: 98% !important;
+}
+
+
+/*Weeks prognosis*/
+
+.weeksProg {
+    border: 1px solid #e4e4e4;
+    border-collapse: collapse !important;
+    margin-top: 10px;
+}
+
+.photoUser {
+    width: 30%;
+    float: left;
+    margin-right: 10px;
+}
+
+.photoUser img {
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+
+}
+
+.onesMatch {
+    padding: 2% 4% !important;
+    border-right: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.onesMatch:hover {
+    background-color: #eaeaea;
+}
+
+.onesMatch:active {
+    background-color: #4384a8;
+    color: white;
+}
+
+.onesMatch:nth-child(3n+2) {
+    border-right: 1px solid #e4e4e4;
+    border-left: 1px solid #e4e4e4;
+}
+
+.onesMatch:nth-child(2) {}
+
+.onesMatch p {
+    width: auto;
+    margin: 0px !important;
+}
+
+.onesMatch p:nth-child(odd) {
+    float: left;
+}
+
+.onesMatch p:nth-child(even) {
+    text-align: right;
+}
+
+.col-lg-5 {
+    width: 40% !important;
+}
+
+.col-lg-2 {
+    width: 20% !important;
+}
+
+.dateUser {
+	margin-bottom: 5px !important;
+}
