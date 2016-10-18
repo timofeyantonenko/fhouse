@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 
 
     # local apps
-    'accounts',
     'comments',
     'posts',
     'records',
@@ -136,8 +135,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-AUTH_USER_MODEL = 'accounts.FHUser'
 
 
 # Static files (CSS, JavaScript, Images)

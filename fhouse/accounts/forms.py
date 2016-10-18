@@ -37,19 +37,13 @@ class UserRegisterForm(forms.ModelForm):
     email = forms.EmailField(label='Email address')
     email2 = forms.EmailField(label='Confirm Email')
     password = forms.CharField(widget=forms.PasswordInput)
-    country = forms.CharField()
-    image = forms.ImageField()
-    birth_date = forms.DateField()
-
     class Meta:
         model = User
         fields = [
+            'username',
             'email',
             'email2',
             'password',
-            'country',
-            'image',
-            'birth_date',
         ]
 
     # def clean(self, *args, **kwargs):

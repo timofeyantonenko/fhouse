@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^comments/', include("comments.urls", namespace='comments')),
     url(r'^posts/', include("posts.urls", namespace='posts')),
-    url(r'^bets/', include("bettournament.urls", namespace='bets')),
     url(r'^records/', include("records.urls", namespace='records')),
     url(r'^gallery/', include("gallery.urls", namespace='gallery')),
     url(r'^articles/', include("article.urls", namespace='article')),
