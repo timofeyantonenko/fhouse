@@ -5,27 +5,9 @@
 form label {
     display: block;
     margin-bottom: 0.5rem;
+    float: left;
     font-family: "PremierSans-Bold", Arial, "Helvetica Neue", Helvetica, sans-serif;
     width: 30%;
-}
-
-.container form label {
-    float: left;
-}
-
-#LOGIN {
-    width: 100% !important;
-}
-
-
-
-element.style {
-    padding-right: 0px !important;
-}
-
-#LOGIN form label {
-    float: none !important;
-    width:100% !important;
 }
 
 label span {
@@ -46,7 +28,7 @@ form .forPlaceholder {
 }
 
 form [type="text"],
-form [type="file"],
+form [type="file"], 
 form [type="email"],
 form [type="password"] {
     background: #E8E8E8;
@@ -118,7 +100,7 @@ form select {
 }
 
 .finishLogin {
-    padding: 4px 6px;
+   padding: 4px 6px;
     float: right;
     background-color: #38003C;
     color: #fafafa;
@@ -136,77 +118,70 @@ form select {
 }
 
 .finishLogin:hover {
-    background-color: #13cf00;
+   background-color: #13cf00;
 }
 
 .unimportant {
-    color: #13cf00;
+    color:#13cf00;
 }
 
+
 .file-upload {
-    position: relative;
-    height: 47px !important;
-    width: 100%;
-    cursor: pointer;
-    font-size: 14px;
-    font-family: sans-serif;
-    line-height: 1.42857143;
-    color: #555;
+  position: relative;
+  height: 47px !important;
+  width: 100%;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: sans-serif;
+  line-height: 1.42857143;
+  color: #555;
 }
 
 .file-upload:after {
-    content: "Обзор";
-    position: absolute;
-    display: block;
-    top: 7px;
-    right: 0;
-    z-index: 5;
-    background-color: #E8E8E8;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    color: #333;
-}
+  content: "Обзор";
+  position: absolute;
+  display: block;
+  top: 7px;
+  right: 0;
+  z-index: 5;
+  background-color: #E8E8E8;
+  border: 1px solid #ccc;
 
+  padding: 6px 12px;
+  color: #333;
+}
 .file-upload:hover:after {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad;
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
 }
 
 .file-upload:active:after {
-    outline: 0;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
 
 .file-upload:before {
-    content: attr(data-text);
-    position: absolute;
-    top: 7px;
-    left: 0;
-    z-index: 3;
-    display: block;
-    width: calc(100% - 40px);
-    padding: 6px 12px;
-    background-color: #fff;
-    border: 1px solid #ccc;
+  content: attr(data-text);
+  position: absolute;
+  top: 7px;
+  left: 0;
+  z-index: 3;
+  display: block;
+  width: calc(100% - 40px);
+  padding: 6px 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+
 }
 
 .file-upload input {
-    position: absolute;
-    display: block;
-    top: 0;
-    height: 100%;
-    z-index: 99;
-    width: 100%;
-    opacity: 0;
-}
-
-.modal-open {
-  padding-right: 0px !important;
-}
-
-element.style {
-    padding-right: 0px !important;
-
-}
+  position: absolute;
+  display: block;
+  top: 0;
+  height: 100%;
+  z-index: 99;
+  width: 100%;
+  opacity: 0;
+} 

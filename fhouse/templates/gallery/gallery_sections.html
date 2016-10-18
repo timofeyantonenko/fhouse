@@ -1,32 +1,31 @@
-{% extends  "base.html" %}
-{% load staticfiles%}
-{% block head_title %}{{ title }}{% endblock head_title %}
-{% block head_extra %}
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="Cross Browser Image Gallery Work Showcase with CSS3 Transition Effect on Hover by Web3canvas.com">
-    <meta name="keywords" content="html5, css3, gallery, pure, image gallery, css3 transition, hover effect, cross browser, animation, css3 animation, thumb image gallery, work showcase, 2013, latest technology, latest trend, photo">
-    <link rel="stylesheet" href='{% static "css/gallery_style.css" %}'>
-{% endblock head_extra %}
-{% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-1 col-lg-1 galleryDiv"></div>
+{% extends "base.html" %} {% load staticfiles %} {% block head_title %}{{ title }}{% endblock head_title %} {% block head_extra %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href='{% static "css/gallery_style.css" %}'> {% endblock head_extra %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="galleryDiv">
+                <div>
+                    <h3>Фотогалерея</h3>
+                </div>
                 {% for section in sections %}
-                    <div class="col-md-3 col-lg-3 galleryDiv">
+                <div class="one_section_gallery">
+                    <div class="img_gallery">
                         <img class="imgSectionGallery" src="{{section.image.url}}" alt="" />
-                        <h3 class="albumName">{{ section.section_title }} </h3>
-                        <h3 class="albumIcon">
+                    </div>
+                    <h3 class="albumName">{{ section.section_title }} </h3>
+                    <h3 class="albumIcon">
                         <span><img src="https://cdn2.iconfinder.com/data/icons/flaticons-solid/16/image-gallery-1-512.png" alt="" /></span>
                         </h3>
-                        <div class="infaAlbum">
-                            <p>Альбомов ({{section.albums|length }})</p>
-                            <p>Обновлен {{section.updated}}</p>
-                        </div>
+                    <div class="infaAlbum">
+                        <p class="font-p">Альбомов ({{section.albums|length }})</p>
+                        <p class="font-p">Обновлен {{section.updated}}</p>
                     </div>
+                </div>
                 {% endfor %}
-            <div class="col-md-1 col-lg-1 galleryDiv"></div>
             </div>
-
+        </div>
+        <div class="col-lg-3"></div>
     </div>
-
+</div>
 {% endblock content %}

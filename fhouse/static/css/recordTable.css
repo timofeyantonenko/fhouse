@@ -1,7 +1,36 @@
-#body {
-    font-size: 1.5em;
-    font-size: 1.5em !important;
-    font-family: PremierSans-Regular, Arial, Helvetica Neue, Helvetica, sans-serif !important;
+.block_table {
+    background-color: #fafafa;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    white-space:nowrap;
+}
+
+.table_allnews_insection {
+    width: 30%;
+
+    display:inline-block;
+    margin-right: -4px;
+}
+
+.block_table .table_allnews_insection:nth-child(n+4) {
+    margin-left: 5%;
+}
+
+
+
+.table_allnews_insection table {
+    margin-bottom: 0px;
+}
+
+.block_table h1,
+.block_table h2,
+.block_table h3,
+.block_table h4,
+.block_table h5,
+.block_table h6 {
+    margin-top: 0px;
+    margin-bottom: 24px;
+    float:left;
 }
 
 .tableRecord {
@@ -71,7 +100,6 @@ thead {
 .searchRecord {
     width: 35%;
     float: right;
-    position: absolute;
     bottom: 10px;
     right: 11px;
 }
