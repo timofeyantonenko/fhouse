@@ -15,8 +15,8 @@ class FHUserAdmin(UserAdmin):
     # that reference the removed 'username' field
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'date_of_birth')}),
-        (_('Customization'), {'fields': ('avatar', 'country')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'date_of_birth', 'country', 'city')}),
+        (_('Customization'), {'fields': ('avatar', )}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         # (_('Important dates'), {'fields': ('last_login', 'date_joined')}),

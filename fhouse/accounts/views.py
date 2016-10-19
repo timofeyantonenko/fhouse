@@ -34,17 +34,20 @@ def login_view(request):
 def register_view(request):
     next = request.GET.get('next')
     title = 'Register'
-    form = UserRegisterForm(request.POST or None)
+    form = UserRegisterForm(request.POST or None, request.FILES or None)
     if form.is_valid():
+        print('VALID?????')
         user = form.save(commit=False)
         password = form.cleaned_data.get('password')
         user.set_password(password)
         user.save()
-        new_user = authenticate(username=user.username, password=password)
+        new_user = authenticate(email=user.email, password=password)
         login(request, new_user)
         if next:
             return redirect(next)
         return redirect('/')
+    else:
+        print('Form not valid')
 
     context = {
         'title': title,

@@ -3,7 +3,8 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 # Create your models here.
-from football_object.models import FootballCountry
+from geohelp.models import Country
+from geohelp.models import City
 from utils.files_preparing import upload_location
 
 from django.utils import timezone
@@ -42,10 +43,10 @@ class FHUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     # country of user
-    country = models.ForeignKey(FootballCountry, on_delete=models.CASCADE, null=True, blank=True)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True, blank=True)
 
     # country of user
-    # city = models.ForeignKey(FootballCountry, on_delete=models.CASCADE, null=True, blank=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, blank=True)
 
     avatar = models.ImageField(upload_to=upload_location,
                                null=True, blank=True,

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'bettournament',
     'gallery',
     'article',
+    'geohelp',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
