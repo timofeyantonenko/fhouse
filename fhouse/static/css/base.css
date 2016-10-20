@@ -1,11 +1,61 @@
 /*Основные стили*/
 
+.navbar {
+    margin-bottom: 20px !important;
+    position: absolute;
+}
+
+.container {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 100px !important;
+    margin-right: 100px !important;
+}
+
+.containerForMenu {
+    position: relative;
+    width: 100%;
+    min-height: 50px;
+    margin-bottom: 23px;
+}
+
+.navbar {
+    position: fixed;
+}
+
+.modal-open {
+    overflow: auto !important;
+}
+
 body {
-    background-color: #fff;
     font-family: Roboto, arial, sans-serif;
     letter-spacing: normal;
     color: #1d2f3e;
-    font-size: 1em;
+    font-size: 1.4em;
+    background-color: #eaeaea;
+}
+
+
+
+
+.col-lg-1,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12 {
+    padding: 0% !important;
+}
+
+.col-lg-4 {
+    margin-left: 2% !important;
+    width: 31.33333333%;
 }
 
 h1 {
@@ -31,8 +81,8 @@ h1 {
     width: 100%;
     text-align: left;
     font: bold 16px sans-serif;
-    padding: 55px 50px;
-    margin-top: 80px;
+    padding: 15px 50px;
+    margin-top: 20px;
 }
 
 .footer-distributed .footer-left,
@@ -210,6 +260,16 @@ h1 {
 
 @media (min-width: 768px) {
     .navbar-nav .liMenuHover0:hover .liMenuHover {
+        bottom: 0px;
+        -moz-transition: all 0.2s ease-out;
+        -o-transition: all 0.2s ease-out;
+        -webkit-transition: all 0.2s ease-out;
+        transition: all 0.2s ease-out;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-nav .liMenuHover0:active .liMenuHover {
         bottom: 0px;
         -moz-transition: all 0.2s ease-out;
         -o-transition: all 0.2s ease-out;
@@ -455,4 +515,8 @@ form [type="password"] {
     -ms-appearance: none;
     -o-appearance: none;
     appearance: none;
+}
+
+.modal-open {
+    padding-right: 0px !important;
 }
