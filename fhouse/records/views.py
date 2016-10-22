@@ -14,7 +14,7 @@ def record_groups(request):  # list items
         for table in tables:
             tables_records_list.append({
                 "table": table,
-                "records": table.records,
+                "records": table.records[:5],
             })
             for record in table.records:
                 print(record.content_object)

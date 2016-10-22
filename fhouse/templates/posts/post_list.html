@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'> {% endblock head_extra %} {% block content %}
-<script src="../../java_script/post_list.js"></script>
+<script src="{% static 'js/post_list.js'  %}"></script>
 <div class="container">
     <div class="row">
         <div class="col-lg-8">

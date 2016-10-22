@@ -1,0 +1,157 @@
+.block_table {
+    background-color: #fafafa;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    white-space:nowrap;
+}
+
+.table_allnews_insection {
+    width: 30%;
+
+    display:inline-block;
+    margin-right: -4px;
+}
+
+.block_table .table_allnews_insection:nth-child(n+4) {
+    margin-left: 5%;
+}
+
+
+
+.table_allnews_insection table {
+    margin-bottom: 0px;
+}
+
+.block_table h1,
+.block_table h2,
+.block_table h3,
+.block_table h4,
+.block_table h5,
+.block_table h6 {
+    margin-top: 0px;
+    margin-bottom: 24px;
+    float:left;
+}
+
+.tableRecord {
+    font-family: PremierSans-Regular, Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.tableRecord a {
+    color: #242424;
+}
+
+.imageTableRecord {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 1rem;
+    width: auto;
+    line-height: 38px;
+    box-sizing: border-box;
+    max-height: 20px;
+}
+
+.recordArrow {
+    float: right;
+}
+
+.recordNeartableRecord {
+    border-top: solid #38003c 5px;
+}
+
+table {
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.otherRecords tr > th {
+    text-align: center !important;
+}
+
+.fullRecord > td {
+    text-align: center !important;
+}
+
+.fullRecord:hover {
+    background-color: #f1f1f1;
+}
+
+td > a:not([class]) {
+    color: #76766f !important;
+}
+
+td > a:hover {
+    text-decoration: none !important;
+    color: #e90052 !important;
+}
+
+.fullRecord td > a {
+    color: #256ba0;
+}
+
+.otherRecords .glyphicon {
+    color: #e90052;
+}
+
+thead {
+    border-top: solid #38003c 5px;
+}
+
+.searchRecord {
+    width: 35%;
+    float: right;
+    bottom: 10px;
+    right: 11px;
+}
+
+.nameTableSsearch {
+    margin: 0px 0px;
+}
+
+.input-group {}
+
+.divForTable {
+    padding: 0px !important;
+}
+
+
+/*search */
+
+.searchRecord {}
+
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.btn-group .form-horizontal .btn[type="submit"] {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+
+/*
+@media screen and (min-width: 768px) {
+    #adv-search {
+        margin: 0 auto;
+    }
+}*/
