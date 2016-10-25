@@ -1,96 +1,139 @@
-{% extends "base.html" %}
-{% load urlify %}
-{% load crispy_forms_tags %}
-
-{% block head_title %}
-{{instance.title}} | {{block.super}}
-{% endblock head_title %}
-
-
-{% block content %}
-<div class='col-sm-6 col-sm-offset-3'>
-    {% if instance.image %}
-    <img src="{{ instance.image.url }}" class='img-responsive'/>
-    {% endif %}
-<h1>{{title}} <small> {% if instance.draft %}<span style="color:red;">Draft</span>{% endif %} {{instance.publish}}</small></h1>
-<p>Read time: {% if instance.read_time <= 1 %} < 1 Minute {% elif instance.read_time <= 10 %} < 10 Minutes {% else %} {{instance.read_time|time:"i"}} Minutes {% endif %}</p>
-    {% if instance.user.get_full_name %}
-<p>Author: {{ instance.user.get_full_name }}</p>
-    {% endif %}
-
-<!--<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_url }}">-->
-<!--Facebook-->
-<!--</a>-->
-    <!--<a href="https://twitter.com/home?status={{ instance.content|truncatechars:5|urlify }}%20{{ request.build_absolute_url }}">-->
-<!--Twitter-->
-<!--</a>-->
-
-
-<!--<a href='https://plus.google.com/share?url=http://codingforentrepreneurs.com'></a>-->
-
-<!--<a href="https://www.linkedin.com/shareArticle?mini=true&url=http://swiftforentrepreneurs.com/&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_url }}">-->
-<!--Linkedin-->
-<!--</a>-->
-
-        <p><div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">
-
-        </div></p>
-
+{% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
+<link rel="stylesheet" href='{% static "css/post_list.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %} <script src="{% static 'js/post_list.js'  %}"></script>
+<div class="container">
     <div class="row">
-        <div class="col-sm-12 ">
-
-            <div class='post-detail-item'>
-                {{ instance.get_markdown }}
+        <div class="col-lg-7">
+            <div class="article_detail_img">
+                {% if instance.image %}
+                <img src="{{ instance.image.url }}" class='img-responsive' /> {% endif %}
+                <div class="share_soc">
+                    <a href="#">
+                        <div class="share_vk">
+                            <i class="fa fa-vk" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="share_facebook">
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="share_twitter">
+                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </div>
+                    </a>
                 </div>
-
-            <hr/>
-            </br>
-
-            <div>
-                <p class="lead">Comments</p>
+            </div>
+            <div class="article_detail">
+                <div class="article_author">
+                    <a href="#">
+                        <div class="author_img">
+                            <img src="https://pp.vk.me/c416931/v416931345/5c5f/hrG8o7GdUHM.jpg" alt="">
+                        </div>
+                    </a>
+                    <div class="author_name_date">
+                        <a href="">Илона Вовк</a> {% if instance.draft %} {% endif %} {{instance.publish}}
+                    </div>
+                </div>
+                <div class="article_detail_content">
+                    <div class="article_title">
+                        <h2>{{title}}</h2>
+                    </div>
+                    <!-- Здесь должен быть автор -->
+                    <div>
+                        {% if instance.user.get_full_name %}
+                        <p>Author: {{ instance.user.get_full_name }}</p>
+                        {% endif %}
+                    </div>
+                    <!--  <p>
+            <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+            </p> -->
+                    <!-- Текст новости  -->
+                    <div class="article_text">
+                        {{ instance.get_markdown }}
+                    </div>
+                    <div class="footer_post_detail">
+                        <div class="teg_post_detail">
+                            Теги:
+                            <a href="#">англия</a>
+                            <a href="#">англия</a>
+                            <a href="#">англия</a>
+                        </div>
+                        <div class="block_like-dislike">
+                            <div class="like_and_dislike">
+                                <a href="#" class="like_all">
+                                    <div class="like">
+                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="quaantity_like">
+                                        32
+                                    </div>
+                                </a>
+                                <a href="#" class="dislike_all">
+                                    <div class="dislike">
+                                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="quantity_dislike">
+                                        43
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Комментарии -->
+                </div>
+            </div>
+            <div class="comments_base">
+                <p class="lead">Оставить комментарий</p>
+                <a href="#">
+                    <div class="coments_author">
+                        <img src="https://pp.vk.me/c9957/u75114231/133901365/w_b34694ef.jpg" alt="">
+                    </div>
+                </a>
                 {% if request.user.is_authenticated %}
-                <form method="POST" action="."> {% csrf_token %}
-                    {{ comment_form|crispy }}
+                <form method="POST" action="."> {% csrf_token %} {{ comment_form|crispy }}
                     <input type="submit" value="Post comment" class="btn btn-default">
                 </form>
                 {% else %}
                 <p>You must login to comment</p>
                 {% endif %}
-                <hr/>
+                 </div>
+            <div class="comments_base" id="without_paddin">
                 {% for comment in comments %}
-
-                <blockquote>
-                    <p>{{ comment.content }}</p>
-                    <footer>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago | {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %}<a class="comment-reply-btn" href="#">Reply</a> | <a class="" href='{{ comment.get_absolute_url }}'>Thread</a> </footer>
-
-                <div class="comment-reply">
-                    {% for child_comment in comment.children %}
-                     <blockquote>
-                    <p>{{ child_comment.content }}</p>
-                    <footer>via {{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>
-
-                         </blockquote>
-                    {% endfor %}
-                    {% if request.user.is_authenticated %}
-                        <form method="POST" action="."> {% csrf_token %}
-                            {{ comment_form|crispy }}
-                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                            <input type="submit" value="Reply" class="btn btn-default">
-                        </form>
-                    {% else %}
-                        <p>You must login to comment</p>
-                    {% endif %}
+                           
+                <div class="blockquote">
+                    <a href="#">
+                        <div class="coments_author">
+                            <img src="https://pp.vk.me/c9957/u75114231/133901365/w_b34694ef.jpg" alt="">
+                        </div>
+                    </a>
+                    <div class="content_coment">
+                        <div class="coment_author_time">
+                            <a href="#">{{ comment.user.first_name }} {{ comment.user.last_name }}</a> {{ comment.timestamp|timesince }} ago
+                        </div>
+                        {{ comment.content }}
+                        <footer> {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class="comment-reply-btn" href="#">Ответить</a> </footer>
+                        <div class="comment-reply">
+                            {% for child_comment in comment.children %}
+                            <div class="blockquote">
+                                <p>{{ child_comment.content }}</p>
+                                <footer>{{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>
+                            </div>
+                            {% endfor %} {% if request.user.is_authenticated %}
+                            <form method="POST" action="."> {% csrf_token %} {{ comment_form|crispy }}
+                                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                <input type="submit" value="Ответить" class="btn btn-default">
+                            </form>
+                            {% else %}
+                            <p>You must login to comment</p>
+                            {% endif %}
+                        </div>
                     </div>
-
-                </blockquote>
-
-                <hr/>
+                </div>
                 {% endfor %}
+                <a href="#" class="show_all_coment">Показать все комментарии</a>
             </div>
-
         </div>
-        </div>
-
-        </div>
+    </div>
+</div>
 {% endblock content %}
-
