@@ -1,31 +1,157 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %}{{ title }}{% endblock head_title %} {% block head_extra %}
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href='{% static "css/gallery_style.css" %}'> {% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-9">
-            <div class="galleryDiv">
-                <div>
-                    <h3>Фотогалерея</h3>
-                </div>
-                {% for section in sections %}
-                <div class="one_section_gallery">
-                    <div class="img_gallery">
-                        <img class="imgSectionGallery" src="{{section.image.url}}" alt="" />
+        <!-- Слайдер фото  -->
+        <div class="slaider_gallery">
+            <div class="body_slaider_gallery">
+                <div class="col-lg-8" id="wrapper_foto">
+                    <div class="content_foto">
+                        <div class="head_nav">
+                            <ul class="nav_ul">
+                                {% for section in sections %}
+                                <li>
+                                    <a href="#">{{ section.section_title }}  <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="slaider_foto_base">
+                            <div class="album_foto">
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://www4.pictures.zimbio.com/gi/Club+Atletico+de+Madrid+v+Juventus+lf1ROs3hB_cx.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://football-pitch.ru/wp-content/uploads/2016/07/zinedin-zidan-foto.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://www.ua-football.com/img/upload/16/2154ad.jpeg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album_foto">
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://3.bp.blogspot.com/-rD3OjNaIJ8w/T6uBeMwW4KI/AAAAAAAAAck/Ujwpyzua-2A/s640/bg9OerpeiNg.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://cs7001.vk.me/c540101/v540101950/abfd/pkFXM_VCOlI.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://cs14113.vk.me/c7004/v7004768/3a22/8LU-ZycuQnY.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album_foto">
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://metalist.ua/files/image/all/stad.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://www.master-profi.dp.ua/wp-content/uploads/2015/08/03-Отрасль-Стадионы-НСК.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="https://cdn.riastatic.com/docs/dom/support/5/22/87f9c802f1cb3655607d4cac14b58.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album_foto">
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="https://img.championat.com/i/article/35/79/1419803579_b_.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://ss.sport-express.ru/userfiles/materials/39/392875/large.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://milanac.ru/wp-content/uploads/2015/08/марадона-и-анчелотти.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album_foto">
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://rian.com.ua/images/100921/66/1009216655.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://shakhtar.com/data/imgdata/foto/news/267041__max_news.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="left_right_foto">
+                                    <div class="img_slaider">
+                                        <img src="http://www.ua-football.com/img/upload/17/21e597.jpeg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fa fa-expand" aria-hidden="true" id="foto_full"></i>
+                            <a href="#">
+                                <div class="foto_left">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="foto_right">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                    <h3 class="albumName">{{ section.section_title }} </h3>
-                    <h3 class="albumIcon">
-                        <span><img src="https://cdn2.iconfinder.com/data/icons/flaticons-solid/16/image-gallery-1-512.png" alt="" /></span>
-                        </h3>
-                    <div class="infaAlbum">
-                        <p class="font-p">Альбомов ({{section.albums|length }})</p>
-                        <p class="font-p">Обновлен {{section.updated}}</p>
+                    <div class="footer_nav">
                     </div>
                 </div>
-                {% endfor %}
+                <div class="col-lg-4">
+                    <div class="description_foto">
+                        Фанаты выбежали на газон
+                    </div>
+                    <div class="comment_slaider">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-3"></div>
+        <!-- Все альбомы -->
+        <div class="col-lg-8">
+            {% for section in sections %}
+            <div class="galleryDiv">
+                <div class="title_and_all_albums">
+                    <h2>{{ section.section_title }}</h2>
+                    <a class="button_all_album" href="#">Посмотреть все  &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
+
+                <a href="#">
+                    <div class="one_album">
+                    <div class="main_foto_albub">
+                        <img src="http://footballtransfers.ru/wp-content/uploads/2016/05/1430841279_sesk.jpg" alt="">
+                    </div>
+                    <div class="discription_album">
+                        Fabregas 2012-2016
+                    </div>
+                </div>
+                </a>
+                
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-4"></div>
     </div>
 </div>
 {% endblock content %}
