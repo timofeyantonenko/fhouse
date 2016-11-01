@@ -5,13 +5,37 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe
 from django.conf import settings
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 from markdown_deux import markdown
 from .utils import get_read_time
 from utils.files_preparing import upload_location
 from utils.abstract_classes import CommentedClass
+
+
+class PostTag(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
+
+class UserFavoriteTags(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(PostTag)
+
+    def __unicode__(self):
+        return self.tags
+
+    def __str__(self):
+        return 'User: {}'.format(self.user.first_name)
+
+    class Meta:
+        db_table = 'user_tags'
 
 
 class PostManager(models.Manager):
@@ -28,6 +52,7 @@ class Post(CommentedClass):
                               height_field="height_field",
                               width_field="width_field")
 
+    tag = models.ManyToManyField(PostTag)
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
     content = models.TextField()
@@ -44,6 +69,11 @@ class Post(CommentedClass):
 
     def __str__(self):
         return self.title
+
+    @property
+    def tags(self):
+        tags = PostTag.objects.filter(post=self)
+        return tags
 
     def get_absolute_url(self):
         return reverse("posts:detail", kwargs={"slug": self.slug})

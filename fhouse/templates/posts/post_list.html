@@ -1,40 +1,29 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
-<link rel="stylesheet" href='{% static "css/post_list.css" %}'> {% endblock head_extra %} {% block content %}
-<script src="{% static 'js/post_list.js'  %}"></script>
+<link rel="stylesheet" href='{% static "css/post_list.css" %}'>
+<script type="text/javascript" src="{% static 'js/post_list.js'  %}"></script>
+{% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-lg-8">
-            <div class="articles">
-                <!-- Индивидуальный блок новостей  -->
-                <div>
+                         <div>
                     <h3>Моя лента</h3>
                 </div>
                 <div class="menu_individualNews">
                     <ul>
                         <div class="changeNews menu_individualNews_active">
-                            <li>
-                                <a href="#">Все </a>
+                            <li class="tab" id="main_tab">
+                                <div>Все</div>
                                 <div class="hover_menu"></div>
                             </li>
                         </div>
-                        <div class="changeNews">
-                            <li>
-                                <a href="#">Англия </a>
-                                <div class="hover_menu"></div>
-                            </li>
-                        </div>
-                        <div class="changeNews">
-                            <li>
-                                <a href="#">Англия </a>
-                                <div class="hover_menu"></div>
-                            </li>
-                        </div>
-                        <div class="changeNews">
-                            <li>
-                                <a href="#">Англия </a>
-                                <div class="hover_menu"></div>
-                            </li>
-                        </div>
+                        {% for tag in user_tags %}
+                            <div class="changeNews">
+                                <li class="tab" id="simple_tab">
+                                    <div>{{ tag }}</div>
+                                    <div class="hover_menu"></div>
+                                </li>
+                            </div>
+                        {% endfor %}
                         <div class="changeNews">
                             <li>
                                 <div class="plus_units"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
@@ -43,282 +32,9 @@
                     </ul>
                 </div>
                 <hr>
-                <!-- Конец блока индивидуальнх новостей  -->
-                <!-- Поток важных новостей  -->
-                <div class="oneArticle mainNews">
-                    <a href="#" class="goNews">
-                        <div class="IMGoneArticle">
-                            <img src="http://images.dailystar.co.uk/dynamic/58/photos/316000/111316.jpg" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="dataCommentsLikes">
-                            <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        </div>
-                        <div class="dataCommentsLikes dataCommentsLikes_main">
-                            <a href="#" class="tegArticle">УПЛ</a>
-                            <a href="#" class="tegArticle">Ювентус</a>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl. УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <div class="oneArticle">
-                    <a href="#" class="goNews">
-                        <div class="IMGoneArticle">
-                            <img src="https://www.thesun.co.uk/wp-content/uploads/2016/07/nintchdbpict000250046714.jpg?w=640" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="dataCommentsLikes">
-                        <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        <a href="#" class="tegArticle">УПЛ</a>
-                    </div>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <div class="oneArticle">
-                    <a href="#" class="goNews">
-                        <div class="IMGoneArticle">
-                            <img src="https://s-media-cache-ak0.pinimg.com/originals/94/14/b6/9414b6031e3580aab3494d1581b9a1fb.jpg" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="dataCommentsLikes">
-                        <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        <a href="#" class="tegArticle">УПЛ</a>
-                        <a href="#" class="tegArticle">челси</a>
-                    </div>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <div class="oneArticle">
-                    <a href="#" class="goNews">
-                        <div class="IMGoneArticle">
-                            <img src="https://s-media-cache-ak0.pinimg.com/originals/94/14/b6/9414b6031e3580aab3494d1581b9a1fb.jpg" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="dataCommentsLikes">
-                        <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        <a href="#" class="tegArticle">УПЛ</a>
-                    </div>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <div class="oneArticle">
-                    <a href="#" class="goNews">
-                        <div class="IMGoneArticle">
-                            <img src="https://s-media-cache-ak0.pinimg.com/originals/94/14/b6/9414b6031e3580aab3494d1581b9a1fb.jpg" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="dataCommentsLikes">
-                        <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        <a href="#" class="tegArticle">УПЛ</a>
-                    </div>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <div class="oneArticle" class="goNews">
-                    <a href="#">
-                        <div class="IMGoneArticle">
-                            <img src="https://s-media-cache-ak0.pinimg.com/originals/94/14/b6/9414b6031e3580aab3494d1581b9a1fb.jpg" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="dataCommentsLikes">
-                        <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        <a href="#" class="tegArticle">УПЛ</a>
-                    </div>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <div class="oneArticle">
-                    <a href="#" class="goNews">
-                        <div class="IMGoneArticle">
-                            <img src="https://s-media-cache-ak0.pinimg.com/originals/94/14/b6/9414b6031e3580aab3494d1581b9a1fb.jpg" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="dataCommentsLikes">
-                        <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        <a href="#" class="tegArticle">УПЛ</a>
-                    </div>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <div class="oneArticle">
-                    <a href="#" class="goNews">
-                        <div class="IMGoneArticle">
-                            <img src="https://s-media-cache-ak0.pinimg.com/originals/94/14/b6/9414b6031e3580aab3494d1581b9a1fb.jpg" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="dataCommentsLikes">
-                        <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        <a href="#" class="tegArticle">УПЛ</a>
-                    </div>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <div class="oneArticle">
-                    <a href="#" class="goNews">
-                        <div class="IMGoneArticle">
-                            <img src="https://s-media-cache-ak0.pinimg.com/originals/94/14/b6/9414b6031e3580aab3494d1581b9a1fb.jpg" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="dataCommentsLikes">
-                        <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        <a href="#" class="tegArticle">УПЛ</a>
-                    </div>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <div class="oneArticle">
-                    <a href="#" class="goNews">
-                        <div class="IMGoneArticle">
-                            <img src="https://s-media-cache-ak0.pinimg.com/originals/94/14/b6/9414b6031e3580aab3494d1581b9a1fb.jpg" alt="">
-                        </div>
-                        <div class="HEADINGoneArticle">
-                            <h3>Недвед перешел в Шахтер</h3>
-                        </div>
-                        <div class="TEXToneArticle">
-                            УЕФА отклонил апелляцию варшавской "Легии" в связи с решением о проведении матча против мадридского "Реала" в рамках четвертого тура группового этапа Лиги чемпионов за закрытыми дверями, сообщил Eurosport.onet.pl.
-                        </div>
-                    </a>
-                    <div class="dataCommentsLikes">
-                        <span class="timeSpan">13 октября 2016, 14:30.</span>
-                        <a href="#" class="tegArticle">упл</a>
-                        <a href="#" class="tegArticle">шахтер</a>
-                        <a href="#" class="tegArticle">трансферы</a>
-                    </div>
-                    <div class="rightlyarticle">
-                        <div class="quantityComments">
-                            <a href="#">154 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 32
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> 12
-                        </div>
-                    </div>
-                </div>
-                <!-- Пагинация   -->
-                <div class="navigationArticle">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">6</a></li>
-                            <li><a href="#">7</a></li>
-                            <li><a href="#">8</a></li>
-                            <li><a href="#">9</a></li>
-                            <li><a href="#">10</a></li>
-                            <li>
-                                <a href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- Конец пагинации -->
+            <!-- Индивидуальный блок новостей  -->
+            <div class="articles">
+               {% include "posts/list_section.html" %}
             </div>
             <!-- Конец важных новостей -->
         </div>
@@ -330,7 +46,7 @@
                     <div class="user_date">
                         <h3>Дивицкая Ирина</h3>
                         <div class="user_date_img">
-                            <img src="https://pp.vk.me/c622317/v622317386/33a4/fp98_RJlh1E.jpg" alt="">
+                            <img src="{{ request.user.avatar.url }}" alt="">
                         </div>
                         <div class="user_information">
                             <table class="table">
@@ -354,7 +70,7 @@
                     <!-- Предложить новость  -->
                     <div class="offerNews">
                         <div class="img_offerNews">
-                            <img src="https://pp.vk.me/c622317/v622317386/33a4/fp98_RJlh1E.jpg" alt="">
+                            <img src="{{ request.user.avatar.url }}" alt="">
                         </div>
                         <div class="text_offer_news">
                             <div class="form-group">

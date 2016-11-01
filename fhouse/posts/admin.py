@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Post
+from .models import Post, PostTag, UserFavoriteTags
 
 
 class PostModelAdmin(admin.ModelAdmin):
@@ -15,4 +15,11 @@ class PostModelAdmin(admin.ModelAdmin):
         model = Post
 
 
+class PostTagModelAdmin(admin.ModelAdmin):
+    class Meta:
+        model = PostTag
+
+
 admin.site.register(Post, PostModelAdmin)
+admin.site.register(PostTag, PostTagModelAdmin)
+admin.site.register(UserFavoriteTags)

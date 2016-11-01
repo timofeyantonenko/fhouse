@@ -4,12 +4,14 @@ post_list,
 post_create,
 post_delete,
 post_detail,
-post_update
+post_update,
+show_tabs,
 )
 
 
 urlpatterns = [
     url(r'^$', post_list, name="list"),
+    url(r'^tabs/$', show_tabs),
     url(r'^create/$', post_create),
     url(r'^(?P<slug>[\w-]+)/$', post_detail, name='detail'),
     # url(r'^(?P<slug>\d+)/$', post_detail, name='detail'),

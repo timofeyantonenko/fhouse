@@ -36,6 +36,7 @@ def comment_delete(request, id):
     }
     return render(request, "confirm_delete.html", context)
 
+
 def comment_thread(request, id):
     # obj = get_object_or_404(Comment, id=id)
     # obj = Comment.objects.get(id=id)

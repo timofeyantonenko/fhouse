@@ -1,8 +1,9 @@
+import json
 from urllib.parse import quote_plus
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 
@@ -12,7 +13,7 @@ from comments.forms import CommentForm
 from django.utils import timezone
 from django.db.models import Q
 from .forms import PostForm
-from .models import Post
+from .models import Post, UserFavoriteTags
 
 from utils.prepare_methods import create_comment_data
 
@@ -84,22 +85,23 @@ def post_list(request):  # list items
         ).distinct()
     paginator = Paginator(queryset_list, 5)  # Show 25 contacts per page
     page_request_var = "page"
-    page = request.GET.get(page_request_var)
+    page = request.GET.get(page_request_var, 1)  # If page is not an integer, deliver first page.
     try:
         queryset = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        queryset = paginator.page(1)
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
+    user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
+    user_tags = user_tags.tags.all()
 
     context = {
         "post_list": queryset,
         "title": "List",
         "page_request_var": page_request_var,
         "today": today,
+        'user_tags': user_tags,
     }
+    # return render(request, "posts/list_section.html", context)
     return render(request, "posts/post_list.html", context)
 
 
@@ -130,3 +132,40 @@ def post_delete(request, slug=None):
     instance.delete()
     messages.success(request, "Successfully deleted")
     return redirect("posts:list")
+
+
+def show_tabs(request):
+    """
+    AJAX request
+    :param tab:
+    :return:
+    """
+    tag = request.GET['tab']
+    user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
+    user_tags = user_tags.tags.all()
+    if tag == 'all':
+        queryset_list = Post.objects.all()
+    elif request.user.is_staff or request.user.is_superuser:
+        tag = user_tags.filter(name=tag)
+        queryset_list = Post.objects.filter(tag=tag)
+    else:
+        queryset_list = Post.objects.active()  # .order_by("-timestamp")
+    today = timezone.now().date()
+    paginator = Paginator(queryset_list, 5)  # Show 25 contacts per page
+    page_request_var = "page"
+    page = request.GET.get(page_request_var, 1)  # If page is not an integer, deliver first page.
+    try:
+        queryset = paginator.page(page)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        queryset = paginator.page(paginator.num_pages)
+
+    context = {
+        "post_list": queryset,
+        "title": "List",
+        "page_request_var": page_request_var,
+        "today": today,
+        'user_tags': user_tags,
+    }
+    return render_to_response(template_name='posts/list_section.html',context=context, content_type='text/html')
+    # return HttpResponse(json.dumps({'tab': tab}), content_type='application/json')
