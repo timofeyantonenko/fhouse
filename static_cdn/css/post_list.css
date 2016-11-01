@@ -415,3 +415,251 @@ textarea {
     position: absolute;
 }
 
+.rightlyarticle .fa {
+    margin-left: 10px;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+.rightlyarticle .fa:hover {
+    opacity: 1;
+}
+
+/*like and dislike */
+
+/*<a href="#"> <i class="fa fa-comment" aria-hidden="true"> 154</i></a>
+<i class="fa fa-thumbs-up" aria-hidden="true"> 32</i> 
+<i class="fa fa-thumbs-down" aria-hidden="true"> 12</i>*/
+
+/*CSS for POst_detail*/
+
+.article_detail {
+    background-color: #fafafa;
+    border: 1px solid #CCD1D9;
+    position: relative;
+    font-size: 16px;
+}
+
+.article_text {
+    text-align: justify;
+}
+
+.article_detail_img {
+    width: 100%;
+    max-height: 470px;
+    overflow: hidden;
+}
+
+.article_detail_img img {
+    width: 100%;
+}
+
+.article_detail_content {
+    padding: 30px;
+    position: relative;
+}
+
+.article_author {}
+
+.author_img {
+    position: absolute;
+    left: 30px;
+    top: -60px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #d9dde0;
+    border: 2px solid #d9dde0;
+}
+
+.author_img img {
+    width: 100%;
+    z-index: 100;
+}
+
+.author_name_date {
+    position: absolute;
+    left: 130px;
+    top: 10px;
+    z-index: 100;
+}
+
+.article_title {
+    font-size: 28px;
+    color: #1d71b9;
+    font-weight: 600;
+    padding: 0;
+    text-align: left;
+}
+
+.coments_author {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+}
+
+.coments_author img {
+    width: 100%;
+}
+
+.content_coment {
+    margin-left: 60px;
+}
+
+.coment_author_time {
+    min-width: 51%;
+    color: #7f8992;
+}
+
+.coment_author_time a {
+    font-weight: 600;
+}
+
+.blockquote {
+    padding: 3%;
+}
+
+.blockquote:hover {
+    background-color: #f0f2f5;
+}
+
+.author_name_date {
+    color: #7f8992;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.author_name_date a {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 7px;
+    margin-left: 10px;
+}
+
+.show_all_coment {
+    display: block;
+    cursor: pointer;
+    color: #55677d;
+    background: #f0f2f5;
+    line-height: 32px;
+    border-radius: 2px;
+    text-align: center;
+    margin-top: 5px;
+    margin: 5px 10% 24px 10%;
+}
+
+
+.comments_base {
+    background-color: #fafafa;
+    border-bottom: 1px solid #CCD1D9;
+    border-left: 1px solid #CCD1D9; 
+    border-right: 1px solid #CCD1D9;
+    padding: 30px;
+}
+
+.share_soc {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    
+}
+
+.share_facebook,
+.share_vk,
+.share_twitter {
+    background-color: #bdc3c7;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    font-size: 17px;
+    float: left;
+    color:#fafafa;
+    margin-left: 5px;
+    opacity: 0.8;
+}
+
+.share_facebook:hover,
+.share_vk:hover,
+.share_twitter:hover {
+    background-color: #95a5a6;
+}
+
+.share_facebook i,
+.share_vk i,
+.share_twitter i {
+    margin-top: 7px;
+}
+
+.article_detail hr {
+    margin-bottom: 5px;
+    margin-top: 15px;
+    border-top:1px solid #CCD1D9;
+}
+
+.like, 
+.dislike {
+    height: 40px;
+    width: 40px;
+    background-color: black;
+    border-radius: 50%;
+    color:#fafafa;
+    font-size: 22px;
+    text-align: center;
+    float: left;
+    margin-left: 10px;
+    opacity: 0.6;
+    vertical-align: center;
+    line-height: 40px;
+}
+
+
+.like_all:hover .quaantity_like,
+.like_all:hover .like,
+.dislike_all:hover .quantity_dislike, 
+.dislike_all:hover .dislike {
+    opacity: 1;
+}
+
+.like_all:hover .quaantity_like,
+.dislike_all:hover .quantity_dislike {
+    color: black;
+}
+
+
+.like_all,
+.dislike_all {
+    color:black;
+}
+
+
+.quaantity_like,
+.quantity_dislike {
+    font-size: 22px;
+    line-height: 40px;
+    float:left;
+    margin-left: 7px;
+    font-weight: 700;
+    opacity: 0.6;
+}
+
+.teg_post_detail {
+    font-weight: 600;
+} 
+
+.like_and_dislike {
+    float: right;
+}
+
+
+.block_like-dislike {
+    width: 100%;
+    height: 40px;
+}
+
+#without_padding {padding: 0px}
