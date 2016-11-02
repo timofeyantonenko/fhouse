@@ -189,7 +189,6 @@
         })
         var contentItem = $("#id_content");
         $("#preview-content").html(marked(contentItem.val()))
-
         function setContent(value) {
             var markedContent = marked(value)
             $("#preview-content").html(markedContent)
@@ -203,7 +202,6 @@
             setContent(newContent)
         })
         var titleInput = $("#id_title");
-
         function setTitle(value) {
             $("#preview-title").html(value)
         }
