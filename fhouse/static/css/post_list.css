@@ -425,11 +425,14 @@ textarea {
     opacity: 1;
 }
 
+
 /*like and dislike */
+
 
 /*<a href="#"> <i class="fa fa-comment" aria-hidden="true"> 154</i></a>
 <i class="fa fa-thumbs-up" aria-hidden="true"> 32</i> 
 <i class="fa fa-thumbs-down" aria-hidden="true"> 12</i>*/
+
 
 /*CSS for POst_detail*/
 
@@ -552,13 +555,19 @@ textarea {
     margin: 5px 10% 24px 10%;
 }
 
-
 .comments_base {
     background-color: #fafafa;
     border-bottom: 1px solid #CCD1D9;
-    border-left: 1px solid #CCD1D9; 
+    border-left: 1px solid #CCD1D9;
     border-right: 1px solid #CCD1D9;
     padding: 30px;
+}
+
+.comments_base2 {
+    background-color: #fafafa;
+    border-bottom: 1px solid #CCD1D9;
+    border-left: 1px solid #CCD1D9;
+    border-right: 1px solid #CCD1D9;
 }
 
 .share_soc {
@@ -566,7 +575,6 @@ textarea {
     top: 10px;
     right: 10px;
     display: inline-block;
-    
 }
 
 .share_facebook,
@@ -579,7 +587,7 @@ textarea {
     text-align: center;
     font-size: 17px;
     float: left;
-    color:#fafafa;
+    color: #fafafa;
     margin-left: 5px;
     opacity: 0.8;
 }
@@ -599,16 +607,16 @@ textarea {
 .article_detail hr {
     margin-bottom: 5px;
     margin-top: 15px;
-    border-top:1px solid #CCD1D9;
+    border-top: 1px solid #CCD1D9;
 }
 
-.like, 
+.like,
 .dislike {
     height: 40px;
     width: 40px;
     background-color: black;
     border-radius: 50%;
-    color:#fafafa;
+    color: #fafafa;
     font-size: 22px;
     text-align: center;
     float: left;
@@ -618,10 +626,9 @@ textarea {
     line-height: 40px;
 }
 
-
 .like_all:hover .quaantity_like,
 .like_all:hover .like,
-.dislike_all:hover .quantity_dislike, 
+.dislike_all:hover .quantity_dislike,
 .dislike_all:hover .dislike {
     opacity: 1;
 }
@@ -631,18 +638,16 @@ textarea {
     color: black;
 }
 
-
 .like_all,
 .dislike_all {
-    color:black;
+    color: black;
 }
-
 
 .quaantity_like,
 .quantity_dislike {
     font-size: 22px;
     line-height: 40px;
-    float:left;
+    float: left;
     margin-left: 7px;
     font-weight: 700;
     opacity: 0.6;
@@ -650,16 +655,17 @@ textarea {
 
 .teg_post_detail {
     font-weight: 600;
-} 
+}
 
 .like_and_dislike {
     float: right;
 }
-
 
 .block_like-dislike {
     width: 100%;
     height: 40px;
 }
 
-#without_padding {padding: 0px}
+#without_padding {
+    padding: 0px
+}

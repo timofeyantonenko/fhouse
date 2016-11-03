@@ -1,13 +1,32 @@
 .statsCard {
     background-color: #fafafa;
-    padding: 24px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #CCD1D9
+}
 
+.title_and_all_albums {
+    height: 40px;
+}
+
+.statsCard h2 {
+    margin-top: 0px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    float: left;
+}
+
+.flex_container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .thumbnail {
     margin: 0px;
     width: 30%;
+    display: none;
+    justify-content: space-around !important;
 }
 
 .statsList {
@@ -39,7 +58,6 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    min-height: 4.7rem
 }
 
 .statsCard .statsList .statsRow a {
@@ -342,17 +360,6 @@
     font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif
 }
 
-
-/*.statsCard .statsHero .cardClubColour,
-.statsCard .statsHero.inactive:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4rem
-}*/
-
 .statsCard .statsHero .heroBadgeContainer {
     width: 32px;
     height: 32px;
@@ -425,29 +432,54 @@
     margin-top: 5px
 }
 
-
-/*@media (max-width:63.9375em) {
-    .statsCard .statInfo {
-        margin-bottom: 3rem
-    }*/
-
-
-}
 ul#otis {
     list-style-type: none;
 }
+
 #list-group {
     margin-bottom: 0px;
 }
+
 #caption {
     padding: 0px;
 }
-#caption h3 {
-    margin-top: 10px;
-}
+
 #btn-record {
     margin-right: 10%;
 }
+
+.full_list_records {
+    background-color: #ebebeb;
+    display: inline-block;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 3px;
+    float: right;
+    font-size: 14px;
+    padding: 0px;
+    color: #333;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.full_list_records:hover {
+    background-color: #e90052;
+    color: white;
+}
+
+.full_list_records span:nth-child(1) {
+    margin: 0px 15px 0px 30px;
+    align-self: center;
+}
+
+.full_list_records span:nth-child(2) {
+    float: right;
+    margin-right: 7px;
+    align-self: center;
+}
+
 .full_list_record {
     box-sizing: border-box;
     float: left;
@@ -465,22 +497,16 @@ ul#otis {
     border-radius: 3px;
     width: 94%;
 }
+
 .full_list_record:hover {
     background-color: #e90052;
     color: white;
 }
+
 #arrow_record {
     float: right;
 }
-#record_card:hover {
-    -webkit-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    transform: scale(1.05);
-    transition-duration: 5s;
-    -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
-    -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
-    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.34);
-}
+
 #statInfo {
     padding-bottom: 10%;
 }

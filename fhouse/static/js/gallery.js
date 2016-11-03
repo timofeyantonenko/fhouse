@@ -85,3 +85,5 @@ $(".nav_ul li").on('click', function() {
 
     }
 });
+
+$("body").is(".content_coment")
