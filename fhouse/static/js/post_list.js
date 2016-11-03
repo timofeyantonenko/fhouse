@@ -1,6 +1,6 @@
 $(document).ready(function() {
 $(document).on('click', '.tab', function(){
-        var url = '/tabs';
+        var url = '/posts/tabs';
         var parent_div_tab = $(this).parent();
         var tab = $(this).find('div').text();
         var previous_active_tab = $('div .menu_individualNews_active');
@@ -17,7 +17,7 @@ $(document).on('click', '.tab', function(){
                 success: function(data){
                     var content = $('.articles');
                     content.html(data);
-                    window.history.pushState("object or string", "Title", 'tabs?tab=' + tab);
+                    window.history.pushState("object or string", "Title", '?tab=' + tab);
                 },
                 error: function(xhr, status, error){
                     console.log(error, status, xhr);
@@ -34,7 +34,7 @@ $(document).on('click', '.tab', function(){
             success: function(data){
                 var content = $('.articles');
                 content.html(data);
-                window.history.pushState("object or string", "Title", 'tabs?tab=' + tab);
+                window.history.pushState("object or string", "Title", '?tab=' + tab);
             },
             error: function(xhr, status, error){
                 console.log(error, status, xhr);
@@ -69,7 +69,7 @@ $(document).on('click', '.pagination_page', function(){
             success: function(data){
                 var content = $('.articles');
                 content.html(data);
-                window.history.pushState("object or string", "Title", 'tabs?tab=' + tab + '&page=' + need_page_number);
+                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
             },
             error: function(xhr, status, error){
                 console.log(error, status, xhr);

@@ -28,7 +28,7 @@
                 <div class="article_author">
                     <a href="#">
                         <div class="author_img">
-                            <img src="https://pp.vk.me/c416931/v416931345/5c5f/hrG8o7GdUHM.jpg" alt="">
+                            <img src="{{ request.user.avatar.url }}" alt="">
                         </div>
                     </a>
                     <div class="author_name_date">
@@ -87,7 +87,7 @@
                 <p class="lead">Оставить комментарий</p>
                 <a href="#">
                     <div class="coments_author">
-                        <img src="https://pp.vk.me/c9957/u75114231/133901365/w_b34694ef.jpg" alt="">
+                        <img src="{{ request.user.avatar.url }}" alt="">
                     </div>
                 </a>
                 {% if request.user.is_authenticated %}
@@ -104,7 +104,7 @@
                 <div class="blockquote">
                     <a href="#">
                         <div class="coments_author">
-                            <img src="https://pp.vk.me/c9957/u75114231/133901365/w_b34694ef.jpg" alt="">
+                            <img src="{{ comment.user.avatar.url }}" alt="">
                         </div>
                     </a>
                     <div class="content_coment">

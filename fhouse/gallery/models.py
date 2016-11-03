@@ -60,6 +60,10 @@ class AlbumPhoto(models.Model):
 
     photo_album = models.ForeignKey(SectionAlbum, on_delete=models.CASCADE)
 
+    # one photo
+    image = models.ImageField(upload_to=upload_location,
+                              null=True, blank=True)
+
     def __str__(self):
         return self.photo_title
 

@@ -70,8 +70,16 @@ def post_detail(request, slug=None):  # retrieve
 
 def post_list(request):  # list items
     today = timezone.now().date()
+
+    user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
+    user_tags = user_tags.tags.all()
+    tag = request.GET.get('tab', False)
     if request.user.is_staff or request.user.is_superuser:
-        queryset_list = Post.objects.all()
+        if tag:
+            tag = user_tags.filter(name=tag)
+            queryset_list = Post.objects.filter(tag=tag)
+        else:
+            queryset_list = Post.objects.all()
     else:
         queryset_list = Post.objects.active()  # .order_by("-timestamp")
 
@@ -83,7 +91,7 @@ def post_list(request):  # list items
             Q(user__first_name__icontains=query) |
             Q(user__last_name__icontains=query)
         ).distinct()
-    paginator = Paginator(queryset_list, 5)  # Show 25 contacts per page
+    paginator = Paginator(queryset_list, 5)  # Show 5 posts per page
     page_request_var = "page"
     page = request.GET.get(page_request_var, 1)  # If page is not an integer, deliver first page.
     try:
@@ -91,8 +99,6 @@ def post_list(request):  # list items
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
-    user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
-    user_tags = user_tags.tags.all()
 
     context = {
         "post_list": queryset,
@@ -137,9 +143,11 @@ def post_delete(request, slug=None):
 def show_tabs(request):
     """
     AJAX request
-    :param tab:
+    :param request:
     :return:
     """
+    if not request.is_ajax():
+        return post_list(request)
     tag = request.GET['tab']
     user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
     user_tags = user_tags.tags.all()
@@ -151,7 +159,7 @@ def show_tabs(request):
     else:
         queryset_list = Post.objects.active()  # .order_by("-timestamp")
     today = timezone.now().date()
-    paginator = Paginator(queryset_list, 5)  # Show 25 contacts per page
+    paginator = Paginator(queryset_list, 5)  # Show 5 posts per page
     page_request_var = "page"
     page = request.GET.get(page_request_var, 1)  # If page is not an integer, deliver first page.
     try:
