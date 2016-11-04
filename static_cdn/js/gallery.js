@@ -85,11 +85,3 @@ $(".nav_ul li").on('click', function() {
 
     }
 });
-
-$('.main_foto_albub img').each(function(i) {
-    if ($(this).css("height") < $(this).parent().css("height")) {
-        $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
-        $(this).parent().css({ "display": "flex", "justify-content": "center" });
-    }
-});
-
