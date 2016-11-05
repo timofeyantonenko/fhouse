@@ -11,6 +11,7 @@ def gallery_sections(request):  # list items
         print(len(albums))
         section_result_dict[section] = {
             "updated": section.updated,
+            "albums": albums,
         }
     title = "Gallery"
 

@@ -35,6 +35,8 @@ class SectionAlbum(models.Model):
     slug = models.SlugField(unique=True)
 
     album_section = models.ForeignKey(GallerySection, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=upload_location,
+                              null=True, blank=True)
 
     def __str__(self):
         return self.album_title
