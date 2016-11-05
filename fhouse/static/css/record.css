@@ -26,9 +26,11 @@
 .thumbnail {
     margin: 0px;
     width: 32%;
-    display: none;
-    justify-content: space-around !important;
+    /*display: none;*/
     padding: 0px;
+    margin-right: 2%;
+    vertical-align: top; 
+
 }
 
 .thumbnail h3 {
@@ -60,6 +62,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .statsCard .statsList .statsRow a {
@@ -432,7 +435,7 @@ ul#otis {
     margin-right: 10%;
 }
 
-.full_list_records {
+.add_record {
     background-color: #ebebeb;
     display: inline-block;
     line-height: 1.42857143;
@@ -448,17 +451,17 @@ ul#otis {
     justify-content: center;
 }
 
-.full_list_records:hover {
+.add_record:hover {
     background-color: #e90052;
     color: white;
 }
 
-.full_list_records span:nth-child(1) {
+.add_record span:nth-child(1) {
     margin: 0px 15px 0px 30px;
     align-self: center;
 }
 
-.full_list_records span:nth-child(2) {
+.add_record span:nth-child(2) {
     float: right;
     margin-right: 7px;
     align-self: center;
