@@ -75,7 +75,7 @@ def post_list(request):  # list items
     user_tags = user_tags.tags.all()
     tag = request.GET.get('tab', False)
     if request.user.is_staff or request.user.is_superuser:
-        if tag:
+        if tag and tag != 'all':
             tag = user_tags.filter(name=tag)
             queryset_list = Post.objects.filter(tag=tag)
         else:
