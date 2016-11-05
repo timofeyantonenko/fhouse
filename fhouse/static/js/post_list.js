@@ -170,3 +170,52 @@ $(document).on('click', '.pagination_page', function(){
         });
     });
 });
+
+// Script author: Dima 
+$(document).ready(function() {
+  
+
+    if ($('*').is('.content_coment')) {
+        $(".comments_base2").show();
+    } else {
+        $(".comments_base2").hide();
+    };
+
+    if ($(".blockquote").length < 6) {
+        $(".show_all_coment").hide();
+        $(".blockquote").css("padding-bottom", "3%")
+    } else {
+        $(".show_all_coment").show();
+    };
+
+    $("body").on("click", ".pagination_page a, .pagination_page span", function() {
+        $('html, body').animate({ scrollTop: 0 }, '0');
+
+    });
+
+    $(document).ajaxComplete(function() {
+        $('.IMGoneArticle img').each(function(i) {
+            if ($(this).css("height") < $(this).parent().css("height")) {
+                $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
+                $(this).parent().css({ "display": "flex", "justify-content": "center" });
+            } else {
+                var par_width = $(this).parent().css("width")
+                $(this).css({ "height": " ", "width": par_width });
+                $(this).parent().css({ "display": "block", });
+            }
+        });
+    })
+
+    $('.IMGoneArticle img').each(function(i) {
+        if ($(this).css("height") < $(this).parent().css("height")) {
+            $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
+            $(this).parent().css({ "display": "flex", "justify-content": "center" });
+        } else {
+            var par_width = $(this).parent().css("width")
+            $(this).css({ "height": " ", "width": par_width });
+            $(this).parent().css({ "display": "block", });
+        }
+    });
+});
+
+// End dimas script
