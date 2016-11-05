@@ -1,4 +1,5 @@
-// Активный раздел меню 
+$(document).ready(function(){
+// Активный раздел меню
 $(".nav_ul li:first-child a").addClass("active_nav_ul"); 
 
 $(".nav_ul li a").click(function(e) {
@@ -84,4 +85,6 @@ $(".nav_ul li").on('click', function() {
         $(".album_foto:nth-child(4)").hide();
 
     }
+});
+
 });
