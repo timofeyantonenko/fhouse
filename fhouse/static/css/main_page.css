@@ -130,11 +130,7 @@ a {
 
 .one_news_info span {
     color: #e90052;
-    font-size: 1.4rem;
-}
-
-.one_news_info:first-letter {
-    text-transform: uppercase;
+    font-size: 12px;
 }
 
 .flex_container {
