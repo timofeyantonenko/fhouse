@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, render_to_response
+from django.views.generic import ListView
 from .models import GallerySection, SectionAlbum, AlbumPhoto
 
 
@@ -8,7 +10,6 @@ def gallery_sections(request):  # list items
     section_result_dict = {}
     for section in sections_set:
         albums = section.albums
-        print(len(albums))
         section_result_dict[section] = {
             "updated": section.updated,
             "albums": albums,
@@ -25,7 +26,6 @@ def gallery_sections(request):  # list items
 def section_albums(request, slug=None):
     section = get_object_or_404(GallerySection, slug=slug)
     albums = section.albums
-    print(albums)
     context = {
         "albums": albums,
         "title": section.section_title,
@@ -53,3 +53,26 @@ def photo_detail(request, section_slug=None, album_slug=None, photo_slug=None):
         "title": photo.photo_title,
     }
     return render(request, "gallery/photo_detail.html", context)
+
+
+class PhotoList(ListView):
+    model = AlbumPhoto
+    template_name = 'gallery/slider_photo_list.html'
+    context_object_name = 'photo_list'
+    paginate_by = 5
+
+    def get_queryset(self):
+        print('HERE>>>>>>>')
+        section = self.request.GET.get('section')
+        print('HERE>>>>>>>{}<<<<<<<'.format(section))
+        if section:
+            print('section: ', section)
+            albums = SectionAlbum.objects.filter(album_section__section_title=section)
+            print('albums: ', albums)
+            photos = AlbumPhoto.objects.filter(photo_album__in=albums)
+        else:
+            photos = AlbumPhoto.objects.all()
+        print("PHOTOS: ", photos)
+        return photos
+        # return HttpResponse(template_name=self.template_name, context=photos, content_type='text/html')
+

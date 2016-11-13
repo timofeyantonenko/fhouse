@@ -66,6 +66,9 @@ class AlbumPhoto(models.Model):
     image = models.ImageField(upload_to=upload_location,
                               null=True, blank=True)
 
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+
     def __str__(self):
         return self.photo_title
 

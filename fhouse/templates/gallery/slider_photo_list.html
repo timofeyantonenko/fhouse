@@ -1,0 +1,110 @@
+<div class="slaider_foto_base">
+                            <!--<div class="album_foto">-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://www4.pictures.zimbio.com/gi/Club+Atletico+de+Madrid+v+Juventus+lf1ROs3hB_cx.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://football-pitch.ru/wp-content/uploads/2016/07/zinedin-zidan-foto.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://www.ua-football.com/img/upload/16/2154ad.jpeg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="album_foto">-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://3.bp.blogspot.com/-rD3OjNaIJ8w/T6uBeMwW4KI/AAAAAAAAAck/Ujwpyzua-2A/s640/bg9OerpeiNg.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://cs7001.vk.me/c540101/v540101950/abfd/pkFXM_VCOlI.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://cs14113.vk.me/c7004/v7004768/3a22/8LU-ZycuQnY.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="album_foto">-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://metalist.ua/files/image/all/stad.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://www.master-profi.dp.ua/wp-content/uploads/2015/08/03-Отрасль-Стадионы-НСК.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="https://cdn.riastatic.com/docs/dom/support/5/22/87f9c802f1cb3655607d4cac14b58.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="album_foto">-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="https://img.championat.com/i/article/35/79/1419803579_b_.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://ss.sport-express.ru/userfiles/materials/39/392875/large.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://milanac.ru/wp-content/uploads/2015/08/марадона-и-анчелотти.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="album_foto">-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://rian.com.ua/images/100921/66/1009216655.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://shakhtar.com/data/imgdata/foto/news/267041__max_news.jpg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="left_right_foto">-->
+                                    <!--<div class="img_slaider">-->
+                                        <!--<img src="http://www.ua-football.com/img/upload/17/21e597.jpeg" alt="">-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+<div class="album_foto">
+    {% for photo in photo_list %}
+    <div class="left_right_foto">
+        <div class="img_slaider">
+            <img src="{{ photo.image.url }}" alt="">
+        </div>
+    </div>
+{% endfor %}
+</div>
+    <i class="fa fa-expand" aria-hidden="true" id="foto_full"></i>
+                            <a href="#">
+                                <div class="foto_left">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="foto_right">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </div>
+                            </a>
+    </div>

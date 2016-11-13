@@ -1,0 +1,10 @@
+<span class="like_block">
+    <a class="positive_like" href="{{post.slug}}">
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+        <span class="likes_count">{{ post.positive_likes|length }}</span>
+    </a>
+    <a class="negative_like" href="{{post.slug}}">
+        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+        <span class="likes_count">{{ post.negative_likes|length }}</span>
+    </a>
+</span>
