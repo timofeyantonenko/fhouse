@@ -3,7 +3,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Record</title>
-<link rel="stylesheet" href='{% static "css/record.css" %}'> {% endblock head_extra %} {% block content %}
+<link rel="stylesheet" href='{% static "css/record.css" %}'>
+<script type="text/javascript" src="{% static 'js/record.js'  %}"></script>
+{% endblock head_extra %} {% block content %}
 <div class="container">
     {% for record_group in groups_tables %}
     <div class="row">
@@ -54,11 +56,9 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <a href="#">
-                        <div class="more_records">
-                            <span>БОЛЬШЕ РЕКОРДОВ</span>
-                        </div>
-                    </a>
+                    <div class="more_article">
+                        ПОСМОТРЕТЬ БОЛЬШЕ
+                    </div>
                 </div>
             </div>
             <div class="col-lg-3">

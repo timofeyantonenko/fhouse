@@ -451,6 +451,8 @@ ul#otis {
     justify-content: center;
 }
 
+
+
 .add_record:hover {
     background-color: #e90052;
     color: white;
@@ -496,4 +498,25 @@ ul#otis {
 
 #statInfo {
     padding-bottom: 10%;
+}
+
+.more_article {
+    cursor: pointer;
+    width: 32%;
+    margin: 0 auto 20px;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 14px;
+    color: #656D78;
+    background: #fff;
+    border: 1px solid #CCD1D9;
+    border-radius: 2px;
+}
+
+.more_article:hover {
+    text-decoration: none!important;
+    background: #eee;
 }

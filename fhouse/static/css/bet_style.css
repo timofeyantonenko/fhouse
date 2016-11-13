@@ -1,36 +1,126 @@
 body {
-    background-color: #eaeaea !important;
+    background-color: #eaeaea;
+    font-size: 1.6rem;
 }
 
-.rightColum {
+/*.my_weeks_bets a:hover h1,
+.my_weeks_bets a:hover h2,
+.my_weeks_bets a:hover h3,
+.my_weeks_bets a:hover h4,
+.my_weeks_bets a:hover h5,
+.my_weeks_bets a:hover h6,
+.preview_main_weeks_matches a:hover h1,
+.preview_main_weeks_matches a:hover h2,
+.preview_main_weeks_matches a:hover h3,
+.preview_main_weeks_matches a:hover h4,
+.preview_main_weeks_matches a:hover h5,
+.preview_main_weeks_matches a:hover h6,
+.div_for_championships_all_prognosisa a:hover h1,
+.div_for_championships_all_prognosisa a:hover h2,
+.div_for_championships_all_prognosisa a:hover h3,
+.div_for_championships_all_prognosisa a:hover h4,
+.div_for_championships_all_prognosisa a:hover h5,
+.div_for_championships_all_prognosisa a:hover h6 {
+    text-decoration: underline;
+}
+
+.div_for_championships_all_prognosisa a,
+.div_for_championships_all_prognosisa a:hover,
+.my_weeks_bets a,
+.my_weeks_bets a:hover,
+.preview_main_weeks_matches a,
+.preview_main_weeks_matches a:hover {
+    color: #242424;
+}
+*/
+.comtainer {
     margin: 0px !important;
 }
 
-.col-lg-6 {
-    width: 46% !important;
-    margin: 2% 2% 2% 2% !important;
+.my_weeks_bets .row {
+    margin: 0px !important;
 }
 
-.whiteDiv {
-    background-color: white !important;
+.preview_main_weeks_matches,
+.my_weeks_bets,
+.div_for_championships_all_prognosis {
+    background-color: #fafafa;
     border: 1px solid #CCD1D9;
 }
 
-.DivForarticlePrognosis {
-    position: relative;
-    overflow: hidden;
-    float: left;
-    clear: right;
+.preview_main_weeks_matches,
+.my_weeks_bets {
+    margin-right: 25px;
+    padding: 25px;
 }
 
-.articlePrognosis {
-    max-width: 100%;
-    float: left;
+.preview_main_weeks_matches {
+    padding-top: 40px;
 }
 
-.articlePrognosis img {
+.my_weeks_bets {
+    margin-bottom: 25px;
+}
+
+.fixed {
+    position: fixed;
+    bottom: 15px;
+    margin-right: 0px;
+}
+
+
+/*Weeks prognosis*/
+
+.weeksProg {
+    border: 1px solid #e4e4e4;
+    border-collapse: collapse !important;
+    margin-top: 10px;
+}
+
+.user_infa {
     width: 100%;
-    align: left;
+    height: 50px;
+}
+
+.name_user {
+    line-height: 50px;
+}
+
+.photo_user {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.photo_user img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+/*Превью к матчам */
+
+.preview_main_weeks_matches {
+    position: relative;
+}
+
+.before_date {
+    width: 30px;
+    height: 16px;
+    background-color: #ff7d00;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+}
+
+.date_aritle {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    color: #656D78;
 }
 
 .ArticleText {
@@ -38,16 +128,24 @@ body {
     margin: 0% 0% 0% 0% !important;
 }
 
+.one_main_match {
+    margin-left: 5px;
+}
+
 .ArticleText p {
     text-align: justify;
 }
 
-.ArticleImg {
-    position: relative;
+.img_one_main_match {
     float: left;
-    vertical-align: top;
-    width: 30%;
+    width: 50%;
     margin: 0% 2% 0% 0% !important;
+    overflow: hidden;
+    height: 300px;
+}
+
+.img_one_main_match img {
+    width: 100%;
 }
 
 .ArticleName {
@@ -56,204 +154,271 @@ body {
 
 h2 {
     margin: 0px !important;
-}
-
-h3 {
     margin: 0px !important;
 }
 
-.onePrognosis {
-    margin: 0% 0% 0% 0% !important;
-    padding: 4% 4% 0% 4% !important;
+.match_stats li {
+    list-style: none;
 }
 
-
-/*Right colum for prognosis*/
-
-.oneChmpionship {
-    padding: 4%;
-    position: relative;
-    clear: right;
-    min-height: 1%;
-    float: left;
+.statistical_data {
+    min-height: 32px;
     width: 100%;
+    line-height: 32px;
+    font-size: 14px;
+    color: #76766f !important;
+    padding: 8px 0px 8px 18px;
+    font-weight: 400;
+    opacity: 0.7;
 }
 
-.divForimgAllprognosis {
-    width: 15%;
-    height: auto;
-    margin: 0% 4% 0% 0% !important;
-    vertical-align: top;
-    position: relative;
-    float: left;
+.statistical_data:hover {
+    border-left: 2px solid #76766f;
+    font-size: 14px;
+    text-decoration: none;
+    color: #242424 !important;
+    opacity: 1;
 }
 
-.divForimgAllprognosis img {
-    float: left;
-    width: 100%;
-    text-align: left;
+.statistical_data:focus {
+    text-decoration: none;
+    opacity: 1;
 }
 
-.divForimgAllprognosis p {
-    text-align: right;
+.active_stat {
+    border-left: 2px solid #e90052;
+    color: #242424;
+    font-weight: 600;
+    font-size: 14px;
+    color: #242424 !important;
+    opacity: 1;
 }
 
-.divForTurAllprognosis {
-    width: 100%;
-    margin: 0% 0% 4% 0% !important;
+.active_stat:hover {
+    border-left: 2px solid #e90052;
 }
 
-.divForNameAllprognosis {
-    width: 100%;
-    margin: 0% !important;
+.match_stats .row {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
-.divForNameAllprognosis0 h3 {
-    font-size: 17px !important;
-    font-weight: bolder !important;
+.match_stats {
+    border-top: 4px solid #e8e8e8;
+    margin-top: 15px;
 }
 
-.divForNameAllprognosis h3 {
-    font-size: 14px !important;
-    font-weight: bolder !important;
-    text-align: right !important;
+.match_stats h3 {
+    color: #1d71b9;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.divForNameAllprognosis p {
-    text-align: right !important;
+.menu_stat {}
+
+.menu_stat ul {
+    padding: 0px;
 }
 
-.divForNameAllprognosis p {
-    color: #7f8992 !important;
-    margin-bottom: 0px !important;
+h2 {
+    font-size: 28px;
+    color: #1d71b9;
+    font-weight: 600;
 }
 
-.infoPrognosis {
+h3 {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+/*ТАблица превью */
+.name_championship {
+    background-color:#e90052;
+    color:#fafafa;
+    height: 40px;
+    width: 100%; 
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+
+}
+
+.this_club_in_table {
+    background-color: #FCF1B7;
+}
+
+.table_championship img {
+    height: 20px;
+    max-width: 20px;
+}
+
+.table_championship {
+    border: 1px solid #e8e8e8;
+    border-top: 0;
+    border-radius: 0 0 3px 3px;
+    font-size: 12px;
+}
+
+.table_championship table {
     margin-bottom: 0px;
 }
 
-.imgAllprognosis {
-    width: 100%;
+.table_championship table tr {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.divForAllRecordsCol {}
+/*Последние результаты*/
 
-.divForChampionatAllprognosis {
-    margin: 2%;
-    position: relative;
+.last_result img {
+    height: 20px;
+    width: auto;
+}
+
+.last_result table tr td {
+    text-align: center;
+    font-size: 12px;
+}
+
+.defeat,
+.draw,
+.victory {
+    
+    padding: 4px;
+    text-align: center;
+    color: #fff;
+    border-radius: 20%;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 11px;
+    cursor: pointer;
+    font-weight: 600;
+    display: none; 
+}
+
+
+.defeat {
+    background-color: #d81920;
+}
+
+.draw {
+    background-color: #76766f;
+}
+
+.victory {
+    background-color: #13cf00;
+}
+
+/*Right colum for prognosis*/
+
+.one_championship {
+    width: 100%;
+    height: 40px;
+}
+
+.img_one_championship {
+    height: 40px;
+    width: auto;
     float: left;
 }
 
-.divForChampionatAllprognosis a:hover .oneChmpionship {
-    background-color: #eaeaea;
+.img_one_championship img {
+    height: 100%;
+    width: auto;
 }
 
+.div_for_championships_all_prognosis {
+    position: relative;
+    float: left;
+    padding: 20px;
+}
 
-/*.oneChmpionship0 {
-border-bottom: 2px solid silver;
-}*/
+.championships_country {
+    float: right;
+    height: 40px;
+}
+
+.championships_country p {
+    float: right;
+    color: #e90052;
+    margin-bottom: 0px;
+    font-size: 12px;
+}
+
+.div_for_championships_all_prognosis h3,
+.div_for_championships_all_prognosis h4 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 
 
 /*Table top-10*/
 
-.table>thead>tr>th {
-    vertical-align: middle !important;
-}
-
-table {
-    margin-bottom: 0px !important;
-}
-
-thead {
-    background-color: #f2f2f2 !important;
-}
-
-th:nth-child(1) {
-    background: #4384a8 !important;
-    width: 60px !important;
-    text-align: center;
-    line-height: 34px;
-    padding: 2px !important;
-}
-
-th:nth-child(4) {
-    text-align: right;
-}
-
-.numberTable {
+.user_foto {
     width: 30px;
     height: 30px;
-    border-radius: 15px;
-    margin-top: 4px;
-    padding-top: 4px;
-    color: #fff;
-    font-weight: bold;
-    background-color: #003555;
-    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+}
+
+.user_foto img {
+    width: 100%;
+    height: auto;
+}
+
+.table_top_forecasters {
+    font-size: 11px;
+    border: 1px solid #ddd;
+    border-top: 5px solid #e90052;
+    border-radius: 4px;
+}
+
+.table_top_forecasters tr {
+    max-height: 34px;
+
+}
+
+.table_top_forecasters tr td {
+    padding: 2px 8px !important;
+    vertical-align: middle !important;
+
+}
+
+.table_top_forecasters tr:first-child td {
+    padding: 8px !important;
+}
+
+.table_top_forecasters table {
+    margin-bottom: 0px;
+}
+
+.table_top_forecasters table tr:first-child {
+    color: #666;
+}
+
+.img_country_forecaster {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    float: left;
+}
+
+.img_country_forecaster img {
     display: inline-block;
-}
-
-#nuberTop {
-    background-color: #f2f2f2 !important;
-    padding: 0px !important;
-}
-
-.table>tbody>tr>td,
-.table>tbody>tr>th,
-.table>tfoot>tr>td,
-.table>tfoot>tr>th,
-.table>thead>tr>td,
-.table>thead>tr>th {
-    line-height: 24px !important;
-    white-space: nowrap;
-}
-
-table thead tr th {
-    color: #57585A;
-    border: 1px solid #e4e4e4 !important;
-}
-
-table tfoot tr th {
-    border: 1px solid #e4e4e4 !important;
-}
-
-table tbody tr th {
-    color: #57585A;
-    border: 1px solid #e4e4e4 !important;
-}
-
-.tableRecord {
-    font-family: PremierSans-Regular, Arial, Helvetica Neue, Helvetica, sans-serif;
-}
-
-.tableRecord a {
-    color: #242424;
-}
-
-.imageTableRecord {
-    display: inline-block;
-    /*    vertical-align: middle;*/
     margin-right: 1rem;
     width: auto;
     max-height: 15px;
-    /*    line-height: 38px;*/
     box-sizing: border-box;
-    /*   padding: -3px;*/
+    align-self: center;
 }
-
-.recordNeartableRecord {
-    border-top: solid #38003c 5px;
-}
-
-#EndTable {
-    text-align: right;
-    background-color: #fafafa !important;
-}
-
-#EndTable a {
-    margin-right: 4px;
-}
-
 
 /*End table top-10*/
 
@@ -309,7 +474,6 @@ table tbody tr th {
     min-height: 1px;
     padding-right: 0px !important;
     padding-left: 0px !important;
-    /* margin: 2% 1% 0% 1% !important;*/
 }
 
 .onePrognosisLast {
@@ -317,97 +481,132 @@ table tbody tr th {
     padding: 4% 4% 4% 4% !important;
 }
 
-.container {
-    padding: 0px !important;
+
+/*Навигация между превью */
+
+.navigation_between_preview {
+    background-color: #292a2e;
+    color: #fff;
+    margin-right: 25px;
 }
 
-.avatarUsers {
-    width: 30px;
-    height: 30px;
+.nav_ul {
+    display: block;
+    height: 43px;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+.nav_ul li {
+    list-style: none;
+    float: left;
+    display: inline-block;
     position: relative;
-    overflow: hidden;
-    margin: 0px !important;
 }
 
-.avatarUsers img {
-    width: 100%;
-    height: auto;
+.nav_ul li span {
+    position: absolute;
+    top: 34px;
+    right: 14px;
+    height: 12px;
+    display: none;
 }
 
-.infoPrognosisResult {
-    margin-bottom: 0px !important;
-    font-weight: bolder;
+.nav_ul li a:hover span {
+    color: #fff;
 }
 
-.witoutMargin {
-    margin: 0px !important;
-    width: 100%;
+.nav_ul li a {
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: block;
+    padding: 13px 14px;
+    font-weight: 600;
+    position: relative;
 }
 
-
-/*Weeks prognosis*/
-
-.weeksProg {
-    border: 1px solid #e4e4e4;
-    border-collapse: collapse !important;
-    margin-top: 10px;
+.nav_ul li a:focus {
+    text-decoration: none;
 }
 
-.photoUser {
-    width: 200px;
-    height: 200px;
-    float: left;
-    margin-right: 10px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.photoUser img {
-    width: 100%;
-    float: left;
-    margin-bottom: 10px;
-}
-
-.onesMatch {
-    padding: 2% 4% !important;
-    border-right: 1px solid #e4e4e4;
-    border-bottom: 1px solid #e4e4e4;
-}
-
-.onesMatch:hover {
-    background-color: #eaeaea;
-}
-
-.onesMatch:active {
-    background-color: #4384a8;
-    color: white;
-}
-
-.onesMatch:nth-child(3n+2) {
-    border-right: 1px solid #e4e4e4;
-    border-left: 1px solid #e4e4e4;
-}
-
-.onesMatch:nth-child(2) {}
-
-.onesMatch p {
+.nav_ul li a img {
+    height: 12px;
     width: auto;
-    margin: 0px !important;
 }
 
-.onesMatch p:nth-child(odd) {
+.active_nav_ul {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.active_nav_ul span {
+    display: block !important;
+    color: #fff;
+}
+
+.nav_ul li:nth-child(1) a:hover,
+ul li:nth-child(1) .active_nav_ul,
+.nav_ul li:nth-child(6) a:hover,
+ul li:nth-child(6) .active_nav_ul {
+    text-decoration: none;
+    background-color: #ec0000;
+    color: #fafafa;
+}
+
+.nav_ul li:nth-child(2) a:hover,
+ul li:nth-child(2) .active_nav_ul,
+.nav_ul li:nth-child(7) a:hover,
+ul li:nth-child(7) .active_nav_ul {
+    text-decoration: none;
+    background-color: #0091ff;
+    color: #fafafa;
+}
+
+.nav_ul li:nth-child(3) a:hover,
+ul li:nth-child(3) .active_nav_ul,
+.nav_ul li:nth-child(8) a:hover,
+ul li:nth-child(8) .active_nav_ul {
+    text-decoration: none;
+    background-color: #ff7d00;
+    color: #fafafa;
+}
+
+.nav_ul li:nth-child(4) a:hover,
+ul li:nth-child(4) .active_nav_ul,
+.nav_ul li:nth-child(9) a:hover,
+ul li:nth-child(9) .active_nav_ul {
+    text-decoration: none;
+    background-color: #2446a3;
+    color: #fafafa;
+}
+
+.nav_ul li:nth-child(5) a:hover,
+ul li:nth-child(5) .active_nav_ul,
+.nav_ul li:nth-child(10) a:hover,
+ul li:nth-child(10) .active_nav_ul {
+    text-decoration: none;
+    background-color: #ffba14;
+    color: #fafafa;
+}
+
+.channel_view {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+}
+
+.channel_view h4 {
     float: left;
+    margin-right: 15px;
+    font-size: 20px !important;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
-.onesMatch p:nth-child(even) {
-    text-align: right;
-}
-
-
-.dateUser {
-    margin-bottom: 5px !important;
-}
-
-.comtainer {
-    margin: 0px !important;
+.channel_view img {
+    height: 20px;
+    float: left;
+    width: auto;
+    margin-right: 15px;
 }
