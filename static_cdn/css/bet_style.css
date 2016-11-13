@@ -6,26 +6,14 @@ body {
     margin: 0px !important;
 }
 
-.col-lg-12 {}
-
-.col-lg-9 {
-    width: 73% !important;
-    margin: 2% 1% 0% 1% !important;
-}
-
 .col-lg-6 {
     width: 46% !important;
     margin: 2% 2% 2% 2% !important;
 }
 
-.col-lg-3 {
-    width: 23% !important;
-    margin: 2% 1% 0% 1% !important;
-}
-
 .whiteDiv {
     background-color: white !important;
-    box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px;
+    border: 1px solid #CCD1D9;
 }
 
 .DivForarticlePrognosis {
@@ -356,11 +344,6 @@ table tbody tr th {
     width: 100%;
 }
 
-.withMargin {
-    margin: 2% 1% 0% 1% !important;
-    width: 98% !important;
-}
-
 
 /*Weeks prognosis*/
 
@@ -371,16 +354,18 @@ table tbody tr th {
 }
 
 .photoUser {
-    width: 30%;
+    width: 200px;
+    height: 200px;
     float: left;
     margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .photoUser img {
     width: 100%;
     float: left;
     margin-bottom: 10px;
-
 }
 
 .onesMatch {
@@ -418,14 +403,11 @@ table tbody tr th {
     text-align: right;
 }
 
-.col-lg-5 {
-    width: 40% !important;
-}
-
-.col-lg-2 {
-    width: 20% !important;
-}
 
 .dateUser {
-	margin-bottom: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+.comtainer {
+    margin: 0px !important;
 }

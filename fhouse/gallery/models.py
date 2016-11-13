@@ -35,6 +35,8 @@ class SectionAlbum(models.Model):
     slug = models.SlugField(unique=True)
 
     album_section = models.ForeignKey(GallerySection, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=upload_location,
+                              null=True, blank=True)
 
     def __str__(self):
         return self.album_title
@@ -63,6 +65,9 @@ class AlbumPhoto(models.Model):
     # one photo
     image = models.ImageField(upload_to=upload_location,
                               null=True, blank=True)
+
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __str__(self):
         return self.photo_title
