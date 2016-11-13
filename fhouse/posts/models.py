@@ -12,6 +12,8 @@ from markdown_deux import markdown
 from .utils import get_read_time
 from utils.files_preparing import upload_location
 from utils.abstract_classes import CommentedClass
+from utils.abstract_classes import LikedClass
+from utils.abstract_classes import ForeignContentClass
 
 
 class PostTag(models.Model):
@@ -43,7 +45,7 @@ class PostManager(models.Manager):
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 
-class Post(CommentedClass):
+class Post(CommentedClass, LikedClass, ForeignContentClass):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)

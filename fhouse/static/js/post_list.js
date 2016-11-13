@@ -49,7 +49,7 @@ $(document).ready(function() {
     var url = window.location.href;
     console.log('before' + url);
 //    window.history.pushState({}, '', url);
-    var ajax_url = '/posts'
+        var ajax_url = '/posts'
         var ajax_data = {}
         var state = ""
         var tab = getUrlParameter('tab')
@@ -105,7 +105,7 @@ $(document).on('click', '.tab', function(){
          if (tab === 'Все'){
             tab = 'all';
             $.ajax({
-                url: '/tabs',
+                url: url,
                 data: {'tab': tab},
                 dataType: "html",
                 success: function(data){
@@ -151,6 +151,9 @@ $(document).on('click', '.pagination_page', function(){
                 var need_page_number = parseInt(active_page_number) + 1
             }
         }
+        else {
+            return;
+        }
         var tab = $('div .menu_individualNews_active').find('div').text();
         if (tab === 'Все'){
             tab = 'all';
@@ -169,11 +172,87 @@ $(document).on('click', '.pagination_page', function(){
             }
         });
     });
+$(document).on('click', '.positive_like', function(e){
+    e.preventDefault();
+    var like_url = "/likes/post/modify";
+    var a_block = $(this);
+    var like_slug = a_block.attr("href");
+    var pos_likes_count = a_block.text();
+    count_block = $(this).find('span.likes_count');
+    pos_likes_count = parseInt(pos_likes_count);
+    var parent_div_tab = $(this).parent();
+    $.ajax({
+    url: like_url,
+    data: {'slug': like_slug, 'type': 0},
+    dataType: "json",
+    success: function(data, textStatus, xhr){
+    var check_list = data['add_result']
+    for (var i = 0; i < check_list.length; i++) {
+        var operation_result = check_list[i];
+        if (operation_result == 0){ // add positive
+            pos_likes_count = pos_likes_count + 1;
+        }
+        else if (operation_result == 2){ // remove positive
+            pos_likes_count = pos_likes_count - 1;
+        }
+        else if (operation_result == 3){ // remove negative
+            neg_like_block = $(parent_div_tab).find('a.negative_like');
+            neg_count_block = $(neg_like_block).find('span.likes_count');
+            var neg_likes_count = parseInt(neg_like_block.text());
+            neg_likes_count = neg_likes_count - 1;
+            neg_count_block.html(neg_likes_count.toString());
+        }
+    }
+        count_block.html(pos_likes_count.toString());
+    },
+    error: function(xhr, status, error){
+        console.log(error, status, xhr);
+    }
+        });
+});
+$(document).on('click', '.negative_like', function(e){
+    e.preventDefault();
+    var like_url = "/likes/post/modify";
+    var a_block = $(this);
+    var like_slug = a_block.attr("href");
+    var neg_likes_count = a_block.text();
+    count_block = $(this).find('span.likes_count');
+    neg_likes_count = parseInt(neg_likes_count);
+    var parent_div_tab = $(this).parent();
+    $.ajax({
+    url: like_url,
+    data: {'slug': like_slug, 'type': 1},
+    dataType: "json",
+    success: function(data, textStatus, xhr){
+    var check_list = data['add_result']
+    for (var i = 0; i < check_list.length; i++) {
+        var operation_result = check_list[i];
+        if (operation_result == 1){ // add negative
+            neg_likes_count = neg_likes_count + 1;
+        }
+        else if (operation_result == 3){ // remove negative
+            neg_likes_count = neg_likes_count - 1;
+        }
+        else if (operation_result == 2){ // remove positive
+            pos_like_block = $(parent_div_tab).find('a.positive_like');
+            pos_count_block = $(pos_like_block).find('span.likes_count');
+            var pos_likes_count = parseInt(pos_like_block.text());
+            pos_likes_count = pos_likes_count - 1;
+            pos_count_block.html(pos_likes_count.toString());
+        }
+    }
+        count_block.html(neg_likes_count.toString());
+    },
+    error: function(xhr, status, error){
+        console.log(error, status, xhr);
+    }
+        });
+});
 });
 
-// Script author: Dima 
+// Script author: Dima
 $(document).ready(function() {
-  
+
 
     if ($('*').is('.content_coment')) {
         $(".comments_base2").show();

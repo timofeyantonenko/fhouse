@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'article',
     'geohelp',
     'main_page',
+    'likes',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
