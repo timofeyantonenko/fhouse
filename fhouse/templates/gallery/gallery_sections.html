@@ -1,8 +1,4 @@
-{% extends "base.html" %} {% load staticfiles %}
-{% block head_title %}
-{{ title }}
-{% endblock head_title %}
-{% block head_extra %}
+{% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/gallery_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/gallery.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
@@ -24,7 +20,7 @@
                             </ul>
                         </div>
                         <div class="slider_photo_list">
-                            </div>
+                        </div>
                     </div>
                     <div class="footer_nav">
                     </div>
@@ -41,24 +37,40 @@
         <!-- Все альбомы -->
         <div class="col-lg-8">
             {% for section in sections %}
-            <div class="galleryDiv">
-                <div class="title_and_all_albums">
-                    <h2>{{ section.section_title }}</h2>
-                    <a class="button_all_album" href="#">Посмотреть все  &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+            <div class="div_album">
+                <div class="title_and_all">
+                    <h2><a href='#'>{{ section.section_title }}</a></h2>
+                    <a href="Больше">
+                        <div class="all_of_units">
+                            <span>Больше</span>
+                            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                        </div>
+                    </a>
                 </div>
-                {% for album in section.albums %}
-                <a href="#">
+                <div class="container_album">
+                    {% for album in section.albums %}
                     <div class="one_album">
-                    <div class="main_foto_albub">
-                        <img src="{{ album.image.url }}" alt="">
+                        <a href="#">
+                            <div class="main_foto_albub">
+                                <img src="{{ album.image.url }}" alt="">
+                            </div>
+                            <div class="color_line">
+                                <div class="icon_for_album">
+                                    <div class="icon_foto">
+                                        <i class="fa fa-camera" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="quantity_foto_in_album">
+                                        15
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="discription_album">
+                                {{ album.album_title }}
+                            </div>
+                        </a>
                     </div>
-                    <div class="discription_album">
-                        {{ album.album_title }}
-                    </div>
+                    {% endfor %}
                 </div>
-                </a>
-                {% endfor %}
-                
             </div>
             {% endfor %}
         </div>

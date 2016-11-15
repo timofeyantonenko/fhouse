@@ -7,63 +7,65 @@
 <script type="text/javascript" src="{% static 'js/record.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
 <div class="container">
-    {% for record_group in groups_tables %}
     <div class="row">
         <div class="col-lg-9">
+            <div class="navigation_between_records">
+                <ul class="nav_ul">
+                    <li><a href="#">Все  <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></li>
+                    {% for record_group in groups_tables %}
+                    <li><a href="#">{{ record_group.group }} <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
             <div class="statsCard">
-                <div class="title_and_all_albums">
-                    <h2><a href = '{{record_group.group.get_absolute_url}}'>{{ record_group.group }} </a></h2>
-                    <a href="{{record_group.group.get_absolute_url}}">
-                        <div class="add_record">
-                            <span>Добавить рекорд</span>
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </div>
-                    </a>
-                </div>
+                {% for record_group in groups_tables %}
                 <div class="flex_container">
                     {% for records_table in record_group.tables %}
-                    <div class="thumbnail">
+                    <div class="thumbnails">
                         <div class="caption" id="caption">
                             <h3>{{ records_table.table }}</h3>
                         </div>
                         <ul class="statsList list-group" id="list-group">
                             {% for record in records_table.records %} {% if forloop.counter == 1 %}
-                            <li class="statsHero inactive">
-                                <div class="statInfo" id="statInfo">
-                                    {% else %}
-                                    <li class="statsRow">
-                                        <div class="pos">
-                                            {{forloop.counter}}.</div>
-                                        <div class="teamInfo">
-                                            {% endif %}
-                                            <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
-                                        </div>
-                                        <div class="stat"> {{ record.record_value }} </div>
-                                        {% if forloop.counter == 1 %}
-                                        <div class="imgCropContainer">
-                                            <img class="img statCardImg" src="{{record.content_object.image.url}}" alt="">
-                                        </div>
-                                        {% endif %}
-                                    </li>
-                                    {% endfor %}
-                                    <a href="{{records_table.table.get_absolute_url}}">
-                                        <li class="full_list_record" id="btn-record">
-                                            Полный Cписок
-                                            <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                                        </li>
+                            <li class="statsHero">
+                                <div class="statInfo">
+                                    <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
+                                    <span class="stat">123</span>
+                                </div>
+                                <div class="img_container_hero">
+                                    <img src="{{record.content_object.image.url}}" alt="">
+                                </div>
+                                {% else %}
+                                <li class="statsRow">
+                                    <div class="pos">
+                                        {{forloop.counter}}.</div>
+                                    <div class="teamInfo">
+                                        <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
+                                    </div>
+                                    <div class="stat"> {{ record.record_value }} </div>
+                                    {% endif %}
+                                </li>
+                                {% endfor %}
+                                <li class="full_list_record">
+                                    <span><a href="{{records_table.table.get_absolute_url}}">
+                                    Полный Cписок
+                                    <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
                                     </a>
+                                    </span>
+                                    </a>
+                                </li>
                         </ul>
-                        </div>
-                        {% endfor %}
                     </div>
-                    <div class="more_article">
-                        ПОСМОТРЕТЬ БОЛЬШЕ
-                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <div class="more_records">
+                    ПОСМОТРЕТЬ БОЛЬШЕ
                 </div>
             </div>
-            <div class="col-lg-3">
-            </div>
         </div>
-        {% endfor %}
+        <div class="col-lg-3">
+        </div>
     </div>
-    {% endblock content %}
+</div>
+{% endblock content %}

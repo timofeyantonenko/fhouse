@@ -142,44 +142,6 @@ $(document).on('click', '.foto_right', function(){
 
 
 
-//$(".nav_ul li").on('click', function() {
-//    if ($(this).is(":first-child")) {
-//        $(".album_foto:nth-child(1)").show();
-//        $(".album_foto:nth-child(5)").hide();
-//        $(".album_foto:nth-child(2)").hide();
-//        $(".album_foto:nth-child(3)").hide();
-//        $(".album_foto:nth-child(4)").hide();
-//
-//    } else if ($(this).is(":nth-child(2)")) {
-//        $(".album_foto:nth-child(2)").show();
-//        $(".album_foto:nth-child(1)").hide();
-//        $(".album_foto:nth-child(5)").hide();
-//        $(".album_foto:nth-child(3)").hide();
-//        $(".album_foto:nth-child(4)").hide();
-//
-//    } else if ($(this).is(":nth-child(3)")) {
-//        $(".album_foto:nth-child(3)").show();
-//        $(".album_foto:nth-child(1)").hide();
-//        $(".album_foto:nth-child(2)").hide();
-//        $(".album_foto:nth-child(5)").hide();
-//        $(".album_foto:nth-child(4)").hide();
-//
-//    } else if ($(this).is(":nth-child(4)")) {
-//        $(".album_foto:nth-child(4)").show();
-//        $(".album_foto:nth-child(1)").hide();
-//        $(".album_foto:nth-child(2)").hide();
-//        $(".album_foto:nth-child(3)").hide();
-//        $(".album_foto:nth-child(5)").hide();
-//
-//    } else {
-//        $(".album_foto:nth-child(5)").show();
-//        $(".album_foto:nth-child(1)").hide();
-//        $(".album_foto:nth-child(2)").hide();
-//        $(".album_foto:nth-child(3)").hide();
-//        $(".album_foto:nth-child(4)").hide();
-//
-//    }
-//});
 
 $('.main_foto_albub img').each(function(i) {
     if ($(this).css("height") < $(this).parent().css("height")) {
