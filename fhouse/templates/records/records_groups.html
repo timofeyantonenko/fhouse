@@ -28,9 +28,10 @@
                         <ul class="statsList list-group" id="list-group">
                             {% for record in records_table.records %} {% if forloop.counter == 1 %}
                             <li class="statsHero">
+                                
                                 <div class="statInfo">
                                     <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
-                                    <span class="stat">123</span>
+                                    <span class="stat">{{ record.record_value }}</span>
                                 </div>
                                 <div class="img_container_hero">
                                     <img src="{{record.content_object.image.url}}" alt="">

@@ -17,7 +17,7 @@ $(document).ready(function() {
         $(this).addClass('active_nav_ul');
     });
 
-    var width_parent_statinfo = $(".statsHero .statInfo").parent().width()-120;    
+    var width_parent_statinfo = $(".statsHero .statInfo").parent().width()-150;    
     $(".statsHero .statInfo").css("max-width", width_parent_statinfo);
 
 });

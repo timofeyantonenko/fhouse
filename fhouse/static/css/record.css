@@ -46,15 +46,15 @@
 
 .statsHero {
     padding: 10px;
-    height: 120px;
+    height: 150px;
     background: #eaeaea;
     border-bottom: 1px solid #e8e8e8;
     background-image: url(https://psv4.vk.me/c812128/u75114231/docs/30d69a75a2bd/Bez_Imeni-1.png?extra=SYW47Wen3NkmAmonh54tsnO9puwftUtekKiaH-6QpS-tjC3ueEvIo8VdqWLS85BhwerWsh2Y2pa6WSd2-Kyz8tHBmGWt6v0gFpewH4anMtwFsizF6M1Hzw);
 }
 
 .img_container_hero {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     overflow: hidden;
     border-radius: 50%;
     border: 3px solid #fff;
@@ -81,6 +81,8 @@
     color: #e90052;
     position: absolute;
     font-size: 26px;
+    top: 100%;
+    left: 0px;
     font-weight: 600;
 }
 

@@ -12,11 +12,4 @@ $(document).ready(function() {
             $(this).parent().css({ "display": "block", });
         }
     });
-
-    $(".thumbnail:nth-child(3n)").css("margin-right", "0");
-    $(".statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
-
-    var width_parent_statinfo = $(".statsHero .statInfo").parent().width()-120;    
-    $(".statsHero .statInfo").css("max-width", width_parent_statinfo);
-
 });
