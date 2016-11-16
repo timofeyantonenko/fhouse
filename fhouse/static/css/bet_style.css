@@ -610,3 +610,13 @@ ul li:nth-child(10) .active_nav_ul {
     width: auto;
     margin-right: 15px;
 }
+
+.fixed_col {
+    position: fixed;
+    bottom: 25px;
+    right: 0px;
+}
+
+.row {
+    position: relative !important;
+}

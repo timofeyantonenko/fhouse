@@ -62,4 +62,55 @@ $(document).ready(function() {
 
 
 
+
+
+
+
+});
+
+// Фиксация блока меньшей высоты
+
+
+
+$(window).load(function() {
+
+
+
+    var height = $(".colum:nth-child(2)").height();
+    $(".colum").each(function(i) {
+
+        if ($(this).height() < height) {
+            height = $(this).height()
+        };
+
+    });
+
+    var min_height_block;
+
+    $(".colum").each(function(i) {
+
+        if ($(this).height() == height) {
+            min_height_block = $(this);
+        };
+
+    });
+
+    var width_min_height_block = $(min_height_block).width();
+
+    $(min_height_block).css("width", width_min_height_block);
+
+    var left_col = $(min_height_block).offset().left;
+    
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > (height - document.documentElement.clientHeight + $(".navbar").height())) {
+                $(min_height_block).addClass("fixed_col");
+                $(min_height_block).css("left", left_col);
+
+            } else {
+                $(min_height_block).removeClass("fixed_col");
+                $(min_height_block).css("left", "0px");
+            }
+        });
+
 });
