@@ -62,17 +62,11 @@ class PhotoList(ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        print('HERE>>>>>>>')
         section = self.request.GET.get('section')
-        print('HERE>>>>>>>{}<<<<<<<'.format(section))
         if section:
-            print('section: ', section)
             albums = SectionAlbum.objects.filter(album_section__section_title=section)
-            print('albums: ', albums)
             photos = AlbumPhoto.objects.filter(photo_album__in=albums)
         else:
             photos = AlbumPhoto.objects.all()
-        print("PHOTOS: ", photos)
         return photos
-        # return HttpResponse(template_name=self.template_name, context=photos, content_type='text/html')
 

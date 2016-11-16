@@ -1,5 +1,11 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
-<link rel="stylesheet" href='{% static "css/post_list.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %} <script src="{% static 'js/post_list.js'  %}"></script>
+<link rel="stylesheet" href='{% static "css/post_list.css" %}'>
+{% endblock head_extra %}
+{% load urlify %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+{{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
+<script src="{% static 'js/post_list.js'  %}"></script>
 <div class="container">
     <div class="row">
         <div class="col-lg-7">
@@ -32,7 +38,7 @@
                         </div>
                     </a>
                     <div class="author_name_date">
-                        <a href="">Илона Вовк</a> {% if instance.draft %} {% endif %} {{instance.publish}}
+                        <a href="">{{request.user.first_name}} {{request.user.last_name}}</a> {% if instance.draft %} {% endif %} {{instance.publish}}
                     </div>
                 </div>
                 <div class="article_detail_content">
@@ -55,9 +61,9 @@
                     <div class="footer_post_detail">
                         <div class="teg_post_detail">
                             Теги:
-                            <a href="#">англия</a>
-                            <a href="#">англия</a>
-                            <a href="#">англия</a>
+                            {% for sub_tag in instance.tag.all %}
+                            <a href="#">{{ sub_tag.name }}</a>
+                            {% endfor %}
                         </div>
                         <div class="block_like-dislike">
                             <div class="like_and_dislike">
@@ -66,7 +72,7 @@
                                         <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                                     </div>
                                     <div class="quaantity_like">
-                                        32
+                                        {{ instance.positive_likes|length }}
                                     </div>
                                 </a>
                                 <a href="#" class="dislike_all">
@@ -74,7 +80,7 @@
                                         <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
                                     </div>
                                     <div class="quantity_dislike">
-                                        43
+                                        {{ instance.negative_likes|length }}
                                     </div>
                                 </a>
                             </div>
