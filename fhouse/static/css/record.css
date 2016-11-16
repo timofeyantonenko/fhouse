@@ -23,40 +23,87 @@
     align-items: flex-start;
 }
 
-.thumbnail {
+.thumbnails {
     margin: 0px;
     width: 32%;
-    /*display: none;*/
     padding: 0px;
     margin-right: 2%;
-    vertical-align: top; 
-
+    vertical-align: top;
+    border:1px solid #ebebeb;
+    border-radius: 5px;
 }
 
-.thumbnail h3 {
+.thumbnails h3 {
     margin: 0px;
     padding: 0.3em 0;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
+    color:#1d71b9;
     padding: 1rem;
 }
+
+/*Stats her0*/
+
+.statsHero {
+    padding: 10px;
+    height: 150px;
+    background: #eaeaea;
+    border-bottom: 1px solid #e8e8e8;
+    background-image: url(https://psv4.vk.me/c812128/u75114231/docs/30d69a75a2bd/Bez_Imeni-1.png?extra=SYW47Wen3NkmAmonh54tsnO9puwftUtekKiaH-6QpS-tjC3ueEvIo8VdqWLS85BhwerWsh2Y2pa6WSd2-Kyz8tHBmGWt6v0gFpewH4anMtwFsizF6M1Hzw);
+}
+
+.img_container_hero {
+    width: 130px;
+    height: 130px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #fff;
+    float: right;
+}
+
+.img_container_hero img {
+    width: 100%;
+    height: auto;
+}
+
+.statsHero .statInfo {
+    float: left;
+    position: relative;
+    font-weight: 600;
+}
+
+.statsHero .statInfo a {
+    font-size: 18px;
+}
+
+.statsHero .statInfo span {
+    color: #e90052;
+    position: absolute;
+    font-size: 26px;
+    top: 100%;
+    left: 0px;
+    font-weight: 600;
+}
+
+
 
 .statsList {
     overflow: hidden
 }
 
-.statsCard .statsList a {
+.statsList a {
     color: #242424;
     text-decoration: none;
     display: block
 }
 
-.statsCard .statsList a:focus,
-.statsCard .statsList a:hover {
+.statsList a:focus,
+.statsList a:hover {
     text-decoration: underline
 }
 
-.statsCard .statsList .statsRow {
+.statsList .statsRow {
     border-bottom: 1px solid #e8e8e8;
     padding: 0.5em;
     display: flex;
@@ -65,147 +112,53 @@
     flex-wrap: wrap;
 }
 
-.statsCard .statsList .statsRow a {
+.statsList .statsRow a {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis
 }
 
-.statsCard .statsList .statsRow .statName {
+.statsList .statsRow .statName {
     margin-bottom: 0
 }
 
-.statsCard .statsList .stat {
+.statsList .stat {
     margin-left: auto
 }
 
-.statsCard .statsList .stat [class*=badge],
-.statsCard .statsList .stat a,
-.statsCard .statsList .statsBadge {
+.statsList .stat [class*=badge],
+.statsList .stat a,
+.statsList .statsBadge {
     display: inline-block;
     vertical-align: middle
 }
 
-.statsCard .statsList .statsBadge {
+.statsList .statsBadge {
     position: relative;
     top: -1px
 }
 
-.statsHero {
-    padding: 1rem 1rem 5rem;
-    background: #eaeaea;
-    background-image: url(../i/bg-elements/stats-card.png);
-    background-position: 100% 0;
-    background-repeat: no-repeat;
-    position: relative;
-    border-bottom: 1px solid #e8e8e8
-}
-
-@media (-moz-min-device-pixel-ratio:2),
-(-webkit-min-device-pixel-ratio:2) {
-    .statsCard .statsHero {
-        background-image: url(../i/bg-elements/stats-card@x2.png);
-        background-size: 250 215
-    }
-}
-
-.statsCard .statsHero .pos {
-    font-size: 1.2em;
-    margin-bottom: .5rem
-}
-
-.statsCard .statsHero .statName {
-    min-height: 4rem;
-    font-size: 1.4em;
-    line-height: 1.4
-}
-
-.statsCard .statsHero .statNameSecondary {
-    margin-bottom: .5rem;
-    font-size: 1em;
-    white-space: nowrap
-}
-
-.statsCard .statsHero .stat {
-    font-size: 1.6em;
-    float: none;
-    font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif
-}
-
-.statsCard .statsHero .heroBadgeContainer {
-    width: 32px;
-    height: 32px;
-    position: relative;
-    top: .4rem;
-    left: .5rem;
-    border-radius: 100%;
-    background: #fff;
-    z-index: 10
-}
-
-.statsCard .statsHero .statsBadge {
-    float: none;
-    position: absolute;
-    width: 100%;
-    height: 100%
-}
-
-.statsCard .statsHero .badge-20 {
-    margin: .7rem .6rem
-}
-
-.statsCard .statsHero .statCardImg {
-    position: absolute;
-    right: -1rem;
-    bottom: 0;
-    max-width: 60%;
-    max-height: 95%
-}
-
-.statsCard .statsHero.inactive .imgCropContainer {
-    position: absolute;
-    top: .8rem;
-    right: .5rem;
-    width: 11rem;
-    height: 11rem;
-    overflow: hidden;
-    border-radius: 100%;
-    background: #fff;
-    border: 4px solid #fff
-}
-
-.statsCard .statsHero.inactive .imgCropContainer .statCardImg {
-    max-width: none;
-    max-height: none;
-    width: 100%;
-    position: static
-}
-
-.statsCard header {
-    position: relative
-}
-
-.statsCard .statsTitle {
+.statsTitle {
     padding: 1rem;
     font-size: 1.4rem
 }
 
-.statsCard .statsTitle .socialShare {
+.statsTitle .socialShare {
     margin-right: -.5rem
 }
 
-.statsCard .statsTitle a {
+.statsTitle a {
     color: #242424;
     text-decoration: none;
     display: block
 }
 
-.statsCard .statsTitle a:focus,
-.statsCard .statsTitle a:hover {
+.statsTitle a:focus,
+.statsTitle a:hover {
     text-decoration: underline
 }
 
-.statsCard .socialShare {
+.socialShare {
     position: absolute;
     top: .6rem;
     right: .6rem
@@ -215,207 +168,108 @@
     overflow: hidden
 }
 
-.statsCard .statsList a {
+.statsList a {
     color: #242424;
     text-decoration: none;
     display: block
 }
 
-.statsCard .statsList a:focus,
-.statsCard .statsList a:hover {
+.statsList a:focus,
+.statsList a:hover {
     text-decoration: underline
 }
 
-.statsCard .statsList .statsRow a {
+.statsList .statsRow a {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis
 }
 
-.statsCard .statsList .statsRow .statName {
+.statsList .statsRow .statName {
     margin-bottom: 0
 }
 
-.statsCard .statsList .stat {
+.statsList .stat {
     margin-left: auto
 }
 
-.statsCard .statsList .stat [class*=badge],
-.statsCard .statsList .stat a,
-.statsCard .statsList .statsBadge {
+.statsList .stat [class*=badge],
+.statsList .stat a,
+.statsList .statsBadge {
     display: inline-block;
     vertical-align: middle
 }
 
-.statsCard .statsList .statsBadge {
+.statsList .statsBadge {
     position: relative;
     top: -1px
 }
 
-.statsCard .badge-20 {
+.badge-20 {
     margin-right: .5rem
 }
 
-.statsCard .pos {
+.pos {
     margin-right: .5rem;
     font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif
 }
 
-.statsCard .pos,
-.statsCard .teamInfo {
+.pos,
+.teamInfo {
     display: inline-block;
     vertical-align: middle
 }
 
-.statsCard .teamInfo {
+.teamInfo {
     max-width: 60%
 }
 
-.statsCard .position {
+.position {
     margin-bottom: .5rem
 }
 
-.statsCard .stat {
+.stat {
     float: right
 }
 
-.statsCard .statName {
+.statName {
     font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 1.1rem;
     margin-bottom: .3rem
 }
 
-.statsCard .statNameSecondary {
+.statNameSecondary {
     min-height: 11px;
     font-weight: 400;
     font-size: .9em;
     color: #76766f
 }
 
-.statsCard .stat {
+.stat {
     color: #e90052;
 }
 
-.statsCard .statsHero {
-    padding: 1rem 1rem 1rem;
-    height: 12.5rem;
-    background: #eaeaea;
-    background-image: url(../i/bg-elements/stats-card.png);
-    background-position: 100% 0;
-    background-repeat: no-repeat;
-    position: relative;
-    border-bottom: 1px solid #e8e8e8
-}
 
-@media (-moz-min-device-pixel-ratio:2),
-(-webkit-min-device-pixel-ratio:2) {
-    .statsCard .statsHero {
-        background-image: url(../i/bg-elements/stats-card@x2.png);
-        background-size: 250 215
-    }
-}
-
-.statsCard .statsHero .statInfo {
-    max-width: 6rem;
-    position: relative;
-    z-index: 10;
-    white-space: normal;
-    position: absolute;
-    top: 3rem;
-}
-
-.statsCard .statsHero .pos {
-    font-size: 1.2rem;
-    margin-bottom: .5rem
-}
-
-.statsCard .statsHero .statName {
-    min-height: 4rem;
-    font-size: 1.4rem;
-    line-height: 1.4
-}
-
-.statsCard .statsHero .statNameSecondary {
-    margin-bottom: .5rem;
-    font-size: 1rem;
-    white-space: nowrap
-}
-
-.statsCard .statsHero .stat {
-    font-size: 1.6em;
-    float: none;
-    font-family: PremierSans-Bold, Arial, Helvetica Neue, Helvetica, sans-serif
-}
-
-.statsCard .statsHero .heroBadgeContainer {
-    width: 32px;
-    height: 32px;
-    position: relative;
-    top: .4rem;
-    left: .5rem;
-    border-radius: 100%;
-    background: #fff;
-    z-index: 10
-}
-
-.statsCard .statsHero .statsBadge {
-    float: none;
-    position: absolute;
-    width: 100%;
-    height: 100%
-}
-
-.statsCard .statsHero .badge-20 {
-    margin: .7rem .6rem
-}
-
-.statsCard .statsHero .statCardImg {
-    position: absolute;
-    right: -1rem;
-    bottom: 0;
-    max-width: 60%;
-    max-height: 95%
-}
-
-.statsCard .statsHero.inactive .imgCropContainer {
-    position: absolute;
-    top: .8rem;
-    right: .5rem;
-    width: 11rem;
-    height: 11rem;
-    overflow: hidden;
-    border-radius: 100%;
-    background: #fff;
-    border: 4px solid #fff
-}
-
-.statsCard .statsHero.inactive .imgCropContainer .statCardImg {
-    max-width: none;
-    max-height: none;
-    width: 100%;
-    position: static
-}
-
-.statsCard .btn {
+.btn {
     margin: 1rem
 }
 
-.statsCard .badge-100 {
+.badge-100 {
     position: absolute;
     bottom: 1rem;
     right: 1rem
 }
 
-.statsCard .playerClub {
+.playerClub {
     margin-right: .5rem
 }
 
-.statsCard .flag {
+.flag {
     vertical-align: middle;
     margin-right: 5px
 }
 
-.statsCard .flag-name {
+.flag-name {
     margin-top: 5px
 }
 
@@ -431,9 +285,7 @@ ul#otis {
     padding: 0px;
 }
 
-#btn-record {
-    margin-right: 10%;
-}
+
 
 .add_record {
     background-color: #ebebeb;
@@ -450,8 +302,6 @@ ul#otis {
     display: flex;
     justify-content: center;
 }
-
-
 
 .add_record:hover {
     background-color: #e90052;
@@ -472,7 +322,7 @@ ul#otis {
 .full_list_record {
     box-sizing: border-box;
     float: left;
-    background-color: #ebebeb;
+    background-color: #e8e8e8;
     display: inline-block;
     line-height: 1.42857143;
     text-align: center;
@@ -482,15 +332,21 @@ ul#otis {
     cursor: pointer;
     -webkit-user-select: none;
     margin: 3%;
-    padding: 2% 3%;
+    padding: 3% 3%;
     border-radius: 3px;
     width: 94%;
+    font-size: 12px;
 }
 
 .full_list_record:hover {
     background-color: #e90052;
-    color: white;
 }
+
+.full_list_record:hover a {
+    color: #fafafa;
+    text-decoration: none;
+}
+
 
 #arrow_record {
     float: right;
@@ -500,10 +356,10 @@ ul#otis {
     padding-bottom: 10%;
 }
 
-.more_article {
+.more_records {
     cursor: pointer;
     width: 32%;
-    margin: 0 auto 20px;
+    margin: 0 auto 0px;
     padding: 5px;
     display: block;
     text-align: center;
@@ -516,7 +372,117 @@ ul#otis {
     border-radius: 2px;
 }
 
-.more_article:hover {
+.more_records:hover {
     text-decoration: none!important;
     background: #eee;
 }
+
+/*Навигация между пазделами рекордов*/
+
+/*Навигация между статьями */
+
+.navigation_between_records {
+    background-color: #292a2e;
+    color: #fff;
+}
+
+.nav_ul {
+    display: block;
+    height: 43px;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+.nav_ul li {
+    list-style: none;
+    float: left;
+    display: inline-block;
+    position: relative;
+}
+
+.nav_ul li span {
+    position: absolute;
+    top: 34px;
+    right: 14px;
+    height: 12px;
+    display: none;
+}
+
+.nav_ul li a:hover span {
+    color: #fff;
+}
+
+.nav_ul li a {
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: block;
+    padding: 13px 14px;
+    font-weight: 600;
+    position: relative;
+}
+
+.nav_ul li a:focus {
+    text-decoration: none;
+}
+
+.nav_ul li a img {
+    height: 12px;
+    width: auto;
+}
+
+.active_nav_ul {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.active_nav_ul span {
+    display: block !important;
+    color: #fff;
+}
+
+.nav_ul li:nth-child(1) a:hover,
+ul li:nth-child(1) .active_nav_ul,
+.nav_ul li:nth-child(6) a:hover,
+ul li:nth-child(6) .active_nav_ul {
+    text-decoration: none;
+    background-color: #ec0000;
+    color: #fafafa;
+}
+
+.nav_ul li:nth-child(2) a:hover,
+ul li:nth-child(2) .active_nav_ul,
+.nav_ul li:nth-child(7) a:hover,
+ul li:nth-child(7) .active_nav_ul {
+    text-decoration: none;
+    background-color: #0091ff;
+    color: #fafafa;
+}
+
+.nav_ul li:nth-child(3) a:hover,
+ul li:nth-child(3) .active_nav_ul,
+.nav_ul li:nth-child(8) a:hover,
+ul li:nth-child(8) .active_nav_ul {
+    text-decoration: none;
+    background-color: #ff7d00;
+    color: #fafafa;
+}
+
+.nav_ul li:nth-child(4) a:hover,
+ul li:nth-child(4) .active_nav_ul,
+.nav_ul li:nth-child(9) a:hover,
+ul li:nth-child(9) .active_nav_ul {
+    text-decoration: none;
+    background-color: #2446a3;
+    color: #fafafa;
+}
+
+.nav_ul li:nth-child(5) a:hover,
+ul li:nth-child(5) .active_nav_ul,
+.nav_ul li:nth-child(10) a:hover,
+ul li:nth-child(10) .active_nav_ul {
+    text-decoration: none;
+    background-color: #ffba14;
+    color: #fafafa;
+}
+

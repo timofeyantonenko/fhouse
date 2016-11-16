@@ -1,6 +1,8 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/main_page.css" %}'>
+<link rel="stylesheet" href='{% static "css/record.css" %}'>
 <script type="text/javascript" src="{% static 'js/main_page.js'  %}"></script>
+<script type="text/javascript" src="{% static 'js/record.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
@@ -278,17 +280,74 @@
                     </div>
                 </div>
                 <div class="container_unit">
+                    <div class="title_and_all">
+                        <h2><a href='#'>Рекорды в мировом футболе </a></h2>
+                        <a href="Больше">
+                            <div class="all_of_units">
+                                <span>Больше</span>
+                                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                            </div>
+                        </a>
+                    </div>
                     <div class="last_records">
-                        <div class="title_and_all">
-                            <h2><a href='#'>Рекорды в мировом футболе </a></h2>
-                            <a href="Больше">
-                                <div class="all_of_units">
-                                    <span>Больше</span>
-                                    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                        <!-- 1 рекорд     -->
+                        <div class="flex_container">
+                            <div class="thumbnails">
+                                <div class="caption" id="caption">
+                                    <h3>Лучший игрок</h3>
                                 </div>
-                            </a>
+                                <ul class="statsList list-group" id="list-group">
+                                    <li class="statsHero">
+                                        <div class="statInfo">
+                                            Лионель Месси
+                                            <span class="stat">123</span>
+                                        </div>
+                                        <div class="img_container_hero">
+                                            <img src="http://www.fc-barca.com/images/squad/squad_2016-17/new/30293622.jpg" alt="">
+                                        </div>
+                                    </li>
+                                    <li class="statsRow">
+                                        <div class="pos">
+                                            2.</div>
+                                        <div class="teamInfo">
+                                            <a href='{{record.get_absolute_url}}' class="statName">Бензема Карим</a>
+                                        </div>
+                                        <div class="stat"> 123 </div>
+                                    </li>
+                                    <li class="statsRow">
+                                        <div class="pos">
+                                            3.</div>
+                                        <div class="teamInfo">
+                                            <a href='{{record.get_absolute_url}}' class="statName">Бензема Карим</a>
+                                        </div>
+                                        <div class="stat"> 123 </div>
+                                    </li>
+                                    <li class="statsRow">
+                                        <div class="pos">
+                                            4.</div>
+                                        <div class="teamInfo">
+                                            <a href='{{record.get_absolute_url}}' class="statName">Бензема Карим</a>
+                                        </div>
+                                        <div class="stat"> 123 </div>
+                                    </li>
+                                    <li class="statsRow">
+                                        <div class="pos">
+                                            5.</div>
+                                        <div class="teamInfo">
+                                            <a href='{{record.get_absolute_url}}' class="statName">Бензема Карим</a>
+                                        </div>
+                                        <div class="stat"> 123 </div>
+                                    </li>
+                                    <li class="full_list_record">
+                                        <a href="{{records_table.table.get_absolute_url}}">
+                                            Полный Cписок
+                                            <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                                            </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        Здесь должны бытиь карточки рекордов
+                        <!-- Конец рекорда -->
                     </div>
                 </div>
             </div>

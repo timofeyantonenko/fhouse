@@ -12,5 +12,4 @@ $(document).ready(function() {
             $(this).parent().css({ "display": "block", });
         }
     });
-
 });
