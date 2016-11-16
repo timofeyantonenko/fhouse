@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView
 from .models import SectionArticle, ArticlesSection
 from django.http import HttpResponseRedirect
 
@@ -51,9 +52,26 @@ def article_detail(request, section_slug=None, article_slug=None):  # list items
     title = article.article_title
 
     context = {
-        "article": article,
+        "instance": article,
         "title": title,
         'comments': comments,
         'comment_form': comment_form,
     }
     return render(request, "articles/article_detail.html", context)
+
+
+class ArticleList(ListView):
+    model = SectionArticle
+    template_name = 'articles/articles_list.html'
+    context_object_name = 'articles_list'
+    paginate_by = 5
+
+    def get_queryset(self):
+        section = self.request.GET.get('section')
+        if section:
+            print("SECTION >>>>>>>> ", section)
+            articles = SectionArticle.objects.filter(article_section__section_title=section)
+            print(articles)
+        else:
+            articles = SectionArticle.objects.all()
+        return articles

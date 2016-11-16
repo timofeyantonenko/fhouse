@@ -2,9 +2,13 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from utils.files_preparing import upload_location
 from utils.abstract_classes import CommentedClass
+from django.conf import settings
 
 
 # Create your models here.
+from utils.abstract_classes import ForeignContentClass
+
+
 class ArticlesSection(models.Model):
     section_title = models.CharField(max_length=120)
     # slug for absolute url
@@ -30,7 +34,9 @@ class ArticlesSection(models.Model):
         return query_set
 
 
-class SectionArticle(CommentedClass):
+class SectionArticle(CommentedClass, ForeignContentClass):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     article_title = models.CharField(max_length=120)
     article_description = models.TextField(max_length=240)
     article_text = models.TextField()
