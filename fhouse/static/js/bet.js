@@ -76,11 +76,14 @@ $(window).load(function() {
 
 
 
-    var height = $(".colum:nth-child(2)").height();
+    var height = $(".colum").height();
+    var biggest_col;
     $(".colum").each(function(i) {
 
         if ($(this).height() < height) {
             height = $(this).height()
+        } else {
+            biggest_col = $(this);
         };
 
     });
@@ -100,17 +103,25 @@ $(window).load(function() {
     $(min_height_block).css("width", width_min_height_block);
 
     var left_col = $(min_height_block).offset().left;
-    
 
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > (height - document.documentElement.clientHeight + $(".navbar").height())) {
-                $(min_height_block).addClass("fixed_col");
-                $(min_height_block).css("left", left_col);
 
-            } else {
-                $(min_height_block).removeClass("fixed_col");
-                $(min_height_block).css("left", "0px");
-            }
-        });
+
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > (45 + height - document.documentElement.clientHeight + $(".navbar").height()) && $(this).scrollTop() <= (50 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
+            $(min_height_block).addClass("fixed_col");
+            $(min_height_block).css("left", left_col);
+            $(min_height_block).css("bottom", "25px")
+
+        } else if ($(this).scrollTop() > (45 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
+            var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
+            $(min_height_block).css("bottom", bottom_scroll);
+        } else {
+
+
+            $(min_height_block).removeClass("fixed_col");
+            $(min_height_block).css({ "left": "0px", "bottom": "0px" });
+        }
+    });
 
 });
