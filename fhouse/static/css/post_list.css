@@ -632,14 +632,14 @@ textarea {
     line-height: 40px;
 }
 
-.like_all:hover .quaantity_like,
+.like_all:hover .quantity_like,
 .like_all:hover .like,
 .dislike_all:hover .quantity_dislike,
 .dislike_all:hover .dislike {
     opacity: 1;
 }
 
-.like_all:hover .quaantity_like,
+.like_all:hover .quantity_like,
 .dislike_all:hover .quantity_dislike {
     color: black;
 }
@@ -649,7 +649,7 @@ textarea {
     color: black;
 }
 
-.quaantity_like,
+.quantity_like,
 .quantity_dislike {
     font-size: 22px;
     line-height: 40px;

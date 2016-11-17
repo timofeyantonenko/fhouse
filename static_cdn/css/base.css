@@ -1,4 +1,8 @@
 /*Основные стили*/
+.row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
 
 .navbar {
     margin-bottom: 20px !important;
@@ -82,7 +86,7 @@ h1 {
     text-align: left;
     font: bold 16px sans-serif;
     padding: 15px 50px;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .footer-distributed .footer-left,

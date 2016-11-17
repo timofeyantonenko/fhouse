@@ -5,7 +5,7 @@
 {% load crispy_forms_tags %}
 {% block head_title %}
 {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
-<script src="{% static 'js/post_list.js'  %}"></script>
+<script src="{% static 'js/post_detail.js'  %}"></script>
 <div class="container">
     <div class="row">
         <div class="col-lg-7">
@@ -67,15 +67,15 @@
                         </div>
                         <div class="block_like-dislike">
                             <div class="like_and_dislike">
-                                <a href="#" class="like_all">
+                                <a href="{{instance.slug}}" class="like_all">
                                     <div class="like">
                                         <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                                     </div>
-                                    <div class="quaantity_like">
+                                    <div class="quantity_like">
                                         {{ instance.positive_likes|length }}
                                     </div>
                                 </a>
-                                <a href="#" class="dislike_all">
+                                <a href="{{instance.slug}}" class="dislike_all">
                                     <div class="dislike">
                                         <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
                                     </div>
@@ -90,16 +90,27 @@
                 </div>
             </div>
             <div class="comments_base">
-                <p class="lead">Оставить комментарий</p>
                 <a href="#">
                     <div class="coments_author">
                         <img src="{{ request.user.avatar.url }}" alt="">
                     </div>
                 </a>
                 {% if request.user.is_authenticated %}
-                <form method="POST" action="."> {% csrf_token %} {{ comment_form|crispy }}
+                <form method="POST" action="."> {% csrf_token %}
+                     <div>
+                        <label for="{{comment_form.content.id_for_label}}">
+                            <p class="lead">Оставить комментарий</p>
+                        </label>
+                        <div class="forPlaceholder">
+                            {{ comment_form.content }}
+                        </div>
+                    </div>
                     <input type="submit" value="Post comment" class="btn btn-default">
                 </form>
+                {% for field, errors in comment_form.errors.items %}
+                    {% for error in errors %}
+                        <p>{{error}}</p>
+                {% endfor %}{% endfor %}
                 {% else %}
                 <p>You must login to comment</p>
                 {% endif %}
@@ -123,7 +134,7 @@
                             {% for child_comment in comment.children %}
                             <div class="blockquote">
                                 <p>{{ child_comment.content }}</p>
-                                <footer>{{ child_comment.user }} | {{ child_comment.timestamp|timesince }} ago</footer>
+                                <footer>{{ child_comment.user.first_name }} {{ child_comment.user.last_name }} | {{ child_comment.timestamp|timesince }} ago</footer>
                             </div>
                             {% endfor %} {% if request.user.is_authenticated %}
                             <form method="POST" action="."> {% csrf_token %} {{ comment_form|crispy }}

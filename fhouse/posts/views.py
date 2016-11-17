@@ -52,7 +52,9 @@ def post_detail(request, slug=None):  # retrieve
     }
     comment_form = CommentForm(request.POST or None, initial=initial_data)
     if comment_form.is_valid() and request.user.is_authenticated():
-        content_type = comment_form.cleaned_data.get("content_type")
+        print('POSTFORM')
+        content_type = instance.get_content_type
+        comment_form.cleaned_data['object_id'] = instance.id
         new_comment, created = create_comment_data(request=request, content_type=content_type,
                                                    comment_form=comment_form)
         return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
