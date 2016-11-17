@@ -44,7 +44,7 @@
                 <div id="wrap">
                     <!-- Профиль пользователя -->
                     <div class="user_date">
-                        <h3>Дивицкая Ирина</h3>
+                        <h3>{{ request.user.first_name }} {{ request.user.last_name }}</h3>
                         <div class="user_date_img">
                             <img src="{{ request.user.avatar.url }}" alt="">
                         </div>

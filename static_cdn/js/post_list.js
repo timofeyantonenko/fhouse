@@ -272,27 +272,23 @@ $(document).ready(function() {
 
     });
 
+
+});
+$(window).load(function(){
     $(document).ajaxComplete(function() {
+        console.log('I am Here');
         $('.IMGoneArticle img').each(function(i) {
             if ($(this).css("height") < $(this).parent().css("height")) {
                 $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
                 $(this).parent().css({ "display": "flex", "justify-content": "center" });
-            } else {
-                var par_width = $(this).parent().css("width")
-                $(this).css({ "height": " ", "width": par_width });
-                $(this).parent().css({ "display": "block", });
             }
         });
-    })
+    });
 
     $('.IMGoneArticle img').each(function(i) {
         if ($(this).css("height") < $(this).parent().css("height")) {
             $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
             $(this).parent().css({ "display": "flex", "justify-content": "center" });
-        } else {
-            var par_width = $(this).parent().css("width")
-            $(this).css({ "height": " ", "width": par_width });
-            $(this).parent().css({ "display": "block", });
         }
     });
 });
