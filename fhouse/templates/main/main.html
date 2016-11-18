@@ -6,33 +6,8 @@
 {% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-3 .colum">
-            <div class="user_date">
-                <h3>Мангура Дмитрий</h3>
-                <div class="user_date_img">
-                    <img src="{{ request.user.avatar.url }}" alt="">
-                </div>
-                <div class="user_information">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td><a href="#">Рейтинг прогнозистов</a></td>
-                                <td><a href="#">143</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Количество сатей</a></td>
-                                <td><a href="#">3</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Голосов</a></td>
-                                <td><a href="#">53</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-9 .colum">
+        
+        <div class="col-lg-9 colum">
             <div class="container_all">
                 <div class="container_unit">
                     <div class="main_news">
@@ -349,6 +324,32 @@
                         </div>
                         <!-- Конец рекорда -->
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 colum">
+            <div class="user_date">
+                <h3>Мангура Дмитрий</h3>
+                <div class="user_date_img">
+                    <img src="{{ request.user.avatar.url }}" alt="">
+                </div>
+                <div class="user_information">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><a href="#">Рейтинг прогнозистов</a></td>
+                                <td><a href="#">143</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Количество сатей</a></td>
+                                <td><a href="#">3</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Голосов</a></td>
+                                <td><a href="#">53</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
