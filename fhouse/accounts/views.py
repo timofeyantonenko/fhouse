@@ -36,7 +36,6 @@ def register_view(request):
     title = 'Register'
     form = UserRegisterForm(request.POST or None, request.FILES or None)
     if form.is_valid():
-        print('VALID?????')
         user = form.save(commit=False)
         password = form.cleaned_data.get('password')
         user.set_password(password)
