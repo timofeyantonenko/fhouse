@@ -12,11 +12,11 @@ $(document).ready(function() {
         }
     });
 
-    $(".nav_ul li:first-child a").addClass("active_nav_ul");
+    $(".navigation_between_preview .nav_ul li:first-child a").addClass("active_nav_ul");
 
-    $(".nav_ul li a").click(function(e) {
+    $(".navigation_between_preview .nav_ul li a").click(function(e) {
         e.preventDefault();
-        $(".nav_ul li a").removeClass('active_nav_ul');
+        $(".navigation_between_preview .nav_ul li a").removeClass('active_nav_ul');
         $(this).addClass('active_nav_ul');
     });
 
@@ -60,10 +60,33 @@ $(document).ready(function() {
     // Таблица с лучшими прогнозистами 
     $(".table_top_forecasters tbody tr:first-child td").css("border-top", "0px solid #fafafa !important");
 
+    // Превью ко всем топ чемпионатам 
+    $(".nav_ul_tour li:first-child div").addClass("active_menu");
 
+    $(".nav_ul_tour li ").click(function(e) {
+        e.preventDefault();
+        $(".nav_ul_tour li div").removeClass('active_menu');
+        $(this).children("div").addClass('active_menu');
+    });
 
+    $(".navigation_between_championships .nav_ul li:first-child").addClass("active_champ");
 
+    $(".navigation_between_championships .nav_ul li").click(function(e) {
+        e.preventDefault();
+        $(".navigation_between_championships .nav_ul li").removeClass('active_champ');
+        $(this).addClass('active_champ');
+    });
 
+    // 1) Всплывают при наведении курсора:
+    $('.navigation_between_championships li').tooltip({
+        trigger: "hover",
+        selector: "a[data-toggle=tooltip]"
+    });
+    // 1) Всплывают при получении фокуса:     
+    $('.navigation_between_championships li').tooltip({
+        trigger: "focus",
+        selector: "a[data-toggle=tooltip]"
+    });
 
 
 });
@@ -103,9 +126,6 @@ $(window).load(function() {
     $(min_height_block).css("width", width_min_height_block);
 
     var left_col = $(min_height_block).offset().left;
-
-
-
 
     $(window).scroll(function() {
         if ($(this).scrollTop() > (45 + height - document.documentElement.clientHeight + $(".navbar").height()) && $(this).scrollTop() <= (50 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {

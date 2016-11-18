@@ -2,391 +2,122 @@
 <title>Prognosis Fhouse</title>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
- {% endblock head_extra %} {% block content %}
+<script type="text/javascript" src="{% static 'js/bootstrap-tooltip.js'  %}"></script>
+
+{% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 whiteDiv">
-            <!-- Weeks prognosis -->
-            <div class="col-lg-6">
-                <div class="userInfa col-lg-12">
-                    <div class="photoUser">
-                        <img src="{{ user.avatar.url }}" alt="" />
-                    </div>
-                    <div class="dateUser">
-                        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
-                        <p>City</p>
-                        <p>Рейтинг: 343 (32.2 p)</p>
-                    </div>
-                </div>
-                <h3>Прогноз Недели</h3>
-                <div class="weeksProg col-lg-12">
-                    <a href="#">
-                        <div class="col-lg-5 onesMatch">
-                            <p>Барселона</p>
-                            <p>1.67</p>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-lg-2 onesMatch">
-                            <p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></p>
-                            <p>3.67</p>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-lg-5 onesMatch">
-                            <p>Атлетико</p>
-                            <p>3.24</p>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-lg-5 onesMatch">
-                            <p>Барселона</p>
-                            <p>1.67</p>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-lg-2 onesMatch">
-                            <p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></p>
-                            <p>3.67</p>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-lg-5 onesMatch">
-                            <p>Атлетико</p>
-                            <p>3.24</p>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-lg-5 onesMatch">
-                            <p>Барселона</p>
-                            <p>1.67</p>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-lg-2 onesMatch">
-                            <p><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></p>
-                            <p>3.67</p>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="col-lg-5 onesMatch">
-                            <p>Атлетико</p>
-                            <p>3.24</p>
-                        </div>
-                    </a>
-                    <div class="col-lg-5">
-                    </div>
-                    <div class="col-lg-2">
-                    </div>
-                    <a href="">
-                        <div class="col-lg-5 onesMatch">
-                            <p></p>
-                            <p>Сделать Ставку</p>
-                        </div>
-                    </a>
-                </div>
+        <div class="col-lg-9">
+            <!-- Навигация по чемпионатам  -->
+            <div class="navigation_between_championships">
+                <ul class="nav_ul">
+                    <!-- {% for section in sections %}
+                    <li><a href="#">{{ section.section_title }}<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></li>
+                    {% endfor %} -->
+                    <li>
+                        <a href="#" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Нижняя всплывающая подсказка.">
+                            <div class="logo_champ">
+                                <img src="http://www.skynetdth.com/images/Premier_League_Logo.png" alt="">
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=" # ">
+                            <div class="logo_champ "><img src="http://files.laliga.es/seccion_logos/laliga-v-600x600.png " alt=" "></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="# ">
+                            <div class="logo_champ "><img src="https://s-media-cache-ak0.pinimg.com/564x/7d/94/9e/7d949ef54a6dfc5c3b084c1dd0e40e73.jpg " alt=" "></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="# ">
+                            <div class="logo_champ "><img src="http://4.bp.blogspot.com/-3d5o6B2CVH8/VpkvUqcMVTI/AAAAAAAA2O8/ONQASmjz69U/s550/New-Serie-A-Logo-Revealed%2B%25283%2529.jpg " alt=" "></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="# ">
+                            <div class="logo_champ "><img src="https://c8234d680a5ae618106c-6b3bd0826ac1075e2d1b52b94a2e0f63.ssl.cf1.rackcdn.com/12642_75403b28.png " alt=" "></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="# ">
+                            <div class="logo_champ "><img src="https://cdn.tribuna.com/fetch/?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fru%2F8%2F86%2FRFPL_2015-16_logo_2.png " alt=" "></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="# ">
+                            <div class="logo_champ "><img src="http://www.fpl.ua/img/main/upl_logo_690.png " alt=" "></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="# ">
+                            <div class="logo_champ "><img src="https://upload.wikimedia.org/wikipedia/ru/thumb/0/0a/UEFA_Champions_League_logo.svg/1067px-UEFA_Champions_League_logo.svg.png " alt=" "></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="# ">
+                            <div class="logo_champ "><img src="https://upload.wikimedia.org/wikipedia/en/e/e4/Uefa_europa_league_logo_20152018.png " alt=" "></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="# ">
+                            <div class="logo_champ "><img src="https://upload.wikimedia.org/wikipedia/ru/f/f7/FIFA_World_Cup_2018_Logo.png " alt=" "></div>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <!-- Table top-10 -->
-            <div class="col-lg-6 tableForTop10">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th id="nuberTop">#</th>
-                            <th>Имя Фамилия</th>
-                            <th>Страна, Город</th>
-                            <th>Очков</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tableRecord">
-                        <tr class="linkRecord">
-                            <th>
-                                <div class="numberTable">1</div>
-                            </th>
-                            <th>
-                                <a href="">Андрей Ярмоленко</a>
-                            </th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tr class="linkRecord">
-                            <th>
-                                <div class="numberTable">2</div>
-                            </th>
-                            <th><a href="">Андрей Ярмоленко</a></th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tr class="linkRecord">
-                            <th>
-                                <div class="numberTable">3</div>
-                            </th>
-                            <th><a href="">Андрей Ярмоленко</a></th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tr class="linkRecord">
-                            <th>
-                                <div class="numberTable">4</div>
-                            </th>
-                            <th><a href="">Андрей Ярмоленко</a></th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tr class="linkRecord">
-                            <th>
-                                <div class="numberTable">5</div>
-                            </th>
-                            <th><a href="">Андрей Ярмоленко</a></th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tr class="linkRecord">
-                            <th>
-                                <div class="numberTable">6</div>
-                            </th>
-                            <th><a href="">Андрей Ярмоленко</a></th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tr class="linkRecord">
-                            <th>
-                                <div class="numberTable">7</div>
-                            </th>
-                            <th><a href="">Андрей Ярмоленко</a></th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tr class="linkRecord">
-                            <th>
-                                <div class="numberTable">8</div>
-                            </th>
-                            <th><a href="">Андрей Ярмоленко</a></th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tr class="linkRecord">
-                            <th>
-                                <div class="numberTable">9</div>
-                            </th>
-                            <th><a href="">Андрей Ярмоленко</a></th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tr class="linkRecord ">
-                            <th>
-                                <div class="numberTable">10</div>
-                            </th>
-                            <th><a href="">Андрей Ярмоленко</a></th>
-                            <th>
-                                <a href=""><img class="imageTableRecord" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt=""> Харьков</a>
-                            </th>
-                            <th>112</th>
-                        </tr>
-                        <tfoot>
-                            <tr class="linkRecord ">
-                                <th colspan="5" id="EndTable"><a href="">Посмотреть Рейтинг Всех Прогнозистов <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></th>
-                            </tr>
-                        </tfoot>
-                    </tbody>
-                </table>
+            <!-- Переключатель между турами -->
+            <div class="navigation_between_tour ">
+                <ul class="nav_ul_tour ">
+                    <li>
+                        <a href="# ">1 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                    <li>
+                        <a href="# ">2 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                    <li>
+                        <a href="# ">3 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                    <li>
+                        <a href="# ">4 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                    <li>
+                        <a href="# ">5 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                    <li>
+                        <a href="# ">6 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                    <li>
+                        <a href="# ">7 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                    <li>
+                        <a href="# ">8 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                    <li>
+                        <a href="# ">9 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                    <li>
+                        <a href="# ">10 тур</a>
+                        <div class="hover_menu "></div>
+                    </li>
+                </ul>
+            </div>
+            <!-- Превью тура -->
+            <div class="container_all_preview ">
             </div>
         </div>
-          <!-- Превью к топ матчам недели  -->
-    <div class="col-lg-9  whiteDiv DivForarticlePrognosis">
-        <div class="articlePrognosis">
-            <div class="onePrognosis ">
-                <div class="ArticleName">
-                    <h2>Превью</h2>
-                </div>
-            </div>
-            <div class="onePrognosis ">
-                <div class="ArticleImg">
-                    <img src="https://img.championat.com/news/big/m/i/lionel-messi_1444339492107030625.jpg" alt="" />
-                </div>
-                <div class="ArticleName">
-                    <h3>Атлетико - Барселона</h3>
-                </div>
-                <div class="ArticleText">
-                    <p>Среда, Барселона, стадион «Камп Ноу», 21:45, Лига чемпионов, 1/2 финала, ответный матч Коэффициенты БК Пари-матч: победа Барселоны – 1.75, ничья – 3.90, победа Баварии – 4.30 После «обгазон» в Мюнхене со счетом 0:4 вряд ли кто-то может надеяться на то, что Барселона сумеет пройти в финал нынешней Лиги чемпионов. Хотя… Всякое случается. Но отыграть 4 мяча, тем более, что противостоять каталонцам будет не дворовая команда, а Бавария. Отметим, что за 7 раз, которые встречались оба клуба между собой «сине-гранатовые» выиграли лишь однажды, причем именно со счетом 4:0. Но, немецкий гранд был далеко не в той форме, в которой пребывает сейчас. И, во многом именно благодаря тому проигрышу мы сейчас видим Баварию такой, какой она стала. Популярная ставка: Х2
-                    </p>
-                </div>
-                <div class="infoPrognosis">
-                    <p class="infoPrognosisResult">Наш прогноз: Победа России</p>
-                </div>
-            </div>
-            <div class="onePrognosis ">
-                <div class="ArticleImg">
-                    <img src="https://img.championat.com/news/big/m/i/lionel-messi_1444339492107030625.jpg" alt="" />
-                </div>
-                <div class="ArticleName">
-                    <h3>Атлетико - Барселона</h3>
-                </div>
-                <div class="ArticleText">
-                    <p>Среда, Барселона, стадион «Камп Ноу», 21:45, Лига чемпионов, 1/2 финала, ответный матч Коэффициенты БК Пари-матч: победа Барселоны – 1.75, ничья – 3.90, победа Баварии – 4.30 После «обгазон» в Мюнхене со счетом 0:4 вряд ли кто-то может надеяться на то, что Барселона сумеет пройти в финал нынешней Лиги чемпионов. Хотя… Всякое случается. Но отыграть 4 мяча, тем более, что противостоять каталонцам будет не дворовая команда, а Бавария. Отметим, что за 7 раз, которые встречались оба клуба между собой «сине-гранатовые» выиграли лишь однажды, причем именно со счетом 4:0. Но, немецкий гранд был далеко не в той форме, в которой пребывает сейчас. И, во многом именно благодаря тому проигрышу мы сейчас видим Баварию такой, какой она стала. Популярная ставка: Х2
-                    </p>
-                </div>
-                <div class="infoPrognosis">
-                    <p class="infoPrognosisResult">Наш прогноз: Победа России</p>
-                </div>
-            </div>
-            <div class="onePrognosisLast">
-                <div class="ArticleImg">
-                    <img src="https://img.championat.com/news/big/m/i/lionel-messi_1444339492107030625.jpg" alt="" />
-                </div>
-                <div class="ArticleName">
-                    <h3>Атлетико - Барселона</h3>
-                </div>
-                <div class="ArticleText">
-                    <p>Среда, Барселона, стадион «Камп Ноу», 21:45, Лига чемпионов, 1/2 финала, ответный матч Коэффициенты БК Пари-матч: победа Барселоны – 1.75, ничья – 3.90, победа Баварии – 4.30 После «обгазон» в Мюнхене со счетом 0:4 вряд ли кто-то может надеяться на то, что Барселона сумеет пройти в финал нынешней Лиги чемпионов. Хотя… Всякое случается. Но отыграть 4 мяча, тем более, что противостоять каталонцам будет не дворовая команда, а Бавария. Отметим, что за 7 раз, которые встречались оба клуба между собой «сине-гранатовые» выиграли лишь однажды, причем именно со счетом 4:0. Но, немецкий гранд был далеко не в той форме, в которой пребывает сейчас. И, во многом именно благодаря тому проигрышу мы сейчас видим Баварию такой, какой она стала. Популярная ставка: Х2
-                    </p>
-                </div>
-                <div class="infoPrognosis">
-                    <p class="infoPrognosisResult">Наш прогноз: Победа России</p>
-                </div>
-            </div>
-        </div>
+        <div class="col-lg-3 "></div>
     </div>
-    <!-- Прогнозы на все матчи топ лиг, еврокубков и отбор ЧМ 2018 -->
-    <div class="col-lg-3 divForAllRecordsCol">
-        <div class="col-lg-12 whiteDiv rightColum witoutMargin">
-            <div class="divForChampionatAllprognosis ">
-                <div class="oneChmpionship oneChmpionship0">
-                    <div class="divForNameAllprognosis0">
-                        <h3>Прогнозы на Все Матчи</h3>
-                        <p>Экспертная Оценка</p>
-                    </div>
-                </div>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/English.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Чемпионат Англии</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/Испания.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Чемпионат Испании</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/Bundesliga_tacn.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Чемптонат Германии</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/LegaSerieAlogoTIM.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Чемпионат Италии</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/Ligue_1_Logo.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Чемпионат Франции</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/Россия.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Чемпионат России</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/upl_logo_690.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Чемпионат Украины</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/FIFA_World_Cup_2018_Logo.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Чемпионат Мира 2018</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/UEFA-Europa-League-2015-2016-1301396.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Лига Европы</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="oneChmpionship">
-                        <div class="divForimgAllprognosis">
-                            <img src="img/UEFA_Champions_League_logo_2.svg.png" alt="" />
-                        </div>
-                        <div class="divForNameAllprognosis">
-                            <h3>Лига Чемпионов</h3>
-                            <p>7 тур</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    </div>
-  
-    {% endblock content %}
+</div>
+{% endblock content %}

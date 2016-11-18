@@ -3,36 +3,6 @@ body {
     font-size: 1.6rem;
 }
 
-/*.my_weeks_bets a:hover h1,
-.my_weeks_bets a:hover h2,
-.my_weeks_bets a:hover h3,
-.my_weeks_bets a:hover h4,
-.my_weeks_bets a:hover h5,
-.my_weeks_bets a:hover h6,
-.preview_main_weeks_matches a:hover h1,
-.preview_main_weeks_matches a:hover h2,
-.preview_main_weeks_matches a:hover h3,
-.preview_main_weeks_matches a:hover h4,
-.preview_main_weeks_matches a:hover h5,
-.preview_main_weeks_matches a:hover h6,
-.div_for_championships_all_prognosisa a:hover h1,
-.div_for_championships_all_prognosisa a:hover h2,
-.div_for_championships_all_prognosisa a:hover h3,
-.div_for_championships_all_prognosisa a:hover h4,
-.div_for_championships_all_prognosisa a:hover h5,
-.div_for_championships_all_prognosisa a:hover h6 {
-    text-decoration: underline;
-}
-
-.div_for_championships_all_prognosisa a,
-.div_for_championships_all_prognosisa a:hover,
-.my_weeks_bets a,
-.my_weeks_bets a:hover,
-.preview_main_weeks_matches a,
-.preview_main_weeks_matches a:hover {
-    color: #242424;
-}
-*/
 .comtainer {
     margin: 0px !important;
 }
@@ -238,15 +208,15 @@ h4 {
 
 
 /*ТАблица превью */
+
 .name_championship {
-    background-color:#e90052;
-    color:#fafafa;
+    background-color: #e90052;
+    color: #fafafa;
     height: 40px;
-    width: 100%; 
+    width: 100%;
     text-align: center;
     font-size: 30px;
     font-weight: 600;
-
 }
 
 .this_club_in_table {
@@ -274,6 +244,7 @@ h4 {
     padding-bottom: 10px;
 }
 
+
 /*Последние результаты*/
 
 .last_result img {
@@ -289,7 +260,6 @@ h4 {
 .defeat,
 .draw,
 .victory {
-    
     padding: 4px;
     text-align: center;
     color: #fff;
@@ -299,9 +269,8 @@ h4 {
     font-size: 11px;
     cursor: pointer;
     font-weight: 600;
-    display: none; 
+    display: none;
 }
-
 
 .defeat {
     background-color: #d81920;
@@ -314,6 +283,7 @@ h4 {
 .victory {
     background-color: #13cf00;
 }
+
 
 /*Right colum for prognosis*/
 
@@ -382,13 +352,11 @@ h4 {
 
 .table_top_forecasters tr {
     max-height: 34px;
-
 }
 
 .table_top_forecasters tr td {
     padding: 2px 8px !important;
     vertical-align: middle !important;
-
 }
 
 .table_top_forecasters tr:first-child td {
@@ -419,6 +387,7 @@ h4 {
     box-sizing: border-box;
     align-self: center;
 }
+
 
 /*End table top-10*/
 
@@ -490,21 +459,21 @@ h4 {
     margin-right: 25px;
 }
 
-.nav_ul {
+.navigation_between_preview .nav_ul {
     display: block;
     height: 43px;
     padding: 0px;
     margin-bottom: 0px;
 }
 
-.nav_ul li {
+.navigation_between_preview .nav_ul li {
     list-style: none;
     float: left;
     display: inline-block;
     position: relative;
 }
 
-.nav_ul li span {
+.navigation_between_preview .nav_ul li span {
     position: absolute;
     top: 34px;
     right: 14px;
@@ -512,85 +481,79 @@ h4 {
     display: none;
 }
 
-.nav_ul li a:hover span {
+.navigation_between_preview .nav_ul li a:hover span {
     color: #fff;
 }
 
-.nav_ul li a {
+.navigation_between_preview .nav_ul li a {
     color: #fff;
     font-size: 12px;
-    text-transform: uppercase;
     display: block;
     padding: 13px 14px;
     font-weight: 600;
     position: relative;
 }
 
-.nav_ul li a:focus {
+.navigation_between_preview .nav_ul li a:focus {
     text-decoration: none;
 }
 
-.nav_ul li a img {
-    height: 12px;
-    width: auto;
-}
-
-.active_nav_ul {
+.navigation_between_preview .active_nav_ul {
     font-weight: 600;
     text-decoration: none;
 }
 
-.active_nav_ul span {
+.navigation_between_preview .active_nav_ul span {
     display: block !important;
     color: #fff;
 }
 
-.nav_ul li:nth-child(1) a:hover,
-ul li:nth-child(1) .active_nav_ul,
-.nav_ul li:nth-child(6) a:hover,
-ul li:nth-child(6) .active_nav_ul {
+.navigation_between_preview .nav_ul li:nth-child(1) a:hover,
+.navigation_between_preview ul li:nth-child(1) .active_nav_ul,
+.navigation_between_preview .nav_ul li:nth-child(6) a:hover,
+.navigation_between_preview ul li:nth-child(6) .active_nav_ul {
     text-decoration: none;
     background-color: #ec0000;
     color: #fafafa;
 }
 
-.nav_ul li:nth-child(2) a:hover,
-ul li:nth-child(2) .active_nav_ul,
-.nav_ul li:nth-child(7) a:hover,
-ul li:nth-child(7) .active_nav_ul {
+.navigation_between_preview .nav_ul li:nth-child(2) a:hover,
+.navigation_between_preview ul li:nth-child(2) .active_nav_ul,
+.navigation_between_preview .nav_ul li:nth-child(7) a:hover,
+.navigation_between_preview ul li:nth-child(7) .active_nav_ul {
     text-decoration: none;
     background-color: #0091ff;
     color: #fafafa;
 }
 
-.nav_ul li:nth-child(3) a:hover,
-ul li:nth-child(3) .active_nav_ul,
-.nav_ul li:nth-child(8) a:hover,
-ul li:nth-child(8) .active_nav_ul {
+.navigation_between_preview .nav_ul li:nth-child(3) a:hover,
+.navigation_between_preview ul li:nth-child(3) .active_nav_ul,
+.navigation_between_preview .nav_ul li:nth-child(8) a:hover,
+.navigation_between_preview ul li:nth-child(8) .active_nav_ul {
     text-decoration: none;
     background-color: #ff7d00;
     color: #fafafa;
 }
 
-.nav_ul li:nth-child(4) a:hover,
-ul li:nth-child(4) .active_nav_ul,
-.nav_ul li:nth-child(9) a:hover,
-ul li:nth-child(9) .active_nav_ul {
+.navigation_between_preview .nav_ul li:nth-child(4) a:hover,
+.navigation_between_preview ul li:nth-child(4) .active_nav_ul,
+.navigation_between_preview .nav_ul li:nth-child(9) a:hover,
+.navigation_between_preview ul li:nth-child(9) .active_nav_ul {
     text-decoration: none;
     background-color: #2446a3;
     color: #fafafa;
 }
 
-.nav_ul li:nth-child(5) a:hover,
-ul li:nth-child(5) .active_nav_ul,
-.nav_ul li:nth-child(10) a:hover,
-ul li:nth-child(10) .active_nav_ul {
+.navigation_between_preview .nav_ul li:nth-child(5) a:hover,
+.navigation_between_preview ul li:nth-child(5) .active_nav_ul,
+.navigation_between_preview .nav_ul li:nth-child(10) a:hover,
+.navigation_between_preview ul li:nth-child(10) .active_nav_ul {
     text-decoration: none;
     background-color: #ffba14;
     color: #fafafa;
 }
 
-.channel_view {
+.navigation_between_preview .channel_view {
     width: 100%;
     height: 20px;
     line-height: 20px;
@@ -614,9 +577,220 @@ ul li:nth-child(10) .active_nav_ul {
 .fixed_col {
     position: fixed;
     bottom: 25px;
-    right: 0px;
 }
 
 .row {
     position: relative !important;
+}
+
+
+/*All reviews */
+
+.container_all_preview {
+    background-color: #fafafa;
+    border: 1px solid #CCD1D9;
+    border-top: 0px solid #fff !important;
+    padding: 25px;
+}
+
+
+/*Навигация между статьями */
+
+.navigation_between_championships {
+    /*background-color: #292a2e;*/
+    background-color: #fafafa;
+    border-top: 1px solid #CCD1D9;
+    border-left: 1px solid #CCD1D9;
+    border-right: 1px solid #CCD1D9;
+}
+
+.navigation_between_championships a {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.navigation_between_championships .nav_ul {
+    display: block;
+    height: 60px;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+.navigation_between_championships .nav_ul li {
+    list-style: none;
+    float: left;
+    display: inline-block;
+    position: relative;
+    opacity: .4;
+}
+
+.navigation_between_championships .nav_ul li a {
+    font-size: 12px;
+    display: block;
+    padding: 0 20px;
+    font-weight: 600;
+    position: relative;
+    display: block;
+    height: 60px;
+}
+
+.navigation_between_championships .nav_ul li a:focus {
+    text-decoration: none;
+}
+
+.navigation_between_championships .active_nav_ul {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.navigation_between_championships .nav_ul li:hover {
+    opacity: 1;
+}
+
+.active_champ {
+    opacity: 1 !important;
+}
+
+.logo_champ {
+    height: 60px;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo_champ img {
+    align-self: center;
+    height: 40px;
+    width: auto;
+    position: relative;
+}
+
+
+/*.active_champ img {
+    transform: scale(1.3);
+    transition: all .1s ease-in-out;
+}*/
+
+
+/*Навигация между турами */
+
+.navigation_between_tour {
+    height: 50px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
+    position: relative;
+    background: #fff;
+    border-left: 1px solid #CCD1D9;
+    border-right: 1px solid #CCD1D9;
+}
+
+.nav_ul_tour {
+    display: block;
+    height: 50px;
+    padding: 0px;
+    margin-bottom: 0px;
+    overflow: hidden;
+}
+
+.nav_ul_tour li {
+    list-style: none;
+    float: left;
+    display: inline-block;
+    position: relative;
+}
+
+.nav_ul_tour li:hover .hover_menu {
+    top: 46px !important;
+    -moz-transition: all 0.15s ease-out;
+    -o-transition: all 0.15s ease-out;
+    -webkit-transition: all 0.15s ease-out;
+    transition: all 0.15s ease-out;
+}
+
+.nav_ul_tour li {
+    line-height: 50px;
+}
+
+.nav_ul_tour li a {
+    padding: 4px 20px;
+    display: block;
+    color: #76766f;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.hover_menu {
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    top: 50px;
+    background-color: #76766f;
+}
+
+.active_menu {
+    top: 46px !important;
+    background-color: #e90052;
+}
+
+
+/*Подсказки меню */
+
+dfn {
+    padding: 0 0.4em;
+    font-style: normal;
+    position: relative;
+}
+
+dfn::after {
+    content: attr(data-info);
+    height: 24px;
+    display: inline;
+    position: absolute;
+    bottom: -10%;
+    left: -50%;
+    opacity: 0;
+    width: auto;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 12px;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    color: #fff;
+    pointer-events: none;
+    /* This prevents the box from apearing when hovered. */
+    transition: opacity 250ms, top 250ms;
+}
+
+dfn::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -10%;
+    left: 50%;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    border: solid transparent 5px;
+    border-bottom-color: rgba(0, 0, 0, 0.8);
+    transition: opacity 250ms, top 250ms;
+}
+
+dfn:hover {
+    z-index: 2;
+}
+
+
+/* Keeps the info boxes on top of other elements */
+
+dfn:hover::after,
+dfn:hover::before {
+    opacity: 1;
+}
+
+dfn:hover::after {
+    top: 50px;
+}
+
+dfn:hover::before {
+    top: 40px;
 }
