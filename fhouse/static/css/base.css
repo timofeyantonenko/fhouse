@@ -1,4 +1,5 @@
 /*Основные стили*/
+
 .row {
     margin-right: 0px !important;
     margin-left: 0px !important;
@@ -38,9 +39,6 @@ body {
     font-size: 1.4em;
     background-color: #eaeaea;
 }
-
-
-
 
 .col-lg-1,
 .col-lg-2,
@@ -523,4 +521,119 @@ form [type="password"] {
 
 .modal-open {
     padding-right: 0px !important;
+}
+
+
+/*Profile user */
+
+.name_user_in_menu {
+    line-height: 50px;
+    font-size: 12.5px;
+    font-weight: 700;
+}
+
+.user_profile img,
+.user_profile i,
+.user_profile img {
+    align-self: center;
+}
+
+.user_profile img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.user_profile {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.user_profile div::nth-child(-n+2) {
+    float: left;
+    max-height: 30px;
+}
+
+.user_profile div:first-child {
+    margin-right: 10px;
+}
+
+.user_profile i {
+    opacity: 0.5;
+    margin-left: 7px;
+}
+
+.user_profile:hover {
+    background-color: #712677;
+}
+
+
+/*Всплывающие окно юзера */
+
+#top_profile_menu {
+    position: absolute;
+    top: 60px;
+    right: -8px;
+    background-color: #fafafa;
+    font-size: 12.5px;
+    color: #222;
+    line-height: 30px;
+    border: 1px solid #CCD1D9;
+    width: 200px;
+    padding: 4px 0px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    display: none;
+}
+
+#top_profile_menu a {
+    display: block;
+    white-space: nowrap;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    color: #2a5885;
+}
+
+.line_solid {
+    margin: 4px 13px;
+    border-top: 1px solid #dbe4ec;
+}
+
+#top_profile_menu a:hover {
+    text-decoration: none;
+    background-color: #e4eaf0;
+}
+
+.posirion_reletive {
+    position: relative;
+}
+
+.posirion_reletive i {
+    position: absolute;
+    top: -21.5px;
+    right: 35px;
+    opacity: 1;
+    z-index: 10000;
+    font-size: 25px;
+}
+
+.active_top_profile_menu {
+    background-color: #712677 !important;
+}
+
+.show_top_profile_menu {
+    display: block;
+}
+
+.active_top_profile_menu  i {
+    opacity: 1;
+}
+
+.relative_container {
+    position: relative;
 }
