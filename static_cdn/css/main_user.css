@@ -1,0 +1,96 @@
+.user_page {
+    background-color: #fafafa;
+    border: 1px solid #CCD1D9;
+    padding: 25px;
+}
+
+.user_name h2 {
+    margin: 0px;
+}
+
+.user_foto {
+    height: 215px;
+    width: 215px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.user_stat {
+    margin-top: 25px;
+}
+
+.user_foto img {
+    width: 100%;
+    height: auto;
+}
+
+.user_info_desc {
+    width: 100%;
+    align-self: center;
+}
+
+.user_info_desc tr td:nth-child(2) a {
+    float: right;
+}
+
+.user_info_desc tr td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.user_info_desc tr td:nth-child(1) a {
+    font-weight: bold;
+}
+
+.user_info_desc table {
+    margin-bottom: 0px;
+    border-bottom: 1px solid #ddd;
+}
+
+.user_stat .row .col-lg-7:nth-child(2) {
+    display: flex;
+    justify-content: center;
+}
+
+
+/*User in soc */
+
+.soc_user div {
+    background-color: rgb(56, 61, 65);
+    border-radius: 50%;
+    height: 21px;
+    width: 21px;
+    margin-left: 5px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.soc_user div i {
+    align-self: center;
+}
+
+.soc_user a div {
+    color: #fafafa;
+    font-size: 12px;
+}
+
+.soc_user a {
+    text-decoration: none;
+}
+
+a #facebook:hover {
+    background-color: #3b5998;
+}
+
+a #vk:hover {
+    background-color: #507299;
+}
+
+a #twitter:hover {
+    background-color: #1b95e0;
+}
+
+a #instagram:hover {
+    background-color: #faa842;
+}

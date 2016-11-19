@@ -4,6 +4,15 @@
     padding-bottom: 20px;
 }
 
+.fixed_col {
+    position: fixed;
+    bottom: 25px;
+}
+
+.fixed_col_top {
+    position: fixed; 
+}
+
 h2,
 h3,
 h4 {
@@ -62,7 +71,7 @@ a {
     padding: 24px;
     background-color: #fafafa;
     border: 1px solid #ccd1d9;
-    margin-left: 25px;
+    margin-right: 25px;
 }
 
 .main_news {

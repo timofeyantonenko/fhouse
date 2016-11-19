@@ -57,16 +57,21 @@ $(document).ready(function() {
         }
     });
 
+
+
     // Таблица с лучшими прогнозистами 
     $(".table_top_forecasters tbody tr:first-child td").css("border-top", "0px solid #fafafa !important");
 
+
     // Превью ко всем топ чемпионатам 
     $(".nav_ul_tour li:first-child div").addClass("active_menu");
+
 
     $(".nav_ul_tour li ").click(function(e) {
         e.preventDefault();
         $(".nav_ul_tour li div").removeClass('active_menu');
         $(this).children("div").addClass('active_menu');
+
     });
 
     $(".navigation_between_championships .nav_ul li:first-child").addClass("active_champ");
@@ -75,17 +80,12 @@ $(document).ready(function() {
         e.preventDefault();
         $(".navigation_between_championships .nav_ul li").removeClass('active_champ');
         $(this).addClass('active_champ');
+
     });
 
-    // 1) Всплывают при наведении курсора:
-    $('.navigation_between_championships li').tooltip({
-        trigger: "hover",
-        selector: "a[data-toggle=tooltip]"
-    });
-    // 1) Всплывают при получении фокуса:     
-    $('.navigation_between_championships li').tooltip({
-        trigger: "focus",
-        selector: "a[data-toggle=tooltip]"
+    // Всплыващая подсказка
+    $(function() {
+        $("[data-toggle='tooltip']").tooltip();
     });
 
 
@@ -133,11 +133,11 @@ $(window).load(function() {
         $(min_height_block).css("left", left_col);
 
         $(window).scroll(function() {
-            if ($(this).scrollTop() > (( document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
+            if ($(this).scrollTop() > ((document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
                 var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
                 $('.fixed_col_top').css('top', 'inherit');
                 $(min_height_block).css("bottom", bottom_scroll);
-                
+
 
             } else {
                 $('.fixed_col_top').css('top', '70px');

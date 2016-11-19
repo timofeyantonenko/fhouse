@@ -28,6 +28,7 @@ h3 {
     overflow: hidden;
     float: left;
     margin-right: 2%;
+    border: 1px solid silver;
 }
 .IMGoneArticle {
     /*display: flex;*/
