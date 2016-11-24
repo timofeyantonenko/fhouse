@@ -95,6 +95,8 @@ $(".nav_ul li a").click(function(e) {
             var content = $('.flex_container');
             content.html(data);
             $(".one_read_article:nth-child(3n+1)").css("margin-left", "0");
+            var a_block = $('.more_article a');
+            $(a_block).prop('href', 3);
 //            window.history.pushState("object or string", "Title", state);
         },
         error: function(xhr, status, error){
@@ -102,6 +104,40 @@ $(".nav_ul li a").click(function(e) {
         }
     });
 });
+$(".more_article a").click(function(e) {
+    e.preventDefault();
+    var a_block = this;
+    var page = $(this).attr('href');
+    var ajax_url = 'article_list';
+    var ajax_data = {"section": section_name}
+    if (section_name == 'Все'){
+    console.log('ВСЕ');
+    var ajax_data = {}
+    }
+    if (page != null){
+        console.log('HERE PAGE IS: ' + page);
+        ajax_data["page"] = page
+    }
+    console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['section']);
+    var state = ""
+    $.ajax({
+        url: ajax_url,
+        data: ajax_data,
+        dataType: "html",
+        success: function(data){
+            page = parseInt(page) + 1;
+            $(a_block).prop('href', page);
+            var content = $('.flex_container');
+            content.append(data);
+            $(".one_read_article:nth-child(3n+1)").css("margin-left", "0");
+//            window.history.pushState("object or string", "Title", state);
+        },
+        error: function(xhr, status, error){
+            console.log(error, status, xhr);
+        }
+    });
+});
+
 
 
     $(".one_read_article:nth-child(3n+1)").css("margin-left", "0");
@@ -112,7 +148,6 @@ $(window).load(function(){
 $(document).ajaxComplete(function() {
     $('.one_read_article_img img').each(function(i) {
         if ($(this).css("height") < $(this).parent().css("height")) {
-            console.log('main: ' + $(this).attr('src') + ' || ' + $(this).height());
             $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
             $(this).parent().css({ "display": "flex", "justify-content": "center" });
         }
@@ -120,7 +155,6 @@ $(document).ajaxComplete(function() {
     });
         $('.one_read_article_img img').each(function(i) {
         if ($(this).css("height") < $(this).parent().css("height")) {
-            console.log($(this).attr('src'));
             $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
             $(this).parent().css({ "display": "flex", "justify-content": "center" });
         }
