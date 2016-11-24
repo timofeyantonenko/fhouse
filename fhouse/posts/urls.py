@@ -6,11 +6,13 @@ post_delete,
 post_detail,
 post_update,
 show_tabs,
+PostList,
 )
 
 
 urlpatterns = [
     url(r'^$', post_list, name="list"),
+    url(r'^ajax_post_list/$', PostList.as_view()),
     url(r'^tabs/$', show_tabs),
     url(r'^create/$', post_create),
     url(r'^(?P<slug>[\w-]+)/$', post_detail, name='detail'),

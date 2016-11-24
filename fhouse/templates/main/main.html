@@ -6,80 +6,37 @@
 {% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
-        
-        <div class="col-lg-9 colum">
+        <div class="col-lg-3">
+            <div class="user_date">
+                <h3>{{ request.user.first_name }} {{ request.user.last_name }}</h3>
+                <div class="user_date_img">
+                    <img src="{{ request.user.avatar.url }}" alt="">
+                </div>
+                <div class="user_information">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><a href="#">Рейтинг прогнозистов</a></td>
+                                <td><a href="#">143</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Количество сатей</a></td>
+                                <td><a href="#">3</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Голосов</a></td>
+                                <td><a href="#">53</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
             <div class="container_all">
-                <div class="container_unit">
-                    <div class="main_news">
-                        <a href="#">
-                            <div class="main_img">
-                                <img src="https://img.championat.com/news/big/h/l/aren-robben_14219952161446644101.jpg" alt="">
-                            </div>
-                            <div class="main_news_infa">
-                                <h2>Роббен не прочь вернуться в бывшbй клуб</h2> Арьен Роббен — нидерландский футболист, вингер. Выигрывал чемпионаты четырёх стран: Нидерландов, Англии, Испании и Германии.
-                            </div>
-                        </a>
+                <div class="main_news_container">
+                    {% include "main/main_posts.html" %}
                     </div>
-                </div>
-                <div class="container_unit">
-                    <div class="last_news">
-                        <div class="title_and_all">
-                            <h2><a href='#'>Последние новости</a></h2>
-                            <a href="Больше">
-                                <div class="all_of_units">
-                                    <span>Больше</span>
-                                    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="container_news">
-                            <div class="one_news">
-                                <a href="#">
-                                    <div class="one_news_img">
-                                        <img src="http://i.dailymail.co.uk/i/pix/2014/08/04/1407151063452_wps_11_IMPROVED_QUALITY_Brazil_s.jpg" alt="">
-                                    </div>
-                                    <div class="one_news_info">
-                                        <span>some teg</span>
-                                        <h4>Роналдо выгнали с Нефтяника Ахтырка</h4>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="one_news">
-                                <a href="#">
-                                    <div class="one_news_img">
-                                        <img src="http://s.ill.in.ua/i/news/630x373/296/296454.jpg" alt="">
-                                    </div>
-                                    <div class="one_news_info">
-                                        <span>some teg</span>
-                                        <h4>Роналдо выгнали с Нефтяника Ахтырка</h4>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="one_news">
-                                <a href="#">
-                                    <div class="one_news_img">
-                                        <img src="http://ronaldo.ru/img/bars/camina.jpg" alt="">
-                                    </div>
-                                    <div class="one_news_info">
-                                        <span>some teg</span>
-                                        <h4>Роналдо выгнали с Нефтяника Ахтырка</h4>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="one_news">
-                                <a href="#">
-                                    <div class="one_news_img">
-                                        <img src="http://static1.repo.aif.ru/1/97/396293/fd58adefda8fc979872c83705f8a9afa.jpg" alt="">
-                                    </div>
-                                    <div class="one_news_info">
-                                        <span>some teg</span>
-                                        <h4>Роналдо выгнали с Нефтяника Ахтырка</h4>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="container_unit">
                     <div class="last_photos">
                         <div class="title_and_all">
@@ -93,107 +50,7 @@
                         </div>
                         <dic class="container">
                             <div class="row">
-                                <div class="col-lg-6 main_last_album">
-                                    <a href="#">
-                                        <div class="album_img">
-                                            <img src="https://metrouk2.files.wordpress.com/2016/06/540174060.jpg?w=748&h=498&crop=1" alt="">
-                                        </div>
-                                        <div class="color_line">
-                                            <div class="icon_for_album">
-                                                <div class="icon_foto">
-                                                    <i class="fa fa-camera" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="quantity_foto_in_album">
-                                                    15
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="discription_main_last_album">
-                                            <h3>Лучшие футболисты современности</h3> Роналду, Неймар, Ибрагимович и остальные мудаки современного футбола
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="last_albums">
-                                        <a href="#">
-                                            <div class="album_img">
-                                                <img src="http://www.readfootball.com/sites/default/files/photogalery/1455568309_yannik-ferreyra-karrasko.jpg" alt="">
-                                            </div>
-                                            <div class="color_line">
-                                                <div class="icon_for_album">
-                                                    <div class="icon_foto">
-                                                        <i class="fa fa-camera" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="quantity_foto_in_album">
-                                                        15
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="discription_last_album">
-                                                <h4>Лучшие футболисты современности</h4>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="last_albums">
-                                        <a href="#">
-                                            <div class="album_img">
-                                                <img src="http://cs636531.vk.me/v636531952/19f3a/hh1bjUXJXP8.jpg" alt="">
-                                            </div>
-                                            <div class="color_line">
-                                                <div class="icon_for_album">
-                                                    <div class="icon_foto">
-                                                        <i class="fa fa-camera" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="quantity_foto_in_album">
-                                                        15
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="discription_last_album">
-                                                <h4>Лучшие футболисты современности</h4>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="last_albums">
-                                        <a href="#">
-                                            <div class="album_img">
-                                                <img src="http://goal.net.ua/foto/2015/a_85526.jpg" alt="">
-                                            </div>
-                                            <div class="color_line">
-                                                <div class="icon_for_album">
-                                                    <div class="icon_foto">
-                                                        <i class="fa fa-camera" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="quantity_foto_in_album">
-                                                        15
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="discription_last_album">
-                                                <h4>Лучшие футболисты современности</h4>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="last_albums">
-                                        <a href="#">
-                                            <div class="album_img">
-                                                <img src="http://ss.sport-express.ru/userfiles/materials/45/457776/large.jpg" alt="">
-                                            </div>
-                                            <div class="color_line">
-                                                <div class="icon_for_album">
-                                                    <div class="icon_foto">
-                                                        <i class="fa fa-camera" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="quantity_foto_in_album">
-                                                        15
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="discription_last_album">
-                                                <h4>Лучшие футболисты современности</h4>
-                                            </div>
-                                        </a>
-                                    </div>
+                                <div class="main_gallery_container">
                                 </div>
                         </dic>
                         </div>
@@ -210,48 +67,8 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="flex_container">
-                            <div class="one_read_article">
-                                <a href="#">
-                                    <div class="one_read_article_img">
-                                        <img src="https://static.independent.co.uk/s3fs-public/styles/story_medium/public/thumbnails/image/2016/06/27/09/lionel-messi-argentina.jpg" alt="">
-                                    </div>
-                                </a>
-                                <a href="#" class="articles_author">
-                                    <div class="author_img">
-                                        <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg" alt="">
-                                    </div>
-                                    <p>Мангура Дмитрий</p>
-                                </a>
-                                <div class="before_date"></div>
-                                <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | 28 october 2016</span>
-                                <a href="#">
-                                    <div class="one_read_article_info">
-                                        <h3>Почему Месси не везет в сборной</h3> Роналдо и Месси - два неудачника в современном футболе
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="one_read_article">
-                                <a href="#">
-                                    <div class="one_read_article_img">
-                                        <img src="http://i.dailymail.co.uk/i/pix/2016/09/13/20/384F092A00000578-3787715-image-a-14_1473793638951.jpg" alt="">
-                                    </div>
-                                </a>
-                                <a href="#" class="articles_author">
-                                    <div class="author_img">
-                                        <img src="https://pp.vk.me/c624723/v624723545/1fd3e/2tAsxjCmPvk.jpg" alt="">
-                                    </div>
-                                    <p>Антоненко Тимофей</p>
-                                </a>
-                                <div class="before_date"></div>
-                                <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | 28 october 2016</span>
-                                <a href="#">
-                                    <div class="one_read_article_info">
-                                        <h3>Почему Месси не везет в сборной</h3> Роналдо и Месси - два неудачника в современном футболе
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                            <div class="articles_list">
+                                </div>
                     </div>
                 </div>
                 <div class="container_unit">
@@ -266,63 +83,8 @@
                     </div>
                     <div class="last_records">
                         <!-- 1 рекорд     -->
-                        <div class="flex_container">
-                            <div class="thumbnails">
-                                <div class="caption" id="caption">
-                                    <h3>Лучший игрок</h3>
+                            <div class="records_list">
                                 </div>
-                                <ul class="statsList list-group" id="list-group">
-                                    <li class="statsHero">
-                                        <div class="statInfo">
-                                            Лионель Месси
-                                            <span class="stat">123</span>
-                                        </div>
-                                        <div class="img_container_hero">
-                                            <img src="http://www.fc-barca.com/images/squad/squad_2016-17/new/30293622.jpg" alt="">
-                                        </div>
-                                    </li>
-                                    <li class="statsRow">
-                                        <div class="pos">
-                                            2.</div>
-                                        <div class="teamInfo">
-                                            <a href='{{record.get_absolute_url}}' class="statName">Бензема Карим</a>
-                                        </div>
-                                        <div class="stat"> 123 </div>
-                                    </li>
-                                    <li class="statsRow">
-                                        <div class="pos">
-                                            3.</div>
-                                        <div class="teamInfo">
-                                            <a href='{{record.get_absolute_url}}' class="statName">Бензема Карим</a>
-                                        </div>
-                                        <div class="stat"> 123 </div>
-                                    </li>
-                                    <li class="statsRow">
-                                        <div class="pos">
-                                            4.</div>
-                                        <div class="teamInfo">
-                                            <a href='{{record.get_absolute_url}}' class="statName">Бензема Карим</a>
-                                        </div>
-                                        <div class="stat"> 123 </div>
-                                    </li>
-                                    <li class="statsRow">
-                                        <div class="pos">
-                                            5.</div>
-                                        <div class="teamInfo">
-                                            <a href='{{record.get_absolute_url}}' class="statName">Бензема Карим</a>
-                                        </div>
-                                        <div class="stat"> 123 </div>
-                                    </li>
-                                    <li class="full_list_record">
-                                        <a href="{{records_table.table.get_absolute_url}}">
-                                            Полный Cписок
-                                            <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                                            </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Конец рекорда -->
                     </div>
                 </div>
             </div>

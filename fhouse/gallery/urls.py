@@ -5,10 +5,13 @@ from .views import (
     album_photos,
     photo_detail,
     PhotoList,
+    LastSectionPhotoList,
 )
 
 urlpatterns = [
     url(r'^slider_photo_list/$', PhotoList.as_view()),
+    url(r'^last_section_photo_list/$', LastSectionPhotoList.as_view()),
+    url(r'^main_page_photo_list/$', PhotoList.as_view()),
     url(r'^$', gallery_sections, name="sections"),
     url(r'^(?P<slug>[\w-]+)/$', section_albums, name='albums'),
     url(r'^(?P<section_slug>[\w-]+)/(?P<album_slug>[\w-]+)/$', album_photos, name='photos'),

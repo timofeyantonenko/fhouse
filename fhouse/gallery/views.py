@@ -70,3 +70,30 @@ class PhotoList(ListView):
             photos = AlbumPhoto.objects.all()
         return photos
 
+
+class LastSectionPhotoList(ListView):
+    model = SectionAlbum
+    template_name = 'gallery/main_section_list.html'
+    context_object_name = 'last_photos'
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+
+        context = super(LastSectionPhotoList, self).get_context_data(**kwargs)
+        last_photos = []
+        sections = GallerySection.objects.all()
+        for section in sections:
+            albums = section.albums
+            last_photo = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-timestamp')[0]
+            last_photos.append(last_photo)
+        context['last_photos'] = last_photos
+        return context
+
+        section = self.request.GET.get('section')
+        if section:
+            albums = SectionAlbum.objects.filter(album_section__section_title=section)
+            photos = AlbumPhoto.objects.filter(photo_album__in=albums)
+        else:
+            photos = AlbumPhoto.objects.all()
+        return photos
+
