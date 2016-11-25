@@ -1,8 +1,23 @@
-.title_and_all {
-    height: 40px;
-    margin-bottom: 25px;
+.col-lg-44 {
+    width: 26%;
+    float: right;
 }
 
+.col-lg-88 {
+    width: 72%;
+    float: left;
+    margin-right: 2%;
+}
+
+.title_and_all {
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.title_and_all h2 {
+    margin-bottom: 0px !important;
+    font-size: 13px;
+}
 
 
 /*Слайдер*/
@@ -144,42 +159,11 @@ ul li:nth-child(5) .active_nav_ul {
 
 /*Картинка слайдер */
 
-.album_foto {
-    height: 464px;
-    display: none;
-}
-
-.album_foto:first-child {
-    display: block !important;
-}
-
-.slaider_foto_base .left_right_foto:nth-child(1) {
-    left: 0px;
-}
-
-.slaider_foto_base .left_right_foto:nth-child(2) {
-    left: 100%;
-}
-
-.slaider_foto_base .left_right_foto:nth-child(3) {
-    left: 200%;
-}
-
 .slaider_foto_base {
     overflow: hidden;
     position: relative;
     width: 100%;
     height: 464px;
-}
-
-.left_right_foto {
-    height: 464px;
-    width: 100%;
-    position: absolute;
-    top: 0px;
-    -moz-transition: all 0.5s ease-out;
-    -o-transition: all 0.5s ease-out;
-    -webkit-transition: all 0.5s ease-out;
 }
 
 .img_slaider {
@@ -208,17 +192,9 @@ ul {
     -webkit-transition: all 0.2s ease-out;
 }
 
-#foto_full:hover {
-    opacity: 1;
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -o-transform: scale(1.2);
-}
-
 .img_slaider img {
-    width: 100%;
-    height: auto;
     align-self: center;
+    display: none;
 }
 
 .slaider_gallery {
@@ -256,7 +232,9 @@ ul {
     /*display:none;*/
 }
 
-/* Альбомы */ 
+
+/* Альбомы */
+
 .color_line {
     width: 100%;
     height: 5px;
@@ -327,20 +305,16 @@ ul {
     margin-top: 0px;
     font-weight: bold;
     margin-bottom: 24px;
-    float:left;
+    float: left;
 }
 
 .div_album {
     overflow: hidden;
     position: relative;
     background-color: #fafafa;
-    padding: 24px;
+    padding: 20px;
     border: 1px solid #CCD1D9;
     margin-bottom: 25px;
-}
-
-.one_album:nth-child(-n+4) {
-    margin-top: 0px;
 }
 
 .container_album {
@@ -350,23 +324,14 @@ ul {
     align-items: flex-start;
 }
 
-.main_foto_albub img:hover {
-    transform: scale(1.2);
-}
-
 .one_album {
-    width: 25%;
-    max-height: 300px;
-    margin-top: 25px;
-} 
-
-.discription_album {
-    padding: 8px 8px 0px 16px;
-}  
+    width: 100%;
+    max-height: 280px;
+}
 
 .main_foto_albub {
     width: 100%;
-    height: 125px;
+    height: 175px;
     overflow: hidden;
 }
 
@@ -376,4 +341,236 @@ ul {
 
 .title_and_all_albums {
     height: 33px;
+}
+
+.before_current_album {
+    border-bottom: 1px solid #CCD1D9;
+    margin: 0px 5px 15px;
+    width: 100%;
+}
+
+.discription_album {
+    padding: 10px;
+    color: #242424;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.current_album {
+    color: #e90052;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.more_cmment {
+    cursor: pointer;
+    width: 25%;
+    margin: 0 auto 20px;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 14px;
+    color: #656D78;
+    background: #fff;
+    border: 1px solid #CCD1D9;
+    border-radius: 2px;
+}
+
+.more_cmment:hover {
+    text-decoration: none!important;
+    background: #eee;
+}
+
+.more_album {
+    cursor: pointer;
+    width: 100%;
+    margin: 0 auto 0px;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 14px;
+    color: #656D78;
+    background: #fff;
+    border: 1px solid #CCD1D9;
+    border-radius: 2px;
+}
+
+.more_album:hover {
+    text-decoration: none!important;
+    background: #eee;
+}
+
+
+/*Для нового слайдера*/
+
+.slider_photo_list {
+    position: relative;
+}
+
+
+/*Ксс для комментрриев */
+
+.comments_base {
+    background-color: #fafafa;
+    border-bottom: 1px solid #CCD1D9;
+    border-left: 1px solid #CCD1D9;
+    border-right: 1px solid #CCD1D9;
+    padding: 25px;
+}
+
+.comments_base2 {
+    background-color: #fafafa;
+    border-bottom: 1px solid #CCD1D9;
+    border-left: 1px solid #CCD1D9;
+    border-right: 1px solid #CCD1D9;
+}
+
+.coments_author {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+}
+
+.coments_author img {
+    width: 100%;
+}
+
+.content_coment {
+    margin-left: 60px;
+}
+
+.coment_author_time {
+    min-width: 51%;
+    color: #7f8992;
+}
+
+.coment_author_time a {
+    font-weight: 600;
+}
+
+.blockquote {
+    padding: 3% 3% 0 3%;
+}
+
+.blockquote:hover {
+    background-color: #f0f2f5;
+}
+
+.author_name_date {
+    color: #7f8992;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.author_name_date a {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 7px;
+    margin-left: 10px;
+}
+
+.show_all_coment {
+    display: block;
+    cursor: pointer;
+    color: #55677d;
+    background: #f0f2f5;
+    line-height: 32px;
+    border-radius: 2px;
+    text-align: center;
+    margin-top: 5px;
+    margin: 5px 10% 24px 10%;
+}
+
+
+/*Описания фото */
+
+.discription_and_like {
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 25px;
+    background-color: #fafafa;
+    border-right: 1px solid #CCD1D9;
+    border-left: 1px solid #CCD1D9;
+    border-bottom: 1px solid #CCD1D9;
+}
+
+.discription_foto {
+    position: relative;
+    font-size: 15px;
+    font-weight: 600;
+    float: left;
+    max-width: 70%;
+}
+
+.discription_foto span {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #939699;
+    padding: 0 1px;
+    font-size: 13px;
+}
+
+
+/*Css for like s dislike*/
+
+.like,
+.dislike {
+    height: 40px;
+    width: 40px;
+    background-color: black;
+    border-radius: 50%;
+    color: #fafafa;
+    font-size: 22px;
+    text-align: center;
+    float: left;
+    margin-left: 10px;
+    opacity: 0.6;
+    vertical-align: center;
+    line-height: 40px;
+}
+
+.like_all:hover .quantity_like,
+.like_all:hover .like,
+.dislike_all:hover .quantity_dislike,
+.dislike_all:hover .dislike {
+    opacity: 1;
+}
+
+.like_all:hover .quantity_like,
+.dislike_all:hover .quantity_dislike {
+    color: black;
+}
+
+.like_all,
+.dislike_all {
+    color: black;
+}
+
+.quantity_like,
+.quantity_dislike {
+    font-size: 22px;
+    line-height: 40px;
+    float: left;
+    margin-left: 7px;
+    font-weight: 700;
+    opacity: 0.6;
+}
+
+.like_and_dislike {
+    float: right;
+}
+
+.block_like-dislike {
+    width: 100%;
+    height: 40px;
 }
