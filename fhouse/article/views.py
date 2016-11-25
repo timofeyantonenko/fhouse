@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from .models import SectionArticle, ArticlesSection
@@ -64,14 +65,54 @@ class ArticleList(ListView):
     model = SectionArticle
     template_name = 'articles/articles_list.html'
     context_object_name = 'articles_list'
-    paginate_by = 5
+    first_paginate = 6
+    paginate_by = 3
+    allow_empty = True
 
-    def get_queryset(self):
+    def get_context_data(self, **kwargs):
+        context = super(ArticleList, self).get_context_data(**kwargs)
         section = self.request.GET.get('section')
+        self.paginate_by = self.get_paginate_by(None)
         if section:
-            print("SECTION >>>>>>>> ", section)
             articles = SectionArticle.objects.filter(article_section__section_title=section)
-            print(articles)
+            paginator = Paginator(articles, self.paginate_by)
+            page = self.request.GET.get('page')
+            try:
+                articles = paginator.page(page)
+            except PageNotAnInteger:
+                articles = paginator.page(1)
+            except EmptyPage:
+                articles = paginator.page(paginator.num_pages)
         else:
             articles = SectionArticle.objects.all()
-        return articles
+            paginator = Paginator(articles, self.paginate_by)
+            page = self.request.GET.get('page', 1)
+            try:
+                articles = paginator.page(page)
+            except EmptyPage as e:
+                # If page is out of range (e.g. 9999), deliver last page of results.
+                articles = paginator.page(paginator.num_pages)
+        context['articles_list'] = articles
+        return context
+
+    def get_paginate_by(self, queryset):
+        """
+        Paginate by specified value in querystring, or use default class property value.
+        """
+        if 'page' in self.request.GET:
+            return self.paginate_by
+        else:
+            return self.first_paginate
+
+
+class MainPageArticlesList(ListView):
+    model = SectionArticle
+    template_name = 'articles/main_articles_list.html'
+    context_object_name = 'articles_list'
+
+    def get_queryset(self):
+        sections = ArticlesSection.objects.all()
+        last_articles = []
+        for section in sections:
+            last_articles.append(section.articles.order_by('-timestamp')[0])
+        return last_articles

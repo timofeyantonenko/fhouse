@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 # Create your views here.
 
 from .models import RecordGroup, RecordTable, Record
@@ -62,3 +62,19 @@ def record_detail(request, group_slug=None, table_slug=None, record_slug=None):
         "title": record.record_owner,
     }
     return render(request, "records/record_detail.html", context)
+
+
+def get_main_page_record_list(request):
+    groups_set = RecordGroup.objects.all()
+    table_list = []
+    for group in groups_set:
+        table = group.tables.order_by('-updated')[0]
+        table_list.append({
+            'table': table,
+            'records': table.records[:5],
+        })
+
+    context = {
+        "groups_tables": table_list,
+    }
+    return render_to_response(template_name="records/main_records_list.html", context=context, content_type='text/html')

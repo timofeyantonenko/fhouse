@@ -12,6 +12,7 @@ from comments.models import Comment
 from comments.forms import CommentForm
 from django.utils import timezone
 from django.db.models import Q
+from django.views.generic import ListView
 from .forms import PostForm
 from .models import Post, UserFavoriteTags
 
@@ -177,5 +178,20 @@ def show_tabs(request):
         "today": today,
         'user_tags': user_tags,
     }
-    return render_to_response(template_name='posts/list_section.html',context=context, content_type='text/html')
+    return render_to_response(template_name='posts/list_section.html', context=context, content_type='text/html')
     # return HttpResponse(json.dumps({'tab': tab}), content_type='application/json')
+
+
+class PostList(ListView):
+    model = Post
+    template_name = 'main/main_posts.html'
+    context_object_name = 'post_list'
+    paginate_by = 5
+    allow_empty = True
+
+    def get_context_data(self, **kwargs):
+        context = super(PostList, self).get_context_data(**kwargs)
+        posts = Post.objects.active()
+        context['post_list'] = posts[1:5]
+        context['main_post'] = posts[0]
+        return context
