@@ -6,37 +6,11 @@
 {% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-3">
-            <div class="user_date">
-                <h3>{{ request.user.first_name }} {{ request.user.last_name }}</h3>
-                <div class="user_date_img">
-                    <img src="{{ request.user.avatar.url }}" alt="">
-                </div>
-                <div class="user_information">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td><a href="#">Рейтинг прогнозистов</a></td>
-                                <td><a href="#">143</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Количество сатей</a></td>
-                                <td><a href="#">3</a></td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Голосов</a></td>
-                                <td><a href="#">53</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-9">
+        <div class="col-lg-9 colum">
             <div class="container_all">
                 <div class="main_news_container">
                     {% include "main/main_posts.html" %}
-                    </div>
+                </div>
                 <div class="container_unit">
                     <div class="last_photos">
                         <div class="title_and_all">
@@ -67,8 +41,8 @@
                                 </div>
                             </a>
                         </div>
-                            <div class="articles_list">
-                                </div>
+                        <div class="articles_list">
+                        </div>
                     </div>
                 </div>
                 <div class="container_unit">
@@ -83,17 +57,19 @@
                     </div>
                     <div class="last_records">
                         <!-- 1 рекорд     -->
-                            <div class="records_list">
-                                </div>
+                        <div class="records_list">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 colum">
             <div class="user_date">
-                <h3>Мангура Дмитрий</h3>
-                <div class="user_date_img">
-                    <img src="{{ request.user.avatar.url }}" alt="">
+                <h3>{{ request.user.first_name }} {{ request.user.last_name }}</h3>
+                <div class="img_flex">
+                    <div class="user_date_img">
+                        <img src="{{ request.user.avatar.url }}" alt="">
+                    </div>
                 </div>
                 <div class="user_information">
                     <table class="table">

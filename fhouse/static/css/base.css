@@ -17,6 +17,10 @@
     margin-right: 100px !important;
 }
 
+body.modal-open {
+    overflow: hidden !important;
+}
+
 .containerForMenu {
     position: relative;
     width: 100%;
@@ -46,18 +50,16 @@ body {
 .col-lg-4,
 .col-lg-5,
 .col-lg-6,
+.col-lg-11,
+.col-lg-12 {
+    padding: 0px !important;
+}
+
 .col-lg-7,
 .col-lg-8,
 .col-lg-9,
-.col-lg-10,
-.col-lg-11,
-.col-lg-12 {
-    padding: 0% !important;
-}
-
-.col-lg-4 {
-    margin-left: 2% !important;
-    width: 31.33333333%;
+.col-lg-10 {
+    padding: 0% 20px 0% 0% !important;
 }
 
 h1 {
@@ -585,7 +587,7 @@ form [type="password"] {
     border: 1px solid #CCD1D9;
     width: 200px;
     padding: 4px 0px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
     display: none;
 }
 
@@ -630,10 +632,45 @@ form [type="password"] {
     display: block;
 }
 
-.active_top_profile_menu  i {
+.active_top_profile_menu i {
     opacity: 1;
 }
 
 .relative_container {
     position: relative;
+}
+
+/*Инфа юзер правая колонка */
+
+.img_flex {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.user_date_img {
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.user_date_img img {
+    width: 100%;
+    height: auto;
+}
+
+.position_fixed {
+    position: absolute;
+}
+
+.fixed_col {
+    position: fixed;
+    bottom: 25px;
+}
+
+.fixed_col_top {
+    position: fixed; 
 }

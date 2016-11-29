@@ -9,13 +9,16 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-9">
-            <div class="navigation_between_records">
-                <ul class="nav_ul">
-                    <li><a href="#">Все  <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></li>
-                    {% for record_group in groups_tables %}
-                    <li><a href="#">{{ record_group.group }} <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></li>
-                    {% endfor %}
-                </ul>
+            <div class="table_nav_records">
+                <div>Рекорды</div>
+                <div class="tab">
+                    <ul>
+                        <li>Все</li>
+                        {% for record_group in groups_tables %}
+                        <li>{{ record_group.group }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
             <div class="statsCard">
                 {% for record_group in groups_tables %}
@@ -28,7 +31,6 @@
                         <ul class="statsList list-group" id="list-group">
                             {% for record in records_table.records %} {% if forloop.counter == 1 %}
                             <li class="statsHero">
-                                
                                 <div class="statInfo">
                                     <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
                                     <span class="stat">{{ record.record_value }}</span>

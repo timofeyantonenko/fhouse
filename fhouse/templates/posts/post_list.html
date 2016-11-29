@@ -4,10 +4,10 @@
 {% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-9 colum">
             <!-- Индивидуальный блок новостей  -->
             <div class="articles">
-                         <div>
+                <div>
                     <h3>Моя лента</h3>
                 </div>
                 <div class="menu_individualNews">
@@ -19,34 +19,163 @@
                             </li>
                         </div>
                         {% for tag in user_tags %}
-                            <div class="changeNews">
-                                <li class="tab" id="simple_tab">
-                                    <div>{{ tag }}</div>
-                                    <div class="hover_menu"></div>
-                                </li>
-                            </div>
+                        <div class="changeNews">
+                            <li class="tab" id="simple_tab">
+                                <div>{{ tag }}</div>
+                                <div class="hover_menu"></div>
+                            </li>
+                        </div>
                         {% endfor %}
                         <div class="changeNews">
                             <li>
-                                <div class="plus_units"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                                <div class="plus_units" data-toggle="modal" data-target="#modal_my_feed_change"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
                             </li>
+                            <!-- Модальное окно, выбор тегов для своей ленты -->
+                            <div id="modal_my_feed_change" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Моя лента</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="you_teg">
+                                                <div class="info_about_tags">
+                                                    Вы подписаль на 5 тегов
+                                                </div>
+                                                <div class="for_tag">
+                                                    <!-- <a href="#" class="tegArticle">Барселона</a>
+                                                    <a href="#" class="tegArticle">Ювентус</a>
+                                                    <a href="#" class="tegArticle">Рената</a>
+                                                    <a href="#" class="tegArticle">Подрочуля</a>
+                                                    <a href="#" class="tegArticle">Сашуля</a>
+                                                    <a href="#" class="tegArticle">Ювентус</a>
+                                                    <a href="#" class="tegArticle">Рената</a>
+                                                    <a href="#" class="tegArticle">Подрочуля</a> -->
+                                                </div>
+                                            </div>
+                                            <div class="search_and_top_tags">
+                                                <div class="search_tag">
+                                                    <div class="icon_search">
+                                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                                    </div>
+                                                    <textarea name="" maxlength="30" placeholder="Начните поиск тегов за которыми вы будете следить" id=""></textarea>
+                                                </div>
+                                                <div class="more_tags">
+                                                    
+                                                    <div class="one_tag_for_choose">
+                                                        <div class="this_tag">
+                                                            <span class="simple_tag">Барсеона</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
+                                                        </div>
+                                                        <div class="flex_right">
+                                                            <div class="choose_tag_success">
+                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="one_tag_for_choose">
+                                                        <div class="this_tag">
+                                                            <span class="simple_tag">Реал Мадрид</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
+                                                        </div>
+                                                        <div class="flex_right">
+                                                            <div class="choose_tag_success">
+                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="one_tag_for_choose">
+                                                        <div class="this_tag">
+                                                            <span class="simple_tag">Валенсия</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
+                                                        </div>
+                                                        <div class="flex_right">
+                                                            <div class="choose_tag_success">
+                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="one_tag_for_choose">
+                                                        <div class="this_tag">
+                                                            <span class="simple_tag">Миша Колинз</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
+                                                        </div>
+                                                        <div class="flex_right">
+                                                            <div class="choose_tag_success">
+                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="one_tag_for_choose">
+                                                        <div class="this_tag">
+                                                            <span class="simple_tag">Сверхы</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
+                                                        </div>
+                                                        <div class="flex_right">
+                                                            <div class="choose_tag_success">
+                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="one_tag_for_choose">
+                                                        <div class="this_tag">
+                                                            <span class="simple_tag">Мангура</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
+                                                        </div>
+                                                        <div class="flex_right">
+                                                            <div class="choose_tag_success">
+                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="one_tag_for_choose">
+                                                        <div class="this_tag">
+                                                            <span class="simple_tag">Антоненко</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
+                                                        </div>
+                                                        <div class="flex_right">
+                                                            <div class="choose_tag_success">
+                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="footer_modal_button">
+                                                <span class="modal_cancel" data-dismiss="modal">
+                                                <a href="#">
+                                                    Отмена                                                  
+                                                </a>
+                                            </span>
+                                                <span class="modal_save" data-dismiss="modal">
+                                                <a href="#">
+                                                    Сохранить                                                  
+                                                </a>
+                                            </span>
+                                            </div>
+                                            <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button> -->
+                                            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Сохранить</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Конец модального окна -->
                         </div>
                     </ul>
                 </div>
-                <hr>
-               {% include "posts/list_section.html" %}
+                <hr> {% include "posts/list_section.html" %}
             </div>
             <!-- Конец важных новостей -->
         </div>
         <!-- Правая колонка новостей -->
-        <div class="div col-lg-4">
+        <div class="div col-lg-3 colum">
             <div class="position_relative">
                 <div id="wrap">
                     <!-- Профиль пользователя -->
                     <div class="user_date">
                         <h3>{{ request.user.first_name }} {{ request.user.last_name }}</h3>
-                        <div class="user_date_img">
-                            <img src="{{ request.user.avatar.url }}" alt="">
+                        <div class="img_flex">
+                            <div class="user_date_img">
+                                <img src="{{ request.user.avatar.url }}" alt="">
+                            </div>
                         </div>
                         <div class="user_information">
                             <table class="table">

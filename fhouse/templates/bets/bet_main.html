@@ -5,234 +5,126 @@
 {% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-9 colum">
+        <div class="col-lg-9 ">
+            <div class="table_nav_prognossis">
+                <div>Прогнозы</div>
+                <div class="tab">
+                    <ul>
+                        <li>Прогноз недели</li>
+                        <li>Превью</li>
+                        <li>My bets</li>
+                        <li>Информация о турнире</li>
+                        <li>Акции</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Weeks prognosis -->
             <div class="my_weeks_bets">
-                <div class="row">
-                    <!-- Weeks prognosis -->
-                    <div class="col-lg-7">
-                        <div class="user_infa">
-                            <a href="#">
-                                <div class="photo_user">
-                                    <img src="{{ user.avatar.url }}" />
-                                </div>
-                                <div class="name_user">
-                                    {{ user.first_name }} {{ user.last_name }} (ВЫ)
-                                </div>
-                            </a>
+                <div class="user_infa">
+                    <a href="#">
+                        <div class="photo_user">
+                            <img src="{{ user.avatar.url }}" />
                         </div>
-                        <h3>Прогноз Недели</h3>
+                        <div class="name_user">
+                            {{ user.first_name }} {{ user.last_name }} (ВЫ)
+                        </div>
+                    </a>
+                </div>
+                <h3>Прогноз Недели</h3>
+                <!-- Прогноз недели  -->
+                <div class="main_matches_bet">
+                    <div class="one_main_match_bet">
+                        <div class="time_match">
+                            <span>23.10</span> -
+                            <span>21:45</span>
+                        </div>
+                        <div class="choose_result">
+                            <div class="hosts_team">
+                                <div class="container_img_team_main_bet">
+                                    <img src="http://www.freeiconspng.com/uploads/real-madrid-logo-png-16.png" alt="">
+                                </div>
+                                <span>Реал Мадрид</span>
+                                <div class="coefficient_home_team">
+                                    103.45
+                                </div>
+                            </div>
+                            <div class="coefficient_draw">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                                <span>85.45</span>
+                            </div>
+                            <div class="guests_team">
+                                <div class="container_img_team_main_bet">
+                                    <img src="http://vignette1.wikia.nocookie.net/logopedia/images/0/0c/474px-Fc_barcelona.png/revision/latest?cb=20140507131428" alt="">
+                                </div>
+                                <span>Барселона</span>
+                                <div class="coefficient_quest_team">
+                                    1.01
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Table top-10 -->
-                    <div class="col-lg-5">
-                        <div class="table_top_forecasters">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td id="nuberTop">#</td>
-                                        <td>Name</td>
-                                        <td>Город</td>
-                                        <td>Pts</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            <div class="user_foto">
-                                                <img src="https://pp.vk.me/c412626/v412626231/cdc/JWLyEwr3-aY.jpg" alt="">
-                                            </div>
-                                            <a href="#">
-                                                Андрей Ярмоленко
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <div class="user_foto">
-                                                    <img src="https://pp.vk.me/c9352/u75114231/116928616/y_98d01c29.jpg" alt="">
-                                                </div>
-                                                Мангура Дмитрий
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            3
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <div class="user_foto">
-                                                    <img src="https://pp.vk.me/c9352/u75114231/116928616/y_98d01c29.jpg" alt="">
-                                                </div>
-                                                Мангура Дмитрий
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            4
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <div class="user_foto">
-                                                    <img src="https://pp.vk.me/c9352/u75114231/116928616/y_98d01c29.jpg" alt="">
-                                                </div>
-                                                Мангура Дмитрий
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            5
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <div class="user_foto">
-                                                    <img src="https://pp.vk.me/c9352/u75114231/116928616/y_98d01c29.jpg" alt="">
-                                                </div>
-                                                Мангура Дмитрий
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            6
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <div class="user_foto">
-                                                    <img src="https://pp.vk.me/c9352/u75114231/116928616/y_98d01c29.jpg" alt="">
-                                                </div>
-                                                Мангура Дмитрий
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            7
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <div class="user_foto">
-                                                    <img src="https://pp.vk.me/c9352/u75114231/116928616/y_98d01c29.jpg" alt="">
-                                                </div>
-                                                Мангура Дмитрий
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            8
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <div class="user_foto">
-                                                    <img src="https://pp.vk.me/c9352/u75114231/116928616/y_98d01c29.jpg" alt="">
-                                                </div>
-                                                Мангура Дмитрий
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            9
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <div class="user_foto">
-                                                    <img src="https://pp.vk.me/c9352/u75114231/116928616/y_98d01c29.jpg" alt="">
-                                                </div>
-                                                Мангура Дмитрий
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            10
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <div class="user_foto">
-                                                    <img src="https://pp.vk.me/c9352/u75114231/116928616/y_98d01c29.jpg" alt="">
-                                                </div>
-                                                Мангура Дмитрий
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="img_country_forecaster">
-                                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="">
-                                            </div> Харьков
-                                        </td>
-                                        <td>112</td>
-                                    </tr>
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="5" id="EndTable"><a href="">Посмотреть Рейтинг Всех Прогнозистов <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></th>
-                                        </tr>
-                                    </tfoot>
-                                </tbody>
-                            </table>
+                   <div class="one_main_match_bet">
+                        <div class="time_match">
+                            <span>23.10</span> -
+                            <span>21:45</span>
+                        </div>
+                        <div class="choose_result">
+                            <div class="hosts_team">
+                                <div class="container_img_team_main_bet">
+                                    <img src="http://www.freeiconspng.com/uploads/real-madrid-logo-png-16.png" alt="">
+                                </div>
+                                <span>Реал Мадрид</span>
+                                <div class="coefficient_home_team">
+                                    103.45
+                                </div>
+                            </div>
+                            <div class="coefficient_draw">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                                <span>85.45</span>
+                            </div>
+                            <div class="guests_team">
+                                <div class="container_img_team_main_bet">
+                                    <img src="http://vignette1.wikia.nocookie.net/logopedia/images/0/0c/474px-Fc_barcelona.png/revision/latest?cb=20140507131428" alt="">
+                                </div>
+                                <span>Барселона</span>
+                                <div class="coefficient_quest_team">
+                                    1.01
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="one_main_match_bet">
+                        <div class="time_match">
+                            <span>23.10</span> -
+                            <span>21:45</span>
+                        </div>
+                        <div class="choose_result">
+                            <div class="hosts_team">
+                                <div class="container_img_team_main_bet">
+                                    <img src="http://www.freeiconspng.com/uploads/real-madrid-logo-png-16.png" alt="">
+                                </div>
+                                <span>Реал Мадрид</span>
+                                <div class="coefficient_home_team">
+                                    103.45
+                                </div>
+                            </div>
+                            <div class="coefficient_draw">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                                <span>85.45</span>
+                            </div>
+                            <div class="guests_team">
+                                <div class="container_img_team_main_bet">
+                                    <img src="http://vignette1.wikia.nocookie.net/logopedia/images/0/0c/474px-Fc_barcelona.png/revision/latest?cb=20140507131428" alt="">
+                                </div>
+                                <span>Барселона</span>
+                                <div class="coefficient_quest_team">
+                                    1.01
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- Прогноз недели конец   -->
             </div>
             <!-- Превью к топ матчам  -->
             <div class="navigation_between_preview">
@@ -646,7 +538,220 @@
             </div>
         </div>
         <!-- Прогнозы на все матчи топ лиг, еврокубков и отбор ЧМ 2018 -->
-        <div class="col-lg-3 colum">
+        <div class="col-lg-3">
+            <!-- Таблица рейтинга прогнозистов -->
+            <div class="table_nav_forecasters">
+                <div>Рейтинг прогнозистов</div>
+                <div class="tab">
+                    <ul>
+                        <li>All time</li>
+                        <li>Year</li>
+                        <li>Month</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="table_top_forecasters">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td id="nuberTop">Pos</td>
+                            <td>Name</td>
+                            <td>Pts</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c837131/v837131374/f3fd/ErlDE6LVkJQ.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c637521/v637521640/1cb87/OxgIp08b9C8.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c637817/v637817193/14394/t4fLNOO54sM.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                4
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c631220/v631220486/38a51/JVsy-LpgHDg.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                5
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c621721/v621721983/283b3/WEvZMVah7eY.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr>
+                        <!-- <tr>
+                            <td>
+                                6
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c412626/v412626231/cdc/JWLyEwr3-aY.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                7
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c412626/v412626231/cdc/JWLyEwr3-aY.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                8
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c412626/v412626231/cdc/JWLyEwr3-aY.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                9
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c412626/v412626231/cdc/JWLyEwr3-aY.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                10
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c412626/v412626231/cdc/JWLyEwr3-aY.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Андрей Ярмоленко
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>112</td>
+                        </tr> -->
+                        <tr>
+                            <td colspan="3">
+                                <span class="full_list_record">
+                                        <a href="#">
+                                            Полный Cписок
+                                            <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                                </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Конец таблицы с прогнозистами  -->
             <div class="div_for_championships_all_prognosis">
                 <a href="all_reviews"><h3>Прогнозы на Все Матчи</h3></a>
                 <div class="one_championship">

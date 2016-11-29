@@ -20,9 +20,6 @@ $(document).ready(function() {
         $(this).addClass('active_nav_ul');
     });
 
-    $(".div_for_championships_all_prognosis").children().css("margin-bottom", "20px");
-    $(".one_championship").last().css("margin-bottom", "0px");
-
     $(".match_stats li:first-child a").addClass("active_stat");
 
     $(".match_stats li a").click(function(e) {
@@ -30,6 +27,35 @@ $(document).ready(function() {
         $(".match_stats li a").removeClass('active_stat');
         $(this).addClass('active_stat');
     });
+
+    // Навигация между топ-прогнозистами
+    $(".table_nav_forecasters .tab ul li:first-child").addClass("tab_active");
+
+    $(".table_nav_forecasters .tab ul li").click(function(e) {
+        e.preventDefault();
+        $(".table_nav_forecasters .tab ul li").removeClass('tab_active');
+        $(this).addClass('tab_active');
+    });
+
+    // Навигация по прогнозам
+    $(".table_nav_prognossis .tab ul li:first-child").addClass("tab_active");
+
+    $(".table_nav_prognossis .tab ul li").click(function(e) {
+        e.preventDefault();
+        $(".table_nav_prognossis .tab ul li").removeClass('tab_active');
+        $(this).addClass('tab_active');
+    });
+
+    // Выбор результата 
+
+    $(".choose_result > div").click(function(e) {
+        e.preventDefault();
+        $(this).parent().find("div").removeClass('choose_result_active');
+        $(this).addClass('choose_result_active');
+    });
+
+
+
 
     // Draw, victory or defeat
 

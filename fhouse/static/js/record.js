@@ -20,4 +20,13 @@ $(document).ready(function() {
     var width_parent_statinfo = $(".statsHero .statInfo").parent().width()-150;    
     $(".statsHero .statInfo").css("max-width", width_parent_statinfo);
 
+    $(".table_nav_records .tab ul li:first-child").addClass("tab_active");
+
+    $(".table_nav_records .tab ul li").click(function(e) {
+        e.preventDefault();
+        $(".table_nav_records .tab ul li").removeClass('tab_active');
+        $(this).addClass('tab_active');
+    });
+
+
 });
