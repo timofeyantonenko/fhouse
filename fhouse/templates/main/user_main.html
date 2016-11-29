@@ -8,14 +8,14 @@
             <div class="user_page">
                 <div class="user_name">
                     <h2>
-                        Сашуля Женьки
+                        {{ first_name }} {{ last_name }}
                     </h2>
                 </div>
                 <div class="user_stat">
                     <div class="row">
                         <div class="col-lg-5">
                             <div class="user_foto">
-                                <img src="https://pp.vk.me/c637817/v637817193/14394/t4fLNOO54sM.jpg" alt="">
+                                <img src="{{ avatar_url }}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-7">
@@ -28,7 +28,7 @@
                                         </tr>
                                         <tr>
                                             <td>Количество статей:</td>
-                                            <td><a href="#">3</a></td>
+                                            <td><a href="#">{{ users_posts_count }}</a></td>
                                         </tr>
                                         <tr>
                                             <td>Голосов:</td>

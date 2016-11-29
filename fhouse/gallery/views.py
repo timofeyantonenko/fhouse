@@ -66,6 +66,7 @@ class PhotoList(ListView):
         if section:
             albums = SectionAlbum.objects.filter(album_section__section_title=section)
             photos = AlbumPhoto.objects.filter(photo_album__in=albums)
+            print('SECTION: {}, PHOTOS: {}'.format(section, photos))
         else:
             photos = AlbumPhoto.objects.all()
         return photos

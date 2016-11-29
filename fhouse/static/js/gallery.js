@@ -43,12 +43,12 @@ $(document).ready(function(){
     }
     else {
         section =  $(".nav_ul li:first-child a");
-        section_name = section.text();
+        section_name = section.text().trim();
         console.log(section_name);
         // Active section of menu
         section.addClass("active_nav_ul");
         var ajax_url = 'slider_photo_list';
-        var ajax_data = {}
+        var ajax_data = {"section": section_name}
         var state = ""
         $.ajax({
             url: ajax_url,
