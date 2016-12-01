@@ -25,9 +25,13 @@ class PostTag(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def posts(self):
+        return Post.objects.filter(tag=self)
+
 
 class UserFavoriteTags(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, unique=True)
     tags = models.ManyToManyField(PostTag)
 
     def __unicode__(self):
@@ -38,6 +42,20 @@ class UserFavoriteTags(models.Model):
 
     class Meta:
         db_table = 'user_tags'
+
+    def add_tags(self, user, tags_to_add):
+        for tag in tags_to_add:
+            post_tag = PostTag.objects.get(name=tag)
+            print("ADD POST TAG: ", post_tag)
+            self.tags.add(post_tag)
+        print(tags_to_add)
+
+    def remove_tags(self, user, tags_to_remove):
+        for tag in tags_to_remove:
+            post_tag = PostTag.objects.get(name=tag)
+            print("REMOVE POST TAG: ", post_tag)
+            self.tags.remove(post_tag)
+        print(tags_to_remove)
 
 
 class PostManager(models.Manager):

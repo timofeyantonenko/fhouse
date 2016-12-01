@@ -12,7 +12,21 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 function isEmpty(obj) {
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop))
@@ -245,8 +259,8 @@ $(document).ready(function() {
         $(this).children(".flex_right").find(".choose_tag_success").toggleClass("success_tag");
         if ($(this).children(".flex_right").find(".choose_tag_success").hasClass("success_tag")) {
             var htmlString = $(this).children(".this_tag").find(".simple_tag").text();
-            $(".for_tag").append('<a href="#" class="tegArticle"><span class="tag_chosen"></span><span class="close_tag"><i class="fa fa-times" aria-hidden="true"></i></span></a>');
-            $(".for_tag a:last-child .tag_chosen").text(htmlString);
+            $(".for_tag").append('<a href="#" class="tegArticle"><span class="tag_chosen"></span><span class="additional_tag"></span><span class="close_tag"><i class="fa fa-times" aria-hidden="true"></i></span></a>');
+            $(".for_tag a:last-child .additional_tag").text(htmlString);
         } else {
             var htmlString = $(this).children(".this_tag").find(".simple_tag").text();
 
@@ -261,6 +275,80 @@ $(document).ready(function() {
 
         };
 
+    });
+    $(".modal_save").on("click", function(){
+        var old_tags = []
+        var new_tags = []
+        $(".tab").each(function(i){
+            var tab = $(this).find('div').text();
+            console.log("USER TAB: " + tab);
+            if (tab != "Все"){
+                old_tags.push(tab);
+            }
+        });
+        $(".additional_tag").each(function(i){
+            var tab = $(this).text();//.attr("class");
+            console.log("ALL TAB: " + tab);
+            new_tags.push(tab);
+        });
+//        console.log(old_tags);
+//        console.log(new_tags);
+        var tags_to_delete = old_tags.filter(function(x) { return new_tags.indexOf(x) < 0 })
+        console.log("to delete: " + tags_to_delete);
+        var tags_to_add = new_tags.filter(function(x) { return old_tags.indexOf(x) < 0 })
+        console.log("to add: " + tags_to_add);
+        var add = false;
+        var remove = false;
+        $.ajax({
+            url: 'change_user_tags/',
+            data: {tags_delete: tags_to_delete,
+            tags_add: tags_to_add,
+            csrfmiddlewaretoken: getCookie('csrftoken')},
+            method: "POST",
+            success: function(data, textStatus, xhr) {
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.log(error, status, xhr);
+            }
+        });
+//        $.ajax({
+//            url: 'delete_user_tag/',
+//            data: {'tag_name': tags_to_delete[0],
+//            csrfmiddlewaretoken: getCookie('csrftoken')},
+////            dataType: "json",
+//            method: "POST",
+//            success: function(data, textStatus, xhr) {
+//                remove = true;
+//            console.log('OOO1' + remove);
+//            },
+//            error: function(xhr, status, error) {
+//                console.log(error, status, xhr);
+//            }
+//        });
+//        $.ajax({
+//            url: 'add_user_tag/',
+//            data: {'tag_name': tags_to_add[0],
+//            csrfmiddlewaretoken: getCookie('csrftoken')},
+////            dataType: "json",
+//            method: "POST",
+//            success: function(data, textStatus, xhr) {
+//                add = true;
+//                console.log('OOO' + add);
+//            },
+//            error: function(xhr, status, error) {
+//                console.log(error, status, xhr);
+//            }
+//        });
+//        console.log(add + ' ' + remove)
+//        if (add || remove){
+//
+//            console.log('true');
+//            location.reload();
+//        }
+//        else{
+//            console.log('false');
+//        }
     });
 
 

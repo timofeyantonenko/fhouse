@@ -42,17 +42,12 @@
                                         <div class="modal-body">
                                             <div class="you_teg">
                                                 <div class="info_about_tags">
-                                                    Вы подписаль на 5 тегов
+                                                    Вы подписаль на {{ user_tags|length }} тегов
                                                 </div>
                                                 <div class="for_tag">
-                                                    <!-- <a href="#" class="tegArticle">Барселона</a>
-                                                    <a href="#" class="tegArticle">Ювентус</a>
-                                                    <a href="#" class="tegArticle">Рената</a>
-                                                    <a href="#" class="tegArticle">Подрочуля</a>
-                                                    <a href="#" class="tegArticle">Сашуля</a>
-                                                    <a href="#" class="tegArticle">Ювентус</a>
-                                                    <a href="#" class="tegArticle">Рената</a>
-                                                    <a href="#" class="tegArticle">Подрочуля</a> -->
+                                                    {% for tag in user_tags %}
+                                                    <a href="#" class="tegArticle"><span class="tag_chosen"></span><span class="additional_tag">{{ tag }}</span><span class="close_tag"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                             <div class="search_and_top_tags">
@@ -63,10 +58,10 @@
                                                     <textarea name="" maxlength="30" placeholder="Начните поиск тегов за которыми вы будете следить" id=""></textarea>
                                                 </div>
                                                 <div class="more_tags">
-                                                    
-                                                    <div class="one_tag_for_choose">
+                                                    {% for tag in all_tags %}
+                                                        <div class="one_tag_for_choose">
                                                         <div class="this_tag">
-                                                            <span class="simple_tag">Барсеона</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
+                                                            <span class="simple_tag">{{ tag }}</span> <span class="quantity_post_with_tag">({{ tag.posts|length }} постов)</span>
                                                         </div>
                                                         <div class="flex_right">
                                                             <div class="choose_tag_success">
@@ -74,67 +69,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="one_tag_for_choose">
-                                                        <div class="this_tag">
-                                                            <span class="simple_tag">Реал Мадрид</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
-                                                        </div>
-                                                        <div class="flex_right">
-                                                            <div class="choose_tag_success">
-                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="one_tag_for_choose">
-                                                        <div class="this_tag">
-                                                            <span class="simple_tag">Валенсия</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
-                                                        </div>
-                                                        <div class="flex_right">
-                                                            <div class="choose_tag_success">
-                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="one_tag_for_choose">
-                                                        <div class="this_tag">
-                                                            <span class="simple_tag">Миша Колинз</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
-                                                        </div>
-                                                        <div class="flex_right">
-                                                            <div class="choose_tag_success">
-                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="one_tag_for_choose">
-                                                        <div class="this_tag">
-                                                            <span class="simple_tag">Сверхы</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
-                                                        </div>
-                                                        <div class="flex_right">
-                                                            <div class="choose_tag_success">
-                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="one_tag_for_choose">
-                                                        <div class="this_tag">
-                                                            <span class="simple_tag">Мангура</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
-                                                        </div>
-                                                        <div class="flex_right">
-                                                            <div class="choose_tag_success">
-                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="one_tag_for_choose">
-                                                        <div class="this_tag">
-                                                            <span class="simple_tag">Антоненко</span> <span class="quantity_post_with_tag">(43.000 постов)</span>
-                                                        </div>
-                                                        <div class="flex_right">
-                                                            <div class="choose_tag_success">
-                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                         </div>
