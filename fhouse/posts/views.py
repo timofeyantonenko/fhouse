@@ -155,9 +155,7 @@ def user_tag_delete(request):
     tag_name = request.POST.get('tag_name')
     if tag_name is None:
         return HttpResponse('200 ok')
-    print("TAG NAME IS: ", tag_name)
     instance = UserFavoriteTags.objects.get_or_create(user=request.user)[0]
-    print("INSTANCE IS: ", instance)
     tag = PostTag.objects.filter(name=tag_name).first()
     instance.tags.remove(tag.id)
     return HttpResponse('200 ok')
@@ -167,9 +165,7 @@ def user_tag_add(request):
     tag_name = request.POST.get('tag_name')
     if tag_name is None:
         return HttpResponse('200 ok')
-    print("Add TAG NAME IS: ", tag_name)
     instance = UserFavoriteTags.objects.get_or_create(user=request.user)[0]
-    print("INSTANCE IS: ", instance)
     tag = PostTag.objects.filter(name=tag_name).first()
     instance.tags.add(tag.id)
     return HttpResponse('200 ok')
@@ -178,8 +174,6 @@ def user_tag_add(request):
 def change_user_tags(request):
     add_tags = request.POST.getlist('tags_add[]')
     delete_tags = request.POST.getlist('tags_delete[]')
-    print("to add: ", add_tags, "len is: ", len(add_tags))
-    print("to delete: ", delete_tags, "len is: ", len(add_tags))
     instance = UserFavoriteTags.objects.get_or_create(user=request.user)[0]
     instance.add_tags(request.user, add_tags)
     instance.remove_tags(request.user, delete_tags)
