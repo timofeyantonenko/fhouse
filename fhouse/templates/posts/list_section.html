@@ -25,7 +25,7 @@
                     </a>
                     <div class="rightlyarticle">
                         <div class="quantityComments">
-                            <a href="#">{{ post.comments| length }} <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
+                            <a href="{{post.get_absolute_url}}">{{ post.comments| length }} <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
                             {% include "posts/like_template.html" %}
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="rightlyarticle">
                         <div class="quantityComments">
-                            <a href="#">{{ post.comments| length }} <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
+                            <a href="{{post.get_absolute_url}}">{{ post.comments| length }} <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a>
                             {% include "posts/like_template.html" %}
                         </div>
                     </div>

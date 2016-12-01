@@ -34,7 +34,11 @@
                 <div class="article_author">
                     <a href="#">
                         <div class="author_img">
-                            <img src="{{ request.user.avatar.url }}" alt="">
+                            {% if request.user.is_authenticated %}
+                                <img src="{{ request.user.avatar.url }}" alt="">
+                            {% else %}
+                                <img src="{% static 'img/albert-einstein.jpg' %}">
+                            {% endif %}
                         </div>
                     </a>
                     <div class="author_name_date">
@@ -92,7 +96,11 @@
             <div class="comments_base">
                 <a href="#">
                     <div class="coments_author">
+                        {% if request.user.is_authenticated %}
                         <img src="{{ request.user.avatar.url }}" alt="">
+                        {% else %}
+                        <img src="{% static 'img/albert-einstein.jpg'  %}">
+                        {% endif %}
                     </div>
                 </a>
                 {% if request.user.is_authenticated %}
@@ -122,6 +130,7 @@
                     <a href="#">
                         <div class="coments_author">
                             <img src="{{ comment.user.avatar.url }}" alt="">
+
                         </div>
                     </a>
                     <div class="content_coment">

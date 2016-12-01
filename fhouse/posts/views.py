@@ -74,9 +74,8 @@ def post_detail(request, slug=None):  # retrieve
 
 def post_list(request):  # list items
     today = timezone.now().date()
-
-    user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
     try:
+        user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
         user_tags = user_tags.tags.all()
     except:
         user_tags = UserFavoriteTags.objects.none()
