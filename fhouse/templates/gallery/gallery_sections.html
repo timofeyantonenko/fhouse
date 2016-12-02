@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <!-- Слайдер фото  -->
-        <div class="col-lg-9" id="wrapper_foto">
+        <div class="col-lg-9 colum" id="wrapper_foto">
             <div class="content_foto">
                 <div class="head_nav">
                     <ul class="nav_ul">
@@ -27,22 +27,7 @@
                 </div>
             </div>
             <div class="discription_and_like">
-                <!-- Подписка на канал ТОП Футбол -->
-                <script src="https://apis.google.com/js/platform.js"></script>
-                <script>
-                function onYtEvent(payload) {
-                    if (payload.eventType == 'subscribe') {
-                        // Add code to handle subscribe event.
-                    } else if (payload.eventType == 'unsubscribe') {
-                        // Add code to handle unsubscribe event.
-                    }
-                    if (window.console) { // for debugging only
-                        window.console.log('YT event: ', payload);
-                    }
-                }
-                </script>
-                <div class="g-ytsubscribe" data-channelid="UCtdMsPUYlJn4BSXx95Iq0yw" data-layout="full" data-count="default" data-onytevent="onYtEvent"></div>
-                <!-- Конец Подписка на канал ТОП Футбол -->
+                
                 <div class="coments_author">
                     <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
                 </div>
@@ -128,7 +113,7 @@
             <!-- Конец блока для комментариев -->
         </div>
         <!-- Все альбомы -->
-        <div class="col-lg-3">
+        <div class="col-lg-3 colum">
             <div class="all_albums">
                 {% for section in sections %}
                 <div class="div_album">
