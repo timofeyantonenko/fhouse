@@ -67,8 +67,13 @@
 
                             <div class="relative_container">
                                 <div class="user_profile">
-                                    <div class="name_user_in_menu">Dima </div>
-                                    <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg" alt="">
+                                    {% if request.user.is_authenticated %}
+                                    <div class="name_user_in_menu">{{ request.user.first_name }}</div>
+                                    <img src="{{ request.user.avatar.url }}" alt="">
+                                    {% else %}
+                                    <div class="name_user_in_menu"><a href="/login">Меню</a></div>
+                                    <img src="{% static 'img/albert-einstein.jpg' %}" alt="">
+                                    {% endif %}
                                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                                 </div>
 
@@ -76,14 +81,20 @@
                                 
                                 <div id="top_profile_menu">
                                     <div class="posirion_reletive">
+                                        {% if request.user.is_authenticated %}
                                         <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                        <a href="">Мой профиль</a>
+                                        <a href="/user">Мой профиль</a>
                                         <div class="line_solid"></div>
                                         <a href="">Сделать ставку</a>
                                         <a href="">Предложить новость</a>
                                         <a href="">Редактировать профиль</a>
                                         <div class="line_solid"></div>
-                                        <a href="">Выйти</a>
+                                        <a href="/logout">Выйти</a>
+                                        {% else %}
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                        <a href="/login">Войти</a>
+                                        <a href="/register">Регистрация</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

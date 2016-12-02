@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
+# from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 from comments.models import Comment
@@ -14,7 +15,7 @@ from django.utils import timezone
 from django.db.models import Q
 from django.views.generic import ListView
 from .forms import PostForm
-from .models import Post, UserFavoriteTags
+from .models import Post, UserFavoriteTags, PostTag
 
 from utils.prepare_methods import create_comment_data
 
@@ -73,9 +74,12 @@ def post_detail(request, slug=None):  # retrieve
 
 def post_list(request):  # list items
     today = timezone.now().date()
-
-    user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
-    user_tags = user_tags.tags.all()
+    try:
+        user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
+        user_tags = user_tags.tags.all()
+    except:
+        user_tags = UserFavoriteTags.objects.none()
+    all_tags = PostTag.objects.all()
     tag = request.GET.get('tab', False)
     if request.user.is_staff or request.user.is_superuser:
         if tag and tag != 'all':
@@ -102,13 +106,15 @@ def post_list(request):  # list items
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
-
+    user_tags_ids = list(user_tags.values_list('id', flat=True))
+    all_tags = all_tags.exclude(id__in=user_tags_ids)
     context = {
         "post_list": queryset,
         "title": "List",
         "page_request_var": page_request_var,
         "today": today,
         'user_tags': user_tags,
+        'all_tags': all_tags
     }
     # return render(request, "posts/list_section.html", context)
     return render(request, "posts/post_list.html", context)
@@ -141,6 +147,36 @@ def post_delete(request, slug=None):
     instance.delete()
     messages.success(request, "Successfully deleted")
     return redirect("posts:list")
+
+
+# @login_required
+def user_tag_delete(request):
+    tag_name = request.POST.get('tag_name')
+    if tag_name is None:
+        return HttpResponse('200 ok')
+    instance = UserFavoriteTags.objects.get_or_create(user=request.user)[0]
+    tag = PostTag.objects.filter(name=tag_name).first()
+    instance.tags.remove(tag.id)
+    return HttpResponse('200 ok')
+
+
+def user_tag_add(request):
+    tag_name = request.POST.get('tag_name')
+    if tag_name is None:
+        return HttpResponse('200 ok')
+    instance = UserFavoriteTags.objects.get_or_create(user=request.user)[0]
+    tag = PostTag.objects.filter(name=tag_name).first()
+    instance.tags.add(tag.id)
+    return HttpResponse('200 ok')
+
+
+def change_user_tags(request):
+    add_tags = request.POST.getlist('tags_add[]')
+    delete_tags = request.POST.getlist('tags_delete[]')
+    instance = UserFavoriteTags.objects.get_or_create(user=request.user)[0]
+    instance.add_tags(request.user, add_tags)
+    instance.remove_tags(request.user, delete_tags)
+    return HttpResponse('200 ok')
 
 
 def show_tabs(request):
