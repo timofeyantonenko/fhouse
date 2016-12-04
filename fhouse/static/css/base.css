@@ -5,6 +5,10 @@
     margin-left: 0px !important;
 }
 
+.colum:nth-child(2) {
+    float: right;
+}
+
 .navbar {
     margin-bottom: 20px !important;
     position: absolute;

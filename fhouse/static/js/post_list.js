@@ -12,6 +12,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -27,6 +28,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
 function isEmpty(obj) {
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop))
@@ -276,34 +278,38 @@ $(document).ready(function() {
         };
 
     });
-    $(".modal_save").on("click", function(){
+    $(".modal_save").on("click", function() {
         var old_tags = []
         var new_tags = []
-        $(".tab").each(function(i){
+        $(".tab").each(function(i) {
             var tab = $(this).find('div').text();
             console.log("USER TAB: " + tab);
-            if (tab != "Все"){
+            if (tab != "Все") {
                 old_tags.push(tab);
             }
         });
-        $(".additional_tag").each(function(i){
-            var tab = $(this).text();//.attr("class");
+        $(".additional_tag").each(function(i) {
+            var tab = $(this).text(); //.attr("class");
             console.log("ALL TAB: " + tab);
             new_tags.push(tab);
         });
-//        console.log(old_tags);
-//        console.log(new_tags);
-        var tags_to_delete = old_tags.filter(function(x) { return new_tags.indexOf(x) < 0 })
+        //        console.log(old_tags);
+        //        console.log(new_tags);
+        var tags_to_delete = old_tags.filter(function(x) {
+            return new_tags.indexOf(x) < 0 })
         console.log("to delete: " + tags_to_delete);
-        var tags_to_add = new_tags.filter(function(x) { return old_tags.indexOf(x) < 0 })
+        var tags_to_add = new_tags.filter(function(x) {
+            return old_tags.indexOf(x) < 0 })
         console.log("to add: " + tags_to_add);
         var add = false;
         var remove = false;
         $.ajax({
             url: 'change_user_tags/',
-            data: {tags_delete: tags_to_delete,
-            tags_add: tags_to_add,
-            csrfmiddlewaretoken: getCookie('csrftoken')},
+            data: {
+                tags_delete: tags_to_delete,
+                tags_add: tags_to_add,
+                csrfmiddlewaretoken: getCookie('csrftoken')
+            },
             method: "POST",
             success: function(data, textStatus, xhr) {
                 location.reload();
@@ -312,48 +318,48 @@ $(document).ready(function() {
                 console.log(error, status, xhr);
             }
         });
-//        $.ajax({
-//            url: 'delete_user_tag/',
-//            data: {'tag_name': tags_to_delete[0],
-//            csrfmiddlewaretoken: getCookie('csrftoken')},
-////            dataType: "json",
-//            method: "POST",
-//            success: function(data, textStatus, xhr) {
-//                remove = true;
-//            console.log('OOO1' + remove);
-//            },
-//            error: function(xhr, status, error) {
-//                console.log(error, status, xhr);
-//            }
-//        });
-//        $.ajax({
-//            url: 'add_user_tag/',
-//            data: {'tag_name': tags_to_add[0],
-//            csrfmiddlewaretoken: getCookie('csrftoken')},
-////            dataType: "json",
-//            method: "POST",
-//            success: function(data, textStatus, xhr) {
-//                add = true;
-//                console.log('OOO' + add);
-//            },
-//            error: function(xhr, status, error) {
-//                console.log(error, status, xhr);
-//            }
-//        });
-//        console.log(add + ' ' + remove)
-//        if (add || remove){
-//
-//            console.log('true');
-//            location.reload();
-//        }
-//        else{
-//            console.log('false');
-//        }
+        //        $.ajax({
+        //            url: 'delete_user_tag/',
+        //            data: {'tag_name': tags_to_delete[0],
+        //            csrfmiddlewaretoken: getCookie('csrftoken')},
+        ////            dataType: "json",
+        //            method: "POST",
+        //            success: function(data, textStatus, xhr) {
+        //                remove = true;
+        //            console.log('OOO1' + remove);
+        //            },
+        //            error: function(xhr, status, error) {
+        //                console.log(error, status, xhr);
+        //            }
+        //        });
+        //        $.ajax({
+        //            url: 'add_user_tag/',
+        //            data: {'tag_name': tags_to_add[0],
+        //            csrfmiddlewaretoken: getCookie('csrftoken')},
+        ////            dataType: "json",
+        //            method: "POST",
+        //            success: function(data, textStatus, xhr) {
+        //                add = true;
+        //                console.log('OOO' + add);
+        //            },
+        //            error: function(xhr, status, error) {
+        //                console.log(error, status, xhr);
+        //            }
+        //        });
+        //        console.log(add + ' ' + remove)
+        //        if (add || remove){
+        //
+        //            console.log('true');
+        //            location.reload();
+        //        }
+        //        else{
+        //            console.log('false');
+        //        }
     });
 
 
 
-    $(".for_tag").on("click", ".close_tag" , function() {
+    $(".for_tag").on("click", ".close_tag", function() {
         $(this).parent().remove();
         var close_tag_text = $(this).parent().children(".tag_chosen").text();
 
@@ -469,12 +475,11 @@ $(window).load(function() {
     });
 
     var width_min_height_block = $(min_height_block).width();
-
-    $(min_height_block).css("width", width_min_height_block);
+    var height_min_height_block = $(min_height_block).height();
+    $(min_height_block).css({ "width": width_min_height_block, "height": height_min_height_block });
+    $(min_height_block).children().css({ "width": width_min_height_block });
 
     var left_col = $(min_height_block).offset().left;
-
-
 
     if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
         $(min_height_block).addClass("fixed_col_top");
@@ -516,5 +521,3 @@ $(window).load(function() {
 
 
 });
-
-// End dimas script

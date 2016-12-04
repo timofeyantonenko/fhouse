@@ -56,12 +56,11 @@ $(window).load(function() {
     });
 
     var width_min_height_block = $(min_height_block).width();
-
-    $(min_height_block).css("width", width_min_height_block);
+    var height_min_height_block = $(min_height_block).height();
+    $(min_height_block).css({ "width": width_min_height_block, "height": height_min_height_block });
+    $(min_height_block).children().css({ "width": width_min_height_block });
 
     var left_col = $(min_height_block).offset().left;
-
-
 
     if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
         $(min_height_block).addClass("fixed_col_top");
@@ -69,11 +68,11 @@ $(window).load(function() {
         $(min_height_block).css("left", left_col);
 
         $(window).scroll(function() {
-            if ($(this).scrollTop() > (( document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
+            if ($(this).scrollTop() > ((document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
                 var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
                 $('.fixed_col_top').css('top', 'inherit');
                 $(min_height_block).css("bottom", bottom_scroll);
-                
+
 
             } else {
                 $('.fixed_col_top').css('top', '70px');
@@ -103,17 +102,18 @@ $(window).load(function() {
 
 
 });
+
 function load_ajax_list(url, container_name) {
     $.ajax({
-            url: url,
-//            data: ajax_data,
-            dataType: "html",
-            success: function(data){
-                var content = $(container_name);
-                content.html(data);
-            },
-            error: function(xhr, status, error){
-                console.log(error, status, xhr);
-            }
-        });
+        url: url,
+        //            data: ajax_data,
+        dataType: "html",
+        success: function(data) {
+            var content = $(container_name);
+            content.html(data);
+        },
+        error: function(xhr, status, error) {
+            console.log(error, status, xhr);
+        }
+    });
 }

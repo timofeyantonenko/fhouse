@@ -38,15 +38,14 @@ $(document).ready(function() {
         var str_to_find = String.format("div.changeNews:contains('{0}')", search_tab);
         var new_active_tab = $(str_to_find);
         new_active_tab.addClass('menu_individualNews_active');
-    }
-    else {
-        section =  $(".nav_ul li:first-child a");
+    } else {
+        section = $(".nav_ul li:first-child a");
         section_name = section.text().trim();
         console.log(section_name);
         // Active section of menu
         section.addClass("active_nav_ul");
         var ajax_url = 'slider_photo_list';
-        var ajax_data = {"section": section_name}
+        var ajax_data = { "section": section_name }
         var state = ""
         $.ajax({
             url: ajax_url,
@@ -119,14 +118,13 @@ $(document).ready(function() {
         var biggest_col;
         $(".colum").each(function(i) {
 
-            if ($(this).height() <= height) {
+            if ($(this).height() < height) {
                 height = $(this).height()
             } else {
                 biggest_col = $(this);
             };
+
         });
-
-
 
         var min_height_block;
 
@@ -138,44 +136,37 @@ $(document).ready(function() {
 
         });
 
-        alert(min_height_block.height())
+        var width_min_height_block = $(min_height_block).width();
+        var height_min_height_block = $(min_height_block).height();
+        $(min_height_block).css({ "width": width_min_height_block, "height": height_min_height_block });
+        $(min_height_block).children().css({ "width": width_min_height_block });
 
+        var left_col = $(min_height_block).offset().left;
 
+        if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
+            $(min_height_block).addClass("fixed_col_top");
+            $(min_height_block).css("bottom", (document.documentElement.clientHeight - min_height_block.height() - 70));
+            $(min_height_block).css("left", left_col);
 
-        $(window).scroll(function() {
-
-
-            var width_min_height_block = $(min_height_block).outerWidth();
-            var height_min_height_block = $(min_height_block).height();
-
-            $(min_height_block).css({ "width": width_min_height_block, "height": height_min_height_block });
-
-            var left_col = $(min_height_block).offset().left;
-
-
-            if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
-
-                $(min_height_block).addClass("fixed_col_top");
-                $(min_height_block).css("bottom", (document.documentElement.clientHeight - min_height_block.height() - 70));
-                $(min_height_block).css("left", left_col);
-
+            $(window).scroll(function() {
                 if ($(this).scrollTop() > ((document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
                     var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
                     $('.fixed_col_top').css('top', 'inherit');
                     $(min_height_block).css("bottom", bottom_scroll);
 
+
                 } else {
                     $('.fixed_col_top').css('top', '70px');
                     $('.fixed_col_top').css('bottom', 'inherit');
                 };
+            })
 
-            } else {
-                console.log(min_height_block.height())
-
+        } else {
+            $(window).scroll(function() {
                 if ($(this).scrollTop() > (45 + height - document.documentElement.clientHeight + $(".navbar").height()) && $(this).scrollTop() <= (50 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
                     $(min_height_block).addClass("fixed_col");
                     $(min_height_block).css("left", left_col);
-                    $(min_height_block).css("bottom", "25px");
+                    $(min_height_block).css("bottom", "25px")
 
                 } else if ($(this).scrollTop() > (45 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
                     var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
@@ -185,17 +176,49 @@ $(document).ready(function() {
 
                     $(min_height_block).removeClass("fixed_col");
                     $(min_height_block).css({ "left": "0px", "bottom": "0px" });
-                };
+                }
+            });
+        }
 
-            }
-        });
-
-
-
+    });
 
 
-        // Конец фиксации
+    // Конец фиксации
 
+    $(".img_slaider img:first-child").show();
+
+    $('.img_slaider img').each(function(i) {
+        var height_slaider = $(".img_slaider").height();
+        var width_slaider = $(".img_slaider").width();
+        var relationship_width_height = (width_slaider / height_slaider);
+        var width_img = $(this).width();
+        var height_img = $(this).height();
+        var relationship_foto = (width_img / height_img);
+        if (relationship_foto > relationship_width_height) {}
+
+        if ((width_img / height_img) > relationship_width_height) {
+            $(this).css({ "width": "100%", "height": "auto" });
+        } else if ((width_img / height_img) < relationship_width_height) {
+            $(this).css({ "width": "auto", "height": "100%" });
+        } else if ((width_img / height_img) == relationship_width_height) {
+            $(this).css({ "width": "100%", "height": "100%" });
+        };
+
+    });
+
+    if ($('.img_slaider img:first-child').is(":visible")) {
+        $(".foto_left").hide();
+    } else {
+        $(".foto_left").show();
+    };
+
+    if ($('.img_slaider img:last-child').is(":visible")) {
+        $(".foto_left").hide();
+    } else {
+        $(".foto_left").show();
+    };
+
+    $(document).ajaxComplete(function() {
         $(".img_slaider img:first-child").show();
 
         $('.img_slaider img').each(function(i) {
@@ -205,7 +228,6 @@ $(document).ready(function() {
             var width_img = $(this).width();
             var height_img = $(this).height();
             var relationship_foto = (width_img / height_img);
-            if (relationship_foto > relationship_width_height) {}
 
             if ((width_img / height_img) > relationship_width_height) {
                 $(this).css({ "width": "100%", "height": "auto" });
@@ -214,7 +236,6 @@ $(document).ready(function() {
             } else if ((width_img / height_img) == relationship_width_height) {
                 $(this).css({ "width": "100%", "height": "100%" });
             };
-
         });
 
         if ($('.img_slaider img:first-child').is(":visible")) {
@@ -229,42 +250,10 @@ $(document).ready(function() {
             $(".foto_left").show();
         };
 
-        $(document).ajaxComplete(function() {
-            $(".img_slaider img:first-child").show();
-
-            $('.img_slaider img').each(function(i) {
-                var height_slaider = $(".img_slaider").height();
-                var width_slaider = $(".img_slaider").width();
-                var relationship_width_height = (width_slaider / height_slaider);
-                var width_img = $(this).width();
-                var height_img = $(this).height();
-                var relationship_foto = (width_img / height_img);
-
-                if ((width_img / height_img) > relationship_width_height) {
-                    $(this).css({ "width": "100%", "height": "auto" });
-                } else if ((width_img / height_img) < relationship_width_height) {
-                    $(this).css({ "width": "auto", "height": "100%" });
-                } else if ((width_img / height_img) == relationship_width_height) {
-                    $(this).css({ "width": "100%", "height": "100%" });
-                };
-            });
-
-            if ($('.img_slaider img:first-child').is(":visible")) {
-                $(".foto_left").hide();
-            } else {
-                $(".foto_left").show();
-            };
-
-            if ($('.img_slaider img:last-child').is(":visible")) {
-                $(".foto_left").hide();
-            } else {
-                $(".foto_left").show();
-            };
 
 
-
-        });
     });
+});
 
 
 
@@ -272,12 +261,12 @@ $(document).ready(function() {
 
 
 
-    $(".foto_right").on("click", function() {
+$(".foto_right").on("click", function() {
 
-        // if ($(".img_slaider img").is(":visible")) {
-        $('.img_slaider img').hide();
-        // $(this).next().show();
-        // }
-    });
+// if ($(".img_slaider img").is(":visible")) {
+$('.img_slaider img').hide();
+// $(this).next().show();
+// }
+});
 
 });

@@ -371,7 +371,7 @@ h4 {
 .table_nav_prognossis .tab ul {
     display: flex;
     width: 100%;
-    padding: 0 .5rem;
+    padding: 0 30% 0 20px;
 }
 
 .table_nav_prognossis .tab_active {

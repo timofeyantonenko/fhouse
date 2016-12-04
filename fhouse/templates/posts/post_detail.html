@@ -1,14 +1,9 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
-<link rel="stylesheet" href='{% static "css/post_list.css" %}'>
-{% endblock head_extra %}
-{% load urlify %}
-{% load crispy_forms_tags %}
-{% block head_title %}
-{{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
+<link rel="stylesheet" href='{% static "css/post_list.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
 <script src="{% static 'js/post_detail.js'  %}"></script>
 <div class="container">
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-7 colum">
             <div class="article_detail_img">
                 {% if instance.image %}
                 <img src="{{ instance.image.url }}" class='img-responsive' /> {% endif %}
@@ -35,10 +30,8 @@
                     <a href="#">
                         <div class="author_img">
                             {% if request.user.is_authenticated %}
-                                <img src="{{ request.user.avatar.url }}" alt="">
-                            {% else %}
-                                <img src="{% static 'img/albert-einstein.jpg' %}">
-                            {% endif %}
+                            <img src="{{ request.user.avatar.url }}" alt=""> {% else %}
+                            <img src="{% static 'img/albert-einstein.jpg' %}"> {% endif %}
                         </div>
                     </a>
                     <div class="author_name_date">
@@ -64,10 +57,8 @@
                     </div>
                     <div class="footer_post_detail">
                         <div class="teg_post_detail">
-                            Теги:
-                            {% for sub_tag in instance.tag.all %}
-                            <a href="#">{{ sub_tag.name }}</a>
-                            {% endfor %}
+                            Теги: {% for sub_tag in instance.tag.all %}
+                            <a href="#">{{ sub_tag.name }}</a> {% endfor %}
                         </div>
                         <div class="block_like-dislike">
                             <div class="like_and_dislike">
@@ -97,15 +88,13 @@
                 <a href="#">
                     <div class="coments_author">
                         {% if request.user.is_authenticated %}
-                        <img src="{{ request.user.avatar.url }}" alt="">
-                        {% else %}
-                        <img src="{% static 'img/albert-einstein.jpg'  %}">
-                        {% endif %}
+                        <img src="{{ request.user.avatar.url }}" alt=""> {% else %}
+                        <img src="{% static 'img/albert-einstein.jpg'  %}"> {% endif %}
                     </div>
                 </a>
                 {% if request.user.is_authenticated %}
                 <form method="POST" action="."> {% csrf_token %}
-                     <div>
+                    <div>
                         <label for="{{comment_form.content.id_for_label}}">
                             <p class="lead">Оставить комментарий</p>
                         </label>
@@ -115,22 +104,18 @@
                     </div>
                     <input type="submit" value="Post comment" class="btn btn-default">
                 </form>
-                {% for field, errors in comment_form.errors.items %}
-                    {% for error in errors %}
-                        <p>{{error}}</p>
-                {% endfor %}{% endfor %}
-                {% else %}
+                {% for field, errors in comment_form.errors.items %} {% for error in errors %}
+                <p>{{error}}</p>
+                {% endfor %}{% endfor %} {% else %}
                 <p>You must login to comment</p>
                 {% endif %}
-                 </div>
+            </div>
             <div class="comments_base2" id="without_paddin">
                 {% for comment in comments %}
-                           
                 <div class="blockquote">
                     <a href="#">
                         <div class="coments_author">
                             <img src="{{ comment.user.avatar.url }}" alt="">
-
                         </div>
                     </a>
                     <div class="content_coment">
@@ -158,6 +143,46 @@
                 </div>
                 {% endfor %}
                 <a href="#" class="show_all_coment">Показать все комментарии</a>
+            </div>
+        </div>
+        <div class="col-lg-5 colum">
+            <div class="next_news_container">
+                <a href="#" class="next_news_container_href">
+                    <div class="next_news">
+                        <div class="img_next_news">
+                            <img src="https://s-media-cache-ak0.pinimg.com/originals/4a/64/e7/4a64e7744ce69b2709f3de63a209db2a.jpg" alt="">
+                        </div>
+                        <div class="title_next_news">
+                            <h3>Ronaldinho will play for Shapecoense in future</h3>
+                            <span class="date_next_news">23 october 20:45</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="next_news_container_href">
+                    <div class="next_news">
+                        <div class="img_next_news">
+                            <img src="http://www.uznayvse.ru/person/zidan/1145985137_2.jpg" alt="">
+                        </div>
+                        <div class="title_next_news">
+                            <h3>Ronaldinho will play for Shapecoense in future</h3>
+                            <span class="date_next_news">23 october 20:45</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="next_news_container_href">
+                    <div class="next_news">
+                        <div class="img_next_news">
+                            <img src="https://s-media-cache-ak0.pinimg.com/736x/0a/ff/28/0aff28930a87f7274bf8b57fdb30a6f3.jpg" alt="">
+                        </div>
+                        <div class="title_next_news">
+                            <h3>Who is the best in world ? Maybe, Messi but kravets is very good too</h3>
+                            <span class="date_next_news">23 october 20:45</span>
+                        </div>
+                    </div>
+                </a>
+                
+                
+
             </div>
         </div>
     </div>
