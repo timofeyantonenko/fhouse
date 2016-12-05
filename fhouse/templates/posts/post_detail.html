@@ -147,42 +147,19 @@
         </div>
         <div class="col-lg-5 colum">
             <div class="next_news_container">
-                <a href="#" class="next_news_container_href">
+                {% for post in additional_posts %}
+                <a href="{{post.get_absolute_url}}" class="next_news_container_href">
                     <div class="next_news">
                         <div class="img_next_news">
-                            <img src="https://s-media-cache-ak0.pinimg.com/originals/4a/64/e7/4a64e7744ce69b2709f3de63a209db2a.jpg" alt="">
+                            <img src="{{ post.image.url }}" alt="">
                         </div>
                         <div class="title_next_news">
-                            <h3>Ronaldinho will play for Shapecoense in future</h3>
-                            <span class="date_next_news">23 october 20:45</span>
+                            <h3>{{ post.title }}</h3>
+                            <span class="date_next_news">{{ post.updated }}</span>
                         </div>
                     </div>
                 </a>
-                <a href="#" class="next_news_container_href">
-                    <div class="next_news">
-                        <div class="img_next_news">
-                            <img src="http://www.uznayvse.ru/person/zidan/1145985137_2.jpg" alt="">
-                        </div>
-                        <div class="title_next_news">
-                            <h3>Ronaldinho will play for Shapecoense in future</h3>
-                            <span class="date_next_news">23 october 20:45</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="next_news_container_href">
-                    <div class="next_news">
-                        <div class="img_next_news">
-                            <img src="https://s-media-cache-ak0.pinimg.com/736x/0a/ff/28/0aff28930a87f7274bf8b57fdb30a6f3.jpg" alt="">
-                        </div>
-                        <div class="title_next_news">
-                            <h3>Who is the best in world ? Maybe, Messi but kravets is very good too</h3>
-                            <span class="date_next_news">23 october 20:45</span>
-                        </div>
-                    </div>
-                </a>
-                
-                
-
+                {% endfor %}
             </div>
         </div>
     </div>

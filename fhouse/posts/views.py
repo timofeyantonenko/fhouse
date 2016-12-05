@@ -62,8 +62,11 @@ def post_detail(request, slug=None):  # retrieve
         return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 
     comments = instance.comments
+    additional_posts = Post.objects.filter(updated__lt=instance.updated).order_by('-updated')[:3]
+    print(additional_posts)
     context = {
         "instance": instance,
+        "additional_posts": additional_posts,
         "title": instance.title,
         "share_string": quote_plus(instance.content),
         'comments': comments,
