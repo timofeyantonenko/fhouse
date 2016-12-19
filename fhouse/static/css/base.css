@@ -1,5 +1,19 @@
 /*Основные стили*/
 
+@font-face {
+  font-family: 'Roboto';
+  src: url('roboto.eot'); 
+  src: url('roboto.eot?#iefix') format('embedded-opentype'),
+  url('roboto.woff') format('woff'),
+  url('roboto.ttf')  format('truetype'), 
+  url('roboto.svg#svgFontName') format('svg'); 
+}
+
+
+body {
+  font-family: 'Roboto', sans-serif !important;
+}
+
 .row {
     margin-right: 0px !important;
     margin-left: 0px !important;
@@ -17,8 +31,8 @@
 .container {
     padding-left: 0px !important;
     padding-right: 0px !important;
-    margin-left: 100px !important;
-    margin-right: 100px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 body.modal-open {
@@ -368,6 +382,7 @@ h1 {
     color: #fafafa;
     font-size: 20px;
     line-height: 50px;
+    cursor:pointer;
 }
 
 .loginScheckIn i:nth-child(1) {
@@ -390,21 +405,21 @@ h1 {
 
 /*Вход для юзера (Модальное окно)*/
 
-.modal-body {
+#LOGIN .modal-body {
     padding: 5%;
     font-size: 14px;
 }
 
-.modal-content {
+#LOGIN .modal-content {
     border-radius: 3px !important;
 }
 
-.modal-body h3 {
+#LOGIN .modal-body h3 {
     text-align: center;
     margin-top: 0px;
 }
 
-.modal-body form {
+#LOGIN .modal-body form {
     width: 90%;
     padding-left: 10%;
 }
@@ -421,7 +436,7 @@ h1 {
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
 }
 
-.modal-dialog {
+#LOGIN .modal-dialog {
     width: 25% !important;
     margin: 30px auto;
 }
@@ -525,7 +540,7 @@ form [type="password"] {
     appearance: none;
 }
 
-.modal-open {
+#LOGIN .modal-open {
     padding-right: 0px !important;
 }
 
