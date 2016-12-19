@@ -5,6 +5,23 @@
     position: relative;
 }
 
+
+.more_article {
+    cursor: pointer;
+    width: 25%;
+    margin: 0 auto 0px;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 14px;
+    color: #656D78;
+    background: #fff;
+    border: 1px solid #CCD1D9;
+    border-radius: 2px;
+}
+
 .articles a {
     color: #333 !important;
 }
