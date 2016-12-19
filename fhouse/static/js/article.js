@@ -29,6 +29,7 @@ if (!String.format) {
         });
     };
 }
+var is_load_more_needed = true;
 $(document).ready(function() {
     var section = getUrlParameter('section');
     if (typeof section != 'undefined') {
@@ -105,6 +106,9 @@ $(document).ready(function() {
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
+        if (page == -1){
+            return;
+        }
         var ajax_url = 'article_list';
         var ajax_data = { "section": section_name }
         if (section_name == 'Все') {
@@ -131,6 +135,9 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
+                if (status = 404){
+                    $(a_block).prop('href', -1);
+                }
             }
         });
     });
@@ -140,27 +147,27 @@ $(document).ready(function() {
     $(".one_read_article:nth-child(3n+1)").css("margin-left", "0");
 
 
-    function renderGrid() {
-        var blocks = document.getElementById("grid_container").children;
-        var pad = 10,
-            cols = 3,
-            newleft, newtop;
-        for (var i = 1; i < blocks.length; i++) {
-            if (i % cols == 0) {
-                newtop = (blocks[i - cols].offsetTop + blocks[i - cols].offsetHeight) + pad;
-                blocks[i].style.top = newtop + "px";
-            } else {
-                if (blocks[i - cols]) {
-                    newtop = (blocks[i - cols].offsetTop + blocks[i - cols].offsetHeight) + pad;
-                    blocks[i].style.top = newtop + "px";
-                }
-                newleft = (blocks[i - 1].offsetLeft + blocks[i - 1].offsetWidth) + pad;
-                blocks[i].style.left = newleft + "px";
-            }
-        }
-    }
-    window.addEventListener("load", renderGrid, false);
-    window.addEventListener("resize", renderGrid, false);
+//    function renderGrid() {
+//        var blocks = document.getElementById("grid_container").children;
+//        var pad = 10,
+//            cols = 3,
+//            newleft, newtop;
+//        for (var i = 1; i < blocks.length; i++) {
+//            if (i % cols == 0) {
+//                newtop = (blocks[i - cols].offsetTop + blocks[i - cols].offsetHeight) + pad;
+//                blocks[i].style.top = newtop + "px";
+//            } else {
+//                if (blocks[i - cols]) {
+//                    newtop = (blocks[i - cols].offsetTop + blocks[i - cols].offsetHeight) + pad;
+//                    blocks[i].style.top = newtop + "px";
+//                }
+//                newleft = (blocks[i - 1].offsetLeft + blocks[i - 1].offsetWidth) + pad;
+//                blocks[i].style.left = newleft + "px";
+//            }
+//        }
+//    }
+//    window.addEventListener("load", renderGrid, false);
+//    window.addEventListener("resize", renderGrid, false);
 
 });
 
@@ -179,4 +186,49 @@ $(window).load(function() {
             $(this).parent().css({ "display": "flex", "justify-content": "center" });
         }
     });
+    $(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+           load_more_articles();
+    }
+});
 })
+function load_more_articles(){
+        var a_block = $(".more_article a");
+//        alert($(a_block).attr('href'));
+        var page = $(a_block).attr('href');
+        if (page == -1){
+            return;
+        }
+        var ajax_url = 'article_list';
+        var ajax_data = { "section": section_name }
+        if (section_name == 'Все') {
+            console.log('ВСЕ');
+            var ajax_data = {}
+        }
+        if (page != null) {
+            console.log('HERE PAGE IS: ' + page);
+            ajax_data["page"] = page
+        }
+        console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['section']);
+        var state = ""
+        $.ajax({
+            url: ajax_url,
+            data: ajax_data,
+            dataType: "html",
+            success: function(data) {
+                page = parseInt(page) + 1;
+                $(a_block).prop('href', page);
+//                alert(page);
+                var content = $('.flex_container');
+                content.append(data);
+                $(".one_read_article:nth-child(3n+1)").css("margin-left", "0");
+                //            window.history.pushState("object or string", "Title", state);
+            },
+            error: function(xhr, status, error) {
+                console.log(error, status, xhr);
+                if (status = 404){
+                    $(a_block).prop('href', -1);
+                }
+            }
+        });
+    }

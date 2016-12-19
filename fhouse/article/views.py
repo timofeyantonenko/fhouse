@@ -67,7 +67,7 @@ class ArticleList(ListView):
     context_object_name = 'articles_list'
     first_paginate = 6
     paginate_by = 3
-    allow_empty = True
+    allow_empty = False
 
     def get_context_data(self, **kwargs):
         context = super(ArticleList, self).get_context_data(**kwargs)
@@ -77,21 +77,28 @@ class ArticleList(ListView):
             articles = SectionArticle.objects.filter(article_section__section_title=section)
             paginator = Paginator(articles, self.paginate_by)
             page = self.request.GET.get('page')
+            print('SECTION PAGE IS: ', page)
             try:
                 articles = paginator.page(page)
+                print('done1')
             except PageNotAnInteger:
                 articles = paginator.page(1)
+                print('done2')
             except EmptyPage:
-                articles = paginator.page(paginator.num_pages)
+                articles = []
+                # articles = paginator.page(paginator.num_pages)
+                print('done3')
         else:
             articles = SectionArticle.objects.all()
             paginator = Paginator(articles, self.paginate_by)
             page = self.request.GET.get('page', 1)
+            print('PAGE IS: ', page)
             try:
                 articles = paginator.page(page)
             except EmptyPage as e:
+                articles = []
                 # If page is out of range (e.g. 9999), deliver last page of results.
-                articles = paginator.page(paginator.num_pages)
+                # articles = paginator.page(paginator.num_pages)
         context['articles_list'] = articles
         return context
 

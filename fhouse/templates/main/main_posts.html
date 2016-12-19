@@ -17,7 +17,7 @@
                     <div class="last_news">
                         <div class="title_and_all">
                             <h2><a href='#'>Последние новости</a></h2>
-                            <a href="Больше">
+                            <a href="/posts">
                                 <div class="all_of_units">
                                     <span>Больше</span>
                                     <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
@@ -27,7 +27,7 @@
                         <div class="container_news">
 {% for post in post_list %}
                             <div class="one_news">
-                                <a href="#">
+                                <a href="{{post.get_absolute_url}}">
                                     <div class="one_news_img">
                                         <img src="{{ post.image.url }}" alt="">
                                     </div>
