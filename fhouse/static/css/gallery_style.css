@@ -350,7 +350,7 @@ ul {
     margin-bottom: 5px;
 }
 
-.more_cmment {
+.more_comment {
     cursor: pointer;
     width: 25%;
     margin: 0 auto 20px;
@@ -400,84 +400,6 @@ ul {
 }
 
 
-/*Ксс для комментрриев */
-
-.comments_base {
-    background-color: #fafafa;
-    border-bottom: 1px solid #CCD1D9;
-    border-left: 1px solid #CCD1D9;
-    border-right: 1px solid #CCD1D9;
-    padding: 25px;
-}
-
-.comments_base2 {
-    background-color: #fafafa;
-    border-bottom: 1px solid #CCD1D9;
-    border-left: 1px solid #CCD1D9;
-    border-right: 1px solid #CCD1D9;
-}
-
-.coments_author {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
-    border-radius: 50%;
-    float: left;
-    margin-right: 10px;
-}
-
-.coments_author img {
-    width: 100%;
-}
-
-.content_coment {
-    margin-left: 60px;
-}
-
-.coment_author_time {
-    min-width: 51%;
-    color: #7f8992;
-}
-
-.coment_author_time a {
-    font-weight: 600;
-}
-
-.blockquote {
-    padding: 3% 3% 0 3%;
-}
-
-.blockquote:hover {
-    background-color: #f0f2f5;
-}
-
-.author_name_date {
-    color: #7f8992;
-    font-weight: 500;
-    font-size: 16px;
-}
-
-.author_name_date a {
-    color: #333;
-    font-size: 24px;
-    font-weight: 600;
-    margin-right: 7px;
-    margin-left: 10px;
-}
-
-.show_all_coment {
-    display: block;
-    cursor: pointer;
-    color: #55677d;
-    background: #f0f2f5;
-    line-height: 32px;
-    border-radius: 2px;
-    text-align: center;
-    margin-top: 5px;
-    margin: 5px 10% 24px 10%;
-}
-
-
 /*Описания фото */
 
 .discription_and_like {
@@ -520,14 +442,13 @@ ul {
 
 .color_line_before_album {
     width: 100%;
-    height: 3px;
-    background-color: #38003c;
+    height: 1px;
+    background-color: #383d41;
 }
 
 #slaider_foto {
-    flex: 2.2;
+    flex: 2;
     height: 500px;
-    background-color: #38003c;
 }
 
 #albums_right {
@@ -539,7 +460,7 @@ ul {
     width: 100%;
     position: relative;
     /*background-color: #eaff04;*/
-    background-color: #fafafa;
+    background-color: #0d0d0e;
     height: 43px;
     line-height: 43px;
     padding-left: 10px;
@@ -548,7 +469,7 @@ ul {
 
 .selected_album i {
     float: right;
-    color: #38003c;
+    color: #fafafa;
     font-size: 1.33em;
     font-weight: bold;
     line-height: 43px;
@@ -556,7 +477,7 @@ ul {
 
 .selected_album h3 {
     line-height: 43px;
-    color: #38003c;
+    color: #fafafa;
     font-weight: bold;
     margin: 0px !important;
     float: left;
@@ -564,9 +485,9 @@ ul {
 }
 
 .list_albums {
-    background-color: #fafafa;
+    background-color: #0d0d0e;
     overflow-y: scroll;
-    height: 524px;
+    height: 526px;
     overflow-y: auto;
     padding: 5px 0px;
     /* border-bottom: 3px solid #38003c;
@@ -579,16 +500,17 @@ ul {
     height: 120px;
     padding: 10px 10px;
     cursor: pointer;
+    border-bottom: 1px solid #1c1d1e;
 }
 
 .album_previews:hover {
-    background-color: rgba(56, 0, 60, 0.29);
+    background-color: #1c1d1e;
     transition-duration: 0.25s;
     transition-timing-function: linear;
 }
 
 .active_selected_album {
-    background-color: #38003c;
+    background-color: #383d41;
 }
 
 .active_selected_album .discription_previewws_album {
@@ -596,7 +518,7 @@ ul {
 }
 
 .active_selected_album:hover {
-    background-color: #38003c;
+    background-color: #383d41;
     color: #fafafa;
 }
 
@@ -638,7 +560,7 @@ ul {
 .discription_previewws_album h3 {
     font-size: 18px;
     margin: 0px 0px 3px 0px;
-    color: #38003c;
+    color: #fafafa;
     font-weight: bold;
 }
 
@@ -649,7 +571,7 @@ ul {
 .info_preview_album span {
     width: 100%;
     font-size: 12px;
-    color: #38003c;
+    color: #fafafa;
     font-weight: 500;
     opacity: 1;
     margin-right: 5px;
@@ -701,18 +623,11 @@ ul {
 /*Плитка альбомов*/
 
 .tile_albums_foto {
-    padding: 60px 10px 10px 0px;
+    padding: 60px 20px 20px 10px;
     background-color: #fafafa;
     position: relative;
-    margin-top: 20px;
     border: 1px solid #ccd1d9;
-}
-
-.info_album_tile {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 20px;
+    border-top: 0px solid silver !important;
 }
 
 .section_album {
@@ -726,8 +641,8 @@ ul {
     display: block;
     float: left;
     font-size: 16px;
-    color: #38003c;
-    opacity: 0.8;
+    color: #333;
+    opacity: 1;
     font-weight: 600;
 }
 
@@ -841,9 +756,9 @@ ul {
 }
 
 #slaider_modal .modal-dialog {
-    height: 90% !important;
+    height: 90vh !important;
     width: 80vw !important;
-    margin: auto !important;
+    margin: 5vh auto !important;
     align-self: center;
 }
 
@@ -855,13 +770,20 @@ ul {
 }
 
 .modal_footer {
-    background-color: #1c1d1e;
+    height: 70px;
     width: 100%;
-    height: 10%;
+    background-color: #1c1d1e;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px;
 }
 
 .container_photo_in_modal {
-    align-self: center;
+    margin: auto;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .container_photo_in_modal img {
@@ -1095,6 +1017,7 @@ ul {
     height: 457px;
     overflow: hidden;
     position: relative;
+    background-color: #1c1d1e;
 }
 
 #container_img_in_slaider {
@@ -1115,7 +1038,7 @@ ul {
     font-weight: 600;
 }
 
-.modal_footer span { 
+.modal_footer span {
     opacity: 0.5;
 }
 
@@ -1168,7 +1091,7 @@ ul {
 }
 
 .discription_photo_modal {
-     font-weight: 500 !important;
+    font-weight: 500 !important;
     font-size: 14px;
     opacity: 0.5;
 }
@@ -1179,7 +1102,7 @@ ul {
 .footer_slaider {
     height: 70px;
     width: 100%;
-    background-color: #38003c;
+    background-color: #1c1d1e;
     font-size: 18px;
     font-weight: 600;
     padding: 10px;
@@ -1232,7 +1155,9 @@ ul {
     display: inline-block;
 }
 
+
 /*comment in slider*/
+
 .button_show_comments {
     display: inline-block;
     line-height: 50px;
@@ -1253,4 +1178,118 @@ ul {
     top: 0;
     z-index: 1000;
     display: none;
+}
+
+.add_comments {
+    border-top: 1px solid silver;
+}
+
+
+/*Ксс для комментрриев */
+
+.comments_base {
+    background-color: #fafafa;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.comments_base2 {
+    background-color: #fafafa;
+}
+
+.coments_author {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+}
+
+.comment_placeholder {
+    flex-grow: 1;
+}
+
+.coments_author img {
+    width: 100%;
+}
+
+.content_coment {
+    margin-left: 50px;
+}
+
+.coment_author_time {
+    min-width: 51%;
+    color: #7f8992;
+}
+
+.coment_author_time a {
+    font-weight: 600;
+}
+
+.blockquote {
+    padding: 3% 3% 0 3%;
+}
+
+.blockquote:hover {
+    background-color: #f0f2f5;
+}
+
+.author_name_date {
+    color: #7f8992;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.author_name_date a {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 7px;
+    margin-left: 10px;
+}
+
+.more_comment_photo {
+    cursor: pointer;
+    width: 80%;
+    margin: 0px auto 10px;
+    padding: 3px 5px;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 14px;
+    color: #656D78;
+    background: #fff;
+    border: 1px solid #CCD1D9;
+    border-radius: 2px;
+}
+
+.more_comment_photo:hover {
+    text-decoration: none!important;
+    background: #eee;
+}
+
+.block_comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+}
+
+.add_comments {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.all_comment_for_photo {
+    width: 100%;
+}
+
+.comment_placeholder input[type=submit] {
+    margin-top: 10px;
+    float: right;
 }

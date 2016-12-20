@@ -1,6 +1,10 @@
 /*Основные стили*/
 body {
-  font-family: 'PT Sans', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.modal-open, .modal-open .navbar-fixed-top {
+  margin-right: 0 !important;
 }
 
 .row {

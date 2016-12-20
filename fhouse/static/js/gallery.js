@@ -95,8 +95,7 @@ $(document).ready(function() {
     });
 
     // Выбор альбома 
-    $(".list_albums .album_previews").click(function(e) {
-        e.preventDefault();
+    $(".list_albums .album_previews").click(function() {
         $(".list_albums .album_previews").removeClass('active_selected_album');
         $(this).addClass('active_selected_album');
         var name_alnum = $(this).children(".discription_previewws_album").children("h3").text();
@@ -265,6 +264,7 @@ $(document).ready(function() {
 
     // При отрытии модального окна
     $('.photo_row img').on("click", function() {
+
         var link_photo = $(this).attr('src');
         $('.container_photo_in_modal img').attr("src", link_photo);
         // var open_poto = $("#list_src_foto_modal").find("li").text(link_photo);
@@ -355,7 +355,7 @@ $(document).ready(function() {
     });
 
     // Комментарии в слайдере 
-    $(".button_show_comments").on("click", function() {
+    $(".footer_slaider .button_show_comments").on("click", function() {
         // $("#comments_photo_slider").show("slide", { direction: "left" }, 1000);        
             $("#comments_photo_slider").slideToggle();          
     });
@@ -364,7 +364,6 @@ $(document).ready(function() {
     // Фиксация блока меньшей высоты
 
     $(window).load(function() {
-
 
         var height = $(".colum").height();
         var biggest_col;
