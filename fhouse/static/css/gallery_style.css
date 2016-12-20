@@ -1207,7 +1207,7 @@ ul {
 .slaider_photo_like>div {
     display: inline-block;
     position: relative;
-    margin-right: 24px;
+    margin-right: 10px;
     width: 50px;
     height: 50px;
     background-repeat: no-repeat;
@@ -1226,4 +1226,31 @@ ul {
 
 .slaider_photo_like>div:hover i {
     opacity: 1;
+}
+
+.slaider_photo_like {
+    display: inline-block;
+}
+
+/*comment in slider*/
+.button_show_comments {
+    display: inline-block;
+    line-height: 50px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.button_show_comments:hover {
+    text-decoration: underline;
+}
+
+#comments_photo_slider {
+    width: 310px;
+    height: 100%;
+    background-color: #fafafa;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    display: none;
 }

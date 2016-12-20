@@ -1,17 +1,6 @@
 /*Основные стили*/
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('roboto.eot'); 
-  src: url('roboto.eot?#iefix') format('embedded-opentype'),
-  url('roboto.woff') format('woff'),
-  url('roboto.ttf')  format('truetype'), 
-  url('roboto.svg#svgFontName') format('svg'); 
-}
-
-
 body {
-  font-family: 'Roboto', sans-serif !important;
+  font-family: 'PT Sans', sans-serif !important;
 }
 
 .row {

@@ -30,6 +30,7 @@ if (!String.format) {
     };
 }
 $(document).ready(function() {
+
     var section = getUrlParameter('section');
     if (typeof section != 'undefined') {
         var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
@@ -353,9 +354,11 @@ $(document).ready(function() {
         }
     });
 
-
-
-
+    // Комментарии в слайдере 
+    $(".button_show_comments").on("click", function() {
+        // $("#comments_photo_slider").show("slide", { direction: "left" }, 1000);        
+            $("#comments_photo_slider").slideToggle();          
+    });
 
 
     // Фиксация блока меньшей высоты
