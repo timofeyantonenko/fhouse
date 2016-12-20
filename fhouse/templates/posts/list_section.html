@@ -1,7 +1,4 @@
-<div class="articles_list">
-<!-- Поток важных новостей  -->
-                <div class="news_stream">
-                {% for post in post_list %}
+ {% for post in post_list %}
                     {% if forloop.counter == 1 and page == 1 %}
                         <div class="oneArticle mainNews">
                     <a href="{{post.get_absolute_url}}" class="goNews">
@@ -58,7 +55,6 @@
                 </div>
                     {% endif %}
                 {% endfor %}
-                    </div>
                 <!-- Пагинация   -->
                 <!--<div class="navigationArticle">-->
                     <!--<nav aria-label="Page navigation">-->
@@ -90,4 +86,3 @@
                     <!--</nav>-->
                 <!--</div>-->
                 <!-- Конец пагинации -->
-    </div>
