@@ -110,7 +110,7 @@ def post_list(request):  # list items
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
     user_tags_ids = list(user_tags.values_list('id', flat=True))
-    all_tags = all_tags.exclude(id__in=user_tags_ids)
+    # all_tags = all_tags.exclude(id__in=user_tags_ids)
     context = {
         "post_list": queryset,
         "title": "List",

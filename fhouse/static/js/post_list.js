@@ -303,11 +303,12 @@ $(document).ready(function() {
             $(".for_tag").append('<a href="#" class="tegArticle"><span class="tag_chosen"></span><span class="additional_tag"></span><span class="close_tag"><i class="fa fa-times" aria-hidden="true"></i></span></a>');
             $(".for_tag a:last-child .additional_tag").text(htmlString);
         } else {
+            console.log("else");
             var htmlString = $(this).children(".this_tag").find(".simple_tag").text();
+            console.log(htmlString);
 
             $('.tegArticle').each(function(i) {
-                var tag = $(this).children('.tag_chosen').text()
-                    // alert(tag)
+                var tag = $(this).children('.additional_tag').text()
                 if (tag == htmlString) {
                     $(this).remove();
                 };
@@ -400,7 +401,9 @@ $(document).ready(function() {
 
     $(".for_tag").on("click", ".close_tag", function() {
         $(this).parent().remove();
-        var close_tag_text = $(this).parent().children(".tag_chosen").text();
+//        var close_tag_text = $(this).parent().children(".tag_chosen").text();
+        var close_tag_text = $(this).parent().children(".additional_tag").text();
+        alert(close_tag_text);
 
         $('.simple_tag').each(function(i) {
             // alert(close_tag_text)
@@ -408,7 +411,7 @@ $(document).ready(function() {
                 // console.log($(this).text() + "закрывающего тега");
                 // console.log(close_tag_text + "где нужно убрать класс");
                 $(this).parent().parent().children(".flex_right").find(".choose_tag_success").removeClass("success_tag");
-                // alert($(this).text())
+
             };
 
         });
