@@ -28,7 +28,8 @@
                         {% endfor %}
                         <div class="changeNews">
                             <li>
-                                <div class="plus_units" data-toggle="modal" data-target="#modal_my_feed_change"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+                                <div class="plus_units" data-toggle="modal" data-target="#modal_my_feed_change"><i
+                                        class="fa fa-plus-circle" aria-hidden="true"></i></div>
                             </li>
                             <!-- Модальное окно, выбор тегов для своей ленты -->
                             <div id="modal_my_feed_change" class="modal fade" role="dialog">
@@ -46,7 +47,10 @@
                                                 </div>
                                                 <div class="for_tag">
                                                     {% for tag in user_tags %}
-                                                    <a href="#" class="tegArticle"><span class="tag_chosen"></span><span class="additional_tag">{{ tag }}</span><span class="close_tag"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                                                    <a href="#" class="tegArticle"><span class="tag_chosen"></span><span
+                                                            class="additional_tag">{{ tag }}</span><span
+                                                            class="close_tag"><i class="fa fa-times"
+                                                                                 aria-hidden="true"></i></span></a>
                                                     {% endfor %}
                                                 </div>
                                             </div>
@@ -55,17 +59,21 @@
                                                     <div class="icon_search">
                                                         <i class="fa fa-search" aria-hidden="true"></i>
                                                     </div>
-                                                    <textarea name="" maxlength="30" placeholder="Начните поиск тегов за которыми вы будете следить" id=""></textarea>
+                                                    <textarea name="" maxlength="30"
+                                                              placeholder="Начните поиск тегов за которыми вы будете следить"
+                                                              id=""></textarea>
                                                 </div>
                                                 <div class="more_tags">
                                                     {% for tag in all_tags %}
-                                                        <div class="one_tag_for_choose">
+                                                    <div class="one_tag_for_choose">
                                                         <div class="this_tag">
-                                                            <span class="simple_tag">{{ tag }}</span> <span class="quantity_post_with_tag">({{ tag.posts|length }} постов)</span>
+                                                            <span class="simple_tag">{{ tag }}</span> <span
+                                                                class="quantity_post_with_tag">({{ tag.posts|length }} постов)</span>
                                                         </div>
                                                         <div class="flex_right">
                                                             <div class="choose_tag_success">
-                                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                                <span class="glyphicon glyphicon-ok"
+                                                                      aria-hidden="true"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -96,7 +104,11 @@
                         </div>
                     </ul>
                 </div>
-                <hr> {% include "posts/list_section.html" %}
+                <hr>
+                {% include "posts/list_section.html" %}
+                <div class="more_article">
+                    <a href="3">ПОСМОТРЕТЬ БОЛЬШЕ</a>
+                </div>
             </div>
             <!-- Конец важных новостей -->
         </div>
@@ -115,18 +127,18 @@
                         <div class="user_information">
                             <table class="table">
                                 <tbody>
-                                    <tr>
-                                        <td><a href="#">Рейтинг прогнозистов</a></td>
-                                        <td><a href="#">143</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Количество сатей</a></td>
-                                        <td><a href="#">3</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">Голосов</a></td>
-                                        <td><a href="#">53</a></td>
-                                    </tr>
+                                <tr>
+                                    <td><a href="#">Рейтинг прогнозистов</a></td>
+                                    <td><a href="#">143</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">Количество сатей</a></td>
+                                    <td><a href="#">3</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">Голосов</a></td>
+                                    <td><a href="#">53</a></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

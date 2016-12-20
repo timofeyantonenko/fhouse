@@ -255,6 +255,45 @@ $(document).ready(function() {
         });
     });
 
+    $(".more_article a").click(function(e) {
+        e.preventDefault();
+        var a_block = this;
+        var page = $(this).attr('href');
+        if (page == -1){
+            return;
+        }
+        var state = ""
+        var tab = $('div .menu_individualNews_active').find('div').text();
+        if (tab === 'Все') {
+            tab = 'all';
+        }
+        var ajax_data = { "tab": tab }
+        if (page != null) {
+            console.log('HERE PAGE IS: ' + page);
+            ajax_data["page"] = page
+        }
+        console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['section']);
+        $.ajax({
+            url: '/posts/tabs',
+            data: ajax_data,
+            dataType: "html",
+            success: function(data) {
+                page = parseInt(page) + 1;
+                $(a_block).prop('href', page);
+                var content = $('.articles_list');
+                content.append(data);
+                img_norm_size();
+//                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
+            },
+            error: function(xhr, status, error) {
+                console.log(error, status, xhr);
+                if (status = 404){
+                    $(a_block).prop('href', -1);
+                }
+            }
+        });
+    });
+
     // Модальное окно 
 
     $(".one_tag_for_choose").on("click", function() {

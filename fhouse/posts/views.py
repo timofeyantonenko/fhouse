@@ -117,7 +117,8 @@ def post_list(request):  # list items
         "page_request_var": page_request_var,
         "today": today,
         'user_tags': user_tags,
-        'all_tags': all_tags
+        'all_tags': all_tags,
+        'page': page,
     }
     # return render(request, "posts/list_section.html", context)
     return render(request, "posts/post_list.html", context)
@@ -207,9 +208,12 @@ def show_tabs(request):
     try:
         queryset = paginator.page(page)
     except EmptyPage:
+        raise Http404('No posts on this page')
+        print('Empty')
+        queryset = []
         # If page is out of range (e.g. 9999), deliver last page of results.
-        queryset = paginator.page(paginator.num_pages)
-
+        # queryset = paginator.page(paginator.num_pages)
+    print(page)
     context = {
         "post_list": queryset,
         "title": "List",
