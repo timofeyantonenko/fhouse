@@ -71,7 +71,7 @@
                                                                 class="quantity_post_with_tag">({{ tag.posts|length }} постов)</span>
                                                         </div>
                                                         <div class="flex_right">
-                                                            <div class="choose_tag_success">
+                                                            <div class="choose_tag_success{%if tag in user_tags%} success_tag{% endif %}">
                                                                 <span class="glyphicon glyphicon-ok"
                                                                       aria-hidden="true"></span>
                                                             </div>
