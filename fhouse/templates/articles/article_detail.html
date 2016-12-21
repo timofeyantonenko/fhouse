@@ -1,14 +1,10 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'>
-{% endblock head_extra %}
-{% load urlify %}
-{% load crispy_forms_tags %}
-{% block head_title %}
-{{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
+<link rel="stylesheet" href='{% static "css/article_detail.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
 <script src="{% static 'js/post_detail.js'  %}"></script>
 <div class="container">
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-7 colum">
             <div class="article_detail_img">
                 {% if instance.image %}
                 <img src="{{ instance.image.url }}" class='img-responsive' /> {% endif %}
@@ -60,30 +56,8 @@
                     </div>
                     <div class="footer_post_detail">
                         <div class="teg_post_detail">
-                            Теги:
-                            {% for sub_tag in instance.tag.all %}
-                            <a href="#">{{ sub_tag.name }}</a>
-                            {% endfor %}
-                        </div>
-                        <div class="block_like-dislike">
-                            <div class="like_and_dislike">
-                                <a href="{{instance.slug}}" class="like_all">
-                                    <div class="like">
-                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="quantity_like">
-                                        {{ instance.positive_likes|length }}
-                                    </div>
-                                </a>
-                                <a href="{{instance.slug}}" class="dislike_all">
-                                    <div class="dislike">
-                                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="quantity_dislike">
-                                        {{ instance.negative_likes|length }}
-                                    </div>
-                                </a>
-                            </div>
+                            Теги: {% for sub_tag in instance.tag.all %}
+                            <a href="#">{{ sub_tag.name }}</a> {% endfor %}
                         </div>
                     </div>
                     <!-- Комментарии -->
@@ -97,7 +71,7 @@
                 </a>
                 {% if request.user.is_authenticated %}
                 <form method="POST" action="."> {% csrf_token %}
-                     <div>
+                    <div>
                         <label for="{{comment_form.content.id_for_label}}">
                             <p class="lead">Оставить комментарий</p>
                         </label>
@@ -107,17 +81,14 @@
                     </div>
                     <input type="submit" value="Post comment" class="btn btn-default">
                 </form>
-                {% for field, errors in comment_form.errors.items %}
-                    {% for error in errors %}
-                        <p>{{error}}</p>
-                {% endfor %}{% endfor %}
-                {% else %}
+                {% for field, errors in comment_form.errors.items %} {% for error in errors %}
+                <p>{{error}}</p>
+                {% endfor %}{% endfor %} {% else %}
                 <p>You must login to comment</p>
                 {% endif %}
-                 </div>
+            </div>
             <div class="comments_base2" id="without_paddin">
                 {% for comment in comments %}
-
                 <div class="blockquote">
                     <a href="#">
                         <div class="coments_author">
@@ -149,6 +120,34 @@
                 </div>
                 {% endfor %}
                 <a href="#" class="show_all_coment">Показать все комментарии</a>
+            </div>
+        </div>
+        <div class="col-lg-5 colum">
+            <div class="article_detail_right">
+                <div class="one_read_article">
+                    <a href="#">
+                        <div class="one_read_article_img">
+                            <img src="http://images.indianexpress.com/2016/05/david-beckham-man-utd.jpg?w=820?w=544" alt="">
+                        </div>
+                        <div class="before_date"></div>
+                        <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | 28 0ctober</span>
+                        <div class="one_read_article_info">
+                            <h3>Месси точго лучше РОналду</h3> Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду
+                        </div>
+                    </a>
+                </div>
+                <div class="one_read_article">
+                    <a href="#">
+                        <div class="one_read_article_img">
+                            <img src="http://images.indianexpress.com/2016/05/david-beckham-man-utd.jpg?w=820?w=544" alt="">
+                        </div>
+                        <div class="before_date"></div>
+                        <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | 28 0ctober</span>
+                        <div class="one_read_article_info">
+                            <h3>Месси точго лучше РОналду</h3> Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

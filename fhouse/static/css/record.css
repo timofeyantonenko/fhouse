@@ -34,6 +34,10 @@
     border-radius: 5px;
 }
 
+.last_records .thumbnails:nth-child(3) {
+    margin-right: 0 !important;
+}
+
 .thumbnails h3 {
     margin: 0px;
     padding: 0.3em 0;
@@ -44,8 +48,12 @@
 }
 
 /*Stats her0*/
+.record_hero_img {
+    width: 132px !important;
+}
 
 .statsHero {
+    display: flex;
     padding: 10px;
     height: 150px;
     background: #eaeaea;
@@ -70,8 +78,12 @@
 
 .statsHero .statInfo {
     float: left;
-    position: relative;
     font-weight: 600;
+    flex-grow: 1;
+}
+
+.relative_hero {
+    position: relative;
 }
 
 .statsHero .statInfo a {
@@ -81,7 +93,7 @@
 .statsHero .statInfo span {
     color: #e90052;
     position: absolute;
-    font-size: 26px;
+    font-size: 18px;
     top: 100%;
     left: 0px;
     font-weight: 600;
@@ -341,6 +353,7 @@ ul#otis {
 
 .full_list_record:hover {
     background-color: #e90052;
+    color: #fafafa;
 }
 
 .full_list_record:hover a {
@@ -349,7 +362,7 @@ ul#otis {
 }
 
 
-#arrow_record {
+.arrow_record {
     float: right;
 }
 

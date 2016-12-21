@@ -98,8 +98,8 @@ $(document).ready(function() {
     $(".list_albums .album_previews").click(function() {
         $(".list_albums .album_previews").removeClass('active_selected_album');
         $(this).addClass('active_selected_album');
-        var name_alnum = $(this).children(".discription_previewws_album").children("h3").text();
-        $(".selected_album h3").html(name_alnum);
+        var name_album = $(this).children(".discription_previewws_album").children(".title_album_preview").text();
+        $("div.quantity_album").html(name_album);
         return false;
     });
 
@@ -356,8 +356,28 @@ $(document).ready(function() {
 
     // Комментарии в слайдере 
     $(".footer_slaider .button_show_comments").on("click", function() {
-        // $("#comments_photo_slider").show("slide", { direction: "left" }, 1000);        
-            $("#comments_photo_slider").slideToggle();          
+        $("#comments_photo_slider").slideToggle();
+
+        if ($(".head_comment_slider").hasClass("head_comment_slider_open")) {
+            $(".head_comment_slider").removeClass("head_comment_slider_open");
+        } else {
+            $(".head_comment_slider").addClass("head_comment_slider_open");
+        }
+
+        $("#comments_photo_slider").scrollTop($("#comments_photo_slider").height());
+
+        // $('html, body').animate({
+        //         scrollTop: $(document).height() - $(window).height()
+        //     },
+        //     1400,
+        //     "easeOutQuint"
+        // );
+
+    });
+
+    $(".head_comment_slider").on("click", function() {
+        $("#comments_photo_slider").slideToggle();
+        $(this).delay(1000).removeClass("head_comment_slider_open");
     });
 
 

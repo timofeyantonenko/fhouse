@@ -7,32 +7,33 @@
         {% for record in records_table.records %} {% if forloop.counter == 1 %}
         <li class="statsHero">
             <div class="statInfo">
-                <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
-                <span class="stat">{{ record.record_value }}</span>
+                <div class="relative_hero">{{ record }}
+                    <span class="stat">{{ record.record_value }}</span>
+                </div>
             </div>
-            <div class="img_container_hero">
-                <img src="{{record.content_object.image.url}}" alt="">
+            <div class="record_hero_img">
+                <div class="img_container_hero">
+                    <img src="{{record.content_object.image.url}}" alt="">
+                </div>
             </div>
             {% else %}
-        <li class="statsRow">
-            <div class="pos">
-                {{forloop.counter}}
-            </div>
-            <div class="teamInfo">
-                <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
-            </div>
-            <div class="stat"> {{ record.record_value }}</div>
-            {% endif %}
-        </li>
-        {% endfor %}
-        <li class="full_list_record">
-                    <span><a href="{{records_table.get_absolute_url}}">
-                        Полный Cписок
-                        <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                    </a>
-                    </span>
-            </a>
-        </li>
+            <li class="statsRow">
+                <div class="pos">
+                    {{forloop.counter}}
+                </div>
+                <div class="teamInfo">
+                    <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
+                </div>
+                <div class="stat"> {{ record.record_value }}</div>
+                {% endif %}
+            </li>
+            {% endfor %}
+            <li class="full_list_record">
+                <a href="{{records_table.get_absolute_url}}">
+                    Полный Cписок
+                    <span class="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                </a>
+            </li>
     </ul>
 </div>
 {% endfor %}

@@ -435,6 +435,8 @@ ul {
 #slaider_and_albums {
     display: flex;
     border: 1px solid #ccd1d9;
+    height: 560px;
+    overflow: hidden;
 }
 
 
@@ -453,35 +455,42 @@ ul {
 
 #albums_right {
     flex: 1;
-    height: 570px;
+    height: 560px;
+    position: relative;
+    background-color: #fafafa;
 }
 
 .selected_album {
     width: 100%;
     position: relative;
-    /*background-color: #eaff04;*/
     background-color: #0d0d0e;
     height: 43px;
     line-height: 43px;
     padding-left: 10px;
     padding-right: 10px;
-}
-
-.selected_album i {
-    float: right;
     color: #fafafa;
-    font-size: 1.33em;
-    font-weight: bold;
-    line-height: 43px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
 }
 
-.selected_album h3 {
+.quantity_album {
+    flex-grow: 1;
     line-height: 43px;
     color: #fafafa;
     font-weight: bold;
     margin: 0px !important;
     float: left;
     font-size: 18px;
+}
+
+.arrow-right {
+    width: 30px;
+    text-align: center;
+    color: #fafafa;
+    font-size: 1.33em;
+    font-weight: bold;
+    line-height: 43px;
 }
 
 .list_albums {
@@ -511,6 +520,21 @@ ul {
 
 .active_selected_album {
     background-color: #383d41;
+}
+
+.title_album_preview {
+    color: #fafafa;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 20px;
+    max-height: 40px;
+    margin: 5px 10px 10px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .active_selected_album .discription_previewws_album {
@@ -583,16 +607,16 @@ ul {
 }
 
 .list_albums::-webkit-scrollbar {
-    width: 9px !important;
-    height: 9px !important;
+    width: 12px !important;
+    height: 12px !important;
 }
 
 .list_albums::-webkit-scrollbar-thumb {
-    background: rgba(205, 2, 73, 0.34) !important;
+    background: rgba(56, 61, 65, 0.56) !important;
 }
 
 .list_albums::-webkit-scrollbar-thumb:hover {
-    background: #e90052 !important;
+    background: rgba(56, 61, 65, 0.82) !important;
 }
 
 .list_albums::-webkit-scrollbar {
@@ -604,19 +628,6 @@ ul {
     border-left-color: #fafafa !important;
     background: #fafafa !important;
     -webkit-box-shadow: inset 0 0 1px #fafafa !important;
-}
-
-.list_albums::-webkit-scrollbar-thumb {
-    border-left-color: rgba(56, 0, 60, 0.62) !important;
-    background: rgba(56, 0, 60, 0.62) !important;
-}
-
-.list_albums::-webkit-scrollbar-thumb:hover {
-    background: #38003c;
-}
-
-.list_albums::-webkit- scrollbar {
-    width: 12px !important;
 }
 
 
@@ -1100,12 +1111,12 @@ ul {
 /*Футер слайдера*/
 
 .footer_slaider {
-    height: 70px;
+    height: 60px;
     width: 100%;
     background-color: #1c1d1e;
     font-size: 18px;
     font-weight: 600;
-    padding: 10px;
+    padding: 5px;
 }
 
 .discription_photo_slaider {
@@ -1170,14 +1181,12 @@ ul {
 }
 
 #comments_photo_slider {
-    width: 310px;
+    width: 100%;
     height: 100%;
     background-color: #fafafa;
-    position: absolute;
-    right: 0;
-    top: 0;
     z-index: 1000;
     display: none;
+    margin-top: 43px;
 }
 
 .add_comments {
@@ -1187,6 +1196,10 @@ ul {
 
 /*Ксс для комментрриев */
 
+.user_comment {
+    overflow-y: auto;
+    padding: 15px 0px;
+}
 .comments_base {
     background-color: #fafafa;
     padding: 10px;
@@ -1272,16 +1285,38 @@ ul {
     background: #eee;
 }
 
+.head_comment_slider {
+    height: 43px;
+    width: 100%;
+    text-align: center;
+    background-color: #0d0d0e;
+    color: #fafafa;
+    line-height: 43px;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.head_comment_slider_open {
+    z-index: 10000;
+}
+
+.head_comment_slider span {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
 .block_comments {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
-    height: 100%;
+    height: 516px;
 }
 
 .add_comments {
-    margin-top: 15px;
     width: 100%;
 }
 

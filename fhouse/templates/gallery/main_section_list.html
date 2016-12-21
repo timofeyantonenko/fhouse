@@ -1,29 +1,30 @@
-{% for photo in last_photos %}
-{% if forloop.counter == 1 %}
-<div class="col-lg-6 main_last_album">
+{% for photo in last_photos %} {% if forloop.counter == 1 %}
+<div class="main_last_album">
     <a href="#">
-        <div class="album_img">
-            <img src="{{ photo.image.url }}" alt="">
-        </div>
-        <div class="color_line">
-            <div class="icon_for_album">
-                <div class="icon_foto">
-                    <i class="fa fa-camera" aria-hidden="true"></i>
+        <div class="main_album_flex">
+            <div class="album_img">
+                <img src="{{ photo.image.url }}" alt="">
+            </div>
+            <div class="color_line">
+                <div class="icon_for_album">
+                    <div class="icon_foto">
+                        <i class="fa fa-camera" aria-hidden="true"></i>
+                    </div>
+                    <div class="quantity_foto_in_album">
+                        {{ photo.photo_album.photos|length }}
+                    </div>
                 </div>
-                <div class="quantity_foto_in_album">
-                    {{ photo.photo_album.photos|length }}
+            </div>
+            <div class="back_color_main_album">
+                <div class="discription_main_last_album">
+                    {{ photo.photo_album.album_title }}
                 </div>
             </div>
         </div>
-        <div class="discription_main_last_album">
-            <h3>{{ photo.photo_album.album_title }}</h3> Роналду, Неймар, Ибрагимович и остальные мудаки современного
-            футбола
-        </div>
     </a>
 </div>
-{% else %}
-{% if forloop.counter == 2 %}
-<div class="col-lg-6">
+{% else %} {% if forloop.counter == 2 %}
+<div class="four_album">
     {% endif %}
     <div class="last_albums">
         <a href="#">
@@ -41,12 +42,10 @@
                 </div>
             </div>
             <div class="discription_last_album">
-                <h4>{{ photo.photo_album.album_title }}</h4>
+                {{ photo.photo_album.album_title }}
             </div>
         </a>
     </div>
     {% if forloop.counter == 2 %}
 </div>
-{% endif %}
-{% endif %}
-{% endfor %}
+{% endif %} {% endif %} {% endfor %}

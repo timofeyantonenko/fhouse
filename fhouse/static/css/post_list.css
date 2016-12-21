@@ -1,10 +1,12 @@
+.tab div:first-child {
+    padding: 0px 6px;
+}
 .oneArticle {
     margin-bottom: 20px;
     min-height: 150px;
     height: 150px;
     position: relative;
 }
-
 
 .more_article {
     cursor: pointer;
@@ -951,9 +953,19 @@ textarea {
 
 .title_next_news {
     position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 24px;
+    max-height: 72px;
+    margin: 5px 10px 10px;
+    font-size: 22px;
+    font-weight: 600;
 }
 
 .date_next_news {
     position: absolute;
-    color: silver;
+    color: #7f8992;
 }

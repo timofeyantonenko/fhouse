@@ -1,40 +1,40 @@
 <div class="flex_container">
-{% for records_table in groups_tables %}
-<div class="thumbnails">
-<div class="caption" id="caption">
-    <h3>{{ records_table.table }}</h3>
-</div>
-<ul class="statsList list-group" id="list-group">
-    {% for record in records_table.records %} {% if forloop.counter == 1 %}
-         <li class="statsHero">
-
-             <div class="statInfo">
-                 {{ record }}
-                 <span class="stat">{{ record.record_value }}</span>
-             </div>
-             <div class="img_container_hero">
-                 <img src="{{record.content_object.image.url}}" alt="">
-             </div>
-             {% else %}
-    <li class="statsRow">
-    <div class="pos">
-        {{forloop.counter}}.</div>
-    <div class="teamInfo">
-        <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
-    </div>
-    <div class="stat"> {{ record.record_value }} </div>
-    {% endif %}
-                                </li>
-         {% endfor %}
-    <li class="full_list_record">
-                                    <span><a href="{{records_table.table.get_absolute_url}}">
-                                    Полный Cписок
-                                    <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                                    </a>
-                                    </span>
-                                    </a>
-                                </li>
-                        </ul>
+    {% for records_table in groups_tables %}
+    <div class="thumbnails">
+        <div class="caption" id="caption">
+            <h3>{{ records_table.table }}</h3>
+        </div>
+        <ul class="statsList list-group" id="list-group">
+            {% for record in records_table.records %} {% if forloop.counter == 1 %}
+            <li class="statsHero">
+                <div class="statInfo">
+                    <div class="relative_hero">{{ record }}
+                        <span class="stat">{{ record.record_value }}</span>
                     </div>
-{% endfor %}
+                </div>
+                <div class="record_hero_img">
+                    <div class="img_container_hero">
+                        <img src="{{record.content_object.image.url}}" alt="">
+                    </div>
+                </div>
+                {% else %}
+                <li class="statsRow">
+                    <div class="pos">
+                        {{forloop.counter}}.</div>
+                    <div class="teamInfo">
+                        <a href='{{record.get_absolute_url}}' class="statName">{{ record }}</a>
+                    </div>
+                    <div class="stat"> {{ record.record_value }} </div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+                <li class="full_list_record">
+                    <a href="{{records_table.table.get_absolute_url}}">
+                        Полный Cписок
+                        <span class="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                    </a>
+                </li>
+        </ul>
+    </div>
+    {% endfor %}
 </div>

@@ -154,9 +154,9 @@
                             <img src="{{ post.image.url }}" alt="">
                         </div>
                         <div class="title_next_news">
-                            <h3>{{ post.title }}</h3>
-                            <span class="date_next_news">{{ post.updated }}</span>
+                            {{ post.title }}
                         </div>
+                        <span class="date_next_news">{{ post.updated }}</span>
                     </div>
                 </a>
                 {% endfor %}
