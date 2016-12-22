@@ -450,3 +450,20 @@ a:hover {
 .rightlyarticle .fa:hover {
     opacity: 1;
 }
+
+/*Рекорды*/
+
+.records_list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+}
+
+.records_list>div {
+    flex: 1;
+    margin-left: 10px;
+}
+.records_list>div:first-child {
+    margin-left: 0px !important;
+}

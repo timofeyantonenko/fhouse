@@ -1,5 +1,5 @@
-<div class="flex_container">
-    {% for records_table in groups_tables %}
+ {% for records_table in groups_tables %}
+<div class="block_record persent-size">
     <div class="thumbnails">
         <div class="caption" id="caption">
             <h3>{{ records_table.table }}</h3>
@@ -36,5 +36,5 @@
                 </li>
         </ul>
     </div>
-    {% endfor %}
 </div>
+{% endfor %}

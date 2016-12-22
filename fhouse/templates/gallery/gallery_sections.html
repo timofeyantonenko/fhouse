@@ -83,7 +83,15 @@
                         </div>
                         <div id="comments_photo_slider">
                             <div class="block_comments">
-                                <div class="user_comment">
+                                <!-- if there are not comments -->
+                                <div class="not_comments">
+                                    <div class="icon_comment">
+                                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="show_user_not_comments">Be the first to comment on this photo.</div>
+                                </div>
+                                <!-- If there are several comments -->
+                                <!-- <div class="user_comment">
                                     <div class="comments_base2" id="without_paddin">
                                         <div class="more_comment_photo">
                                             Показать предыдущие
@@ -124,149 +132,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="blockquote">
-                                                <a href="#">
-                                                    <div class="coments_author">
-                                                        <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
-                                                    </div>
-                                                </a>
-                                                <div class="content_coment">
-                                                    <div class="coment_author_time">
-                                                        <a href="#">Дмитрий Мангура</a> </br>
-                                                        4 days, 23 hours ago
-                                                    </div>
-                                                    <div class="text_comment_slider">
-                                                        Атлетико проиграл в финале Лиги Чемпионов ОХтырке
-                                                    </div>
-                                                    <footer>
-                                                        <a class="comment-reply-btn" href="#">Удалить</a>
-                                                        <a class="comment-reply-btn" href="#">Ответить</a>
-                                                    </footer>
-                                                    <div class="comment-reply">
-                                                        <form method="POST" action=".">
-                                                            <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
-                                                            <input id="id_content_type" name="content_type" type="hidden" value="post" />
-                                                            <input id="id_object_id" name="object_id" type="hidden" value="11" />
-                                                            <div id="div_id_content" class="form-group">
-                                                                <label for="id_content" class="control-label  requiredField">
-                                                                    content<span class="asteriskField">*</span> </label>
-                                                                <div class="controls ">
-                                                                    <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
-                                                            </div>
-                                                            <input type="hidden" name="parent_id" value="10">
-                                                            <input type="submit" value="Ответить" class="btn btn-default">
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="blockquote">
-                                                <a href="#">
-                                                    <div class="coments_author">
-                                                        <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
-                                                    </div>
-                                                </a>
-                                                <div class="content_coment">
-                                                    <div class="coment_author_time">
-                                                        <a href="#">Дмитрий Мангура</a> </br>
-                                                        4 days, 23 hours ago
-                                                    </div>
-                                                    <div class="text_comment_slider">
-                                                        Атлетико проиграл в финале Лиги Чемпионов ОХтырке
-                                                    </div>
-                                                    <footer>
-                                                        <a class="comment-reply-btn" href="#">Удалить</a>
-                                                        <a class="comment-reply-btn" href="#">Ответить</a>
-                                                    </footer>
-                                                    <div class="comment-reply">
-                                                        <form method="POST" action=".">
-                                                            <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
-                                                            <input id="id_content_type" name="content_type" type="hidden" value="post" />
-                                                            <input id="id_object_id" name="object_id" type="hidden" value="11" />
-                                                            <div id="div_id_content" class="form-group">
-                                                                <label for="id_content" class="control-label  requiredField">
-                                                                    content<span class="asteriskField">*</span> </label>
-                                                                <div class="controls ">
-                                                                    <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
-                                                            </div>
-                                                            <input type="hidden" name="parent_id" value="10">
-                                                            <input type="submit" value="Ответить" class="btn btn-default">
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="blockquote">
-                                                <a href="#">
-                                                    <div class="coments_author">
-                                                        <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
-                                                    </div>
-                                                </a>
-                                                <div class="content_coment">
-                                                    <div class="coment_author_time">
-                                                        <a href="#">Дмитрий Мангура</a> </br>
-                                                        4 days, 23 hours ago
-                                                    </div>
-                                                    <div class="text_comment_slider">
-                                                        Атлетико проиграл в финале Лиги Чемпионов ОХтырке
-                                                    </div>
-                                                    <footer>
-                                                        <a class="comment-reply-btn" href="#">Удалить</a>
-                                                        <a class="comment-reply-btn" href="#">Ответить</a>
-                                                    </footer>
-                                                    <div class="comment-reply">
-                                                        <form method="POST" action=".">
-                                                            <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
-                                                            <input id="id_content_type" name="content_type" type="hidden" value="post" />
-                                                            <input id="id_object_id" name="object_id" type="hidden" value="11" />
-                                                            <div id="div_id_content" class="form-group">
-                                                                <label for="id_content" class="control-label  requiredField">
-                                                                    content<span class="asteriskField">*</span> </label>
-                                                                <div class="controls ">
-                                                                    <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
-                                                            </div>
-                                                            <input type="hidden" name="parent_id" value="10">
-                                                            <input type="submit" value="Ответить" class="btn btn-default">
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="blockquote">
-                                                <a href="#">
-                                                    <div class="coments_author">
-                                                        <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
-                                                    </div>
-                                                </a>
-                                                <div class="content_coment">
-                                                    <div class="coment_author_time">
-                                                        <a href="#">Дмитрий Мангура</a> </br>
-                                                        4 days, 23 hours ago
-                                                    </div>
-                                                    <div class="text_comment_slider">
-                                                        Атлетико проиграл в финале Лиги Чемпионов ОХтырке
-                                                    </div>
-                                                    <footer>
-                                                        <a class="comment-reply-btn" href="#">Удалить</a>
-                                                        <a class="comment-reply-btn" href="#">Ответить</a>
-                                                    </footer>
-                                                    <div class="comment-reply">
-                                                        <form method="POST" action=".">
-                                                            <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
-                                                            <input id="id_content_type" name="content_type" type="hidden" value="post" />
-                                                            <input id="id_object_id" name="object_id" type="hidden" value="11" />
-                                                            <div id="div_id_content" class="form-group">
-                                                                <label for="id_content" class="control-label  requiredField">
-                                                                    content<span class="asteriskField">*</span> </label>
-                                                                <div class="controls ">
-                                                                    <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
-                                                            </div>
-                                                            <input type="hidden" name="parent_id" value="10">
-                                                            <input type="submit" value="Ответить" class="btn btn-default">
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="add_comments">
                                     <div class="comments_base">
                                         <div class="coments_author">
@@ -523,152 +391,22 @@
                                 </div>
                                 <div id="comments_photo_modal">
                                     <div class="block_comments">
-                                        <div class="user_comment">
+                                        <!-- if there are not comments -->
+                                        <div class="not_comments">
+                                            <div class="icon_comment">
+                                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                            </div>
+                                            <div class="show_user_not_comments">Be the first to comment on this photo.</div>
+                                        </div>
+
+                                        <!-- If there are several comments -->
+                                        <!-- <div class="user_comment">
                                             <div class="comments_base2" id="without_paddin">
                                                 <div class="more_comment_photo">
                                                     Показать предыдущие
                                                 </div>
                                                 <div class="all_comment_for_photo">
-                                                    <div class="blockquote">
-                                                        <a href="#">
-                                                            <div class="coments_author">
-                                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <div class="content_coment">
-                                                            <div class="coment_author_time">
-                                                                <a href="#">Дмитрий Мангура</a> </br>
-                                                                4 days, 23 hours ago
-                                                            </div>
-                                                            <div class="text_comment_slider">
-                                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
-                                                            </div>
-                                                            <footer>
-                                                                <a class="comment-reply-btn" href="#">Удалить</a>
-                                                                <a class="comment-reply-btn" href="#">Ответить</a>
-                                                            </footer>
-                                                            <div class="comment-reply">
-                                                                <form method="POST" action=".">
-                                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
-                                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
-                                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
-                                                                    <div id="div_id_content" class="form-group">
-                                                                        <label for="id_content" class="control-label  requiredField">
-                                                                            content<span class="asteriskField">*</span> </label>
-                                                                        <div class="controls ">
-                                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
-                                                                    </div>
-                                                                    <input type="hidden" name="parent_id" value="10">
-                                                                    <input type="submit" value="Ответить" class="btn btn-default">
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="blockquote">
-                                                        <a href="#">
-                                                            <div class="coments_author">
-                                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <div class="content_coment">
-                                                            <div class="coment_author_time">
-                                                                <a href="#">Дмитрий Мангура</a> </br>
-                                                                4 days, 23 hours ago
-                                                            </div>
-                                                            <div class="text_comment_slider">
-                                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
-                                                            </div>
-                                                            <footer>
-                                                                <a class="comment-reply-btn" href="#">Удалить</a>
-                                                                <a class="comment-reply-btn" href="#">Ответить</a>
-                                                            </footer>
-                                                            <div class="comment-reply">
-                                                                <form method="POST" action=".">
-                                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
-                                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
-                                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
-                                                                    <div id="div_id_content" class="form-group">
-                                                                        <label for="id_content" class="control-label  requiredField">
-                                                                            content<span class="asteriskField">*</span> </label>
-                                                                        <div class="controls ">
-                                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
-                                                                    </div>
-                                                                    <input type="hidden" name="parent_id" value="10">
-                                                                    <input type="submit" value="Ответить" class="btn btn-default">
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="blockquote">
-                                                        <a href="#">
-                                                            <div class="coments_author">
-                                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <div class="content_coment">
-                                                            <div class="coment_author_time">
-                                                                <a href="#">Дмитрий Мангура</a> </br>
-                                                                4 days, 23 hours ago
-                                                            </div>
-                                                            <div class="text_comment_slider">
-                                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
-                                                            </div>
-                                                            <footer>
-                                                                <a class="comment-reply-btn" href="#">Удалить</a>
-                                                                <a class="comment-reply-btn" href="#">Ответить</a>
-                                                            </footer>
-                                                            <div class="comment-reply">
-                                                                <form method="POST" action=".">
-                                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
-                                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
-                                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
-                                                                    <div id="div_id_content" class="form-group">
-                                                                        <label for="id_content" class="control-label  requiredField">
-                                                                            content<span class="asteriskField">*</span> </label>
-                                                                        <div class="controls ">
-                                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
-                                                                    </div>
-                                                                    <input type="hidden" name="parent_id" value="10">
-                                                                    <input type="submit" value="Ответить" class="btn btn-default">
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="blockquote">
-                                                        <a href="#">
-                                                            <div class="coments_author">
-                                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <div class="content_coment">
-                                                            <div class="coment_author_time">
-                                                                <a href="#">Дмитрий Мангура</a> </br>
-                                                                4 days, 23 hours ago
-                                                            </div>
-                                                            <div class="text_comment_slider">
-                                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
-                                                            </div>
-                                                            <footer>
-                                                                <a class="comment-reply-btn" href="#">Удалить</a>
-                                                                <a class="comment-reply-btn" href="#">Ответить</a>
-                                                            </footer>
-                                                            <div class="comment-reply">
-                                                                <form method="POST" action=".">
-                                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
-                                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
-                                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
-                                                                    <div id="div_id_content" class="form-group">
-                                                                        <label for="id_content" class="control-label  requiredField">
-                                                                            content<span class="asteriskField">*</span> </label>
-                                                                        <div class="controls ">
-                                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
-                                                                    </div>
-                                                                    <input type="hidden" name="parent_id" value="10">
-                                                                    <input type="submit" value="Ответить" class="btn btn-default">
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="blockquote">
                                                         <a href="#">
                                                             <div class="coments_author">
@@ -706,7 +444,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="add_comments">
                                             <div class="comments_base">
                                                 <div class="coments_author">

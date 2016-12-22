@@ -1,7 +1,6 @@
 .statsCard {
     background-color: #fafafa;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 20px 20px 20px 10px; 
     border: 1px solid #CCD1D9;
     border-top: 0px !important;
 }
@@ -24,13 +23,15 @@
     align-items: flex-start;
 }
 
+.statsCard .block_record {
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
 .thumbnails {
-    margin: 0px;
-    width: 32%;
-    padding: 0px;
-    margin-right: 2%;
+    /*width: 32%;*/
     vertical-align: top;
-    border:1px solid #ebebeb;
+    border: 1px solid #ebebeb;
     border-radius: 5px;
 }
 
@@ -43,11 +44,13 @@
     padding: 0.3em 0;
     font-size: 16px;
     font-weight: 600;
-    color:#1d71b9;
+    color: #1d71b9;
     padding: 1rem;
 }
 
+
 /*Stats her0*/
+
 .record_hero_img {
     width: 132px !important;
 }
@@ -98,8 +101,6 @@
     left: 0px;
     font-weight: 600;
 }
-
-
 
 .statsList {
     overflow: hidden
@@ -262,7 +263,6 @@
     color: #e90052;
 }
 
-
 .btn {
     margin: 1rem
 }
@@ -297,8 +297,6 @@ ul#otis {
 #caption {
     padding: 0px;
 }
-
-
 
 .add_record {
     background-color: #ebebeb;
@@ -361,7 +359,6 @@ ul#otis {
     text-decoration: none;
 }
 
-
 .arrow_record {
     float: right;
 }
@@ -391,7 +388,9 @@ ul#otis {
     background: #eee;
 }
 
+
 /*Навигация между пазделами рекордов*/
+
 
 /*Навигация между статьями */
 
@@ -468,3 +467,9 @@ ul#otis {
     border-radius: 7px 7px 0 0;
 }
 
+
+/*Масонри рекорды */
+
+.persent-size {
+    width: 33.333333%;
+}
