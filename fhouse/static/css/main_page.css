@@ -15,6 +15,10 @@ a {
     color: #242424;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .all_of_units {
     background-color: #ebebeb;
     display: inline-block;
@@ -63,11 +67,11 @@ a {
     padding: 20px;
     background-color: #fafafa;
     border: 1px solid #ccd1d9;
-
 }
+
 .container_all a {
     color: #1d2f3e !important;
-} 
+}
 
 .main_news {
     height: 300px;
@@ -123,7 +127,15 @@ a {
 }
 
 .one_news_info {
-    margin: 10px 10px 0px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 18px;
+    max-height: 54px;
+    margin: 5px 10px 10px;
+    font-size: 18px;
 }
 
 .one_news_info h4 {
@@ -228,9 +240,30 @@ a {
 
 /*Альбомы на главной*/
 
-.main_last_album {
-    width: 50%;
+.main_gallery_container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0px;
+}
+
+.main_album_flex {
+    display: flex;
+    flex-direction: column;
     height: 350px;
+}
+
+.main_last_album {
+    flex: 1;
+    height: 350px;
+}
+
+.main_last_album .album_img {
+    flex-grow: 1;
+}
+
+.four_album {
+    flex: 1;
 }
 
 .main_last_album h3 {
@@ -248,10 +281,35 @@ a {
     width: 100%;
 }
 
-.discription_main_last_album {
+.back_color_main_album {
     background-color: #267788;
+}
+
+.discription_main_last_album {
     color: #fafafa;
-    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 22px;
+    max-height: 66px;
+    margin: 5px 10px 10px;
+    font-size: 20px;
+}
+
+.discription_last_album {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    line-height: 18px;
+    /* fallback */
+    max-height: 36px;
+    margin: 10px;
+    font-size: 18px;
 }
 
 .discription_main_last_album h2,
@@ -277,16 +335,48 @@ a {
     position: relative;
 }
 
-.icon_for_album {
+
+/*main album icon*/
+
+.main_album_flex .icon_for_album {
     position: absolute;
     color: #fafafa;
-    font-size: 16px;
-    top: -40px;
-    left: 8px;
+    font-size: 20px;
+    bottom: 20px;
+    left: 15px;
     display: flex;
 }
 
-.icon_foto {
+.main_album_flex .icon_foto {
+    float: left;
+    height: 45px;
+    width: 45px;
+    background-color: #135965;
+    line-height: 45px;
+    text-align: center;
+}
+
+.main_album_flex .quantity_foto_in_album {
+    height: 45px;
+    width: 45px;
+    background-color: #267788;
+    line-height: 45px;
+    text-align: center;
+}
+
+
+/*last 4 album icon*/
+
+.four_album .icon_for_album {
+    position: absolute;
+    color: #fafafa;
+    font-size: 16px;
+    bottom: 15px;
+    left: 10px;
+    display: flex;
+}
+
+.four_album .icon_foto {
     float: left;
     height: 35px;
     width: 35px;
@@ -295,7 +385,7 @@ a {
     text-align: center;
 }
 
-.quantity_foto_in_album {
+.four_album .quantity_foto_in_album {
     height: 35px;
     width: 35px;
     background-color: #267788;
@@ -351,8 +441,6 @@ a {
     position: relative;
 }
 
-
-
 .rightlyarticle .fa {
     margin-left: 10px;
     font-size: 16px;
@@ -361,4 +449,21 @@ a {
 
 .rightlyarticle .fa:hover {
     opacity: 1;
+}
+
+/*Рекорды*/
+
+.records_list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+}
+
+.records_list>div {
+    flex: 1;
+    margin-left: 10px;
+}
+.records_list>div:first-child {
+    margin-left: 0px !important;
 }

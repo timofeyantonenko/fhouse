@@ -30,6 +30,7 @@ if (!String.format) {
     };
 }
 $(document).ready(function() {
+
     var section = getUrlParameter('section');
     if (typeof section != 'undefined') {
         var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
@@ -94,12 +95,11 @@ $(document).ready(function() {
     });
 
     // Выбор альбома 
-    $(".list_albums .album_previews").click(function(e) {
-        e.preventDefault();
+    $(".list_albums .album_previews").click(function() {
         $(".list_albums .album_previews").removeClass('active_selected_album');
         $(this).addClass('active_selected_album');
-        var name_alnum = $(this).children(".discription_previewws_album").children("h3").text();
-        $(".selected_album h3").html(name_alnum);
+        var name_album = $(this).children(".discription_previewws_album").children(".title_album_preview").text();
+        $("div.quantity_album").html(name_album);
         return false;
     });
 
@@ -264,6 +264,7 @@ $(document).ready(function() {
 
     // При отрытии модального окна
     $('.photo_row img').on("click", function() {
+
         var link_photo = $(this).attr('src');
         $('.container_photo_in_modal img').attr("src", link_photo);
         // var open_poto = $("#list_src_foto_modal").find("li").text(link_photo);
@@ -353,15 +354,26 @@ $(document).ready(function() {
         }
     });
 
+    // Комментарии в слайдере 
+    $(".footer_slaider .button_show_comments").on("click", function() {
+        $("#comments_photo_slider").slideToggle();
 
+        if ($(".head_comment_slider").hasClass("head_comment_slider_open")) {
+            $(".head_comment_slider").removeClass("head_comment_slider_open");
+        } else {
+            $(".head_comment_slider").addClass("head_comment_slider_open");
+        }
 
+    });
 
-
+    $(".head_comment_slider").on("click", function() {
+        $("#comments_photo_slider").slideToggle();
+        $(this).delay(1000).removeClass("head_comment_slider_open");
+    });
 
     // Фиксация блока меньшей высоты
 
     $(window).load(function() {
-
 
         var height = $(".colum").height();
         var biggest_col;

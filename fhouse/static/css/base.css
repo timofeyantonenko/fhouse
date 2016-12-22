@@ -1,17 +1,8 @@
 /*Основные стили*/
 
-@font-face {
-  font-family: 'Roboto';
-  src: url('roboto.eot'); 
-  src: url('roboto.eot?#iefix') format('embedded-opentype'),
-  url('roboto.woff') format('woff'),
-  url('roboto.ttf')  format('truetype'), 
-  url('roboto.svg#svgFontName') format('svg'); 
-}
-
-
 body {
-  font-family: 'Roboto', sans-serif !important;
+    font-family: 'Roboto', sans-serif !important;
+    margin-bottom: 20px;
 }
 
 .row {
@@ -48,10 +39,6 @@ body.modal-open {
 
 .navbar {
     position: fixed;
-}
-
-.modal-open {
-    overflow: auto !important;
 }
 
 body {
@@ -382,7 +369,7 @@ h1 {
     color: #fafafa;
     font-size: 20px;
     line-height: 50px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .loginScheckIn i:nth-child(1) {
@@ -540,11 +527,6 @@ form [type="password"] {
     appearance: none;
 }
 
-#LOGIN .modal-open {
-    padding-right: 0px !important;
-}
-
-
 /*Profile user */
 
 .name_user_in_menu {
@@ -659,6 +641,7 @@ form [type="password"] {
     position: relative;
 }
 
+
 /*Инфа юзер правая колонка */
 
 .img_flex {
@@ -691,5 +674,5 @@ form [type="password"] {
 }
 
 .fixed_col_top {
-    position: fixed; 
+    position: fixed;
 }

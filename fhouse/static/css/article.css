@@ -13,6 +13,9 @@
 
 
 /*Чтиво*/
+.one_read_article a {
+    color: #333;
+}
 
 .author_img {
     height: 70px;
@@ -218,4 +221,3 @@ ul li:nth-child(10) .active_nav_ul {
     background-color: #ffba14;
     color: #fafafa;
 }
-
