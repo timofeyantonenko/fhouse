@@ -469,60 +469,263 @@
                     <!-- Слайдер в модальном окне для фотографий с плитки -->
                     <div id="slaider_modal" class="modal" role="dialog">
                         <div class="modal-dialog">
-                            <div class="flex_modal"></div>
-                            <!-- Modal content-->
-                            <div class="modal_photos">
-                                <div id="flex_container_img_modal">
-                                    <div class="container_photo_in_modal">
-                                        <img src="" alt="">
-                                    </div>
-                                </div>
-                                <!-- Право-лево фото -->
-                                <div class="area_for_left_arrow">
-                                    <div class="container_arow">
-                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="area_for_right_arrow">
-                                    <div class="container_arow">
-                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <!-- Список src с альбома, где лежит выбранное фото  -->
-                                <div class="list_src_foto">
-                                    <ul id="list_src_foto_modal">
-                                        <li>http://i2.mirror.co.uk/incoming/article9182077.ece/ALTERNATES/s615/Manchester-City-FC-v-FC-Barcelona-UEFA-Champions-League.jpg</li>
-                                        <li>https://i.ytimg.com/vi/vSuSS5z1eSw/maxresdefault.jpg</li>
-                                        <li>https://www.thesun.co.uk/wp-content/uploads/2016/11/nintchdbpict0002822538053.jpg?w=960&strip=all</li>
-                                        <li>https://fotoreserg.files.wordpress.com/2011/07/din-met-24.jpg</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="modal_footer">
-                                <div class="slaider_footer_left">
-                                    <div class="album_slaider">Название альбома
-                                        <span id="number_photo">1</span> <span>of</span> <span id="quantity_photo_in_album">42</span>
-                                    </div>
-                                    <div class="discription_photo_slaider">Подпись фотографии</div>
-                                </div>
-                                <div class="slaider_footer_right">
-                                    <div class="button_show_comments">
-                                        Комментарии <span>21</span>
-                                    </div>
-                                    <div class="slaider_photo_like">
-                                        <div class="block_like">
-                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                            <div class="votes">12</div>
-                                        </div>
-                                        <div class="block_dislike">
-                                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                            <div class="votes">12</div>
+                            <div class="flex_modal">
+                                <!-- Modal content-->
+                                <div class="modal_photos">
+                                    <div id="flex_container_img_modal">
+                                        <div class="container_photo_in_modal">
+                                            <img src="" alt="">
                                         </div>
                                     </div>
+                                    <!-- Право-лево фото -->
+                                    <div class="area_for_left_arrow">
+                                        <div class="container_arow">
+                                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="area_for_right_arrow">
+                                        <div class="container_arow">
+                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <!-- Список src с альбома, где лежит выбранное фото  -->
+                                    <div class="list_src_foto">
+                                        <ul id="list_src_foto_modal">
+                                            <li>http://i2.mirror.co.uk/incoming/article9182077.ece/ALTERNATES/s615/Manchester-City-FC-v-FC-Barcelona-UEFA-Champions-League.jpg</li>
+                                            <li>https://i.ytimg.com/vi/vSuSS5z1eSw/maxresdefault.jpg</li>
+                                            <li>https://www.thesun.co.uk/wp-content/uploads/2016/11/nintchdbpict0002822538053.jpg?w=960&strip=all</li>
+                                            <li>https://fotoreserg.files.wordpress.com/2011/07/din-met-24.jpg</li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal_footer">
+                                        <div class="slaider_footer_left">
+                                            <div class="album_slaider">Название альбома
+                                                <span id="number_photo">1</span> <span>of</span> <span id="quantity_photo_in_album">42</span>
+                                            </div>
+                                            <div class="discription_photo_slaider">Подпись фотографии</div>
+                                        </div>
+                                        <div class="slaider_footer_right">
+                                            <div class="button_show_comments">
+                                                Комментарии <span>21</span>
+                                            </div>
+                                            <div class="slaider_photo_like">
+                                                <div class="block_like">
+                                                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                                    <div class="votes">12</div>
+                                                </div>
+                                                <div class="block_dislike">
+                                                    <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                                    <div class="votes">12</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="comments_photo_modal">
+                                    <div class="block_comments">
+                                        <div class="user_comment">
+                                            <div class="comments_base2" id="without_paddin">
+                                                <div class="more_comment_photo">
+                                                    Показать предыдущие
+                                                </div>
+                                                <div class="all_comment_for_photo">
+                                                    <div class="blockquote">
+                                                        <a href="#">
+                                                            <div class="coments_author">
+                                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                                            </div>
+                                                        </a>
+                                                        <div class="content_coment">
+                                                            <div class="coment_author_time">
+                                                                <a href="#">Дмитрий Мангура</a> </br>
+                                                                4 days, 23 hours ago
+                                                            </div>
+                                                            <div class="text_comment_slider">
+                                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
+                                                            </div>
+                                                            <footer>
+                                                                <a class="comment-reply-btn" href="#">Удалить</a>
+                                                                <a class="comment-reply-btn" href="#">Ответить</a>
+                                                            </footer>
+                                                            <div class="comment-reply">
+                                                                <form method="POST" action=".">
+                                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
+                                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
+                                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
+                                                                    <div id="div_id_content" class="form-group">
+                                                                        <label for="id_content" class="control-label  requiredField">
+                                                                            content<span class="asteriskField">*</span> </label>
+                                                                        <div class="controls ">
+                                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
+                                                                    </div>
+                                                                    <input type="hidden" name="parent_id" value="10">
+                                                                    <input type="submit" value="Ответить" class="btn btn-default">
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="blockquote">
+                                                        <a href="#">
+                                                            <div class="coments_author">
+                                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                                            </div>
+                                                        </a>
+                                                        <div class="content_coment">
+                                                            <div class="coment_author_time">
+                                                                <a href="#">Дмитрий Мангура</a> </br>
+                                                                4 days, 23 hours ago
+                                                            </div>
+                                                            <div class="text_comment_slider">
+                                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
+                                                            </div>
+                                                            <footer>
+                                                                <a class="comment-reply-btn" href="#">Удалить</a>
+                                                                <a class="comment-reply-btn" href="#">Ответить</a>
+                                                            </footer>
+                                                            <div class="comment-reply">
+                                                                <form method="POST" action=".">
+                                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
+                                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
+                                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
+                                                                    <div id="div_id_content" class="form-group">
+                                                                        <label for="id_content" class="control-label  requiredField">
+                                                                            content<span class="asteriskField">*</span> </label>
+                                                                        <div class="controls ">
+                                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
+                                                                    </div>
+                                                                    <input type="hidden" name="parent_id" value="10">
+                                                                    <input type="submit" value="Ответить" class="btn btn-default">
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="blockquote">
+                                                        <a href="#">
+                                                            <div class="coments_author">
+                                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                                            </div>
+                                                        </a>
+                                                        <div class="content_coment">
+                                                            <div class="coment_author_time">
+                                                                <a href="#">Дмитрий Мангура</a> </br>
+                                                                4 days, 23 hours ago
+                                                            </div>
+                                                            <div class="text_comment_slider">
+                                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
+                                                            </div>
+                                                            <footer>
+                                                                <a class="comment-reply-btn" href="#">Удалить</a>
+                                                                <a class="comment-reply-btn" href="#">Ответить</a>
+                                                            </footer>
+                                                            <div class="comment-reply">
+                                                                <form method="POST" action=".">
+                                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
+                                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
+                                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
+                                                                    <div id="div_id_content" class="form-group">
+                                                                        <label for="id_content" class="control-label  requiredField">
+                                                                            content<span class="asteriskField">*</span> </label>
+                                                                        <div class="controls ">
+                                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
+                                                                    </div>
+                                                                    <input type="hidden" name="parent_id" value="10">
+                                                                    <input type="submit" value="Ответить" class="btn btn-default">
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="blockquote">
+                                                        <a href="#">
+                                                            <div class="coments_author">
+                                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                                            </div>
+                                                        </a>
+                                                        <div class="content_coment">
+                                                            <div class="coment_author_time">
+                                                                <a href="#">Дмитрий Мангура</a> </br>
+                                                                4 days, 23 hours ago
+                                                            </div>
+                                                            <div class="text_comment_slider">
+                                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
+                                                            </div>
+                                                            <footer>
+                                                                <a class="comment-reply-btn" href="#">Удалить</a>
+                                                                <a class="comment-reply-btn" href="#">Ответить</a>
+                                                            </footer>
+                                                            <div class="comment-reply">
+                                                                <form method="POST" action=".">
+                                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
+                                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
+                                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
+                                                                    <div id="div_id_content" class="form-group">
+                                                                        <label for="id_content" class="control-label  requiredField">
+                                                                            content<span class="asteriskField">*</span> </label>
+                                                                        <div class="controls ">
+                                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
+                                                                    </div>
+                                                                    <input type="hidden" name="parent_id" value="10">
+                                                                    <input type="submit" value="Ответить" class="btn btn-default">
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="blockquote">
+                                                        <a href="#">
+                                                            <div class="coments_author">
+                                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                                            </div>
+                                                        </a>
+                                                        <div class="content_coment">
+                                                            <div class="coment_author_time">
+                                                                <a href="#">Дмитрий Мангура</a> </br>
+                                                                4 days, 23 hours ago
+                                                            </div>
+                                                            <div class="text_comment_slider">
+                                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
+                                                            </div>
+                                                            <footer>
+                                                                <a class="comment-reply-btn" href="#">Удалить</a>
+                                                                <a class="comment-reply-btn" href="#">Ответить</a>
+                                                            </footer>
+                                                            <div class="comment-reply">
+                                                                <form method="POST" action=".">
+                                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
+                                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
+                                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
+                                                                    <div id="div_id_content" class="form-group">
+                                                                        <label for="id_content" class="control-label  requiredField">
+                                                                            content<span class="asteriskField">*</span> </label>
+                                                                        <div class="controls ">
+                                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
+                                                                    </div>
+                                                                    <input type="hidden" name="parent_id" value="10">
+                                                                    <input type="submit" value="Ответить" class="btn btn-default">
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="add_comments">
+                                            <div class="comments_base">
+                                                <div class="coments_author">
+                                                    <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                                </div>
+                                                <div class="comment_placeholder">
+                                                    <form method="POST" action=".">
+                                                        <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
+                                                        <div class="forPlaceholder">
+                                                            <input id="id_content" name="content" placeholder="Оставить комментарий..." type="text" />
+                                                        </div>
+                                                        <input type="submit" value="Post comment" class="btn btn-default btn-send-comment">
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- <div class="modal_comments">
-                            </div> -->
                         </div>
                     </div>
                     <!-- Конец слайдера  модльном окне -->

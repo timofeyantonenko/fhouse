@@ -768,16 +768,17 @@ ul {
 
 #slaider_modal .modal-dialog {
     height: 90vh !important;
-    width: 80vw !important;
+    width: 90vw !important;
     margin: 5vh auto !important;
     align-self: center;
 }
 
 .modal_photos {
-    height: 90%;
-    width: 100%;
+    height: 90vh;
     background-color: #1c1d1e;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal_footer {
@@ -810,7 +811,6 @@ ul {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100%;
     overflow: hidden;
 }
 
@@ -1042,6 +1042,17 @@ ul {
 
 
 /*Footer modal*/
+
+.flex_modal {
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+}
+
+#comments_photo_modal {
+    width: 350px;
+    background-color: #fafafa;
+}
 
 .modal_footer {
     color: #fafafa;
@@ -1327,4 +1338,10 @@ ul {
 .comment_placeholder input[type=submit] {
     margin-top: 10px;
     float: right;
+}
+
+/*Ксс для комментрриев в модальном окне*/
+
+#comments_photo_modal .block_comments {
+    height: 90vh !important;
 }

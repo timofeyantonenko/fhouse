@@ -364,15 +364,6 @@ $(document).ready(function() {
             $(".head_comment_slider").addClass("head_comment_slider_open");
         }
 
-        $("#comments_photo_slider").scrollTop($("#comments_photo_slider").height());
-
-        // $('html, body').animate({
-        //         scrollTop: $(document).height() - $(window).height()
-        //     },
-        //     1400,
-        //     "easeOutQuint"
-        // );
-
     });
 
     $(".head_comment_slider").on("click", function() {
@@ -380,7 +371,18 @@ $(document).ready(function() {
         $(this).delay(1000).removeClass("head_comment_slider_open");
     });
 
+    // Размер контейнера для фото в модальном окне 
 
+    var width_modal_dialog = ($(window).width() * 0.9);
+    var width_comments_modal = $("#comments_photo_modal").width();
+    var modal_container_width = width_modal_dialog - width_comments_modal;
+    $(".modal_photos").css({"width":modal_container_width})
+
+    var height_modal_dialog = ($(window).height() * 0.9);
+    var height_footer_modal = $(".modal_footer").height();
+    var modal_photo_height = height_modal_dialog - height_footer_modal;
+    $("#flex_container_img_modal").css({"height":modal_photo_height});
+    
     // Фиксация блока меньшей высоты
 
     $(window).load(function() {
