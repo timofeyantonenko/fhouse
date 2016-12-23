@@ -326,8 +326,12 @@ $(document).ready(function() {
     $('html').keydown(function(eventObject) {
         if ($('#slaider_modal').hasClass('in') && event.keyCode == 37) {
             modal_left();
+            size_img_modal();
+            return false;
         } else if ($('#slaider_modal').hasClass('in') && event.keyCode == 39) {
             modal_right();
+            size_img_modal();
+            return false;
         }
     });
 
