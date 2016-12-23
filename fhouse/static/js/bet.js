@@ -1,4 +1,14 @@
 $(document).ready(function() {
+
+    
+
+    // Background position for img column right
+    for (var i = 0; i < $(".bets_one_championship").length; i++) {
+        $(".bets_one_championship").eq(i).css({
+            "background-position-y": (-60 * i)
+        });
+    }
+
     $('.img_one_main_match img').each(function(i) {
         if ($(this).css("height") < $(this).parent().css("height")) {
             $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });

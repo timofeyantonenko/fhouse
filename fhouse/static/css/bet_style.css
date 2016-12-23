@@ -284,52 +284,6 @@ h4 {
 }
 
 
-/*Right colum for prognosis*/
-
-.one_championship {
-    width: 100%;
-    height: 60px;
-    padding: 10px 10px;
-    border-top: 1px solid #ddd;
-}
-
-.img_one_championship {
-    height: 40px;
-    width: auto;
-    float: left;
-}
-
-.img_one_championship img {
-    height: 100%;
-    width: auto;
-}
-
-.div_for_championships_all_prognosis {
-    position: relative;
-    float: left;
-    width: 100%;
-    background-color: #fafafa;
-}
-
-.championships_country {
-    float: right;
-    height: 40px;
-}
-
-.championships_country p {
-    float: right;
-    color: #e90052;
-    margin-bottom: 0px;
-    font-size: 12px;
-}
-
-.div_for_championships_all_prognosis h3,
-.div_for_championships_all_prognosis h4 {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-
 /*Nav prognosis*/
 
 .table_nav_prognossis {
@@ -340,7 +294,7 @@ h4 {
     font-size: 14px;
 }
 
-..table_nav_prognossis ul {
+.table_nav_prognossis ul {
     margin-bottom: 0px;
 }
 
@@ -876,70 +830,6 @@ h4 {
 }
 
 
-/*Подсказки меню */
-
-dfn {
-    padding: 0 0.4em;
-    font-style: normal;
-    position: relative;
-}
-
-dfn::after {
-    content: attr(data-info);
-    height: 24px;
-    display: inline;
-    position: absolute;
-    bottom: -10%;
-    left: -50%;
-    opacity: 0;
-    width: auto;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 12px;
-    padding: 6px 8px;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 5px;
-    color: #fff;
-    pointer-events: none;
-    /* This prevents the box from apearing when hovered. */
-    transition: opacity 250ms, top 250ms;
-}
-
-dfn::before {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -10%;
-    left: 50%;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    border: solid transparent 5px;
-    border-bottom-color: rgba(0, 0, 0, 0.8);
-    transition: opacity 250ms, top 250ms;
-}
-
-dfn:hover {
-    z-index: 2;
-}
-
-
-/* Keeps the info boxes on top of other elements */
-
-dfn:hover::after,
-dfn:hover::before {
-    opacity: 1;
-}
-
-dfn:hover::after {
-    top: 50px;
-}
-
-dfn:hover::before {
-    top: 40px;
-}
-
-
 /*Ставка недели*/
 
 .one_main_match_bet {
@@ -1055,3 +945,26 @@ div.choose_result_active:hover {
     color: blue;
     margin-right: 5px;
 }
+
+
+/*Прогнозы на все матчи правая колонка*/
+
+#bets_all_championships {
+    width: 100%;
+    background-color: #fafafa;
+    padding: 10px 15px;
+}
+
+.bets_one_championship {
+    width: 100%;
+    height: 60px;
+    background-image: url(../img/all_championship_right_column.jpg);
+    background-repeat: no-repeat;
+    background-position-x: -10px;
+    cursor: pointer;
+}
+
+.bets_one_championship:hover {
+    opacity: 0.7;
+}
+

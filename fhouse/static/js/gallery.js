@@ -265,6 +265,7 @@ $(document).ready(function() {
     // При отрытии модального окна
     $('.photo_row img').on("click", function() {
 
+
         var link_photo = $(this).attr('src');
         $('.container_photo_in_modal img').attr("src", link_photo);
         // var open_poto = $("#list_src_foto_modal").find("li").text(link_photo);
@@ -278,7 +279,7 @@ $(document).ready(function() {
     });
     // Преключения между фотками в модальном окне
 
-    $('.area_for_right_arrow').on("click", function() {
+    function modal_right() {
 
         var this_href = $('.container_photo_in_modal img').attr('src');
         var this_src = $("#list_src_foto_modal li").find().text(this_href);
@@ -302,13 +303,9 @@ $(document).ready(function() {
 
             };
         });
+    };
 
-        size_img_modal();
-        return false;
-
-    });
-
-    $('.area_for_left_arrow').on("click", function() {
+    function modal_left() {
         var this_href = $('.container_photo_in_modal img').attr('src');
         var this_src = $("#list_src_foto_modal li").find().text(this_href);
 
@@ -324,7 +321,24 @@ $(document).ready(function() {
                 };
             };
         });
+    }
 
+    $('html').keydown(function(eventObject) {
+        if ($('#slaider_modal').hasClass('in') && event.keyCode == 37) {
+            modal_left();
+        } else if ($('#slaider_modal').hasClass('in') && event.keyCode == 39) {
+            modal_right();
+        }
+    });
+
+    $('.area_for_right_arrow').on("click", function() {
+        modal_right();
+        size_img_modal();
+        return false;
+    });
+
+    $('.area_for_left_arrow').on("click", function() {
+        modal_left();
         size_img_modal();
         return false;
     });

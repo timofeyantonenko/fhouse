@@ -120,6 +120,8 @@ $(document).ready(function() {
         });
     });
 
+    
+
     $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
 
     var width_parent_statinfo = $(".statsHero .statInfo").parent().width() - 120;
