@@ -1,26 +1,28 @@
 $(document).ready(function() {
 
-    
-
     // Background position for img column right
     for (var i = 0; i < $(".bets_one_championship").length; i++) {
         $(".bets_one_championship").eq(i).css({
             "background-position-y": (-60 * i)
         });
-    }
+    };
 
-    $('.img_one_main_match img').each(function(i) {
-        if ($(this).css("height") < $(this).parent().css("height")) {
-            $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
-            $(this).parent().css({ "display": "flex", "justify-content": "center" });
-        }
+    // Background position nav all bets
+    for (var i = 0; i < $(".change_champ").length; i++) {
+        $(".change_champ").eq(i).css({
+            "background-position-x": ((-83 * i) - 25)
+        });
+    };
+
+    // Active champ in nav all bets
+    $("#all_bets_nav .change_champ").eq(0).addClass("active_champ");
+
+    $(".change_champ").on("click", function() {
+        $(".change_champ").removeClass("active_champ");
+        $(this).addClass("active_champ");
     });
-    $('.img_one_main_match img').each(function(i) {
-        if ($(this).css("width") < $(this).parent().css("width")) {
-            $(this).css({ "width": "100%", "align-self": "center", "height": "auto", "margin-top": "-15%" });
-            $(this).parent().css({ "display": "block", });
-        }
-    });
+
+
 
     $(".navigation_between_preview .nav_ul li:first-child a").addClass("active_nav_ul");
 
@@ -103,26 +105,26 @@ $(document).ready(function() {
     $(".nav_ul_tour li:first-child div").addClass("active_menu");
 
 
-    $(".nav_ul_tour li ").click(function(e) {
-        e.preventDefault();
+    $(".nav_ul_tour li ").click(function() {
         $(".nav_ul_tour li div").removeClass('active_menu');
         $(this).children("div").addClass('active_menu');
-
     });
 
-    $(".navigation_between_championships .nav_ul li:first-child").addClass("active_champ");
+    // Стрелки для просмотра туров которые не поместились в основной блок
 
-    $(".navigation_between_championships .nav_ul li").click(function(e) {
-        e.preventDefault();
-        $(".navigation_between_championships .nav_ul li").removeClass('active_champ');
-        $(this).addClass('active_champ');
-
+    $("#arrow_left_tour").on("click", function() {
+        $(".nav_ul_tour").animate({ 'margin-left': '+=60px' }, 500, function() {
+            // Анимация завершена.
+        });
     });
 
-    // Всплыващая подсказка
-    $(function() {
-        $("[data-toggle='tooltip']").tooltip();
+    $("#arrow_right_tour").on("click", function() {
+        $(".nav_ul_tour").animate({ 'margin-left': '-=60px' }, 500, function() {
+            // Анимация завершена.
+        });
     });
+
+    alert($(".nav_ul_tour").width())
 
 
 });

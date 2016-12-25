@@ -6,127 +6,176 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-9">
-            <!-- Навигация по чемпионатам  -->
-            <div class="navigation_between_championships">
-                <ul class="nav_ul">
-                    <!-- {% for section in sections %}
-                    <li><a href="#">{{ section.section_title }}<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></li>
-                    {% endfor %} -->
-                    <li>
-                        <a href="#" data-toggle="tooltip" data-placement="left" title="Подсказка">
-                            <div class="logo_champ">
-                                <img src="http://www.skynetdth.com/images/Premier_League_Logo.png" alt="">
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href=" # ">
-                            <div class="logo_champ "><img src="http://files.laliga.es/seccion_logos/laliga-v-600x600.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://s-media-cache-ak0.pinimg.com/564x/7d/94/9e/7d949ef54a6dfc5c3b084c1dd0e40e73.jpg " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="http://4.bp.blogspot.com/-3d5o6B2CVH8/VpkvUqcMVTI/AAAAAAAA2O8/ONQASmjz69U/s550/New-Serie-A-Logo-Revealed%2B%25283%2529.jpg " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://c8234d680a5ae618106c-6b3bd0826ac1075e2d1b52b94a2e0f63.ssl.cf1.rackcdn.com/12642_75403b28.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://cdn.tribuna.com/fetch/?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fru%2F8%2F86%2FRFPL_2015-16_logo_2.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="http://www.fpl.ua/img/main/upl_logo_690.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://upload.wikimedia.org/wikipedia/ru/thumb/0/0a/UEFA_Champions_League_logo.svg/1067px-UEFA_Champions_League_logo.svg.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://upload.wikimedia.org/wikipedia/en/e/e4/Uefa_europa_league_logo_20152018.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://upload.wikimedia.org/wikipedia/ru/f/f7/FIFA_World_Cup_2018_Logo.png " alt=" "></div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- Переключатель между турами -->
-            <div class="navigation_between_tour ">
-                <ul class="nav_ul_tour ">
-                    <li>
-                        <a href="# ">1 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">2 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">3 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">4 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">5 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">6 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">7 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">8 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">9 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">10 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                </ul>
-            </div>
             <!-- Превью тура -->
             <div class="container_all_preview ">
+                <!-- Навигация по чемпионатам  -->
+                <div id="all_bets_nav">
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                </div>
+                <!-- Переключатель между турами -->
+                <div class="navigation_between_tour ">
+                    <div id="arrow_left_tour"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                    <div id="arrow_right_tour"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                    <ul class="nav_ul_tour ">
+                        <li>
+                            <a href="# ">1 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">2 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">3 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">4 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">5 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">6 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">7 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">8 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">9 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">10 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                         <li>
+                            <a href="# ">11 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">12 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">13 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">14 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">15 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">16 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">17 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">18 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">19 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                        <li>
+                            <a href="# ">20 тур</a>
+                            <div class="hover_menu "></div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="col-lg-3 ">
-            <a href="#" data-toggle="tooltip" title="Текст всплывающей подсказки">
-                Ссылка с tooltip
-            </a>
-            <!-- Скрипт для инициализации элементов на странице, имеющих атрибут data-toggle="tooltip" -->
-            <script>
-            // после загрузки страницы
-            $(function() {
-                // инициализировать все элементы на страницы, имеющих атрибут data-toggle="tooltip", как компоненты tooltip
-                $('[data-toggle="tooltip"]').tooltip()
-            })
-            </script>
+            <!-- Таблица рейтинга прогнозистов -->
+            <div class="table_nav_forecasters">
+                <div>Турнирная таблица</div>
+                <div class="tab">
+                    <ul>
+                        <li>Чемпионаты</li>
+                        <li>Еврокубки</li>
+                        <li>ЧМ 2018</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="table_top_forecasters">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td id="nuberTop">Pos</td>
+                            <td>Команда</td>
+                            <td>И</td>
+                            <td>РГ</td>
+                            <td>О</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                <div class="user_foto">
+                                    <img src="https://pp.vk.me/c837131/v837131374/f3fd/ErlDE6LVkJQ.jpg" alt="">
+                                </div>
+                                <div class="name_user-prognosis">
+                                    <div class="user_prognosist">
+                                        <a href="#">
+                                            Барселона
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>14</td>
+                            <td>+12</td>
+                            <td>36</td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="5">
+                                <span class="full_list_record">
+                                        <a href="#">
+                                            Полный Cписок
+                                            <span id="arrow_record" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                                </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
