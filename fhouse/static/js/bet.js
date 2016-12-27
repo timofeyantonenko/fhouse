@@ -1,5 +1,46 @@
 $(document).ready(function() {
 
+    $(function max_height_block_comment() {
+        var height_block_preview = $(".preview_one_championship").height();
+        $(".block_comments_for_one_champ").css({ "height": height_block_preview });
+    });
+
+    $(function max_height_all_comments() {
+        var height_title_comment = $(".title_comments").height();
+        var height_add_com = $(".add_comment_prev").height()
+        var height_parent_all_comments = $(".block_comments_for_one_champ").height();
+        $(".block_comments_preview").css({
+            "height": (height_parent_all_comments - height_add_com - height_title_comment - 20)
+        })
+    });
+
+    $(function() {
+        $('#type_comment').on('keyup paste', function() {
+
+            var height_area = $("#type_comment").height()
+            var $el = $(this),
+                offset = $el.innerHeight() - $el.height();
+            if ($el.innerHeight < this.scrollHeight) {
+                $el.height(this.scrollHeight - offset);
+            } else {
+                console.log($(this).height());
+                $el.height(1);
+                $el.height(this.scrollHeight - offset);
+            }
+
+            $(function max_height_all_comments() {
+                var height_title_comment = $(".title_comments").height();
+                var height_add_com = $(".add_comment_prev").height()
+                var height_parent_all_comments = $(".block_comments_for_one_champ").height();
+                $(".block_comments_preview").css({
+                    "height": (height_parent_all_comments - height_add_com - height_title_comment - 20)
+                })
+            });
+
+        });
+    });
+
+
     // Background position for img column right
     for (var i = 0; i < $(".bets_one_championship").length; i++) {
         $(".bets_one_championship").eq(i).css({
@@ -110,21 +151,56 @@ $(document).ready(function() {
         $(this).children("div").addClass('active_menu');
     });
 
+    // alert(parseInt($(".nav_ul_tour li ").css('margin-left')) * 10)
+
     // Стрелки для просмотра туров которые не поместились в основной блок
 
-    $("#arrow_left_tour").on("click", function() {
-        $(".nav_ul_tour").animate({ 'margin-left': '+=60px' }, 500, function() {
-            // Анимация завершена.
-        });
-    });
+    function left_tour() {
+        var width_li_tour = $(".nav_ul_tour li").width();
+        var margin_left_ul = parseInt($(".nav_ul_tour").css('margin-left'));
 
-    $("#arrow_right_tour").on("click", function() {
-        $(".nav_ul_tour").animate({ 'margin-left': '-=60px' }, 500, function() {
-            // Анимация завершена.
-        });
-    });
+        if (margin_left_ul < 0) {
+            $(this).unbind('click');
+            $(".nav_ul_tour").animate({ 'margin-left': '+=' + width_li_tour }, 300, function() {
+                $('#arrow_left_tour').bind('click', left_tour);
+            });
+        } else {
+            return;
+        };
+    }
 
-    alert($(".nav_ul_tour").width())
+    function right_tour() {
+        var width_li_tour = $(".nav_ul_tour li").width();
+        var li_lenght = $(".nav_ul_tour li").length;
+        var margin_left_ul = parseInt($(".nav_ul_tour").css('margin-left'));
+        var width_ul = $(".nav_ul_tour").width();
+        if ((li_lenght * width_li_tour) <= width_ul) {
+            return;
+        } else {
+            var max_click_right = ((li_lenght * width_li_tour) - width_ul - width_li_tour);
+            if ((margin_left_ul - max_click_right) == 0) {
+                return;
+            } else {
+                $(this).unbind('click');
+                $(".nav_ul_tour").animate({ 'margin-left': '-=' + width_li_tour }, 300, function() {
+                    $('#arrow_right_tour').bind('click', right_tour);
+                });
+            }
+        }
+        return;
+    }
+
+    $("#arrow_left_tour").bind('click', left_tour);
+
+    $("#arrow_right_tour").bind('click', right_tour);
+
+    // Выбор секции в турнирной таблицы 
+    $(".one_division_nav:first-child").addClass("active_tab_section");
+
+    $(".one_division_nav").on("click", function() {
+        $(".one_division_nav").removeClass("active_tab_section");
+        $(this).addClass("active_tab_section");
+    });
 
 
 });
