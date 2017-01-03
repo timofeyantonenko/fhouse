@@ -1,20 +1,14 @@
-{% extends  "base.html" %}
-{% load staticfiles%}
-{% block head_title %}{{ title }}{% endblock head_title %}
-{% block head_extra %}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <link rel="stylesheet" href='{% static "css/login.css" %}'>
-{% endblock head_extra %}
-{% block content %}
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-6">
-                <h2>Твои Персональные данные</h2>
+{% extends "base.html" %} {% load staticfiles%} {% block head_title %}{{ title }}{% endblock head_title %} {% block head_extra %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+<link rel="stylesheet" href='{% static "css/login.css" %}'> {% endblock head_extra %} {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <main>
+                <h2>Твои персональные данные</h2>
                 <form method="post" enctype="multipart/form-data"> {% csrf_token %}
                     <div class="formLogin">
                         <label for="{{form.first_name.id_for_label}}">
@@ -257,18 +251,16 @@
                             <span class="unimportant">*Необязательно</span>
                         </label>
                         <div class="file-upload forPlaceholder" data-text="Выберите файл">
-                             {{ form.avatar }}
+                            {{ form.avatar }}
                         </div>
                     </div>
                     <button class="finishLogin" type="submit">
                         Завершить регистрацию <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
                     </button>
-
-            </form>
+                </form>
+            </main>
         </div>
         <div class="col-lg-3"></div>
     </div>
-        </div>
-{{ form.errors }}
-
-{% endblock %}
+</div>
+{{ form.errors }} {% endblock %}
