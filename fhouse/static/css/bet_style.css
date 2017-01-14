@@ -1,34 +1,15 @@
-body {
-    background-color: #eaeaea;
-    font-size: 1.6rem;
-}
-
 .comtainer {
     margin: 0px !important;
 }
 
-.my_weeks_bets .row {
-    margin: 0px !important;
-}
-
 .preview_main_weeks_matches,
-.my_weeks_bets,
 .div_for_championships_all_prognosis {
     background-color: #fafafa;
     border: 1px solid #CCD1D9;
 }
 
-.preview_main_weeks_matches,
-.my_weeks_bets {
-    padding: 20px;
-}
-
 .preview_main_weeks_matches {
-    padding-top: 40px;
-}
-
-.my_weeks_bets {
-    margin-bottom: 20px;
+    padding: 20px;
 }
 
 .fixed {
@@ -121,11 +102,6 @@ body {
     margin: 0% 0% 0% 0% !important;
 }
 
-h2 {
-    margin: 0px !important;
-    margin: 0px !important;
-}
-
 .match_stats li {
     list-style: none;
 }
@@ -206,513 +182,7 @@ h4 {
 }
 
 
-/*ТАблица превью */
-
-.name_championship {
-    background-color: #e90052;
-    color: #fafafa;
-    height: 40px;
-    width: 100%;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 600;
-}
-
-.this_club_in_table {
-    background-color: #FCF1B7;
-}
-
-.table_championship img {
-    height: 20px;
-    max-width: 20px;
-}
-
-.table_championship {
-    border: 1px solid #e8e8e8;
-    border-top: 0;
-    border-radius: 0 0 3px 3px;
-    font-size: 12px;
-}
-
-.table_championship table {
-    margin-bottom: 0px;
-}
-
-.table_championship table tr {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-
-/*Последние результаты*/
-
-.last_result img {
-    height: 20px;
-    width: auto;
-}
-
-.last_result table tr td {
-    text-align: center;
-    font-size: 12px;
-}
-
-.defeat,
-.draw,
-.victory {
-    padding: 4px;
-    text-align: center;
-    color: #fff;
-    border-radius: 20%;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 11px;
-    cursor: pointer;
-    font-weight: 600;
-    display: none;
-}
-
-.defeat {
-    background-color: #d81920;
-}
-
-.draw {
-    background-color: #76766f;
-}
-
-.victory {
-    background-color: #13cf00;
-}
-
-
-/*Right colum for prognosis*/
-
-.one_championship {
-    width: 100%;
-    height: 60px;
-    padding: 10px 10px;
-    border-top: 1px solid #ddd;
-}
-
-.img_one_championship {
-    height: 40px;
-    width: auto;
-    float: left;
-}
-
-.img_one_championship img {
-    height: 100%;
-    width: auto;
-}
-
-.div_for_championships_all_prognosis {
-    position: relative;
-    float: left;
-    width: 100%;
-    background-color: #fafafa;
-}
-
-.championships_country {
-    float: right;
-    height: 40px;
-}
-
-.championships_country p {
-    float: right;
-    color: #e90052;
-    margin-bottom: 0px;
-    font-size: 12px;
-}
-
-.div_for_championships_all_prognosis h3,
-.div_for_championships_all_prognosis h4 {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-
-/*Nav prognosis*/
-
-.table_nav_prognossis {
-    background-color: #00ff87;
-    height: 80px;
-    border-radius: 3px 3px 0 0;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-..table_nav_prognossis ul {
-    margin-bottom: 0px;
-}
-
-.table_nav_prognossis a {
-    color: #242424;
-}
-
-.table_nav_prognossis td:nth-child(2+3n) {
-    padding-left: 0px !important;
-}
-
-.table_nav_prognossis td:nth-child(1+3n) {
-    padding-right: 0px !important;
-}
-
-.table_nav_prognossis div:first-child {
-    height: 39px;
-    line-height: 39px;
-    color: #38003c;
-    font-weight: 600;
-    font-size: 18px;
-}
-
-.table_nav_prognossis tr:nth-child(2) {
-    background-color: #e4e4e4;
-}
-
-.table_nav_prognossis .tab ul {
-    display: flex;
-    width: 100%;
-    padding: 0 30% 0 20px;
-}
-
-.table_nav_prognossis .tab_active {
-    background-color: #fafafa !important;
-    color: #1d2f3e !important;
-}
-
-.table_nav_prognossis .tab ul li {
-    background: #0db566;
-    color: #fff;
-    display: block;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    font-size: 1.1rem;
-    position: relative;
-    text-decoration: none;
-    text-align: center;
-    transition: all .2s;
-    border-radius: 3px 3px 0 0;
-    cursor: pointer;
-}
-
-.table_nav_prognossis .tab ul li:hover {
-    background-color: #188b55;
-}
-
-.table_nav_prognossis .tab ul li:not(:last-child) {
-    margin-right: .5rem;
-}
-
-.table_nav_prognossis .table_nav_forecasters {
-    height: 80px;
-    background-color: #00ff87;
-    border-radius: 3px 3px 0 0;
-}
-
-
-/*Table top-10*/
-
-.table > tbody > tr:first-child > td {
-    border-top: 0px !important;
-    font-weight: bold;
-    color: #666;
-}
-
-.table_top_forecasters a {
-    color: #242424;
-}
-
-.table_top_forecasters td:nth-child(2+3n) {
-    padding-left: 0px !important;
-}
-
-.table_top_forecasters td:nth-child(1+3n) {
-    padding-right: 0px !important;
-}
-
-.table_nav_forecasters div:first-child {
-    height: 39px;
-    line-height: 39px;
-    text-align: center;
-    color: #fafafa;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.table_nav_forecasters tr:nth-child(2) {
-    background-color: #e4e4e4;
-}
-
-.tab ul {
-    display: flex;
-    width: 100%;
-    padding: 0 .5rem;
-}
-
-.tab_active {
-    background-color: #fafafa !important;
-    color: #1d2f3e !important;
-}
-
-.tab ul li {
-    background: #b60040;
-    color: #fff;
-    padding: 1.3rem 1rem;
-    display: block;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    font-size: 1.1rem;
-    position: relative;
-    text-decoration: none;
-    text-align: center;
-    transition: all .2s;
-    border-radius: 3px 3px 0 0;
-    cursor: pointer;
-}
-
-.tab ul li:hover {
-    background-color: #83002e;
-}
-
-.tab ul li:not(:last-child) {
-    margin-right: .5rem;
-}
-
-.table_nav_forecasters {
-    height: 80px;
-    background-color: #e90052;
-    border-radius: 3px 3px 0 0;
-}
-
-.user_foto {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    overflow: hidden;
-    float: left;
-    margin-right: 10px;
-}
-
-.user_foto img {
-    width: 100%;
-    height: auto;
-}
-
-.user_prognosist {
-    line-height: 35px;
-}
-
-.table_top_forecasters {
-    font-size: 12px;
-    border-right: 1px solid #CCD1D9;
-    border-left: 1px solid #CCD1D9;
-    border-bottom: 1px solid #CCD1D9;
-    background-color: #fafafa;
-    margin-bottom: 20px;
-}
-
-.table_top_forecasters tr {
-    height: 100%;
-    line-height: 35px;
-}
-
-.table_top_forecasters tr td {
-    padding: 2px 8px !important;
-    vertical-align: middle !important;
-}
-
-.table_top_forecasters tr:first-child td {
-    padding: 8px !important;
-}
-
-.table_top_forecasters table {
-    margin-bottom: 0px;
-}
-
-.table_top_forecasters table tr:first-child {
-    color: #666;
-}
-
-.img_country_forecaster {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    width: auto;
-    float: left;
-}
-
-.img_country_forecaster img {
-    display: inline-block;
-    margin-right: 1rem;
-    width: auto;
-    max-height: 15px;
-    box-sizing: border-box;
-    align-self: center;
-}
-
-.full_list_record {
-    box-sizing: border-box;
-    float: left;
-    background-color: #e8e8e8;
-    display: inline-block;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    margin: 3%;
-    padding: 3% 3%;
-    border-radius: 3px;
-    width: 94%;
-    font-size: 12px;
-}
-
-.full_list_record:hover {
-    background-color: #e90052;
-}
-
-.full_list_record:hover a {
-    color: #fafafa;
-    text-decoration: none;
-}
-
-#arrow_record {
-    float: right;
-}
-
-
-/*End table top-10*/
-
-.onePrognosisLast {
-    margin: 0% 0% 0% 0% !important;
-    padding: 4% 4% 4% 4% !important;
-}
-
-
 /*Навигация между превью */
-
-.navigation_between_preview {
-    background-color: #292a2e;
-    color: #fff;
-}
-
-.navigation_between_preview .nav_ul {
-    display: block;
-    height: 43px;
-    padding: 0px;
-    margin-bottom: 0px;
-}
-
-.navigation_between_preview .nav_ul li {
-    list-style: none;
-    float: left;
-    display: inline-block;
-    position: relative;
-}
-
-.navigation_between_preview .nav_ul li span {
-    position: absolute;
-    top: 34px;
-    right: 14px;
-    height: 12px;
-    display: none;
-}
-
-.navigation_between_preview .nav_ul li a:hover span {
-    color: #fff;
-}
-
-.navigation_between_preview .nav_ul li a {
-    color: #fff;
-    font-size: 12px;
-    display: block;
-    padding: 13px 14px;
-    font-weight: 600;
-    position: relative;
-}
-
-.navigation_between_preview .nav_ul li a:focus {
-    text-decoration: none;
-}
-
-.navigation_between_preview .active_nav_ul {
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.navigation_between_preview .active_nav_ul span {
-    display: block !important;
-    color: #fff;
-}
-
-.navigation_between_preview .nav_ul li:nth-child(1) a:hover,
-.navigation_between_preview ul li:nth-child(1) .active_nav_ul,
-.navigation_between_preview .nav_ul li:nth-child(6) a:hover,
-.navigation_between_preview ul li:nth-child(6) .active_nav_ul {
-    text-decoration: none;
-    background-color: #ec0000;
-    color: #fafafa;
-}
-
-.navigation_between_preview .nav_ul li:nth-child(2) a:hover,
-.navigation_between_preview ul li:nth-child(2) .active_nav_ul,
-.navigation_between_preview .nav_ul li:nth-child(7) a:hover,
-.navigation_between_preview ul li:nth-child(7) .active_nav_ul {
-    text-decoration: none;
-    background-color: #0091ff;
-    color: #fafafa;
-}
-
-.navigation_between_preview .nav_ul li:nth-child(3) a:hover,
-.navigation_between_preview ul li:nth-child(3) .active_nav_ul,
-.navigation_between_preview .nav_ul li:nth-child(8) a:hover,
-.navigation_between_preview ul li:nth-child(8) .active_nav_ul {
-    text-decoration: none;
-    background-color: #ff7d00;
-    color: #fafafa;
-}
-
-.navigation_between_preview .nav_ul li:nth-child(4) a:hover,
-.navigation_between_preview ul li:nth-child(4) .active_nav_ul,
-.navigation_between_preview .nav_ul li:nth-child(9) a:hover,
-.navigation_between_preview ul li:nth-child(9) .active_nav_ul {
-    text-decoration: none;
-    background-color: #2446a3;
-    color: #fafafa;
-}
-
-.navigation_between_preview .nav_ul li:nth-child(5) a:hover,
-.navigation_between_preview ul li:nth-child(5) .active_nav_ul,
-.navigation_between_preview .nav_ul li:nth-child(10) a:hover,
-.navigation_between_preview ul li:nth-child(10) .active_nav_ul {
-    text-decoration: none;
-    background-color: #ffba14;
-    color: #fafafa;
-}
-
-.navigation_between_preview .channel_view {
-    width: 100%;
-    height: 20px;
-    line-height: 20px;
-}
-
-.channel_view h4 {
-    float: left;
-    margin-right: 15px;
-    font-size: 20px !important;
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-.channel_view img {
-    height: 20px;
-    float: left;
-    width: auto;
-    margin-right: 15px;
-}
 
 .fixed_col {
     position: fixed;
@@ -733,113 +203,74 @@ h4 {
 .container_all_preview {
     background-color: #fafafa;
     border: 1px solid #CCD1D9;
-    border-top: 0px solid #fff !important;
     padding: 20px;
+    overflow: hidden;
 }
 
 
 /*Навигация между статьями */
 
-.navigation_between_championships {
-    /*background-color: #292a2e;*/
-    background-color: #fafafa;
-    border-top: 1px solid #CCD1D9;
-    border-left: 1px solid #CCD1D9;
-    border-right: 1px solid #CCD1D9;
-}
-
-.navigation_between_championships a {
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.navigation_between_championships .nav_ul {
-    display: block;
+#all_bets_nav {
+    width: 100%;
     height: 60px;
-    padding: 0px;
-    margin-bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.navigation_between_championships .nav_ul li {
-    list-style: none;
-    float: left;
-    display: inline-block;
-    position: relative;
-    opacity: .4;
-}
-
-.navigation_between_championships .nav_ul li a {
-    font-size: 12px;
-    display: block;
-    padding: 0 20px;
-    font-weight: 600;
-    position: relative;
-    display: block;
+.change_champ {
+    width: 63px;
     height: 60px;
+    background-image: url(../img/menu_nav.png);
+    background-position-y: 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    opacity: 0.3;
 }
 
-.navigation_between_championships .nav_ul li a:focus {
-    text-decoration: none;
-}
-
-.navigation_between_championships .active_nav_ul {
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.navigation_between_championships .nav_ul li:hover {
+.change_champ:hover {
     opacity: 1;
 }
 
 .active_champ {
-    opacity: 1 !important;
+    opacity: 1;
 }
-
-.logo_champ {
-    height: 60px;
-    padding: 10px 0px;
-    display: flex;
-    justify-content: center;
-}
-
-.logo_champ img {
-    align-self: center;
-    height: 40px;
-    width: auto;
-    position: relative;
-}
-
-
-/*.active_champ img {
-    transform: scale(1.3);
-    transition: all .1s ease-in-out;
-}*/
 
 
 /*Навигация между турами */
 
 .navigation_between_tour {
+    width: calc(100% + 44.5px);
+    margin-left: -22.25px;
+    padding: 0px 20px;
     height: 50px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
     position: relative;
-    background: #fff;
-    border-left: 1px solid #CCD1D9;
-    border-right: 1px solid #CCD1D9;
+    overflow: hidden;
+}
+
+.container_tour {
+    overflow: hidden;
+    width: calc(100% - 40px);
+    margin: 0px 20px;
+    height: 50px;
 }
 
 .nav_ul_tour {
-    display: block;
+    display: flex;
     height: 50px;
     padding: 0px;
     margin-bottom: 0px;
     overflow: hidden;
+    width: auto;
+    flex-direction: row;
 }
 
 .nav_ul_tour li {
     list-style: none;
-    float: left;
-    display: inline-block;
+    text-align: center;
     position: relative;
+    line-height: 50px;
 }
 
 .nav_ul_tour li:hover .hover_menu {
@@ -850,12 +281,8 @@ h4 {
     transition: all 0.15s ease-out;
 }
 
-.nav_ul_tour li {
-    line-height: 50px;
-}
-
 .nav_ul_tour li a {
-    padding: 4px 20px;
+    width: 60px;
     display: block;
     color: #76766f;
     text-decoration: none;
@@ -876,182 +303,1197 @@ h4 {
 }
 
 
-/*Подсказки меню */
+/*Arrow in nav between tour*/
 
-dfn {
-    padding: 0 0.4em;
-    font-style: normal;
+#arrow_left_tour,
+#arrow_right_tour {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    z-index: 2;
+    border-radius: 50%;
+    background-color: rgba(204, 204, 204, 0.86);
+    ;
+    color: #333;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#arrow_left_tour:hover,
+#arrow_right_tour:hover {
+    background-color: rgba(204, 204, 204, 0.39);
+}
+
+#arrow_left_tour {
+    left: 10px;
+}
+
+#arrow_right_tour {
+    right: 10px;
+}
+
+
+/*Прогнозы на все матчи правая колонка*/
+
+.name_right_column {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.name_right_column a {
+    font-weight: 600;
+    font-size: 22px;
+    color: #1d71b9;
+}
+
+.name_right_column a:hover,
+.name_right_column a:focus {
+    color: #1d71b9;
+}
+
+#bets_all_championships {
+    width: 100%;
+    background-color: #fafafa;
+    padding: 10px 15px 15px;
+}
+
+.bets_one_championship {
+    width: 100%;
+    height: 60px;
+    background-image: url(../img/right_column_all_champ.png);
+    background-repeat: no-repeat;
+    background-position-x: -10px;
+    cursor: pointer;
+}
+
+.bets_one_championship:hover .championship_title {
+    color: #1d71b9;
+}
+
+.bets_one_championship:hover {
+    background-image: url(../img/right_column_bet_hover.png);
+}
+
+#bets_all_championships {
+    border: 1px solid #CCD1D9;
+}
+
+#bets_all_championships>a {
+    color: #333
+}
+
+#bets_all_championships>a:hover {
+    text-decoration: none;
+    color: #333;
+}
+
+.championat_bet_preview {
+    margin-left: 60px;
+    height: 100%;
+    padding: 5px 0px;
+    width: calc( 100% - 60px);
+}
+
+.championship_title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.current_tour_right {
+    font-size: 13px;
+    color: #999a9c;
+    font-weight: 600;
+}
+
+
+/*Турнирные таблицы */
+
+#table_rating_forecasters {
+    margin-bottom: 20px;
+}
+
+#table_other_champs,
+#table_rating_forecasters {
+    width: 100%;
+}
+
+#table_other_champs .head_table,
+#table_rating_forecasters .head_table {
+    height: 80px;
+    width: 100%;
+    background-color: #e90052;
+    border-radius: 3px 3px 0 0;
+}
+
+.nav_table,
+.table_name {
+    height: 40px;
+    width: 100%;
+}
+
+.table_name {
+    text-align: center;
+    line-height: 40px;
+    color: #fafafa;
+    font-weight: 600;
+}
+
+.nav_table {
+    display: flex;
+    flex-direction: row;
+    padding: 0 5px;
+}
+
+.nav_table>div {
+    text-align: center;
+    color: #fafafa;
+    font-size: 12px;
+    line-height: 40px;
+    background-color: #b60040;
+    border-radius: 3px 3px 0 0;
+    cursor: pointer;
+    flex: 1;
+}
+
+.active_tab_section {
+    background-color: #fafafa !important;
+    color: #333 !important;
+}
+
+.nav_table>div:not(:last-child) {
+    margin-right: 5px;
+}
+
+.nav_table>div:hover {
+    background-color: #83002e;
+}
+
+.body_table select {
+    height: 25px;
+}
+
+.nation_selection_group,
+.selection_tournament,
+.selection_champ,
+.nation_selection_tournament {
+    width: 100%;
+    height: 35px;
+    padding: 0px 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.select_championship_selector {
+    margin: 10px 0px 0px;
+    height: 25px;
+    width: 100%;
+}
+
+.selection_tournament>div {
+    margin-top: 10px;
+}
+
+
+/*Body table*/
+
+.body_table {
+    width: 100%;
+    background-color: #fafafa;
+    padding: 0;
+    font-size: 13px;
+    border: 1px solid #CCD1D9;
+    border-top: 0px solid silver;
+}
+
+.one_position {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 35px;
+    border-bottom: 1px solid #CCD1D9;
+}
+
+.one_position:nth-child(1) {
+    font-weight: 600;
+}
+
+.one_position:nth-child(2) {
+    background-color: #e4e4e4;
+}
+
+.one_position>div {
+    line-height: 35px;
+}
+
+.one_position>div:first-child {
+    padding-left: 10px;
+}
+
+.one_position>div:last-child {
+    padding-right: 10px;
+}
+
+.team_img {
+    width: 35px;
+    float: left;
+}
+
+.position {
+    width: 15%;
+}
+
+.team_name {
+    width: 45%;
+}
+
+.team_table {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-height: 35px;
+    max-height: 35px;
+}
+
+.team_games {
+    width: 12%;
+    text-align: center;
+}
+
+.team_goals {
+    text-align: center;
+    width: 14%;
+}
+
+.team_pts {
+    width: 14%;
+    text-align: center;
+}
+
+.team_img img {
+    max-width: 25px;
+    max-height: 25px;
+}
+
+.choosen_championship {
+    margin: 20px 0px 10px;
+    font-size: 22px;
+    font-weight: 600;
+    width: 100%;
+}
+
+.after_nav_tour {
+    width: calc(100% + 10px);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.forecasters_name {
+    width: 57%;
+}
+
+.forecasters_percent {
+    width: 14%;
+    text-align: center;
+}
+
+.forecasters_pts {
+    width: 14%;
+    text-align: center;
+}
+
+
+/*Футер таблицы*/
+
+#table_rating_forecasters footer {
+    height: 40px;
+    width: 100%;
+    display: flex;
     position: relative;
 }
 
-dfn::after {
-    content: attr(data-info);
-    height: 24px;
-    display: inline;
-    position: absolute;
-    bottom: -10%;
-    left: -50%;
-    opacity: 0;
-    width: auto;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 12px;
-    padding: 6px 8px;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 5px;
-    color: #fff;
-    pointer-events: none;
-    /* This prevents the box from apearing when hovered. */
-    transition: opacity 250ms, top 250ms;
-}
-
-dfn::before {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -10%;
-    left: 50%;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    border: solid transparent 5px;
-    border-bottom-color: rgba(0, 0, 0, 0.8);
-    transition: opacity 250ms, top 250ms;
-}
-
-dfn:hover {
-    z-index: 2;
-}
-
-
-/* Keeps the info boxes on top of other elements */
-
-dfn:hover::after,
-dfn:hover::before {
-    opacity: 1;
-}
-
-dfn:hover::after {
-    top: 50px;
-}
-
-dfn:hover::before {
-    top: 40px;
-}
-
-
-/*Ставка недели*/
-
-.one_main_match_bet {
-    display: flex;
+#table_rating_forecasters footer>div {
+    height: 30px;
+    margin: auto;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 30px;
     width: 70%;
-    height: 50px;
-    justify-content: center;
+    background-color: #e8e8e8;
+    cursor: pointer;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+}
+
+#table_rating_forecasters footer>div:hover {
+    background-color: #e90052;
+    color: #fafafa;
+}
+
+
+/*Превью к матчам */
+
+.preview_one_championship {
+    width: calc(100% - 300px);
+    margin-right: 15px;
+}
+
+.preview_one_match {
+    display: flex;
     flex-direction: row;
+    width: 100%;
+    padding: 10px 0px;
+    border-top: 1px solid #CCD1D9;
+}
+
+.preview_one_match:last-child {
+    padding: 10px 0 0;
+}
+
+.teams_logo_s_time {
+    width: 100px;
+}
+
+.teams_img {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 45px;
+}
+
+.teams_img>div {
+    display: flex;
+}
+
+.img_logo_one_team {
+    width: 45px;
+}
+
+.img_logo_one_team img {
+    max-width: 45px;
+    max-height: 45px;
+    margin: auto;
+}
+
+.match_date {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.match_time {
     font-size: 13px;
     font-weight: 600;
 }
 
-.choose_result {
-    display: flex;
-    flex: 6;
-    background-color: #eee;
+.match_time span {
+    font-weight: 500;
 }
 
-.choose_result_active {
-    background-color: #0e5fc7;
-    /* IE9, iOS 3.2+ */
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjEwMCUiIHgyPSIwJSIgeTI9IjAlIj48c3RvcCBzdG9wLWNvbG9yPSIjMTMzZDkzIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiMwODgwZmEiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwLjUiLz48c3RvcCBzdG9wLWNvbG9yPSIjMTMzZDkzIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCN2c2dnKSIgLz48L3N2Zz4=);
-    background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, color-stop(0, rgb(19, 61, 147)), color-stop(0.5, rgb(8, 128, 250)), color-stop(1, rgb(19, 61, 147)));
-    /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(bottom, rgb(19, 61, 147) 0%, rgb(8, 128, 250) 50%, rgb(19, 61, 147) 100%);
-    /* IE10+ */
-    background-image: repeating-linear-gradient(to top, rgb(19, 61, 147) 0%, rgb(8, 128, 250) 50%, rgb(19, 61, 147) 100%);
-    background-image: -ms-repeating-linear-gradient(bottom, rgb(19, 61, 147) 0%, rgb(8, 128, 250) 50%, rgb(19, 61, 147) 100%);
-    color: #fafafa;
+.match_discription {
+    width: calc(100% - 100px);
 }
 
-div.choose_result_active:hover {
-    background-color: #0e5fc7;
-    /* IE9, iOS 3.2+ */
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjEwMCUiIHgyPSIwJSIgeTI9IjAlIj48c3RvcCBzdG9wLWNvbG9yPSIjMTMzZDkzIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiMwODgwZmEiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwLjUiLz48c3RvcCBzdG9wLWNvbG9yPSIjMTMzZDkzIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCN2c2dnKSIgLz48L3N2Zz4=);
-    background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, color-stop(0, rgb(19, 61, 147)), color-stop(0.5, rgb(8, 128, 250)), color-stop(1, rgb(19, 61, 147)));
-    /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(bottom, rgb(19, 61, 147) 0%, rgb(8, 128, 250) 50%, rgb(19, 61, 147) 100%);
-    /* IE10+ */
-    background-image: repeating-linear-gradient(to top, rgb(19, 61, 147) 0%, rgb(8, 128, 250) 50%, rgb(19, 61, 147) 100%);
-    background-image: -ms-repeating-linear-gradient(bottom, rgb(19, 61, 147) 0%, rgb(8, 128, 250) 50%, rgb(19, 61, 147) 100%);
-    color: #fafafa;
-}
-
-.hosts_team:hover,
-.guests_team:hover,
-.coefficient_draw:hover {
-    background-color: rgba(91, 178, 214, 0.93);
-    /* IE9, iOS 3.2+ */
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjEwMCUiIHgyPSIwJSIgeTI9IjAlIj48c3RvcCBzdG9wLWNvbG9yPSIjMjc4ZmJhIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMCIvPjxzdG9wIHN0b3AtY29sb3I9IiM4ZWQ0ZjEiIHN0b3Atb3BhY2l0eT0iMC44NiIgb2Zmc2V0PSIwLjUiLz48c3RvcCBzdG9wLWNvbG9yPSIjMjc4ZmJhIiBzdG9wLW9wYWNpdHk9IjEiIG9mZnNldD0iMSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCN2c2dnKSIgLz48L3N2Zz4=);
-    background-image: -webkit-gradient(linear, 0% 100%, 0% 0%, color-stop(0, rgb(39, 143, 186)), color-stop(0.5, rgba(142, 212, 241, 0.86)), color-stop(1, rgb(39, 143, 186)));
-    /* Android 2.3 */
-    background-image: -webkit-repeating-linear-gradient(bottom, rgb(39, 143, 186) 0%, rgba(142, 212, 241, 0.86) 50%, rgb(39, 143, 186) 100%);
-    /* IE10+ */
-    background-image: repeating-linear-gradient(to top, rgb(39, 143, 186) 0%, rgba(142, 212, 241, 0.86) 50%, rgb(39, 143, 186) 100%);
-    background-image: -ms-repeating-linear-gradient(bottom, rgb(39, 143, 186) 0%, rgba(142, 212, 241, 0.86) 50%, rgb(39, 143, 186) 100%);
-}
-
-.choose_result > div {
-    height: 100%;
-    line-height: 50px;
-}
-
-.one_main_match_bet div {
-    align-self: center;
-}
-
-.time_match {
-    flex: 1;
-    text-align: center;
-    height: 52px;
-    line-height: 52px;
-    padding-left: 12px;
-    padding-right: 12px;
-}
-
-.hosts_team,
-.guests_team {
-    flex: 2;
-    padding-right: 10px;
+.match_discription {
     padding-left: 10px;
-    cursor: pointer;
 }
 
-.hosts_team div:last-child,
-.guests_team div:last-child {
-    float: right;
+.title_match {
+    font-weight: 600;
+    font-size: 18px;
+    color: #1d71b9;
 }
 
-.container_img_team_main_bet {
-    height: 25px;
+.bet_match {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px 0px 10px;
+}
+
+.evnt_bet {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 24px;
+    padding: 0px 8px;
+    background: #d3d3d3;
+    color: #3c3e41;
+    border-radius: 3px;
+    height: 24px;
+}
+
+.evnt_bet span {
+    font-weight: 500;
+}
+
+.admin_bets_one_match {
+    border: 2px solid #d3d3d3;
+    margin-left: 10px;
+    height: 24px;
+    font-size: 12px;
+    padding: 0px 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.our_bet {
+    margin-left: 5px;
+}
+
+.result_match {
+    margin-top: 5px;
+    font-weight: 600;
+}
+
+.result_match span {
+    margin-left: 5px;
+    font-weight: 500;
+}
+
+
+/*Комментарии превью матчей */
+
+.add_comment_prev {
+    padding: 10px 0;
+    padding-bottom: 10px;
+    width: calc(100% - 10px);
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #CCD1D9;
+}
+
+.block_comments_for_one_champ {
+    width: 285px;
+    border-left: 1px solid #CCD1D9;
+    padding: 10px 0px 0px 15px;
+}
+
+.line_img_placeholder_comment {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.title_comments {
+    color: #1d71b9;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.text_area_comment_prev {
+    width: calc(100% - 45px);
+    min-height: 35px;
+}
+
+#type_comment {
+    height: 35px;
+    min-height: 35px;
+    overflow-y: hidden;
+    width: 100%;
+    outline: none;
+    resize: none;
+    font-size: 12px;
+    border-width: 0 0 1px;
+    background-color: #E8E8E8;
+    border-color: #76766f;
+    padding: 10px;
+}
+
+#type_comment:focus {
+    border-color: #e90052;
+    background-color: #fafafa;
+}
+
+.author_comment_prev {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.send_comment_prev {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.author_comment_prev img {
+    width: 100%;
+}
+
+.author_comment_prev {
     float: left;
-    margin-right: 10px;
 }
 
-.container_img_team_main_bet img {
-    height: 100%;
-    width: auto;
+.block_comments_preview {
+    font-size: 12px;
+    overflow-y: auto;
 }
 
-.coefficient_draw {
+.user_comment {
+    overflow-y: auto;
+    padding: 0px;
+}
+
+.comment_placeholder {
+    flex-grow: 1;
+}
+
+.content_coment {
+    margin-left: 50px;
+    padding-bottom: 10px;
+}
+
+.coment_author_time {
+    min-width: 51%;
+    color: #7f8992;
+}
+
+.coment_author_time a {
+    font-weight: 600;
+}
+
+.blockquote {
+    padding: 3% 3% 0 3%;
+}
+
+.blockquote:hover {
+    background-color: #f0f2f5;
+}
+
+.author_name_date {
+    color: #7f8992;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.author_name_date a {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 7px;
+    margin-left: 10px;
+}
+
+.all_comment_for_preview {
+    overflow: hidden;
+}
+
+.user_comment_preview:first-child {
+    padding-top: 10px;
+}
+
+.block_comments_preview::-webkit-scrollbar {
+    width: 10px;
+}
+
+.block_comments_preview::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.block_comments_preview::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.block_comments_preview::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.more_comment_prev {
     text-align: center;
+    padding: 3px 8px;
+    margin: 0px auto 10px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 14px;
+    color: #656D78;
+    background: #fafafa;
+    border: 1px solid #CCD1D9;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 50%;
+}
+
+.more_comment_prev:hover {
+    background: #eee;
+}
+
+
+/*Навигация три топовые матчи */
+
+#nav_top_matches {
+    width: 100%;
+    height: 200px;
+    background-color: #fafafa;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.li_img__top_match {
+    width: 33.333%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
     cursor: pointer;
 }
 
-.coefficient_home_team,
-.coefficient_draw,
-.coefficient_quest_team {
-    flex: 1;
+.img_top_math {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.coefficient_draw i {
-    color: blue;
-    margin-right: 5px;
+.img_top_math img {
+    width: 100%;
+    margin: 0;
+}
+
+.preview_math_nav_background {
+    background-color: #333;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.7;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.team_nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 3;
+    align-items: center;
+    justify-content: space-around;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.first_team_nav,
+.second_team_nav {
+    width: 80px;
+    height: 80px;
+}
+
+.first_team_nav img,
+.second_team_nav img {
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.vs {
+    color: #fafafa;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.li_img__top_match:hover .team_nav {
+    top: 100%;
+}
+
+.li_img__top_match:hover .preview_math_nav_background {
+    top: 100%;
+}
+
+.li_img__top_match figure {
+    display: none;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(232, 232, 232, 0.88);
+    color: #333;
+    padding: 0 6px;
+}
+
+.read_prev {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.read_prev>div {
+    margin: auto;
+}
+
+.top_match_teams {
+    font-weight: 600;
+    color: #1d71b9;
+    width: 100%;
+}
+
+.tour_match {
+    width: 100%;
+}
+
+.liga_top_match,
+.tour_top_match {
+    font-size: 12px;
+}
+
+
+/*Топ 3 матча main */
+
+main {
+    background-color: #fafafa;
+    width: 100%;
+    border-color: #CCD1D9;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    padding: 20px;
+}
+
+header {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+header h2,
+header p {
+    margin: 0 !important;
+    max-width: 66.66%;
+}
+
+header p {
+    font-size: 13px;
+    color: #999a9c;
+}
+
+.prev_info_text {
+    font-size: 16px;
+}
+
+.make_bet {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 33.33%;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    color: #fafafa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    background-color: #e90052;
+}
+
+.make_bet {}
+
+
+/*ТОП матчи недели правая колонка*/
+
+#top_matches_right {
+    background-color: #fafafa;
+    border: 1px solid #CCD1D9;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.header_top_matches_right {
+    background: #f0f0f0;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.footer_top_matches_right {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    height: 35px;
+}
+
+.footer_top_matches_right>div {
+    width: 50%;
+    cursor: pointer;
+    text-align: center;
+    height: 100%;
+    line-height: 35px;
+}
+
+.footer_top_matches_right>div:first-child {
+    border-right: 1px solid #CCD1D9;
+}
+
+.footer_top_matches_right>div:hover {
+    color: #fafafa !important;
+    background-color: #e90052;
+}
+
+.body_top_matches_right {
+    width: 100%;
+}
+
+.body_top_matches_right>div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 35px;
+    border-bottom: 1px solid #CCD1D9;
+}
+
+.day_one_top_match_right {
+    width: 15%;
+    text-align: center;
+    height: 100%;
+    line-height: 35px;
+    color: #e90052;
+    font-weight: 600;
+}
+
+.team_one_top_match_right {
+    width: 32.5%;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+.logo_one_top_match_right {
+    width: 35px;
+    float: left;
+}
+
+.logo_one_top_match_right img {
+    max-width: 25px;
+    max-height: 25px;
+    margin: 5px 0;
+}
+
+.name_team_one_top_match_right {
+    line-height: 35px;
+    font-weight: 600;
+}
+
+.time_one_top_match_right {
+    width: 20%;
+    color: #fafafa;
+    margin: 5px 0;
+    height: 25px;
+    text-align: center;
+    background-color: #38003c;
+    line-height: 25px;
+}
+
+
+/*Ставка в модальном окне*/
+
+
+/*Модальное окно ставка недели */
+
+.modal_dialog {
+    display: flex;
+}
+
+#my_weeks_bets {
+    /*margin: 15vh auto;*/
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: row;
+}
+
+@media (min-width: 768px) {
+    #my_weeks_bets {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    #my_weeks_bets {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.bet_in_modal {
+    width: calc( 70% - 20px);
+    margin-right: 20px;
+}
+
+
+/*Выбор пользователя*/
+
+.user_choice {
+    width: 30%;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+.header_user_choice {
+    width: 100%;
+    height: 35px;
+    background-color: red;
+    color: #fafafa;
+    text-align: center;
+    line-height: 35px;
+}
+
+#user_choice_nav {
+    width: 100%;
+    height: 35px;
+    position: relative;
+    overflow: hidden;
+}
+
+.prev_week_bet,
+.next_week_bet {
+    position: absolute;
+    height: 100%;
+    text-align: center;
+    line-height: 35px;
+    width: 30px;
+    color: #fafafa;
+    background-color: #222;
+    top: 0px;
+    cursor: pointer;
+}
+
+.prev_week_bet {
+    left: 0;
+}
+
+.next_week_bet {
+    right: 0;
+}
+
+#all_weeks {
+    width: 100%;
+    height: auto;
+}
+
+.one_week_bet {
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    display: inline-block;
+}
+
+.body_user_choice {
+    background-color: #e6ebf4;
+    width: 100%;
+    padding: 10px 10px 0;
+}
+
+.one_user_choice {
+    background-color: #fafafa;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.one_user_choice>div:first-child {
+    padding-bottom: 5px;
+}
+
+.one_user_choice>div:nth-child(2) {
+    margin-top: 5px;
+}
+
+.one_user_choice:last-child {
+    margin-bottom: 0 !important;
+}
+
+.delete_this_this_choice {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.delete_this_this_choice:hover {
+    opacity: 1;
+}
+
+.match_bet_choice {
+    border-bottom: 1px solid #CCD1D9;
+}
+
+.total_kof {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+}
+
+.footer_user_choice {
+    width: 100%;
+    padding: 8px 10px;
+    background-color: #e6ebf4;
+}
+
+.btn_success_bet {
+    height: 35px;
+    width: 100%;
+    line-height: 35px;
+    text-align: center;
+    background-color: red;
+    border-radius: 2px;
+    cursor: pointer;
+    color: #fafafa;
+}
+
+
+/*Выбор результата*/
+
+.mathes_can_bet {
+    padding: 4px 10px 10px;
+    width: 100%;
+    background-color: #e6ebf4;
+}
+
+.one_math_can_bet {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.one_math_can_bet>div {
+    padding: 0 5px;
+    height: 24px;
+    border-radius: 2px;
+    margin: 6px 1px;
+    background-color: #fafafa;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.result_can {
+    cursor: pointer;
+    line-height: 24px;
+    display: flex;
+    flex-direction: row;
+}
+
+.kof_can {
+    color: #0b68f4;
+    width: 36px;
+    text-align: right;
+}
+
+.team_can {
+    width: calc( 100% - 36px);
+}
+
+.teams_can {
+    width: calc( 31.5% - 2px);
+}
+
+.result_can:hover {
+    color: #0b68f4;
+}
+
+.data_time_can {
+    width: calc( 25% - 2px);
+    text-align: center;
+    line-height: 30px;
+}
+
+.draw_can {
+    width: calc( 12% - 2px);
+}
+
+.active_choice_bet {
+    background-color: #0b68f4 !important;
+    color: #fafafa !important;
+}
+
+.active_choice_bet .kof_can {
+    color: #fafafa !important;
+}
+
+.marth_choice_this {
+    display: block;
+}
+
+.kof_this_match,
+.delete_this_this_choice {
+    width: 20%;
+    text-align: right;
+}
+
+.total_kof_these_matches,
+.win_points {
+    flex-grow: 1;
+}
+
+.kof_this_match,
+.total_kof_these_matches,
+.win_points {
+    font-weight: 600;
+    color: #c51255;
+}
+
+.match_bet_choice,
+.user_match_bet_choice,
+.total_kof {
+    display: flex;
+    flex-direction: row;
+}
+
+.marth_choice_this,
+.result_math_and_won_team,
+.total_kof>div:first-child,
+.your_result_after>div:first-child {
+    width: 80%;
+}
+
+.total_kof>div:first-child,
+.your_result_after>div:first-child {
+    font-weight: 600;
+}
+
+.your_choice_team {
+    font-weight: 600;
+}
+
+.team_can,
+.kof_can {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-height: 24px;
+    max-height: 24px;
+}
+
+.not_results,
+.success_bet {
+    text-align: center;
+    font-weight: 600;
+    width: 100%;
+}
+
+.your_result_after {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }

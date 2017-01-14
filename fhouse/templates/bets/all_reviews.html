@@ -1,132 +1,522 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %}{{ title }}{% endblock head_title %} {% block head_extra %}
 <title>Prognosis Fhouse</title>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
+<link rel="stylesheet" href='{% static "css/jquery.formstyler.css" %}'>
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.formstyler.min.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-lg-9">
-            <!-- Навигация по чемпионатам  -->
-            <div class="navigation_between_championships">
-                <ul class="nav_ul">
-                    <!-- {% for section in sections %}
-                    <li><a href="#">{{ section.section_title }}<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></li>
-                    {% endfor %} -->
-                    <li>
-                        <a href="#" data-toggle="tooltip" data-placement="left" title="Подсказка">
-                            <div class="logo_champ">
-                                <img src="http://www.skynetdth.com/images/Premier_League_Logo.png" alt="">
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href=" # ">
-                            <div class="logo_champ "><img src="http://files.laliga.es/seccion_logos/laliga-v-600x600.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://s-media-cache-ak0.pinimg.com/564x/7d/94/9e/7d949ef54a6dfc5c3b084c1dd0e40e73.jpg " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="http://4.bp.blogspot.com/-3d5o6B2CVH8/VpkvUqcMVTI/AAAAAAAA2O8/ONQASmjz69U/s550/New-Serie-A-Logo-Revealed%2B%25283%2529.jpg " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://c8234d680a5ae618106c-6b3bd0826ac1075e2d1b52b94a2e0f63.ssl.cf1.rackcdn.com/12642_75403b28.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://cdn.tribuna.com/fetch/?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fru%2F8%2F86%2FRFPL_2015-16_logo_2.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="http://www.fpl.ua/img/main/upl_logo_690.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://upload.wikimedia.org/wikipedia/ru/thumb/0/0a/UEFA_Champions_League_logo.svg/1067px-UEFA_Champions_League_logo.svg.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://upload.wikimedia.org/wikipedia/en/e/e4/Uefa_europa_league_logo_20152018.png " alt=" "></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="# ">
-                            <div class="logo_champ "><img src="https://upload.wikimedia.org/wikipedia/ru/f/f7/FIFA_World_Cup_2018_Logo.png " alt=" "></div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <!-- Переключатель между турами -->
-            <div class="navigation_between_tour ">
-                <ul class="nav_ul_tour ">
-                    <li>
-                        <a href="# ">1 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">2 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">3 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">4 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">5 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">6 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">7 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">8 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">9 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                    <li>
-                        <a href="# ">10 тур</a>
-                        <div class="hover_menu "></div>
-                    </li>
-                </ul>
-            </div>
             <!-- Превью тура -->
             <div class="container_all_preview ">
+                <!-- Навигация по чемпионатам  -->
+                <div id="all_bets_nav">
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                    <div class="change_champ">
+                    </div>
+                </div>
+                <!-- Переключатель между турами -->
+                <div class="navigation_between_tour ">
+                    <div id="arrow_left_tour"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                    <div id="arrow_right_tour"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                    <div class="container_tour">
+                        <ul class="nav_ul_tour ">
+                            <li>
+                                <a href="# ">1 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">2 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">3 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">4 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">5 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">6 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">7 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">8 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">9 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">10 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">11 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">12 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">13 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">14 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">15 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">16 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">17 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">18 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">19 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                            <li>
+                                <a href="# ">20 тур</a>
+                                <div class="hover_menu "></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="choosen_championship">
+                    Превью и прогноз <span class="champ">Английская Премьер Лига</span>
+                </div>
+                <div class="after_nav_tour">
+                    <div class="preview_one_championship">
+                        <div class="preview_one_match">
+                            <div class="teams_logo_s_time">
+                                <div class="teams_img">
+                                    <div class="img_logo_one_team">
+                                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/768px-Chelsea_FC.svg.png" alt="">
+                                    </div>
+                                    <div class="img_logo_one_team">
+                                        <img src="http://www.soccertalentidentification.com/Content/images/Liverpool_FC.svg.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="match_date">29 october</div>
+                                <div class="match_time">Москва: <span class="time_match_moscow">22:40</span></div>
+                                <div class="match_time">Киев: <span class="time_match_kiev">21:40</span></div>
+                            </div>
+                            <div class="match_discription">
+                                <div class="title_match"><span class="home_team">Челси</span> - <span class="visiting_team">Ливерпуль</span> </div>
+                                <div class="bet_match">
+                                    <div class="evnt_bet">
+                                        П1 <span class="kof">(1.12)</span> Х <span class="kof">(6.43)</span> П2 <span class="kof">(51.12)</span>
+                                    </div>
+                                    <div class="admin_bets_one_match">Наш прогноз: <span class="our_bet">8 : 1</span></div>
+                                </div>
+                                <div class="match_preview_discription">
+                                    Учитывая, то «Эпицентр К Таирова» с каждой игрой становится всё ближе к заветной тройке, с уверенностью можно сказать, что команда Виталия Сурича будет играть на победу. А вот будет ли положительный результат после отдыха в предыдущем туре у «Кодымы», смогут ли ребята взять очки в последнем поединке первого круга – приходите и вы всё увидите сами.
+                                </div>
+                                <!-- if match has been finished   -->
+                                <div class="result_match">
+                                    Сыграли: <span class="result_match_preview">2 : 1</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="preview_one_match">
+                            <div class="teams_logo_s_time">
+                                <div class="teams_img">
+                                    <div class="img_logo_one_team">
+                                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/768px-Chelsea_FC.svg.png" alt="">
+                                    </div>
+                                    <div class="img_logo_one_team">
+                                        <img src="http://www.soccertalentidentification.com/Content/images/Liverpool_FC.svg.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="match_date">29 october</div>
+                                <div class="match_time">Москва: <span class="time_match_moscow">22:40</span></div>
+                                <div class="match_time">Киев: <span class="time_match_kiev">21:40</span></div>
+                            </div>
+                            <div class="match_discription">
+                                <div class="title_match"><span class="home_team">Челси</span> - <span class="visiting_team">Ливерпуль</span> </div>
+                                <div class="bet_match">
+                                    <div class="evnt_bet">
+                                        П1 <span class="kof">(1.12)</span> Х <span class="kof">(6.43)</span> П2 <span class="kof">(51.12)</span>
+                                    </div>
+                                    <div class="admin_bets_one_match">Наш прогноз: <span class="our_bet">8 : 1</span></div>
+                                </div>
+                                <div class="match_preview_discription">
+                                    Учитывая, то «Эпицентр К Таирова» с каждой игрой становится всё ближе к заветной тройке, с уверенностью можно сказать, что команда Виталия Сурича будет играть на победу. А вот будет ли положительный результат после отдыха в предыдущем туре у «Кодымы», смогут ли ребята взять очки в последнем поединке первого круга – приходите и вы всё увидите сами.
+                                </div>
+                                <!-- if match has been finished   -->
+                                <div class="result_match">
+                                    Сыграли: <span class="result_match_preview">2 : 1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Комментарии к превью -->
+                    <div class="block_comments_for_one_champ">
+                        <div class="title_comments">
+                            Комментарии <span class="quantity_comments_prev">(13)</span>
+                        </div>
+                        <div class="add_comment_prev">
+                            <div class="line_img_placeholder_comment">
+                                <div class="author_comment_prev">
+                                    <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                </div>
+                                <div class="text_area_comment_prev">
+                                    <textarea id="type_comment" maxlength="40" placeholder="Оставьте комментарий..."></textarea>
+                                </div>
+                            </div>
+                            <div class="send_comment_prev">
+                                <button>Отправить</button>
+                            </div>
+                        </div>
+                        <div class="block_comments_preview">
+                            <!-- if there are not comments -->
+                            <!-- <div class="not_comments">
+                                    <div class="icon_comment">
+                                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                    </div>
+                                    <div class="show_user_not_comments">Be the first to comment on this photo.</div>
+                                </div> -->
+                            <!-- If there are several comments -->
+                            <div class="user_comment">
+                                <div class="all_comment_for_preview">
+                                    <!-- Один коммент  -->
+                                    <div class="user_comment_preview">
+                                        <a href="#">
+                                            <div class="author_comment_prev">
+                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                            </div>
+                                        </a>
+                                        <div class="content_coment">
+                                            <div class="coment_author_time">
+                                                <a href="#">Дмитрий Мангура</a> </br>
+                                                4 days, 23 hours ago
+                                            </div>
+                                            <div class="text_comment_slider">
+                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
+                                            </div>
+                                            <footer>
+                                                <a class="comment-reply-btn" href="#">Удалить</a>
+                                                <a class="comment-reply-btn" href="#">Ответить</a>
+                                            </footer>
+                                            <div class="comment-reply">
+                                                <form method="POST" action=".">
+                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
+                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
+                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
+                                                    <div id="div_id_content" class="form-group">
+                                                        <label for="id_content" class="control-label  requiredField">
+                                                            content<span class="asteriskField">*</span> </label>
+                                                        <div class="controls ">
+                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
+                                                    </div>
+                                                    <input type="hidden" name="parent_id" value="10">
+                                                    <input type="submit" value="Ответить" class="btn btn-default">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user_comment_preview">
+                                        <a href="#">
+                                            <div class="author_comment_prev">
+                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                            </div>
+                                        </a>
+                                        <div class="content_coment">
+                                            <div class="coment_author_time">
+                                                <a href="#">Дмитрий Мангура</a> </br>
+                                                4 days, 23 hours ago
+                                            </div>
+                                            <div class="text_comment_slider">
+                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
+                                            </div>
+                                            <footer>
+                                                <a class="comment-reply-btn" href="#">Удалить</a>
+                                                <a class="comment-reply-btn" href="#">Ответить</a>
+                                            </footer>
+                                            <div class="comment-reply">
+                                                <form method="POST" action=".">
+                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
+                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
+                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
+                                                    <div id="div_id_content" class="form-group">
+                                                        <label for="id_content" class="control-label  requiredField">
+                                                            content<span class="asteriskField">*</span> </label>
+                                                        <div class="controls ">
+                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
+                                                    </div>
+                                                    <input type="hidden" name="parent_id" value="10">
+                                                    <input type="submit" value="Ответить" class="btn btn-default">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="user_comment_preview">
+                                        <a href="#">
+                                            <div class="author_comment_prev">
+                                                <img src="/media/1/YdBB-4zlNa4.jpg" alt="">
+                                            </div>
+                                        </a>
+                                        <div class="content_coment">
+                                            <div class="coment_author_time">
+                                                <a href="#">Дмитрий Мангура</a> </br>
+                                                4 days, 23 hours ago
+                                            </div>
+                                            <div class="text_comment_slider">
+                                                Атлетико проиграл в финале Лиги Чемпионов ОХтырке
+                                            </div>
+                                            <footer>
+                                                <a class="comment-reply-btn" href="#">Удалить</a>
+                                                <a class="comment-reply-btn" href="#">Ответить</a>
+                                            </footer>
+                                            <div class="comment-reply">
+                                                <form method="POST" action=".">
+                                                    <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
+                                                    <input id="id_content_type" name="content_type" type="hidden" value="post" />
+                                                    <input id="id_object_id" name="object_id" type="hidden" value="11" />
+                                                    <div id="div_id_content" class="form-group">
+                                                        <label for="id_content" class="control-label  requiredField">
+                                                            content<span class="asteriskField">*</span> </label>
+                                                        <div class="controls ">
+                                                            <input class="textinput textInput form-control" id="id_content" name="content" placeholder="Оставить комментарий..." type="text" /> </div>
+                                                    </div>
+                                                    <input type="hidden" name="parent_id" value="10">
+                                                    <input type="submit" value="Ответить" class="btn btn-default">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Болше комментариев превью  -->
+                                    <div class="more_comment_prev">
+                                        больше
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="all_comments_prev">
+                                <div class="one_coment_prev"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Прогнозы на все матчи от администраторов  -->
             </div>
         </div>
         <div class="col-lg-3 ">
-            <a href="#" data-toggle="tooltip" title="Текст всплывающей подсказки">
-                Ссылка с tooltip
-            </a>
-            <!-- Скрипт для инициализации элементов на странице, имеющих атрибут data-toggle="tooltip" -->
-            <script>
-            // после загрузки страницы
-            $(function() {
-                // инициализировать все элементы на страницы, имеющих атрибут data-toggle="tooltip", как компоненты tooltip
-                $('[data-toggle="tooltip"]').tooltip()
-            })
-            </script>
+            <!-- ТОП матчи недели правая колонка -->
+            <div id="top_matches_right">
+                <div class="header_top_matches_right">
+                    Ставка недели. 12-19 Сен. 2017
+                </div>
+                <div class="body_top_matches_right">
+                    <div class="one_top_match_right">
+                        <div class="day_one_top_match_right">Пят</div>
+                        <div class="team_one_top_match_right">
+                            <div class="logo_one_top_match_right">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                            </div>
+                            <div class="name_team_one_top_match_right">Чел</div>
+                        </div>
+                        <div class="time_one_top_match_right">14:40</div>
+                        <div class="team_one_top_match_right">
+                            <div class="logo_one_top_match_right">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                            </div>
+                            <div class="name_team_one_top_match_right">Чел</div>
+                        </div>
+                    </div>
+                    <div class="one_top_match_right">
+                        <div class="day_one_top_match_right">Пят</div>
+                        <div class="team_one_top_match_right">
+                            <div class="logo_one_top_match_right">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                            </div>
+                            <div class="name_team_one_top_match_right">Чел</div>
+                        </div>
+                        <div class="time_one_top_match_right">14:40</div>
+                        <div class="team_one_top_match_right">
+                            <div class="logo_one_top_match_right">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                            </div>
+                            <div class="name_team_one_top_match_right">Чел</div>
+                        </div>
+                    </div>
+                    <div class="one_top_match_right">
+                        <div class="day_one_top_match_right">Пят</div>
+                        <div class="team_one_top_match_right">
+                            <div class="logo_one_top_match_right">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                            </div>
+                            <div class="name_team_one_top_match_right">Чел</div>
+                        </div>
+                        <div class="time_one_top_match_right">14:40</div>
+                        <div class="team_one_top_match_right">
+                            <div class="logo_one_top_match_right">
+                                <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                            </div>
+                            <div class="name_team_one_top_match_right">Чел</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer_top_matches_right">
+                    <div id="read_preview">Читать превью</div>
+                    <div id="bet_right">Сделать ставку</div>
+                </div>
+            </div>
+            <!-- Турнирная таблица -->
+            <div id="table_other_champs">
+                <div class="head_table">
+                    <div class="table_name">Турнирная таблица</div>
+                    <div class="nav_table">
+                        <div class="one_division_nav">Чемпионаты</div>
+                        <div class="one_division_nav">Еврокубки</div>
+                        <div class="one_division_nav">Сборные</div>
+                    </div>
+                </div>
+                <div class="body_table">
+                    <!-- Если чемпионаты -->
+                    <!-- <div class="selection_champ">
+                        <div class="select_championship_selector">
+                            <select name="select_championship" id="select_championship">
+                                <option>FA Premier League</option>
+                                <option>Liga BBVA</option>
+                                <option>Serie A</option>
+                                <option>Bundesliga 1</option>
+                                <option>Ligue 1</option>
+                                <option>Российская Премьер-Лига</option>
+                                <option>Украинская Премьер-лига</option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <!-- Если Еврокубки  -->
+                    <!-- <div class="selection_tournament">
+                        <div class="select_championship_selector">
+                            <select name="select_championship" id="select_championship">
+                                <option>Лига Чемпионов</option>
+                                <option>Лига Европы</option>
+                            </select>
+                        </div> -->
+                    <!-- if champions league -->
+                    <!-- <div class="select_championship_selector">
+                            <select name="select_championship" id="select_group_LC">
+                                <option value="">Группа 1</option>
+                                <option value="">Группа 2</option>
+                                <option value="">Группа 3</option>
+                                <option value="">Группа 4</option>
+                                <option value="">Группа 5</option>
+                                <option value="">Группа 6</option>
+                                <option value="">Группа 7</option>
+                                <option value="">Группа 8</option>
+                            </select>
+                        </div> -->
+                    <!-- if Europa League    -->
+                    <!-- <div class="select_championship_selector">
+                            <select name="select_championship" id="select_group_LE">
+                                <option value="">Группа 1</option>
+                                <option value="">Группа 2</option>
+                                <option value="">Группа 3</option>
+                                <option value="">Группа 4</option>
+                                <option value="">Группа 5</option>
+                                <option value="">Группа 6</option>
+                                <option value="">Группа 7</option>
+                                <option value="">Группа 8</option>
+                                <option value="">Группа 9</option>
+                                <option value="">Группа 10</option>
+                                <option value="">Группа 11</option>
+                                <option value="">Группа 12</option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <!-- Если сборные -->
+                    <div class="nation_selection_tournament">
+                        <div class="select_championship_selector">
+                            <select name="select_championship" id="select_nation_tournament">
+                                <option value="">Квалиффикация к ЧМ 2018 Европа</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="nation_selection_group">
+                        <div class="select_championship_selector">
+                            <select name="select_championship" id="select_group_CM">
+                                <option value="">Группа 1</option>
+                                <option value="">Группа 2</option>
+                                <option value="">Группа 3</option>
+                                <option value="">Группа 4</option>
+                                <option value="">Группа 5</option>
+                                <option value="">Группа 6</option>
+                                <option value="">Группа 7</option>
+                                <option value="">Группа 8</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Подсказки таблица  -->
+                    <div class="all_team_table">
+                        <div class="one_position">
+                            <div class="position">Поз</div>
+                            <div class="team_name">Команда</div>
+                            <div class="team_games">И</div>
+                            <div class="team_goals">Г</div>
+                            <div class="team_pts">О</div>
+                        </div>
+                        <div class="one_position">
+                            <div class="position">1</div>
+                            <div class="team_name">
+                                <div class="team_img">
+                                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                                </div>
+                                <div class="team_table">
+                                    Chelseasdsadsdsadsadasdsadsfsdfsdfsdf
+                                </div>
+                            </div>
+                            <div class="team_games">15</div>
+                            <div class="team_goals">+45</div>
+                            <div class="team_pts">43</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer_table">
+                    <div class="more_info"></div>
+                </div>
+            </div>
+            <!-- Конец турнирной таблицы  -->
         </div>
     </div>
 </div>
