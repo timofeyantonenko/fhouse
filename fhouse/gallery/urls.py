@@ -6,10 +6,16 @@ from .views import (
     photo_detail,
     PhotoList,
     LastSectionPhotoList,
+    get_section_information,
+    get_album_photos,
+    # api_test,
 )
 
-urlpatterns = [
-    url(r'^slider_photo_list/$', PhotoList.as_view()),
+urlpatterns = [  # get_section_information
+    # url(r'^slider_photo_list/$', PhotoList.as_view()),
+    url(r'^slider_photo_list/$', get_section_information),
+    url(r'^album_photo_list/$', get_album_photos),
+    url(r'^api/$', get_section_information),
     url(r'^last_section_photo_list/$', LastSectionPhotoList.as_view()),
     url(r'^main_page_photo_list/$', PhotoList.as_view()),
     url(r'^$', gallery_sections, name="sections"),

@@ -1,7 +1,42 @@
+import json
+
 from django.http import HttpResponse
+from django.core import serializers
+from django.http import JsonResponse
+from django.forms.models import model_to_dict
 from django.shortcuts import render, get_object_or_404, render_to_response
 from django.views.generic import ListView
 from .models import GallerySection, SectionAlbum, AlbumPhoto
+from .serializers import AlbumPhotoSerializer, SectionAlbumSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+@api_view(['GET'])
+def get_section_information(request):
+    count_of_photo_to_load = 15
+    count_of_albums_to_load = 6
+    section = request.GET.get('section')
+    if not section:
+        section = 'Soccer'
+    if section:
+        albums = SectionAlbum.objects.filter(album_section__section_title=section).order_by('-updated')[
+                 :count_of_albums_to_load]
+        photos = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-updated')[:count_of_photo_to_load]
+        photo_serializer = AlbumPhotoSerializer(photos, many=True, context={'request': request})
+        album_serializer = SectionAlbumSerializer(albums, many=True, context={'request': request})
+    return Response({"photo_list": photo_serializer.data, 'albums': album_serializer.data})
+
+
+@api_view(['GET'])
+def get_album_photos(request):
+    count_of_photo_to_load = 15
+    count_of_albums_to_load = 6
+    album_id = request.GET.get('album_id', 1)
+    album = SectionAlbum.objects.get(id=album_id)
+    photos = album.photos.order_by('-updated')[:count_of_photo_to_load]
+    photo_serializer = AlbumPhotoSerializer(photos, many=True, context={'request': request})
+    return Response({"photo_list": photo_serializer.data})
 
 
 # Create your views here.
@@ -55,6 +90,36 @@ def photo_detail(request, section_slug=None, album_slug=None, photo_slug=None):
     return render(request, "gallery/photo_detail.html", context)
 
 
+# def get_section_information(request):
+#     count_of_photo_to_load = 15
+#     count_of_albums_to_load = 6
+#     section = request.GET.get('section')
+#     if section:
+#
+#         photos_list = []
+#         albums = SectionAlbum.objects.filter(album_section__section_title=section).order_by('-updated')[
+#                  :count_of_albums_to_load]
+#         photos = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-updated')[:count_of_photo_to_load]
+#         for photo in photos:
+#             photos_list.append(
+#                 {'url': photo.image.url, 'name': photo.photo_title, 'album': photo.photo_album.album_title,
+#                  'comments': serializers.serialize('json', photo.comments),
+#                  'likes': serializers.serialize('json', photo.likes)})
+#         print(photos_list)
+#         print('SECTION: {}, ALBUMS: {}, PHOTOS: {}'.format(section, albums, photos))
+#     else:
+#         photos = AlbumPhoto.objects.all().order_by('-timestamp')[:count_of_photo_to_load]
+#     context = {
+#         'photo_list': photos_list,  # serializers.serialize('json', photos),
+#         'albums': serializers.serialize('json', albums, fields=('image', 'album_title')),
+#     }
+#     context = json.dumps(context)
+#     # return HttpResponse(content=context, content_type='json')
+#     print(json.dumps(context))
+#     return JsonResponse(data=context, safe=False)
+#     # return render_to_response(template_name='gallery/slider_photo_list.html', content_type='html', context=context)
+
+
 class PhotoList(ListView):
     model = AlbumPhoto
     template_name = 'gallery/slider_photo_list.html'
@@ -97,4 +162,3 @@ class LastSectionPhotoList(ListView):
         else:
             photos = AlbumPhoto.objects.all()
         return photos
-
