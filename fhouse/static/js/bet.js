@@ -274,10 +274,12 @@ $(document).ready(function() {
     });
 
     // Выбор секции в турнирной таблицы 
-    $(".one_division_nav:first-child").addClass("active_tab_section");
+    $(".nav_table").each(function(i) {
+        $(this).find(".one_division_nav").eq(0).addClass("active_tab_section");
+    });
 
     $(".one_division_nav").on("click", function() {
-        $(".one_division_nav").removeClass("active_tab_section");
+        $(this).parent().children().removeClass("active_tab_section");
         $(this).addClass("active_tab_section");
     });
 

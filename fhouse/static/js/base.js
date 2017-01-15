@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $('.modal-body').change( function() {
+    $('.modal-body').change(function() {
         console.log("sadasd");
     });
 
@@ -8,18 +8,13 @@ $(document).ready(function() {
 
 
     $(".user_profile").click(function() {
-        if ($("#top_profile_menu").is(":hidden")) {
-
-            $("#top_profile_menu").slideDown("fust");
-            $(".user_profile").addClass("active_top_profile_menu ");
-
-        } else {
-
-            $("#top_profile_menu").slideUp("fust");
-            $(".user_profile").removeClass("active_top_profile_menu ");
-
-        }
-        return false;
+        $("#top_profile_menu").slideToggle("fast", function() {
+            if ( $(".user_profile").hasClass("active_top_profile_menu") ) {
+                $(".user_profile").removeClass("active_top_profile_menu");
+            } else {
+                $(".user_profile").addClass("active_top_profile_menu");
+            };
+        });
     });
 
     $(document).mouseup(function(e) {
@@ -30,6 +25,5 @@ $(document).ready(function() {
             div_parent.removeClass("active_top_profile_menu");
         }
     });
-
 
 });
