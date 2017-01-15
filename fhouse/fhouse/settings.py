@@ -31,32 +31,30 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    # third-party library
-    'crispy_forms',
-    'pagedown',
-    'markdown_deux',
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+# third-party library
+'crispy_forms',
+'pagedown',
+'markdown_deux',
 
-
-    # local apps
-    'accounts',
-    'comments',
-    'posts',
-    'records',
-    'football_object',
-    'bettournament',
-    'gallery',
-    'article',
-    'geohelp',
-    'main_page',
-    'likes',
+# local apps
+'accounts',
+'comments',
+'posts',
+'records',
+'football_object',
+'bettournament',
+'gallery',
+'article',
+'geohelp',
+'main_page',
+'likes',
 ]
-
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE_CLASSES = [
@@ -70,7 +68,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-LOGIN_URL = '/login/'
 ROOT_URLCONF = 'fhouse.urls'
 
 TEMPLATES = [
@@ -97,12 +94,8 @@ WSGI_APPLICATION = 'fhouse.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fhouse',
-        'USER': 'tantonenko',
-        'PASSWORD': 'fhousetimofey',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
 
     }
 }
