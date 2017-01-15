@@ -54,7 +54,6 @@ def post_detail(request, slug=None):  # retrieve
     }
     comment_form = CommentForm(request.POST or None, initial=initial_data)
     if comment_form.is_valid() and request.user.is_authenticated():
-        print('POSTFORM')
         content_type = instance.get_content_type
         comment_form.cleaned_data['object_id'] = instance.id
         new_comment, created = create_comment_data(request=request, content_type=content_type,
@@ -62,8 +61,34 @@ def post_detail(request, slug=None):  # retrieve
         return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 
     comments = instance.comments
-    additional_posts = Post.objects.filter(updated__lt=instance.updated).order_by('-updated')[:3]
-    print(additional_posts)
+    count_of_additional_posts = 3
+    tagged_posts = Post.objects.filter(tag__in=instance.tag.all()).order_by('-updated')
+    elder_additional_posts = tagged_posts.filter(updated__lt=instance.updated)
+    # prepare_additional_posts = elder_additional_posts
+
+    # print('LEN OF ALL: ', len(tagged_posts))
+    # print('LEN OF OLDER: ', len(elder_additional_posts))
+
+    if len(elder_additional_posts) < count_of_additional_posts and len(tagged_posts) != 0:
+        print('I will load: ', count_of_additional_posts - elder_additional_posts.count())
+        # from itertools import chain
+        prepare_additional_posts = list(elder_additional_posts) + list(tagged_posts[:(count_of_additional_posts - len(elder_additional_posts))])
+        print('I loaded: ', len(prepare_additional_posts))
+    elif len(tagged_posts) != 0:
+        prepare_additional_posts = list(elder_additional_posts[:count_of_additional_posts])
+    else:
+        print('here')
+        prepare_additional_posts = Post.objects.active().order_by('-updated')[:count_of_additional_posts]
+    # print('TAG:', instance.tag.all())
+    additional_posts = prepare_additional_posts
+    # if len(additional_posts) < count_of_additional_posts:
+    #     additional_posts = additional_posts | prepare_additional_posts[0:count_of_additional_posts - len(additional_posts)]
+
+    # print(additional_posts)
+
+    print('LEN OF ALL: ', len(tagged_posts))
+    print('LEN OF OLDER: ', len(elder_additional_posts))
+    print('AND TOTAL: ', len(prepare_additional_posts))
     context = {
         "instance": instance,
         "additional_posts": additional_posts,
@@ -109,8 +134,11 @@ def post_list(request):  # list items
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
-    user_tags_ids = list(user_tags.values_list('id', flat=True))
+
+    # IF I WANT EXCLUDE SOME TAGS FROM MODAL
+    # user_tags_ids = list(user_tags.values_list('id', flat=True))
     # all_tags = all_tags.exclude(id__in=user_tags_ids)
+
     context = {
         "post_list": queryset,
         "title": "List",
@@ -195,6 +223,7 @@ def show_tabs(request):
     user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
     user_tags = user_tags.tags.all()
     if tag == 'all':
+        print('IN ALL')
         queryset_list = Post.objects.all()
     elif request.user.is_staff or request.user.is_superuser:
         tag = user_tags.filter(name=tag)
@@ -207,13 +236,16 @@ def show_tabs(request):
     page = request.GET.get(page_request_var, 1)  # If page is not an integer, deliver first page.
     try:
         queryset = paginator.page(page)
+        print("LEN OR RESP: ", len(queryset))
+        if len(queryset) == 1:
+            print(queryset[0])
     except EmptyPage:
         raise Http404('No posts on this page')
         print('Empty')
         queryset = []
         # If page is out of range (e.g. 9999), deliver last page of results.
         # queryset = paginator.page(paginator.num_pages)
-    print(page)
+    print('page is:', page)
     context = {
         "post_list": queryset,
         "title": "List",

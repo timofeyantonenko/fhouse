@@ -122,8 +122,9 @@ $(document).ready(function() {
                 data: { 'tab': tab },
                 dataType: "html",
                 success: function(data) {
-                    var content = $('.articles_list');
+                    var content = $('.news_stream');
                     content.html(data);
+                    $(".more_article a").prop('href', 2);
                     window.history.pushState("object or string", "Title", '?tab=' + tab);
                 },
                 error: function(xhr, status, error) {
@@ -138,8 +139,9 @@ $(document).ready(function() {
                 data: { 'tab': tab },
                 dataType: "html",
                 success: function(data) {
-                    var content = $('.articles_list');
+                    var content = $('.news_stream');
                     content.html(data);
+                    $(".more_article a").prop('href', 2);
                     window.history.pushState("object or string", "Title", '?tab=' + tab);
                 },
                 error: function(xhr, status, error) {
@@ -175,7 +177,7 @@ $(document).ready(function() {
                 var content = $('.articles_list');
                 content.html(data);
                 img_norm_size();
-                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
+//                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
@@ -263,16 +265,16 @@ $(document).ready(function() {
             return;
         }
         var state = ""
-        var tab = $('div .menu_individualNews_active').find('div').text();
+        var tab = $('div .menu_individualNews_active li').find('div').text();
         if (tab === 'Все') {
             tab = 'all';
         }
         var ajax_data = { "tab": tab }
         if (page != null) {
-            console.log('HERE PAGE IS: ' + page);
+//            console.log('HERE PAGE IS: ' + page);
             ajax_data["page"] = page
         }
-        console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['section']);
+//        console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['tab']);
         $.ajax({
             url: '/posts/tabs',
             data: ajax_data,
@@ -280,8 +282,11 @@ $(document).ready(function() {
             success: function(data) {
                 page = parseInt(page) + 1;
                 $(a_block).prop('href', page);
-                var content = $('.articles_list');
+                var content = $('.news_stream');
+                console.log('data is here');
+                console.log(data);
                 content.append(data);
+                console.log('after data is here');
                 img_norm_size();
 //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
             },
@@ -454,8 +459,8 @@ $(document).ready(function() {
 var img_norm_size = function() {
     $('.IMGoneArticle img').each(function(i) {
         $(this).load(function() {
-            console.log($(this).height() + " child");
-            console.log($(this).parent().height() + " parent]");
+//            console.log($(this).height() + " child");
+//            console.log($(this).parent().height() + " parent]");
             if ($(this).css("height") < $(this).parent().css("height")) {
                 $(this).parent().css({ "display": "flex", "justify-content": "center" });
                 $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });

@@ -12,7 +12,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-
 function isEmpty(obj) {
     for (var prop in obj) {
         if (obj.hasOwnProperty(prop))
@@ -30,38 +29,13 @@ if (!String.format) {
     };
 }
 $(document).ready(function() {
+    section = $(".nav_ul li:first-child a");
+    section_name = section.text().trim();
+    console.log(section_name);
+    // Active section of menu
+    section.addClass("active_nav_ul");
+    load_section_info(section_name, undefined);
 
-    var section = getUrlParameter('section');
-    if (typeof section != 'undefined') {
-        var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
-        var previous_active_tab = $('div .menu_individualNews_active');
-        previous_active_tab.removeClass('menu_individualNews_active');
-        var str_to_find = String.format("div.changeNews:contains('{0}')", search_tab);
-        var new_active_tab = $(str_to_find);
-        new_active_tab.addClass('menu_individualNews_active');
-    } else {
-        section = $(".nav_ul li:first-child a");
-        section_name = section.text().trim();
-        console.log(section_name);
-        // Active section of menu
-        section.addClass("active_nav_ul");
-        var ajax_url = 'slider_photo_list';
-        var ajax_data = { "section": section_name }
-        var state = ""
-        $.ajax({
-            url: ajax_url,
-            data: ajax_data,
-            dataType: "html",
-            success: function(data) {
-                var content = $('.slider_photo_list');
-                content.html(data);
-                //                window.history.pushState("object or string", "Title", state);
-            },
-            error: function(xhr, status, error) {
-                console.log(error, status, xhr);
-            }
-        });
-    }
 
     // Активный раздел меню
     //$(".nav_ul li:first-child a").addClass("active_nav_ul");
@@ -76,32 +50,9 @@ $(document).ready(function() {
         section_name = section.text().trim();
         // Active section of menu
         section.addClass("active_nav_ul");
-        var ajax_url = 'slider_photo_list';
-        var ajax_data = { "section": section_name }
-        var state = ""
-        $.ajax({
-            url: ajax_url,
-            data: ajax_data,
-            dataType: "html",
-            success: function(data) {
-                var content = $('.slider_photo_list');
-                content.html(data);
-                //            window.history.pushState("object or string", "Title", state);
-            },
-            error: function(xhr, status, error) {
-                console.log(error, status, xhr);
-            }
-        });
+        load_section_info(section_name, undefined);
     });
 
-    // Выбор альбома 
-    $(".list_albums .album_previews").click(function() {
-        $(".list_albums .album_previews").removeClass('active_selected_album');
-        $(this).addClass('active_selected_album');
-        var name_album = $(this).children(".discription_previewws_album").children(".title_album_preview").text();
-        $("div.quantity_album").html(name_album);
-        return false;
-    });
 
     size_img_slaider();
 
@@ -118,32 +69,32 @@ $(document).ready(function() {
             $(this).css({ "width": "inherit", "height": "inherit" });
             var width_height_img = ($(this).width() / $(this).height());
             if (($(this).width() > width_container_photo) && ($(this).height() > height_container_photo) && (relationship_w_h_container > width_height_img)) {
-                console.log("w>h")
+//                console.log("w>h")
                 $(this).css({ "width": height_container_photo * width_height_img, "height": height_container_photo, "margin": "0 auto" })
                 $(this).show();
-                return success;
+                return true;
             } else if (($(this).width() > width_container_photo) && ($(this).height() > height_container_photo) && (relationship_w_h_container < width_height_img)) {
-                console.log("w<h")
+//                console.log("w<h")
                 $(this).css({ "width": width_container_photo, "height": width_container_photo / width_height_img, "margin": "0 auto" })
                 $(this).show();
-                return success;
+                return true;
             } else if (($(this).width() > width_container_photo) && ($(this).height() < height_container_photo)) {
                 $(this).css({ "width": width_container_photo, "height": "auto", "margin": "0 auto" });
-                console.log("width >")
+//                console.log("width >")
                 $(this).show();
-                return success;
+                return true;
             } else if (($(this).width() < width_container_photo) && ($(this).height() > height_container_photo)) {
                 $(this).css({ "height": height_container_photo, "width": "auto", "margin": "0 auto" });
-                console.log("height >");
+//                console.log("height >");
                 $(this).show();
-                return success;
+                return true;
             } else if (($(this).width() < width_container_photo) && ($(this).height() < height_container_photo)) {
-                console.log("width and height <");
+//                console.log("width and height <");
                 var width_img = $(this).width();
                 var height_img = $(this).height();
                 $(this).css({ "height": "auto", "width": "auto", "margin": "0 auto" });
                 $(this).show();
-                return success;
+                return true;
             } else {
                 console.log("Пиздец")
             }
@@ -181,24 +132,10 @@ $(document).ready(function() {
                 var height_img = $(this).height();
                 $(this).css({ "height": "auto", "width": "auto" });
             } else {
-                // alet("Пиздец")
+                // alert("Пиздец")
             }
         });
     }
-
-    // Номер фотографии
-    var quantity_foto_albums = ($(".list_src_slaider li").length);
-    $("#quantity_photo_in_album").html(quantity_foto_albums);
-
-    // Номер фото модальное окно 
-    var quantity_foto_modal = ($("#list_src_foto_modal li").length);
-    $("#quantity_photo_in_album_modal").html(quantity_foto_modal);
-
-    // Новый слайдер 
-
-    // При переходе в галерею подгружается список ссылок с первой секции и src последней фото добавляется в img 
-    var src_first_li_section = $('.list_src_slaider li:first-child').text()
-    $('#container_img_in_slaider img').attr("src", src_first_li_section);
 
 
     // Преключения между фотками в слайдере
@@ -212,7 +149,7 @@ $(document).ready(function() {
 
 
             if ($(this).text() == now_src_slaider) {
-                // Number foto 
+                // Number foto
                 var index_photo = ($(this).index());
                 $("#number_photo").html(index_photo);
                 console.log(index_photo)
@@ -391,7 +328,26 @@ $(document).ready(function() {
 
     // Фиксация блока меньшей высоты
 
-    $(window).load(function() {
+    // Конец фиксации
+
+});
+
+
+// выбор альбома
+$(document).on("click", ".list_albums .album_previews", function(e) {
+    var long_id = $(this).attr("id");
+//    var name_album = $(this).find(".title_album_preview").text();
+    values=long_id.split("album_id_");
+    short_id = values[1];
+    $(".list_albums .album_previews").removeClass('active_selected_album');
+    $(this).addClass('active_selected_album');
+    var name_album = $(this).children(".discription_previewws_album").children(".title_album_preview").text();
+    $('.album_slaider').html(name_album);
+    load_album_photos(short_id, 1);  // load first part of album photos
+    return false;
+});
+
+$(window).load(function() {
 
         var height = $(".colum").height();
         var biggest_col;
@@ -465,8 +421,138 @@ $(document).ready(function() {
 
     });
 
+function load_section_info(section_name, album_name){
+    var ajax_url = 'slider_photo_list';
+    var ajax_data = { "section": section_name }
+    var state = ""
+    $.ajax({
+        url: ajax_url,
+        data: ajax_data,
+        dataType: "json",
+        success: function(data) {
+            var content = $('.list_src_slaider');
+            var insert_data = "";
+//          console.log(data);
+//          json_data = JSON.parse(data);
+            var json_request_photos = data['photo_list'];
+            $.each(json_request_photos, function(idx, obj) {
+//              insert_data += "<li>" + obj.image + " </li>";
+                console.log('obj: ' + obj.image);
+                obj_comments = obj.comments;
+                console.log(obj_comments.length);
+                insert_data += "<li>" + "<span class=\"photo_url\">" + obj.image + "</span>"
+                + " <span class=\"count_of_comments\">" + obj_comments.length + "</span>"
+                + " <span class=\"photo_album_title\">" + obj.album_title + "</span>"
+                + " <span class=\"photo_positive_likes\">" + obj.positive_likes.length + "</span>"
+                + " <span class=\"photo_negative_likes\">" + obj.negative_likes.length  + "</span>"
+                + "</li>";
+                try {
+//                    console.log("comments: " + JSON.parse(obj.comments)[0]["fields"]["content"]);
+                    }
+                catch (err){
+                    }
+                });
+            content.html(insert_data);
+            make_slider();
 
-    // Конец фиксации
+            var json_request_albums = data['albums'];
+            var albums_count_block = $('.quantity_album');
+            albums_count_block.html(json_request_albums.length + " альбомов");
+            var albums_container = $('.list_albums');
+            insert_data = ""
+            $.each(json_request_albums, function(idx, obj) {
+                insert_data += "<div class=\"album_previews\" id=\"album_id_" + obj.id + "\">" +
+                "<div class=\"album_previews_img\">" +
+                "<img src=\"" + obj.image + "\" alt=\"\"> </div>" +
+                " <div class=\"discription_previewws_album\">" +
+                " <div class=\"title_album_preview\"> " + obj.album_title + " </div>" +
+                " <div class=\"info_preview_album\"> <span><i class=\"fa fa-camera\" aria-hidden=\"true\"></i>" +
+                " 48 &nbsp;<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i> 456</span>" +
+                " <span class=\"date_album_preview\">28 october 2010</span>" +
+                " </div> </div> </div>"
+//                insert_data += "<div class=\"album_previews\"><div class=\"album_previews_img\">" +
+//                "<img src=\"https://photo.championat.com/18/18040/full/762888-artjom-rebrov-denis-davydov-i-denis-glushakov.jpg\""  +
+//                "alt=\"\"></div><div class=\"discription_previewws_album\"><div class=\"title_album_preview\">Лучшие стадины Украины</div>" +
+//                                   +  "<div class=\"info_preview_album\"><span><i class=\"fa fa-camera\" aria-hidden=\"true\">" +
+//                                   "</i> 48 &nbsp;<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i> 456</span>" +
+//                                   "<span class=\"date_album_preview\">28 october 2010</span></div></div></div>"
+//                    insert_data += "<li>" + MEDIA_URL + obj.fields.image + " </li>"
+            });
+            albums_container.html(insert_data);
+            $('.album_slaider').html(section_name);
+        },
+        error: function(xhr, status, error) {
+            console.log(error, status, xhr);
+        }
+        });
+}
+
+function load_album_photos(album_id, page){
+    var ajax_url = 'album_photo_list';
+    var ajax_data = { "album_id": album_id, "page": page }
+    var state = ""
+    $.ajax({
+        url: ajax_url,
+        data: ajax_data,
+        dataType: "json",
+        success: function(data) {
+            var content = $('.list_src_slaider');
+            var insert_data = "";
+//          console.log(data);
+//          json_data = JSON.parse(data);
+            var json_request_photos = data['photo_list'];
+            $.each(json_request_photos, function(idx, obj) {
+//              insert_data += "<li>" + obj.image + " </li>";
+                console.log('obj: ' + obj.image);
+                obj_comments = obj.comments;
+                console.log(obj_comments.length);
+                insert_data += "<li>" + "<span class=\"photo_url\">" + obj.image + "</span>"
+                + " <span class=\"count_of_comments\">" + obj_comments.length + "</span>"
+                + " <span class=\"photo_album_title\">" + obj.album_title + "</span>"
+                + " <span class=\"photo_positive_likes\">" + obj.positive_likes.length + "</span>"
+                + " <span class=\"photo_negative_likes\">" + obj.negative_likes.length  + "</span>"
+                + "</li>";
+                try {
+//                    console.log("comments: " + JSON.parse(obj.comments)[0]["fields"]["content"]);
+                    }
+                catch (err){
+                    }
+                });
+            content.html(insert_data);
+            make_slider();
+        },
+        error: function(xhr, status, error) {
+            console.log(error, status, xhr);
+        }
+        });
+}
+
+function make_slider(){
+    // Номер фотографии
+    var quantity_foto_albums = ($(".list_src_slaider").length);
+    $("#quantity_photo_in_album").html(quantity_foto_albums);
+
+    // Номер фото модальное окно
+    var quantity_foto_modal = ($("#list_src_foto_modal li").length);
+    $("#quantity_photo_in_album_modal").html(quantity_foto_modal);
+
+    // Новый слайдер
+
+    // При переходе в галерею подгружается список ссылок с первой секции и src последней фото добавляется в img
+//    alert($('.list_src_slaider li:first-child span.count_of_comments').text());
+    var photo_image_url = $('.list_src_slaider li:first-child span.photo_url').text();
+    var count_of_comments = $('.list_src_slaider li:first-child span.count_of_comments').text();
+    var count_of_pos_likes = $('.list_src_slaider li:first-child span.photo_positive_likes').text();
+    var count_of_neg_likes = $('.list_src_slaider li:first-child span.photo_negative_likes').text();
+    var photo_album_title = $('.list_src_slaider li:first-child span.photo_album_title').text();
+
+//    var src_first_li_section = $('.list_src_slaider li:first-child span.photo_url').text()
+
+    $('#container_img_in_slaider img').attr("src", photo_image_url);
+    $('.block_like div.votes').text(count_of_pos_likes);
+    $('.block_dislike div.votes').text(count_of_neg_likes);
+    $('.button_show_comments').text("Комметарии " + count_of_comments);
+    $('.album_slaider').text(photo_album_title);
 
 
-});
+}

@@ -1,8 +1,1 @@
-<div class="slaider_foto_base">
-    <div class="img_slaider">
-        {% for photo in photo_list %}
-        <img src="{{ photo.image.url }}" alt=""> {% endfor %}
-    </div>
-    <i class="fa fa-expand" aria-hidden="true" id="foto_full"></i>
-    
-</div>
+{% for photo in photo_list %}<li>{{ photo.image.url }}</li>{% endfor %}
