@@ -664,6 +664,11 @@ ul {
     margin-right: 10px !important;
 }
 
+.flex_container_albums {
+    overflow: hidden;
+    padding-bottom: 50px;
+}
+
 .photo_row {
     max-height: 300px;
     display: flex;
@@ -734,8 +739,11 @@ ul {
 .more_photo {
     cursor: pointer;
     width: 32%;
-    margin: 10px auto 0px;
-    padding: 5px;
+    position: absolute;
+    bottom: 20px;
+    left: 34%;
+    height: 35px;
+    line-height: 35px;
     display: block;
     text-align: center;
     text-transform: uppercase;
@@ -973,30 +981,32 @@ ul {
     overflow: hidden;
 }
 
-.dialog_slaider .area_for_left_arrow_slaider {
+.dialog_slaider #area_for_left_arrow_slaider {
     position: absolute;
     height: 100%;
     width: 50%;
     left: 0;
     top: 0;
     cursor: pointer;
+    z-index: 1000;
 }
 
-.dialog_slaider .area_for_left_arrow_slaider:hover i {
+.dialog_slaider #area_for_left_arrow_slaider:hover i {
     opacity: 1 !important;
 }
 
-.dialog_slaider .area_for_right_arrow_slaider:hover i {
+.dialog_slaider #area_for_right_arrow_slaider:hover i {
     opacity: 1 !important;
 }
 
-.dialog_slaider .area_for_right_arrow_slaider {
+.dialog_slaider #area_for_right_arrow_slaider {
     position: absolute;
     height: 100%;
     width: 50%;
     left: 50%;
     top: 0;
     cursor: pointer;
+    z-index: 1000;
 }
 
 .dialog_slaider .container_arow_slaider i {
@@ -1027,7 +1037,6 @@ ul {
     display: flex;
     justify-content: center;
     width: 100%;
-
     height: calc(100% - 60px);
     overflow: hidden;
     position: relative;

@@ -1,175 +1,124 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %}{{ title }} {% endblock head_title %} {% block head_extra %}
-<title>Prognosis Fhouse</title>
+<title>Анонсы ТОП матчей недели</title>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-lg-9 ">
-            <nav id="nav_top_matches">
-                <div class="match_top_nav">
-                    <div class="team_top_nav">
-                        <div class="team_top_three">
-                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/768px-Chelsea_FC.svg.png" alt="">
+            <div class="main">
+                <nav id="nav_top_matches">
+                    <div class="title_section_web_site">
+                        <h2>Анонс ТОП матчей недели. 28 окт - 3 ноя 2010</h2>
+                    </div>
+                    <div class="make_bet">
+                        <button data-toggle="modal" data-target="#week_bets_top">сделать ставку</button>
+                    </div>
+                </nav>
+                <!-- Превью к топ матчам  -->
+                <main>
+                    <div id="match_top_nav">
+                        <div class="one_menu_top_match">
+                            <div class="team_top_nav">
+                                <div class="team_top_three">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/768px-Chelsea_FC.svg.png" alt="">
+                                </div>
+                                <div class="team_top_three">
+                                    vs
+                                </div>
+                                <div class="team_top_three">
+                                    <img src="http://www.soccertalentidentification.com/Content/images/Liverpool_FC.svg.png" alt="">
+                                </div>
+                            </div>
+                            <div class="super_title">
+                                Дерби северного-западного лондона и уэльса
+                            </div>
+                            <div class="read_prev">
+                                Читать превью
+                            </div>
+                            <div class="line_hover_active"></div>
                         </div>
-                        <div class="team_top_three">
-                            vs
+                        <div class="one_menu_top_match">
+                            <div class="team_top_nav">
+                                <div class="team_top_three">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/768px-Chelsea_FC.svg.png" alt="">
+                                </div>
+                                <div class="team_top_three">
+                                    vs
+                                </div>
+                                <div class="team_top_three">
+                                    <img src="http://www.soccertalentidentification.com/Content/images/Liverpool_FC.svg.png" alt="">
+                                </div>
+                            </div>
+                            <div class="super_title">
+                                Дерби северного лондона
+                            </div>
+                            <div class="read_prev">
+                                Читать превью
+                            </div>
+                            <div class="line_hover_active"></div>
                         </div>
-                        <div class="team_top_three">
-                            <img src="http://www.soccertalentidentification.com/Content/images/Liverpool_FC.svg.png" alt="">
+                        <div class="one_menu_top_match">
+                            <div class="team_top_nav">
+                                <div class="team_top_three">
+                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/768px-Chelsea_FC.svg.png" alt="">
+                                </div>
+                                <div class="team_top_three">
+                                    vs
+                                </div>
+                                <div class="team_top_three">
+                                    <img src="http://www.soccertalentidentification.com/Content/images/Liverpool_FC.svg.png" alt="">
+                                </div>
+                            </div>
+                            <div class="super_title">
+                                Дерби северного лондона
+                            </div>
+                            <div class="read_prev">
+                                Читать превью
+                            </div>
+                            <div class="line_hover_active"></div>
                         </div>
                     </div>
-                    <div class="leagua_and_tour_top_nav">
-                        <div class="infa_top_match_nav">
-                            <div class="title_league_top_nav">Английская премьер лига</div>
-                            <div class="tour_league_top_nav">8 тур</div>
+                    <div class="top_match">
+                        <header>
+                            <h2>Арсенал - Ливерпуль</h2>
+                            <p>Английская Премьер Лига 17 тур</p>
+                        </header>
+                        <div class="prev_info_text">
+                            <img src="https://s-media-cache-ak0.pinimg.com/736x/01/68/66/01686699c0ae0f2f8c98659a92f4ca01.jpg" alt="">
+                            <p>
+                                В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английском чемпионате и разделяет их всего 1 очко. Воскресное противостояние команд станет 190 в истории. Огромное, даже можно сказать тотальное преимущество в матчах соперников на стороне лондонцев, одержавших 96 побед, при 44 ничьих и всего 49 победах "горожан". Разница мячей также намного лучше у "канониров" 310 забитых мячей против 216 у "Манчестер Сити". В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английско
+                            </p>
+                            <img src="http://4.bp.blogspot.com/-L7eObnullmc/VI3qosjg67I/AAAAAAAABQw/EGWyaM0EQ9s/s320/Juventus%2BFC%2BWallpaper%2B86.jpg" alt="">
+                            <p>
+                                В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английском чемпионате и разделяет их всего 1 очко. Воскресное противостояние команд станет 190 в истории. Огромное, даже можно сказать тотальное преимущество в матчах соперников на стороне лондонцев, одержавших 96 побед, при 44 ничьих и всего 49 победах "горожан". Разница мячей также намного лучше у "канониров" 310 забитых мячей против 216 у "Манчестер Сити". В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английско
+                            </p>
                         </div>
-                        <div class="read_this_prev_top_nav">
-                            Читать
+                        <div class="time_start">
+                            Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
                         </div>
+                    </div>
+                    <div class="top_match">
+                    </div>
+                    <div class="top_match">
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <!-- Таблица рейтинга прогнозистов -->
+            <div calss="table_rating_forecasters" id="table_rat_forcas">
+                <div class="head_table">
+                    <div class="table_name">Рейтинг прогнозистов</div>
+                    <div class="nav_table">
+                        <div class="one_division_nav">Все время</div>
+                        <div class="one_division_nav">Месяц</div>
+                        <div class="one_division_nav">Неделя</div>
                     </div>
                 </div>
-            </nav>
-            <!-- Превью к топ матчам  -->
-            <main>
-                <div id="my_weeks_bets">
-                    <!-- Ставка недели -->
-                    <div class="bet_in_modal">
-                        <!-- Прогноз недели  -->
-                        <div class="header_user_choice">
-                            Экспресс недели
-                        </div>
-                        <div class="mathes_can_bet">
-                            <div class="one_math_can_bet">
-                                <div class="data_time_can">02.01 - 22:30</div>
-                                <div class="result_can teams_can">
-                                    <div class="team_can">
-                                        Манчестер
-                                    </div>
-                                    <div class="kof_can">
-                                        12
-                                    </div>
-                                </div>
-                                <div class="result_can draw_can">
-                                    <div class="team_can">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="kof_can">
-                                        10
-                                    </div>
-                                </div>
-                                <div class="result_can teams_can">
-                                    <div class="team_can">
-                                        Дортмунд
-                                    </div>
-                                    <div class="kof_can">
-                                        10.21
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="one_math_can_bet">
-                                <div class="data_time_can">02.01 - 22:30</div>
-                                <div class="result_can teams_can">
-                                    <div class="team_can">
-                                        Шахтер
-                                    </div>
-                                    <div class="kof_can">
-                                        1
-                                    </div>
-                                </div>
-                                <div class="result_can draw_can">
-                                    <div class="team_can">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="kof_can">
-                                        2
-                                    </div>
-                                </div>
-                                <div class="result_can teams_can">
-                                    <div class="team_can">
-                                        Динамо Киев
-                                    </div>
-                                    <div class="kof_can">
-                                        1.12
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="one_math_can_bet">
-                                <div class="data_time_can">02.01 - 22:30</div>
-                                <div class="result_can teams_can">
-                                    <div class="team_can">
-                                        Барселона-Мадридистская Порош
-                                    </div>
-                                    <div class="kof_can">
-                                        1.23
-                                    </div>
-                                </div>
-                                <div class="result_can draw_can">
-                                    <div class="team_can">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="kof_can">
-                                        84.32
-                                    </div>
-                                </div>
-                                <div class="result_can teams_can">
-                                    <div class="team_can">
-                                        Реал Мадрид
-                                    </div>
-                                    <div class="kof_can">
-                                        101.12
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Прогноз недели конец   -->
-                        <!-- Таблица и инфа о юзере  -->
-                        <div class="table_forecasters_and_user_infa">
-                            <!-- Инфа юзер -->
-                            <div class="user_infa">
-                                <div class="photo_user">
-                                    <img src="{{ user.avatar.url }}" />
-                                </div>
-                                <div class="name_user">
-                                    {{ user.first_name }} {{ user.last_name }} (ВЫ)
-                                </div>
-                                <div class="all_about_user_honour">
-                                    <div class="user_position_forecasters_all_time">
-                                        <div>Рейтинг (все время):</div>
-                                        <span class="pos_user_bet">1213</span>
-                                    </div>
-                                    <div class="user_position_forecasters_year">
-                                        <div>Рейтинг (текущий год):</div>
-                                        <span class="pos_user_bet">1213</span>
-                                    </div>
-                                    <div class="user_position_forecasters_month">
-                                        <div>Рейтинг (текущий месяц):</div>
-                                        <span class="pos_user_bet">1213</span>
-                                    </div>
-                                    <div class="user_kof_win">
-                                        <div>Процент побед:</div>
-                                        <span class="pos_user_bet">56%</span>
-                                    </div>
-                                    <div class="users_honour">
-                                        <div>Достижения:</div>
-                                        <div class="user_best_in_this"> Апрель 2016 (1)</div>
-                                        <div class="user_best_in_this"> 2016 (3)</div>
-                                        <div class="user_best_in_this"> Октябрь 2016 (2)</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Таблица прогнозистов -->
-                            <div calss="table_rating_forecasters">
-                                <div class="head_table">
-                                    <div class="table_name">Рейтинг прогнозистов</div>
-                                    <div class="nav_table">
-                                        <div class="one_division_nav">Все время</div>
-                                        <div class="one_division_nav">Месяц</div>
-                                        <div class="one_division_nav">Неделя</div>
-                                    </div>
-                                </div>
-                                <div class="body_table">
-                                    <!-- Подсказки таблица  -->
+                <div class="body_table">
+                    <!-- Подсказки таблица  -->
+                    <span class="time_rating" id="year_rating_forecasters">
                                     <div class="all_team_table">
                                         <div class="one_position">
                                             <div class="position">Поз</div>
@@ -193,7 +142,7 @@
                                         <div class="one_position">
                                             <div class="position">1</div>
                                             <div class="forecasters_name">
-                                                <div class="team_img">
+                                                    <div class="team_img">
                                                     <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
                                                 </div>
                                                 <div class="team_table">
@@ -203,190 +152,95 @@
                                             <div class="forecasters_percent">65%</div>
                                             <div class="forecasters_pts">1230</div>
                                         </div>
+                                        <footer>
+                                            <div class="more_info">
+                                                <a href="#">Весь список</a>
+                                            </div>
+                                        </footer>
                                     </div>
-                                    <footer>
-                                        <div class="more_info">
-                                            Весь список
+                                </span>
+                    <span class="time_rating" id="month_rating_forecasters">
+                                    <div class="all_team_table">
+                                        <div class="one_position">
+                                            <div class="position">Поз</div>
+                                            <div class="forecasters_name">Имя</div>
+                                            <div class="forecasters_percent">Коэф</div>
+                                            <div class="forecasters_pts">О</div>
                                         </div>
-                                    </footer>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Выбор юзера -->
-                    <div class="user_choice">
-                        <div class="header_user_choice">
-                            Моя ставка
-                        </div>
-                        <nav id="user_choice_nav">
-                            <!-- arrow beetween weeks -->
-                            <div class="prev_week_bet"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                            <div class="next_week_bet"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                            <!-- weeks -->
-                            <div id="all_weeks">
-                                <div class="one_week_bet">
-                                    23-30 сен. 2017
-                                </div>
-                                <div class="one_week_bet">
-                                    23-30 окт. 2015
-                                </div>
-                                <div class="one_week_bet">
-                                    23-30 сен. 1999
-                                </div>
-                                <div class="one_week_bet">
-                                    23-30 ноя. 2003
-                                </div>
-                                <div class="one_week_bet">
-                                    23-30 фев. 1008
-                                </div>
-                            </div>
-                        </nav>
-                        <div class="body_user_choice">
-                            <!-- Выбор пользователя -->
-                            <div class="one_user_choice">
-                                <div class="match_bet_choice">
-                                    <span class="marth_choice_this"></span>
-                                    <div class="delete_this_this_choice">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                        <div class="one_position">
+                                            <div class="position">1</div>
+                                            <div class="forecasters_name">
+                                                <div class="team_img">
+                                                    <img src="https://s-media-cache-ak0.pinimg.com/236x/41/42/ae/4142ae1faf0ee1b6ca68e3ed9c629bec.jpg" alt="">
+                                                </div>
+                                                <div class="team_table">
+                                                    Мангура Дмитрий Николаевич
+                                                </div>
+                                            </div>
+                                            <div class="forecasters_percent">65%</div>
+                                            <div class="forecasters_pts">1230</div>
+                                        </div>
+                                        <div class="one_position">
+                                            <div class="position">1</div>
+                                            <div class="forecasters_name">
+                                                <div class="team_img">
+                                                    <img src="https://s-media-cache-ak0.pinimg.com/236x/41/42/ae/4142ae1faf0ee1b6ca68e3ed9c629bec.jpg" alt="">
+                                                </div>
+                                                <div class="team_table">
+                                                    Мангура Дмитрий Николаевич
+                                                </div>
+                                            </div>
+                                            <div class="forecasters_percent">65%</div>
+                                            <div class="forecasters_pts">1230</div>
+                                        </div>
+                                        <footer>
+                                            <div class="more_info">
+                                                <a href="#">Весь список</a>
+                                            </div>
+                                        </footer>
                                     </div>
-                                </div>
-                                <div class="user_match_bet_choice">
-                                    <div class="result_math_and_won_team">
-                                        <div class="win_or_draw"></div>
-                                        <div class="your_choice_team"></div>
-                                    </div>
-                                    <div class="kof_this_match">1</div>
-                                </div>
-                            </div>
-                            <div class="one_user_choice">
-                                <div class="match_bet_choice">
-                                    <span class="marth_choice_this"></span>
-                                    <div class="delete_this_this_choice">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="user_match_bet_choice">
-                                    <div class="result_math_and_won_team">
-                                        <div class="win_or_draw"></div>
-                                        <div class="your_choice_team"></div>
-                                    </div>
-                                    <div class="kof_this_match">1</div>
-                                </div>
-                            </div>
-                            <div class="one_user_choice">
-                                <div class="match_bet_choice">
-                                    <span class="marth_choice_this"></span>
-                                    <div class="delete_this_this_choice">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                                <div class="user_match_bet_choice">
-                                    <div class="result_math_and_won_team">
-                                        <div class="win_or_draw"></div>
-                                        <div class="your_choice_team"></div>
-                                    </div>
-                                    <div class="kof_this_match">1</div>
-                                </div>
-                            </div>
-                            <!-- Суммарный коэффициент -->
-                            <div class="total_kof">
-                                <div>Общий коэффициент:</div>
-                                <div class="total_kof_these_matches"></div>
-                            </div>
-                            <!-- Если пользователь еще не выбрал ни одного матча -->
-                            <div class="not_results">
-                                Сделайте ставку
-                            </div>
-                            <!-- После подтверждения  -->
-                            <div class="success_bet">
-                                Ставка успешно принята!</br>
-                                Ожидайте результатов
-                            </div>
-                            <!-- После того как все события произошли  -->
-                            <div class="your_result_after">
-                                <div>Ваш выигрыш:</div>
-                                <div class="win_points"></div>
-                            </div>
-                        </div>
-                        <div class="footer_user_choice">
-                            <div class="btn_success_bet">
-                                Сделать ставку
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <header>
-                    <h2>Арсенал - Ливерпуль</h2>
-                    <p>Английская Премьер Лига 17 тур</p>
-                    <div class="make_bet" data-toggle="modal" data-target="#week_bets_top">
-                        Ставка недели
-                    </div>
-                </header>
-                <div class="prev_info_text">
-                    В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английском чемпионате и разделяет их всего 1 очко. Воскресное противостояние команд станет 190 в истории. Огромное, даже можно сказать тотальное преимущество в матчах соперников на стороне лондонцев, одержавших 96 побед, при 44 ничьих и всего 49 победах "горожан". Разница мячей также намного лучше у "канониров" 310 забитых мячей против 216 у "Манчестер Сити". В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английско
-                </div>
-                <footer>
-                </footer>
-            </main>
-            <!-- Weeks prognosis -->
-            <div class="modal fade" id="week_bets_top" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal_dialog">
-                </div>
-            </div>
-        </div>
-        <!-- Прогнозы на все матчи топ лиг, еврокубков и отбор ЧМ 2018 -->
-        <div class="col-lg-3">
-            <!-- Таблица рейтинга прогнозистов -->
-            <div calss="table_rating_forecasters">
-                <div class="head_table">
-                    <div class="table_name">Рейтинг прогнозистов</div>
-                    <div class="nav_table">
-                        <div class="one_division_nav">Все время</div>
-                        <div class="one_division_nav">Месяц</div>
-                        <div class="one_division_nav">Неделя</div>
-                    </div>
-                </div>
-                <div class="body_table">
-                    <!-- Подсказки таблица  -->
-                    <div class="all_team_table">
-                        <div class="one_position">
-                            <div class="position">Поз</div>
-                            <div class="forecasters_name">Имя</div>
-                            <div class="forecasters_percent">Коэф</div>
-                            <div class="forecasters_pts">О</div>
-                        </div>
-                        <div class="one_position">
-                            <div class="position">1</div>
-                            <div class="forecasters_name">
-                                <div class="team_img">
-                                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                </div>
-                                <div class="team_table">
-                                    Мангура Дмитрий Николаевич
-                                </div>
-                            </div>
-                            <div class="forecasters_percent">65%</div>
-                            <div class="forecasters_pts">1230</div>
-                        </div>
-                        <div class="one_position">
-                            <div class="position">1</div>
-                            <div class="forecasters_name">
-                                <div class="team_img">
-                                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                </div>
-                                <div class="team_table">
-                                    Мангура Дмитрий Николаевич
-                                </div>
-                            </div>
-                            <div class="forecasters_percent">65%</div>
-                            <div class="forecasters_pts">1230</div>
-                        </div>
-                    </div>
-                    <footer>
-                        <div class="more_info">
-                            Весь список
-                        </div>
-                    </footer>
+                                </span>
+                    <span class="time_rating" id="weak_rating_forecasters">
+                                        <div class="all_team_table">
+                                            <div class="one_position">
+                                                <div class="position">Поз</div>
+                                                <div class="forecasters_name">Имя</div>
+                                                <div class="forecasters_percent">Коэф</div>
+                                                <div class="forecasters_pts">О</div>
+                                            </div>
+                                            <div class="one_position">
+                                                <div class="position">1</div>
+                                                <div class="forecasters_name">
+                                                    <div class="team_img">
+                                                        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                                                    </div>
+                                                    <div class="team_table">
+                                                        Мангура Дмитрий Николаевич
+                                                    </div>
+                                                </div>
+                                                <div class="forecasters_percent">65%</div>
+                                                <div class="forecasters_pts">1230</div>
+                                            </div>
+                                            <div class="one_position">
+                                                <div class="position">1</div>
+                                                <div class="forecasters_name">
+                                                    <div class="team_img">
+                                                        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                                                    </div>
+                                                    <div class="team_table">
+                                                        Мангура Дмитрий Николаевич
+                                                    </div>
+                                                </div>
+                                                <div class="forecasters_percent">65%</div>
+                                                <div class="forecasters_pts">1230</div>
+                                            </div>
+                                            <footer>
+                                                <div class="more_info">
+                                                    <a href="#">Весь список</a>
+                                                </div>      
+                                            </footer>
+                                         </div>
+                                    </span>
                 </div>
             </div>
             <!-- Конец таблицы с прогнозистами  -->
@@ -395,7 +249,7 @@
                 <div class="name_right_column">
                     <a href="all_reviews">Превью и прогнозы</a>
                 </div>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">Чемпионат Англии</div>
@@ -403,7 +257,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">Чемпионат Испании</div>
@@ -411,7 +265,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">Чемпионат Италии</div>
@@ -419,7 +273,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">Чемпионат Германии</div>
@@ -427,7 +281,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">Чемпионат Франции</div>
@@ -435,7 +289,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">Чемпионат России</div>
@@ -443,7 +297,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">Чемпионат Украины</div>
@@ -451,7 +305,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">Лига Чемпионов</div>
@@ -459,7 +313,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">Лига Европы</div>
@@ -467,7 +321,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
                             <div class="championship_title">ЧМ 2018</div>
@@ -477,7 +331,460 @@
                 </a>
             </div>
         </div>
-        <!-- Превью к топ матчам недели  -->
     </div>
+</div>
+<!-- Weeks prognosis modal -->
+<div class="modal fade" id="week_bets_top" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal_dialog">
+        <div id="my_weeks_bets">
+            <!-- Ставка недели -->
+            <div class="bet_in_modal">
+                <!-- Таблица и инфа о юзере  -->
+                <div class="table_forecasters_and_user_infa">
+                    <!-- Инфа юзер -->
+                    <div class="photo_user">
+                        <img src="{{ user.avatar.url }}" />
+                    </div>
+                    <div class="name_user_info">
+                        <h3>{{ user.first_name }} {{ user.last_name }} </h3>
+                        <div class="users_progress">
+                            <span id="open_user_results">
+                                        Мои результаты <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                            </span>
+                            <div class="drop_down_users_results">
+                                <div class="user_position_forecasters_all_time">
+                                    <div>Рейтинг (все время):</div>
+                                    <span class="pos_user_bet">1213</span>
+                                </div>
+                                <div class="user_position_forecasters_year">
+                                    <div>Рейтинг (текущий год):</div>
+                                    <span class="pos_user_bet">1213</span>
+                                </div>
+                                <div class="user_position_forecasters_month">
+                                    <div>Рейтинг (текущий месяц):</div>
+                                    <span class="pos_user_bet">1213</span>
+                                </div>
+                                <div class="user_kof_win">
+                                    <div>Процент побед:</div>
+                                    <span class="pos_user_bet">56%</span>
+                                </div>
+                                <div class="users_honour">
+                                    <div>Достижения:</div>
+                                    <div class="user_best_in_this">
+                                        <div class="title_honour_best">Апрель 2014</div>
+                                        <div class="place_result "><span>2</span></div>
+                                    </div>
+                                    <div class="user_best_in_this">
+                                        <div class="title_honour_best">Сезон 2014-2015</div>
+                                        <div class="place_result "><span>1</span></div>
+                                    </div>
+                                    <div class="user_best_in_this">
+                                        <div class="title_honour_best">2016 год</div>
+                                        <div class="place_result"><span>3</span></div>
+                                    </div>
+                                    <div class="user_best_in_this">
+                                        <div class="title_honour_best">2016 год</div>
+                                        <div class="place_result "><span>3</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="show_all_table_forecasters">
+                        <a href="#">Рейтинг прогнозистов</a>
+                    </div>
+                </div>
+                <!-- Прогноз недели  -->
+                <div class="header_user_choice">
+                    Экспресс недели
+                </div>
+                <div class="mathes_can_bet">
+                    <div class="one_math_can_bet">
+                        <div class="data_time_can">02.01 - 22:30</div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Манчестер
+                            </div>
+                            <div class="kof_can">
+                                12
+                            </div>
+                        </div>
+                        <div class="result_can draw_can">
+                            <div class="team_can">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </div>
+                            <div class="kof_can">
+                                10
+                            </div>
+                        </div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Дортмунд
+                            </div>
+                            <div class="kof_can">
+                                10.21
+                            </div>
+                        </div>
+                    </div>
+                    <div class="one_math_can_bet">
+                        <div class="data_time_can">02.01 - 22:30</div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Шахтер
+                            </div>
+                            <div class="kof_can">
+                                1
+                            </div>
+                        </div>
+                        <div class="result_can draw_can">
+                            <div class="team_can">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </div>
+                            <div class="kof_can">
+                                2
+                            </div>
+                        </div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Динамо Киев
+                            </div>
+                            <div class="kof_can">
+                                1.12
+                            </div>
+                        </div>
+                    </div>
+                    <div class="one_math_can_bet">
+                        <div class="data_time_can">02.01 - 22:30</div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Барселона-Мадридистская Порош
+                            </div>
+                            <div class="kof_can">
+                                1.23
+                            </div>
+                        </div>
+                        <div class="result_can draw_can">
+                            <div class="team_can">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </div>
+                            <div class="kof_can">
+                                84.32
+                            </div>
+                        </div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Реал Мадрид
+                            </div>
+                            <div class="kof_can">
+                                101.12
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Прогноз недели конец   -->
+            </div>
+            <!-- Выбор юзера -->
+            <div class="user_choice">
+                <div class="header_user_choice">
+                    Моя ставка
+                </div>
+                <nav id="user_choice_nav">
+                    <!-- arrow beetween weeks -->
+                    <div class="prev_week_bet"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                    <div class="next_week_bet"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                    <!-- weeks -->
+                    <div id="all_weeks">
+                        <div class="one_week_bet current_week">
+                            23-30 сен. 2017
+                        </div>
+                        <div class="one_week_bet">
+                            23-30 окт. 2016
+                        </div>
+                        <div class="one_week_bet">
+                            23-30 сен. 2015
+                        </div>
+                        <div class="one_week_bet">
+                            23-30 ноя. 2014
+                        </div>
+                    </div>
+                </nav>
+                <div class="body_user_choice">
+                    <span class="history_bet">
+                        <!-- Выбор пользователя -->
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                    <div class="delete_this_this_choice">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="user_match_bet_choice">
+                    <div class="result_math_and_won_team">
+                        <div class="win_or_draw"></div>
+                        <div class="your_choice_team"></div>
+                    </div>
+                    <div class="kof_this_match">1</div>
+                </div>
+            </div>
+            <div class="one_user_choice">
+                <div class="match_bet_choice">
+                    <span class="marth_choice_this"></span>
+                    <div class="delete_this_this_choice">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="user_match_bet_choice">
+                    <div class="result_math_and_won_team">
+                        <div class="win_or_draw"></div>
+                        <div class="your_choice_team"></div>
+                    </div>
+                    <div class="kof_this_match">1</div>
+                </div>
+            </div>
+            <div class="one_user_choice">
+                <div class="match_bet_choice">
+                    <span class="marth_choice_this"></span>
+                    <div class="delete_this_this_choice">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="user_match_bet_choice">
+                    <div class="result_math_and_won_team">
+                        <div class="win_or_draw"></div>
+                        <div class="your_choice_team"></div>
+                    </div>
+                    <div class="kof_this_match">1</div>
+                </div>
+            </div>
+            <!-- Суммарный коэффициент -->
+            <div class="total_kof">
+                <div>Общий коэффициент:</div>
+                <div class="total_kof_these_matches"></div>
+            </div>
+            <!-- Если пользователь еще не выбрал ни одного матча -->
+            <div class="not_results">
+                Сделайте ставку
+            </div>
+            <!-- После подтверждения  -->
+            <div class="success_bet">
+                Ставка успешно принята!</br>
+                Ожидайте результатов
+            </div>
+            <!-- После того как все события произошли  -->
+            <div class="your_result_after">
+                <div>Ваш выигрыш:</div>
+                <div class="win_points"></div>
+            </div>
+            </span>
+            <span class="history_bet">
+                        <!-- Выбор пользователя -->
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+            <div class="delete_this_this_choice">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="user_match_bet_choice">
+            <div class="result_math_and_won_team">
+                <div class="win_or_draw"></div>
+                <div class="your_choice_team"></div>
+            </div>
+            <div class="kof_this_match">1</div>
+        </div>
+    </div>
+    <div class="one_user_choice">
+        <div class="match_bet_choice">
+            <span class="marth_choice_this"></span>
+            <div class="delete_this_this_choice">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="user_match_bet_choice">
+            <div class="result_math_and_won_team">
+                <div class="win_or_draw"></div>
+                <div class="your_choice_team"></div>
+            </div>
+            <div class="kof_this_match">1</div>
+        </div>
+    </div>
+    <div class="one_user_choice">
+        <div class="match_bet_choice">
+            <span class="marth_choice_this"></span>
+            <div class="delete_this_this_choice">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="user_match_bet_choice">
+            <div class="result_math_and_won_team">
+                <div class="win_or_draw"></div>
+                <div class="your_choice_team"></div>
+            </div>
+            <div class="kof_this_match">1</div>
+        </div>
+    </div>
+    <!-- Суммарный коэффициент -->
+    <div class="total_kof">
+        <div>Общий коэффициент:</div>
+        <div class="total_kof_these_matches"></div>
+    </div>
+    <!-- Если пользователь еще не выбрал ни одного матча -->
+    <div class="not_results">
+        Сделайте ставку
+    </div>
+    <!-- После подтверждения  -->
+    <div class="success_bet">
+        Ставка успешно принята!</br>
+        Ожидайте результатов
+    </div>
+    <!-- После того как все события произошли  -->
+    <div class="your_result_after">
+        <div>Ваш выигрыш:</div>
+        <div class="win_points"></div>
+    </div>
+    </span>
+    <span class="history_bet">
+                        <!-- Выбор пользователя -->
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+    <div class="delete_this_this_choice">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+</div>
+<div class="user_match_bet_choice">
+    <div class="result_math_and_won_team">
+        <div class="win_or_draw"></div>
+        <div class="your_choice_team"></div>
+    </div>
+    <div class="kof_this_match">1</div>
+</div>
+</div>
+<div class="one_user_choice">
+    <div class="match_bet_choice">
+        <span class="marth_choice_this"></span>
+        <div class="delete_this_this_choice">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="user_match_bet_choice">
+        <div class="result_math_and_won_team">
+            <div class="win_or_draw"></div>
+            <div class="your_choice_team"></div>
+        </div>
+        <div class="kof_this_match">1</div>
+    </div>
+</div>
+<div class="one_user_choice">
+    <div class="match_bet_choice">
+        <span class="marth_choice_this"></span>
+        <div class="delete_this_this_choice">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="user_match_bet_choice">
+        <div class="result_math_and_won_team">
+            <div class="win_or_draw"></div>
+            <div class="your_choice_team"></div>
+        </div>
+        <div class="kof_this_match">1</div>
+    </div>
+</div>
+<!-- Суммарный коэффициент -->
+<div class="total_kof">
+    <div>Общий коэффициент:</div>
+    <div class="total_kof_these_matches"></div>
+</div>
+<!-- Если пользователь еще не выбрал ни одного матча -->
+<div class="not_results">
+    Сделайте ставку
+</div>
+<!-- После подтверждения  -->
+<div class="success_bet">
+    Ставка успешно принята!</br>
+    Ожидайте результатов
+</div>
+<!-- После того как все события произошли  -->
+<div class="your_result_after">
+    <div>Ваш выигрыш:</div>
+    <div class="win_points"></div>
+</div>
+</span>
+<span class="history_bet">
+                        <!-- Выбор пользователя -->
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+<div class="delete_this_this_choice">
+    <i class="fa fa-times" aria-hidden="true"></i>
+</div>
+</div>
+<div class="user_match_bet_choice">
+    <div class="result_math_and_won_team">
+        <div class="win_or_draw"></div>
+        <div class="your_choice_team"></div>
+    </div>
+    <div class="kof_this_match">1</div>
+</div>
+</div>
+<div class="one_user_choice">
+    <div class="match_bet_choice">
+        <span class="marth_choice_this"></span>
+        <div class="delete_this_this_choice">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="user_match_bet_choice">
+        <div class="result_math_and_won_team">
+            <div class="win_or_draw"></div>
+            <div class="your_choice_team"></div>
+        </div>
+        <div class="kof_this_match">1</div>
+    </div>
+</div>
+<div class="one_user_choice">
+    <div class="match_bet_choice">
+        <span class="marth_choice_this"></span>
+        <div class="delete_this_this_choice">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="user_match_bet_choice">
+        <div class="result_math_and_won_team">
+            <div class="win_or_draw"></div>
+            <div class="your_choice_team"></div>
+        </div>
+        <div class="kof_this_match">1</div>
+    </div>
+</div>
+<!-- Суммарный коэффициент -->
+<div class="total_kof">
+    <div>Общий коэффициент:</div>
+    <div class="total_kof_these_matches"></div>
+</div>
+<!-- Если пользователь еще не выбрал ни одного матча -->
+<div class="not_results">
+    Сделайте ставку
+</div>
+<!-- После подтверждения  -->
+<div class="success_bet">
+    Ставка успешно принята!</br>
+    Ожидайте результатов
+</div>
+<!-- После того как все события произошли  -->
+<div class="your_result_after">
+    <div>Ваш выигрыш:</div>
+    <div class="win_points"></div>
+</div>
+</span>
+</div>
+<div class="footer_user_choice">
+    <div class="btn_success_bet">
+        Сделать ставку
+    </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 {% endblock content %}

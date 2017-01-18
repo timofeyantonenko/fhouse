@@ -234,6 +234,10 @@ h4 {
     flex-direction: row;
 }
 
+#id_list_tour {
+    display: none;
+}
+
 .nav_ul_tour li {
     list-style: none;
     text-align: center;
@@ -439,29 +443,23 @@ h4 {
     background-color: #83002e;
 }
 
-.body_table select {
-    height: 25px;
-}
-
-.nation_selection_group,
-.selection_tournament,
-.selection_champ,
-.nation_selection_tournament {
-    width: 100%;
-    height: 35px;
-    padding: 0px 5px;
+.select_tab_conteiner {
     display: flex;
-    flex-direction: row;
-}
-
-.select_championship_selector {
-    margin: 10px 0px 0px;
-    height: 25px;
+    flex-wrap: wrap;
     width: 100%;
+    padding: 5px 10px 0 10px;
 }
 
-.selection_tournament>div {
-    margin-top: 10px;
+.select_table {
+    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: none;
+}
+
+.select_table>div {
+    padding-top: 5px;
 }
 
 
@@ -474,6 +472,7 @@ h4 {
     font-size: 13px;
     border: 1px solid #CCD1D9;
     border-top: 0px solid silver;
+    margin-bottom: 20px;
 }
 
 .one_position {
@@ -484,11 +483,31 @@ h4 {
     border-bottom: 1px solid #CCD1D9;
 }
 
-.one_position:nth-child(1) {
+.time_rating {
+    display: none;
+}
+
+.time_rating .one_position:nth-child(1) {
     font-weight: 600;
 }
 
-.one_position:nth-child(2) {
+#table_rat_forcas span .one_position:first-child {
+    background-color: #fafafa !important;
+}
+
+#table_rat_forcas span .one_position:nth-child(2) {
+    background-color: #fafafa !important;
+}
+
+#table_rat_forcas span .one_position:nth-child(3) {
+    background-color: #fafafa !important;
+}
+
+#table_rat_forcas span .one_position:nth-child(4) {
+    background-color: #fafafa !important;
+}
+
+span .one_position:first-child {
     background-color: #e4e4e4;
 }
 
@@ -559,6 +578,21 @@ h4 {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+}
+
+.championat {
+    width: 100%;
+    height: 100%;
+}
+
+.tours {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.title_hide {
+    display: none;
 }
 
 .forecasters_name {
@@ -905,42 +939,56 @@ footer>div:hover {
 
 #nav_top_matches {
     width: 100%;
-    background-color: #fafafa;
-    overflow: hidden;
     display: flex;
-    flex-direction: row;
+    flex-direction: wrap;
+    justify-content: space-between;
 }
 
-#nav_top_matches>div {
-    width: 33.33%;
+#match_top_nav {
     display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    border-bottom: 4px solid rgba(192, 192, 192, 0.58);
 }
 
-.match_top_nav {
-    display: flex;
-    flex-direction: column;
+.one_menu_top_match {
+    position: relative;
+    padding-bottom: 20px;
 }
 
-.match_top_nav>div {
+.line_hover_active {
+    position: absolute;
     width: 100%;
+    height: 4px;
+    top: 100%;
+    left: 0;
+    background-color: #1d71b9;
+    opacity: 0;
+}
+
+#match_top_nav>div {
+    width: calc( 100% / 3 );
 }
 
 .team_top_nav {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
 }
 
 .team_top_three {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 900;
+    color: #b09f9f;
 }
 
 .team_top_three img {
-    max-width: 60px;
-    max-height: 60px;
+    max-width: 40px;
+    max-height: 40px;
 }
 
 .leagua_and_tour_top_nav {
@@ -953,15 +1001,11 @@ footer>div:hover {
     flex-direction: column;
 }
 
+
 /*Топ 3 матча main */
 
 main {
-    background-color: #fafafa;
     width: 100%;
-    border-color: #CCD1D9;
-    border-style: solid;
-    border-width: 0 1px 1px;
-    padding: 20px;
 }
 
 header {
@@ -984,23 +1028,28 @@ header p {
     font-size: 16px;
 }
 
-.make_bet {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 33.33%;
-    height: 100%;
-    cursor: pointer;
-    overflow: hidden;
-    color: #fafafa;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-    outline: none;
-    background-color: #e90052;
+.prev_info_text img {
+    max-width: 50%;
 }
 
-.make_bet {}
+.prev_info_text img:nth-child(2n) {
+    float: left;
+}
+
+.prev_info_text img:nth-child(2n - 1) {
+    float: right;
+}
+
+.make_bet button {
+    color: #fafafa;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    background-color: #e90052;
+    padding: 5px 15px;
+    border-radius: 7px;
+    border: 2px outset #fff;
+}
 
 
 /*ТОП матчи недели правая колонка*/
@@ -1111,6 +1160,7 @@ header p {
     background-color: #fafafa;
     display: flex;
     flex-direction: row;
+    padding: 20px;
 }
 
 @media (min-width: 768px) {
@@ -1201,7 +1251,14 @@ header p {
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 10px;
+}
+
+.history_bet:first-child .one_user_choice {
     display: none;
+}
+
+.history_bet:nth-child(n+2) .one_user_choice {
+    display: block;
 }
 
 .one_user_choice>div:first-child {
@@ -1233,6 +1290,7 @@ header p {
     width: 100%;
     height: 35px;
     line-height: 35px;
+    display: none;
 }
 
 .footer_user_choice {
@@ -1389,6 +1447,7 @@ header p {
     width: 100%;
     display: flex;
     flex-direction: row;
+    padding-bottom: 7px;
 }
 
 
@@ -1397,21 +1456,239 @@ header p {
 .table_forecasters_and_user_infa {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    padding: 10px 0;
+    flex-wrap: wrap;
+    padding: 10px 0 20px 0;
 }
 
-.table_forecasters_and_user_infa>div {
-    width: 50%;
+.name_user_info h3 {
+    margin-top: 10px;
 }
 
 .photo_user {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     overflow: hidden;
     border-radius: 50%;
+    margin-right: 10px;
 }
 
 .photo_user img {
+    width: 100%;
+}
+
+.users_progress {
+    position: relative;
+}
+
+.drop_down_users_results {
+    display: none;
+    position: absolute;
+    top: calc(100% + 7px);
+    left: 0px;
+    background-color: #fafafa;
+    padding: 10px;
+    z-index: 1000;
+    border: 1px solid #CCD1D9;
+    width: 300px;
+    height: auto;
+    max-height: 300px;
+    overflow-y: auto;
+    -webkit-box-shadow: 2px -3px 37px -9px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px -3px 37px -9px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px -3px 37px -9px rgba(0, 0, 0, 0.75);
+}
+
+#open_user_results {
+    cursor: pointer;
+}
+
+#open_user_results:hover {
+    text-decoration: underline;
+}
+
+.drop_down_users_results>div {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 35px;
+    align-items: center;
+}
+
+.drop_down_users_results>div:nth-last-child(n+2) {
+    padding-bottom: 5px;
+    border-bottom: 1px solid silver;
+}
+
+.drop_down_users_results>div:nth-child(n+2) {
+    padding-top: 5px;
+}
+
+.users_honour {
+    height: auto;
+    width: 100%;
+    display: block !important;
+}
+
+.users_honour>div {
+    width: 100%;
+    text-align: center;
+    height: 40px;
+}
+
+.users_honour>div:first-child {
+    color: #1d71b9;
+    text-align: left !important;
+    text-decoration: underline;
+    line-height: 40px;
+    font-size: 20px;
+}
+
+.users_honour>div {
+    height: 40px !important;
+    font-weight: 900;
+}
+
+.user_best_in_this {
+    font-size: 15px;
+    font-style: italic;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.user_best_in_this:nth-last-child(n+2) {
+    border-bottom: 1px solid silver;
+}
+
+.place_result {
+    height: 30px;
+    width: 30px;
+    background-image: url(../img/Gold_Silver_and_Bronze_Medals_Transparent_PNG_Clip_Art_Image.png);
+    background-size: calc(8000px / 82.5);
+}
+
+.place_result span {
+    display: none;
+}
+
+.gold_vedal {
+    background-position: calc(-113px / 82.5) calc(-52px / 82.5);
+}
+
+.sliver_medal {
+    background-position: calc(-2762px / 82.5) calc(-74px / 82.5);
+}
+
+.bronze_medal {
+    background-position: calc(-5402px / 82.5) calc(-74px / 82.5);
+}
+
+.show_all_table_forecasters {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.show_all_table_forecasters a {
+    display: block;
+    padding: 5px 12px;
+    color: #fff;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 11px;
+    background-color: red;
+    border-radius: 2px;
+}
+
+.show_all_table_forecasters a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.modal_dialog {
+    width: 900px;
+    margin: 50px auto;
+}
+
+
+/*Select */
+
+#country_champ>span,
+.type_euro_champ>span,
+.continent_sel>span {
+    display: none;
+}
+
+.history_bet {
+    display: none;
+}
+
+
+/*New main bets */
+
+.main {
+    background-color: #fafafa;
+    padding: 20px;
+    border: 1px solid #CCD1D9;
+}
+
+.super_title {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 700;
+    padding: 0 10px;
+}
+
+#nav_top_matches {
+    padding: 5px;
+    margin-bottom: 15px;
+    background-color: #e4e4e4;
+    font-family: 'Anton', sans-serif !important;
+}
+
+.title_section_web_site {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.title_section_web_site h2 {
+    margin: 0 !important;
+    text-transform: uppercase;
+    color: #222;
+    font-size: 14px;
+}
+
+.read_prev {
+    text-transform: uppercase;
+    opacity: 0.5;
+    color: #222;
+    font-size: 13px;
+    font-weight: 900;
+    width: auto !important;
+    margin: 0 auto 5px auto;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+}
+
+.read_prev:hover {
+    opacity: 1;
+}
+
+.top_match {
+    display: none;
+}
+
+.time_start {
+    padding: 7px 20px;
+    font-weight: 700;
+    color: #222;
+    background-color: #e4e4e4;
     width: 100%;
 }

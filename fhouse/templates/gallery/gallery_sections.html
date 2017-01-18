@@ -12,7 +12,7 @@
                         <div class="head_nav">
                             <ul class="nav_ul">
                                 {% for section in sections %}
-                                <li>
+                                <li class="reset_variable">
                                     <a href="#">{{ section.section_title }}<span
                                             class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                                     </a>
@@ -24,39 +24,37 @@
                             <!-- div.img_slaider -->
                             <div id="flex_container_img_slaider">
                                 <div id="container_img_in_slaider"><img src="" alt=""></div>
-                                <div class="area_for_left_arrow_slaider">
+                                <div class="slider_click" id="area_for_left_arrow_slaider">
                                     <div class="container_arow_slaider">
-                                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                        <i class="fa fa-chevron-left slider_click" id="icon_left" aria-hidden="true"></i>
                                     </div>
                                 </div>
-                                <div class="area_for_right_arrow_slaider">
+                                <div class="slider_click" id="area_for_right_arrow_slaider">
                                     <div class="container_arow_slaider">
-                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                        <i class="fa fa-chevron-right slider_click" id="icon_right" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="url_list">
                                 <ul class="list_src_slaider">
-
                                 </ul>
                             </div>
                             <!-- Право-лево фото -->
                             <div class="footer_slaider">
                                 <div class="slaider_footer_left">
                                     <div class="album_slaider">Название альбома
-                                        <span id="number_photo">1</span> <span>of</span> <span
-                                                id="quantity_photo_in_album">42</span>
+                                        <span id="number_photo">1</span> <span>of</span> <span id="quantity_photo_in_album"></span>
                                     </div>
                                     <div class="discription_photo_slaider">Подпись фотографии</div>
                                 </div>
                                 <div class="slaider_footer_right">
                                     <div class="button_show_comments">
-                                        Комментарии <span>21</span>
+                                        Комментарии <span></span>
                                     </div>
                                     <div class="slaider_photo_like">
                                         <div class="block_like">
                                             <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                            <div class="votes">12</div>
+                                            <div class="votes"></div>
                                         </div>
                                         <div class="block_dislike">
                                             <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
@@ -133,14 +131,11 @@
                                         </div>
                                         <div class="comment_placeholder">
                                             <form method="POST" action=".">
-                                                <input type='hidden' name='csrfmiddlewaretoken'
-                                                       value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr'/>
+                                                <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
                                                 <div class="forPlaceholder">
-                                                    <input id="id_content" name="content"
-                                                           placeholder="Оставить комментарий..." type="text"/>
+                                                    <input id="id_content" name="content" placeholder="Оставить комментарий..." type="text" />
                                                 </div>
-                                                <input type="submit" value="Post comment"
-                                                       class="btn btn-default btn-send-comment">
+                                                <input type="submit" value="Post comment" class="btn btn-default btn-send-comment">
                                             </form>
                                         </div>
                                     </div>
@@ -163,56 +158,18 @@
                         <span>Лионель Месси &nbsp;|&nbsp;</span><span>28 october 1995 (date last foto from this album)</span>
                     </div>
                     <div class="flex_container_albums">
-                        <div class="img_from_album" data-masonry='{ "itemSelector": ".photo_row", "columnWidth": ".persent-size", 
+                        <!-- <div class="img_from_album" data-masonry='{ "itemSelector": ".photo_row", "columnWidth": ".persent-size", 
            "percentPosition": true}'>
                             <div class="photo_row persent-size">
                                 <div class="relative_container">
-                                    <div class="img_info">
-                                        <span><i class="fa fa-comment-o"
-                                                 aria-hidden="true"></i> 48 &nbsp;|&nbsp;&nbsp;<i
-                                                class="fa fa-thumbs-o-up" aria-hidden="true"></i> 456</span>
-                                    </div>
+                                    
                                     <img src="http://i2.mirror.co.uk/incoming/article9182077.ece/ALTERNATES/s615/Manchester-City-FC-v-FC-Barcelona-UEFA-Champions-League.jpg"
                                          alt="" data-toggle="modal" data-target="#slaider_modal">
                                 </div>
-                            </div>
-                            <div class="photo_row persent-size">
-                                <div class="relative_container">
-                                    <div class="img_info">
-                                        <span><i class="fa fa-comment-o"
-                                                 aria-hidden="true"></i> 48 &nbsp;|&nbsp;&nbsp;<i
-                                                class="fa fa-thumbs-o-up" aria-hidden="true"></i> 456</span>
-                                    </div>
-                                    <img src="https://i.ytimg.com/vi/vSuSS5z1eSw/maxresdefault.jpg" alt=""
-                                         data-toggle="modal" data-target="#slaider_modal">
-                                </div>
-                            </div>
-                            <div class="photo_row persent-size">
-                                <div class="relative_container">
-                                    <div class="img_info">
-                                        <span><i class="fa fa-comment-o"
-                                                 aria-hidden="true"></i> 48 &nbsp;|&nbsp;&nbsp;<i
-                                                class="fa fa-thumbs-o-up" aria-hidden="true"></i> 456</span>
-                                    </div>
-                                    <img src="https://www.thesun.co.uk/wp-content/uploads/2016/11/nintchdbpict0002822538053.jpg?w=960&strip=all"
-                                         alt="" data-toggle="modal" data-target="#slaider_modal">
-                                </div>
-                            </div>
-                            <div class="photo_row persent-size">
-                                <div class="relative_container">
-                                    <div class="img_info">
-                                        <span><i class="fa fa-comment-o"
-                                                 aria-hidden="true"></i> 48 &nbsp;|&nbsp;&nbsp;<i
-                                                class="fa fa-thumbs-o-up" aria-hidden="true"></i> 456</span>
-                                    </div>
-                                    <img src="https://fotoreserg.files.wordpress.com/2011/07/din-met-24.jpg" alt=""
-                                         data-toggle="modal" data-target="#slaider_modal">
-                                </div>
-                            </div>
+                            </div> -->
+                        <div class="more_photo">
+                            ПОСМОТРЕТЬ БОЛЬШЕ
                         </div>
-                    </div>
-                    <div class="more_photo">
-                        ПОСМОТРЕТЬ БОЛЬШЕ
                     </div>
                     <!-- Слайдер в модальном окне для фотографий с плитки -->
                     <div id="slaider_modal" class="modal" role="dialog">
@@ -226,34 +183,20 @@
                                         </div>
                                     </div>
                                     <!-- Право-лево фото -->
-                                    <div class="area_for_left_arrow">
+                                    <div class="area_for_left_arrow modal_slider_click" id="modal_left">
                                         <div class="container_arow">
-                                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                            <i class="fa fa-chevron-left modal_slider_click" id="modal_left_icon" aria-hidden="true"></i>
                                         </div>
                                     </div>
-                                    <div class="area_for_right_arrow">
+                                    <div class="area_for_right_arrow modal_slider_click" id="modal_right">
                                         <div class="container_arow">
-                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                            <i class="fa fa-chevron-right modal_slider_click" aria-hidden="true" id="modal_right_icon"></i>
                                         </div>
-                                    </div>
-                                    <!-- Список src с альбома, где лежит выбранное фото  -->
-                                    <div class="list_src_foto">
-                                        <ul id="list_src_foto_modal">
-                                            <li>
-                                                http://i2.mirror.co.uk/incoming/article9182077.ece/ALTERNATES/s615/Manchester-City-FC-v-FC-Barcelona-UEFA-Champions-League.jpg
-                                            </li>
-                                            <li>https://i.ytimg.com/vi/vSuSS5z1eSw/maxresdefault.jpg</li>
-                                            <li>
-                                                https://www.thesun.co.uk/wp-content/uploads/2016/11/nintchdbpict0002822538053.jpg?w=960&strip=all
-                                            </li>
-                                            <li>https://fotoreserg.files.wordpress.com/2011/07/din-met-24.jpg</li>
-                                        </ul>
                                     </div>
                                     <div class="modal_footer">
                                         <div class="slaider_footer_left">
                                             <div class="album_slaider">Название альбома
-                                                <span id="number_photo">1</span> <span>of</span> <span
-                                                        id="quantity_photo_in_album">42</span>
+                                                <span id="number_photo">1</span> <span>of</span> <span id="quantity_photo_in_album">42</span>
                                             </div>
                                             <div class="discription_photo_slaider">Подпись фотографии</div>
                                         </div>
@@ -284,7 +227,6 @@
                                             <div class="show_user_not_comments">Be the first to comment on this photo.
                                             </div>
                                         </div>
-
                                         <!-- If there are several comments -->
                                         <!-- <div class="user_comment">
                                             <div class="comments_base2" id="without_paddin">
@@ -338,14 +280,11 @@
                                                 </div>
                                                 <div class="comment_placeholder">
                                                     <form method="POST" action=".">
-                                                        <input type='hidden' name='csrfmiddlewaretoken'
-                                                               value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr'/>
+                                                        <input type='hidden' name='csrfmiddlewaretoken' value='uRuHP0rG5SNPyDYp81AWqmIJguzMKehr' />
                                                         <div class="forPlaceholder">
-                                                            <input id="id_content" name="content"
-                                                                   placeholder="Оставить комментарий..." type="text"/>
+                                                            <input id="id_content" name="content" placeholder="Оставить комментарий..." type="text" />
                                                         </div>
-                                                        <input type="submit" value="Post comment"
-                                                               class="btn btn-default btn-send-comment">
+                                                        <input type="submit" value="Post comment" class="btn btn-default btn-send-comment">
                                                     </form>
                                                 </div>
                                             </div>
