@@ -327,30 +327,6 @@ $(document).on("click", ".list_albums .album_previews", function(e) {
 
 $(window).load(function() {
 
-    $(".reset_variable").on("click", function() {
-        $(".photo_row").remove();
-        tile_fot();
-    });
-    $('.list_albums').delegate('.album_previews ', 'click', function() {
-        $(".photo_row").remove();
-        tile_fot();
-    });
-
-    // Плитка фотографий
-    function tile_fot() {
-
-        var ul_list_length = $(".list_src_slaider").find("li").length;
-
-        for (var lim = 0; lim < ul_list_length; lim++) {
-            var order = (ul_list_length - lim - 1);
-            var url_img = $(".list_src_slaider").find("li").eq(order).find(".photo_url").text();
-            var piece_html = '<div class="photo_row persent-size"><div class="relative_container"><img src="' + url_img + '"alt="" data-toggle="modal" data-target="#slaider_modal"></div></div>';
-            $('.flex_container_albums').prepend(piece_html);
-        };
-    }
-
-    tile_fot();
-
     // Фиксация колонк
 
     var height = $(".colum").height();
@@ -517,6 +493,20 @@ function load_album_photos(album_id, page) {
     });
 }
 
+// Плитка фотографий
+function tile_fot() {
+    $(".photo_row").remove();
+
+    var ul_list_length = $(".list_src_slaider").find("li").length;
+
+    for (var lim = 0; lim < ul_list_length; lim++) {
+        var order = (ul_list_length - lim - 1);
+        var url_img = $(".list_src_slaider").find("li").eq(order).find(".photo_url").text();
+        var piece_html = '<div class="photo_row persent-size"><div class="relative_container"><img src="' + url_img + '"alt="" data-toggle="modal" data-target="#slaider_modal"></div></div>';
+        $('.flex_container_albums').prepend(piece_html);
+    };
+}
+
 function make_slider() {
     // Номер фотографии
     var quantity_foto_albums = ($(".list_src_slaider").length);
@@ -543,6 +533,9 @@ function make_slider() {
     $("#slaider_and_albums").find('.block_dislike div.votes').text(count_of_neg_likes);
     $("#slaider_and_albums").find('.button_show_comments').text("Комметарии " + count_of_comments);
     $("#slaider_and_albums").find('.album_slaider').text(photo_album_title);
+
+
+    tile_fot();
 
 
 }
