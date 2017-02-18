@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin page</title>
+    <link rel="stylesheet" href="../../static/css/admin.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" />
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css"> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <main>
+                <div class="all_suggesting_news">
+                    <nav>
+                        <ul class="nav nav-pills">
+                            <li role="presentation"><a href="#">Новости<span class="new">(11)</span></a></li>
+                            <li role="presentation"><a href="#">Статьи<span class="new">(22)</span></a></li>
+                            <li role="presentation"><a href="#">Прогнозы</a></li>
+                            <li role="presentation"><a href="#">Добавить фото <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                        </ul>
+                    </nav>
+                    <h2>Предложенные новости/Добавить фото/Прогнозы</h2>
+                    <!-- Прогнозы -->
+                    <div class="forecastersBlock">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#">ТОП матчи</a></li>
+                            <li role="presentation"><a href="#">Прогнозы на все матчи</a></li>
+                        </ul>
+                        <div class="topMatchesBet">
+                            <h3>Неделя</h3>
+                            <div class="selectWeek">
+                                <select name="" class="weekChose">
+                                </select>
+                                <button class="btn btn-danger delWeek" data-toggle="modal" data-target="#delteWeek">Удалить неделю</button>
+                            </div>
+                            <div class="addNewWeek">
+                                <textarea name="" id="weekTopMatchesForBet" placeholder="Пример: 28 ОКТ - 3 НОЯ 2010"></textarea>
+                                <button class="btn btn-success addWeekToSelect">Добавить неделю</button>
+                            </div>
+                            <form class="makeMatch thumbnail">
+                                <h2 class="titleTopMatch">Топ матч недели</h2>
+                                <div class="championatMatchTopBet">
+                                    <h3>Турнир</h3>
+                                    <select class="leagueSelect">
+                                        <option value="1">Чемпионат Анлии</option>
+                                        <option value="2">Чемпионат Испании</option>
+                                        <option value="3">Чемпионат Италии</option>
+                                        <option value="4">Чемпионат Германии</option>
+                                        <option value="5">Чемпионат Франции</option>
+                                        <option value="6">Чемпионат России</option>
+                                        <option value="7">Чемпионат Украины</option>
+                                        <option value="8">Лига Чемпионов</option>
+                                        <option value="9">Лига Европы</option>
+                                        <option value="10">Чемпионат Мира 2018</option>
+                                    </select>
+                                </div>
+                                <div class="titleSuperMatch">
+                                    <h3>Супер title ТОП матча</h3>
+                                    <textarea name="" placeholder="SuperTitle (Эль-Класико)"></textarea>
+                                </div>
+                                <div class="choseTeams">
+                                    <h4>Первая команда</h4>
+                                    <select name="" id=""></select>
+                                    <h4>Вторая команда</h4>
+                                    <select name="" id=""></select>
+                                </div>
+                                <div class="koffMatch">
+                                    <h3>Коэффициенты на матч</h3>
+                                    <textarea class="winFirst" placeholder="Победа 1 (1.12)"></textarea>
+                                    <textarea class="winSecond" placeholder="Победа 2 (6.12)"></textarea>
+                                    <textarea class="draw" placeholder="Ничья (2.12)"></textarea>
+                                </div>
+                                <div class="tourMatchTopBet">
+                                    <h3>Тур, стадия</h3>
+                                    <div class="chooseTour">
+                                        <div class="choseOrDelTour">
+                                            <select class="listTour">
+                                            </select>
+                                            <button class="btn btn-danger delTourBtn">Удалить тур</button>
+                                        </div>
+                                        <div class="addTour">
+                                            <textarea name="choseTour" class="tourArea" placeholder="10 тур"></textarea>
+                                            <button class="btn btn-success addTourBtn">Добавить тур</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choseTime">
+                                    <h3>Выбор времени начала матча</h3>
+                                    <textarea placeholder="День (29 октября)" class="dayMatch"></textarea>
+                                    <textarea placeholder="Время Москва (22:45)" class="moscowTimeStartMatch"></textarea>
+                                    <textarea placeholder="Время Киев (21:45)" class="kievTimeStartMatch"></textarea>
+                                </div>
+                                <div class="discriptionMatch">
+                                    <h3>Текст</h3>
+                                    <textarea class="discriptionBig" placeholder="Описание матча..."></textarea>
+                                </div>
+                                <div class="albumPhoto">
+                                    <form class="add-photo-bet" runat="server">
+                                        <input type='file' class="betPhoto" />
+                                        <img class="imgBet" src="" />
+                                    </form>
+                                </div>
+                            </form>
+                            <button class="btn btn-success">Схранить</button>
+                        </div>
+                        <div class="allMatchesBet">
+                            <h3>Выбор лигы</h3>
+                            <select class="leagueSelect">
+                                <option value="1">Чемпионат Анлии</option>
+                                <option value="2">Чемпионат Испании</option>
+                                <option value="3">Чемпионат Италии</option>
+                                <option value="4">Чемпионат Германии</option>
+                                <option value="5">Чемпионат Франции</option>
+                                <option value="6">Чемпионат России</option>
+                                <option value="7">Чемпионат Украины</option>
+                                <option value="8">Лига Чемпионов</option>
+                                <option value="9">Лига Европы</option>
+                                <option value="10">Чемпионат Мира 2018</option>
+                            </select>
+                            <!-- List club and national teams  -->
+                            <ul class="listWeeks">
+                                <li>29 окт - 5 ноя</li>
+                                <li>6 ноя - 13 ноя</li>
+                                <li>14 ноя - 21 ноя</li>
+                                <li>22 ноя - 29 ноя</li>
+                            </ul>
+                            <ul class="listOtherTeam">
+                                <!-- Чемпионат Анлии -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li>Арсенал</li>
+                                                <li>Бёрнли</li>
+                                                <li>Борнмут</li>
+                                                <li>Вест Бромвич</li>
+                                                <li>Вест Хэм Юнайтед</li>
+                                                <li>Кристал Пэлас</li>
+                                                <li>Лестер Сити</li>
+                                                <li>Ливерпуль</li>
+                                                <li>Манчестер Сити</li>
+                                                <li>Манчестер Юнайтед</li>
+                                                <li>Мидлсбро</li>
+                                                <li>Сандерленд</li>
+                                                <li>Саутгемптон</li>
+                                                <li>Сток Сити</li>
+                                                <li>Суонси Сити</li>
+                                                <li>Тоттенхэм Хотспур</li>
+                                                <li>Уотфорд</li>
+                                                <li>Халл Сити</li>
+                                                <li>Челси</li>
+                                                <li>Эвертон</li>
+                                            </ul>
+                                            <ul class="list-tour">
+                                                <li>1 тур</li>
+                                                <li>2 тур</li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Чемпионат Испании -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li>Барселона</li>
+                                                <li>Реал Мадрид</li>
+                                                <li>Атлетико Мадрид</li>
+                                                <li>Вильярреал</li>
+                                                <li>Атлетик Бильбао</li>
+                                                <li>Сельта</li>
+                                                <li>Севилья</li>
+                                                <li>Малага</li>
+                                                <li>Реал Сосьедад</li>
+                                                <li>Бетис</li>
+                                                <li>Лас-Пальмас</li>
+                                                <li>Валенсия</li>
+                                                <li>Эспаньол</li>
+                                                <li>Эйбар</li>
+                                                <li>Депортиво</li>
+                                                <li>Гранада</li>
+                                                <li>Спортинг</li>
+                                                <li>Алавес</li>
+                                                <li>Осасуна</li>
+                                                <li>Алавес</li>
+                                            </ul>
+                                            <ul class="list-tour">
+                                                <li>1 тур</li>
+                                                <li>2 тур</li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Чемпионат Италии -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li>Ювентус</li>
+                                                <li>Рома</li>
+                                                <li>Наполи</li>
+                                                <li>Лацио</li>
+                                                <li>Аталанта</li>
+                                                <li>Интер</li>
+                                                <li>Милан</li>
+                                                <li>Фиорентина</li>
+                                                <li>Торино</li>
+                                                <li>Сампдория</li>
+                                                <li>Кьево</li>
+                                                <li>Кьево</li>
+                                                <li>Кьево</li>
+                                                <li>Кальяри</li>
+                                                <li>Сассуоло</li>
+                                                <li>Дженоа</li>
+                                                <li>Эмполи</li>
+                                                <li>Палермо</li>
+                                                <li>Кротоне</li>
+                                                <li>Пескара</li>
+                                            </ul>
+                                            <ul class="list-tour">
+                                                <li>1 тур</li>
+                                                <li>2 тур</li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Чемпионат Германии -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li>Бавария</li>
+                                                <li>РБ Лейпциг</li>
+                                                <li>Герта</li>
+                                                <li>Айнтрахт Франкфурт</li>
+                                                <li>Хоффенхайм</li>
+                                                <li>Боруссия Дортмунд</li>
+                                                <li>Кёльн</li>
+                                                <li>Фрайбург</li>
+                                                <li>Байер</li>
+                                                <li>Майнц 05</li>
+                                                <li>Шальке 04</li>
+                                                <li>Аугсбург</li>
+                                                <li>Вольфсбург</li>
+                                                <li>Боруссия Мёнхенгладбах</li>
+                                                <li>Вердер</li>
+                                                <li>Гамбург</li>
+                                                <li>Ингольштадт 04</li>
+                                                <li>Дармштадт 98</li>
+                                            </ul>
+                                            <ul class="list-tour">
+                                                <li>1 тур</li>
+                                                <li>2 тур</li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Чемпионат Франции -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li>Монако</li>
+                                                <li>ПСЖ</li>
+                                                <li>Ницца</li>
+                                                <li>Лион</li>
+                                                <li>Сент-Этьен</li>
+                                                <li>Марсель</li>
+                                                <li>Бордо</li>
+                                                <li>Ренн</li>
+                                                <li>Генгам</li>
+                                                <li>Тулуза</li>
+                                                <li>Метц</li>
+                                                <li>Нанси</li>
+                                                <li>Лилль</li>
+                                                <li>Монпелье</li>
+                                                <li>Нант</li>
+                                                <li>Кан</li>
+                                                <li>Дижон</li>
+                                                <li>Анже</li>
+                                                <li>Бастия</li>
+                                                <li>Лорьян</li>
+                                            </ul>
+                                            <ul class="list-tour">
+                                                <li>1 тур</li>
+                                                <li>2 тур</li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Чемпионат России -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li>Спартак</li>
+                                                <li>Зенит</li>
+                                                <li>ЦСКА</li>
+                                                <li>Терек</li>
+                                                <li>Краснодар</li>
+                                                <li>Амкар</li>
+                                                <li>Ростов</li>
+                                                <li>Уфа</li>
+                                                <li>Рубин</li>
+                                                <li>Локомотив</li>
+                                                <li>Анжи</li>
+                                                <li>Крылья Советов</li>
+                                                <li>Урал</li>
+                                                <li>Оренбург</li>
+                                                <li>Арсенал</li>
+                                                <li>Томь</li>
+                                            </ul>
+                                            <ul class="list-tour">
+                                                <li>1 тур</li>
+                                                <li>2 тур</li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Чемпионат Украины -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li>Шахтер</li>
+                                                <li>Динамо</li>
+                                                <li>Заря</li>
+                                                <li>Александрия</li>
+                                                <li>Олимпик</li>
+                                                <li>Ворскла</li>
+                                                <li>Черноморец</li>
+                                                <li>Зирка</li>
+                                                <li>Сталь</li>
+                                                <li>Волынь</li>
+                                                <li>Днепр</li>
+                                                <li>Карпаты</li>
+                                            </ul>
+                                            <ul class="list-tour">
+                                                <li>1 тур</li>
+                                                <li>2 тур</li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Лига Чемпионов -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Лига Европы -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- Чемпионат Мира 2018 -->
+                                <li>
+                                    <ul class="seasonList">
+                                        <li class="2016-2017">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                        <li class="2017-2018">
+                                            <ul class="listClub">
+                                                <li></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!-- end list -->
+                            <h3>Выбор сезона</h3>
+                            <select id="seasonSelect">
+                                <option value="0">2016-2017</option>
+                                <option value="1">2017-2018</option>
+                                <option value="2">2018-2019</option>
+                            </select>
+                            <h3>Тур</h3>
+                            <div class="chooseTour">
+                                <div class="choseOrDelTour">
+                                    <select class="listTour">
+                                    </select>
+                                    <button class="btn btn-danger delTourBtn">Удалить тур</button>
+                                </div>
+                                <div class="addTour">
+                                    <textarea name="choseTour" class="tourArea" placeholder="10 тур"></textarea>
+                                    <button class="btn btn-success addTourBtn">Добавить тур</button>
+                                </div>
+                            </div>
+                            <diV class="areaMatches">
+                                <form class="makeMatch thumbnail">
+                                    <span class="glyphicon glyphicon-remove removeMatchBetForm" aria-hidden="true"></span>
+                                    <h2>
+                                    <span class="championatTitle">Чемпионат Англии</span>,
+                                    <span class="tourTitle">8 тур</span>    
+                                </h2>
+                                    <div class="choseTeams">
+                                        <h4>Первая команда</h4>
+                                        <select name="" id=""></select>
+                                        <h4>Вторая команда</h4>
+                                        <select name="" id=""></select>
+                                    </div>
+                                    <div class="choseTime">
+                                        <h3>Выбор времени начала матча</h3>
+                                        <textarea placeholder="День (29 октября)" class="dayMatch"></textarea>
+                                        <textarea placeholder="Время Москва (22:45)" class="moscowTimeStartMatch"></textarea>
+                                        <textarea placeholder="Время Киев (21:45)" class="kievTimeStartMatch"></textarea>
+                                    </div>
+                                    <div class="koffMatch">
+                                        <h3>Коэффициенты на матч</h3>
+                                        <textarea class="winFirst" placeholder="Победа 1 (1.12)"></textarea>
+                                        <textarea class="winSecond" placeholder="Победа 2 (6.12)"></textarea>
+                                        <textarea class="draw" placeholder="Ничья (2.12)"></textarea>
+                                    </div>
+                                    <div class="adminBet">
+                                        <h3>Прогноз админа</h3>
+                                        <textarea class="goalFirstTeam" placeholder="1 команда (голы)"></textarea>
+                                        <textarea class="goalFirstTeam" placeholder="2 команда (голы)"></textarea>
+                                    </div>
+                                    <div class="discriptionMatch">
+                                        <h3>Текст</h3>
+                                        <textarea class="discriptionBig" placeholder="Описание матча..."></textarea>
+                                    </div>
+                                </form>
+                            </diV>
+                            <button class="btn btn-primary addMatchBetForm">Добавить матч <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                            <button class="btn btn-success">Схранить</button>
+                        </div>
+                    </div>
+                    <!-- Добавить фото -->
+                    <!-- <div class="addPhoto thumbnail">
+                        <div class="sectionPhoto">
+                            <h3>Выбор секции</h3>
+                            <select id="selectSectiom" name="selectSection">
+                                <option value="0" class="StadiumAlbums">Стадионы</option>
+                                <option value="1" class="memAlbums">Мемы</option>
+                                <option value="2" class="retoAlbums">Ретро</option>
+                                <option value="3" class="matchesAlbums">Матчи</option>
+                            </select>
+                            <button class="btn btn-default add_album" role="button" data-toggle="modal" data-target="#add-album">Добавить альбом <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                        </div>
+                        <div class="albumPhoto">
+                            <h3>Выбор альбома</h3>
+                            <select class="albumSelect">
+                            </select>
+                            <div id="listAlumms">
+                                <ul class="StadiumAlbums">
+                                    <li>Донбасс Арена</li>
+                                    <li>Металлист стедикм</li>
+                                    <li>Стадион Динамо</li>
+                                </ul>
+                                <ul class="memAlbums">
+                                    <li>Украинские мемы</li>
+                                </ul>
+                                <ul class="retoAlbums">
+                                    <li>Марадона</li>
+                                    <li>ЧМ 1960</li>
+                                </ul>
+                                <ul class="matchesAlbums">
+                                    <li>Шахтер - Динамо</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h3>Добавить фото</h3>
+                        <div class="addPhoto">
+                            <div class="titlePhoto">
+                                <h4>Подпись фото</h4>
+                                <textarea name="" id="" placeholder="Подпись фото"></textarea>
+                            </div>
+                            <div class="albumPhoto">
+                                <form id="add-photo-form" runat="server">
+                                    <input type='file' id="newImg" />
+                                    <img id="imgToThis" src="" />
+                                </form>
+                            </div>
+                            <button class="btn btn-success add_album" role="button">Добавить</button>
+                        </div>
+                    </div> -->
+                    <!-- Cписок новостей -->
+                    <!-- <div class="list_news">
+                        <div class="one_suggestion_news thumbnail">
+                            <div class="imgConteinerSuggestion">
+                                <img src="../../static/img/example_photo.jpg" alt="">
+                            </div>
+                            <div class="thumbNews">
+                                <div class="infoSuggestingPerson">
+                                    <div class="photo-user">
+                                        <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg">
+                                    </div>
+                                    <div class="info-user">
+                                        <h4 class="media-heading"><span class="author_news">Василий Соловьев </span> </h4>
+                                        <div class="author_time">23.10.2012 19:21</div>
+                                    </div>
+                                </div>
+                                <p class="text_suggesting_news">О мотивации... Самый целеустремлённый человек — это тот, который очень хочет в туалет. Все преграды кажутся несущественными. Согласитесь, смешно слышать фразы типа: Я описался, потому что: — не было времени сходить в туалет. — я был слишком уставший. — потерял надежду. Я не верил, что смогу добежать. — ну конечно. Он-то добежал. У него ноги вон какие длинные. — я слишком глуп, чтобы это сделать. — я уже 5 раз описывался. У меня никогда не получится добежать. — это явно не для меня. — я постучался в туалет — но мне не открыли. — мне не хватило мотивации. — у меня была депрессия. — у меня нет денег, я не могу себе этого позволить! — решил сходить завтра Часто ли вы идете к цели, как будто бежите к туалету?
+                                </p>
+                                <div class="more_read">Читать больше...</div>
+                                <p>
+                                    <button class="btn btn-warning editNewsBtn" role="button">Редактировать</button>
+                                    <button class="btn btn-default deleteNewsBtn" role="button" data-toggle="modal" data-target="#delteNews">Удалить</button>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="one_suggestion_news thumbnail">
+                            <div class="imgConteinerSuggestion">
+                                <img src="https://pp.vk.me/c626220/v626220205/4a53d/UXskXTl5rxA.jpg" alt="">
+                            </div>
+                            <div class="thumbNews">
+                                <div class="infoSuggestingPerson">
+                                    <div class="photo-user">
+                                        <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg">
+                                    </div>
+                                    <div class="info-user">
+                                        <h4 class="media-heading"><span class="author_news">Василий Соловьев </span> </h4>
+                                        <div class="author_time">23.10.2012 19:21</div>
+                                    </div>
+                                </div>
+                                <p class="text_suggesting_news">Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня.
+                                </p>
+                                <div class="more_read">Читать больше...</div>
+                                <p>
+                                    <button class="btn btn-warning editNewsBtn" role="button">Редактировать</button>
+                                    <button class="btn btn-default deleteNewsBtn" role="button" data-toggle="modal" data-target="#delteNews">Удалить</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- Список статей -->
+                    <!-- <div class="list_article">
+                        <div class="one_suggestion_news thumbnail article">
+                            <div class="imgConteinerSuggestion">
+                                <img src="http://sport-arenas.ru/images/panorama/europe/russia/panorama-luzhniki-stadium.jpg" alt="">
+                            </div>
+                            <div class="thumbNews">
+                                <div class="infoSuggestingPerson">
+                                    <div class="photo-user">
+                                        <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg">
+                                    </div>
+                                    <div class="info-user">
+                                        <h4 class="media-heading"><span class="author_news">Василий Соловьев </span> </h4>
+                                        <div class="author_time">23.10.2012 19:21</div>
+                                    </div>
+                                </div>
+                                <p class="text_suggesting_news">"Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. "Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. "Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. "Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. </p>
+                                <div class="more_read">Читать больше...</div>
+                                <p>
+                                    <button class="btn btn-warning editNewsBtn" role="button">Редактировать</button>
+                                    <button class="btn btn-default deleteNewsBtn" role="button" data-toggle="modal" data-target="#delteNews">Удалить</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="rightColumn">
+                    <div class="blockResizeAfterScroll"></div>
+                    <div class="editor thumbnail">
+                        <h2>Редактировать и опубликовать</h2>
+                        <div class="img_suggesting">
+                            <div class="imgContainer">
+                                <img id="img_background" class="photoNewsAdding" src="" alt="">
+                                <div class="need_area">
+                                    <img src="" alt="" class="photoNewsAdding">
+                                </div>
+                            </div>
+                        </div>
+                        <form class="formAddNewsPhoto" runat="server">
+                            <input type='file' class="newsPhoto" />
+                        </form>
+                        <!-- Заголовок -->
+                        <h3>Заголовок</h3>
+                        <div class="titleSuggestingNews">
+                            <textarea name="" id="title-suggesting-news" placeholder="Заголовок"></textarea>
+                        </div>
+                        <!-- Текст новости -->
+                        <h3>Текст новости</h3>
+                        <div class="textSuggestingNews">
+                            <textarea name="" id="text-suggesting-news" placeholder="Текст новости"></textarea>
+                        </div>
+                        <!-- Теги -->
+                        <div class="tegs">
+                            <h3>Теги:</h3>
+                            <div class="textarea_write_teg">
+                                <textarea name="" id="seachTags" placeholder="Поиск тегов"></textarea>
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                <ul class="list_tegs">
+                                    <!-- Сортированы по количеству постов с этим тегом -->
+                                    <li class="itemTag">
+                                        <p>Динамо</p><span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>Шахтер</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>ворскла</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>барса</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>челси</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>дрогба</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>матич</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>ярмола</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="addNewTag">
+                                <h3>Добавить новый тег:</h3>
+                                <textarea placeholder="Новый тег"></textarea>
+                                <button type="button" class="btn btn-primary">
+                                    ok
+                                </button>
+                            </div>
+                            <div class="tegs_area">
+                                <div class="oneTeg">
+                                    <div class="nameTeg">Динамо</div>
+                                    <div class="removeTeg">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="oneTeg">
+                                    <div class="nameTeg">Динамо</div>
+                                    <div class="removeTeg">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer>
+                            <select name="" id="timePublishing">
+                                <option value="0">Сейчас</option>
+                                <option value="1">Через 5 часов</option>
+                                <option value="2">Через 10 часов</option>
+                                <option value="3">Через 15 часов</option>
+                                <option value="4">Через 20 часов</option>
+                            </select>
+                            <button type="button" class="btn btn-success">
+                                опубликовать
+                            </button>
+                        </footer>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Modal window -->
+    <!-- Delete news -->
+    <div class="modal fade" id="delteWeek" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" class="myModalLabel">Выберете неделю которую хотите удалить</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="selectWeekForDelete">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " id="refuseDelWeek" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary " id="confirmDelWeek" data-dismiss="modal">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete news -->
+    <div class="modal fade" id="delteNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Удалить новость</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " id="refuseDel" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary " id="confirmDel" data-dismiss="modal">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add albums -->
+    <div class="modal fade" id="add-album" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Добавить альбом</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>Выбор секции</h3>
+                    <select id="selectSectiomModal">
+                        <option value="0">Стадионы</option>
+                        <option value="1">Мемы</option>
+                        <option value="2">Ретро</option>
+                        <option value="3">Матчи</option>
+                    </select>
+                    <div class="addAlbum">
+                        <div class="titleAlbum">
+                            <h4>Названия альбома:</h4>
+                            <textarea name="" id="" placeholder="Названия альбома"></textarea>
+                        </div>
+                    </div>
+                    <div class="albumPhoto">
+                        <h4>Добавить фото альбома</h4>
+                        <form id="add-photo-form-2" runat="server">
+                            <input type='file' id="newImgAlbum" />
+                            <img id="imgAlbumToThis" src="" />
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="../../static/js/admin_page.js"></script>
+    <script src="../../static/js/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</body>
+
+</html>

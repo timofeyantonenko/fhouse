@@ -967,7 +967,7 @@ footer>div:hover {
 }
 
 #match_top_nav>div {
-    width: calc( 100% / 3 );
+    width: calc( 100% / 3);
 }
 
 .team_top_nav {
@@ -1692,3 +1692,4 @@ header p {
     background-color: #e4e4e4;
     width: 100%;
 }
+

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Админ.Статьи</title>
+    <link rel="stylesheet" href="../../static/css/admin.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" />
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css"> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <main>
+                <div class="all_suggesting_news">
+                    <nav>
+                        <ul class="nav nav-pills navEventAdmin">
+                            <li role="presentation"><a href="admin_news.html">Новости<span class="new">(11)</span></a></li>
+                            <li role="presentation"><a href="admin_article.html">Статьи<span class="new">(22)</span></a></li>
+                            <li role="presentation"><a href="admin_bets.html">Прогнозы</a></li>
+                            <li role="presentation"><a href="admin_photo.html">Добавить фото <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                        </ul>
+                    </nav>
+                    <h2>Предложенные статьи</h2>
+
+                    <!-- Список статей -->
+                    <div class="list_article">
+                        <div class="one_suggestion_news thumbnail article">
+                            <div class="imgConteinerSuggestion">
+                                <img src="https://pp.vk.me/c637216/v637216085/348ed/aqZ4g7Ns95k.jpg" alt="">
+                            </div>
+                            <div class="thumbNews">
+                                <div class="infoSuggestingPerson">
+                                    <div class="photo-user">
+                                        <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg">
+                                    </div>
+                                    <div class="info-user">
+                                        <h4 class="media-heading"><span class="author_news">Василий Соловьев </span> </h4>
+                                        <div class="author_time">23.10.2012 19:21</div>
+                                    </div>
+                                </div>
+                                <p class="text_suggesting_news">"Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. "Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. "Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. "Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. </p>
+                                <div class="more_read">Читать больше...</div>
+                                <p>
+                                    <button class="btn btn-warning editNewsBtn" role="button">Редактировать</button>
+                                    <button class="btn btn-default deleteNewsBtn" role="button" data-toggle="modal" data-target="#delteNews">Удалить</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightColumn">
+                    <div class="blockResizeAfterScroll"></div>
+                    <div class="editor thumbnail">
+                        <h2>Редактировать и опубликовать</h2>
+                        <div class="imgCanvasConteiner">
+                            <div class="tableCell box canvasParent">
+                                <canvas id="panel"></canvas>
+                                <p>
+                                    <input type="button" id="cropBttn" class="btn btn-danger" value="Обрезать">
+                                </p>
+                                <div class="changeOrAddNewPhoto">
+                                    <textarea id="newSrcPhoto" placeholder="Ссылка на новое изображения" ></textarea>
+                                    <button class="btn btn-primary" id="newPhotoAdd">Изменить / Добавить</button>
+                                </div>
+                            </div>
+                            <div class="tableCell box">
+                                <h2>Фото для сайта</h2>
+                                <img src="" id="croppedImage">
+                            </div>
+                        </div>
+                        
+                        <!-- Заголовок -->
+                        <h3>Заголовок</h3>
+                        <div class="titleSuggestingNews">
+                            <textarea name="" id="title-suggesting-news" placeholder="Заголовок"></textarea>
+                        </div>
+                        <!-- Текст новости -->
+                        <h3>Текст новости</h3>
+                        <div class="textSuggestingNews">
+                            <textarea name="" id="text-suggesting-news" placeholder="Текст новости"></textarea>
+                        </div>
+                        <!-- Теги -->
+                        <div class="tegs">
+                            <h3>Теги:</h3>
+                            <div class="textarea_write_teg">
+                                <textarea name="" id="seachTags" placeholder="Поиск тегов"></textarea>
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                <ul class="list_tegs">
+                                    <!-- Сортированы по количеству постов с этим тегом -->
+                                    <li class="itemTag">
+                                        <p>Динамо</p><span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>Шахтер</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>ворскла</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>барса</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>челси</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>дрогба</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>матич</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li class="itemTag">
+                                        <p>ярмола</p> <span>(21)</span>
+                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="addNewTag">
+                                <h3>Добавить новый тег:</h3>
+                                <textarea placeholder="Новый тег"></textarea>
+                                <button type="button" class="btn btn-primary">
+                                    ok
+                                </button>
+                            </div>
+                            <div class="tegs_area">
+                                <div class="oneTeg">
+                                    <div class="nameTeg">Динамо</div>
+                                    <div class="removeTeg">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="oneTeg">
+                                    <div class="nameTeg">Динамо</div>
+                                    <div class="removeTeg">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer>
+                            <select name="" id="timePublishing">
+                                <option value="0">Сейчас</option>
+                                <option value="1">Через 5 часов</option>
+                                <option value="2">Через 10 часов</option>
+                                <option value="3">Через 15 часов</option>
+                                <option value="4">Через 20 часов</option>
+                            </select>
+                            <button type="button" class="btn btn-success">
+                                опубликовать
+                            </button>
+                        </footer>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Modal window -->
+    <!-- Delete news -->
+    <div class="modal fade" id="delteWeek" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" class="myModalLabel">Выберете неделю которую хотите удалить</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="selectWeekForDelete">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " id="refuseDelWeek" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary " id="confirmDelWeek" data-dismiss="modal">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete news -->
+    <div class="modal fade" id="delteNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Удалить новость</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " id="refuseDel" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary " id="confirmDel" data-dismiss="modal">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add albums -->
+    <div class="modal fade" id="add-album" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Добавить альбом</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>Выбор секции</h3>
+                    <select id="selectSectiomModal">
+                        <option value="0">Стадионы</option>
+                        <option value="1">Мемы</option>
+                        <option value="2">Ретро</option>
+                        <option value="3">Матчи</option>
+                    </select>
+                    <div class="addAlbum">
+                        <div class="titleAlbum">
+                            <h4>Названия альбома:</h4>
+                            <textarea name="" id="" placeholder="Названия альбома"></textarea>
+                        </div>
+                    </div>
+                    <div class="albumPhoto">
+                        <h4>Добавить фото альбома</h4>
+                        <form id="add-photo-form-2" runat="server">
+                            <input type='file' id="newImgAlbum" />
+                            <img id="imgAlbumToThis" src="" />
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="../../static/js/admin_page.js"></script>
+    <script src="../../static/js/jquery-ui.min.js"></script>
+    <script src="../../static/js/edit_news.js"></script>
+</body>
+
+</html>

@@ -177,7 +177,7 @@ $(document).ready(function() {
                 var content = $('.articles_list');
                 content.html(data);
                 img_norm_size();
-//                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
+                //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
@@ -261,7 +261,7 @@ $(document).ready(function() {
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
-        if (page == -1){
+        if (page == -1) {
             return;
         }
         var state = ""
@@ -271,10 +271,10 @@ $(document).ready(function() {
         }
         var ajax_data = { "tab": tab }
         if (page != null) {
-//            console.log('HERE PAGE IS: ' + page);
+            //            console.log('HERE PAGE IS: ' + page);
             ajax_data["page"] = page
         }
-//        console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['tab']);
+        //        console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['tab']);
         $.ajax({
             url: '/posts/tabs',
             data: ajax_data,
@@ -288,11 +288,11 @@ $(document).ready(function() {
                 content.append(data);
                 console.log('after data is here');
                 img_norm_size();
-//                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
+                //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
-                if (status = 404){
+                if (status = 404) {
                     $(a_block).prop('href', -1);
                 }
             }
@@ -341,10 +341,12 @@ $(document).ready(function() {
         //        console.log(old_tags);
         //        console.log(new_tags);
         var tags_to_delete = old_tags.filter(function(x) {
-            return new_tags.indexOf(x) < 0 })
+            return new_tags.indexOf(x) < 0
+        })
         console.log("to delete: " + tags_to_delete);
         var tags_to_add = new_tags.filter(function(x) {
-            return old_tags.indexOf(x) < 0 })
+            return old_tags.indexOf(x) < 0
+        })
         console.log("to add: " + tags_to_add);
         var add = false;
         var remove = false;
@@ -406,7 +408,7 @@ $(document).ready(function() {
 
     $(".for_tag").on("click", ".close_tag", function() {
         $(this).parent().remove();
-//        var close_tag_text = $(this).parent().children(".tag_chosen").text();
+        //        var close_tag_text = $(this).parent().children(".tag_chosen").text();
         var close_tag_text = $(this).parent().children(".additional_tag").text();
         alert(close_tag_text);
 
@@ -426,9 +428,38 @@ $(document).ready(function() {
 
 });
 
+// Download photo
+function readURLoffer(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('.imgOfferNews').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+    $(".linkImg").val("");
+}
+
+function downloadLinkTosrc() {
+    var srcNew = $(this).val();
+    $('.imgOfferNews').attr('src', srcNew);
+}
+
 // Script author: Dima
 $(document).ready(function() {
 
+    $(".linkImg").keyup(function() {
+        // downloadLinkTosrc();
+        var srcNew = $(this).val();
+        $('.imgOfferNews').attr('src', srcNew);
+        console.log("Privet")
+    })
+
+    // Download photo
+    $("#offerImgDownload").change(function() {
+
+        readURLoffer(this);
+    });
 
     if ($('*').is('.content_coment')) {
         $(".comments_base2").show();
@@ -448,10 +479,6 @@ $(document).ready(function() {
 
     });
 
-
-
-
-
 });
 
 // Правильный код для картинок 
@@ -459,8 +486,8 @@ $(document).ready(function() {
 var img_norm_size = function() {
     $('.IMGoneArticle img').each(function(i) {
         $(this).load(function() {
-//            console.log($(this).height() + " child");
-//            console.log($(this).parent().height() + " parent]");
+            //            console.log($(this).height() + " child");
+            //            console.log($(this).parent().height() + " parent]");
             if ($(this).css("height") < $(this).parent().css("height")) {
                 $(this).parent().css({ "display": "flex", "justify-content": "center" });
                 $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
@@ -564,7 +591,13 @@ $(window).load(function() {
             }
         });
     }
-
-
-
 });
+
+
+
+// $('.linkImg').keyup( function() {
+//     console.log("fsalfjsakfasl")
+// })
+$('body').on("click", "btn", function() {
+    console.log("fsalfjsakfasl")
+})

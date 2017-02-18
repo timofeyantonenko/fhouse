@@ -153,7 +153,6 @@ $(document).ready(function() {
 
 
     $(".slider_click").on("click", function(event) {
-
         var click_element_id = event.target.id;
         var quantity_foto_li = $(".url_list .list_src_slaider li").length;
         var id_left = "area_for_left_arrow_slaider";
@@ -188,19 +187,28 @@ $(document).ready(function() {
 
     // При отрытии модального окна
     // Слайдер в модальном окне
+    // $('.relative_container').on('click', function(evt) {
+
+    // });
 
     var index_photo_modal = 0;
     var body_width = $('#slaider_modal .modal-dialog').width();
 
-    $('.flex_container_albums').delegate('.photo_row', 'click', function() {
+
+
+    $('.flex_container_albums').delegate('.photo_row', 'click', function(evt) {
         size_img_modal();
         index_photo_modal = $(this).index();
         make_modal_slider();
+        // $('#slaider_modal').on('shown.bs.modal', function() {
+        //     size_img_modal();
+        //     console.log("papapa");
+        // }).modal('show');
     });
 
     // Преключения между фотками в модальном окне
 
-    $(".modal_slider_click").on("click", function(event) {
+    $(".modal_slider_click").on("click", function(evt) {
         var click_element_id = event.target.id;
         var quantity_foto_li = $(".url_list .list_src_slaider li").length;
         var id_left = "modal_left";

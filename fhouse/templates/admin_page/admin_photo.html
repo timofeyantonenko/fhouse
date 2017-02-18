@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Админ.Добавить фото</title>
+    <link rel="stylesheet" href="../../static/css/admin.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" />
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css"> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <main>
+                <div class="all_suggesting_news">
+                    <nav>
+                        <ul class="nav nav-pills navEventAdmin">
+                            <li role="presentation"><a href="admin_news.html">Новости<span class="new">(11)</span></a></li>
+                            <li role="presentation"><a href="admin_article.html">Статьи<span class="new">(22)</span></a></li>
+                            <li role="presentation"><a href="admin_bets.html">Прогнозы</a></li>
+                            <li role="presentation"><a href="admin_photo.html">Добавить фото <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                        </ul>
+                    </nav>
+                    <h2>Добавить фото</h2>
+                    <!-- Добавить фото -->
+                    <div class="addPhoto thumbnail">
+                        <div class="sectionPhoto">
+                            <h3>Выбор секции</h3>
+                            <select id="selectSectiom" name="selectSection">
+                                <option value="0" class="StadiumAlbums">Стадионы</option>
+                                <option value="1" class="memAlbums">Мемы</option>
+                                <option value="2" class="retoAlbums">Ретро</option>
+                                <option value="3" class="matchesAlbums">Матчи</option>
+                            </select>
+                            <button class="btn btn-default add_album" role="button" data-toggle="modal" data-target="#add-album">Добавить альбом <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                        </div>
+                        <div class="albumPhoto">
+                            <h3>Выбор альбома</h3>
+                            <select class="albumSelect">
+                            </select>
+                            <div id="listAlumms">
+                                <ul class="StadiumAlbums">
+                                    <li>Донбасс Арена</li>
+                                    <li>Металлист стедикм</li>
+                                    <li>Стадион Динамо</li>
+                                </ul>
+                                <ul class="memAlbums">
+                                    <li>Украинские мемы</li>
+                                </ul>
+                                <ul class="retoAlbums">
+                                    <li>Марадона</li>
+                                    <li>ЧМ 1960</li>
+                                </ul>
+                                <ul class="matchesAlbums">
+                                    <li>Шахтер - Динамо</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h3>Добавить фото</h3>
+                        <div class="addPhoto">
+                            <div class="titlePhoto">
+                                <h4>Подпись фото</h4>
+                                <textarea name="" id="" placeholder="Подпись фото"></textarea>
+                            </div>
+                            <div class="albumPhoto">
+                                <form id="add-photo-form" runat="server">
+                                    <input type='file' id="newImg" />
+                                    <img id="imgToThis" src="" />
+                                </form>
+                            </div>
+                            <button class="btn btn-success add_album" role="button">Добавить</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Modal window -->
+    <!-- Delete news -->
+    <div class="modal fade" id="delteWeek" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" class="myModalLabel">Выберете неделю которую хотите удалить</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="selectWeekForDelete">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " id="refuseDelWeek" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary " id="confirmDelWeek" data-dismiss="modal">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete news -->
+    <div class="modal fade" id="delteNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Удалить новость</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default " id="refuseDel" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary " id="confirmDel" data-dismiss="modal">Подтвердить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add albums -->
+    <div class="modal fade" id="add-album" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Добавить альбом</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>Выбор секции</h3>
+                    <select id="selectSectiomModal">
+                        <option value="0">Стадионы</option>
+                        <option value="1">Мемы</option>
+                        <option value="2">Ретро</option>
+                        <option value="3">Матчи</option>
+                    </select>
+                    <div class="addAlbum">
+                        <div class="titleAlbum">
+                            <h4>Названия альбома:</h4>
+                            <textarea name="" id="" placeholder="Названия альбома"></textarea>
+                        </div>
+                    </div>
+                    <div class="albumPhoto">
+                        <h4>Добавить фото альбома</h4>
+                        <form id="add-photo-form-2" runat="server">
+                            <input type='file' id="newImgAlbum" />
+                            <img id="imgAlbumToThis" src="" />
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="../../static/js/admin_page.js"></script>
+    <script src="../../static/js/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</body>
+
+</html>
