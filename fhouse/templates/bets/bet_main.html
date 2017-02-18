@@ -13,7 +13,8 @@
                         <h2>Анонс ТОП матчей недели. 28 окт - 3 ноя 2010</h2>
                     </div>
                     <div class="make_bet">
-                        <button data-toggle="modal" data-target="#week_bets_top">сделать ставку</button>
+                        <button data-toggle="modal">сделать ставку</button>
+                        <!--<button data-toggle="modal" data-target="#week_bets_top">сделать ставку</button>-->
                     </div>
                 </nav>
                 <!-- Превью к топ матчам  -->
@@ -22,17 +23,17 @@
                         <div class="one_menu_top_match">
                             <div class="team_top_nav">
                                 <div class="team_top_three">
-                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/768px-Chelsea_FC.svg.png" alt="">
+                                    <img src="{{ current_week_bet.match_1.home_team.image.url }}" alt="">
                                 </div>
                                 <div class="team_top_three">
                                     vs
                                 </div>
                                 <div class="team_top_three">
-                                    <img src="http://www.soccertalentidentification.com/Content/images/Liverpool_FC.svg.png" alt="">
+                                    <img src="{{ current_week_bet.match_1.guest_team.image.url }}" alt="">
                                 </div>
                             </div>
                             <div class="super_title">
-                                Дерби северного-западного лондона и уэльса
+                                {{ current_week_bet.match_1.match_name }}
                             </div>
                             <div class="read_prev">
                                 Читать превью
@@ -42,17 +43,17 @@
                         <div class="one_menu_top_match">
                             <div class="team_top_nav">
                                 <div class="team_top_three">
-                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/768px-Chelsea_FC.svg.png" alt="">
+                                    <img src="{{ current_week_bet.match_2.home_team.image.url }}" alt="">
                                 </div>
                                 <div class="team_top_three">
                                     vs
                                 </div>
                                 <div class="team_top_three">
-                                    <img src="http://www.soccertalentidentification.com/Content/images/Liverpool_FC.svg.png" alt="">
+                                    <img src="{{ current_week_bet.match_2.guest_team.image.url }}" alt="">
                                 </div>
                             </div>
                             <div class="super_title">
-                                Дерби северного лондона
+                                {{ current_week_bet.match_2.match_name }}
                             </div>
                             <div class="read_prev">
                                 Читать превью
@@ -62,17 +63,17 @@
                         <div class="one_menu_top_match">
                             <div class="team_top_nav">
                                 <div class="team_top_three">
-                                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/768px-Chelsea_FC.svg.png" alt="">
+                                    <img src="{{ current_week_bet.match_3.home_team.image.url }}" alt="">
                                 </div>
                                 <div class="team_top_three">
                                     vs
                                 </div>
                                 <div class="team_top_three">
-                                    <img src="http://www.soccertalentidentification.com/Content/images/Liverpool_FC.svg.png" alt="">
+                                    <img src="{{ current_week_bet.match_3.guest_team.image.url }}" alt="">
                                 </div>
                             </div>
                             <div class="super_title">
-                                Дерби северного лондона
+                                {{ current_week_bet.match_3.match_name }}
                             </div>
                             <div class="read_prev">
                                 Читать превью
@@ -82,26 +83,39 @@
                     </div>
                     <div class="top_match">
                         <header>
-                            <h2>Арсенал - Ливерпуль</h2>
-                            <p>Английская Премьер Лига 17 тур</p>
+                            <h2>{{ current_week_bet.match_1.home_team.team_name }} - {{ current_week_bet.match_1.guest_team.team_name }}</h2>
+                            <p>{{ current_week_bet.match_1.stage}} </p>
                         </header>
                         <div class="prev_info_text">
-                            <img src="https://s-media-cache-ak0.pinimg.com/736x/01/68/66/01686699c0ae0f2f8c98659a92f4ca01.jpg" alt="">
-                            <p>
-                                В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английском чемпионате и разделяет их всего 1 очко. Воскресное противостояние команд станет 190 в истории. Огромное, даже можно сказать тотальное преимущество в матчах соперников на стороне лондонцев, одержавших 96 побед, при 44 ничьих и всего 49 победах "горожан". Разница мячей также намного лучше у "канониров" 310 забитых мячей против 216 у "Манчестер Сити". В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английско
-                            </p>
-                            <img src="http://4.bp.blogspot.com/-L7eObnullmc/VI3qosjg67I/AAAAAAAABQw/EGWyaM0EQ9s/s320/Juventus%2BFC%2BWallpaper%2B86.jpg" alt="">
-                            <p>
-                                В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английском чемпионате и разделяет их всего 1 очко. Воскресное противостояние команд станет 190 в истории. Огромное, даже можно сказать тотальное преимущество в матчах соперников на стороне лондонцев, одержавших 96 побед, при 44 ничьих и всего 49 победах "горожан". Разница мячей также намного лучше у "канониров" 310 забитых мячей против 216 у "Манчестер Сити". В воскресенье 18 декабря в 19:00 в Манчестере, на стадионе "Этихад" в рамках 17 тура английской Премьер-лиги "Манчестер Сити" Хосепа Гвардиолы примет в гости "Арсенал" Арсена Венгера. Драйва и напряжения этому и без того топовому матчу предаёт тот факт, что команды занимают 4 и 3 места в английско
-                            </p>
+                            {{ current_week_bet.match_1.preview.description }}
                         </div>
                         <div class="time_start">
                             Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
                         </div>
                     </div>
                     <div class="top_match">
+                        <header>
+                            <h2>{{ current_week_bet.match_2.home_team.team_name }} - {{ current_week_bet.match_2.guest_team.team_name }}</h2>
+                            <p>{{ current_week_bet.match_2.stage}} </p>
+                        </header>
+                        <div class="prev_info_text">
+                            {{ current_week_bet.match_2.preview.description }}
+                        </div>
+                        <div class="time_start">
+                            Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                        </div>
                     </div>
                     <div class="top_match">
+                        <header>
+                            <h2>{{ current_week_bet.match_3.home_team.team_name }} - {{ current_week_bet.match_3.guest_team.team_name }}</h2>
+                            <p>{{ current_week_bet.match_3.stage}} </p>
+                        </header>
+                        <div class="prev_info_text">
+                            {{ current_week_bet.match_3.preview.description }}
+                        </div>
+                        <div class="time_start">
+                            Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                        </div>
                     </div>
                 </main>
             </div>
@@ -250,86 +264,16 @@
                 <div class="name_right_column">
                     <a href="all_reviews">Превью и прогнозы</a>
                 </div>
+                {% for league in leagues %}
                 <a href="all_reviews">
                     <div class="bets_one_championship">
                         <div class="championat_bet_preview">
-                            <div class="championship_title">Чемпионат Англии</div>
+                            <div class="championship_title">{{ league.league_name  }}</div>
                             <div class="current_tour_right">1 тур</div>
                         </div>
                     </div>
                 </a>
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">Чемпионат Испании</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">Чемпионат Италии</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">Чемпионат Германии</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">Чемпионат Франции</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">Чемпионат России</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">Чемпионат Украины</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">Лига Чемпионов</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">Лига Европы</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">ЧМ 2018</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
+                {% endfor %}
             </div>
         </div>
     </div>
