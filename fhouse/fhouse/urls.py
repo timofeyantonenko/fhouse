@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^records/', include("records.urls", namespace='records')),
     url(r'^gallery/', include("gallery.urls", namespace='gallery')),
     url(r'^articles/', include("article.urls", namespace='article')),
+    url(r'^admin_page/', include("admin_page.urls", namespace='admin_page')),
     url(r'^login/', login_view, name='login'),
     url(r'^logout/', logout_view, name='logout'),
     url(r'^register/', register_view, name='register'),

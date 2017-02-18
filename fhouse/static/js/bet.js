@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+//    $(".make_bet").on("click", function(){
+//    $('#week_bets_top').modal('show');
+//        show_modal('#week_bets_top');
+//    });
+
     // Выбор топ матча
     $(".read_prev").eq(0).hide();
     $(".line_hover_active").eq(0).css({ "opacity": "1" });
@@ -344,9 +349,175 @@ $(document).ready(function() {
         $(".body_user_choice").children(".history_bet").eq(i).find(".not_results").hide();
     }
 
-    var week_show = 0;
 
-    function prev_week() {
+
+
+    $(".next_week_bet").bind('click', prev_week);
+
+    $(".prev_week_bet").bind('click', next_week);
+
+    arraySum(arr);
+
+
+
+});
+
+$(window).load(function() {
+
+    $(".make_bet").on("click", function(){
+            show_modal('#week_bets_top');
+        });
+
+    // Для картинок в меню топ матчи
+
+    var width_nav_li = $(".li_img__top_match").width();
+
+    $(".img_top_math img").each(function(i) {
+        var img_height = $(this).height();
+        var img_width = $(this).width();
+        var new_width = (img_width / img_height) * 200;
+
+        var margin_left_li = (width_nav_li - new_width) / 2;
+        if ($(this).height() < $(this).parent().height()) {
+            $(this).css({ "height": "100%", "width": new_width, "margin-left": margin_left_li })
+        } else {
+            return;
+        }
+    });
+
+    var height = $(".colum").height();
+    var biggest_col;
+    $(".colum").each(function(i) {
+
+        if ($(this).height() < height) {
+            height = $(this).height()
+        } else {
+            biggest_col = $(this);
+        };
+
+    });
+
+    var min_height_block;
+
+    $(".colum").each(function(i) {
+
+        if ($(this).height() == height) {
+            min_height_block = $(this);
+        };
+
+    });
+
+    var width_min_height_block = $(min_height_block).width();
+
+    $(min_height_block).css("width", width_min_height_block);
+
+    var left_col = $(min_height_block).offset().left;
+
+
+
+    if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
+        $(min_height_block).addClass("fixed_col_top");
+        $(min_height_block).css("bottom", (document.documentElement.clientHeight - min_height_block.height() - 70));
+        $(min_height_block).css("left", left_col);
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > ((document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
+                var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
+                $('.fixed_col_top').css('top', 'inherit');
+                $(min_height_block).css("bottom", bottom_scroll);
+
+
+            } else {
+                $('.fixed_col_top').css('top', '70px');
+                $('.fixed_col_top').css('bottom', 'inherit');
+            };
+        })
+
+    } else {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > (45 + height - document.documentElement.clientHeight + $(".navbar").height()) && $(this).scrollTop() <= (50 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
+                $(min_height_block).addClass("fixed_col");
+                $(min_height_block).css("left", left_col);
+                $(min_height_block).css("bottom", "25px")
+
+            } else if ($(this).scrollTop() > (45 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
+                var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
+                $(min_height_block).css("bottom", bottom_scroll);
+            } else {
+
+
+                $(min_height_block).removeClass("fixed_col");
+                $(min_height_block).css({ "left": "0px", "bottom": "0px" });
+            }
+        });
+    }
+});
+
+// Фиксация блока меньшей высоты
+
+var first_open = true;
+
+function show_modal(modal_id){
+if (first_open){
+      load_bet_info();
+      first_open = false;
+      }
+      $(modal_id).modal();
+}
+
+function load_bet_info(){
+var ajax_url = 'get_bet_stage_info';
+//    var ajax_data = { "section": section_name }
+    var state = ""
+    $.ajax({
+        url: ajax_url,
+//        data: ajax_data,
+        dataType: "json",
+        success: function(data) {
+//        console.log(data["stage_bet"]["match_1"]);
+            var content = $('.mathes_can_bet');
+            var insert_data = "";
+            //          console.log(data);
+            //          json_data = JSON.parse(data);
+            var json_stage_matches = data['stage_bet'];
+            for (var i = 1; i < 4; i++){
+                match_i = "match_" + i;
+                match_json = json_stage_matches[match_i];
+                console.log(match_json);
+
+                home_team_name = match_json["home_team"]["team_name"];
+                home_team_coef = match_json["coefficient"]["home_coef"];
+
+                guest_team_name = match_json["guest_team"]["team_name"];
+                guest_team_coef = match_json["coefficient"]["guest_coef"];
+
+                draw_coef = match_json["coefficient"]["draw_coef"];
+
+                insert_data +=
+                "<div class=\"one_math_can_bet\"><div class=\"data_time_can\">02.01 - 22:30</div>" +
+                "<div class=\"result_can teams_can\">" +
+                            "<div class=\"team_can\">" + home_team_name + "</div>" +
+                            "<div class=\"kof_can\">" + home_team_coef + "</div></div>" +
+                        "<div class=\"result_can draw_can\"><div class=\"team_can\">" +
+                                "<i class=\"fa fa-times\" aria-hidden=\"true\"></i></div>" +
+                            "<div class=\"kof_can\">" + draw_coef + "</div></div>" +
+                        "<div class=\"result_can teams_can\"><div class=\"team_can\">" +
+                                guest_team_name +
+                            "</div><div class=\"kof_can\">" + guest_team_coef +
+                            "</div></div></div>";
+            }
+            content.html(insert_data);
+        },
+        error: function(xhr, status, error) {
+             console.log(error, status, xhr);
+        }
+    });
+}
+
+
+var week_show = 0;
+
+function prev_week() {
         var quantity_week = $(".one_week_bet").length;
         var height_week = $(".one_week_bet").height();
         var margin_top = parseInt($("#all_weeks").css('margin-top'));
@@ -368,7 +539,7 @@ $(document).ready(function() {
         }
     }
 
-    function next_week() {
+function next_week() {
         var quantity_week = $(".one_week_bet").length;
         var height_week = $(".one_week_bet").height();
         var margin_top = parseInt($("#all_weeks").css('margin-top'));
@@ -390,20 +561,19 @@ $(document).ready(function() {
         }
     }
 
+// Общий Коэффициент
+var arr = [];
+for (var i = 0; i < $(".history_bet").eq(0).children(".one_user_choice").length; i++) {
+    var sum = $(".history_bet").eq(0).find(".kof_this_match").eq(i).text();
+    arr.push(sum++);
+};
 
 
-    $(".next_week_bet").bind('click', prev_week);
+    var quantity_chosen_math = 0;
 
-    $(".prev_week_bet").bind('click', next_week);
+    // Переменная кол-во выбранных матчей
 
-    // Общий Коэффициент
-    var arr = [];
-    for (var i = 0; i < $(".history_bet").eq(0).children(".one_user_choice").length; i++) {
-        var sum = $(".history_bet").eq(0).find(".kof_this_match").eq(i).text();
-        arr.push(sum++);
-    };
-
-    function arraySum(arr) {
+function arraySum(arr) {
         var umno = 1;
         for (var i = 0; i < arr.length; i++) {
             umno *= arr[i];
@@ -414,80 +584,76 @@ $(document).ready(function() {
         $(".history_bet").eq(0).find(".total_kof_these_matches").text(text_kof);
 
     }
+
+
+// Выбор результата матча
+$(document).on("click", ".result_can", function(e) {
+    $(this).parents(".one_math_can_bet").children().removeClass("active_choice_bet");
+    $(this).addClass("active_choice_bet");
+    var match = $(this).parents(".one_math_can_bet").find(".teams_can").eq(0).find(".team_can").text() +
+        " " + "-" + " " + $(this).parents(".one_math_can_bet").find(".teams_can").eq(1).find(".team_can").text();
+    var kof_result = $(this).children(".kof_can").text();
+    // var draw_or_win =
+    var team_won = $(this).children(".team_can").text();
+    if ($(this).parents(".one_math_can_bet").index() == 0) {
+        var choisce_result_thum = $(".history_bet").eq(0).find(".one_user_choice").eq(0);
+    } else if ($(this).parents(".one_math_can_bet").index() == 1) {
+        var choisce_result_thum = $(".history_bet").eq(0).find(".one_user_choice").eq(1);
+    } else {
+        var choisce_result_thum = $(".history_bet").eq(0).find(".one_user_choice").eq(2);
+    };
+    if ($(this).hasClass("teams_can")) {
+        choisce_result_thum.fadeIn();
+        var win = "Победа";
+        choisce_result_thum.find(".win_or_draw").html(win);
+        choisce_result_thum.find(".your_choice_team").html(team_won);
+        choisce_result_thum.find(".kof_this_match").html(kof_result);
+        choisce_result_thum.find(".marth_choice_this").html(match);
+    } else {
+        choisce_result_thum.fadeIn();
+        var draw = "Ничья";
+        choisce_result_thum.find(".win_or_draw").html(draw);
+        var this_draw = " ";
+        choisce_result_thum.find(".your_choice_team").html(this_draw);
+        choisce_result_thum.find(".kof_this_match").html(kof_result);
+        choisce_result_thum.find(".marth_choice_this").html(match);
+    };
+
+    var arr = [];
+    for (var i = 0; i < $(".history_bet").eq(0).find(".one_user_choice").length; i++) {
+        var sum = +$(".history_bet").eq(0).find(".kof_this_match").eq(i).text();
+        arr.push(sum++);
+    };
+
+    console.log(arr)
+
+    function arraySum(arr) {
+        var umno = 1;
+        for (var i = 0; i < arr.length; i++) {
+            umno *= arr[i];
+        }
+        $(".history_bet").eq(0).find(".total_kof_these_matches").text(umno);
+        var text_kof = +$(".total_kof_these_matches").text();
+        var text_kof = text_kof.toFixed(2);
+        $(".history_bet").eq(0).find(".total_kof_these_matches").text(text_kof);
+
+    }
     arraySum(arr);
 
-    var quantity_chosen_math = 0;
+    quantity_chosen_math = $(".mathes_can_bet").find(".active_choice_bet").length;
 
-    // Выбор результата матча
-    $(".result_can").on("click", function() {
-        $(this).parents(".one_math_can_bet").children().removeClass("active_choice_bet");
-        $(this).addClass("active_choice_bet");
-        var match = $(this).parents(".one_math_can_bet").find(".teams_can").eq(0).find(".team_can").text() +
-            " " + "-" + " " + $(this).parents(".one_math_can_bet").find(".teams_can").eq(1).find(".team_can").text();
-        var kof_result = $(this).children(".kof_can").text();
-        // var draw_or_win = 
-        var team_won = $(this).children(".team_can").text();
-        if ($(this).parents(".one_math_can_bet").index() == 0) {
-            var choisce_result_thum = $(".history_bet").eq(0).find(".one_user_choice").eq(0);
-        } else if ($(this).parents(".one_math_can_bet").index() == 1) {
-            var choisce_result_thum = $(".history_bet").eq(0).find(".one_user_choice").eq(1);
-        } else {
-            var choisce_result_thum = $(".history_bet").eq(0).find(".one_user_choice").eq(2);
-        };
-        if ($(this).hasClass("teams_can")) {
-            choisce_result_thum.fadeIn();
-            var win = "Победа";
-            choisce_result_thum.find(".win_or_draw").html(win);
-            choisce_result_thum.find(".your_choice_team").html(team_won);
-            choisce_result_thum.find(".kof_this_match").html(kof_result);
-            choisce_result_thum.find(".marth_choice_this").html(match);
-        } else {
-            choisce_result_thum.fadeIn();
-            var draw = "Ничья";
-            choisce_result_thum.find(".win_or_draw").html(draw);
-            var this_draw = " ";
-            choisce_result_thum.find(".your_choice_team").html(this_draw);
-            choisce_result_thum.find(".kof_this_match").html(kof_result);
-            choisce_result_thum.find(".marth_choice_this").html(match);
-        };
+    if (quantity_chosen_math < 1) {
+        $(".history_bet").eq(0).find(".not_results").show()
+        $(".history_bet").eq(0).find(".total_kof").hide()
+    } else {
+        $(".history_bet").eq(0).find(".not_results").hide()
+        $(".history_bet").eq(0).find(".total_kof").show()
+    }
 
-        var arr = [];
-        for (var i = 0; i < $(".history_bet").eq(0).find(".one_user_choice").length; i++) {
-            var sum = +$(".history_bet").eq(0).find(".kof_this_match").eq(i).text();
-            arr.push(sum++);
-        };
+});
 
-        console.log(arr)
-
-        function arraySum(arr) {
-            var umno = 1;
-            for (var i = 0; i < arr.length; i++) {
-                umno *= arr[i];
-            }
-            $(".history_bet").eq(0).find(".total_kof_these_matches").text(umno);
-            var text_kof = +$(".total_kof_these_matches").text();
-            var text_kof = text_kof.toFixed(2);
-            $(".history_bet").eq(0).find(".total_kof_these_matches").text(text_kof);
-
-        }
-        arraySum(arr);
-
-        quantity_chosen_math = $(".mathes_can_bet").find(".active_choice_bet").length;
-
-        if (quantity_chosen_math < 1) {
-            $(".history_bet").eq(0).find(".not_results").show()
-            $(".history_bet").eq(0).find(".total_kof").hide()
-        } else {
-            $(".history_bet").eq(0).find(".not_results").hide()
-            $(".history_bet").eq(0).find(".total_kof").show()
-        }
-
-    });
-    // Переменная кол-во выбранных матчей 
-
-
-    // Удаление выбранного матча
-    $(".delete_this_this_choice i").click(function() {
+// Удаление выбранного матча
+$(document).on("click", ".delete_this_this_choice i", function() {
         console.log("sdadas")
         $(this).parents(".one_user_choice").fadeOut();
         if ($(this).parents(".one_user_choice").index() == 0) {
@@ -530,96 +696,3 @@ $(document).ready(function() {
         }
 
     });
-
-
-    $(window).load(function() {
-
-        // Для картинок в меню топ матчи 
-
-        var width_nav_li = $(".li_img__top_match").width();
-
-        $(".img_top_math img").each(function(i) {
-            var img_height = $(this).height();
-            var img_width = $(this).width();
-            var new_width = (img_width / img_height) * 200;
-
-            var margin_left_li = (width_nav_li - new_width) / 2;
-            if ($(this).height() < $(this).parent().height()) {
-                $(this).css({ "height": "100%", "width": new_width, "margin-left": margin_left_li })
-            } else {
-                return;
-            }
-        });
-
-        var height = $(".colum").height();
-        var biggest_col;
-        $(".colum").each(function(i) {
-
-            if ($(this).height() < height) {
-                height = $(this).height()
-            } else {
-                biggest_col = $(this);
-            };
-
-        });
-
-        var min_height_block;
-
-        $(".colum").each(function(i) {
-
-            if ($(this).height() == height) {
-                min_height_block = $(this);
-            };
-
-        });
-
-        var width_min_height_block = $(min_height_block).width();
-
-        $(min_height_block).css("width", width_min_height_block);
-
-        var left_col = $(min_height_block).offset().left;
-
-
-
-        if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
-            $(min_height_block).addClass("fixed_col_top");
-            $(min_height_block).css("bottom", (document.documentElement.clientHeight - min_height_block.height() - 70));
-            $(min_height_block).css("left", left_col);
-
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > ((document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                    var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                    $('.fixed_col_top').css('top', 'inherit');
-                    $(min_height_block).css("bottom", bottom_scroll);
-
-
-                } else {
-                    $('.fixed_col_top').css('top', '70px');
-                    $('.fixed_col_top').css('bottom', 'inherit');
-                };
-            })
-
-        } else {
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > (45 + height - document.documentElement.clientHeight + $(".navbar").height()) && $(this).scrollTop() <= (50 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                    $(min_height_block).addClass("fixed_col");
-                    $(min_height_block).css("left", left_col);
-                    $(min_height_block).css("bottom", "25px")
-
-                } else if ($(this).scrollTop() > (45 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                    var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                    $(min_height_block).css("bottom", bottom_scroll);
-                } else {
-
-
-                    $(min_height_block).removeClass("fixed_col");
-                    $(min_height_block).css({ "left": "0px", "bottom": "0px" });
-                }
-            });
-        }
-    });
-
-
-});
-
-// Фиксация блока меньшей высоты

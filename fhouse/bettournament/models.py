@@ -2,6 +2,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
+from utils.files_preparing import upload_location
+
 
 # Create your models here.
 
@@ -12,20 +14,46 @@ class League(models.Model):
     """
     league_name = models.CharField(max_length=80)
     league_description = models.TextField()
+    image = models.ImageField(upload_to=upload_location,
+                              null=True, blank=True)
 
     def __str__(self):
         return self.league_name
 
 
+class Season(models.Model):
+    season_name = models.CharField(max_length=50)
+    season_league = models.ForeignKey(League, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{}: {}".format(self.season_league, self.season_name)
+
+
+class SeasonStage(models.Model):
+    """
+    Analog of a tour, semi-final etc.
+    """
+    stage_name = models.CharField(max_length=80)
+    stage_season = models.ForeignKey(Season, on_delete=models.CASCADE)
+    is_current = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '{}: {}'.format(self.stage_season, self.stage_name)
+
+
 class Team(models.Model):
     team_name = models.CharField(max_length=80)
-    team_league = models.ForeignKey(League, on_delete=models.CASCADE)
+    team_league = models.ManyToManyField(Season)
+    image = models.ImageField(upload_to=upload_location,
+                              null=True, blank=True)
 
     def __str__(self):
         return self.team_name
 
 
 class Match(models.Model):
+    stage = models.ForeignKey(SeasonStage, on_delete=models.CASCADE)
+
     home_team = models.ForeignKey(Team, related_name='match_home_team', on_delete=models.CASCADE)
     guest_team = models.ForeignKey(Team, related_name='match_guest_team', on_delete=models.CASCADE)
 
@@ -50,12 +78,19 @@ class Match(models.Model):
         default=simple,
     )
 
-    league = models.ForeignKey(League, on_delete=models.CASCADE)
-
+    # if match used for bet and if we want to give some specific bonus for this match
     match_bonus = models.IntegerField(blank=True, null=True)
 
+    # if we want to give for match name
+    match_name = models.CharField(max_length=120, blank=True, null=True)
+
+    @property
+    def preview(self):
+        print('preview:', MatchPreview.objects.filter(match=self))
+        return MatchPreview.objects.filter(match=self).first()
+
     def __str__(self):
-        return '{} vs {}'.format(self.home_team, self.guest_team)
+        return '{} vs {}::{}'.format(self.home_team, self.guest_team, self.stage)
 
 
 class Coefficient(models.Model):
@@ -66,7 +101,7 @@ class Coefficient(models.Model):
     match = models.OneToOneField(Match, on_delete=models.CASCADE)
 
     def __str__(self):
-        return 'h: {}; d: {}, g: {}'.format(self.home_coef, self.draw_coef, self.guest_coef)
+        return '{} :: h: {}; d: {}, g: {}'.format(self.match, self.home_coef, self.draw_coef, self.guest_coef)
 
 
 class MatchPreview(models.Model):
@@ -103,6 +138,11 @@ class MatchBetFromUser(models.Model):
         choices=USER_BETS,
         default=draw,
     )
+
+    # which user make the bet
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+
+    # for which match user make the bet
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -110,10 +150,35 @@ class MatchBetFromUser(models.Model):
 
 
 class UsersResult(models.Model):
-    # which user make the bat
+    # which user make the bet
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
-    match = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE)
+
+    # three matches for every user
+    result_match1 = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE,
+                                         related_name='%(class)s_match1_result', default=1)
+    result_match2 = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE,
+                                         related_name='%(class)s_match2_result', default=1)
+    result_match3 = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE,
+                                         related_name='%(class)s_match3_result', default=1)
+
     score = models.FloatField()
 
     def __str__(self):
         return 'user: {} match: {}, score: {}'.format(self.user, self.match, self.score)
+
+
+class StageBet(models.Model):
+    """
+    need for setup stage bet
+    """
+
+    # we have three matches for one stage
+    match_1 = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='%(class)s_match1_stage', default=1)
+    match_2 = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='%(class)s_match2_stage', default=1)
+    match_3 = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='%(class)s_match3_stage', default=1)
+
+    check_date = models.DateTimeField()
+    must_be_checked = models.BooleanField(default=True)
+
+    def __str__(self):
+        return 'match1: {},\nmatch2: {}\nmatch3: {}'.format(self.match_1, self.match_2, self.match_3)
