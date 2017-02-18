@@ -11,7 +11,7 @@ $(document).ready(function() {
         $(this).parent().find(".line_hover_active").css({ "opacity": "1" })
         $(".read_prev").show();
         $(this).fadeOut();
-        
+
         $(".top_match").hide();
         $(".top_match").eq(index_read).show();
     });
@@ -530,6 +530,8 @@ $(document).ready(function() {
         }
 
     });
+
+
 
 
     $(window).load(function() {
