@@ -4,33 +4,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Record</title>
 <link rel="stylesheet" href='{% static "css/record.css" %}'>
+<link rel="stylesheet" href='{% static "css/post_list.css" %}'>
 <script type="text/javascript" src="{% static 'js/record.js'  %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
 {% endblock head_extra %} {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9">
-            <div class="table_nav_records">
-                <div>Рекорды</div>
-                <div class="tab">
-                    <ul>
-                        <li>Все</li>
-                        {% for record_group in groups_tables %}
-                        <li>{{ record_group.group }}</li>
-                        {% endfor %}
-                    </ul>
+<main>
+    <div class="recordsMain">
+        <div class="table_nav_records">
+            <h1>
+                <p>Рекорды</p>
+                <div class="searchRecord">
+                    <textarea placeholder="Найди рекорд..." ></textarea> 
+                    <button type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
                 </div>
+            </h1>
+            <div class="tab">
+                <ul>
+                    <li class="activeRecords">
+                        Все
+                        <div class="lineHover"></div>
+                    </li>
+                    {% for record_group in groups_tables %}
+                    <li>
+                        {{ record_group.group }}
+                        <div class="lineHover"></div>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
-            <div class="statsCard">
-                <div class="flex_container" data-masonry='{ "itemSelector": ".block_record", "columnWidth": ".persent-size", 
-           "percentPosition": true}'>
-                </div>
-                <div class="more_records">
-                    <a href="3">ПОСМОТРЕТЬ БОЛЬШЕ</a>
-                </div>
+            <hr>
+        </div>
+        <div class="statsCard" id="wrapper">
+            <div class="flex_container" id="list">
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="more_records">
+            <a href="3">ПОСМОТРЕТЬ БОЛЬШЕ</a>
         </div>
     </div>
-</div>
+</main>
 {% endblock content %}

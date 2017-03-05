@@ -1,6 +1,7 @@
 .statsCard {
     background-color: #fafafa;
-    padding: 20px 20px 20px 10px; 
+    padding: 20px;
+    padding-bottom: 70px;
     border: 1px solid #CCD1D9;
     border-top: 0px !important;
 }
@@ -17,15 +18,7 @@
 }
 
 .flex_container {
-    display: flex;
     width: 100%;
-    flex-wrap: wrap;
-    align-items: flex-start;
-}
-
-.statsCard .block_record {
-    padding-left: 10px;
-    margin-bottom: 10px;
 }
 
 .thumbnails {
@@ -94,7 +87,7 @@
 }
 
 .statsHero .statInfo span {
-    color: #e90052;
+    color: #e62117;
     position: absolute;
     font-size: 18px;
     top: 100%;
@@ -260,7 +253,7 @@
 }
 
 .stat {
-    color: #e90052;
+    color: #e62117;
 }
 
 .btn {
@@ -315,7 +308,7 @@ ul#otis {
 }
 
 .add_record:hover {
-    background-color: #e90052;
+    background-color: #e62117;
     color: white;
 }
 
@@ -350,7 +343,7 @@ ul#otis {
 }
 
 .full_list_record:hover {
-    background-color: #e90052;
+    background-color: #e62117;
     color: #fafafa;
 }
 
@@ -369,8 +362,8 @@ ul#otis {
 
 .more_records {
     cursor: pointer;
-    width: 32%;
-    margin: 0 auto 0px;
+    width: 230px;
+    margin: -45px auto 0px;
     padding: 5px;
     display: block;
     text-align: center;
@@ -384,94 +377,210 @@ ul#otis {
 }
 
 .more_records:hover {
-    text-decoration: none!important;
     background: #eee;
 }
 
-
-/*Навигация между пазделами рекордов*/
-
-
-/*Навигация между статьями */
-
-.table > tbody > tr:first-child > td {
-    border-top: 0px !important;
-    font-weight: bold;
-    color: #666;
-}
-
-.table_nav_records a {
-    color: #242424;
-}
-
-.table_nav_records td:nth-child(2+3n) {
-    padding-left: 0px !important;
-}
-
-.table_nav_records td:nth-child(1+3n) {
-    padding-right: 0px !important;
-}
-
-.table_nav_records div:first-child {
-    height: 39px;
-    line-height: 39px;
-    margin-left: 20px;
-    color: #fafafa;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.table_nav_records tr:nth-child(2) {
-    background-color: #e4e4e4;
-}
-
-.tab ul {
-    display: flex;
-    width: 100%;
-    padding: 0 50% 0 20px;
-}
-
-.tab_active {
-    background-color: #fafafa !important;
-    color: #1d2f3e !important;
-}
-
-.tab ul li {
-    background: #b60040;
-    color: #fff;
-    padding: 1.3rem 1rem;
-    display: block;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    font-size: 1.1rem;
-    position: relative;
+.more_records a {
     text-decoration: none;
-    text-align: center;
-    transition: all .2s;
-    border-radius: 3px 3px 0 0;
-    cursor: pointer;
+    color: #333;
 }
 
-.tab ul li:hover {
-    background-color: #83002e;
+.more_records a:hover,
+.more_records a:focus {
+    text-decoration: none;
+    color: #333;
 }
 
-.tab ul li:not(:last-child) {
-    margin-right: 10px;
-}
+
+/*Navigation records*/
 
 .table_nav_records {
-    height: 80px;
-    background-color: #e90052;
-    border-radius: 7px 7px 0 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fafafa;
+    padding: 0 20px;
+    border: 1px solid #CCD1D9;
+    border-bottom: 0px !important;
+}
+
+.table_nav_records h1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 30px;
+    color: #000;
+    font-weight: 900;
+}
+
+.table_nav_records h1 p {
+    margin: 0;
+    padding: 0;
+}
+
+.searchRecord {
+    width: 250px;
+    display: flex;
+    height: 30px;
+}
+
+.searchRecord textarea {
+    width: 225px;
+    height: 100%;
+    font-size: 15px;
+    overflow: hidden;
+    padding: 5px;
+    outline: none;
+    font-weight: 400 !important;
+}
+
+.searchRecord button {
+    width: 30px;
+    height: 30px;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    outline: none;
+}
+
+.form-control {
+    outline: none !important;
+}
+
+.table_nav_records ul {
+    display: flex;
+    overflow: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.table_nav_records ul li {
+    margin: 0 5px 0 0;
+    padding: 5px 10px;
+    position: relative;
+    cursor: pointer;
+    display: block;
+}
+
+.table_nav_records ul li:hover .lineHover {
+    top: calc(100% - 4px);
+}
+
+.activeRecords {
+    font-weight: 900;
+}
+
+.activeRecords .lineHover {
+    top: calc(100% - 4px);
+}
+
+.lineHover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #e62117;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+}
+
+.table_nav_records hr {
+    width: 100%;
+    border-top: 2px solid #eee;
+    margin: 0 !important;
 }
 
 
-/*Масонри рекорды */
+/*Responsive*/
 
-.persent-size {
-    width: 33.333333%;
+.recordsMain {
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 1170px) {
+    .recordsMain {
+        width: 70%;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .recordsMain {
+        width: 65%;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .recordsMain {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .recordsMain {
+        width: 100%;
+    }
 }
 
 
+/*Masonry*/
+
+#wrapper {
+    width: 100%;
+}
+
+#list {
+    width: calc(100% + 10px);
+    /* 990px */
+    overflow: hidden;
+    margin-left: -5px;
+    /* 15px */
+    margin-bottom: -1.875em;
+    /* 30px */
+}
+
+.item {
+    float: left;
+}
+
+@media screen and (min-width: 1170px) {
+    .item {
+        width: calc(33.333333% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .item {
+        width: calc(50% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .item {
+        width: calc(50% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}
+
+@media screen and (min-width: 590px) and (max-width: 749px) {
+    .item {
+        width: calc(50% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}
+
+@media screen and (max-width: 589px) {
+    .item {
+        width: calc(100% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}

@@ -6,11 +6,9 @@
     <meta charset="UTF-8">
     <title>{% block head_title %}FootballHouse {% endblock head_title %}</title>
     <!-- Latest compiled and minified CSS -->
-
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>-->
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
@@ -20,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Anton|Raleway" rel="stylesheet">
     <link rel="stylesheet" href='{% static "css/base.css" %}'>
     <link rel="stylesheet" href='{% static "css/font-awesome.css" %}'>
-    <link href='{% static "css/jquery.formstyler.css" %}' rel="stylesheet" />vk
+    <link href='{% static "css/jquery.formstyler.css" %}' rel="stylesheet" />
     <style>
     {
         % block style %
@@ -35,68 +33,63 @@
 
 <body id='body'>
     <!-- Menu fixed top -->
-    <div class="containerForMenu">
-        <div class="navbar navbar-custom navbar-fixed-top">
-            <div class="container">
-                <div class="row">
-                    <div class="navbar-header">
-                        <a href="/" class="navbar-brand">
-                            <p>FH</p>
-                        </a>
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#responsive-menu">
-                            <i class="fa fa-bars fa-2x"></i>
-                            <span class="sr-only">Открыть навигацию</span>
-                        </button>
-                    </div>
-                    <div class="collapse navbar-collapse" id="responsive-menu">
-                        <ul class="nav navbar-nav">
-                            <li class="liMenuHover0"><a href="/posts">Новости</a>
-                                <div class="liMenuHover"></div>
-                            </li>
-                            <li class="liMenuHover0"><a href="/bets">Прогнозы</a>
-                                <div class="liMenuHover"></div>
-                            </li>
-                            <li class="liMenuHover0"><a href="/gallery">Галерея</a>
-                                <div class="liMenuHover"></div>
-                            </li>
-                            <li class="liMenuHover0"><a href="/articles">Статьи</a>
-                                <div class="liMenuHover"></div>
-                            </li>
-                            <li class="liMenuHover0"><a href="/records">Рекорды</a>
-                                <div class="liMenuHover"></div>
-                            </li>
-                        </ul>
-                        <div class="loginScheckIn">
-                            <!--  <a href="" data-toggle="modal" data-target="#LOGIN"><i class="fa fa-sign-in" aria-hidden="true"></i> Вход</a> |
+    <div class="navbar navbar-custom navbar-fixed-top">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">
+                <p>FH</p>
+            </a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#responsive-menu">
+                <i class="fa fa-bars fa-2x"></i>
+                <span class="sr-only">Открыть навигацию</span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="responsive-menu">
+            <ul class="nav navbar-nav">
+                <li class="liMenuHover0"><a href="/posts">Новости</a>
+                    <div class="liMenuHover"></div>
+                </li>
+                <li class="liMenuHover0"><a href="/bets">Прогнозы</a>
+                    <div class="liMenuHover"></div>
+                </li>
+                <li class="liMenuHover0"><a href="/gallery">Галерея</a>
+                    <div class="liMenuHover"></div>
+                </li>
+                <li class="liMenuHover0"><a href="/articles">Статьи</a>
+                    <div class="liMenuHover"></div>
+                </li>
+                <li class="liMenuHover0"><a href="/records">Рекорды</a>
+                    <div class="liMenuHover"></div>
+                </li>
+            </ul>
+            <div class="loginScheckIn">
+                <!--  <a href="" data-toggle="modal" data-target="#LOGIN"><i class="fa fa-sign-in" aria-hidden="true"></i> Вход</a> |
                             <a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> Регистрация</a> -->
-                            <!-- Показать когда пользователь вошел  -->
-                            <div class="relative_container">
-                                <div class="user_profile">
-                                    {% if request.user.is_authenticated %}
-                                    <div class="name_user_in_menu">{{ request.user.first_name }}</div>
-                                    <img src="{{ request.user.avatar.url }}" alt=""> {% else %}
-                                    <div class="name_user_in_menu"><a href="/login">Меню</a></div>
-                                    <img src="{% static 'img/albert-einstein.jpg' %}" alt=""> {% endif %}
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </div>
-                                <!-- Всплывающее окно юзера -->
-                                <div id="top_profile_menu">
-                                    <div class="posirion_reletive">
-                                        {% if request.user.is_authenticated %}
-                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                        <a href="/user">Мой профиль</a>
-                                        <div class="line_solid"></div>
-                                        <a href="">Сделать ставку</a>
-                                        <a href="">Предложить новость</a>
-                                        <a href="">Редактировать профиль</a>
-                                        <div class="line_solid"></div>
-                                        <a href="/logout">Выйти</a> {% else %}
-                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                        <a href="/login">Войти</a>
-                                        <a href="/register">Регистрация</a> {% endif %}
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Показать когда пользователь вошел  -->
+                <div class="relative_container">
+                    <div class="user_profile">
+                        {% if request.user.is_authenticated %}
+                        <div class="name_user_in_menu">{{ request.user.first_name }}</div>
+                        <div class="imgUserNav"><img src="{{ request.user.avatar.url }}" alt=""></div> 
+                        <i class="fa fa-caret-down" aria-hidden="true"></i> {% else %}
+                        <div class="name_user_in_menu">Вход</div>
+                        <i class="fa fa-sign-in" aria-hidden="true"></i> {% endif %}
+                        
+                    </div>
+                    <!-- Всплывающее окно юзера -->
+                    <div id="top_profile_menu">
+                        <div class="posirion_reletive">
+                            {% if request.user.is_authenticated %}
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            <a href="/user">Мой профиль</a>
+                            <div class="line_solid"></div>
+                            <a href="">Сделать ставку</a>
+                            <a href="">Предложить новость</a>
+                            <a href="">Редактировать профиль</a>
+                            <div class="line_solid"></div>
+                            <a href="/logout">Выйти</a> {% else %}
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            <a href="/login">Войти</a>
+                            <a href="/register">Регистрация</a> {% endif %}
                         </div>
                     </div>
                 </div>

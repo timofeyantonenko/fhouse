@@ -56,8 +56,14 @@
                 </div>
                 <div class="footer_post_detail">
                     <div class="teg_post_detail">
-                        Теги: {% for sub_tag in instance.tag.all %}
-                        <a href="#">{{ sub_tag.name }}</a> {% endfor %}
+                        <h3>Теги:</h3>
+                        <div class="tagsConteiner">
+                            {% for sub_tag in instance.tag.all %}
+                            <a href="#" class="tags__item js-tags-item">
+                                <span> {{ sub_tag.name }} </span>
+                            </a>
+                            {% endfor %}
+                        </div>
                     </div>
                     <div class="block_like-dislike">
                         <div class="like_and_dislike">

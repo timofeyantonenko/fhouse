@@ -6,64 +6,99 @@ body {
     color: #1d2f3e;
     font-size: 14px;
     background-color: #eaeaea;
+    overflow-y: scroll;
+    padding-top: 70px;
+    padding-bottom: 20px;
 }
 
-html {
-    overflow-y: 
+textarea {
+    resize: none;
+    outline: none;
+    overflow: none;
 }
 
-.row {
-    margin-right: 0px !important;
-    margin-left: 0px !important;
+
+/*Content*/
+
+main {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
-.colum:nth-child(2) {
-    float: right;
+@media screen and (min-width: 1170px) {
+    main {
+        width: 1150px;
+    }
+    .navbar-fixed-top {
+        padding-left: calc( 50% - 575px);
+        padding-right: calc( 50% - 575px);
+    }
+    body.modal-open .navbar-fixed-top {
+        width: 100%;
+        padding-left: calc( 50% - 583.5px);
+        padding-right: calc( 50% - 566.5px);
+    }
+    .navbar-custom {
+        background-color: #000;
+    }
 }
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    main {
+        width: 95% !important;
+    }
+    .navbar-fixed-top {
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+    }
+    body.modal-open .navbar-fixed-top {
+        padding-left: 2.5vw !important;
+        padding-right: calc( 2.5vw + 17px) !important;
+    }
+    .navbar-custom {
+        background-color: #000;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    main {
+        width: 95% !important;
+    }
+    .navbar-fixed-top {
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+    }
+    body.modal-open .navbar-fixed-top {
+        padding-left: 2.5vw !important;
+        padding-right: calc( 2.5vw + 17px) !important;
+    }
+    .navbar-custom {
+        background-color: #000;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    main {
+        width: 100% !important;
+    }
+    .navbar-custom {
+        background-color: #fcb913;
+    }
+}
+
+/*Modal dialog*/
 
 .navbar {
     margin-bottom: 20px !important;
     position: absolute;
 }
 
-.container {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-body.modal-open {
-    overflow: hidden !important;
-}
-
 .containerForMenu {
     position: relative;
     width: 100%;
-    min-height: 50px;
-    margin-bottom: 20px;
-}
-
-.navbar {
-    position: fixed;
-}
-
-.col-lg-1,
-.col-lg-2,
-.col-lg-3,
-.col-lg-4,
-.col-lg-5,
-.col-lg-6,
-.col-lg-11,
-.col-lg-12 {
-    padding: 0px !important;
-}
-
-.col-lg-7,
-.col-lg-8,
-.col-lg-9,
-.col-lg-10 {
-    padding: 0% 20px 0% 0% !important;
+    height: 50px;
 }
 
 h1 {
@@ -82,10 +117,6 @@ h1 {
 
 /*Menu Fixed Top*/
 
-.navbar-custom {
-    background-color: #38003c
-}
-
 .navbar-nav a {
     color: #fff;
     font-size: 20px;
@@ -103,9 +134,6 @@ h1 {
         -webkit-transition: all 0.2s ease-out;
         transition: all 0.2s ease-out;
     }
-}
-
-@media (min-width: 768px) {
     .navbar-nav .liMenuHover0:active .liMenuHover {
         bottom: 0px;
         -moz-transition: all 0.2s ease-out;
@@ -120,19 +148,13 @@ h1 {
     overflow: hidden;
 }
 
-@media (max-width: 767px) {
-    .navbar-nav a:hover {
-        color: #e90052;
-    }
-}
-
 .liMenuHover {
     position: absolute;
     bottom: -5px;
     left: 0px;
     width: 100%;
     height: 5px;
-    background-color: #e90052;
+    background-color: #fcb913;
     /*-moz-transition: all 1.2s ease-out;
     -o-transition: all 1.2s ease-out;
     -webkit-transition: all 1.2s ease-out;
@@ -140,7 +162,7 @@ h1 {
 }
 
 .navbar-nav li:hover {
-    background-color: #38003c;
+    background-color: #000;
 }
 
 .navbar-header img {
@@ -150,8 +172,7 @@ h1 {
 }
 
 .navbar-header {
-    background-color: #00ff87;
-    min-width: 50px;
+    background-color: #fcb913;
 }
 
 .navbar-brand {
@@ -175,7 +196,7 @@ h1 {
 
 .nav li>a:focus,
 .nav li>a:hover {
-    background-color: #38003c;
+    background-color: #000;
 }
 
 @media (min-width: 768px) {
@@ -364,39 +385,40 @@ form [type="password"] {
     font-weight: 700;
 }
 
-.user_profile img,
-.user_profile i,
-.user_profile img {
-    align-self: center;
+.user_profile>div, 
+.user_profile>i {
+    margin: 0 5px;
 }
 
-.user_profile img {
+.user_profile .fa-sign-in {
+    font-size: 25px;
+}
+
+.user_profile .fa-caret-down {
+    opacity: 0.5;
+}
+
+.imgUserNav {
     width: 35px;
     height: 35px;
-    border-radius: 50%;
+    border-radius: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgUserNav img {
+    width: 100%;
 }
 
 .user_profile {
     height: 50px;
     display: flex;
     justify-content: center;
+    align-items: center;
     padding-left: 10px;
     padding-right: 10px;
-    position: relative;
-}
-
-.user_profile div::nth-child(-n+2) {
-    float: left;
-    max-height: 30px;
-}
-
-.user_profile div:first-child {
-    margin-right: 10px;
-}
-
-.user_profile i {
-    opacity: 0.5;
-    margin-left: 7px;
 }
 
 .user_profile:hover {

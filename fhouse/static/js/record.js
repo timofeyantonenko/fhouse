@@ -13,7 +13,33 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
+
+// К-во элементов для подгрузки
+
+var dowloadItem;
+
+function itemDownload() {
+  if ($(window).width() >= 1170) {
+        dowloadItem = 3;
+
+    } else if ($(window).width() >= 590 && $(window).width() < 1170) {
+        dowloadItem = 2;
+    } else {
+        dowloadItem = 1;
+    }
+    $(".more_records a").attr("href", dowloadItem); 
+    console.log(dowloadItem) 
+}
+
 $(document).ready(function() {
+
+    var dowloadItem;
+    itemDownload();
+
+    $(window).resize(function() {
+        itemDownload();
+    });
+
     var group = getUrlParameter('group');
     if (typeof group != 'undefined') {
         var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
@@ -39,8 +65,8 @@ $(document).ready(function() {
             success: function(data) {
                 var content = $('.statsCard .flex_container');
                 content.html(data);
-
                 $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
+                $('#list').masonry({ itemSelector: '.item' });
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
@@ -79,6 +105,8 @@ $(document).ready(function() {
                 $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
                 var a_block = $('.more_records a');
                 $(a_block).prop('href', 3);
+                $("#list").masonry('reloadItems');
+                $("#list").masonry('layout');
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
@@ -86,6 +114,7 @@ $(document).ready(function() {
         });
     });
     $(".more_records a").click(function(e) {
+        $(this).html("Загрузка...");
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
@@ -113,21 +142,23 @@ $(document).ready(function() {
 
                 $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
                 //            window.history.pushState("object or string", "Title", state);
+                $("#list").masonry('reloadItems');
+                $("#list").masonry('layout');
+                $(".more_records a").html("Посмотреть больше");
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
+                $(".more_records a").html("Посмотреть больше");
             }
         });
     });
 
-    
+
 
     $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
 
     var width_parent_statinfo = $(".statsHero .statInfo").parent().width() - 120;
     $(".statsHero .statInfo").css("max-width", width_parent_statinfo);
-
-    $(".nav_ul li:first-child a").addClass("active_nav_ul");
 
     $(".nav_ul li a").click(function() {
         $(".nav_ul li a").removeClass('active_nav_ul');
@@ -139,11 +170,9 @@ $(document).ready(function() {
 
     $(".table_nav_records .tab ul li:first-child").addClass("tab_active");
 
-    $(".table_nav_records .tab ul li").click(function() {
-        $(".table_nav_records .tab ul li").removeClass('tab_active');
-        $(this).addClass('tab_active');
+    $(".tab ul li").click(function() {
+        $(".tab ul li").removeClass('activeRecords');
+        $(this).addClass('activeRecords');
     });
 
 });
-
-

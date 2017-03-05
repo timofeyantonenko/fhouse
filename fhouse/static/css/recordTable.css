@@ -1,22 +1,59 @@
+@media screen and (min-width: 1170px) {
+    .tableInfo {
+        width: 70%;
+        margin-right: 20px;
+    }
+    .advertising {
+        width: calc(30% - 20px);
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .tableInfo {
+        width: 70%;
+        margin-right: 20px;
+    }
+    .advertising {
+        width: calc(30% - 20px);
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .tableInfo {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .advertising {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .tableInfo {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .advertising {
+        width: 100%;
+    }
+}
+
 .block_table {
     background-color: #fafafa;
     padding: 24px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    white-space:nowrap;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
 }
 
 .table_allnews_insection {
     width: 30%;
-
-    display:inline-block;
+    display: inline-block;
     margin-right: -4px;
 }
 
 .block_table .table_allnews_insection:nth-child(n+4) {
     margin-left: 5%;
 }
-
-
 
 .table_allnews_insection table {
     margin-bottom: 0px;
@@ -30,7 +67,7 @@
 .block_table h6 {
     margin-top: 0px;
     margin-bottom: 24px;
-    float:left;
+    float: left;
 }
 
 .tableRecord {
@@ -82,7 +119,7 @@ td > a:not([class]) {
 
 td > a:hover {
     text-decoration: none !important;
-    color: #e90052 !important;
+    color: #e62117 !important;
 }
 
 .fullRecord td > a {
@@ -90,7 +127,7 @@ td > a:hover {
 }
 
 .otherRecords .glyphicon {
-    color: #e90052;
+    color: #e62117;
 }
 
 thead {
@@ -149,9 +186,45 @@ thead {
 }
 
 
-/*
-@media screen and (min-width: 768px) {
-    #adv-search {
-        margin: 0 auto;
-    }
-}*/
+/*Head table record*/
+
+h1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 30px;
+    color: #000;
+    font-weight: 900;
+}
+
+h1 p {
+    margin: 0;
+    padding: 0;
+}
+.searchRecord {
+    width: 250px;
+    display: flex;
+    height: 30px;
+}
+
+.searchRecord textarea {
+    width: 225px;
+    height: 100%;
+    font-size: 15px;
+    overflow: hidden;
+    padding: 5px;
+    outline: none;
+    font-weight: 400 !important;
+}
+
+.searchRecord button {
+    width: 30px;
+    height: 30px;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    outline: none;
+}

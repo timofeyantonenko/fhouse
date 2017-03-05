@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     $(".user_profile").click(function() {
         $("#top_profile_menu").slideToggle("fast", function() {
-            if ( $(".user_profile").hasClass("active_top_profile_menu") ) {
+            if ($(".user_profile").hasClass("active_top_profile_menu")) {
                 $(".user_profile").removeClass("active_top_profile_menu");
             } else {
                 $(".user_profile").addClass("active_top_profile_menu");
@@ -27,3 +27,14 @@ $(document).ready(function() {
     });
 
 });
+
+$(".headerAllnews .btn").on("click", function() {
+    $("#offerNewsModal").modal('show')
+
+})
+
+
+$('.modal').on('shown.bs.modal', function() {
+    console.log("Хана")
+    // $("body.modal-open").removeAttr("style");
+})

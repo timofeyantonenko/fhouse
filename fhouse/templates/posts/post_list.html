@@ -7,10 +7,11 @@
     <div class="articles">
         <div class="headerAllnews">
             <h3>Моя лента</h3>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#offerNewsModal">
+            <button class="btn btn-primary" data-toggle="modal">
                 Предложить новость
             </button>
         </div>
+        <!-- Модальное окно для предложения новости -->
         <div id="offerNewsModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <header>
@@ -80,10 +81,13 @@
                                         </div>
                                         <div class="for_tag">
                                             {% for tag in user_tags %}
-                                            <a href="#" class="tegArticle"><span class="tag_chosen"></span><span
-                                                            class="additional_tag">{{ tag }}</span><span
-                                                            class="close_tag"><i class="fa fa-times"
-                                                                                 aria-hidden="true"></i></span></a> {% endfor %}
+                                            <a href="#" class="tegArticle tags__item js-tags-item">
+                                                <span class="tag_chosen"></span>
+                                                <span class="additional_tag">{{ tag }}</span>
+                                                <span class="close_tag">
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                </span>
+                                            </a>{% endfor H%}
                                         </div>
                                     </div>
                                     <div class="search_and_top_tags">

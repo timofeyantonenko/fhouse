@@ -1,24 +1,25 @@
 <div class="flex_container">
-{% for article in articles_list %}
-<div class="one_read_article">
-    <a href="#">
+    {% for article in articles_list %}
+    <a href="" class="one_read_article articleSrc">
         <div class="one_read_article_img">
             <img src="{{ article.image.url }}" alt="">
         </div>
-    </a>
-    <a href="#" class="articles_author">
-        <div class="author_img">
-            <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg" alt="">
+        <div class="relative_article">
+            <div class="author_img">
+                <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg" alt="">
+            </div>
+            <p>Мангура Дмитрий</p>
         </div>
-        <p>Мангура Дмитрий</p>
-    </a>
-    <div class="before_date"></div>
-    <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | {{ article.timestamp }}</span>
-    <a href="#">
+        <div class="info_time_article">
+            <div class="before_date"></div>
+            <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | {{ article.timestamp }}</span>
+        </div>
         <div class="one_read_article_info">
-            <h3>{{ article.article_title }}</h3> {{ article.article_description }}
+            <h3>{{ article.article_title }}</h3>
+            <p>
+                {{ article.article_description }}
+            </p>
         </div>
     </a>
-</div>
-{% endfor %}
+    {% endfor %}
 </div>

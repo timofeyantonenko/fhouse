@@ -258,6 +258,7 @@ $(document).ready(function() {
     });
 
     $(".more_article a").click(function(e) {
+        $(this).html("Загрузка...");
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
@@ -288,6 +289,7 @@ $(document).ready(function() {
                 content.append(data);
                 console.log('after data is here');
                 img_norm_size();
+                $(".more_article a").html("ПОСМОТРЕТЬ БОЛЬШЕ");
                 //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
             },
             error: function(xhr, status, error) {

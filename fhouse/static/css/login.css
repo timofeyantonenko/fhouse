@@ -1,121 +1,79 @@
-main {
-    background-color: #fafafa;
+.conteinerLogin {
     border: 1px solid #CCD1D9;
-    padding: 0 20px 20px;
+    background-color: #fafafa;
+    padding: 20px;
 }
 
-.formLogin {
+#id_country {
     width: 100%;
-}
-
-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    float: left;
-    font-family: "PremierSans-Bold", Arial, "Helvetica Neue", Helvetica, sans-serif;
-    width: 30%;
-}
-
-label span {
-    font-size: 1.2rem;
-    color: #E90052;
-    float: left;
-    clear: left;
-    width: 100%;
-    margin: 0.35em 0 0 0;
-    font-weight: 600;
-}
-
-form .forPlaceholder {
-    display: inline-block;
-    position: relative;
-    float: right;
-    width: 70%;
-}
-
-form [type="text"],
-form [type="file"],
-form [type="email"],
-form [type="password"] {
-    background: #E8E8E8;
-    border: none;
-    padding: 15px;
-    border-bottom: 1px solid #76766f;
-    width: 100%;
-    height: 47px;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    border-radius: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-}
-
-.formLogin {
-    margin-bottom: 1em;
-    width: 100%;
-    clear: both;
-    display: inline-block;
-    position: relative;
-}
-
-.forPlaceholder p {
-    font-weight: bold;
-    font-size: 0.8em;
-    margin-bottom: 0em;
 }
 
 select {
-    display: block;
+    height: 25px;
+}
+
+@media screen and (min-width: 1170px) {
+    .conteinerLogin {
+        width: 70%;
+        margin-right: 20px;
+    }
+    .advertising {
+        width: calc(30% - 20px);
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .conteinerLogin {
+        width: 70%;
+        margin-right: 20px;
+    }
+    .advertising {
+        width: calc(30% - 20px);
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .conteinerLogin {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .advertising {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .conteinerLogin {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .advertising {
+        width: 100%;
+    }
+}
+
+#uploadAvatar {
     width: 100%;
-    appearance: none;
-    background: none;
-    border: none;
-    padding: 15px 0;
-    border-radius: 0;
-    cursor: pointer;
-    background: url(http://sofaloca.com/themes/ypanel/ionicons/src/chevron-down.svg);
-    background-repeat: no-repeat;
-    background-position: right 8px;
-    background-size: 30px;
-    -webkit-appearance: none;
-}
-
-form [type="text"]:focus,
-form [type="email"]:focus,
-form [type="password"]:focus {
-    background: #fafafa;
-    border-width: 0 0 1px;
-    border-style: solid;
-    border-color: #E90052;
-}
-
-.forPlaceholderSmall {
-    width: 30%;
-    margin-right: 5%;
-    float: left;
-}
-
-.forPlaceholderSmall:nth-child(3) {
-    margin-right: 0px;
-}
-
-form select {
-    border-bottom: 1px solid #76766f;
+    height: 35px;
+    resize: none;
+    overflow: hidden;
+    outline: none;
+    padding: 6px;
 }
 
 .finishLogin {
-    padding: 4px 6px;
+    padding: 0px 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
     background-color: #38003C;
-    color: #fafafa;
-    font-size: 0.8em;
-    width: 40%;
-    text-align: center;
-    height: 32px;
-    line-height: 24px;
-    border-radius: 3px;
+    color: #fff;
+    width: 200px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    float: right;
 }
 
 .finishLogin span {
@@ -131,61 +89,175 @@ form select {
     color: #13cf00;
 }
 
-.file-upload {
+#mainH {
+    margin: 0 0 20px 0;
+    font-weight: 900;
+}
+
+
+/*Select */
+
+.choseDayBitrh {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.formLogin {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.formLogin:nth-last-child(n+2) {
+    margin-bottom: 15px;
+}
+
+@media screen and (min-width: 1170px) {
+    .choseDayBitrh select {
+        width: 32%;
+    }
+    .formLogin label {
+        width: 30%;
+    }
+    .formLogin>div,
+    .formLogin>select {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .choseDayBitrh select {
+        width: 32%;
+    }
+    .formLogin label {
+        width: 40%;
+    }
+    .formLogin>div,
+    .formLogin>select {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .choseDayBitrh select {
+        width: 32%;
+    }
+    .formLogin label {
+        width: 30%;
+    }
+    .formLogin>div,
+    .formLogin>select {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .choseDayBitrh select {
+        width: 100%;
+    }
+    .formLogin label {
+        width: 100%;
+    }
+    .formLogin>div,
+    .formLogin>select {
+        width: 100%;
+    }
+}
+
+
+/*Canvas */
+
+
+canvas {
+    width: 100%;
+}
+
+.imgCutting {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cutImg {
+    padding: 10px;
+}
+
+@media screen and (min-width: 1170px) {
+    .canvasParent,
+    .conteinerAva {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .canvasParent,
+    .conteinerAva {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .canvasParent,
+    .conteinerAva {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .canvasParent,
+    .conteinerAva {
+        width: 100%;
+    }
+}
+
+.uploadPhotoInput {
+    width: 100%;
+    height: 35px;
+    border: 1px solid silver;
+    background-color: red;
+    color: #fff;
     position: relative;
-    height: 47px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#dowPhoto {
     width: 100%;
-    cursor: pointer;
-    font-size: 14px;
-    font-family: sans-serif;
-    line-height: 1.42857143;
-    color: #555;
-}
-
-.file-upload:after {
-    content: "Обзор";
-    position: absolute;
-    display: block;
-    top: 7px;
-    right: 0;
-    z-index: 5;
-    background-color: #E8E8E8;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    color: #333;
-}
-
-.file-upload:hover:after {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad;
-}
-
-.file-upload:active:after {
-    outline: 0;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-}
-
-.file-upload:before {
-    content: attr(data-text);
-    position: absolute;
-    top: 7px;
-    left: 0;
-    z-index: 3;
-    display: block;
-    width: calc(100% - 40px);
-    padding: 6px 12px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-}
-
-.file-upload input {
-    position: absolute;
-    display: block;
-    top: 0;
     height: 100%;
-    z-index: 99;
-    width: 100%;
     opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.cutImg>input,
+.cutImg>textarea, 
+.cutImg>div {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.avatarImg {
+    max-width: 80%
+    margin: auto;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.avatarImg img {
+    width: 100%;
+}
+#cropBttn {
+    float: right;
+    margin-right: 20px;
+}
+.conteinerAva {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
 }

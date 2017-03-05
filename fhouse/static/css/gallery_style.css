@@ -8,13 +8,31 @@
     font-size: 13px;
 }
 
+#containner_all_gallery {
+    width: 100%;
+}
+
+.loading {
+    display: none;
+}
+
 
 /*Слайдер*/
 
 .head_nav {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     height: 43px;
     background-color: #fafafa;
+}
+
+#mobileAlnbumShow {
+    height: 100%;
+    padding: 0 10px;
+    align-items: center;
+    cursor: pointer;
+    background-color: yellow;
 }
 
 .slaider_gallery {
@@ -56,7 +74,6 @@
 }
 
 .nav_ul {
-    display: block;
     height: 43px;
     padding: 0px;
 }
@@ -65,12 +82,13 @@
     list-style: none;
     float: left;
     display: inline-block;
+    height: 100%;
 }
 
 .nav_ul li span {
     position: absolute;
-    top: 34px;
-    right: 14px;
+    top: calc(100% - 9px);
+    right: 10px;
     height: 12px;
     display: none;
 }
@@ -81,12 +99,46 @@
 
 .nav_ul li a {
     color: #434a54;
-    font-size: 12px;
     text-transform: uppercase;
-    display: block;
-    padding: 13px 14px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 10px;
     font-weight: 600;
     position: relative;
+}
+
+
+/*Nav responsive*/
+
+@media screen and (min-width: 1170px) {
+    .nav_ul li a {
+        font-size: 1.15vw;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .nav_ul li a {
+        font-size: 1.4vw;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .nav_ul li a {
+        font-size: 1.6vw;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .nav_ul li a {
+        font-size: 1.8vw;
+    }
+}
+
+@media screen and (max-width: 569px) {
+    .nav_ul li a {
+        font-size: 2vw;
+    }
 }
 
 .nav_ul li a:focus {
@@ -432,13 +484,6 @@ ul {
 
 /*Основные для слайдера и альбомов с прокруткой */
 
-#slaider_and_albums {
-    display: flex;
-    border: 1px solid #ccd1d9;
-    height: 560px;
-    overflow: hidden;
-}
-
 
 /*Прокрутка подгруженных альбомов */
 
@@ -446,18 +491,6 @@ ul {
     width: 100%;
     height: 1px;
     background-color: #383d41;
-}
-
-#slaider_foto {
-    width: calc(100% - 400px);
-    height: 100%;
-}
-
-#albums_right {
-    width: 400px;
-    height: 560px;
-    position: relative;
-    background-color: #fafafa;
 }
 
 .selected_album {
@@ -491,16 +524,19 @@ ul {
     font-size: 1.33em;
     font-weight: bold;
     line-height: 43px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.arrow-right:hover {
+    opacity: 1;
 }
 
 .list_albums {
     background-color: #0d0d0e;
     overflow-y: scroll;
-    height: 526px;
     overflow-y: auto;
     padding: 5px 0px;
-    /* border-bottom: 3px solid #38003c;
-    border-right: 3px solid #38003c;*/
 }
 
 .album_previews {
@@ -567,6 +603,9 @@ ul {
     overflow: hidden;
     float: left;
     margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .album_previews_img img {
@@ -634,7 +673,7 @@ ul {
 /*Плитка альбомов*/
 
 .tile_albums_foto {
-    padding: 60px 20px 20px 10px;
+    padding: 60px 20px 20px;
     background-color: #fafafa;
     position: relative;
     border: 1px solid #ccd1d9;
@@ -670,13 +709,9 @@ ul {
 }
 
 .photo_row {
-    max-height: 300px;
     display: flex;
     justify-content: center;
-    float: left;
-    margin-bottom: 10px;
     overflow: hidden;
-    padding-left: 10px;
 }
 
 
@@ -738,7 +773,7 @@ ul {
 
 .more_photo {
     cursor: pointer;
-    width: 32%;
+    width: 240px;
     position: absolute;
     bottom: 20px;
     left: 34%;
@@ -774,22 +809,6 @@ ul {
     justify-content: center;
 }
 
-#slaider_modal .modal-dialog {
-    height: 90vh !important;
-    width: 90vw !important;
-    margin: 5vh auto !important;
-    align-self: center;
-}
-
-.modal_photos {
-    height: 90vh;
-    width: calc(100% - 350px);
-    background-color: #1c1d1e;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
 .modal_footer {
     height: 70px;
     width: 100%;
@@ -820,7 +839,7 @@ ul {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: calc(90vh - 70px);
+    height: calc(100% - 70px);
     overflow: hidden;
 }
 
@@ -1044,27 +1063,15 @@ ul {
 }
 
 #container_img_in_slaider {
-    align-self: center;
     margin: auto;
 }
 
 #container_img_in_slaider img {
-    display: none;
+    display: block;
 }
 
 
 /*Footer modal*/
-
-.flex_modal {
-    display: flex;
-    flex-direction: row;
-    width: 90vw;
-}
-
-#comments_photo_modal {
-    width: 350px;
-    background-color: #fafafa;
-}
 
 .modal_footer {
     color: #fafafa;
@@ -1312,24 +1319,29 @@ ul {
 .head_comment_slider {
     height: 43px;
     width: 100%;
-    text-align: center;
     background-color: #0d0d0e;
     color: #fafafa;
-    line-height: 43px;
     font-size: 20px;
-    cursor: pointer;
     position: absolute;
     top: 0px;
     left: 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.head_comment_slider i {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.head_comment_slider i:hover {
+    opacity: 1;
 }
 
 .head_comment_slider_open {
-    z-index: 10000;
-}
-
-.head_comment_slider span {
-    font-size: 14px;
-    margin-left: 10px;
+    z-index: 10;
 }
 
 .block_comments {
@@ -1374,10 +1386,6 @@ ul {
 
 /*Ксс для комментрриев в модальном окне*/
 
-#comments_photo_modal .block_comments {
-    height: 90vh !important;
-}
-
 #comments_photo_modal .not_comments {
     display: flex;
     flex-direction: column;
@@ -1392,4 +1400,312 @@ ul {
 
 .in {
     padding-right: 0px !important;
+}
+
+
+/*Masonry*/
+
+#wrapper {
+    width: 100%;
+}
+
+#list {
+    width: calc(100% + 10px);
+    /* 990px */
+    overflow: hidden;
+    margin-left: -5px;
+    /* 15px */
+    margin-bottom: -1.875em;
+    /* 30px */
+}
+
+.item {
+    float: left;
+}
+
+@media screen and (min-width: 1170px) {
+    .item {
+        width: calc(33.333333% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+    .photo_row {
+        max-height: 300px;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .item {
+        width: calc(33.333333% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+    .photo_row {
+        max-height: 300px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .item {
+        width: calc(50% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+    .photo_row {
+        max-height: 250px;
+    }
+}
+
+@media screen and (min-width: 570px) and (max-width: 749px) {
+    .item {
+        width: calc(50% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+    .photo_row {
+        max-height: 250px;
+    }
+}
+
+@media screen and (max-width: 569px) {
+    .item {
+        width: calc(100% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}
+
+
+/*Adaptive slider */
+
+#albums_right {
+    position: relative;
+    background-color: #fafafa;
+}
+
+#slaider_and_albums {
+    display: flex;
+    border: 1px solid #ccd1d9;
+    overflow: hidden;
+}
+
+.list_albums {
+    height: calc(100% - 40px);
+}
+
+@media screen and (min-width: 1170px) {
+    .arrow-right {
+        display: none;
+    }
+    #slaider_and_albums {
+        height: 560px;
+    }
+    #slaider_foto {
+        width: calc(100% - 400px);
+        height: 100%;
+    }
+    #albums_right {
+        height: 100%;
+        width: 400px;
+    }
+    #mobileAlnbumShow {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .arrow-right {
+        display: none;
+    }
+    #slaider_and_albums {
+        height: 460px;
+    }
+    #slaider_foto {
+        width: calc(100% - 350px);
+        height: 100%;
+    }
+    #albums_right {
+        height: 100%;
+        width: 350px;
+    }
+    #mobileAlnbumShow {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    #slaider_and_albums {
+        height: 460px;
+        position: relative;
+    }
+    #slaider_foto {
+        width: 100%;
+        height: 100%;
+    }
+    #albums_right {
+        width: 400px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1000;
+        height: 100%;
+        display: none;
+    }
+    #mobileAlnbumShow {
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 570px) and (max-width: 749px) {
+    #slaider_and_albums {
+        /*Высота равняется 100vh - высота блока меню*/
+        height: calc(100vh - 80px);
+        position: relative;
+    }
+    #slaider_foto {
+        width: 100%;
+        height: 100%;
+    }
+    #albums_right {
+        height: 100%;
+        width: 400px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1000;
+        display: none;
+    }
+}
+
+@media screen and (max-width: 569px) {
+    #slaider_and_albums {
+        /*Высота равняется 100vh - высота блока меню*/
+        height: calc(100vh - 80px);
+        position: relative;
+    }
+    #slaider_foto {
+        width: 100%;
+        height: 100%;
+    }
+    #albums_right {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1000;
+        display: none;
+    }
+    #mobileAlnbumShow {
+        display: flex;
+    }
+}
+
+
+/*Slider responsive*/
+
+#slaider_modal .modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex_modal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal_photos {
+    background-color: #1c1d1e;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#comments_photo_modal {
+    background-color: #fafafa;
+}
+
+@media screen and (min-width: 1170px) {
+
+    #comments_photo_modal .block_comments {
+        height: 100% !important;
+    }
+    #slaider_modal .modal-dialog {
+        height: 90vh !important;
+        width: 90vw !important;
+    }
+    .flex_modal {
+        height: 90vh !important;
+        width: 90vw !important;
+    }
+    .modal_photos {
+        height: 100%;
+        width: calc(100% - 350px);
+    }
+    #comments_photo_modal {
+        width: 350px;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    #comments_photo_modal .block_comments {
+        height: 100% !important;
+    }
+    #slaider_modal .modal-dialog {
+        height: 500px !important;
+        width: 95vw !important;
+    }
+    .flex_modal {
+        height: 500px !important;
+        width: 95vw !important;
+    }
+    .modal_photos {
+        height: 100%;
+        width: 100%;
+    }
+    #comments_photo_modal {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    #slaider_modal .modal-dialog {
+        height: 400px !important;
+        width: 95vw !important;
+    }
+    .flex_modal {
+        height:400px !important;
+        width: 95vw !important;
+    }
+    .modal_photos {
+        height: 400px;
+        width: 100%;
+    }
+    #comments_photo_modal {
+        width: 100%;
+        
+    }
+}
+
+@media screen and (max-width: 749px) {
+    #slaider_modal .modal-dialog {
+        width: 100vw !important;
+    }
+    .flex_modal {
+        width: 100vw !important;
+    }
+    .modal_photos {
+        height: 100vh;
+        width: 100%;
+    }
+    #comments_photo_modal {
+        width: 100%;
+        
+    }
+}
+
+#beforeLoadModal,
+#beforeSliderLoading {
+    background-image: url(../../static/img/preload.gif);
+    background-size: 50px;
+    width: 50px;
+    height: 50px;
+    background-position: 0 0;
+    display: none;
 }

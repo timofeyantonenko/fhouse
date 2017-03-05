@@ -1,0 +1,585 @@
+.logoTeam {
+    background-image: url(../img/mainClubsLogo.png);
+}
+
+
+/*Standart logo*/
+
+.standartLogo {}
+
+.standartLogo .logoTeam {
+    background-size: 1600px;
+    height: 60px;
+    width: 60px;
+}
+
+
+/*logo 40*40*/
+
+.bigLogo {}
+
+.bigLogo .logoTeam {
+    background-size: calc(1600px / 0.6666);
+    height: 40px;
+    width: 40px;
+}
+
+
+/*logo 25*25*/
+
+.miniLogo {}
+
+.miniLogo .logoTeam {
+    background-size: calc(1600px / 0.41666667);
+    height: 25px;
+    width: 25px;
+}
+
+/*English logo 60*60*/
+
+.standartLogo .englandChampionat {
+    background-position: -10px -10px;
+}
+
+.standartLogo .burnley {
+    background-position: -10px -90px;
+}
+
+.standartLogo .AFCBournemouth {
+    background-position: -10px -170px;
+}
+
+.standartLogo .arsenal {
+    background-position: -10px -250px;
+}
+
+.standartLogo .chelsea {
+    background-position: -10px -330px;
+}
+
+.standartLogo .stokeCity {
+    background-position: -10px -410px;
+}
+
+.standartLogo .everton {
+    background-position: -10px -490px;
+}
+
+.standartLogo .crystalPalace {
+    background-position: -10px -570px;
+}
+
+.standartLogo .southampton {
+    background-position: -10px -650px;
+}
+
+.standartLogo .hullCity {
+    background-position: -10px -730px;
+}
+
+.standartLogo .leicesterCity {
+    background-position: -10px -810px;
+}
+
+.standartLogo .liverpool {
+    background-position: -10px -890px;
+}
+
+.standartLogo .sunderland {
+    background-position: -10px -970px;
+}
+
+.standartLogo .swanseaCity {
+    background-position: -10px -1050px;
+}
+
+.standartLogo .middlesbrough {
+    background-position: -10px -1130px;
+}
+
+.standartLogo .manchesterCity {
+    background-position: -10px -1210px;
+}
+
+.standartLogo .manchesterUnited {
+    background-position: -10px -1290px;
+}
+
+.standartLogo .watford {
+    background-position: -10px -1370px;
+}
+
+.standartLogo .tottenhamHotspur {
+    background-position: -10px -1450px;
+}
+
+.standartLogo .westBromwichAlbion {
+    background-position: -10px -1530px;
+}
+
+.standartLogo .westHamUnited {
+    background-position: -10px -1610px;
+}
+
+/*Spain logo 60*60*/
+
+.standartLogo .spainChampionat {
+    background-position: -90px -10px;
+}
+
+.standartLogo .eibar {
+    background-position: -90px -90px;
+}
+
+.standartLogo .athleticBilbao {
+    background-position: -90px -170px;
+}
+
+.standartLogo .realSociedad {
+    background-position: -90px -250px;
+}
+
+.standartLogo .atleticoMadrid {
+    background-position: -90px -330px;
+}
+
+.standartLogo .leganes {
+    background-position: -90px -410px;
+}
+
+.standartLogo .alaves {
+    background-position: -90px -490px;
+}
+
+.standartLogo .deportivo {
+    background-position: -90px -570px;
+}
+
+.standartLogo .FCBarcelona {
+    background-position: -90px -650px;
+}
+
+.standartLogo .malaga {
+    background-position: -90px -730px;
+}
+
+.standartLogo .granada {
+    background-position: -90px -810px;
+}
+
+.standartLogo .osasuna {
+    background-position: -90px -890px;
+}
+
+.standartLogo .celtaVigo {
+    background-position: -90px -970px;
+}
+
+.standartLogo .espanyol {
+    background-position: -90px -1050px;
+}
+
+.standartLogo .realBetis {
+    background-position: -90px -1130px;
+}
+
+.standartLogo .realMadrid {
+    background-position: -90px -1210px;
+}
+
+.standartLogo .sportingGijon {
+    background-position: -90px -1290px;
+}
+
+.standartLogo .FCSevilla {
+    background-position: -90px -1370px;
+}
+
+.standartLogo .valencia {
+    background-position: -90px -1450px;
+}
+
+.standartLogo .villarreal {
+    background-position: -90px -1530px;
+}
+
+.standartLogo .lasPalmas {
+    background-position: -90px -1610px;
+}
+
+/*Italy logo 60*60*/
+
+.standartLogo .italyChampionat {
+    background-position: -170px -10px;
+}
+
+.standartLogo .torino {
+    background-position: -170px -90px;
+}
+
+.standartLogo .fiorentina {
+    background-position: -170px -170px;
+}
+
+.standartLogo .roma {
+    background-position: -170px -250px;
+}
+
+.standartLogo .atlanta {
+    background-position: -170px -330px;
+}
+
+.standartLogo .chievo {
+    background-position: -170px -410px;
+}
+
+.standartLogo .bologna {
+    background-position: -170px -490px;
+}
+
+.standartLogo .cagliari {
+    background-position: -170px -570px;
+}
+
+.standartLogo .empoli {
+    background-position: -170px -650px;
+}
+
+.standartLogo .crotone {
+    background-position: -170px -730px;
+}
+
+.standartLogo .genoa {
+    background-position: -170px -810px;
+}
+
+.standartLogo .inter {
+    background-position: -170px -890px;
+}
+
+.standartLogo .juventus {
+    background-position: -170px -970px;
+}
+
+.standartLogo .lazio {
+    background-position: -170px -1050px;
+}
+
+.standartLogo .milan {
+    background-position: -170px -1130px;
+}
+
+.standartLogo .palermo {
+    background-position: -170px -1210px;
+}
+
+.standartLogo .pescara {
+    background-position: -170px -1290px;
+}
+
+.standartLogo .napoli {
+    background-position: -170px -1370px;
+}
+
+.standartLogo .sassuolo {
+    background-position: -170px -1450px;
+}
+
+.standartLogo .udinese {
+    background-position: -170px -1530px;
+}
+
+.standartLogo .sampdoria {
+    background-position: -170px -1610px;
+}
+
+
+/*Germany logo 60*60*/
+
+.standartLogo .germanyChampionat {
+    background-position: -250px -10px;
+}
+
+.standartLogo .hoffenheim {
+    background-position: -250px -90px;
+}
+
+.standartLogo .borussiaDortmund {
+    background-position: -250px -170px;
+}
+
+.standartLogo .schalke {
+    background-position: -250px -250px;
+}
+
+.standartLogo .wolfsburg {
+    background-position: -250px -330px;
+}
+
+.standartLogo .eintrachtFrankfurt {
+    background-position: -250px -410px;
+}
+
+.standartLogo .hamburgerSV {
+    background-position: -250px -490px;
+}
+
+.standartLogo .borussiaMonchengladbach {
+    background-position: -250px -570px;
+}
+
+.standartLogo .bayer {
+    background-position: -250px -650px;
+}
+
+.standartLogo .bayern {
+    background-position: -250px -730px;
+}
+
+.standartLogo .koln {
+    background-position: -250px -810px;
+}
+
+.standartLogo .mainz05 {
+    background-position: -250px -890px;
+}
+
+.standartLogo .herthaBSC {
+    background-position: -250px -970px;
+}
+
+.standartLogo .ingolstadt {
+    background-position: -250px -1050px;
+}
+
+.standartLogo .augsburg {
+    background-position: -250px -1130px;
+}
+
+.standartLogo .RBleipzig {
+    background-position: -250px -1210px;
+}
+
+.standartLogo .freiburg {
+    background-position: -250px -1290px;
+}
+
+.standartLogo .werder {
+    background-position: -250px -1370px;
+}
+
+.standartLogo .darmstadt98 {
+    background-position: -250px -1450px;
+}
+
+/*France logo 60*60*/
+
+.standartLogo .franceChampionat {
+    background-position: -330px -10px;
+}
+
+.standartLogo .metz {
+    background-position: -330px -90px;
+}
+
+.standartLogo .nantes {
+    background-position: -330px -170px;
+}
+
+.standartLogo .lille {
+    background-position: -330px -250px;
+}
+
+.standartLogo .marseille {
+    background-position: -330px -330px;
+}
+
+.standartLogo .dijon {
+    background-position: -330px -410px;
+}
+
+.standartLogo .saint-etienne {
+    background-position: -330px -490px;
+}
+
+.standartLogo .nancy {
+    background-position: -330px -570px;
+}
+
+.standartLogo .angers {
+    background-position: -330px -650px;
+}
+
+.standartLogo .nice {
+    background-position: -330px -730px;
+}
+
+.standartLogo .guingamp {
+    background-position: -330px -810px;
+}
+
+.standartLogo .bordeaux {
+    background-position: -330px -890px;
+}
+
+.standartLogo .lorient {
+    background-position: -330px -970px;
+}
+
+.standartLogo .lyon {
+    background-position: -330px -1050px;
+}
+
+.standartLogo .psg {
+    background-position: -330px -1130px;
+}
+
+.standartLogo .bastia {
+    background-position: -330px -1210px;
+}
+
+.standartLogo .caen {
+    background-position: -330px -1290px;
+}
+
+.standartLogo .rennes {
+    background-position: -330px -1370px;
+}
+
+.standartLogo .montpellier {
+    background-position: -330px -1450px;
+}
+
+.standartLogo .toulouse {
+    background-position: -330px -1530px;
+}
+
+.standartLogo .monaco {
+    background-position: -330px -1610px;
+}
+
+/*Russia logo 60*60*/
+
+.standartLogo .russiaChampionat {
+    background-position: -410px -10px;
+}
+
+.standartLogo .rubin {
+    background-position: -410px -90px;
+}
+
+.standartLogo .ural {
+    background-position: -410px -170px;
+}
+
+.standartLogo .spartak {
+    background-position: -410px -250px;
+}
+
+.standartLogo .anzhi {
+    background-position: -410px -330px;
+}
+
+.standartLogo .arsenalTula {
+    background-position: -410px -410px;
+}
+
+.standartLogo .cska {
+    background-position: -410px -490px;
+}
+
+.standartLogo .krasnodar {
+    background-position: -410px -570px;
+}
+
+.standartLogo .tom {
+    background-position: -410px -650px;
+}
+
+.standartLogo .amkar {
+    background-position: -410px -730px;
+}
+
+.standartLogo .lokomotiv {
+    background-position: -410px -810px;
+}
+
+.standartLogo .orenburg {
+    background-position: -410px -890px;
+}
+
+.standartLogo .terek {
+    background-position: -410px -970px;
+}
+
+.standartLogo .ufa {
+    background-position: -410px -1050px;
+}
+
+.standartLogo .kryliaSovetov {
+    background-position: -410px -1130px;
+}
+
+.standartLogo .rostov {
+    background-position: -410px -1210px;
+}
+
+.standartLogo .zenit {
+    background-position: -410px -1290px;
+}
+
+/*Ukrain logo 60*60*/
+
+.standartLogo .ukrainChampionat {
+    background-position: -490px -10px;
+}
+
+.standartLogo .olimpikDonetsk {
+    background-position: -490px -90px;
+}
+
+.standartLogo .chornomoretsOdesa {
+    background-position: -490px -170px;
+}
+
+.standartLogo .FColeksandriya {
+    background-position: -490px -250px;
+}
+
+.standartLogo .zirkaKropyvnytskyi {
+    background-position: -490px -330px;
+}
+
+.standartLogo .volynLutsk  {
+    background-position: -490px -410px;
+}
+
+.standartLogo .karpatyLviv {
+    background-position: -490px -490px;
+}
+
+.standartLogo .dynamoKyiv {
+    background-position: -490px -570px;
+}
+
+.standartLogo .stalKamianske {
+    background-position: -490px -650px;
+}
+
+.standartLogo .shakhtar {
+    background-position: -490px -730px;
+}
+
+.standartLogo .vorskla {
+    background-position: -490px -810px;
+}
+
+.standartLogo .dnipro {
+    background-position: -490px -890px;
+}
+
+.standartLogo .zoryaLuhansk {
+    background-position: -490px -970px;
+}
+
+

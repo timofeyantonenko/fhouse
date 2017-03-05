@@ -2,154 +2,161 @@
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'>
 <link rel="stylesheet" href='{% static "css/article_detail.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
 <script src="{% static 'js/post_detail.js'  %}"></script>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-7 colum">
-            <div class="article_detail_img">
-                {% if instance.image %}
-                <img src="{{ instance.image.url }}" class='img-responsive' /> {% endif %}
-                <div class="share_soc">
-                    <a href="#">
-                        <div class="share_vk">
-                            <i class="fa fa-vk" aria-hidden="true"></i>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="share_facebook">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="share_twitter">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="article_detail">
-                <div class="article_author">
-                    <a href="#">
-                        <div class="author_img">
-                            <img src="{{ request.user.avatar.url }}" alt="">
-                        </div>
-                    </a>
-                    <div class="author_name_date">
-                        <a href="">{{request.user.first_name}} {{request.user.last_name}}</a> {% if instance.draft %} {% endif %} {{instance.publish}}
-                    </div>
-                </div>
-                <div class="article_detail_content">
-                    <div class="article_title">
-                        <h2>{{title}}</h2>
-                    </div>
-                    <!-- Здесь должен быть автор -->
-                    <div>
-                        {% if instance.user.get_full_name %}
-                        <p>Author: {{ instance.user.get_full_name }}</p>
-                        {% endif %}
-                    </div>
-                    <!--  <p>
-            <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-            </p> -->
-                    <!-- Текст новости  -->
-                    <div class="article_text">
-                        {{ instance.get_markdown }}
-                    </div>
-                    <div class="footer_post_detail">
-                        <div class="teg_post_detail">
-                            Теги: {% for sub_tag in instance.tag.all %}
-                            <a href="#">{{ sub_tag.name }}</a> {% endfor %}
-                        </div>
-                    </div>
-                    <!-- Комментарии -->
-                </div>
-            </div>
-            <div class="comments_base">
+<main>
+    <div class="newsDetail">
+        <div class="article_detail_img">
+            {% if instance.image %}
+            <img src="{{ instance.image.url }}" class='img-responsive' /> {% endif %}
+            <div class="share_soc">
                 <a href="#">
-                    <div class="coments_author">
+                    <div class="share_vk">
+                        <i class="fa fa-vk" aria-hidden="true"></i>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="share_facebook">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="share_twitter">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="article_detail">
+            <div class="article_author">
+                <a href="#">
+                    <div class="author_img">
                         <img src="{{ request.user.avatar.url }}" alt="">
                     </div>
                 </a>
-                {% if request.user.is_authenticated %}
-                <form method="POST" action="."> {% csrf_token %}
-                    <div>
-                        <label for="{{comment_form.content.id_for_label}}">
-                            <p class="lead">Оставить комментарий</p>
-                        </label>
-                        <div class="forPlaceholder">
-                            {{ comment_form.content }}
-                        </div>
-                    </div>
-                    <input type="submit" value="Post comment" class="btn btn-default">
-                </form>
-                {% for field, errors in comment_form.errors.items %} {% for error in errors %}
-                <p>{{error}}</p>
-                {% endfor %}{% endfor %} {% else %}
-                <p>You must login to comment</p>
-                {% endif %}
+                <div class="author_name_date">
+                    <a href="">{{request.user.first_name}} {{request.user.last_name}}</a> {% if instance.draft %} {% endif %} {{instance.publish}}
+                </div>
             </div>
-            <div class="comments_base2" id="without_paddin">
-                {% for comment in comments %}
-                <div class="blockquote">
-                    <a href="#">
-                        <div class="coments_author">
-                            <img src="{{ comment.user.avatar.url }}" alt="">
-                        </div>
-                    </a>
-                    <div class="content_coment">
-                        <div class="coment_author_time">
-                            <a href="#">{{ comment.user.first_name }} {{ comment.user.last_name }}</a> {{ comment.timestamp|timesince }} ago
-                        </div>
-                        {{ comment.content }}
-                        <footer> {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class="comment-reply-btn" href="#">Ответить</a> </footer>
-                        <div class="comment-reply">
-                            {% for child_comment in comment.children %}
-                            <div class="blockquote">
-                                <p>{{ child_comment.content }}</p>
-                                <footer>{{ child_comment.user.first_name }} {{ child_comment.user.last_name }} | {{ child_comment.timestamp|timesince }} ago</footer>
-                            </div>
-                            {% endfor %} {% if request.user.is_authenticated %}
-                            <form method="POST" action="."> {% csrf_token %} {{ comment_form|crispy }}
-                                <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                                <input type="submit" value="Ответить" class="btn btn-default">
-                            </form>
-                            {% else %}
-                            <p>You must login to comment</p>
-                            {% endif %}
-                        </div>
+            <div class="article_detail_content">
+                <div class="article_title">
+                    <h2>{{title}}</h2>
+                </div>
+                <!-- Здесь должен быть автор -->
+                <div>
+                    {% if instance.user.get_full_name %}
+                    <p>Author: {{ instance.user.get_full_name }}</p>
+                    {% endif %}
+                </div>
+                <!--  <p>
+            <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+            </p> -->
+                <!-- Текст новости  -->
+                <div class="article_text">
+                    {{ instance.get_markdown }}
+                </div>
+                <div class="footer_post_detail">
+                    <div class="teg_post_detail">
+                        Теги: {% for sub_tag in instance.tag.all %}
+                        <a href="#">{{ sub_tag.name }}</a> {% endfor %}
                     </div>
                 </div>
-                {% endfor %}
-                <a href="#" class="show_all_coment">Показать все комментарии</a>
+                <!-- Комментарии -->
             </div>
         </div>
-        <div class="col-lg-5 colum">
-            <div class="article_detail_right">
-                <div class="one_read_article">
-                    <a href="#">
-                        <div class="one_read_article_img">
-                            <img src="http://images.indianexpress.com/2016/05/david-beckham-man-utd.jpg?w=820?w=544" alt="">
-                        </div>
-                        <div class="before_date"></div>
-                        <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | 28 0ctober</span>
-                        <div class="one_read_article_info">
-                            <h3>Месси точго лучше РОналду</h3> Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду
-                        </div>
-                    </a>
+        <div class="comments_base">
+            <a href="#">
+                <div class="coments_author">
+                    <img src="{{ request.user.avatar.url }}" alt="">
                 </div>
-                <div class="one_read_article">
-                    <a href="#">
-                        <div class="one_read_article_img">
-                            <img src="http://images.indianexpress.com/2016/05/david-beckham-man-utd.jpg?w=820?w=544" alt="">
+            </a>
+            {% if request.user.is_authenticated %}
+            <form method="POST" action="."> {% csrf_token %}
+                <div>
+                    <label for="{{comment_form.content.id_for_label}}">
+                        <p class="lead">Оставить комментарий</p>
+                    </label>
+                    <div class="forPlaceholder">
+                        {{ comment_form.content }}
+                    </div>
+                </div>
+                <input type="submit" value="Post comment" class="btn btn-default">
+            </form>
+            {% for field, errors in comment_form.errors.items %} {% for error in errors %}
+            <p>{{error}}</p>
+            {% endfor %}{% endfor %} {% else %}
+            <p>You must login to comment</p>
+            {% endif %}
+        </div>
+        <div class="comments_base2" id="without_paddin">
+            {% for comment in comments %}
+            <div class="blockquote">
+                <a href="#">
+                    <div class="coments_author">
+                        <img src="{{ comment.user.avatar.url }}" alt="">
+                    </div>
+                </a>
+                <div class="content_coment">
+                    <div class="coment_author_time">
+                        <a href="#">{{ comment.user.first_name }} {{ comment.user.last_name }}</a> {{ comment.timestamp|timesince }} ago
+                    </div>
+                    {{ comment.content }}
+                    <footer> {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class="comment-reply-btn" href="#">Ответить</a> </footer>
+                    <div class="comment-reply">
+                        {% for child_comment in comment.children %}
+                        <div class="blockquote">
+                            <p>{{ child_comment.content }}</p>
+                            <footer>{{ child_comment.user.first_name }} {{ child_comment.user.last_name }} | {{ child_comment.timestamp|timesince }} ago</footer>
                         </div>
-                        <div class="before_date"></div>
-                        <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | 28 0ctober</span>
-                        <div class="one_read_article_info">
-                            <h3>Месси точго лучше РОналду</h3> Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду
-                        </div>
-                    </a>
+                        {% endfor %} {% if request.user.is_authenticated %}
+                        <form method="POST" action="."> {% csrf_token %} {{ comment_form|crispy }}
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                            <input type="submit" value="Ответить" class="btn btn-default">
+                        </form>
+                        {% else %}
+                        <p>You must login to comment</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+            {% endfor %}
+            <a href="#" class="show_all_coment">Показать все комментарии</a>
         </div>
     </div>
-</div>
+    <div class="next_article_container">
+        <div class="one_read_article">
+            <a href="#">
+                <div class="one_read_article_img">
+                    <img src="http://images.indianexpress.com/2016/05/david-beckham-man-utd.jpg?w=820?w=544" alt="">
+                    <div class="infoAricleDate">
+                        <div class="before_date"></div>
+                        <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | 28 0ctober</span>
+                    </div>
+                </div>
+                <div class="one_read_article_info">
+                    <h3>Месси точго лучше РОналду</h3>
+                    <p>
+                        Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div class="one_read_article">
+            <a href="#">
+                <div class="one_read_article_img">
+                    <img src="http://images.indianexpress.com/2016/05/david-beckham-man-utd.jpg?w=820?w=544" alt="">
+                    <div class="infoAricleDate">
+                        <div class="before_date"></div>
+                        <span class="date_aritle"><strong>ПОСЛЕДНИЕ</strong> | 28 0ctober</span>
+                    </div>
+                </div>
+                <div class="one_read_article_info">
+                    <h3>Манчестер долго терпел унижения</h3>
+                    <p>
+                        Сколько можно, давайте уже играть. Сколько можно, давайте уже играть.
+                        Сколько можно, давайте уже играть. Сколько можно, давайте уже играть. Сколько можно, давайте уже играть.
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>
+</main>
 {% endblock content %}

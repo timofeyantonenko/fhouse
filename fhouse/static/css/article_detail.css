@@ -1,70 +1,67 @@
 /*Article right column*/
-
-.article_detail_right .one_read_article_info {
-    padding: 36px 15px 15px 15px;
-    font-size: 12px;
-}
-
-.article_detail_right .one_read_article_info h3 {
-    color: #1d71b9;
-    font-weight: 600;
-    margin-bottom: 5px;
-    font-size: 18px !important;
-}
-
-.article_detail_right .one_read_article_img {
-    width: 100%;
-    height: 150px;
-    overflow: hidden;
-}
-
-.article_detail_right .one_read_article_img img {
-    width: 100%;
-}
-
-.article_detail_right .one_read_article {
-    width: 32%;
+.one_read_article_img {
     position: relative;
-    border: 1px solid #CCD1D9;
-    margin-left: 2%;
+}
+.one_read_article_img {
     margin-bottom: 25px;
 }
-
-.article_detail_right .one_read_article:first-child {
-    margin-left: 0%;
-}
-
-.article_detail_right .before_date {
+.before_date {
     width: 45px;
     height: 16px;
     background-color: #ff7d00;
-    position: absolute;
-    top: 160px;
+    margin-right: 5px;
 }
 
-.article_detail_right .date_aritle {
-    position: absolute;
-    top: 160px;
-    left: 50px;
+.date_aritle {
     color: #656D78;
 }
 
-.article_detail_right .date_aritle:nth-child(2) {
-    left: 62.5px;
-}
-
-.article_detail_right {
+.infoAricleDate {
+    position: absolute;
+    top: calc(100% + 5px);
     display: flex;
-    flex-direction: row;
+    align-items: center;
+}
+.one_read_article_info h3 {
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
-.article_detail_right .one_read_article {
-    background-color: #fafafa;
-    flex: 1;
+.one_read_article_info p {
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    margin-bottom: 0;
 }
 
-.article_detail_right .one_read_article a {
-    color: #333;
+
+@media screen and (min-width: 1170px) {
+    .one_read_article_info h3 {
+        font-size: 1.5vw !important;
+    }
 }
 
-.row_one_article
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .one_read_article_info h3 {
+        font-size: 2.5vw !important;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .one_read_article_info h3 {
+        font-size: 3vw !important;
+    }
+}
+
+@media screen and (max-width: 749px) {
+.one_read_article_info h3 {
+        font-size: 4.5vw !important;
+    }
+}
