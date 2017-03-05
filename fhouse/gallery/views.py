@@ -1,5 +1,6 @@
 import json
 
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.core import serializers
 from django.http import JsonResponse
@@ -14,27 +15,42 @@ from rest_framework.response import Response
 
 @api_view(['GET'])
 def get_section_information(request):
-    count_of_photo_to_load = 15
+    count_of_photo_by_pagination = 9
     count_of_albums_to_load = 6
-    section = request.GET.get('section')
-    if not section:
-        section = 'Soccer'
-    if section:
-        albums = SectionAlbum.objects.filter(album_section__section_title=section).order_by('-updated')[
-                 :count_of_albums_to_load]
-        photos = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-updated')[:count_of_photo_to_load]
-        photo_serializer = AlbumPhotoSerializer(photos, many=True, context={'request': request})
-        album_serializer = SectionAlbumSerializer(albums, many=True, context={'request': request})
+
+    page = request.GET.get("page", 1)
+    # page = request.GET.page
+    # print("page is {}".format(page))
+    section = request.GET.get('section', "Soccer")
+    albums = SectionAlbum.objects.filter(album_section__section_title=section).order_by('-updated')
+    print("PAGE IS: {}".format(page))
+    photos = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-updated')
+    paginator = Paginator(photos, count_of_photo_by_pagination)  # Show n posts per page
+    photos = paginator.page(page)
+    photo_serializer = AlbumPhotoSerializer(photos, many=True, context={'request': request})
+    album_serializer = SectionAlbumSerializer(albums[
+             :count_of_albums_to_load], many=True, context={'request': request})
     return Response({"photo_list": photo_serializer.data, 'albums': album_serializer.data})
 
 
 @api_view(['GET'])
 def get_album_photos(request):
-    count_of_photo_to_load = 15
-    count_of_albums_to_load = 6
-    album_id = request.GET.get('album_id', 1)
-    album = SectionAlbum.objects.get(id=album_id)
-    photos = album.photos.order_by('-updated')[:count_of_photo_to_load]
+    count_of_photo_by_pagination = 9
+    page = request.GET.get("page", 1)
+    album_id = request.GET.get('album_id', -1)
+    section = request.GET.get('section', -1)
+
+    print("page is {}, album: {}".format(page, album_id))
+    if album_id != -1:
+        album = SectionAlbum.objects.get(id=album_id)
+        photos = album.photos.order_by('-updated')  # [:count_of_photo_to_load]
+        paginator = Paginator(photos, count_of_photo_by_pagination)  # Show n posts per page
+        photos = paginator.page(page)
+    else:
+        albums = SectionAlbum.objects.filter(album_section__section_title=section).order_by('-updated')
+        photos = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-updated')
+        paginator = Paginator(photos, count_of_photo_by_pagination)  # Show n posts per page
+        photos = paginator.page(page)
     photo_serializer = AlbumPhotoSerializer(photos, many=True, context={'request': request})
     return Response({"photo_list": photo_serializer.data})
 

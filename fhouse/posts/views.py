@@ -1,11 +1,19 @@
 import json
-from urllib.parse import quote_plus
+from urllib.request import urlopen
+from urllib.parse import quote_plus, urlparse
+
+from io import BytesIO
+
+from os.path import basename
+
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
+from django.core.files.temp import NamedTemporaryFile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
+from django.core.files.base import File
 # from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -26,18 +34,34 @@ def post_create(request):
     :param request:
     :return:
     """
-    if not (request.user.is_staff or request.user.is_superuser):
-        raise Http404
-    form = PostForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
-        messages.success(request, "Successfully created")
-        return HttpResponseRedirect(instance.get_absolute_url())
-    elif form.errors:
-        messages.error(request, "Fail of created")
+    # if not (request.user.is_staff or request.user.is_superuser):
+    #     raise Http404
+    post_content = request.POST.get("content")
+    post_image_url = request.POST.get("image_url")
+    print(request.POST.get("content"))
+    print(request.POST.get("image_url"))
+    if request.user.is_authenticated():
+        new_post = Post(
+            user=request.user,
+            draft=True,
+            content=post_content,
+        )
+        response = urlopen(post_image_url)
+        io = BytesIO(response.read())
+        new_post.image.save(quote_plus(post_image_url), File(io))
+
+        # new_post.image.url = post_image_url
+        new_post.save()
+        print(new_post)
+    # if form.is_valid():
+    #     instance = form.save(commit=False)
+    #     instance.save()
+    #     messages.success(request, "Successfully created")
+    #     return HttpResponseRedirect(instance.get_absolute_url())
+    # elif form.errors:
+    #     messages.error(request, "Fail of created")
     context = {
-        "form": form,
+        "form": post_content,
     }
     return render(request, "posts/post_form.html", context)
 
@@ -72,7 +96,8 @@ def post_detail(request, slug=None):  # retrieve
     if len(elder_additional_posts) < count_of_additional_posts and len(tagged_posts) != 0:
         print('I will load: ', count_of_additional_posts - elder_additional_posts.count())
         # from itertools import chain
-        prepare_additional_posts = list(elder_additional_posts) + list(tagged_posts[:(count_of_additional_posts - len(elder_additional_posts))])
+        prepare_additional_posts = list(elder_additional_posts) + list(
+            tagged_posts[:(count_of_additional_posts - len(elder_additional_posts))])
         print('I loaded: ', len(prepare_additional_posts))
     elif len(tagged_posts) != 0:
         prepare_additional_posts = list(elder_additional_posts[:count_of_additional_posts])
@@ -101,6 +126,7 @@ def post_detail(request, slug=None):  # retrieve
 
 
 def post_list(request):  # list items
+    print("IN POST LIST")
     today = timezone.now().date()
     try:
         user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
@@ -139,14 +165,17 @@ def post_list(request):  # list items
     # user_tags_ids = list(user_tags.values_list('id', flat=True))
     # all_tags = all_tags.exclude(id__in=user_tags_ids)
 
+    post_form = PostForm(request.POST or None, request.FILES or None)
+
     context = {
-        "post_list": queryset,
+        # "post_list": queryset,
         "title": "List",
         "page_request_var": page_request_var,
         "today": today,
         'user_tags': user_tags,
         'all_tags': all_tags,
         'page': page,
+        'post_form': post_form,
     }
     # return render(request, "posts/list_section.html", context)
     return render(request, "posts/post_list.html", context)
@@ -217,6 +246,7 @@ def show_tabs(request):
     :param request:
     :return:
     """
+    print("IN SHOW TABS")
     if not request.is_ajax():
         return post_list(request)
     tag = request.GET['tab']
@@ -230,6 +260,8 @@ def show_tabs(request):
         queryset_list = Post.objects.filter(tag=tag)
     else:
         queryset_list = Post.objects.active()  # .order_by("-timestamp")
+
+    queryset_list = Post.objects.get_only_active(queryset_list)
     today = timezone.now().date()
     paginator = Paginator(queryset_list, 5)  # Show 5 posts per page
     page_request_var = "page"

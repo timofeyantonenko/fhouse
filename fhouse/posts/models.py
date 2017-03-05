@@ -62,22 +62,28 @@ class PostManager(models.Manager):
     def active(self, *args, **kwargs):
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
+    def get_only_active(self, post_list):
+        return post_list.filter(draft=False).filter(publish__lte=timezone.now())
+
+    def non_activated(self, *args, **kwargs):
+        return super(PostManager, self).filter(draft=True)
+
 
 class Post(CommentedClass, LikedClass, ForeignContentClass):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
-    title = models.CharField(max_length=120)
-    slug = models.SlugField(unique=True)
+    title = models.CharField(max_length=120, null=True, blank=True)
+    slug = models.SlugField(unique=True, null=True, blank=True)
     image = models.ImageField(upload_to=upload_location,
                               null=True, blank=True,
                               height_field="height_field",
                               width_field="width_field")
 
-    tag = models.ManyToManyField(PostTag)
+    tag = models.ManyToManyField(PostTag, null=True, blank=True)
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
     content = models.TextField()
     draft = models.BooleanField(default=False)
-    publish = models.DateField(auto_now=False, auto_now_add=False)
+    publish = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
     read_time = models.IntegerField(default=0)  # models.TimeField(null=True, blank=True)  # assume minutes
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -85,10 +91,18 @@ class Post(CommentedClass, LikedClass, ForeignContentClass):
     objects = PostManager()
 
     def __unicode__(self):
-        return self.title
+        if self.title is not None:
+            post = self.title
+        else:
+            post = "No title"
+        return post
 
     def __str__(self):
-        return self.title
+        if self.title is not None:
+            post = self.title
+        else:
+            post = "No title"
+        return post
 
     @property
     def tags(self):

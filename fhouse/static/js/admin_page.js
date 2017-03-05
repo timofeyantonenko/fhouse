@@ -481,3 +481,4 @@ $('body').on("click", "#confirmDelTour", function() {
     $(".listOtherTeam").children("li").eq(iDelChamp).children(".seasonList").children("li").eq(iDelseason).children(".list-tour").children("li").eq(iDelTour).remove();
     updateTour();
 });
+
