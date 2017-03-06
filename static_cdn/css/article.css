@@ -13,6 +13,9 @@
 
 
 /*Чтиво*/
+.one_read_article a {
+    color: #333;
+}
 
 .author_img {
     height: 70px;

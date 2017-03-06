@@ -1,8 +1,8 @@
 .statsCard {
     background-color: #fafafa;
-    padding: 25px;
-    margin-bottom: 25px;
-    border: 1px solid #CCD1D9
+    padding: 20px 20px 20px 10px; 
+    border: 1px solid #CCD1D9;
+    border-top: 0px !important;
 }
 
 .title_and_all_albums {
@@ -23,14 +23,20 @@
     align-items: flex-start;
 }
 
+.statsCard .block_record {
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
 .thumbnails {
-    margin: 0px;
-    width: 32%;
-    padding: 0px;
-    margin-right: 2%;
+    /*width: 32%;*/
     vertical-align: top;
-    border:1px solid #ebebeb;
+    border: 1px solid #ebebeb;
     border-radius: 5px;
+}
+
+.last_records .thumbnails:nth-child(3) {
+    margin-right: 0 !important;
 }
 
 .thumbnails h3 {
@@ -38,13 +44,19 @@
     padding: 0.3em 0;
     font-size: 16px;
     font-weight: 600;
-    color:#1d71b9;
+    color: #1d71b9;
     padding: 1rem;
 }
 
+
 /*Stats her0*/
 
+.record_hero_img {
+    width: 132px !important;
+}
+
 .statsHero {
+    display: flex;
     padding: 10px;
     height: 150px;
     background: #eaeaea;
@@ -69,8 +81,12 @@
 
 .statsHero .statInfo {
     float: left;
-    position: relative;
     font-weight: 600;
+    flex-grow: 1;
+}
+
+.relative_hero {
+    position: relative;
 }
 
 .statsHero .statInfo a {
@@ -80,13 +96,11 @@
 .statsHero .statInfo span {
     color: #e90052;
     position: absolute;
-    font-size: 26px;
+    font-size: 18px;
     top: 100%;
     left: 0px;
     font-weight: 600;
 }
-
-
 
 .statsList {
     overflow: hidden
@@ -249,7 +263,6 @@
     color: #e90052;
 }
 
-
 .btn {
     margin: 1rem
 }
@@ -284,8 +297,6 @@ ul#otis {
 #caption {
     padding: 0px;
 }
-
-
 
 .add_record {
     background-color: #ebebeb;
@@ -340,6 +351,7 @@ ul#otis {
 
 .full_list_record:hover {
     background-color: #e90052;
+    color: #fafafa;
 }
 
 .full_list_record:hover a {
@@ -347,8 +359,7 @@ ul#otis {
     text-decoration: none;
 }
 
-
-#arrow_record {
+.arrow_record {
     float: right;
 }
 
@@ -377,112 +388,88 @@ ul#otis {
     background: #eee;
 }
 
+
 /*Навигация между пазделами рекордов*/
+
 
 /*Навигация между статьями */
 
-.navigation_between_records {
-    background-color: #292a2e;
-    color: #fff;
+.table > tbody > tr:first-child > td {
+    border-top: 0px !important;
+    font-weight: bold;
+    color: #666;
 }
 
-.nav_ul {
-    display: block;
-    height: 43px;
-    padding: 0px;
-    margin-bottom: 0px;
+.table_nav_records a {
+    color: #242424;
 }
 
-.nav_ul li {
-    list-style: none;
-    float: left;
-    display: inline-block;
-    position: relative;
+.table_nav_records td:nth-child(2+3n) {
+    padding-left: 0px !important;
 }
 
-.nav_ul li span {
-    position: absolute;
-    top: 34px;
-    right: 14px;
-    height: 12px;
-    display: none;
+.table_nav_records td:nth-child(1+3n) {
+    padding-right: 0px !important;
 }
 
-.nav_ul li a:hover span {
-    color: #fff;
-}
-
-.nav_ul li a {
-    color: #fff;
-    font-size: 12px;
-    text-transform: uppercase;
-    display: block;
-    padding: 13px 14px;
+.table_nav_records div:first-child {
+    height: 39px;
+    line-height: 39px;
+    margin-left: 20px;
+    color: #fafafa;
     font-weight: 600;
-    position: relative;
+    font-size: 16px;
 }
 
-.nav_ul li a:focus {
-    text-decoration: none;
+.table_nav_records tr:nth-child(2) {
+    background-color: #e4e4e4;
 }
 
-.nav_ul li a img {
-    height: 12px;
-    width: auto;
+.tab ul {
+    display: flex;
+    width: 100%;
+    padding: 0 50% 0 20px;
 }
 
-.active_nav_ul {
-    font-weight: 600;
-    text-decoration: none;
+.tab_active {
+    background-color: #fafafa !important;
+    color: #1d2f3e !important;
 }
 
-.active_nav_ul span {
-    display: block !important;
+.tab ul li {
+    background: #b60040;
     color: #fff;
-}
-
-.nav_ul li:nth-child(1) a:hover,
-ul li:nth-child(1) .active_nav_ul,
-.nav_ul li:nth-child(6) a:hover,
-ul li:nth-child(6) .active_nav_ul {
+    padding: 1.3rem 1rem;
+    display: block;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: 1.1rem;
+    position: relative;
     text-decoration: none;
-    background-color: #ec0000;
-    color: #fafafa;
+    text-align: center;
+    transition: all .2s;
+    border-radius: 3px 3px 0 0;
+    cursor: pointer;
 }
 
-.nav_ul li:nth-child(2) a:hover,
-ul li:nth-child(2) .active_nav_ul,
-.nav_ul li:nth-child(7) a:hover,
-ul li:nth-child(7) .active_nav_ul {
-    text-decoration: none;
-    background-color: #0091ff;
-    color: #fafafa;
+.tab ul li:hover {
+    background-color: #83002e;
 }
 
-.nav_ul li:nth-child(3) a:hover,
-ul li:nth-child(3) .active_nav_ul,
-.nav_ul li:nth-child(8) a:hover,
-ul li:nth-child(8) .active_nav_ul {
-    text-decoration: none;
-    background-color: #ff7d00;
-    color: #fafafa;
+.tab ul li:not(:last-child) {
+    margin-right: 10px;
 }
 
-.nav_ul li:nth-child(4) a:hover,
-ul li:nth-child(4) .active_nav_ul,
-.nav_ul li:nth-child(9) a:hover,
-ul li:nth-child(9) .active_nav_ul {
-    text-decoration: none;
-    background-color: #2446a3;
-    color: #fafafa;
+.table_nav_records {
+    height: 80px;
+    background-color: #e90052;
+    border-radius: 7px 7px 0 0;
 }
 
-.nav_ul li:nth-child(5) a:hover,
-ul li:nth-child(5) .active_nav_ul,
-.nav_ul li:nth-child(10) a:hover,
-ul li:nth-child(10) .active_nav_ul {
-    text-decoration: none;
-    background-color: #ffba14;
-    color: #fafafa;
-}
 
+/*Масонри рекорды */
+
+.persent-size {
+    width: 33.333333%;
+}

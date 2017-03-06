@@ -93,7 +93,6 @@ $(document).ready(function() {
                 data: ajax_data,
                 dataType: "html",
                 success: function(data) {
-                alert("opop");
                     var content = $('.articles_list');
                     content.html(data);
                     //                window.history.pushState("object or string", "Title", state);
@@ -357,7 +356,6 @@ $(document).ready(function() {
         $(this).parent().remove();
         //        var close_tag_text = $(this).parent().children(".tag_chosen").text();
         var close_tag_text = $(this).parent().children(".additional_tag").text();
-        alert(close_tag_text);
 
         $('.simple_tag').each(function(i) {
             // alert(close_tag_text)
@@ -588,7 +586,7 @@ function load_posts(url, tab, page){
             var content = $('.news_stream');
             content.html(data);
             $(".more_article a").prop('href', 2);
-            window.history.pushState("object or string", "Title", 'tabs?tab=' + tab);
+            window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tab);
         },
         error: function(xhr, status, error) {
             console.log(error, status, xhr);

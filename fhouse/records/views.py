@@ -87,7 +87,10 @@ class RecordList(ListView):
             except PageNotAnInteger:
                 tables = paginator.page(1)
             except EmptyPage:
-                tables = paginator.page(paginator.num_pages)
+                tables = []
+                # return context
+                print("This except")
+                # tables = paginator.page(paginator.num_pages)
         else:
             tables = RecordTable.objects.all()
             paginator = Paginator(tables, self.paginate_by)
@@ -95,8 +98,9 @@ class RecordList(ListView):
             try:
                 tables = paginator.page(page)
             except EmptyPage as e:
+                tables = []
                 # If page is out of range (e.g. 9999), deliver last page of results.
-                tables = paginator.page(paginator.num_pages)
+                # tables = paginator.page(paginator.num_pages)
         context['record_table_list'] = tables
         return context
 
