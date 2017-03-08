@@ -279,6 +279,7 @@ def show_tabs(request):
         # queryset = paginator.page(paginator.num_pages)
     print('page is:', page)
     context = {
+        "page": page,
         "post_list": queryset,
         "title": "List",
         "page_request_var": page_request_var,

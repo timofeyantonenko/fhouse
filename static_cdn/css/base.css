@@ -1,8 +1,24 @@
 /*Основные стили*/
 
+body {
+    font-family: Roboto, arial, sans-serif;
+    letter-spacing: normal;
+    color: #1d2f3e;
+    font-size: 14px;
+    background-color: #eaeaea;
+}
+
+html {
+    overflow-y: 
+}
+
 .row {
     margin-right: 0px !important;
     margin-left: 0px !important;
+}
+
+.colum:nth-child(2) {
+    float: right;
 }
 
 .navbar {
@@ -13,8 +29,12 @@
 .container {
     padding-left: 0px !important;
     padding-right: 0px !important;
-    margin-left: 100px !important;
-    margin-right: 100px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+body.modal-open {
+    overflow: hidden !important;
 }
 
 .containerForMenu {
@@ -28,36 +48,22 @@
     position: fixed;
 }
 
-.modal-open {
-    overflow: auto !important;
-}
-
-body {
-    font-family: Roboto, arial, sans-serif;
-    letter-spacing: normal;
-    color: #1d2f3e;
-    font-size: 1.4em;
-    background-color: #eaeaea;
-}
-
 .col-lg-1,
 .col-lg-2,
 .col-lg-3,
 .col-lg-4,
 .col-lg-5,
 .col-lg-6,
+.col-lg-11,
+.col-lg-12 {
+    padding: 0px !important;
+}
+
 .col-lg-7,
 .col-lg-8,
 .col-lg-9,
-.col-lg-10,
-.col-lg-11,
-.col-lg-12 {
-    padding: 0% !important;
-}
-
-.col-lg-4 {
-    margin-left: 2% !important;
-    width: 31.33333333%;
+.col-lg-10 {
+    padding: 0% 20px 0% 0% !important;
 }
 
 h1 {
@@ -71,177 +77,6 @@ h1 {
 
 .comment-reply {
     display: none;
-}
-
-
-/*footer*/
-
-.footer-distributed {
-    background-color: #38003c;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
-    box-sizing: border-box;
-    width: 100%;
-    text-align: left;
-    font: bold 16px sans-serif;
-    padding: 15px 50px;
-    margin-top: 25px;
-}
-
-.footer-distributed .footer-left,
-.footer-distributed .footer-center,
-.footer-distributed .footer-right {
-    display: inline-block;
-    vertical-align: top;
-}
-
-
-/* Footer left */
-
-.footer-distributed .footer-left {
-    width: 40%;
-}
-
-
-/* The company logo */
-
-.footer-distributed h3 {
-    color: #ffffff;
-    font: normal 36px 'Cookie', cursive;
-    margin: 0;
-}
-
-.footer-distributed h3 span {
-    color: #5383d3;
-}
-
-
-/* Footer links */
-
-.footer-distributed .footer-links {
-    color: #ffffff;
-    margin: 20px 0 12px;
-    padding: 0;
-}
-
-.footer-distributed .footer-links a {
-    display: inline-block;
-    line-height: 1.8;
-    text-decoration: none;
-    color: inherit;
-}
-
-.footer-distributed .footer-company-name {
-    color: #8f9296;
-    font-size: 14px;
-    font-weight: normal;
-    margin: 0;
-}
-
-
-/* Footer Center */
-
-.footer-distributed .footer-center {
-    width: 35%;
-}
-
-.footer-distributed .footer-center i {
-    background-color: #e90052;
-    color: #ffffff;
-    font-size: 25px;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 42px;
-    margin: 10px 15px;
-    vertical-align: middle;
-}
-
-.footer-distributed .footer-center i.fa-envelope {
-    font-size: 17px;
-    line-height: 38px;
-}
-
-.footer-distributed .footer-center p {
-    display: inline-block;
-    color: #ffffff;
-    vertical-align: middle;
-    margin: 0;
-}
-
-.footer-distributed .footer-center p span {
-    display: block;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 2;
-}
-
-.footer-distributed .footer-center p a {
-    color: #5383d3;
-    text-decoration: none;
-    ;
-}
-
-
-/* Footer Right */
-
-.footer-distributed .footer-right {
-    width: 20%;
-}
-
-.footer-distributed .footer-company-about {
-    line-height: 20px;
-    color: #92999f;
-    font-size: 13px;
-    font-weight: normal;
-    margin: 0;
-}
-
-.footer-distributed .footer-company-about span {
-    display: block;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.footer-distributed .footer-icons {
-    margin-top: 25px;
-}
-
-.footer-distributed .footer-icons a {
-    display: inline-block;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    background-color: #e90052;
-    border-radius: 2px;
-    font-size: 20px;
-    color: #ffffff;
-    text-align: center;
-    line-height: 35px;
-    margin-right: 3px;
-    margin-bottom: 5px;
-}
-
-
-/* If you don't want the footer to be responsive, remove these media queries */
-
-@media (max-width: 880px) {
-    .footer-distributed {
-        font: bold 14px sans-serif;
-    }
-    .footer-distributed .footer-left,
-    .footer-distributed .footer-center,
-    .footer-distributed .footer-right {
-        display: block;
-        width: 100%;
-        margin-bottom: 40px;
-        text-align: center;
-    }
-    .footer-distributed .footer-center i {
-        margin-left: 0;
-    }
 }
 
 
@@ -362,6 +197,7 @@ h1 {
     color: #fafafa;
     font-size: 20px;
     line-height: 50px;
+    cursor: pointer;
 }
 
 .loginScheckIn i:nth-child(1) {
@@ -384,21 +220,21 @@ h1 {
 
 /*Вход для юзера (Модальное окно)*/
 
-.modal-body {
+#LOGIN .modal-body {
     padding: 5%;
     font-size: 14px;
 }
 
-.modal-content {
+#LOGIN .modal-content {
     border-radius: 3px !important;
 }
 
-.modal-body h3 {
+#LOGIN .modal-body h3 {
     text-align: center;
     margin-top: 0px;
 }
 
-.modal-body form {
+#LOGIN .modal-body form {
     width: 90%;
     padding-left: 10%;
 }
@@ -415,7 +251,7 @@ h1 {
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
 }
 
-.modal-dialog {
+#LOGIN .modal-dialog {
     width: 25% !important;
     margin: 30px auto;
 }
@@ -519,10 +355,6 @@ form [type="password"] {
     appearance: none;
 }
 
-.modal-open {
-    padding-right: 0px !important;
-}
-
 
 /*Profile user */
 
@@ -585,7 +417,7 @@ form [type="password"] {
     border: 1px solid #CCD1D9;
     width: 200px;
     padding: 4px 0px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
     display: none;
 }
 
@@ -630,10 +462,46 @@ form [type="password"] {
     display: block;
 }
 
-.active_top_profile_menu  i {
+.active_top_profile_menu i {
     opacity: 1;
 }
 
 .relative_container {
     position: relative;
+}
+
+
+/*Инфа юзер правая колонка */
+
+.img_flex {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.user_date_img {
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.user_date_img img {
+    width: 100%;
+    height: auto;
+}
+
+.position_fixed {
+    position: absolute;
+}
+
+.fixed_col {
+    position: fixed;
+    bottom: 25px;
+}
+
+.fixed_col_top {
+    position: fixed;
 }
