@@ -121,7 +121,7 @@ var x2;
 var canvasElement;
 var reletionship = 1;
 
-$(window).load(function() {
+function implementResize(){
 
     var parentcanvasWidth = $(".canvasParent").width();
     var imageUploader;
@@ -506,10 +506,35 @@ $(window).load(function() {
         });
     });
 
-    // Add new photo to news if user add bad or not add 
+    // Add new photo to news if user add bad or not add
 
     $("#newPhotoAdd").on("click", function() {
         imgNewSrc = $("#newSrcPhoto").val();
         imageCropper.init();
     });
+}
+
+$(window).load(function() {
+    implementResize();
+});
+
+function publishPost(post_id, post_title, post_text, tags){
+    ajax_url = "";
+    $.ajax({
+        url: ajax_url,
+        data: ajax_data,
+        dataType: "json",
+        success: function(data) {
+        },
+        error: function(xhr, status, error) {
+//             console.log(error, status, xhr);
+        }
+    });
+
+}
+
+
+// Confirm delete tour
+$(document).on("click", ".btn-success", function() {
+    alert('d');
 });

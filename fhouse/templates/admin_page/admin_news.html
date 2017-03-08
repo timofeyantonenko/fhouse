@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
+<link rel="stylesheet" href='{% static "css/admin.css" %}'>
 
-<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, initial-scale = 1"></meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Админ.Новости</title>
-    <link rel="stylesheet" href="../../static/css/admin.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" />
-    <link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.css" type="text/css" />
-</head>
+
+{% endblock head_extra %} {% block content %}
+
 
 <body>
     <div class="container">
@@ -21,31 +17,31 @@
                 <div class="all_suggesting_news">
                     <nav>
                         <ul class="nav nav-pills navEventAdmin">
-                            <li role="presentation"><a href="admin_news.html">Новости<span class="new">(11)</span></a></li>
-                            <li role="presentation"><a href="admin_article.html">Статьи<span class="new">(22)</span></a></li>
-                            <li role="presentation"><a href="admin_bets.html">Прогнозы</a></li>
-                            <li role="presentation"><a href="admin_photo.html">Добавить фото <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
+                            <li role="presentation"><a href="/admin_page/news">Новости<span class="new">(11)</span></a></li>
+                            <li role="presentation"><a href="/admin_page/articles">Статьи<span class="new">(22)</span></a></li>
+                            <li role="presentation"><a href="/admin_page/bets">Прогнозы</a></li>
+                            <li role="presentation"><a href="/admin_page/gallery">Добавить фото <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
                         </ul>
                     </nav>
                     <h2>Предложенные новости</h2>
                     <!-- Cписок новостей -->
                     <div class="list_news">
+                        {% for post in posts_to_check %}
                         <div class="one_suggestion_news thumbnail">
                             <div class="imgConteinerSuggestion">
-                                <img src="https://pp.vk.me/c638922/v638922637/25ee5/2Ylzt-1aF1I.jpg" alt="">
+                                <img src="{{ post.image.url }}" alt="">
                             </div>
                             <div class="thumbNews">
                                 <div class="infoSuggestingPerson">
                                     <div class="photo-user">
-                                        <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg">
+                                        <img src="{{ post.user.avatar.url }}">
                                     </div>
                                     <div class="info-user">
-                                        <h4 class="media-heading"><span class="author_news">Василий Соловьев </span> </h4>
-                                        <div class="author_time">23.10.2012 19:21</div>
+                                        <h4 class="media-heading"><span class="author_news">{{ request.user.first_name }} {{ request.user.last_name }}</span> </h4>
+                                        <div class="author_time">{{ post.timestamp }}</div>
                                     </div>
                                 </div>
-                                <p class="text_suggesting_news">О мотивации... Самый целеустремлённый человек — это тот, который очень хочет в туалет. Все преграды кажутся несущественными. Согласитесь, смешно слышать фразы типа: Я описался, потому что: — не было времени сходить в туалет. — я был слишком уставший. — потерял надежду. Я не верил, что смогу добежать. — ну конечно. Он-то добежал. У него ноги вон какие длинные. — я слишком глуп, чтобы это сделать. — я уже 5 раз описывался. У меня никогда не получится добежать. — это явно не для меня. — я постучался в туалет — но мне не открыли. — мне не хватило мотивации. — у меня была депрессия. — у меня нет денег, я не могу себе этого позволить! — решил сходить завтра Часто ли вы идете к цели, как будто бежите к туалету?
-                                </p>
+                                <p class="text_suggesting_news">{{ post.content }}</p>
                                 <div class="more_read">Читать больше...</div>
                                 <p>
                                     <button class="btn btn-warning editNewsBtn" role="button">Редактировать</button>
@@ -53,29 +49,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="one_suggestion_news thumbnail">
-                            <div class="imgConteinerSuggestion">
-                                <img src="http://pre08.deviantart.net/79a5/th/pre/f/2016/251/8/5/messi_2016_super_copa_by_elsextetefcb-dagwgxt.jpg" alt="">
-                            </div>
-                            <div class="thumbNews">
-                                <div class="infoSuggestingPerson">
-                                    <div class="photo-user">
-                                        <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg">
-                                    </div>
-                                    <div class="info-user">
-                                        <h4 class="media-heading"><span class="author_news">Василий Соловьев </span> </h4>
-                                        <div class="author_time">23.10.2012 19:21</div>
-                                    </div>
-                                </div>
-                                <p class="text_suggesting_news">Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня. Если у вас не задалась неделя, вспомните о Садио Мане, который вылетел из 3-х кубков за 4 дня.
-                                </p>
-                                <div class="more_read">Читать больше...</div>
-                                <p>
-                                    <button class="btn btn-warning editNewsBtn" role="button">Редактировать</button>
-                                    <button class="btn btn-default deleteNewsBtn" role="button" data-toggle="modal" data-target="#delteNews">Удалить</button>
-                                </p>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="rightColumn">
@@ -239,14 +213,13 @@
             </div>
         </div>
     </div>
+
     <!-- Скрипты -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="../../static/js/admin_page.js"></script>
-    <script src="../../static/js/jquery-ui.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="../../static/js/edit_news.js"></script>
-</body>
 
-</html>
+    <script type="text/javascript" src="{% static 'js/admin_page.js'  %}"></script>
+    <script type="text/javascript" src="{% static 'js/edit_news.js'  %}"></script>
+{% endblock content %}
+

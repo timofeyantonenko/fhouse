@@ -147,8 +147,9 @@ $(document).ready(function() {
                 $(".more_records a").html("Посмотреть больше");
             },
             error: function(xhr, status, error) {
+                $(".more_records a").html("Конец");
                 console.log(error, status, xhr);
-                $(".more_records a").html("Посмотреть больше");
+                
             }
         });
     });

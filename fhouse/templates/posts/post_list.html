@@ -11,40 +11,7 @@
                 Предложить новость
             </button>
         </div>
-        <!-- Модальное окно для предложения новости -->
-        <div id="offerNewsModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <header>
-                    <h4>Предложить новость</h4>
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true" data-dismiss="modal"></span>
-                </header>
-                <div class="content">
-                    <div class="content_author">
-                        <div class="imgAuthorOfferNews">
-                            <img src="{{ request.user.avatar.url }}" alt="">
-                        </div>
-                        <div class="textOfferNews">
-                            <textarea class="type" placeholder="Текст новости..."></textarea>
-                        </div>
-                    </div>
-                    <form action="" class="offerNewsFormImg">
-                        <div class="dowPhoto">
-                            <h4>Загрузить фото</h4>
-                            <div class="downloadImg">
-                                <i class="fa fa-camera" aria-hidden="true"></i>
-                                <input type="file" value="Загрузить файл" class="dowFileImg" id="offerImgDownload">
-                            </div>
-                        </div>
-                        <textarea placeholder="Ссылка на изображения" class="linkImg"></textarea>
-                        <img src="" class="imgOfferNews">
-                    </form>
-                </div>
-                <footer>
-                    <button class="btn btn-not" data-dismiss="modal">Отмена</button>
-                    <button class="btn btn-ok" data-dismiss="modal">Предложить</button>
-                </footer>
-            </div>
-        </div>
+        {% include "posts/post_form.html" %}
         <div class="menu_individualNews">
             <ul>
                 <div class="changeNews menu_individualNews_active">
@@ -81,7 +48,7 @@
                                         </div>
                                         <div class="for_tag">
                                             {% for tag in user_tags %}
-                                            <a href="#" class="tegArticle tags__item js-tags-item">
+                                            <a href="#" class="tegArticle modalTag">
                                                 <span class="tag_chosen"></span>
                                                 <span class="additional_tag">{{ tag }}</span>
                                                 <span class="close_tag">
@@ -139,7 +106,7 @@
         <hr>
         <div class="articles_list">
             <div class="news_stream">
-                {% include "posts/list_section.html" %}
+
             </div>
         </div>
         <div class="more_article">

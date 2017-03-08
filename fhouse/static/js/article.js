@@ -174,11 +174,11 @@ $(document).ready(function() {
                 //            window.history.pushState("object or string", "Title", state);
             },
             error: function(xhr, status, error) {
+                $(".more_article a").html("Конец");
                 console.log(error, status, xhr);
                 if (status = 404) {
                     $(a_block).prop('href', -1);
-                }
-                $(".more_article a").html("ПОСМОТРЕТЬ БОЛЬШЕ");
+                }   
             }
         });
 
@@ -213,12 +213,11 @@ $(window).load(function() {
 
     // $('#list').masonry({ itemSelector: '.item' });
 
-    $(window).scroll(function() {
-        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            // load_more_articles();
-
-        }
-    });
+    // $(window).scroll(function() {
+    //     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    //         load_more_articles();
+    //     }
+    // });
 
 })
 

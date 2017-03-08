@@ -167,7 +167,7 @@ h3 {
 .menu_individualNews a:hover,
 .menu_individualNews a:active {
     text-decoration: none;
-    color: #F66301 !important;
+    /*color: #F66301 !important;*/
 }
 
 hr {
@@ -195,14 +195,14 @@ hr {
     visibility: visible;
 }
 
-.menu_individualNews li:hover .menu_individualNews,
+/*.menu_individualNews li:hover .menu_individualNews,
 .menu_individualNews li:active .menu_individualNews {
     color: #F66301;
-}
+}*/
 
-.menu_individualNews_active a {
+/*.menu_individualNews_active a {
     color: #F66301 !important;
-}
+}*/
 
 .menu_individualNews_active .hover_menu {
     visibility: visible;
@@ -214,11 +214,7 @@ hr {
     padding-left: 0;
 }
 
-.menu_individualNews a {
-    padding: 0px 5px;
-    font-weight: bold;
-    font-size: 14px;
-}
+
 
 .menu_individualNews li {
     display: block;
@@ -652,8 +648,8 @@ textarea {
 
 .tags__item:before {
     content: '';
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
+    border-left: 1px solid #abacad;
+    border-bottom: 1px solid #abacad;
     width: 16px;
     height: 16px;
     position: absolute;
@@ -670,7 +666,7 @@ textarea {
 }
 
 .tags__item>span {
-    border: 1px solid #000;
+    border: 1px solid #abacad;
     border-left: none;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -683,7 +679,37 @@ textarea {
     display: flex;
 }
 
+.modalTag {
+    padding: 4px 10px;
+    border-radius: 10px;
+    border: 1px solid silver;
+    margin: 0 2.5px;
+}
 
+.modalTag span {
+    margin: 0 2px; 
+}
+
+.modalTag {
+    color: #222;
+}
+
+.modalTag:hover,
+.modalTag:active,
+.modalTag:visited,
+.modalTag:focus, {
+    color: #222 !important;
+    text-decoration: none !important;
+}
+
+.modalTag i {
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.modalTag i:hover {
+    color: #e62117;
+}
 
 
 .more_tags {
@@ -785,8 +811,6 @@ textarea {
 .modal-footer {
     position: relative !important;
 }
-
-.footer_modal_button {}
 
 .modal_cancel,
 .modal_save {
@@ -994,11 +1018,10 @@ main {
         font-size: 2vw !important;
     }
     .articles {
-        width: 65%;
-        margin-right: 20px;
+        width: 100%;
     }
     .infoUserRight {
-        width: calc(35% - 20px);
+        display: none;
     }
     .oneArticle {
         height: 150px;

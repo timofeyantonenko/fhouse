@@ -24,9 +24,8 @@
                         <tr>
                             <th class="thTableRecord">#</th>
                             <th>Имя Фамилия</th>
-                            <th>
-                                Клуб</th>
-                            <th>Национальность</th>
+                            <th>Клуб</th>
+                            <th class="nationalHead"></th>
                             <th>Стат</th>
                         </tr>
                     </thead>
@@ -36,10 +35,20 @@
                             <th>{{forloop.counter}}</th>
                             <th><a href="">{{record.content_object.name}}</a></th>
                             <th>
-                                <a href=""><img class="imageTableRecord" src="{{record.content_object.club.image.url}}" alt="">{{record.content_object.club}}</a>
+                                <a href="" class="aTable">
+                                    <img class="imageTableRecord" src="{{record.content_object.club.image.url}}">
+                                    <p class="infoRecordTable">
+                                        {{record.content_object.club}}
+                                    </p>
+                                </a>
                             </th>
                             <th>
-                                <a href=""><img class="imageTableRecord" src="{{record.content_object.country.image.url}}" alt="">{{record.content_object.country}}</a>
+                                <a href="" class="aTable">
+                                    <img class="imageTableRecord" src="{{record.content_object.country.image.url}}">
+                                    <p class="infoRecordTable">
+                                        {{record.content_object.country}}
+                                    </p>
+                                </a>
                             </th>
                             <th>{{record.record_value}}</th>
                         </tr>
@@ -48,92 +57,94 @@
                 </table>
             </div>
             <!-- Дополнительные таблицы -->
-            <div class="table_allnews_insection">
-                <table class="table otherRecords">
-                    <thead class="recordNeartableRecord">
-                        <tr>
-                            <th>Клубы</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr class="fullRecord">
-                            <td><a href="#" class="ndsfds">Посмотреть все (15)</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="table_allnews_insection">
-                <table class="table otherRecords">
-                    <thead class="recordNeartableRecord">
-                        <tr>
-                            <th>Клубы</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr class="fullRecord">
-                            <td><a href="#" class="ndsfds">Посмотреть все (15)</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="table_allnews_insection">
-                <table class="table otherRecords">
-                    <thead class="recordNeartableRecord">
-                        <tr>
-                            <th>Клубы</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
-                        </tr>
-                        <tr class="fullRecord">
-                            <td><a href="#" class="ndsfds">Посмотреть все (15)</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="moreRecords">
+                <div class="table_allnews_insection">
+                    <table class="table otherRecords">
+                        <thead class="recordNeartableRecord">
+                            <tr>
+                                <th>Клубы</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr class="fullRecord">
+                                <td><a href="#" class="ndsfds">Посмотреть все (15)</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table_allnews_insection">
+                    <table class="table otherRecords">
+                        <thead class="recordNeartableRecord">
+                            <tr>
+                                <th>Клубы</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr class="fullRecord">
+                                <td><a href="#" class="ndsfds">Посмотреть все (15)</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table_allnews_insection">
+                    <table class="table otherRecords">
+                        <thead class="recordNeartableRecord">
+                            <tr>
+                                <th>Клубы</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Трофеи</a> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></td>
+                            </tr>
+                            <tr class="fullRecord">
+                                <td><a href="#" class="ndsfds">Посмотреть все (15)</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
