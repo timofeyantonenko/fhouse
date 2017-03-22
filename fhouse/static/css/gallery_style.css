@@ -24,19 +24,35 @@
     justify-content: space-between;
     width: 100%;
     height: 43px;
-    background-color: #fafafa;
+    background-color: #fff;
+    position: relative;
 }
 
-#mobileAlnbumShow {
+#mobileAlnbumShow,
+#sectionMobile {
     height: 100%;
     padding: 0 10px;
     align-items: center;
     cursor: pointer;
-    background-color: yellow;
+    background-color: #aa0a0c;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+#mobileAlnbumShow p,
+#sectionMobile p {
+    margin: 0;
+    padding: 0;
+}
+
+#mobileAlnbumShow i,
+#sectionMobile i {
+    margin-left: 10px;
 }
 
 .slaider_gallery {
-    background-color: #fafafa;
+    background-color: #fff;
     height: 552px;
     margin-bottom: 25px;
 }
@@ -74,14 +90,12 @@
 }
 
 .nav_ul {
-    height: 43px;
     padding: 0px;
+    display: flex;
 }
 
 .nav_ul li {
     list-style: none;
-    float: left;
-    display: inline-block;
     height: 100%;
 }
 
@@ -113,31 +127,31 @@
 
 @media screen and (min-width: 1170px) {
     .nav_ul li a {
-        font-size: 1.15vw;
+        font-size: 14px;
     }
 }
 
 @media screen and (min-width: 970px) and (max-width: 1169px) {
     .nav_ul li a {
-        font-size: 1.4vw;
+        font-size: 13px;
     }
 }
 
 @media screen and (min-width: 750px) and (max-width: 969px) {
     .nav_ul li a {
-        font-size: 1.6vw;
+        font-size: 12px;
     }
 }
 
 @media screen and (max-width: 749px) {
     .nav_ul li a {
-        font-size: 1.8vw;
+        font-size: 14px;
     }
 }
 
 @media screen and (max-width: 569px) {
     .nav_ul li a {
-        font-size: 2vw;
+        font-size: 14px;
     }
 }
 
@@ -150,43 +164,20 @@
     width: auto;
 }
 
-.nav_ul li:nth-child(1) a:hover,
-ul li:nth-child(1) .active_nav_ul {
+ul li .active_nav_ul {
     text-decoration: none;
-    background-color: #ec0000;
-    color: #fafafa;
+    background-color: #aa0a0c !important;
+    color: #fff !important;
 }
 
-.nav_ul li:nth-child(2) a:hover,
-ul li:nth-child(2) .active_nav_ul {
+.nav_ul li a:hover {
+    color: #aa0a0c;
+    background-color: #d7d7d7;
     text-decoration: none;
-    background-color: #0091ff;
-    color: #fafafa;
-}
-
-.nav_ul li:nth-child(3) a:hover,
-ul li:nth-child(3) .active_nav_ul {
-    text-decoration: none;
-    background-color: #ff7d00;
-    color: #fafafa;
-}
-
-.nav_ul li:nth-child(4) a:hover,
-ul li:nth-child(4) .active_nav_ul {
-    text-decoration: none;
-    background-color: #2446a3;
-    color: #fafafa;
-}
-
-.nav_ul li:nth-child(5) a:hover,
-ul li:nth-child(5) .active_nav_ul {
-    text-decoration: none;
-    background-color: #ffba14;
-    color: #fafafa;
 }
 
 .active_nav_ul {
-    color: #fafafa !important;
+    color: #fff !important;
     text-decoration: none;
 }
 
@@ -223,7 +214,7 @@ ul {
     position: absolute;
     top: 15px;
     right: 15px;
-    color: #fafafa;
+    color: #fff;
     opacity: 0.8;
     font-size: 30px;
     -moz-transition: all 0.2s ease-out;
@@ -247,7 +238,7 @@ ul {
 
 .foto_left,
 .foto_right {
-    color: #fafafa;
+    color: #fff;
     background-color: black;
     opacity: 0.5;
     position: absolute;
@@ -283,7 +274,7 @@ ul {
 
 .icon_for_album {
     position: absolute;
-    color: #fafafa;
+    color: #fff;
     font-size: 16px;
     top: -40px;
     left: 8px;
@@ -350,7 +341,7 @@ ul {
 .div_album {
     overflow: hidden;
     position: relative;
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 20px;
     border: 1px solid #CCD1D9;
 }
@@ -458,7 +449,7 @@ ul {
     display: inline-block;
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #fafafa;
+    background-color: #fff;
     border-right: 1px solid #CCD1D9;
     border-left: 1px solid #CCD1D9;
     border-bottom: 1px solid #CCD1D9;
@@ -501,7 +492,7 @@ ul {
     line-height: 43px;
     padding-left: 10px;
     padding-right: 10px;
-    color: #fafafa;
+    color: #fff;
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -510,7 +501,7 @@ ul {
 .quantity_album {
     flex-grow: 1;
     line-height: 43px;
-    color: #fafafa;
+    color: #fff;
     font-weight: bold;
     margin: 0px !important;
     float: left;
@@ -520,7 +511,7 @@ ul {
 .arrow-right {
     width: 30px;
     text-align: center;
-    color: #fafafa;
+    color: #fff;
     font-size: 1.33em;
     font-weight: bold;
     line-height: 43px;
@@ -559,7 +550,7 @@ ul {
 }
 
 .title_album_preview {
-    color: #fafafa;
+    color: #fff;
     position: relative;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -573,25 +564,37 @@ ul {
     font-weight: 600;
 }
 
+.album_slaider {
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-height: 20px;
+    max-height: 20px;
+    font-size: 18px;
+}
+
 .active_selected_album .discription_previewws_album {
-    color: #fafafa;
+    color: #fff;
 }
 
 .active_selected_album:hover {
     background-color: #383d41;
-    color: #fafafa;
+    color: #fff;
 }
 
 .active_selected_album h3 {
-    color: #fafafa !important;
+    color: #fff !important;
 }
 
 .active_selected_album:hover h3 {
-    color: #fafafa;
+    color: #fff;
 }
 
 .active_selected_album .info_preview_album span {
-    color: #fafafa;
+    color: #fff;
     font-weight: 500;
     opacity: 0.5;
 }
@@ -623,7 +626,7 @@ ul {
 .discription_previewws_album h3 {
     font-size: 18px;
     margin: 0px 0px 3px 0px;
-    color: #fafafa;
+    color: #fff;
     font-weight: bold;
 }
 
@@ -634,7 +637,7 @@ ul {
 .info_preview_album span {
     width: 100%;
     font-size: 12px;
-    color: #fafafa;
+    color: #fff;
     font-weight: 500;
     opacity: 1;
     margin-right: 5px;
@@ -664,32 +667,31 @@ ul {
 }
 
 .list_albums::-webkit-scrollbar-track {
-    border-left-color: #fafafa !important;
-    background: #fafafa !important;
-    -webkit-box-shadow: inset 0 0 1px #fafafa !important;
+    border-left-color: #fff !important;
+    background: #fff !important;
+    -webkit-box-shadow: inset 0 0 1px #fff !important;
 }
 
 
 /*Плитка альбомов*/
 
 .tile_albums_foto {
-    padding: 60px 20px 20px;
-    background-color: #fafafa;
+    padding: 20px;
+    background-color: #fff;
     position: relative;
-    border: 1px solid #ccd1d9;
+    border: 1px solid #afadad;
     border-top: 0px solid silver !important;
 }
 
 .section_album {
-    position: absolute;
-    left: 0px;
-    top: 20px;
+    margin-left: 25px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
 }
 
 .section_album span {
-    margin-right: 5px;
-    display: block;
-    float: left;
     font-size: 16px;
     color: #333;
     opacity: 1;
@@ -697,15 +699,18 @@ ul {
 }
 
 .color_line_album {
+    position: absolute;
+    left: -45px;
+    top: 0;
     height: 20px;
     width: 40px;
-    background-color: orange;
+    background-color: #e62117;
     margin-right: 10px !important;
 }
 
 .flex_container_albums {
     overflow: hidden;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 }
 
 .photo_row {
@@ -726,7 +731,7 @@ ul {
     cursor: pointer;
     position: relative;
     float: left;
-    z-index: 100;
+    z-index: 2;
 }
 
 .photo_row img:hover {
@@ -738,7 +743,7 @@ ul {
 }
 
 .photo_row:hover .img_info {
-    z-index: 101;
+    z-index: 3;
     right: 0 !important;
     left: inherit;
 }
@@ -760,7 +765,7 @@ ul {
     right: -50px;
     top: 15px;
     font-size: 18px;
-    color: #fafafa;
+    color: #fff;
     font-weight: 600;
     background-color: #000;
     padding: 2px 10px;
@@ -772,11 +777,9 @@ ul {
 }
 
 .more_photo {
+    margin: 20px auto 0;
     cursor: pointer;
     width: 240px;
-    position: absolute;
-    bottom: 20px;
-    left: 34%;
     height: 35px;
     line-height: 35px;
     display: block;
@@ -786,7 +789,7 @@ ul {
     font-size: 14px;
     color: #656D78;
     background: #fff;
-    border: 1px solid #CCD1D9;
+    border: 1px solid #afadad;
     border-radius: 2px;
 }
 
@@ -800,7 +803,7 @@ ul {
 
 .modal_comments {
     width: 300px;
-    background-color: #fafafa;
+    background-color: #fff;
     height: 100%;
 }
 
@@ -810,6 +813,8 @@ ul {
 }
 
 .modal_footer {
+    display: flex;
+    justify-content: space-between;
     height: 70px;
     width: 100%;
     background-color: #1c1d1e;
@@ -878,7 +883,7 @@ ul {
 .container_arow i {
     position: absolute;
     top: 45%;
-    color: #fafafa;
+    color: #fff;
     font-size: 40px;
     opacity: 0;
 }
@@ -898,7 +903,7 @@ ul {
 .number_foto_and_like {
     height: 10%;
     width: 100%;
-    background-color: #fafafa;
+    background-color: #fff;
     display: flex;
     padding: 0px 10%;
 }
@@ -907,7 +912,7 @@ ul {
     float: left;
     font-size: 18px;
     font-weight: 600;
-    /*color: #fafafa;*/
+    /*color: #fff;*/
     flex: 4;
 }
 
@@ -930,7 +935,7 @@ ul {
 .dislike {
     background-color: #000;
     border-radius: 50%;
-    color: #fafafa;
+    color: #fff;
     font-size: 24px;
     text-align: center;
     vertical-align: center;
@@ -1007,7 +1012,7 @@ ul {
     left: 0;
     top: 0;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 4;
 }
 
 .dialog_slaider #area_for_left_arrow_slaider:hover i {
@@ -1025,13 +1030,13 @@ ul {
     left: 50%;
     top: 0;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 4;
 }
 
 .dialog_slaider .container_arow_slaider i {
     position: absolute;
     top: 45%;
-    color: #fafafa;
+    color: #fff;
     font-size: 40px;
     opacity: 0;
 }
@@ -1074,17 +1079,13 @@ ul {
 /*Footer modal*/
 
 .modal_footer {
-    color: #fafafa;
+    color: #fff;
     font-size: 18px;
     font-weight: 600;
 }
 
 .modal_footer span {
     opacity: 0.5;
-}
-
-.modal_footer>div {
-    display: inline-block;
 }
 
 .modal_footer_right {
@@ -1099,7 +1100,7 @@ ul {
     height: 60px;
     background-repeat: no-repeat;
     background-color: #000;
-    color: #fafafa;
+    color: #fff;
     border-radius: 50%;
     line-height: 60px;
     text-align: center;
@@ -1147,6 +1148,8 @@ ul {
     font-size: 18px;
     font-weight: 600;
     padding: 5px 5px 5px 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .discription_photo_slaider {
@@ -1156,8 +1159,7 @@ ul {
 }
 
 .footer_slaider>div {
-    display: inline-block;
-    color: #fafafa;
+    color: #fff;
 }
 
 .slaider_footer_left span {
@@ -1165,18 +1167,17 @@ ul {
 }
 
 .slaider_footer_right {
-    float: right;
+    display: flex;
 }
 
 .slaider_photo_like>div {
-    display: inline-block;
     position: relative;
     margin-right: 10px;
     width: 50px;
     height: 50px;
     background-repeat: no-repeat;
     background-color: #000;
-    color: #fafafa;
+    color: #fff;
     border-radius: 50%;
     line-height: 50px;
     text-align: center;
@@ -1193,28 +1194,43 @@ ul {
 }
 
 .slaider_photo_like {
-    display: inline-block;
+    display: flex;
 }
 
 
 /*comment in slider*/
 
 .button_show_comments {
-    display: inline-block;
-    line-height: 50px;
+    display: flex;
+    align-items: center;
     margin-right: 10px;
     cursor: pointer;
+    color: #fff;
+    height: 100%;
 }
 
-.button_show_comments:hover {
-    text-decoration: underline;
+#slaider_foto .button_show_comments {
+    opacity: 0.5;
+}
+
+#slaider_foto .button_show_comments:hover {
+    opacity: 1;
+}
+
+.button_show_comments span {
+    margin-right: 2.5px;
+    margin-left: 2.5px;
+}
+
+.button_show_comments p {
+    margin-bottom: 0;
 }
 
 #comments_photo_slider {
     width: 100%;
     height: 100%;
-    background-color: #fafafa;
-    z-index: 1000;
+    background-color: #fff;
+    z-index: 4;
     display: none;
     margin-top: 43px;
 }
@@ -1232,7 +1248,7 @@ ul {
 }
 
 .comments_base {
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -1240,7 +1256,7 @@ ul {
 }
 
 .comments_base2 {
-    background-color: #fafafa;
+    background-color: #fff;
 }
 
 .coments_author {
@@ -1320,7 +1336,7 @@ ul {
     height: 43px;
     width: 100%;
     background-color: #0d0d0e;
-    color: #fafafa;
+    color: #fff;
     font-size: 20px;
     position: absolute;
     top: 0px;
@@ -1463,7 +1479,7 @@ ul {
     }
 }
 
-@media screen and (max-width: 569px) {
+.nav_ul li a @media screen and (max-width: 569px) {
     .item {
         width: calc(100% - 10px);
         margin: 0 5px 10px 5px;
@@ -1473,14 +1489,18 @@ ul {
 
 /*Adaptive slider */
 
+.responsiveNavGallery i {
+    font-size: 20px;
+}
+
 #albums_right {
     position: relative;
-    background-color: #fafafa;
+    background-color: #fff;
 }
 
 #slaider_and_albums {
     display: flex;
-    border: 1px solid #ccd1d9;
+    border: 1px solid #666;
     overflow: hidden;
 }
 
@@ -1542,7 +1562,7 @@ ul {
         position: absolute;
         right: 0;
         top: 0;
-        z-index: 1000;
+        z-index: 4;
         height: 100%;
         display: none;
     }
@@ -1554,7 +1574,7 @@ ul {
 @media screen and (min-width: 570px) and (max-width: 749px) {
     #slaider_and_albums {
         /*Высота равняется 100vh - высота блока меню*/
-        height: calc(100vh - 80px);
+        height: 400px;
         position: relative;
     }
     #slaider_foto {
@@ -1567,7 +1587,7 @@ ul {
         position: absolute;
         right: 0;
         top: 0;
-        z-index: 1000;
+        z-index: 4;
         display: none;
     }
 }
@@ -1588,11 +1608,55 @@ ul {
         position: absolute;
         right: 0;
         top: 0;
-        z-index: 1000;
+        z-index: 4;
         display: none;
     }
     #mobileAlnbumShow {
         display: flex;
+    }
+}
+
+
+/*Mobile section*/
+
+@media screen and (min-width: 750px) {
+    #sectionMobile {
+        display: none;
+    }
+    .nav_ul {
+        display: flex !important;
+    }
+    .nav_ul {
+        height: 43px;
+    }
+}
+
+.nav_ul li {
+    border-right: 1px solid #666;
+}
+
+@media screen and (max-width: 749px) {
+    #sectionMobile {
+        display: flex;
+    }
+    .nav_ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 43px;
+        z-index: 10;
+        width: 400px;
+        background-color: #fff;
+        max-width: 100%;
+    }
+    .nav_ul li {
+        width: 100%;
+        background-color: #fff;
+        border-top: 1px solid #666;
+        height: 43px;
+    }
+    #mobileAlnbumShow {
+        display: flex !important;
     }
 }
 
@@ -1603,6 +1667,21 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+#closeModalDialog {
+    position: absolute;
+    font-size: 25px;
+    opacity: 0.6;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#closeModalDialog:hover {
+    opacity: 1;
 }
 
 .flex_modal {
@@ -1618,11 +1697,10 @@ ul {
 }
 
 #comments_photo_modal {
-    background-color: #fafafa;
+    background-color: #fff;
 }
 
 @media screen and (min-width: 1170px) {
-
     #comments_photo_modal .block_comments {
         height: 100% !important;
     }
@@ -1655,6 +1733,10 @@ ul {
         height: 500px !important;
         width: 95vw !important;
     }
+    #closeModalDialog {
+        right: 2.5vw;
+        top: 40px;
+    }
     .modal_photos {
         height: 100%;
         width: 100%;
@@ -1666,37 +1748,47 @@ ul {
 
 @media screen and (min-width: 750px) and (max-width: 969px) {
     #slaider_modal .modal-dialog {
-        height: 400px !important;
+        height: 450px !important;
         width: 95vw !important;
     }
     .flex_modal {
-        height:400px !important;
+        height: 450px !important;
         width: 95vw !important;
     }
+    #closeModalDialog {
+        right: 2.5vw;
+        top: 40px;
+    }
     .modal_photos {
-        height: 400px;
+        height: 450px;
         width: 100%;
     }
     #comments_photo_modal {
         width: 100%;
-        
     }
 }
 
 @media screen and (max-width: 749px) {
+    #containner_all_gallery {
+        width: 95% !important;
+        margin: auto;
+    }
     #slaider_modal .modal-dialog {
-        width: 100vw !important;
+        width: 95vw !important;
     }
     .flex_modal {
-        width: 100vw !important;
+        width: 95vw !important;
+    }
+    #closeModalDialog {
+        right: 2.5vw;
+        top: 20px;
     }
     .modal_photos {
-        height: 100vh;
+        height: 450px;
         width: 100%;
     }
     #comments_photo_modal {
         width: 100%;
-        
     }
 }
 
@@ -1708,4 +1800,84 @@ ul {
     height: 50px;
     background-position: 0 0;
     display: none;
+}
+
+
+/*Modal slider responsive*/
+
+@media screen and (min-width: 1170px) {
+    #closeModalDialog {
+        top: 10px;
+        right: 10px;
+        color: #fff;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    #closeModalDialog {
+        color: #222;
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        z-index: 1000;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    #closeModalDialog {
+        color: #222;
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        z-index: 1000;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    #closeModalDialog {
+        color: #222;
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        z-index: 1000;
+    }
+}
+
+
+/*Count photo*/
+
+.countPhoto,
+.countPhotoModal {
+    display: flex;
+}
+
+.countPhoto p,
+.countPhotoModal p {
+    margin: 0 5px 0;
+}
+
+.section_album p {
+    margin: 0;
+}
+
+.flex {
+    display: flex;
+}
+
+
+/*Comment item*/
+
+@media screen and (min-width: 750px) {
+    .commentItem span {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .commentItem p {
+        display: none;
+    }
 }

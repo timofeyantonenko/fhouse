@@ -76,6 +76,7 @@ $(document).ready(function() {
 
     //tab click
     $(".table_nav_records .tab ul li").click(function(e) {
+        $(".more_records a").html("Посмотреть больше");
         if ($(this).hasClass('tab_active')) {
             return;
         }
@@ -114,7 +115,9 @@ $(document).ready(function() {
         });
     });
     $(".more_records a").click(function(e) {
-        $(this).html("Загрузка...");
+        if ( $(".more_records a").text() != "Конец") {
+          $(this).html("Загрузка...");  
+        }
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
@@ -149,7 +152,6 @@ $(document).ready(function() {
             error: function(xhr, status, error) {
                 $(".more_records a").html("Конец");
                 console.log(error, status, xhr);
-                
             }
         });
     });

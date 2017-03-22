@@ -38,18 +38,6 @@ $(document).ready(function() {
         $(this).addClass('activeRecords');
     });
 
-    $(".linkImg").keyup(function() {
-        // downloadLinkTosrc();
-        var srcNew = $(this).val();
-        $('.imgOfferNews').attr('src', srcNew);
-        console.log("Privet")
-    })
-
-    // Download photo
-    $("#offerImgDownload").change(function() {
-        readURLoffer(this);
-    });
-
     // К-во элементов для подгрузки
     var dowloadItem;
     itemDownload();
@@ -96,6 +84,7 @@ $(document).ready(function() {
 
     //tab click
     $(".nav_ul li a").click(function(e) {
+        $(".more_article a").html("ПОСМОТРЕТЬ БОЛЬШЕ");
         if ($(this).hasClass('active_nav_ul')) {
             return;
         }
@@ -138,7 +127,9 @@ $(document).ready(function() {
 
     });
     $(".more_article a").click(function(e) {
-        $(this).html("Загрузка...")
+        if( $(this).text() != "Конец") {
+          $(this).html("Загрузка...")  
+        }
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
@@ -287,19 +278,4 @@ function itemDownload() {
     $(".more_records a").attr("href", dowloadItem);
 }
 
-// Download photo
-function readURLoffer(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('.imgOfferNews').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-    $(".linkImg").val("");
-}
 
-function downloadLinkTosrc() {
-    var srcNew = $(this).val();
-    $('.imgOfferNews').attr('src', srcNew);
-}

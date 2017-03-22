@@ -1,6 +1,6 @@
 .conteinerLogin {
     border: 1px solid #CCD1D9;
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 20px;
 }
 
@@ -66,10 +66,9 @@ select {
     font-weight: 700;
     text-transform: uppercase;
     font-size: 12px;
-    background-color: #38003C;
     color: #fff;
     width: 200px;
-    height: 30px;
+    height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -79,10 +78,6 @@ select {
 .finishLogin span {
     float: right;
     line-height: 24px;
-}
-
-.finishLogin:hover {
-    background-color: #13cf00;
 }
 
 .unimportant {
@@ -110,6 +105,15 @@ select {
     flex-wrap: wrap;
 }
 
+.formLogin label {
+    display: flex;
+    flex-direction: column;
+}
+
+.formLogin label span {
+    color: #e62117;
+}
+
 .formLogin:nth-last-child(n+2) {
     margin-bottom: 15px;
 }
@@ -132,7 +136,7 @@ select {
         width: 32%;
     }
     .formLogin label {
-        width: 40%;
+        width: 30%;
     }
     .formLogin>div,
     .formLogin>select {
@@ -168,7 +172,6 @@ select {
 
 
 /*Canvas */
-
 
 canvas {
     width: 100%;
@@ -235,15 +238,14 @@ canvas {
 }
 
 .cutImg>input,
-.cutImg>textarea, 
+.cutImg>textarea,
 .cutImg>div {
     margin-bottom: 10px;
     width: 100%;
 }
 
 .avatarImg {
-    max-width: 80%
-    margin: auto;
+    max-width: 80% margin: auto;
     overflow: hidden;
     border-radius: 100%;
 }
@@ -251,13 +253,307 @@ canvas {
 .avatarImg img {
     width: 100%;
 }
+
 #cropBttn {
     float: right;
     margin-right: 20px;
 }
+
 .conteinerAva {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+}
+
+
+/*Login (not register)*/
+
+#signIn {
+    padding: 20px;
+}
+
+#signIn h1 {
+    font-size: 30px;
+    font-weight: 900;
+    color: #000;
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.signInhelp {
+    display: flex;
+    height: 40px;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.signInhelp:nth-last-child(n+2) {
+    margin-bottom: 5px;
+}
+
+.signInhelp h3 {
+    margin: 0;
+    line-height: 40px;
+    margin-left: 20px;
+    font-size: 22px;
+}
+
+.iconSign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    font-size: 25px;
+}
+
+
+/*Social login*/
+
+.fb {
+    background-color: #3b5998;
+    border: 1px solid #324b82;
+}
+
+.fb:hover {
+    background: linear-gradient( to bottom, #3b5998, #324b82);
+}
+
+.fb .iconSign {
+    border-right: 1px solid #324b82;
+}
+
+.vk {
+    background-color: #507299;
+    border: 1px solid #305075;
+}
+
+.vk:hover {
+    background: linear-gradient( to bottom, #507299, #305075);
+}
+
+.vk .iconSign {
+    border-right: 1px solid #305075;
+}
+
+.gogle {
+    background-color: #dd4b39;
+    border: 1px solid #be4030;
+}
+
+.gogle:hover {
+    background: linear-gradient( to bottom, #dd4b39, #be4030);
+}
+
+.gogle .iconSign {
+    border-right: 1px solid #be4030;
+}
+
+.odnoklasniki {
+    background-color: #ee8208;
+    border: 1px solid #c77110;
+}
+
+.odnoklasniki:hover {
+    background: linear-gradient( to bottom, #ee8208, #c77110);
+}
+
+.odnoklasniki .iconSign {
+    border-right: 1px solid #c77110;
+}
+
+.tw {
+    background-color: #55acee;
+    border: 1px solid #4893cc;
+}
+
+.tw:hover {
+    background: linear-gradient( to bottom, #55acee, #4893cc);
+}
+
+.tw .iconSign {
+    border-right: 1px solid #4893cc;
+}
+
+.loginBtn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.content h2 {
+    font-size: 28px;
+    font-weight: 900;
+    margin-top: 0;
+}
+
+.loginBtn a {
+    color: #222;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginBtn a:hover,
+.loginBtn a:focus,
+.loginBtn a:active,
+.loginBtn a:visited {
+    color: #222;
+    text-decoration: none;
+}
+
+.btnLogin,
+.finishLogin {
+    background: linear-gradient( to bottom, #55acee, #3e83b6);
+    color: #fff !important;
+    border-color: #55acee;
+}
+
+.btnLogin:hover,
+.btnLogin:focus,
+.btnLogin:active,
+.finishLogin:hover,
+.finishLogin:focus,
+.finishLogin:active {
+    background: linear-gradient( to bottom, #55acee, #2e5b7d);
+    color: #fff;
+    border-color: #55acee;
+}
+
+.btnLogin,
+.btnRegister {
+    height: 40px;
+    width: calc( 50% - 5px);
+}
+
+@media screen and (min-width: 1170px) {
+    #signIn {
+        width: 800px;
+        margin: auto;
+        border: 1px solid #afadad;
+    }
+    .loginWith,
+    .simpleLogin {
+        width: 50%;
+    }
+    .loginWith {
+        padding-right: 20px;
+        border-right: 1px solid silver;
+    }
+    .simpleLogin {
+        padding-left: 20px;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    #signIn {
+        width: 800px;
+        margin: auto;
+        border: 1px solid #afadad;
+    }
+    .loginWith,
+    .simpleLogin {
+        width: 50%;
+    }
+    .loginWith {
+        padding-right: 20px;
+        border-right: 1px solid silver;
+    }
+    .simpleLogin {
+        padding-left: 20px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    #signIn {
+        width: 100%;
+        border: 1px solid #afadad;
+    }
+    .loginWith,
+    .simpleLogin {
+        width: 50%;
+    }
+    .loginWith {
+        padding-right: 20px;
+        border-right: 1px solid silver;
+    }
+    .simpleLogin {
+        padding-left: 20px;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    #signIn {
+        width: 100%;
+    }
+    .loginWith,
+    .simpleLogin {
+        width: 100%;
+    }
+    .loginWith {
+        order: 2;
+    }
+    .simpleLogin {
+        order: 1;
+        margin-bottom: 20px;  
+    }
+    #signIn h1 {
+        margin-bottom: 20px;
+    }
+}
+
+/*Textarea login*/
+
+input[type="text"],
+input[type="password"] {
+    background-color: #fff;
+   border: 1px solid #cccccc; 
+   border-radius: 3px; 
+   -webkit-border-radius: 3px; 
+   -moz-border-radius: 3px; 
+   -khtml-border-radius: 3px; 
+   background: #ffffff !important; 
+   outline: none !important; 
+   color: #cccccc; 
+}
+
+input[type="text"]:focus,
+input[type="password"] {
+  border: 1px solid #b9b6b6;
+  color: #222;
+}
+
+.simpleLogin label {
+    font-size: 14px !important;
+    text-transform: uppercase;
+}
+
+/*Media for border main*/
+
+@media screen and (min-width: 970px) {
+    .conteinerLogin {
+        border: 1px solid #afadad;
+    }
+    body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 969px) {
+    .conteinerLogin {
+        border: 0px solid #666;
+    }
+    body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
 }

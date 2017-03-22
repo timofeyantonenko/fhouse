@@ -1,4 +1,4 @@
-<div id="offerNewsModal" class="modal fade" role="dialog">
+<div id="offerArticleModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <header>
             <h4>Предложить новость</h4>
@@ -9,27 +9,25 @@
                 <div class="imgAuthorOfferNews">
                     <img src="{{ request.user.avatar.url }}" alt="">
                 </div>
-                <div class="textOfferNews">
-                    {{ post_form.content }}
-                    <!--<textarea class="type" placeholder="Текст новости..."></textarea>-->
+                <div class="textOfferArticle">
+                    <textarea class="type" placeholder="Текст новости..."></textarea>
                 </div>
             </div>
-            <form action="" class="offerNewsFormImg">
+            <form action="" class="offerArticleFormImg">
                 <div class="dowPhoto">
                     <h4>Загрузить фото</h4>
                     <div class="downloadImg">
                         <i class="fa fa-camera" aria-hidden="true"></i>
-                        <input type="file" value="Загрузить файл" class="dowFileImg" id="offerImgDownload">
+                        <input type="file" value="Загрузить файл" class="dowFileImg" id="offerArticleImgDownload">
                     </div>
                 </div>
-                {{ post_form.image_url }}
-                <!--<textarea placeholder="Ссылка на изображения" class="linkImg"></textarea>-->
-                <img src="" class="imgOfferNews">
+                <textarea placeholder="Ссылка на изображения" class="linkImgArticle"></textarea>
+                <img src="" class="imgOfferArticle">
             </form>
         </div>
         <footer>
             <button class="btn btn-not" data-dismiss="modal">Отмена</button>
-            <button class="btn btn-ok">Предложить</button>
+            <button class="btn btn-ok" id="offerArticleBtn" data-dismiss="modal">Предложить</button>
         </footer>
     </div>
 </div>

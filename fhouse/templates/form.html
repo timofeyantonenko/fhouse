@@ -1,8 +1,66 @@
-{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+{% extends "base.html" %} {% load crispy_forms_tags %} {% load staticfiles %} {% block head_extra %}
+<link rel="stylesheet" href='{% static "css/login.css" %}'> {% endblock head_extra %} {% block content %}
 <main>
-	<h1>{{ title }}</h1>
-    <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %} {{ form|crispy }} {{ form.errors }} {{ form.non_field_errors }}
-        <input type="submit" class="btn btn-default" value="{{ title }}">
-    </form>
-</main>    
+    <section id="signIn">   
+        <div class="content">
+            <div class="loginWith">
+                <h2>Вход с помощью</h2>
+                <div class="signInhelp vk">
+                    <div class="iconSign">
+                        <i class="fa fa-vk" aria-hidden="true"></i>
+                    </div>
+                    <h3>
+        			Вконтакте
+        		</h3>
+                </div>
+                <div class="signInhelp fb">
+                    <div class="iconSign">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </div>
+                    <h3>
+        			Facebook
+        		</h3>
+                </div>
+                <div class="signInhelp gogle">
+                    <div class="iconSign">
+                        <i class="fa fa-google-plus" aria-hidden="true"></i>
+                    </div>
+                    <h3>
+        			Google
+        		</h3>
+                </div>
+                <div class="signInhelp odnoklasniki">
+                    <div class="iconSign">
+                        <i class="fa fa-odnoklassniki" aria-hidden="true"></i>
+                    </div>
+                    <h3>
+        			Одноклассники
+        		</h3>
+                </div>
+                <div class="signInhelp tw">
+                    <div class="iconSign">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </div>
+                    <h3>
+        			Twitter
+        		</h3>
+                </div>
+            </div>
+            <div class="simpleLogin">
+            	<h2>{{ title }}</h2>
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %} {{ form|crispy }} {{ form.errors }} {{ form.non_field_errors }}
+                    <div class="loginBtn">
+                    	<input type="submit" class="btn btn-default btnLogin" value="{{ title }}">
+                    	<button class="btnRegister btn btn-default ">
+                    		<a href="/register" class="registerLink">Регистрация</a>
+                    	</button>
+                    	
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock content %}

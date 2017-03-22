@@ -1,3 +1,7 @@
+.tableInfo {
+    border: 1px solid #afadad;
+}
+
 @media screen and (min-width: 1170px) {
     .tableInfo {
         width: 70%;
@@ -39,10 +43,8 @@
 }
 
 .block_table {
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 24px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    white-space: nowrap;
 }
 
 .block_table .table_allnews_insection:nth-child(n+4) {
@@ -87,7 +89,7 @@
 }
 
 .recordNeartableRecord {
-    border-top: solid #38003c 5px;
+    border-top: solid #d91f17 5px;
 }
 
 table {
@@ -103,29 +105,8 @@ table {
     text-align: center !important;
 }
 
-.fullRecord:hover {
-    background-color: #f1f1f1;
-}
-
-td > a:not([class]) {
-    color: #76766f !important;
-}
-
-td > a:hover {
-    text-decoration: none !important;
-    color: #e62117 !important;
-}
-
-.fullRecord td > a {
-    color: #256ba0;
-}
-
-.otherRecords .glyphicon {
-    color: #e62117;
-}
-
 thead {
-    border-top: solid #38003c 5px;
+    border-top: solid #d91f17 5px;
 }
 
 .searchRecord {
@@ -138,8 +119,6 @@ thead {
 .nameTableSsearch {
     margin: 0px 0px;
 }
-
-.input-group {}
 
 .divForTable {
     padding: 0px !important;
@@ -237,7 +216,7 @@ h1 p {
         justify-content: space-between;
     }
     .table_allnews_insection {
-        width: 32%;
+        width: 32% !important;
     }
     .searchRecord {
         width: 250px;
@@ -321,7 +300,7 @@ h1 p {
 }
 
 @media screen and (min-width: 970px) and (max-width: 1169px) {
-     h1 {
+    h1 {
         font-size: 2.2vw;
     }
     .infoRecordTable {
@@ -333,7 +312,7 @@ h1 p {
 }
 
 @media screen and (min-width: 750px) and (max-width: 969px) {
-     h1 {
+    h1 {
         font-size: 2.6vw;
     }
     .infoRecordTable {
@@ -345,7 +324,7 @@ h1 p {
 }
 
 @media screen and (max-width: 749px) {
-     h1 {
+    h1 {
         font-size: 4.5vw;
     }
     .infoRecordTable {
@@ -354,4 +333,89 @@ h1 p {
     .nationalHead:before {
         content: "Нац";
     }
+}
+
+@media screen and (min-width: 970px) {
+    .tableInfo {
+        border: 1px solid #afadad;
+    }
+    body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 969px) {
+    .tableInfo {
+        border: 0px solid #afadad;
+    }
+    body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
+}
+
+.linkTable {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    color: #222;
+    text-decoration: none;
+    padding: 8px;
+    width: 100%;
+}
+
+.linkTable p {
+    
+}
+
+.linkTable:focus,
+.linkTable:active,
+.linkTable:visited {
+    text-decoration: none;
+    color: #222;
+}
+
+.linkTable:hover {
+    text-decoration: none;
+    color: #aa0a0c;
+}
+.otherRecords {
+    width: 100%;
+}
+.table_allnews_insection tbody tr {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.table_allnews_insection tbody td {
+    padding: 0 !important;
+    width: 100%;
+    height: auto !important;
+}
+
+.table_allnews_insection tbody td:hover {
+    background-color: #d7d7d7;
+}
+
+.linkTable p {
+    margin: 0;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    max-width: calc(100% - 30px) !important;
+}
+
+
+.fullRecord a {
+    justify-content: center !important;
+}
+
+table {
+    max-width: 100% !important;
 }

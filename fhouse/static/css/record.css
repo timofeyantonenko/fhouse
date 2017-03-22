@@ -1,8 +1,7 @@
 .statsCard {
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 20px;
     padding-bottom: 70px;
-    border: 1px solid #CCD1D9;
     border-top: 0px !important;
 }
 
@@ -24,7 +23,7 @@
 .thumbnails {
     /*width: 32%;*/
     vertical-align: top;
-    border: 1px solid #ebebeb;
+    border: 1px solid #afadad;
     border-radius: 5px;
 }
 
@@ -344,11 +343,11 @@ ul#otis {
 
 .full_list_record:hover {
     background-color: #e62117;
-    color: #fafafa;
+    color: #fff;
 }
 
 .full_list_record:hover a {
-    color: #fafafa;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -364,7 +363,6 @@ ul#otis {
     cursor: pointer;
     width: 230px;
     margin: -45px auto 0px;
-    padding: 5px;
     display: block;
     text-align: center;
     text-transform: uppercase;
@@ -372,7 +370,7 @@ ul#otis {
     font-size: 14px;
     color: #656D78;
     background: #fff;
-    border: 1px solid #CCD1D9;
+    border: 1px solid #afadad;
     border-radius: 2px;
 }
 
@@ -381,12 +379,16 @@ ul#otis {
 }
 
 .more_records a {
+    display: block;
+    width: 230px;
+    padding: 5px;
     text-decoration: none;
     color: #333;
 }
 
 .more_records a:hover,
-.more_records a:focus {
+.more_records a:focus,
+.more_records a:active {
     text-decoration: none;
     color: #333;
 }
@@ -398,9 +400,8 @@ ul#otis {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 0 20px;
-    border: 1px solid #CCD1D9;
     border-bottom: 0px !important;
 }
 
@@ -409,13 +410,15 @@ ul#otis {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 0;
     font-size: 30px;
     color: #000;
     font-weight: 900;
 }
 
 .table_nav_records h1 p {
-    margin: 0;
+    margin: 0 0 10px;
     padding: 0;
 }
 
@@ -423,6 +426,7 @@ ul#otis {
     width: 250px;
     display: flex;
     height: 30px;
+    margin-bottom: 10px;
 }
 
 .searchRecord textarea {
@@ -444,6 +448,8 @@ ul#otis {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
+    background: linear-gradient(to bottom, #e62117 0, #a21515 100%) !important;
+    border-color: #7b4341;
 }
 
 .form-control {
@@ -580,7 +586,36 @@ ul#otis {
 
 @media screen and (max-width: 589px) {
     .item {
-        width: calc(100% - 10px);
-        margin: 0 5px 10px 5px;
+        width: calc(100% - 10px) !important;
+        margin: 0 auto 20px !important;
+    }
+}
+
+
+/*Responsive other*/
+
+@media screen and (min-width: 970px) {
+    .table_nav_records {
+        border: 1px solid #afadad;
+    }
+    .statsCard {
+        border: 1px solid #afadad;
+    }
+    body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 969px) {
+    body {
+        padding-top: 60px;
+        padding-bottom: 0px;
+    }
+    .table_nav_records {
+        border: 0px solid #afadad;
+    }
+    .statsCard {
+        border: 0px solid #666;
     }
 }

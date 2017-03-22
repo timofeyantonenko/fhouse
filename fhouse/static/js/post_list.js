@@ -215,7 +215,9 @@ $(document).ready(function() {
     });
 
     $(".more_article a").click(function(e) {
-        $(this).html("Загрузка...");
+        if ($(".more_article a").text() != "Конец") {
+            $(this).html("Загрузка...");
+        }
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
@@ -272,12 +274,10 @@ $(document).ready(function() {
                 if (tag == htmlString) {
                     $(this).remove();
                 };
-
             });
-
         };
-
     });
+
     $(".modal_save").on("click", function() {
         var old_tags = []
         var new_tags = []
@@ -353,8 +353,6 @@ $(document).ready(function() {
         //        }
     });
 
-
-
     $(".for_tag").on("click", ".close_tag", function() {
         $(this).parent().remove();
         //        var close_tag_text = $(this).parent().children(".tag_chosen").text();
@@ -366,12 +364,8 @@ $(document).ready(function() {
                 // console.log($(this).text() + "закрывающего тега");
                 // console.log(close_tag_text + "где нужно убрать класс");
                 $(this).parent().parent().children(".flex_right").find(".choose_tag_success").removeClass("success_tag");
-
             };
-
         });
-
-
     });
 
     page_settings();
@@ -451,71 +445,6 @@ var img_norm_size = function() {
 // Фиксация блока меньшей высоты
 $(window).load(function() {
 
-    var height = $(".colum").height();
-    var biggest_col;
-    $(".colum").each(function(i) {
-
-        if ($(this).height() < height) {
-            height = $(this).height()
-        } else {
-            biggest_col = $(this);
-        };
-
-    });
-
-    var min_height_block;
-
-    $(".colum").each(function(i) {
-
-        if ($(this).height() == height) {
-            min_height_block = $(this);
-        };
-
-    });
-
-    var width_min_height_block = $(min_height_block).width();
-    var height_min_height_block = $(min_height_block).height();
-    $(min_height_block).css({ "width": width_min_height_block, "height": height_min_height_block });
-    $(min_height_block).children().css({ "width": width_min_height_block });
-
-    var left_col = $(min_height_block).offset().left;
-
-    if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
-        $(min_height_block).addClass("fixed_col_top");
-        $(min_height_block).css("bottom", (document.documentElement.clientHeight - min_height_block.height() - 70));
-        $(min_height_block).css("left", left_col);
-
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > ((document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                $('.fixed_col_top').css('top', 'inherit');
-                $(min_height_block).css("bottom", bottom_scroll);
-
-
-            } else {
-                $('.fixed_col_top').css('top', '70px');
-                $('.fixed_col_top').css('bottom', 'inherit');
-            };
-        })
-
-    } else {
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > (45 + height - document.documentElement.clientHeight + $(".navbar").height()) && $(this).scrollTop() <= (50 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                $(min_height_block).addClass("fixed_col");
-                $(min_height_block).css("left", left_col);
-                $(min_height_block).css("bottom", "25px")
-
-            } else if ($(this).scrollTop() > (45 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                $(min_height_block).css("bottom", bottom_scroll);
-            } else {
-
-
-                $(min_height_block).removeClass("fixed_col");
-                $(min_height_block).css({ "left": "0px", "bottom": "0px" });
-            }
-        });
-    }
 });
 
 function show_modal(modal_id) {
@@ -532,7 +461,7 @@ $(document).on("click", ".btn-ok", function(e) {
     show_modal('#offerNewsModal');
 });
 
-function propose_post(text, image){
+function propose_post(text, image) {
     $.ajax({
         url: 'create/',
         data: {
@@ -542,7 +471,7 @@ function propose_post(text, image){
         },
         method: "POST",
         success: function(data, textStatus, xhr) {
-//            location.reload();
+            //            location.reload();
         },
         error: function(xhr, status, error) {
             console.log(error, status, xhr);
@@ -551,6 +480,7 @@ function propose_post(text, image){
 }
 
 $(document).on('click', '.tab', function() {
+    $(".more_article a").html("ПОСМОТРЕТЬ БОЛЬШЕ");
     var url = '/posts/tabs';
     var parent_div_tab = $(this).parent();
     var tab = $(this).find('div').text();
@@ -560,32 +490,32 @@ $(document).on('click', '.tab', function() {
     parent_div_tab.addClass('menu_individualNews_active');
     if (tab === 'Все') {
         tab = 'all';
-        }
-        load_posts(url, tab, 2);
-//        $.ajax({
-//            url: url,
-//            data: { 'tab': tab },
-//            dataType: "html",
-//            success: function(data) {
-//                var content = $('.news_stream');
-//                content.html(data);
-//                $(".more_article a").prop('href', 2);
-//                window.history.pushState("object or string", "Title", '?tab=' + tab);
-//            },
-//            error: function(xhr, status, error) {
-//                console.log(error, status, xhr);
-//            }
-//        });
+    }
+    load_posts(url, tab, 2);
+    //        $.ajax({
+    //            url: url,
+    //            data: { 'tab': tab },
+    //            dataType: "html",
+    //            success: function(data) {
+    //                var content = $('.news_stream');
+    //                content.html(data);
+    //                $(".more_article a").prop('href', 2);
+    //                window.history.pushState("object or string", "Title", '?tab=' + tab);
+    //            },
+    //            error: function(xhr, status, error) {
+    //                console.log(error, status, xhr);
+    //            }
+    //        });
 
 });
 
-function load_posts(url, tab, page){
+function load_posts(url, tab, page) {
     $.ajax({
         url: url,
         data: { 'tab': tab },
         dataType: "html",
         success: function(data) {
-//        alert(url);
+            //        alert(url);
             var content = $('.news_stream');
             content.html(data);
             $(".more_article a").prop('href', 2);

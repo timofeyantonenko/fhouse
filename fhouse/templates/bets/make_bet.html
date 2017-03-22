@@ -1,0 +1,453 @@
+<div class="modal fade" id="week_bets_top" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal_dialog">
+        <div id="my_weeks_bets">
+            <!-- Ставка недели -->
+            <div class="bet_in_modal">
+                <!-- Таблица и инфа о юзере  -->
+                <div class="table_forecasters_and_user_infa">
+                    <!-- Инфа юзер -->
+                    <div class="photo_user">
+                        <img src="{{ user.avatar.url }}" />
+                    </div>
+                    <div class="name_user_info">
+                        <h3>{{ user.first_name }} {{ user.last_name }} </h3>
+                        <div class="users_progress">
+                            <span id="open_user_results">
+                                        Мои результаты <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                            </span>
+                            <div class="drop_down_users_results">
+                                <div class="user_position_forecasters_all_time">
+                                    <div>Рейтинг (все время):</div>
+                                    <span class="pos_user_bet">1213</span>
+                                </div>
+                                <div class="user_position_forecasters_year">
+                                    <div>Рейтинг (текущий год):</div>
+                                    <span class="pos_user_bet">1213</span>
+                                </div>
+                                <div class="user_position_forecasters_month">
+                                    <div>Рейтинг (текущий месяц):</div>
+                                    <span class="pos_user_bet">1213</span>
+                                </div>
+                                <div class="user_kof_win">
+                                    <div>Процент побед:</div>
+                                    <span class="pos_user_bet">56%</span>
+                                </div>
+                                <div class="users_honour">
+                                    <div>Достижения:</div>
+                                    <div class="user_best_in_this">
+                                        <div class="title_honour_best">Апрель 2014</div>
+                                        <div class="place_result "><span>2</span></div>
+                                    </div>
+                                    <div class="user_best_in_this">
+                                        <div class="title_honour_best">Сезон 2014-2015</div>
+                                        <div class="place_result "><span>1</span></div>
+                                    </div>
+                                    <div class="user_best_in_this">
+                                        <div class="title_honour_best">2016 год</div>
+                                        <div class="place_result"><span>3</span></div>
+                                    </div>
+                                    <div class="user_best_in_this">
+                                        <div class="title_honour_best">2016 год</div>
+                                        <div class="place_result "><span>3</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="show_all_table_forecasters">
+                        <a href="#">Рейтинг прогнозистов</a>
+                    </div>
+                </div>
+                <!-- Прогноз недели  -->
+                <div class="header_user_choice">
+                    Экспресс недели
+                </div>
+                <div class="mathes_can_bet">
+                    <div class="one_math_can_bet">
+                        <div class="data_time_can">02.01 - 22:30</div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Манчестер
+                            </div>
+                            <div class="kof_can">
+                                12
+                            </div>
+                        </div>
+                        <div class="result_can draw_can">
+                            <div class="team_can">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </div>
+                            <div class="kof_can">
+                                10
+                            </div>
+                        </div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Дортмунд
+                            </div>
+                            <div class="kof_can">
+                                10.21
+                            </div>
+                        </div>
+                    </div>
+                    <div class="one_math_can_bet">
+                        <div class="data_time_can">02.01 - 22:30</div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Шахтер
+                            </div>
+                            <div class="kof_can">
+                                1
+                            </div>
+                        </div>
+                        <div class="result_can draw_can">
+                            <div class="team_can">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </div>
+                            <div class="kof_can">
+                                2
+                            </div>
+                        </div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Динамо Киев
+                            </div>
+                            <div class="kof_can">
+                                1.12
+                            </div>
+                        </div>
+                    </div>
+                    <div class="one_math_can_bet">
+                        <div class="data_time_can">02.01 - 22:30</div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Барселона-Мадридистская Порош
+                            </div>
+                            <div class="kof_can">
+                                1.23
+                            </div>
+                        </div>
+                        <div class="result_can draw_can">
+                            <div class="team_can">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </div>
+                            <div class="kof_can">
+                                84.32
+                            </div>
+                        </div>
+                        <div class="result_can teams_can">
+                            <div class="team_can">
+                                Реал Мадрид
+                            </div>
+                            <div class="kof_can">
+                                101.12
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Прогноз недели конец   -->
+            </div>
+            <!-- Выбор юзера -->
+            <div class="user_choice">
+                <div class="header_user_choice">
+                    Моя ставка
+                </div>
+                <nav id="user_choice_nav">
+                    <!-- arrow beetween weeks -->
+                    <div class="prev_week_bet"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                    <div class="next_week_bet"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                    <!-- weeks -->
+                    <div id="all_weeks">
+                        <div class="one_week_bet current_week">
+                            23-30 сен. 2017
+                        </div>
+                        <div class="one_week_bet">
+                            23-30 окт. 2016
+                        </div>
+                        <div class="one_week_bet">
+                            23-30 сен. 2015
+                        </div>
+                        <div class="one_week_bet">
+                            23-30 ноя. 2014
+                        </div>
+                    </div>
+                </nav>
+                <div class="body_user_choice">
+                    <span class="history_bet">
+                        <!-- Выбор пользователя -->
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>           
+                        <!-- Суммарный коэффициент -->
+                        <div class="total_kof">
+                            <div>Общий коэффициент:</div>
+                            <div class="total_kof_these_matches"></div>
+                        </div>
+                        <!-- Если пользователь еще не выбрал ни одного матча -->
+                        <div class="not_results">
+                            Сделайте ставку
+                        </div>
+                        После подтверждения 
+                        <div class="success_bet">
+                            Ставка успешно принята!</br>
+                            Ожидайте результатов
+                        </div>
+                        <!-- После того как все события произошли  -->
+                        <div class="your_result_after">
+                            <div>Ваш выигрыш:</div>
+                            <div class="win_points"></div>
+                        </div>
+                    </span>
+                    <span class="history_bet">
+                        <!-- Выбор пользователя -->
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>           
+                        <!-- Суммарный коэффициент -->
+                        <div class="total_kof">
+                            <div>Общий коэффициент:</div>
+                            <div class="total_kof_these_matches"></div>
+                        </div>
+                        <!-- Если пользователь еще не выбрал ни одного матча -->
+                        <div class="not_results">
+                            Сделайте ставку
+                        </div>
+                        <!-- После подтверждения  -->
+                        <div class="success_bet">
+                            Ставка успешно принята!</br>
+                            Ожидайте результатов
+                        </div>
+                        <!-- После того как все события произошли  -->
+                        <div class="your_result_after">
+                            <div>Ваш выигрыш:</div>
+                            <div class="win_points"></div>
+                        </div>
+                    </span>
+                    <span class="history_bet">
+                        <!-- Выбор пользователя -->
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>           
+                        <!-- Суммарный коэффициент -->
+                        <div class="total_kof">
+                            <div>Общий коэффициент:</div>
+                            <div class="total_kof_these_matches"></div>
+                        </div>
+                        <!-- Если пользователь еще не выбрал ни одного матча -->
+                        <div class="not_results">
+                            Сделайте ставку
+                        </div>
+                        <!-- После подтверждения  -->
+                        <div class="success_bet">
+                            Ставка успешно принята!</br>
+                            Ожидайте результатов
+                        </div>
+                        <!-- После того как все события произошли  -->
+                        <div class="your_result_after">
+                            <div>Ваш выигрыш:</div>
+                            <div class="win_points"></div>
+                        </div>
+                    </span>
+                    <span class="history_bet">
+                        <!-- Выбор пользователя -->
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>
+                        <div class="one_user_choice">
+                            <div class="match_bet_choice">
+                                <span class="marth_choice_this"></span>
+                                <div class="delete_this_this_choice">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="user_match_bet_choice">
+                                <div class="result_math_and_won_team">
+                                    <div class="win_or_draw"></div>
+                                    <div class="your_choice_team"></div>
+                                </div>
+                                <div class="kof_this_match">1</div>
+                            </div>
+                        </div>           
+                        <!-- Суммарный коэффициент -->
+                        <div class="total_kof">
+                            <div>Общий коэффициент:</div>
+                            <div class="total_kof_these_matches"></div>
+                        </div>
+                        <!-- Если пользователь еще не выбрал ни одного матча -->
+                        <div class="not_results">
+                            Сделайте ставку
+                        </div>
+                        <!-- После подтверждения  -->
+                        <div class="success_bet">
+                            Ставка успешно принята!</br>
+                            Ожидайте результатов
+                        </div>
+                        <!-- После того как все события произошли  -->
+                        <div class="your_result_after">
+                            <div>Ваш выигрыш:</div>
+                            <div class="win_points"></div>
+                        </div>
+                    </span>
+                </div>
+                <div class="footer_user_choice">
+                    <div class="btn_success_bet">
+                        Сделать ставку
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

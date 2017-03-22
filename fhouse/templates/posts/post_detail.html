@@ -34,7 +34,9 @@
                     </div>
                 </a>
                 <div class="author_name_date">
-                    <a href="">{{request.user.first_name}} {{request.user.last_name}}</a> {% if instance.draft %} {% endif %} {{instance.publish}}
+                    <a href="">{{request.user.first_name}} {{request.user.last_name}}</a> 
+                    <p>{% if instance.draft %} </p>
+                    {% endif %} {{instance.publish}}
                 </div>
             </div>
             <div class="article_detail_content">
@@ -56,9 +58,8 @@
                 </div>
                 <div class="footer_post_detail">
                     <div class="teg_post_detail">
-                        <h3>Теги:</h3>
                         <div class="tagsConteiner">
-                            {% for sub_tag in instance.tag.all %}
+                            <h3>Теги:</h3> {% for sub_tag in instance.tag.all %}
                             <a href="#" class="tags__item js-tags-item">
                                 <span> {{ sub_tag.name }} </span>
                             </a>
@@ -99,10 +100,8 @@
                 <a href="#" class="authorComent">
                     <div class="coments_author">
                         {% if request.user.is_authenticated %}
-                        <img src="{{ request.user.avatar.url }}" alt="">
-                        {% else %}
-                        <img src="{% static 'img/albert-einstein.jpg'  %}">
-                        {% endif %}
+                        <img src="{{ request.user.avatar.url }}" alt=""> {% else %}
+                        <img src="{% static 'img/albert-einstein.jpg'  %}"> {% endif %}
                     </div>
                 </a>
                 {% if request.user.is_authenticated %}
@@ -116,9 +115,8 @@
                         {% endfor %}{% endfor %}
                         <input type="submit" value="Отправить" class="btn btn-primary">
                     </div>
-                        {% else %}
-                        <p>Войдите, чтобы оставлять комментарии</p>
-
+                    {% else %}
+                    <p>Войдите, чтобы оставлять комментарии</p>
                 </form>
                 {% endif %}
             </div>

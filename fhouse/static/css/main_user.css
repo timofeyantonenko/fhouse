@@ -1,11 +1,63 @@
-.user_page {
-    background-color: #fafafa;
-    border: 1px solid #CCD1D9;
-    padding: 25px;
+@media screen and (min-width: 1170px) {
+    .user_page {
+        width: 60%;
+    }
+    .user_stat {
+        justify-content: space-between;
+    }
+    .user_info_desc {
+        width: calc(100% - 235px);
+    }
 }
 
-.user_name h2 {
-    margin: 0px;
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .user_page {
+        width: 60%;
+    }
+    .user_stat {
+        justify-content: center;
+    }
+    .user_info_desc {
+        margin-top: 20px;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .user_page {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .user_stat {
+        justify-content: space-between;
+    }
+    .user_info_desc {
+        width: calc(100% - 235px);
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .user_page {
+        width: 100%;
+        justify-content: center;
+    }
+    .user_stat {
+        justify-content: center;
+    }
+    .user_info_desc {
+        margin-top: 20px;
+        width: 100%;
+    }
+}
+
+.user_page {
+    background-color: #fff;
+    padding: 20px;
+}
+
+.user_page h2 {
+    font-weight: 900;
+    margin: 0;
 }
 
 .user_foto {
@@ -16,17 +68,14 @@
 }
 
 .user_stat {
-    margin-top: 25px;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .user_foto img {
     width: 100%;
     height: auto;
-}
-
-.user_info_desc {
-    width: 100%;
-    align-self: center;
 }
 
 .user_info_desc tr td:nth-child(2) a {
@@ -71,7 +120,7 @@
 }
 
 .soc_user a div {
-    color: #fafafa;
+    color: #fff;
     font-size: 12px;
 }
 
@@ -93,4 +142,118 @@ a #twitter:hover {
 
 a #instagram:hover {
     background-color: #faa842;
+}
+
+
+/*Suggesting articles*/
+
+.headerArticle {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.headerArticle h3 {
+    margin: 0 0 10px;
+    font-weight: 900;
+}
+
+.headerArticle button {
+    margin-bottom: 10px;
+}
+
+#authorArticles {
+    padding: 0;
+    margin: 0 0 10px;
+}
+
+#authorArticles li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 !important;
+}
+
+.titleLink {
+    /*max-width: 50%;*/
+}
+
+.titleLink a {
+/*    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;*/
+}
+
+#authorArticles li:nth-last-child(n+2) {
+    border-bottom: 1px solid silver;
+}
+
+.aboutArticle {
+    display: flex;
+}
+
+.aboutArticle>div {
+    margin: 0 2.5px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.aboutArticle>div>span {
+    margin: 0 2.5px;
+}
+
+
+.moreArt {
+    cursor: pointer;
+    width: 230px;
+    margin: 0 auto;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 14px;
+    color: #656D78;
+    background: #fff;
+    border: 1px solid #afadad;
+    border-radius: 2px;
+}
+
+.moreArt:hover {
+    background: #eee;
+}
+
+@media screen and (max-width: 969px) {
+    body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #authorArticles li {
+        flex-wrap: wrap;
+    }
+    .titleLink {
+        width: 100%;
+        margin-bottom: 15px
+    }
+}
+
+@media screen and (min-width: 750px) {
+    .user_page {
+        border: 1px solid #afadad;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    #authorArticles li {
+        flex-wrap: wrap;
+    }
+    .titleLink {
+        width: 100%;
+        margin-bottom: 15px;
+    }
 }

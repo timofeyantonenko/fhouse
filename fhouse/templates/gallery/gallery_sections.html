@@ -11,14 +11,19 @@
                     <ul class="nav_ul">
                         {% for section in sections %}
                         <li class="reset_variable">
-                            <a href="#">{{ section.section_title }}<span
-                                        class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-                                    </a>
+                            <a href="#">
+                                {{ section.section_title }}
+                            </a>
                         </li>
                         {% endfor %}
                     </ul>
-                    <div id="mobileAlnbumShow">
-                        Выбрать альбом
+                    <div id="sectionMobile" class="responsiveNavGallery">
+                        <p>Секции</p>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </div>
+                    <div id="mobileAlnbumShow" class="responsiveNavGallery">
+                        <p>Альбомы</p>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
                     </div>
                 </div>
                 <div class="dialog_slaider">
@@ -46,14 +51,22 @@
                     <!-- Право-лево фото -->
                     <div class="footer_slaider">
                         <div class="slaider_footer_left">
-                            <div class="album_slaider">Название альбома
-                                <span id="number_photo">1</span> <span>of</span> <span id="quantity_photo_in_album"></span>
+                            <div class="album_slaider">
+                                Название альбома
                             </div>
-                            <div class="discription_photo_slaider">Подпись фотографии</div>
+                            <div class="countPhoto">
+                                <p id="indexCount">1</p>
+                                <p>из</p>
+                                <p id="sumCount">34</p>
+                            </div>
                         </div>
                         <div class="slaider_footer_right">
                             <div class="button_show_comments">
-                                Комментарии <span></span>
+                                <span class="commentItem">
+                                    <p>Комментарии</p>
+                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                </span>
+                                <span id="sumCommentSlider"></span>
                             </div>
                             <div class="slaider_photo_like">
                                 <div class="block_like">
@@ -159,17 +172,27 @@
         <div class="tile_albums_foto">
             <div class="section_album">
                 <span class="color_line_album"></span>
-                <span>Лионель Месси &nbsp;|&nbsp;</span><span>28 october 1995</span>
+                <span class="flex">
+                    <p id="maneAlbumSelect"></p> &nbsp;|&nbsp;
+                </span>
+                <span>
+                    <p id="lastTimeFoto">
+                        <!-- 28 october 1995 -->
+                    </p>
+                </span>
             </div>
             <div id="wrapper">
                 <div class="flex_container_albums" id="list">
-                    <div class="more_photo" href="2">
-                        ПОСМОТРЕТЬ БОЛЬШЕ
-                    </div>
+                </div>
+                <div class="more_photo" href="2">
+                    ПОСМОТРЕТЬ БОЛЬШЕ
                 </div>
             </div>
             <!-- Слайдер в модальном окне для фотографий с плитки -->
             <div id="slaider_modal" class="modal" role="dialog">
+                <div id="closeModalDialog">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </div>
                 <div class="modal-dialog">
                     <div class="flex_modal">
                         <!-- Modal content-->
@@ -196,11 +219,19 @@
                                     <div class="album_slaider">Название альбома
                                         <span id="number_photo">1</span> <span>of</span> <span id="quantity_photo_in_album">42</span>
                                     </div>
-                                    <div class="discription_photo_slaider">Подпись фотографии</div>
+                                    <div class="countPhotoModal">
+                                        <p id="indexCountModal">1</p>
+                                        <p>из</p>
+                                        <p id="sumCountModal">34</p>
+                                    </div>
                                 </div>
                                 <div class="slaider_footer_right">
                                     <div class="button_show_comments">
-                                        Комментарии <span>21</span>
+                                        <span class="commentItem">
+                                           <p>Комментарии</p>
+                                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                        </span>
+                                        <span>21</span>
                                     </div>
                                     <div class="slaider_photo_like">
                                         <div class="block_like">
@@ -293,5 +324,6 @@
                 </div>
             </div>
         </div>
+    </div>
 </main>
 {% endblock content %}

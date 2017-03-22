@@ -2,75 +2,168 @@
 <link rel="stylesheet" href='{% static "css/main_user.css" %}'>
 <script type="text/javascript" src="{% static 'js/main_user.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-7">
-            <div class="user_page">
-                <div class="user_name">
-                    <h2>
-                        {{ first_name }} {{ last_name }}
-                    </h2>
-                </div>
-                <div class="user_stat">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="user_foto">
-                                <img src="{{ avatar_url }}" alt="">
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="user_info_desc">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>Рейтинг прогнозистов:</td>
-                                            <td><a href="#">143</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Количество статей:</td>
-                                            <td><a href="#">{{ users_posts_count }}</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Голосов:</td>
-                                            <td><a href="#">53</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Профиль в соцсетях:</td>
-                                            <td>
-                                                <div class="soc_user">
-                                                    <a href="#">
-                                                        <div id="instagram">
-                                                            <i class="fa fa-instagram" aria-hidden="true"></i>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#">
-                                                        <div id="vk">
-                                                            <i class="fa fa-vk" aria-hidden="true"></i>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#">
-                                                        <div id="twitter">
-                                                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#">
-                                                        <div id="facebook">
-                                                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<main>
+    <div class="user_page">
+        <h2>
+            {{ first_name }} {{ last_name }}
+        </h2>
+        <div class="user_stat">
+            <div class="user_foto">
+                <img src="{{ avatar_url }}" alt="">
+            </div>
+            <div class="user_info_desc">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Рейтинг прогнозистов:</td>
+                            <td><a href="#">143</a></td>
+                        </tr>
+                        <tr>
+                            <td>Количество статей:</td>
+                            <td><a href="#">{{ users_posts_count }}</a></td>
+                        </tr>
+                        <tr>
+                            <td>Голосов:</td>
+                            <td><a href="#">53</a></td>
+                        </tr>
+                        <tr>
+                            <td>Профиль в соцсетях:</td>
+                            <td>
+                                <div class="soc_user">
+                                    <a href="#">
+                                        <div id="instagram">
+                                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="#">
+                                        <div id="vk">
+                                            <i class="fa fa-vk" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="#">
+                                        <div id="twitter">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                    <a href="#">
+                                        <div id="facebook">
+                                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="col-lg-5">
+        <div class="userArticle">
+            <div class="headerArticle">
+                <h3>Статьи пользователя</h3>
+            </div>
+            <ol id="authorArticles">
+                <li>
+                    <div class="titleLink">
+                        <span>1.</span>
+                        <a href="">Title some article user Title some article user Title some article user
+                        Title some article user Title some article user</a>
+                    </div>
+                    <div class="aboutArticle">
+                        <div class="viewsArt">
+                            <span>127</span>
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        </div>
+                        <div class="commentssArt">
+                            <span>903</span>
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        </div>
+                        <div class="likesArt">
+                            <span>223</span>
+                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        </div>
+                        <div class="dislikesArt">
+                            <span>2к</span>
+                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="titleLink">
+                        <span>2.</span>
+                        <a href="">Title some article user</a>
+                    </div>
+                    <div class="aboutArticle">
+                        <div class="viewsArt">
+                            <span>127</span>
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        </div>
+                        <div class="commentssArt">
+                            <span>903</span>
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        </div>
+                        <div class="likesArt">
+                            <span>223</span>
+                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        </div>
+                        <div class="dislikesArt">
+                            <span>2к</span>
+                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="titleLink">
+                        <span>3.</span>
+                        <a href="">Title some article user</a>
+                    </div>
+                    <div class="aboutArticle">
+                        <div class="viewsArt">
+                            <span>127</span>
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        </div>
+                        <div class="commentssArt">
+                            <span>903</span>
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        </div>
+                        <div class="likesArt">
+                            <span>223</span>
+                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        </div>
+                        <div class="dislikesArt">
+                            <span>2к</span>
+                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="titleLink">
+                        <span>4.</span>
+                        <a href="">Title some article user</a>
+                    </div>
+                    <div class="aboutArticle">
+                        <div class="viewsArt">
+                            <span>127</span>
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        </div>
+                        <div class="commentssArt">
+                            <span>903</span>
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        </div>
+                        <div class="likesArt">
+                            <span>223</span>
+                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        </div>
+                        <div class="dislikesArt">
+                            <span>2к</span>
+                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <div class="moreArt">
+                Посмотреть больше
+            </div>
         </div>
     </div>
-</div>
+</main>
 {% endblock %}

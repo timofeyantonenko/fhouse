@@ -16,7 +16,15 @@
     <div class="table_nav_records">
         <h1>
             <p>Статьи</p>
-            <button class="btn btn-default" data-toggle="modal" data-target="#offerNewsModal">Предложить статью</button>
+            <div class="right_header">
+               <button class="btn btn-default" id="offerNewsBtn" data-toggle="modal" data-target="#offerArticleModal">Предложить статью</button>
+                <div class="searchRecord" id="find_article">
+                    <textarea placeholder="Найти сатью..." ></textarea> 
+                    <button type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                </div> 
+            </div>
         </h1>
         <div class="tab">
             <ul class="nav_ul">
@@ -25,7 +33,7 @@
                     <div class="lineHover"></div>
                 </li> -->
                 {% for record_group in groups_tables %}
-                <li >
+                <li>
                     {{ record_group.group }}
                     <div class="lineHover"></div>
                 </li>
@@ -46,40 +54,6 @@
             </ul>
         </div>
         <hr>
-    </div>
-    <!-- Модальное окно для предложения новости -->
-    <div id="offerNewsModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <header>
-                <h4>Предложить новость</h4>
-                <span class="glyphicon glyphicon-remove" aria-hidden="true" data-dismiss="modal"></span>
-            </header>
-            <div class="content">
-                <div class="content_author">
-                    <div class="imgAuthorOfferNews">
-                        <img src="{{ request.user.avatar.url }}" alt="">
-                    </div>
-                    <div class="textOfferNews">
-                        <textarea class="type" placeholder="Текст новости..."></textarea>
-                    </div>
-                </div>
-                <form action="" class="offerNewsFormImg">
-                    <div class="dowPhoto">
-                        <h4>Загрузить фото</h4>
-                        <div class="downloadImg">
-                            <i class="fa fa-camera" aria-hidden="true"></i>
-                            <input type="file" value="Загрузить файл" class="dowFileImg" id="offerImgDownload">
-                        </div>
-                    </div>
-                    <textarea placeholder="Ссылка на изображения" class="linkImg"></textarea>
-                    <img src="" class="imgOfferNews">
-                </form>
-            </div>
-            <footer>
-                <button class="btn btn-not" data-dismiss="modal">Отмена</button>
-                <button class="btn btn-ok" data-dismiss="modal">Предложить</button>
-            </footer>
-        </div>
     </div>
     <div class="container_article" id="wrapper">
         <div class="flex_container" id="list">

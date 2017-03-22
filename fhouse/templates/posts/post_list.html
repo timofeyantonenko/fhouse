@@ -7,29 +7,36 @@
     <div class="articles">
         <div class="headerAllnews">
             <h3>Моя лента</h3>
-            <button class="btn btn-primary" data-toggle="modal">
-                Предложить новость
-            </button>
+            <div class="right_header">
+                <button class="btn btn-primary" id="offerNewsBtn" data-toggle="modal">
+                    Предложить новость
+                </button>
+                <div class="searchRecord" id="find_news">
+                    <textarea placeholder="Поиск новости..."></textarea>
+                    <button type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
         </div>
-        {% include "posts/post_form.html" %}
         <div class="menu_individualNews">
             <ul>
-                <div class="changeNews menu_individualNews_active">
-                    <li class="tab" id="main_tab">
+                <div class="changeNews menu_individualNews_active ">
+                    <li class="tab tabResponsive" id="main_tab">
                         <div>Все</div>
                         <div class="hover_menu"></div>
                     </li>
                 </div>
                 {% for tag in user_tags %}
-                <div class="changeNews">
-                    <li class="tab" id="simple_tab">
+                <div class="changeNews ">
+                    <li class="tab tabResponsive">
                         <div>{{ tag }}</div>
                         <div class="hover_menu"></div>
                     </li>
                 </div>
                 {% endfor %}
-                <div class="changeNews">
-                    <li>
+                <div class="changeNews addTagParent">
+                    <li class="addTag">
                         <div class="plus_units" data-toggle="modal" data-target="#modal_my_feed_change"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
                     </li>
                     <!-- Модальное окно, выбор тегов для своей ленты -->
@@ -103,10 +110,9 @@
                 </div>
             </ul>
         </div>
-        <hr>
+        <hr class="postHr">
         <div class="articles_list">
             <div class="news_stream">
-
             </div>
         </div>
         <div class="more_article">
