@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import StageBetSerializer
+from django.views.decorators.csrf import csrf_protect
+from .tasks import send_feedback_email_task
 
-from .models import StageBet, League
+from .models import StageBet, League, MatchBetFromUser, UsersResult
 
 
 # Create your views here.
@@ -40,16 +42,61 @@ def all_reviews(request):
 
 @api_view(['GET'])
 def get_bet_stage_info(request):
+    send_feedback_email_task.delay("s", "message")
+    send_feedback_email_task(1, 12)
     context = {}
     # we take current bet. BE AWARE - it must be only one object
     current_week_bet = StageBet.objects.filter(must_be_checked=True).first()
     bet_serializer = StageBetSerializer(current_week_bet, many=False, context={'request': request})
     return Response({'stage_bet': bet_serializer.data})
-    context['current_week_bet'] = current_week_bet
-    count_of_photo_to_load = 15
-    count_of_albums_to_load = 6
-    album_id = request.GET.get('album_id', 1)
-    album = SectionAlbum.objects.get(id=album_id)
-    photos = album.photos.order_by('-updated')[:count_of_photo_to_load]
-    photo_serializer = AlbumPhotoSerializer(photos, many=True, context={'request': request})
-    return Response({"photo_list": photo_serializer.data})
+
+
+@csrf_protect
+@api_view(['POST'])
+def make_bet(request):
+    print("COME IN")
+    response = Response()
+    if request.user.is_authenticated():
+        bet_stage_id = request.POST.get("stage_id")
+        bet_stage_instance = get_object_or_404(StageBet, id=bet_stage_id)
+
+        if UsersResult.objects.filter(stage=bet_stage_instance, user=request.user).exists():
+            response.status_code = 409  # Conflict :: already exist
+        else:
+            first_match_instance = bet_stage_instance.match_1
+            first_match_bet = request.POST.get("first_match")
+            new_first_match_bet_from_user = MatchBetFromUser(
+                user_bet=first_match_bet,
+                match=first_match_instance,
+                user=request.user
+            )
+
+            second_match_instance = bet_stage_instance.match_2
+            second_match_bet = request.POST.get("second_match")
+            new_second_match_bet_from_user = MatchBetFromUser(
+                user_bet=second_match_bet,
+                match=second_match_instance,
+                user=request.user
+            )
+
+            third_match_instance = bet_stage_instance.match_3
+            third_match_bet = request.POST.get("third_match")
+            new_third_match_bet_from_user = MatchBetFromUser(
+                user_bet=third_match_bet,
+                match=third_match_instance,
+                user=request.user
+            )
+
+            new_first_match_bet_from_user.save()
+            new_second_match_bet_from_user.save()
+            new_third_match_bet_from_user.save()
+
+            user_result = UsersResult(
+                user=request.user,
+                result_match1=new_first_match_bet_from_user,
+                result_match2=new_second_match_bet_from_user,
+                result_match3=new_third_match_bet_from_user,
+                stage=bet_stage_instance
+            )
+            user_result.save()
+        return response

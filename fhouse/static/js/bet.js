@@ -1,3 +1,18 @@
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 $(document).ready(function() {
 
     //    $(".make_bet").on("click", function(){
@@ -480,12 +495,14 @@ function load_bet_info() {
             //          console.log(data);
             //          json_data = JSON.parse(data);
             var json_stage_matches = data['stage_bet'];
+            var stage_id = json_stage_matches["id"];
+            console.log("DATA IS: " + data);
             for (var i = 1; i < 4; i++) {
                 match_i = "match_" + i;
                 match_json = json_stage_matches[match_i];
                 console.log(match_json);
 
-                home_team_name = match_json["home_team"]["team_name"];
+                home_team_name = match_json["ho me_team"]["team_name"];
                 home_team_coef = match_json["coefficient"]["home_coef"];
 
                 guest_team_name = match_json["guest_team"]["team_name"];
@@ -506,6 +523,7 @@ function load_bet_info() {
                     "</div><div class=\"kof_can\">" + guest_team_coef +
                     "</div></div></div>";
             }
+            content.attr("stage_id", stage_id);
             content.html(insert_data);
         },
         error: function(xhr, status, error) {
@@ -695,3 +713,56 @@ $(document).on("click", ".delete_this_this_choice i", function() {
         $(".history_bet").eq(0).find(".total_kof").show()
     }
 });
+
+// User make bet
+$(document).on("click", ".btn_success_bet", function(){
+    var content = $('.mathes_can_bet');
+    stage_id = content.attr("stage_id");
+    first_match = content.children()[0];
+    first_result = get_match_bet_result(first_match);
+
+    second_match = content.children()[1];
+    second_result = get_match_bet_result(second_match);
+
+    third_match = content.children()[2];
+    third_result = get_match_bet_result(third_match);
+
+    propose_bet(stage_id, first_result, second_result, third_result);
+
+});
+
+function get_match_bet_result(match_div){
+    var bet = -1;
+    var result_cans = $(match_div).children();
+    for (var i = 0; i < 3; i++){
+           if ($(result_cans[i+1]).hasClass("active_choice_bet"))
+                {
+                    bet = i;
+                    break;
+                }
+    }
+    return bet;
+
+}
+function propose_bet(stage_id, match_1, match_2, match_3){
+    $.ajax({
+        url: 'make_bet/',
+        data: {
+            stage_id: stage_id,
+            first_match: match_1,
+            second_match: match_2,
+            third_match: match_3,
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        method: "POST",
+        success: function(data, textStatus, xhr) {
+            alert("POST sent!");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 409){
+                alert("Exist!")
+            }
+//            console.log(error, status, xhr);
+        }
+    });
+}
