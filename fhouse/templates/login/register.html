@@ -16,6 +16,7 @@
                 </label>
                 <div class="forPlaceholder">
                     {{form.first_name}}
+                    <p></p>
                 </div>
             </div>
             <div class="formLogin">
@@ -25,6 +26,7 @@
                 </label>
                 <div class="forPlaceholder">
                     {{form.last_name}}
+                    <p></p>
                 </div>
             </div>
             <div class="formLogin">
@@ -34,7 +36,7 @@
                 </label>
                 <div class="forPlaceholder">
                     {{form.email}}
-                    <p>Мы вышлем вам подтверждение по электронной почте на этот адрес</p>
+                    <p></p>
                 </div>
             </div>
             <div class="formLogin">
@@ -44,7 +46,10 @@
                 </label>
                 <div class="forPlaceholder">
                     {{form.password}}
-                    <p>По крайней мере 8 символов</p>
+                    <!-- glyphicon glyphicon-eye-open -->
+                    <!-- glyphicon glyphicon-eye-close -->
+                    <!-- <span class="glyphicon glyphicon-search" aria-hidden="true"></span> -->
+                    <p></p>
                 </div>
             </div>
             <div class="formLogin">
@@ -52,7 +57,7 @@
                     Дата Рождения
                 </label>
                 <div class="dateBirth">
-                    {{ form.date_of_birth }}
+                    <!-- {{ form.date_of_birth }} -->
                     <div class="choseDayBitrh">
                         <select name="Day" id="BirthdayDay" title="День">
                             <option value="1">1</option>
@@ -245,34 +250,34 @@
                     <!-- {{ form.avatar }} -->
                     <div class="imgCanvasConteiner">
                         <div class="cutImg">
+                            <input id="newSrcPhoto" type="text" name="imgLoader" placeholder="Ссылка на фото...">
                             <div class="uploadPhotoInput">
                                 <input type="file" id="dowPhoto">
                                 <div id="iconDownload">
                                     <i class="fa fa-camera" aria-hidden="true"></i>
                                 </div>
                             </div>
-                            <textarea id="newSrcPhoto" placeholder="Ссылка на фото..."></textarea>
-                            
+                            <p id="erorSrc">
+                                Картинка не найдена 
+                            </p>
                         </div>
                         <div class="imgCutting">
-                            <div class="tableCell box canvasParent">
-                                <canvas id="panel"></canvas>
-                                <input type="button" id="cropBttn" class="btn btn-danger" value="Обрезать">
-                            </div>
-                            <div class="conteinerAva">
-                                <h3>Фото на сайте</h3>
-                                <div class="tableCell box avatarImg">
-                                    <img src="" id="croppedImage">
+                            <div class="avatarChoose">
+                                <div class="closeImg">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
                                 </div>
-
+                                <img  id="imgAva" alt="Image not found" src="" id="croppedImage">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-default finishLogin" type="submit">
-                Сохранить<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-            </button>
+            <footer id='registerFooter'>
+                <button class="btn btn-default finishLogin" id="registerBtn" type="submit">
+                    Сохранить
+                </button>
+                <p id=messageEror></p>
+            </footer>
         </form>
     </div>
     <div class="advertising"></div>

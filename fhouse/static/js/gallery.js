@@ -44,8 +44,12 @@ $(document).ready(function() {
     // Показать секции
     $("#sectionMobile").on("click", function() {
         if ($(".nav_ul").is(":visible")) {
+            $(this).children("span").addClass("glyphicon-triangle-bottom");
+            $(this).children("span").removeClass("glyphicon-triangle-top");
             $(".nav_ul").hide();
         } else {
+            $(this).children("span").removeClass("glyphicon-triangle-bottom");
+            $(this).children("span").addClass("glyphicon-triangle-top");
             $(".nav_ul").slideDown();
         }
     });
@@ -88,6 +92,8 @@ $(document).ready(function() {
     //$(".nav_ul li:first-child a").addClass("active_nav_ul");
 
     $(".nav_ul li a").click(function(e) {
+        // Reset var start foto 
+        resetFirstLi ();
         $(".nav_ul").hide();
         $(".more_photo").html("ПОСМОТРЕТЬ БОЛЬШЕ");
         $(".photo_row").remove();
@@ -120,6 +126,7 @@ $(document).ready(function() {
         $.when($.ajax(size_img_slider())).then(function() {
             loadedModal();
         });
+        
     });
 
     $.when($.ajax(size_img_slaider())).then(function() {
@@ -498,7 +505,6 @@ $(document).ready(function() {
 
 // выбор альбома
 $(document).on("click", ".list_albums .album_previews", function(e) {
-
     $(".more_photo").html("ПОСМОТРЕТЬ БОЛЬШЕ");
     $(".photo_row").remove();
     var long_id = $(this).attr("id");
@@ -508,6 +514,7 @@ $(document).on("click", ".list_albums .album_previews", function(e) {
     if ($(this).hasClass("active_selected_album")) {
         return;
     } else {
+        firstFoto = -9;
         $("#indexCount").html("1");
         // Нужно передать к-во фото в данном альбоме или секции
         $("#sumCount").html("1");
@@ -547,9 +554,8 @@ $(document).on("click", ".more_photo", function(e) {
         short_id = "all";
     }
     console.log($(".list_src_slaider").find("li").length)
-    morePhoto();
     load_tile_photos(section_name, short_id, page);
-
+    morePhoto();
 });
 
 $(window).load(function() {
@@ -622,6 +628,7 @@ function load_section_info(section_name, album_name) {
             var json_request_albums = data['albums'];
             var albums_count_block = $('.quantity_album');
             albums_count_block.html(json_request_albums.length + " альбомов");
+            $("#albumsMobile").html("(" + json_request_albums.length + ")");
             var albums_container = $('.list_albums');
             insert_data = ""
             $.each(json_request_albums, function(idx, obj) {
@@ -709,46 +716,27 @@ function massonryShow() {
     $(".photo_row").css({ "display": "flex" });
 }
 
-var firstFoto = 0;
+function resetFirstLi() {
+    firstFoto = -9;
+}
+
+var firstFoto = -9;
 var lastFoto = 9;
 
 function morePhoto() {
     if ($(".more_photo").text() != "Конец фотографий") {
         $(".more_photo").html("Загрузка...")
     }
-    var lengthLi = $(".list_src_slaider").find("li").length;
-    firstFoto += 9;
-    lastFoto += 9;
-    if (lengthLi <= lastFoto) {
-        lastFoto = lengthLi;
-
-    } else {
-        for (var lim = firstFoto; lim < lastFoto; lim++) {
-            var order = lim;
-            var url_img = $(".list_src_slaider").find("li").eq(order).find(".photo_url").text();
-            var piece_html = '<div class="photo_row item"><img  src="' + url_img + '"alt="" class="imgTile" data-toggle="modal" data-target="#slaider_modal"></div>';
-            $('.flex_container_albums').append(piece_html);
-        };
-        $(".flex_container_albums").find(".imgTile").on("load", function() {
-            $("#list").masonry('reloadItems');
-            $("#list").masonry('layout');
-        });
-    }
-    if ($(".more_photo").text() != "Конец фотографий") {
-        $(".more_photo").html("ПОСМОТРЕТЬ БОЛЬШЕ");
-    }
 }
-
 
 function tile_fot() {
     ul_list_length = $(".list_src_slaider").find("li").length;
+    console.log("Input:" + ul_list_length)
     lastFoto = ul_list_length;
-    firstFoto = lastFoto - 9;
+    firstFoto += 9;
     if (firstFoto <= 0) {
         firstFoto = 0;
     }
-    // $(".photo_row").css({ "display": "none" });
-    // $(".photo_row").remove();
     for (var lim = firstFoto; lim < lastFoto; lim++) {
         var order = lim;
         var url_img = $(".list_src_slaider").find("li").eq(order).find(".photo_url").text();
@@ -759,6 +747,9 @@ function tile_fot() {
         $("#list").masonry('reloadItems');
         $("#list").masonry('layout');
     });
+    if ($(".more_photo").text() != "Конец фотографий") {
+        $(".more_photo").html("ПОСМОТРЕТЬ БОЛЬШЕ");
+    }
 }
 
 function make_slider() {

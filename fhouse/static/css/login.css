@@ -1,7 +1,7 @@
 .conteinerLogin {
     border: 1px solid #CCD1D9;
     background-color: #fff;
-    padding: 20px;
+    padding: 20px 20px 10px;
 }
 
 #id_country {
@@ -9,7 +9,18 @@
 }
 
 select {
-    height: 25px;
+    height: 35px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    background: #ffffff !important;
+    outline: none !important;
+}
+
+.forPlaceholder p {
+    margin-top: 5px;
 }
 
 @media screen and (min-width: 1170px) {
@@ -72,16 +83,6 @@ select {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    float: right;
-}
-
-.finishLogin span {
-    float: right;
-    line-height: 24px;
-}
-
-.unimportant {
-    color: #13cf00;
 }
 
 #mainH {
@@ -161,6 +162,9 @@ select {
     .choseDayBitrh select {
         width: 100%;
     }
+    .choseDayBitrh select:nth-last-child(n+2) {
+        margin-bottom: 10px;
+    }
     .formLogin label {
         width: 100%;
     }
@@ -180,11 +184,8 @@ canvas {
 .imgCutting {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-}
-
-.cutImg {
-    padding: 10px;
+    justify-content: center;
+    overflow: hidden;
 }
 
 @media screen and (min-width: 1170px) {
@@ -216,16 +217,19 @@ canvas {
 }
 
 .uploadPhotoInput {
-    width: 100%;
-    height: 35px;
-    border: 1px solid silver;
-    background-color: red;
+    width: 45px;
+    height: 45px;
+    border: 0px solid silver;
+    background-color: #aa0a0c;
+    border-radius: 3px;
     color: #fff;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 #dowPhoto {
@@ -235,13 +239,6 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.cutImg>input,
-.cutImg>textarea,
-.cutImg>div {
-    margin-bottom: 10px;
-    width: 100%;
 }
 
 .avatarImg {
@@ -412,9 +409,44 @@ canvas {
 
 .btnLogin,
 .finishLogin {
-    background: linear-gradient( to bottom, #55acee, #3e83b6);
-    color: #fff !important;
-    border-color: #55acee;
+    padding: 7px 16px 8px;
+    margin: 0;
+    font-size: 12.5px;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: none;
+    vertical-align: top;
+    line-height: 15px;
+    text-align: center;
+    text-decoration: none;
+    background: none;
+    background-color: #aa0a0c;
+    color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.btnRegister {
+    padding: 7px 16px 8px;
+    margin: 0;
+    font-size: 12.5px;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: none;
+    vertical-align: top;
+    background: red;
+    line-height: 15px;
+    text-align: center;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    border-radius: 2px;
+    box-sizing: border-box;
 }
 
 .btnLogin:hover,
@@ -423,14 +455,12 @@ canvas {
 .finishLogin:hover,
 .finishLogin:focus,
 .finishLogin:active {
-    background: linear-gradient( to bottom, #55acee, #2e5b7d);
+    background-color: rgba(170, 10, 12, 0.76);
     color: #fff;
-    border-color: #55acee;
 }
 
 .btnLogin,
 .btnRegister {
-    height: 40px;
     width: calc( 50% - 5px);
 }
 
@@ -503,38 +533,40 @@ canvas {
     }
     .simpleLogin {
         order: 1;
-        margin-bottom: 20px;  
+        margin-bottom: 20px;
     }
     #signIn h1 {
         margin-bottom: 20px;
     }
 }
 
+
 /*Textarea login*/
 
 input[type="text"],
 input[type="password"] {
     background-color: #fff;
-   border: 1px solid #cccccc; 
-   border-radius: 3px; 
-   -webkit-border-radius: 3px; 
-   -moz-border-radius: 3px; 
-   -khtml-border-radius: 3px; 
-   background: #ffffff !important; 
-   outline: none !important; 
-   color: #cccccc; 
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    background: #ffffff !important;
+    outline: none !important;
+    color: #cccccc;
 }
 
 input[type="text"]:focus,
 input[type="password"] {
-  border: 1px solid #b9b6b6;
-  color: #222;
+    border: 1px solid #b9b6b6;
+    color: #222;
 }
 
 .simpleLogin label {
     font-size: 14px !important;
     text-transform: uppercase;
 }
+
 
 /*Media for border main*/
 
@@ -556,4 +588,68 @@ input[type="password"] {
         padding-top: 70px;
         padding-bottom: 20px;
     }
+}
+
+
+/*Register last*/
+
+#messageEror {
+    color: #e62117;
+    width: 100%;
+    text-align: right;
+}
+
+#registerFooter {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.cutImg {
+    display: flex;
+    justify-content: space-between;
+}
+
+.avatarChoose {
+    max-width: 100%;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    display: none;
+    margin-top: 20px;
+}
+
+.avatarChoose img {
+    width: 100%;
+}
+
+.closeImg {
+    cursor: pointer;
+    position: absolute;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #fff;
+    color: #fff;
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 15px;
+    top: 15px;
+    opacity: 0.7;
+}
+
+.closeImg:hover {
+    opacity: 1;
+}
+
+#erorSrc {
+    display: none;
+    color: #aa0a0c;
 }

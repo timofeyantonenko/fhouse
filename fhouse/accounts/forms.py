@@ -292,12 +292,12 @@ class UserLoginForm(forms.Form):
 
 
 class UserRegisterForm(forms.ModelForm):
-    first_name = forms.CharField(label='First name', widget=forms.TextInput(attrs={'placeholder': 'Имя'}))
-    last_name = forms.CharField(label='Last name', widget=forms.TextInput(attrs={'placeholder': 'Фамилия'}))
+    first_name = forms.CharField(label='First name', widget=forms.TextInput(attrs={'placeholder': 'Имя', 'maxlength':'12'}))
+    last_name = forms.CharField(label='Last name', widget=forms.TextInput(attrs={'placeholder': 'Фамилия', 'maxlength':'12'}))
     email = forms.EmailField(label='Email address', widget=forms.TextInput(attrs={'placeholder': 'Email адресс'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Пароль'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Пароль', 'maxlength':'30'}))
     country = forms.CharField(label='Country', widget=forms.Select(choices=COUNTRY_CHOICES))
-    city = forms.CharField(label='City', widget=forms.TextInput(attrs={'placeholder': 'Город'}))
+    city = forms.CharField(label='City', widget=forms.TextInput(attrs={'placeholder': 'Город', 'maxlength':'20'}))
     avatar = forms.ImageField()
     date_of_birth = forms.DateField()
 

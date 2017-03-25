@@ -49,10 +49,10 @@
             <div class="simpleLogin">
             	<h2>{{ title }}</h2>
                 <form method="POST" action="" enctype="multipart/form-data">
-                    {% csrf_token %} {{ form|crispy }} {{ form.errors }} {{ form.non_field_errors }}
+                    {% csrf_token %} {{ form|crispy }} {{ form.non_field_errors }}
                     <div class="loginBtn">
                     	<input type="submit" class="btn btn-default btnLogin" value="{{ title }}">
-                    	<button class="btnRegister btn btn-default ">
+                    	<button class="btnRegister">
                     		<a href="/register" class="registerLink">Регистрация</a>
                     	</button>
                     	

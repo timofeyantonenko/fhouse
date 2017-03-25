@@ -51,6 +51,15 @@
     margin-left: 10px;
 }
 
+#mobileAlnbumShow span,
+#sectionMobile span {
+    margin-left: 10px;
+}
+
+#mobileAlnbumShow .glyphicon-menu-hamburger {
+    font-size: 22px;
+}
+
 .slaider_gallery {
     background-color: #fff;
     height: 552px;
@@ -1479,10 +1488,10 @@ ul {
     }
 }
 
-.nav_ul li a @media screen and (max-width: 569px) {
+@media screen and (max-width: 569px) {
     .item {
-        width: calc(100% - 10px);
-        margin: 0 5px 10px 5px;
+        width: 100%;
+        margin: 0 0 10px 0;
     }
 }
 
@@ -1734,7 +1743,7 @@ ul {
         width: 95vw !important;
     }
     #closeModalDialog {
-        right: 2.5vw;
+        right: calc(2.5vw + 10px);
         top: 40px;
     }
     .modal_photos {
@@ -1749,14 +1758,14 @@ ul {
 @media screen and (min-width: 750px) and (max-width: 969px) {
     #slaider_modal .modal-dialog {
         height: 450px !important;
-        width: 95vw !important;
+        width: 95% !important;
     }
     .flex_modal {
         height: 450px !important;
-        width: 95vw !important;
+        width: 100% !important;
     }
     #closeModalDialog {
-        right: 2.5vw;
+        right: calc(2.5% + 10px);
         top: 40px;
     }
     .modal_photos {
@@ -1773,14 +1782,14 @@ ul {
         width: 95% !important;
         margin: auto;
     }
-    #slaider_modal .modal-dialog {
+/*    #slaider_modal .modal-dialog {
         width: 95vw !important;
-    }
+    }*/
     .flex_modal {
-        width: 95vw !important;
+        width: 100% !important;
     }
     #closeModalDialog {
-        right: 2.5vw;
+        right: 20px;
         top: 20px;
     }
     .modal_photos {
