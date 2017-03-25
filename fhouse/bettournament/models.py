@@ -78,6 +78,21 @@ class Match(models.Model):
         default=simple,
     )
 
+    no_played = -1
+    home_win = 0
+    draw = 1
+    guest_win = 2
+    MATCH_RESULT_CHOICES = (
+        (no_played, 'No played'),
+        (home_win, 'Home win'),
+        (draw, 'Draw'),
+        (guest_win, 'Guest win'),
+    )
+    match_result = models.IntegerField(
+        choices=MATCH_RESULT_CHOICES,
+        default=no_played,
+    )
+
     # if match used for bet and if we want to give some specific bonus for this match
     match_bonus = models.IntegerField(blank=True, null=True)
 
@@ -149,24 +164,6 @@ class MatchBetFromUser(models.Model):
         return '{},  bet: {}'.format(self.match, self.user_bet)
 
 
-class UsersResult(models.Model):
-    # which user make the bet
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
-
-    # three matches for every user
-    result_match1 = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE,
-                                         related_name='%(class)s_match1_result', default=1)
-    result_match2 = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE,
-                                         related_name='%(class)s_match2_result', default=1)
-    result_match3 = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE,
-                                         related_name='%(class)s_match3_result', default=1)
-
-    score = models.FloatField()
-
-    def __str__(self):
-        return 'user: {} match: {}, score: {}'.format(self.user, self.match, self.score)
-
-
 class StageBet(models.Model):
     """
     need for setup stage bet
@@ -182,3 +179,23 @@ class StageBet(models.Model):
 
     def __str__(self):
         return 'match1: {},\nmatch2: {}\nmatch3: {}'.format(self.match_1, self.match_2, self.match_3)
+
+
+class UsersResult(models.Model):
+    # which user make the bet
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+
+    # three matches for every user
+    result_match1 = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE,
+                                         related_name='%(class)s_match1_result', default=1)
+    result_match2 = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE,
+                                         related_name='%(class)s_match2_result', default=1)
+    result_match3 = models.OneToOneField(MatchBetFromUser, on_delete=models.CASCADE,
+                                         related_name='%(class)s_match3_result', default=1)
+
+    stage = models.ForeignKey(StageBet, on_delete=models.CASCADE)
+
+    score = models.FloatField(default=0)
+
+    def __str__(self):
+        return 'user: {}, score: {}'.format(self.user, self.score)

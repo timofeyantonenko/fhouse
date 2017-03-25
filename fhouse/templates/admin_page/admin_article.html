@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+{% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
     <meta charset="utf-8">
-    <meta name="viewport" content="width = device-width, initial-scale = 1"></meta>
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Админ.Статьи</title>
@@ -13,22 +10,17 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" />
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css"> -->
-</head>
-
-<body>
+{% endblock head_extra %} {% block content %}
     <div class="container">
         <div class="row">
             <main>
                 <div class="all_suggesting_news">
                     <nav>
                         <ul class="nav nav-pills navEventAdmin">
-                            <li role="presentation"><a href="admin_news.html">Новости<span class="new">(11)</span></a></li>
-                            <li role="presentation"><a href="admin_article.html">Статьи<span class="new">(22)</span></a></li>
-                            <li role="presentation"><a href="admin_bets.html">Прогнозы</a></li>
-                            <li role="presentation"><a href="admin_photo.html">Добавить фото <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li>
-                        </ul>
+                            <li role="presentation"><a href="/admin_page/news">Новости<span class="new">(11)</span></a></li>
+                            <li role="presentation"><a href="/admin_page/articles">Статьи<span class="new">(22)</span></a></li>
+                            <li role="presentation"><a href="/admin_page/bets">Прогнозы</a></li>
+                            <li role="presentation"><a href="/admin_page/gallery">Добавить фото <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></li></ul>
                     </nav>
                     <h2>Предложенные статьи</h2>
 
@@ -251,6 +243,4 @@
     <script src="../../static/js/admin_page.js"></script>
     <script src="../../static/js/jquery-ui.min.js"></script>
     <script src="../../static/js/edit_news.js"></script>
-</body>
-
-</html>
+{% endblock content %}
