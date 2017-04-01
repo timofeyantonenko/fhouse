@@ -40,6 +40,9 @@
     .advertising {
         width: 100%;
     }
+    .table {
+        font-size: 12px !important;
+    }
 }
 
 .block_table {
@@ -62,7 +65,7 @@
 .block_table h5,
 .block_table h6 {
     margin-top: 0px;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
     float: left;
 }
 
@@ -89,7 +92,7 @@
 }
 
 .recordNeartableRecord {
-    border-top: solid #d91f17 5px;
+    border-top: solid #aa0a0c 5px;
 }
 
 table {
@@ -106,7 +109,7 @@ table {
 }
 
 thead {
-    border-top: solid #d91f17 5px;
+    border-top: solid #aa0a0c 5px;
 }
 
 .searchRecord {
@@ -126,8 +129,6 @@ thead {
 
 
 /*search */
-
-.searchRecord {}
 
 .input-group-btn .btn-group {
     display: flex !important;
@@ -173,7 +174,7 @@ h1 {
 }
 
 h1 p {
-    margin: 0;
+    margin: 0 0 10px;
     padding: 0;
 }
 
@@ -200,6 +201,18 @@ h1 p {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
+    background: #aa0a0c;
+    border-color: #aa0a0c;
+    text-transform: uppercase;
+}
+
+.searchRecord .btn-primary:hover,
+.searchRecord .btn-primary:focus,
+.searchRecord .btn-primary:visited,
+.searchRecord .btn-primary:active  {
+    color: #fff;
+    background: rgba(170, 10, 12, 0.84);
+    border-color: rgba(170, 10, 12, 0.84);
 }
 
 
@@ -366,10 +379,6 @@ h1 p {
     width: 100%;
 }
 
-.linkTable p {
-    
-}
-
 .linkTable:focus,
 .linkTable:active,
 .linkTable:visited {
@@ -409,6 +418,8 @@ h1 p {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     max-width: calc(100% - 30px) !important;
+    line-height: 16px;
+    max-height: 16px;
 }
 
 
@@ -418,4 +429,14 @@ h1 p {
 
 table {
     max-width: 100% !important;
+}
+
+/*Особенная таблица*/
+
+.noClub tr th:nth-child(3) {
+    display: none;
+}
+
+.noNational tr th:nth-child(4) {
+    display: none;
 }

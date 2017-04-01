@@ -21,6 +21,8 @@ select {
 
 .forPlaceholder p {
     margin-top: 5px;
+    display: none;
+    color: #e62117;
 }
 
 @media screen and (min-width: 1170px) {
@@ -73,13 +75,10 @@ select {
 }
 
 .finishLogin {
-    padding: 0px 15px;
-    font-weight: 700;
     text-transform: uppercase;
     font-size: 12px;
     color: #fff;
     width: 200px;
-    height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -229,7 +228,11 @@ canvas {
     align-items: center;
     overflow: hidden;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 5px;
+}
+
+.uploadPhotoInput:hover {
+    background-color: rgba(170, 10, 12, 0.84);
 }
 
 #dowPhoto {
@@ -239,6 +242,7 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
+    cursor: pointer;
 }
 
 .avatarImg {
@@ -379,7 +383,6 @@ canvas {
 
 .loginBtn {
     display: flex;
-    align-items: flex-end;
     justify-content: space-between;
     width: 100%;
 }
@@ -390,26 +393,9 @@ canvas {
     margin-top: 0;
 }
 
-.loginBtn a {
-    color: #222;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.loginBtn a:hover,
-.loginBtn a:focus,
-.loginBtn a:active,
-.loginBtn a:visited {
-    color: #222;
-    text-decoration: none;
-}
-
 .btnLogin,
 .finishLogin {
-    padding: 7px 16px 8px;
+    padding: 9px 16px 9px;
     margin: 0;
     font-size: 12.5px;
     display: inline-block;
@@ -429,17 +415,18 @@ canvas {
     box-sizing: border-box;
 }
 
-.btnRegister {
-    padding: 7px 16px 8px;
+a.btnRegister {
+    padding: 9px 16px 9px;
     margin: 0;
     font-size: 12.5px;
-    display: inline-block;
+    display: block;
     zoom: 1;
     cursor: pointer;
     white-space: nowrap;
     outline: none;
     vertical-align: top;
-    background: red;
+    background: #5fb053 !important;
+    color: #fff;
     line-height: 15px;
     text-align: center;
     text-decoration: none;
@@ -449,13 +436,32 @@ canvas {
     box-sizing: border-box;
 }
 
+.btnRegister:focus {
+    background: #5fb053 !important;
+    color: #fff;
+}
+
+.btnRegister:hover,
+.btnRegister:active {
+    background: rgba(23, 160, 0, 0.55) !important;
+    color: #fff;
+}
+
+.btnRegister a {
+    color: #fff;
+}
+
 .btnLogin:hover,
-.btnLogin:focus,
 .btnLogin:active,
 .finishLogin:hover,
-.finishLogin:focus,
 .finishLogin:active {
-    background-color: rgba(170, 10, 12, 0.76);
+    background-color: rgba(170, 10, 12, 0.84) !important;
+    color: #fff !important;
+}
+
+.finishLogin:focus,
+.btnLogin:focus {
+    background-color: #aa0a0c !important;
     color: #fff;
 }
 
@@ -564,7 +570,6 @@ input[type="password"] {
 
 .simpleLogin label {
     font-size: 14px !important;
-    text-transform: uppercase;
 }
 
 
@@ -597,6 +602,8 @@ input[type="password"] {
     color: #e62117;
     width: 100%;
     text-align: right;
+    margin-top: 10px;
+    font-weight: 700;
 }
 
 #registerFooter {
@@ -651,5 +658,127 @@ input[type="password"] {
 
 #erorSrc {
     display: none;
-    color: #aa0a0c;
+    color: #e62117;
+}
+
+.asteriskField {
+    display: none;
+}
+
+#div_id_username label,
+#div_id_password label {
+    opacity: 0;
+}
+
+.getNewPasword {
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+}
+
+
+/*Error login*/
+
+.erorLogin {
+    margin: 10px 0 0;
+    color: #e62117;
+    width: 100%;
+}
+
+#loginWarning {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+/*Modal fogot pasword*/
+
+#forgotPasword .modal-header {
+    color: #fff;
+    background-color: #aa0a0c;
+}
+
+#forgotPasword .modal-content {
+    border-radius: 0;
+}
+
+#forgotPasword button.close {
+    color: #fff;
+    opacity: 0.7;
+    font-size: 20px;
+}
+
+#forgotPasword button.close:hover {
+    opacity: 1;
+}
+
+#forgotPasword h4 {
+    text-align: center;
+}
+
+.send-email {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.send-email label {
+    margin: 0 10px 0 40px;
+    color: #777;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.infoP {
+    color: #666;
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 750px) {
+    .send-email label {
+        margin: 0 10px 0 40px;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .send-email label {
+        margin: 0 10px 0 0;
+    }
+}
+
+.cancelModal,
+#getEmailBtn {
+    padding: 9px 16px 9px;
+    margin: 0;
+    font-size: 12.5px;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: none;
+    vertical-align: top;
+    line-height: 15px;
+    text-align: center;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.cancelModal {
+    background: rgba(51, 39, 39, 0.2);
+}
+
+.cancelModal:hover {
+    background: rgba(0, 0, 0, 0.24);
+}
+
+#getEmailBtn {
+    background: #aa0a0c;
+}
+
+#getEmailBtn:hover {
+    background: rgba(170, 10, 12, 0.84);
 }

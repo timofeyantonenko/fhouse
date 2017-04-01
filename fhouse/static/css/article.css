@@ -8,13 +8,29 @@ textarea {
 }
 
 #offerNewsBtn {
-    margin-right: 10px;
     height: 30px !important;
-    margin-bottom: 10px;
-    background: linear-gradient(to bottom, #e62117 0, #a21515 100%) !important;
+    padding: 0 16px;
+    margin: 0 10px 10px 0;
+    font-size: 12.5px;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: none;
+    vertical-align: top;
+    line-height: 30pxpx;
+    text-align: center;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    border-radius: 2px;
+    background: #aa0a0c;
     color: #fff;
-    border-color: #7b4341;
-    padding: 0 10px !important;
+    box-sizing: border-box;
+}
+
+#offerNewsBtn:hover{
+   background:  rgba(170, 10, 12, 0.84);
 }
 
 .searchRecord {
@@ -43,11 +59,19 @@ textarea {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
-    background: linear-gradient(to bottom, #e62117 0, #a21515 100%) !important;
-    border-color: #7b4341;
+    background: #aa0a0c;
+    border-color: #aa0a0c;
     text-transform: uppercase;
 }
 
+.searchRecord .btn-primary:hover,
+.searchRecord .btn-primary:focus,
+.searchRecord .btn-primary:visited,
+.searchRecord .btn-primary:active  {
+    color: #fff;
+    background: rgba(170, 10, 12, 0.84);
+    border-color: rgba(170, 10, 12, 0.84);
+}
 
 
 /*Aticle main block*/
@@ -67,7 +91,7 @@ textarea {
 /*Чтиво*/
 
 .one_read_article a {
-    color: #333;
+    color: #222;
 }
 
 .articles_author p {
@@ -118,14 +142,14 @@ textarea {
     padding: 5px;
     width: 230px;
     text-decoration: none;
-    color: #333;
+    color: #222;
 }
 
 .more_article a:hover,
 .more_article a:focus,
 .more_article a:active {
     text-decoration: none;
-    color: #333;
+    color: #222;
 }
 
 
@@ -417,6 +441,8 @@ textarea {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    line-height: 20px;
+    max-height: 60px;
 }
 
 .author_img {
@@ -463,7 +489,7 @@ textarea {
 
 @media screen and (min-width: 1170px) {
     .item {
-        width: calc(33.333333% - 15px);
+        width: calc(33.222222% - 15px);
         float: left;
         margin: 0 7.5px 15px 7.5px;
     }
@@ -471,7 +497,7 @@ textarea {
 
 @media screen and (min-width: 970px) and (max-width: 1169px) {
     .item {
-        width: calc(33.333333% - 15px);
+        width: calc(33.222222% - 15px);
         float: left;
         margin: 0 7.5px 15px 7.5px;
     }

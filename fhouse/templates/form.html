@@ -1,7 +1,9 @@
 {% extends "base.html" %} {% load crispy_forms_tags %} {% load staticfiles %} {% block head_extra %}
-<link rel="stylesheet" href='{% static "css/login.css" %}'> {% endblock head_extra %} {% block content %}
+<link rel="stylesheet" href='{% static "css/login.css" %}'>
+<script src='{% static "js/login.js" %}'></script>
+{% endblock head_extra %} {% block content %}
 <main>
-    <section id="signIn">   
+    <section id="signIn">
         <div class="content">
             <div class="loginWith">
                 <h2>Вход с помощью</h2>
@@ -10,57 +12,85 @@
                         <i class="fa fa-vk" aria-hidden="true"></i>
                     </div>
                     <h3>
-        			Вконтакте
-        		</h3>
+            Вконтакте
+        </h3>
                 </div>
                 <div class="signInhelp fb">
                     <div class="iconSign">
                         <i class="fa fa-facebook" aria-hidden="true"></i>
                     </div>
                     <h3>
-        			Facebook
-        		</h3>
+            Facebook
+        </h3>
                 </div>
                 <div class="signInhelp gogle">
                     <div class="iconSign">
                         <i class="fa fa-google-plus" aria-hidden="true"></i>
                     </div>
                     <h3>
-        			Google
-        		</h3>
+            Google
+        </h3>
                 </div>
                 <div class="signInhelp odnoklasniki">
                     <div class="iconSign">
                         <i class="fa fa-odnoklassniki" aria-hidden="true"></i>
                     </div>
                     <h3>
-        			Одноклассники
-        		</h3>
+            Одноклассники
+        </h3>
                 </div>
                 <div class="signInhelp tw">
                     <div class="iconSign">
                         <i class="fa fa-twitter" aria-hidden="true"></i>
                     </div>
                     <h3>
-        			Twitter
-        		</h3>
+            Twitter
+        </h3>
                 </div>
             </div>
             <div class="simpleLogin">
-            	<h2>{{ title }}</h2>
+                <h2>{{ title }}</h2>
+                <span id="loginWarning">
+            
+        </span>
                 <form method="POST" action="" enctype="multipart/form-data">
-                    {% csrf_token %} {{ form|crispy }} {{ form.non_field_errors }}
+                    {% csrf_token %} {{ form|crispy }}
+                    <!-- {{ form.non_field_errors }} -->
                     <div class="loginBtn">
-                    	<input type="submit" class="btn btn-default btnLogin" value="{{ title }}">
-                    	<button class="btnRegister">
-                    		<a href="/register" class="registerLink">Регистрация</a>
-                    	</button>
-                    	
+                        <input type="submit" class="btn btn-default btnLogin" value="{{ title }}">
+                        <a href="/register" class="btnRegister">Регистрация</a>
                     </div>
-                    
+                    <div class="getNewPasword">
+                        <a href="" data-toggle="modal" data-target="#forgotPasword">Забыли пароль?</a>
+                    </div>
                 </form>
             </div>
         </div>
     </section>
 </main>
+<!-- Modal forgot pasword -->
+<div class="modal fade" id="forgotPasword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Восстановление доступа к аккаунту</h5>
+            </div>
+            <div class="modal-body">
+                <h4>Пожалуйста, укажите e-mail, который Вы использовали для входа на сайт.</h4>
+                <form>
+                    <div class="send-email">
+                        <label for="emailUser" nowrap>E-mail:</label>
+                        <input type="text" id="emailUser">
+                    </div>
+                    <p class="infoP">На указаный почтовый адрес будет выслан ваш пароль</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancelModal" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" id="getEmailBtn">Получить пароль</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

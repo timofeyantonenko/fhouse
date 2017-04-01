@@ -1,5 +1,57 @@
 $(document).ready(function() {
 
+    // Flex img
+    // flexImg()
+
+    $(document).mouseup(function(e) {
+        var div = $("#top_profile_menu");
+        var div_parent = $(".user_profile");
+        if (!div.is(e.target) && div.has(e.target).length === 0 && !div_parent.is(e.target) && div_parent.has(e.target).length === 0) {
+            div.hide();
+            div_parent.removeClass("active_top_profile_menu");
+        }
+    });
+
+    // Рейтинг посмотреть
+    $(".users_progress").children("section").on("click", function() {
+        var slideToogleElement = $(this).find(".contentRating");
+        if ( $(this).hasClass("closedAkardion") ) {
+            slideToogleElement.slideDown();
+            $(this).removeClass("closedAkardion").addClass("openingAkardion");
+            $(this).siblings().removeClass("openingAkardion").addClass("closedAkardion");
+            $(this).siblings().children(".contentRating").slideUp(200)
+        } else {
+            slideToogleElement.slideUp();
+            $(this).addClass("closedAkardion").removeClass("openingAkardion");
+        }
+    })
+
+    // Close modal
+
+    $(".close_modal").on("click touchstart", function() {
+        $('#week_bets_top').modal('hide')
+    });
+
+    $('.relativeModal').on('click touchstart', function(e) {
+        if (e.target !== this)
+            return;
+
+        $('#week_bets_top').modal('hide');
+    });
+
+    // $(window).resize(function() {
+    //     flexImg();
+    // });
+
+    // Class users avatar
+    $(".flexImg").children("img").each(function() {
+        $(this).on("load", function() {
+            if ($(this).height() < $(this).parent().height()) {
+                $(this).parent().addClass("bigWidth")
+            }
+        })
+    });
+
     // Offer article
     $(".linkImgArticle").keyup(function() {
         // downloadLinkTosrc();
@@ -22,7 +74,7 @@ $(document).ready(function() {
     });
 
     // Current link
-    if ((location.pathname.split("/")[1]) !== ""){
+    if ((location.pathname.split("/")[1]) !== "") {
         $('#mainNav a[href^="/' + location.pathname.split("/")[1] + '"]').parent().addClass('currentLink');
     }
 
@@ -41,15 +93,6 @@ $(document).ready(function() {
                 $(".user_profile").addClass("active_top_profile_menu");
             };
         });
-    });
-
-    $(document).mouseup(function(e) {
-        var div = $("#top_profile_menu");
-        var div_parent = $(".user_profile");
-        if (!div.is(e.target) && div.has(e.target).length === 0 && !div_parent.is(e.target) && div_parent.has(e.target).length === 0) {
-            div.hide();
-            div_parent.removeClass("active_top_profile_menu");
-        }
     });
 
     // Make bet
@@ -141,9 +184,6 @@ $(document).ready(function() {
         $(".body_user_choice").children(".history_bet").eq(i).find(".not_results").hide();
     }
 
-
-
-
     $(".next_week_bet").bind('click', prev_week);
 
     $(".prev_week_bet").bind('click', next_week);
@@ -151,6 +191,8 @@ $(document).ready(function() {
     arraySum(arr);
 
 });
+
+
 
 // Menu toggle
 
@@ -167,11 +209,6 @@ $("#menuBtn").on("click", function() {
 // For modal
 $(".headerAllnews .btn").on("click", function() {
     $("#offerNewsModal").modal('show')
-})
-
-$('.modal').on('shown.bs.modal', function() {
-    console.log("Хана")
-        // $("body.modal-open").removeAttr("style");
 })
 
 // Модальное окно предложить артикл
@@ -192,3 +229,15 @@ function downloadLinkTosrc() {
     var srcNew = $(this).val();
     $('.imgOfferArticle').attr('src', srcNew);
 }
+
+
+// function flexImg() {
+//     $(".flexImg").children("img").each(function() {
+//         $(this).parent().removeClass("bigWidth");
+//         $(this).on("load", function() {
+//             if ($(this).height() < $(this).parent().height()) {
+//                 $(this).parent().addClass("bigWidth");
+//             }
+//         })
+//     });
+// }

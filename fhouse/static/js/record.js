@@ -33,6 +33,30 @@ function itemDownload() {
 
 $(document).ready(function() {
 
+    // Уникальные таблицы
+
+    var $trTable = $(".tableRecord").children("tr").eq(1).children("th");
+    for ( var i = 2; i < 4; i++) {
+        var indexTh = $(this).eq(i).index() 
+        if ( $trTable.find("img").attr('src') == ""  ) {
+            if ( i == 2) {
+                $(".tableRecord").addClass("noClub")
+                $(".headTable").addClass("noClub")
+            } else {
+                $(".tableRecord").addClass("noNational")
+                $(".headTable").addClass("noNational")
+            }
+        }
+    }
+
+    if ( $(".headTable").hasClass("noClub") && !$(".headTable").hasClass("noNational") ) {
+        $(".headTable").children("tr").children("th").eq(1).html("Клуб")
+    } else if ( $(".headTable").hasClass("noClub") && $(".headTable").hasClass("noNational") ) {
+        $(".headTable").children("tr").children("th").eq(1).html("Страна")
+    } else {
+        $(".headTable").children("tr").children("th").eq(1).html("Имя Фамилия") 
+    }
+
     var dowloadItem;
     itemDownload();
 
