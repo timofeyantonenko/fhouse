@@ -3,7 +3,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import StageBetSerializer
 from django.views.decorators.csrf import csrf_protect
-from .tasks import send_feedback_email_task
 
 from .models import StageBet, League, MatchBetFromUser, UsersResult
 
@@ -42,11 +41,9 @@ def all_reviews(request):
 
 @api_view(['GET'])
 def get_bet_stage_info(request):
-    send_feedback_email_task.delay("s", "message")
-    send_feedback_email_task(1, 12)
     context = {}
     # we take current bet. BE AWARE - it must be only one object
-    current_week_bet = StageBet.objects.filter(must_be_checked=True).first()
+    current_week_bet = StageBet.objects.filter(must_be_checked=True).last()
     bet_serializer = StageBetSerializer(current_week_bet, many=False, context={'request': request})
     return Response({'stage_bet': bet_serializer.data})
 

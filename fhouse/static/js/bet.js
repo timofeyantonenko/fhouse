@@ -321,7 +321,7 @@ function load_bet_info() {
                 match_json = json_stage_matches[match_i];
                 console.log(match_json);
 
-                home_team_name = match_json["ho me_team"]["team_name"];
+                home_team_name = match_json["home_team"]["team_name"];
                 home_team_coef = match_json["coefficient"]["home_coef"];
 
                 guest_team_name = match_json["guest_team"]["team_name"];

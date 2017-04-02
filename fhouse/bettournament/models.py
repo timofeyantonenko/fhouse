@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.db import models
 
 from utils.files_preparing import upload_location
@@ -178,7 +177,8 @@ class StageBet(models.Model):
     must_be_checked = models.BooleanField(default=True)
 
     def __str__(self):
-        return 'match1: {},\nmatch2: {}\nmatch3: {}'.format(self.match_1, self.match_2, self.match_3)
+        return 'match1: {},\nmatch2: {}\nmatch3: {}'.format(self.match_1, self.match_2, self.match_3) + \
+               " id: " + str(self.id)
 
 
 class UsersResult(models.Model):
