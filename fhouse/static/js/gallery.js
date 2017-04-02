@@ -29,14 +29,60 @@ if (!String.format) {
         });
     };
 }
+
 $(document).ready(function() {
+
+    // Size img in slider
+
+    var sliderPar = '#container_img_in_slaider';
+    var modalPar = '#flex_container_img_modal';
+
+    $('#container_img_in_slaider').children('img').on('load', function() {
+            size_img_slaider(sliderPar)
+            $(this).parent().removeClass('load');
+        })
+        .on('error', function() {
+            // do stuff on smth wrong (error 404, etc.)
+        })
+        .each(function() {
+            if (this.complete) {
+                $(this).parent().addClass('load');
+            }
+        });
+
+    $('#flex_container_img_modal').children('img').on('load', function() {
+        size_img_slaider(modalPar)
+        $(this).parent().removeClass('load');
+    }).on('error', function() {
+
+    }).each(function() {
+        if (this.complete) {
+            $(this).parent().addClass('load');
+        }
+    });
+
+    $(window).resize(function() {
+        itemDownload();
+        size_img_slaider(sliderPar);
+        size_img_slaider(modalPar);
+        if ($(window).width() >= 970) {
+            $("#albums_right").show();
+        }
+    });
 
     // Показать альбомы
     $("#mobileAlnbumShow").on("click", function() {
         $("#comments_photo_slider").hide();
         $(".head_comment_slider").hide();
         $("#albums_right").show();
+        $(".album_previews_img img").each(function() {
+            if ($(this).height() < $(this).parent().height()) {
+                $(this).parent().addClass("bigWidth");
+            }
+            $(this).css({ "opacity": "1" })
+        });
     });
+
     // Скрыть альбомы
     $(".arrow-right").on("click", function() {
         $("#albums_right").hide();
@@ -72,15 +118,6 @@ $(document).ready(function() {
     var dowloadItem;
     itemDownload();
 
-    $(window).resize(function() {
-        itemDownload();
-        resizeWindowModal();
-        resizeWindowSlider();
-        if ($(window).width() >= 970) {
-            $("#albums_right").show();
-        }
-    });
-
     section = $(".nav_ul li:first-child a");
     section_name = section.text().trim();
     console.log(section_name);
@@ -89,16 +126,12 @@ $(document).ready(function() {
     load_section_info(section_name, undefined);
 
     // Активный раздел меню
-    //$(".nav_ul li:first-child a").addClass("active_nav_ul");
-
     $(".nav_ul li a").click(function(e) {
         // Reset var start foto 
-        resetFirstLi ();
+        resetFirstLi();
         $(".nav_ul").hide();
         $(".more_photo").html("ПОСМОТРЕТЬ БОЛЬШЕ");
         $(".photo_row").remove();
-        $('.container_photo_in_modal img').hide();
-        $("#beforeLoadModal").show();
         if ($(this).hasClass('active_nav_ul')) {
             return;
         } else {
@@ -118,188 +151,8 @@ $(document).ready(function() {
         // Active section of menu
         section.addClass("active_nav_ul");
         load_section_info(section_name, undefined);
-
-        // $('#list').masonry({ itemSelector: '.item' });
-        $(".flex_container_albums img").on("load", function() {
-            console.log("privet moy svet")
-        });
-        $.when($.ajax(size_img_slider())).then(function() {
-            loadedModal();
-        });
-        
+        loadSlider();
     });
-
-    $.when($.ajax(size_img_slaider())).then(function() {
-        loaded();
-    });
-
-    // After resize window img size_img_slaider
-    function resizeWindowModal() {
-        var height_container_photo = $('#flex_container_img_modal').height();
-        var width_container_photo = $('#flex_container_img_modal').width();
-        var relationship_w_h_container = (width_container_photo / height_container_photo);
-
-        var thisElement = $(".container_photo_in_modal img");
-
-        $(thisElement).css({ "width": "inherit", "height": "inherit" });
-        if (($(thisElement).width() > width_container_photo) && ($(thisElement).height() > height_container_photo)) {
-            var width_height_img = ($(thisElement).width() / $(thisElement).height());
-            if (relationship_w_h_container > width_height_img) {
-                // alert("w>h")                  
-                $(thisElement).css({ "width": height_container_photo * width_height_img, "height": height_container_photo })
-            } else if (relationship_w_h_container < width_height_img) {
-                // alert("w<h")
-
-                $(thisElement).css({ "width": width_container_photo, "height": width_container_photo / width_height_img })
-            };
-            // alert("width and height >")
-        } else if (($(thisElement).width() > width_container_photo) && ($(thisElement).height() < height_container_photo)) {
-            $(thisElement).css({ "width": width_container_photo, "height": "auto" });
-            // alert("width >")
-        } else if (($(thisElement).width() < width_container_photo) && ($(thisElement).height() > height_container_photo)) {
-            $(thisElement).css({ "height": height_container_photo, "width": "auto", "margin": "0 auto" });
-            // alert("height >");
-        } else if (($(thisElement).width() < width_container_photo) && ($(thisElement).height() < height_container_photo)) {
-            // alert("width and height <");
-            var width_img = $(thisElement).width();
-            var height_img = $(thisElement).height();
-            $(thisElement).css({ "height": "auto", "width": "auto" });
-        } else {
-            // alert("Пиздец")
-        }
-
-    }
-
-    function resizeWindowSlider() {
-        var height_container_photo = $('#flex_container_img_slaider').height();
-        var width_container_photo = $('#flex_container_img_slaider').width();
-        var relationship_w_h_container = (width_container_photo / height_container_photo);
-
-        var thisElement = $("#container_img_in_slaider img");
-
-        $(thisElement).css({ "width": "inherit", "height": "inherit" });
-        var width_height_img = ($(thisElement).width() / $(thisElement).height());
-        if (($(thisElement).width() > width_container_photo) && ($(thisElement).height() > height_container_photo) && (relationship_w_h_container > width_height_img)) {
-            //                console.log("w>h")
-            $(thisElement).css({ "width": height_container_photo * width_height_img, "height": height_container_photo, "margin": "0 auto" })
-            $(thisElement).show();
-            return true;
-        } else if (($(thisElement).width() > width_container_photo) && ($(thisElement).height() > height_container_photo) && (relationship_w_h_container < width_height_img)) {
-            //                console.log("w<h")
-            $(thisElement).css({ "width": width_container_photo, "height": width_container_photo / width_height_img, "margin": "0 auto" })
-            $(thisElement).show();
-            return true;
-        } else if (($(thisElement).width() > width_container_photo) && ($(thisElement).height() < height_container_photo)) {
-            $(thisElement).css({ "width": width_container_photo, "height": "auto", "margin": "0 auto" });
-            //                console.log("width >")
-            $(thisElement).show();
-            return true;
-        } else if (($(thisElement).width() < width_container_photo) && ($(thisElement).height() > height_container_photo)) {
-            $(thisElement).css({ "height": height_container_photo, "width": "auto", "margin": "0 auto" });
-            //                console.log("height >");
-            $(thisElement).show();
-            return true;
-        } else if (($(thisElement).width() < width_container_photo) && ($(thisElement).height() < height_container_photo)) {
-            //                console.log("width and height <");
-            var width_img = $(thisElement).width();
-            var height_img = $(thisElement).height();
-            $(thisElement).css({ "height": "auto", "width": "auto", "margin": "0 auto" });
-            $(thisElement).show();
-            return true;
-        } else {
-            console.log("Пиздец")
-        }
-    }
-
-    function loaded() {
-        $("#beforeSliderLoading").hide();
-        $('#container_img_in_slaider img').show();
-    };
-
-
-    // Размер фото 
-    function size_img_slaider() {
-
-        $('#container_img_in_slaider img').hide();
-        $("#beforeSliderLoading").show();
-
-        var height_container_photo = $('#flex_container_img_slaider').height();
-        var width_container_photo = $('#flex_container_img_slaider').width();
-        var relationship_w_h_container = (width_container_photo / height_container_photo);
-
-        $('#container_img_in_slaider img').on('load', function() {
-
-            $(this).css({ "width": "", "height": "" });
-            var width_height_img = ($(this).width() / $(this).height());
-            if (($(this).width() > width_container_photo) && ($(this).height() > height_container_photo) && (relationship_w_h_container > width_height_img)) {
-                //                console.log("w>h")
-                $(this).css({ "width": height_container_photo * width_height_img, "height": height_container_photo, "margin": "0 auto" })
-                return true;
-            } else if (($(this).width() > width_container_photo) && ($(this).height() > height_container_photo) && (relationship_w_h_container < width_height_img)) {
-                //                console.log("w<h")
-                $(this).css({ "width": width_container_photo, "height": width_container_photo / width_height_img, "margin": "0 auto" })
-                return true;
-            } else if (($(this).width() > width_container_photo) && ($(this).height() < height_container_photo)) {
-                $(this).css({ "width": width_container_photo, "height": "auto", "margin": "0 auto" });
-                //                console.log("width >")
-                return true;
-            } else if (($(this).width() < width_container_photo) && ($(this).height() > height_container_photo)) {
-                $(this).css({ "height": height_container_photo, "width": "auto", "margin": "0 auto" });
-                //                console.log("height >");
-                return true;
-            } else if (($(this).width() < width_container_photo) && ($(this).height() < height_container_photo)) {
-                //                console.log("width and height <");
-                var width_img = $(this).width();
-                var height_img = $(this).height();
-                $(this).css({ "height": "auto", "width": "auto", "margin": "0 auto" });
-                return true;
-            } else {
-                console.log("Пиздец")
-            }
-        });
-    }
-
-    function loadedModal() {
-        $("#beforeLoadModal").hide();
-        $('.container_photo_in_modal img').show();
-    }
-
-    function size_img_modal() {
-        $('.container_photo_in_modal img').hide();
-        $("#beforeLoadModal").show();
-        var height_container_photo = $('#flex_container_img_modal').height();
-        var width_container_photo = $('#flex_container_img_modal').width();
-        var relationship_w_h_container = (width_container_photo / height_container_photo);
-
-        $('.container_photo_in_modal img').on('load', function() {
-            $(this).css({ "width": "inherit", "height": "inherit" });
-            if (($(this).width() > width_container_photo) && ($(this).height() > height_container_photo)) {
-                var width_height_img = ($(this).width() / $(this).height());
-                if (relationship_w_h_container > width_height_img) {
-                    // alert("w>h")                  
-                    $(this).css({ "width": height_container_photo * width_height_img, "height": height_container_photo })
-                } else if (relationship_w_h_container < width_height_img) {
-                    // alert("w<h")
-
-                    $(this).css({ "width": width_container_photo, "height": width_container_photo / width_height_img })
-                };
-                // alert("width and height >")
-            } else if (($(this).width() > width_container_photo) && ($(this).height() < height_container_photo)) {
-                $(this).css({ "width": width_container_photo, "height": "auto" });
-                // alert("width >")
-            } else if (($(this).width() < width_container_photo) && ($(this).height() > height_container_photo)) {
-                $(this).css({ "height": height_container_photo, "width": "auto", "margin": "0 auto" });
-                // alert("height >");
-            } else if (($(this).width() < width_container_photo) && ($(this).height() < height_container_photo)) {
-                // alert("width and height <");
-                var width_img = $(this).width();
-                var height_img = $(this).height();
-                $(this).css({ "height": "auto", "width": "auto" });
-            } else {
-                // alert("Пиздец")
-            }
-        });
-    }
 
     // Преключения между фотками в слайдере
     var index_photo_slaider = 0;
@@ -323,7 +176,7 @@ $(document).ready(function() {
         var id_right = "area_for_right_arrow_slaider";
         var id_icon_left = "icon_left";
         var id_icon_right = "icon_right";
-
+        loadSlider()
         if (click_element_id == id_left || click_element_id == id_icon_left) {
             index_photo_slaider--;
             if (index_photo_slaider == -1) {
@@ -349,51 +202,57 @@ $(document).ready(function() {
         $("#slaider_and_albums").find('.block_dislike div.votes').text(new_negat_like);
         // $("#slaider_and_albums").find('.button_show_comments').children("span").text(new_count_comments);
         $("#slaider_and_albums").find('.album_slaider').text(new_album_title);
-        $.when($.ajax(size_img_slaider())).then(function() {
-            loaded();
-        });
         return false;
     });
 
     // При отрытии модального окна
-    // Слайдер в модальном окне
-    // $('.relative_container').on('click', function(evt) {
 
-    // });
-
-    var index_photo_modal = 0;
     var body_width = $('#slaider_modal .modal-dialog').width();
-
-
+    var index_photo_modal;
 
     $('.flex_container_albums').delegate('.photo_row', 'click', function(evt) {
-        $.when($.ajax(size_img_modal())).then(function() {
-            loadedModal();
-        });
         index_photo_modal = $(this).index();
         make_modal_slider();
         var indexModalPhoto = index_photo_modal + 1;
         $("#indexCountModal").html(indexModalPhoto);
         // Нужно передать к-во фото в данном альбоме или секции
         $("#sumCountModal").html("100");
-
         $('#slaider_modal').on('shown.bs.modal', function() {
-            $.when($.ajax(size_img_modal())).then(function() {
-                loadedModal();
-            });
+            size_img_slaider(modalPar)
+                // loadModal();
         })
     });
+
+    function make_modal_slider() {
+        var new_src = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".photo_url").text()
+        var new_count_comments = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".count_of_comments").text();
+        var new_album_title = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".photo_album_title").text()
+        var new_posit_like = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".photo_positive_likes").text()
+        var new_negat_like = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".photo_negative_likes").text()
+        $("#slaider_modal").find('#flex_container_img_modal img').attr("src", new_src);
+        $("#slaider_modal").find('.block_like div.votes').text(new_posit_like);
+        $("#slaider_modal").find('.block_dislike div.votes').text(new_negat_like);
+        $("#modalCountComment").text(new_count_comments);
+        if (new_count_comments == 0) {
+            $("#comments_photo_modal").find(".not_comments").css({ "display": "flex" });
+            $("#comments_photo_modal").find(".user_comment").hide()
+        } else {
+            $("#comments_photo_modal").find(".not_comments").css({ "display": "none" });
+            $("#comments_photo_modal").find(".user_comment").show();
+        }
+        $("#slaider_modal").find('.album_slaider').text(new_album_title);
+    }
 
     // Преключения между фотками в модальном окне
 
     $(".modal_slider_click").on("click", function(evt) {
-        var click_element_id = event.target.id;
+        loadModal()
+        var click_element_id = evt.target.id;
         var quantity_foto_li = $(".url_list .list_src_slaider li").length;
         var id_left = "modal_left";
         var id_right = "modal_right";
         var id_icon_left = "modal_left_icon";
         var id_icon_right = "modal_right_icon";
-
         if (click_element_id == id_left || click_element_id == id_icon_left) {
             index_photo_modal--;
             if (index_photo_modal == -1) {
@@ -408,26 +267,24 @@ $(document).ready(function() {
         var indexModalPhoto = index_photo_modal + 1;
         $("#indexCountModal").html(indexModalPhoto);
         make_modal_slider();
-        $.when($.ajax(size_img_modal())).then(function() {
-            loadedModal();
-        });
         return false;
     });
 
     $('html').keydown(function(eventObject) {
+        loadModal()
         if ($('#slaider_modal').hasClass('in')) {
-            var click_element_id = event.target.id;
+            var click_element_id = eventObject.target.id;
             var quantity_foto_li = $(".url_list .list_src_slaider li").length;
             var id_left = "modal_left";
             var id_right = "modal_right";
             var id_icon_left = "modal_left_icon";
             var id_icon_right = "modal_right_icon";
-            if (event.keyCode == 37) {
+            if (eventObject.keyCode == 37) {
                 index_photo_modal--;
                 if (index_photo_modal == -1) {
                     index_photo_modal = (quantity_foto_li - 1);
                 }
-            } else if (event.keyCode == 39) {
+            } else if (eventObject.keyCode == 39) {
                 index_photo_modal++;
                 if (index_photo_modal == quantity_foto_li) {
                     index_photo_modal = 0;
@@ -436,24 +293,8 @@ $(document).ready(function() {
             var indexModalPhoto = index_photo_modal + 1;
             $("#indexCountModal").html(indexModalPhoto);
             make_modal_slider();
-            $.when($.ajax(size_img_modal())).then(function() {
-                loadedModal();
-            });
         }
     });
-
-    function make_modal_slider() {
-        var new_src = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".photo_url").text()
-        var new_count_comments = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".count_of_comments").text()
-        var new_album_title = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".photo_album_title").text()
-        var new_posit_like = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".photo_positive_likes").text()
-        var new_negat_like = $(".url_list .list_src_slaider li").eq(index_photo_modal).children(".photo_negative_likes").text()
-        $("#slaider_modal").find('.container_photo_in_modal img').attr("src", new_src);
-        $("#slaider_modal").find('.block_like div.votes').text(new_posit_like);
-        $("#slaider_modal").find('.block_dislike div.votes').text(new_negat_like);
-        // $("#slaider_modal").find('.button_show_comments').children("span").text(new_count_comments);
-        $("#slaider_modal").find('.album_slaider').text(new_album_title);
-    }
 
     // Лайк-Дислйк
     $(".modal_photo_like>div").on("click", function() {
@@ -530,6 +371,7 @@ $(document).on("click", ".list_albums .album_previews", function(e) {
     var name_album = $(this).children(".discription_previewws_album").children(".title_album_preview").text();
     $('.album_slaider').html(name_album);
     load_album_photos(short_id, 1); // load first part of album photos
+    loadSlider();
     if ($(window).width() <= 969) {
         $("#albums_right").slideUp();
     }
@@ -541,7 +383,6 @@ $(document).on("click", ".list_albums .album_previews", function(e) {
 $(document).on("click", ".more_photo", function(e) {
     page = $(this).attr("href");
     section_name = $(".active_nav_ul");
-    console.log(section_name);
     section_name = section_name.text().trim();
     //    album_name = find(".active_selected_album");
     album = $(".active_selected_album");
@@ -553,7 +394,6 @@ $(document).on("click", ".more_photo", function(e) {
     } else {
         short_id = "all";
     }
-    console.log($(".list_src_slaider").find("li").length)
     load_tile_photos(section_name, short_id, page);
     morePhoto();
 });
@@ -624,7 +464,6 @@ function load_section_info(section_name, album_name) {
             });
             content.html(insert_data);
             make_slider();
-
             var json_request_albums = data['albums'];
             var albums_count_block = $('.quantity_album');
             albums_count_block.html(json_request_albums.length + " альбомов");
@@ -651,23 +490,9 @@ function load_section_info(section_name, album_name) {
             });
             albums_container.html(insert_data);
             $('.album_slaider').html(section_name);
-            // Обложка альбома
-            $(".imgAlbumCover").each(function() {
-                var $imgCover = $(this);
-                var $parentIMg = $(this).parent();
-                $(this).on("load", function() {
-                    var parent_width = $parentIMg.width();
-                    var parent_height = $parentIMg.height();
-                    var this_width = $imgCover.width();
-                    var this_height = $imgCover.height();
-                    var kofRel_w_h = parent_height / this_height;
-                    if (this_height < parent_height) {
-                        $imgCover.css({ "height": parent_height, "width": (parent_width * kofRel_w_h) });
-                    } else {
-                        console.log($parentImgAlbumCover)
-                    }
-                });
-            })
+            if ($(window).width() > 969) {
+                albumFotoFlex();
+            }
             $(".more_photo").attr("href", 2);
         },
         error: function(xhr, status, error) {
@@ -675,6 +500,18 @@ function load_section_info(section_name, album_name) {
             $(".more_photo").html("Конец фотограий");
         }
 
+    });
+}
+
+function albumFotoFlex() {
+    // Обложка альбома
+    $(".imgAlbumCover").each(function() {
+        $(this).on("load", function() {
+            if ($(this).height() < $(this).parent().height()) {
+                $(this).parent().addClass("bigWidth");
+            }
+            $(this).css({ "opacity": "1" });
+        })
     });
 }
 
@@ -731,7 +568,6 @@ function morePhoto() {
 
 function tile_fot() {
     ul_list_length = $(".list_src_slaider").find("li").length;
-    console.log("Input:" + ul_list_length)
     lastFoto = ul_list_length;
     firstFoto += 9;
     if (firstFoto <= 0) {
@@ -764,7 +600,6 @@ function make_slider() {
     // Новый слайдер
 
     // При переходе в галерею подгружается список ссылок с первой секции и src последней фото добавляется в img
-    //    alert($('.list_src_slaider li:first-child span.count_of_comments').text());
     var photo_image_url = $('.list_src_slaider li:first-child span.photo_url').text();
     var count_of_comments = $('.list_src_slaider li:first-child span.count_of_comments').text();
     var count_of_pos_likes = $('.list_src_slaider li:first-child span.photo_positive_likes').text();
@@ -779,17 +614,25 @@ function make_slider() {
     // $("#slaider_and_albums").find('.button_show_comments').children("span").text(new_count_comments);
     $("#slaider_and_albums").find('.album_slaider').text(photo_album_title);
     $("#sumCommentSlider").html(count_of_comments);
+    $("#sumCommentSliderRight").html(count_of_comments);
+    if (count_of_comments == 0) {
+        $("#comments_photo_slider").find(".not_comments").css({ "display": "flex" });
+        $("#comments_photo_slider").find(".user_comment").hide()
+    } else {
+        $("#comments_photo_slider").find(".not_comments").css({ "display": "none" });
+        $("#comments_photo_slider").find(".user_comment").show();
+    }
     $.when($.ajax(tile_fot())).then(function() {
         massonryShow();
     });
 }
+
 
 // К-во элементов для подгрузки
 
 var dowloadItem;
 
 function itemDownload() {
-
     if ($(window).width() >= 970) {
         dowloadItem = 3;
     } else if ($(window).width() >= 570 && $(window).width() < 1170) {
@@ -798,4 +641,55 @@ function itemDownload() {
         dowloadItem = 1;
     }
     $(".more_records a").attr("href", dowloadItem);
+}
+
+// Размер фото
+
+function size_img_slaider(parentImg) {
+    var height_container_photo = $(parentImg).height();
+    var width_container_photo = $(parentImg).width();
+    var relationship_w_h_container = (width_container_photo / height_container_photo);
+    var $imgSlider = $(parentImg).children("img");
+    $imgSlider.css({ "width": "auto", "height": "auto" });
+    var width_height_img = ($imgSlider.width() / $imgSlider.height());
+    if (($imgSlider.width() > width_container_photo) && ($imgSlider.height() > height_container_photo) && (relationship_w_h_container > width_height_img)) {
+        $imgSlider.css({ "width": height_container_photo * width_height_img, "height": height_container_photo, "margin": "0 auto" })
+        return true;
+    } else if (($imgSlider.width() > width_container_photo) && ($imgSlider.height() > height_container_photo) && (relationship_w_h_container < width_height_img)) {
+        $imgSlider.css({ "width": width_container_photo, "height": width_container_photo / width_height_img, "margin": "0 auto" })
+        return true;
+    } else if (($imgSlider.width() > width_container_photo) && ($imgSlider.height() < height_container_photo)) {
+        $imgSlider.css({ "width": width_container_photo, "height": "auto", "margin": "0 auto" });
+        return true;
+    } else if (($imgSlider.width() < width_container_photo) && ($imgSlider.height() > height_container_photo)) {
+        $imgSlider.css({ "height": height_container_photo, "width": "auto", "margin": "0 auto" });
+        return true;
+    } else if (($imgSlider.width() < width_container_photo) && ($imgSlider.height() < height_container_photo)) {
+        var width_img = $imgSlider.width();
+        var height_img = $imgSlider.height();
+        $imgSlider.css({ "height": "auto", "width": "auto", "margin": "0 auto" });
+        return true;
+    } else {
+        console.log("Пиздец")
+    }
+}
+
+// Loading img
+
+function loadSlider() {
+    $('#container_img_in_slaider').children('img')
+        .each(function() {
+            if (this.complete) {
+                $(this).parent().addClass('load');
+            }
+        });
+}
+
+function loadModal() {
+    $('#flex_container_img_modal').children('img')
+        .each(function() {
+            if (this.complete) {
+                $(this).parent().addClass('load');
+            }
+        });
 }

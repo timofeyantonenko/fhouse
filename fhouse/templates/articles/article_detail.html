@@ -46,20 +46,36 @@
                     <p>Author: {{ instance.user.get_full_name }}</p>
                     {% endif %}
                 </div>
-                <!--  <p>
-            <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-            </p> -->
                 <!-- Текст новости  -->
                 <div class="article_text">
                     {{ instance.get_markdown }}
                 </div>
+                <!--  <p>
+            <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+            </p> -->
+                <!-- Комментарии -->
                 <div class="footer_post_detail">
-                    <div class="teg_post_detail">
-                        Теги: {% for sub_tag in instance.tag.all %}
-                        <a href="#">{{ sub_tag.name }}</a> {% endfor %}
+                    <div class="block_like-dislike">
+                        <div class="like_and_dislike">
+                            <a href="{{instance.slug}}" class="like_all">
+                                <div class="like">
+                                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                </div>
+                                <div class="quantity_like">
+                                    {{ instance.positive_likes|length }}
+                                </div>
+                            </a>
+                            <a href="{{instance.slug}}" class="dislike_all">
+                                <div class="dislike">
+                                    <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                </div>
+                                <div class="quantity_dislike">
+                                    {{ instance.negative_likes|length }}
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <!-- Комментарии -->
             </div>
         </div>
         <div class="comments_base">
@@ -123,13 +139,13 @@
     </div>
     <div class="next_article_container">
         <div class="one_read_article">
-            <a href="#">
+            <a href="#" class="linkArticle">
                 <div class="one_read_article_img">
                     <img src="http://images.indianexpress.com/2016/05/david-beckham-man-utd.jpg?w=820?w=544" alt="">
-                    <div class="infoAricleDate">
-                        <div class="before_date"></div>
-                        <span class="date_aritle">28 0ctober</span>
-                    </div>
+                </div>
+                <div class="infoAricleDate">
+                    <div class="before_date"></div>
+                    <span class="date_aritle">28 0ctober</span>
                 </div>
                 <div class="one_read_article_info">
                     <h3>Месси точго лучше РОналду</h3>
@@ -140,19 +156,18 @@
             </a>
         </div>
         <div class="one_read_article">
-            <a href="#">
+            <a href="#" class="linkArticle">
                 <div class="one_read_article_img">
-                    <img src="http://images.indianexpress.com/2016/05/david-beckham-man-utd.jpg?w=820?w=544" alt="">
-                    <div class="infoAricleDate">
-                        <div class="before_date"></div>
-                        <span class="date_aritle"><strong>28 0ctober</span>
-                    </div>
+                    <img src="https://s-media-cache-ak0.pinimg.com/736x/0a/ff/28/0aff28930a87f7274bf8b57fdb30a6f3.jpg" alt="">
+                </div>
+                <div class="infoAricleDate">
+                    <div class="before_date"></div>
+                    <span class="date_aritle">28 0ctober</span>
                 </div>
                 <div class="one_read_article_info">
-                    <h3>Манчестер долго терпел унижения</h3>
+                    <h3>Месси точго лучше РОналду</h3>
                     <p>
-                        Сколько можно, давайте уже играть. Сколько можно, давайте уже играть.
-                        Сколько можно, давайте уже играть. Сколько можно, давайте уже играть. Сколько можно, давайте уже играть.
+                        Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду Месси точго лучше РОналду
                     </p>
                 </div>
             </a>

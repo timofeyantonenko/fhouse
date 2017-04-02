@@ -4,12 +4,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Record</title>
 <link rel="stylesheet" href='{% static "css/recordTable.css" %}'>
-<link rel="stylesheet" href='{% static "css/record.css" %}'> {% endblock head_extra %} {% block content %}
+<link rel="stylesheet" href='{% static "css/record.css" %}'>
+<script src="{% static 'js/record.js'  %}"></script> {% endblock head_extra %} {% block content %}
 <main>
     <!-- Table Record -->
     <div class=" tableInfo ">
         <div class="block_table">
-            <h1>
+            <h1 class="search_s_head">
                 <p>{{record_name}}</p>
                 <div class="searchRecord">
                     <textarea placeholder="Найти рекорд..." ></textarea> 
@@ -21,10 +22,10 @@
             <!-- Таблица рекорда -->
             <div class="divForTable">
                 <table class="table">
-                    <thead>
+                    <thead class="headTable">
                         <tr>
                             <th class="thTableRecord">#</th>
-                            <th>Имя Фамилия</th>
+                            <th></th>
                             <th>Клуб</th>
                             <th class="nationalHead"></th>
                             <th>Стат</th>

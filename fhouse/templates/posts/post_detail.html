@@ -34,7 +34,7 @@
                     </div>
                 </a>
                 <div class="author_name_date">
-                    <a href="">{{request.user.first_name}} {{request.user.last_name}}</a> 
+                    <a href="">{{request.user.first_name}} {{request.user.last_name}}</a>
                     <p>{% if instance.draft %} </p>
                     {% endif %} {{instance.publish}}
                 </div>
@@ -97,14 +97,13 @@
             <h3>Оставить комментарий</h3>
             <!-- Нужно вставить ссылку на профиль автора -->
             <div class="sendComment">
+                {% if request.user.is_authenticated %}
                 <a href="#" class="authorComent">
                     <div class="coments_author">
-                        {% if request.user.is_authenticated %}
-                        <img src="{{ request.user.avatar.url }}" alt=""> {% else %}
-                        <img src="{% static 'img/albert-einstein.jpg'  %}"> {% endif %}
+                        <img src="{{ request.user.avatar.url }}" alt="">
                     </div>
                 </a>
-                {% if request.user.is_authenticated %}
+                {% else %} {% endif %} {% if request.user.is_authenticated %}
                 <form method="POST" action="." class="formSendComment"> {% csrf_token %}
                     <div class="forPlaceholder">
                         {{ comment_form.content }}
@@ -116,7 +115,7 @@
                         <input type="submit" value="Отправить" class="btn btn-primary">
                     </div>
                     {% else %}
-                    <p>Войдите, чтобы оставлять комментарии</p>
+                    <p><a href="/login">Войдите</a> в свой аккаунт или <a href="/register">зарегистрируйтесь</a> чтобы оставлять комментарии</p>
                 </form>
                 {% endif %}
             </div>
@@ -131,7 +130,7 @@
                 </a>
                 <div class="content_coment">
                     <div class="coment_author_time">
-                        <a href="#">{{ comment.user.first_name }} {{ comment.user.last_name }}</a> {{ comment.timestamp|timesince }} ago
+                        <a href="#">{{ comment.user.first_name }} {{ comment.user.last_name }}</a> {{ comment.timestamp|timesince }} назад
                     </div>
                     {{ comment.content }}
                     <footer> {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class="comment-reply-btn" href="#">Ответить</a> </footer>
@@ -139,7 +138,7 @@
                         {% for child_comment in comment.children %}
                         <div class="blockquote">
                             <p>{{ child_comment.content }}</p>
-                            <footer>{{ child_comment.user.first_name }} {{ child_comment.user.last_name }} | {{ child_comment.timestamp|timesince }} ago</footer>
+                            <footer>{{ child_comment.user.first_name }} {{ child_comment.user.last_name }} | {{ child_comment.timestamp|timesince }} назад</footer>
                         </div>
                         {% endfor %} {% if request.user.is_authenticated %}
                         <form method="POST" action="."> {% csrf_token %} {{ comment_form|crispy }}
@@ -147,7 +146,7 @@
                             <input type="submit" value="Ответить" class="btn btn-default">
                         </form>
                         {% else %}
-                        <p>You must login to comment</p>
+                        <p><a href="/login">Войдите</a> в свой аккаунт или <a href="/register">зарегистрируйтесь</a> чтобы оставлять комментарии</p>
                         {% endif %}
                     </div>
                 </div>

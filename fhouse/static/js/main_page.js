@@ -14,91 +14,16 @@ $(document).ready(function() {
     var record_list_url = 'records/get_main_page_record_list';
     var gallery_list_container = '.records_list';
     load_ajax_list(record_list_url, gallery_list_container);
-
-
-    $('.one_news_img img').each(function(i) {
-        if ($(this).css("height") < $(this).parent().css("height")) {
-            $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
-            $(this).parent().css({ "display": "flex", "justify-content": "center" });
-        }
-    });
-    $('one_news_img img').each(function(i) {
-        if ($(this).css("width") < $(this).parent().css("width")) {
-            $(this).css({ "width": "100%", "align-self": "center" });
-            $(this).parent().css({ "display": "block", });
-        }
-    });
-});
-
-// Фиксация блока меньшей высоты
-$(window).load(function() {
-
-    var height = $(".colum").height();
-    var biggest_col;
-    $(".colum").each(function(i) {
-
-        if ($(this).height() < height) {
-            height = $(this).height()
-        } else {
-            biggest_col = $(this);
-        };
-
-    });
-
-    var min_height_block;
-
-    $(".colum").each(function(i) {
-
-        if ($(this).height() == height) {
-            min_height_block = $(this);
-        };
-
-    });
-
-    var width_min_height_block = $(min_height_block).width();
-    var height_min_height_block = $(min_height_block).height();
-    $(min_height_block).css({ "width": width_min_height_block, "height": height_min_height_block });
-    $(min_height_block).children().css({ "width": width_min_height_block });
-
-    var left_col = $(min_height_block).offset().left;
-
-    if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
-        $(min_height_block).addClass("fixed_col_top");
-        $(min_height_block).css("bottom", (document.documentElement.clientHeight - min_height_block.height() - 70));
-        $(min_height_block).css("left", left_col);
-
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > ((document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                $('.fixed_col_top').css('top', 'inherit');
-                $(min_height_block).css("bottom", bottom_scroll);
-
-
-            } else {
-                $('.fixed_col_top').css('top', '70px');
-                $('.fixed_col_top').css('bottom', 'inherit');
-            };
-        })
-
-    } else {
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > (45 + height - document.documentElement.clientHeight + $(".navbar").height()) && $(this).scrollTop() <= (50 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                $(min_height_block).addClass("fixed_col");
-                $(min_height_block).css("left", left_col);
-                $(min_height_block).css("bottom", "25px")
-
-            } else if ($(this).scrollTop() > (45 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                $(min_height_block).css("bottom", bottom_scroll);
-            } else {
-
-
-                $(min_height_block).removeClass("fixed_col");
-                $(min_height_block).css({ "left": "0px", "bottom": "0px" });
+    $(window).resize(function() {
+        $(".imgAlbumCover").each(function() {
+            $(this).parent().removeClass("bigWidth");
+            if ($(this).height() < $(this).parent().height()) {
+                $(this).parent().addClass("bigWidth");
             }
-        });
-    }
+        })
+    });
 });
+
 
 function load_ajax_list(url, container_name) {
     $.ajax({
@@ -109,18 +34,11 @@ function load_ajax_list(url, container_name) {
             var content = $(container_name);
             content.html(data);
             $(".imgAlbumCover").each(function() {
-                var $imgCover = $(this);
-                var $parentIMg = $(this).parent();
                 $(this).on("load", function() {
-                    var parent_width = $parentIMg.width();
-                    var parent_height = $parentIMg.height();
-                    var this_width = $imgCover.width();
-                    var this_height = $imgCover.height();
-                    var kofRel_w_h = parent_height / this_height;
-                    if (this_height < parent_height) {
-                        $imgCover.css({ "height": parent_height, "width": (parent_width * kofRel_w_h) });
-                    } else {
-                        console.log("$parentImgAlbumCover")
+                    console.log($(this).height())
+                    $(this).parent().removeClass("bigWidth");
+                    if ($(this).height() < $(this).parent().height()) {
+                        $(this).parent().addClass("bigWidth");
                     }
                 });
             })
@@ -129,27 +47,4 @@ function load_ajax_list(url, container_name) {
             console.log(error, status, xhr);
         }
     });
-}
-
-$(window).resize(function() {
-    imgAlbumSize();
-})
-
-function imgAlbumSize() {
-    $(".imgAlbumCover").css({ "width": "", "height": "" });
-    $(".imgAlbumCover").each(function() {
-        var $imgCover = $(this);
-        var $parentIMg = $(this).parent();
-        var parent_width = $parentIMg.width();
-        var parent_height = $parentIMg.height();
-        var this_width = $imgCover.width();
-        var this_height = $imgCover.height();
-        var kofRel_w_h = parent_height / this_height;
-        if (this_height < parent_height) {
-            $imgCover.css({ "height": parent_height, "width": (parent_width * kofRel_w_h) });
-        } else {
-            console.log("$parentImgAlbumCover")
-        }
-
-    })
 }

@@ -229,20 +229,6 @@ $(document).ready(function() {
         $(".section_tournament").eq(2).children(".continent_sel").eq(0).children("span").eq(val_select).show();
     });
 
-    // $(function max_height_block_comment() {
-    //     var height_block_preview = $(".preview_one_championship").height();
-    //     $(".block_comments_for_one_champ").css({ "height": height_block_preview });
-    // });
-
-    // $(function max_height_all_comments() {
-    //     var height_title_comment = $(".title_comments").height();
-    //     var height_add_com = $(".add_comment_prev").height()
-    //     var height_parent_all_comments = $(".block_comments_for_one_champ").height();
-    //     $(".block_comments_preview").css({
-    //         "height": (height_parent_all_comments - height_add_com - height_title_comment - 20)
-    //     })
-    // });
-
     // Выбор топ матча 
     $(".li_img__top_match").click(function() {
         $(".li_img__top_match").children("figure").hide();
@@ -251,43 +237,13 @@ $(document).ready(function() {
         $(this).children(".team_nav, .preview_math_nav_background").hide();
     });
 
-    $(function() {
-        $('#type_comment').on('keyup paste', function() {
-
-            var height_area = $("#type_comment").height()
-            var $el = $(this),
-                offset = $el.innerHeight() - $el.height();
-            if ($el.innerHeight < this.scrollHeight) {
-                $el.height(this.scrollHeight - offset);
-            } else {
-
-                $el.height(1);
-                $el.height(this.scrollHeight - offset);
-            }
-
-            $(function max_height_all_comments() {
-                var height_title_comment = $(".title_comments").height();
-                var height_add_com = $(".add_comment_prev").height()
-                var height_parent_all_comments = $(".block_comments_for_one_champ").height();
-                $(".block_comments_preview").css({
-                    "height": (height_parent_all_comments - height_add_com - height_title_comment - 30)
-                })
-            });
-
-        });
-    });
-
-
 });
 
 $(window).load(function() {
-
     $(".make_bet").on("click", function() {
         show_modal('#week_bets_top');
     });
 });
-
-// Фиксация блока меньшей высоты
 
 var first_open = true;
 
@@ -421,7 +377,6 @@ function arraySum(arr) {
     $(".history_bet").eq(0).find(".total_kof_these_matches").text(text_kof);
 
 }
-
 
 // Выбор результата матча
 $(document).on("click", ".result_can", function(e) {

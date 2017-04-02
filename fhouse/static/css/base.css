@@ -1,9 +1,7 @@
 /*Основные стили*/
 
 body {
-    font-family: Roboto, arial, sans-serif;
-    letter-spacing: normal;
-    color: #1d2f3e;
+    color: #222;
     font-size: 14px;
     background-color: #fff;
     overflow-y: scroll;
@@ -15,6 +13,14 @@ textarea {
     resize: none;
     outline: none;
     overflow: none;
+}
+
+
+/*textarea search*/
+
+.search_s_head textarea {
+    resize: none;
+    white-space: nowrap;
 }
 
 
@@ -304,6 +310,7 @@ h1 {
 .loginScheckIn {
     font-size: 20px;
     cursor: pointer;
+    height: 100%;
 }
 
 
@@ -332,7 +339,7 @@ h1 {
     width: 80%;
     margin-left: 10%;
     background-color: #e90052;
-    color: #fafafa;
+    color: #fff;
     text-align: center;
     height: 34px;
     line-height: 34px;
@@ -364,7 +371,7 @@ h1 {
     margin-bottom: 2.5%;
     float: left;
     text-align: center;
-    color: #fafafa;
+    color: #fff;
     line-height: 35px;
 }
 
@@ -637,7 +644,7 @@ form [type="password"] {
         display: none;
     }
     .menu_individualNews {
-        margin: 10px 0 20px !important;
+        margin: 0px 0 20px !important;
         width: 100% !important;
     }
     .menu_individualNews ul {
@@ -679,7 +686,7 @@ form [type="password"] {
         align-self: center;
     }
     #top_profile_menu {
-        top: 47px;
+        top: 59px;
     }
 }
 
@@ -738,7 +745,7 @@ form [type="password"] {
 }
 
 .downloadImg:hover {
-    color: #e62117;
+    color: #aa0a0c;
 }
 
 .offerNewsFormImg textarea,
@@ -796,7 +803,7 @@ form [type="password"] {
 #offerNewsModal header,
 #offerArticleModal header {
     width: 100%;
-    background-color: #e62117;
+    background-color: #aa0a0c;
     height: 50px;
     align-items: center;
     justify-content: space-between;
@@ -828,26 +835,43 @@ form [type="password"] {
     max-height: 300px;
 }
 
+.btn-ok,
+.btn-not {
+    padding: 9px 16px 9px;
+    margin: 0;
+    font-size: 12.5px;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: none;
+    vertical-align: top;
+    line-height: 15px;
+    text-align: center;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
 .btn-ok {
-    background-color: #38003c;
+    background: #aa0a0c;
     color: #fff;
-    font-weight: 600;
 }
 
 .btn-not {
-    background-color: #e8e8e8;
-    color: #222;
-    font-weight: 600;
+    background: rgba(0, 0, 0, 0.24);
 }
 
 .btn-ok:hover {
     color: #fff;
-    background-color: rgb(113, 5, 121);
+    background-color: rgba(170, 10, 12, 0.84);
 }
 
 .btn-not:hover {
-    color: #fff;
-    background-color: #e62117;
+    color: #222;
+    background: rgba(51, 39, 39, 0.2);
 }
 
 .newsDetail {
@@ -863,9 +887,9 @@ form [type="password"] {
 
 #my_weeks_bets {
     /*margin: 15vh auto;*/
-    background-color: #fafafa;
+    background-color: #fff;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     padding: 20px;
 }
 
@@ -881,16 +905,10 @@ form [type="password"] {
     }
 }
 
-.bet_in_modal {
-    width: calc( 70% - 20px);
-    margin-right: 20px;
-}
-
 
 /*Выбор пользователя*/
 
 .user_choice {
-    width: 30%;
     font-size: 13px;
     border-radius: 4px;
 }
@@ -898,8 +916,8 @@ form [type="password"] {
 .header_user_choice {
     width: 100%;
     height: 35px;
-    background-color: red;
-    color: #fafafa;
+    background-color: #e62117;
+    color: #fff;
     text-align: center;
     line-height: 35px;
 }
@@ -918,7 +936,7 @@ form [type="password"] {
     text-align: center;
     line-height: 35px;
     width: 30px;
-    color: #fafafa;
+    color: #fff;
     background-color: #222;
     top: 0px;
     cursor: pointer;
@@ -952,7 +970,7 @@ form [type="password"] {
 }
 
 .one_user_choice {
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 10px;
@@ -1009,80 +1027,23 @@ form [type="password"] {
     width: 100%;
     line-height: 35px;
     text-align: center;
-    background-color: red;
+    background-color: #e62117;
     border-radius: 2px;
     cursor: pointer;
-    color: #fafafa;
+    color: #fff;
 }
 
-
-/*Выбор результата*/
-
-.mathes_can_bet {
-    padding: 4px 10px 10px;
-    width: 100%;
-    background-color: #e6ebf4;
-}
-
-.one_math_can_bet {
-    width: 100%;
-    height: 30px;
-    display: flex;
-    flex-direction: row;
-}
-
-.one_math_can_bet>div {
-    padding: 0 5px;
-    height: 24px;
-    border-radius: 2px;
-    margin: 6px 1px;
-    background-color: #fafafa;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.result_can {
-    cursor: pointer;
-    line-height: 24px;
-    display: flex;
-    flex-direction: row;
-}
-
-.kof_can {
-    color: #0b68f4;
-    width: 36px;
-    text-align: right;
-}
-
-.team_can {
-    width: calc( 100% - 36px);
-}
-
-.teams_can {
-    width: calc( 31.5% - 2px);
-}
-
-.result_can:hover {
-    color: #0b68f4;
-}
-
-.data_time_can {
-    width: calc( 25% - 2px);
-    text-align: center;
-    line-height: 30px;
-}
-
-.draw_can {
-    width: calc( 12% - 2px);
+.btn_success_bet:hover {
+    background-color: rgba(230, 33, 23, 0.77);
 }
 
 .active_choice_bet {
     background-color: #0b68f4 !important;
-    color: #fafafa !important;
+    color: #fff !important;
 }
 
 .active_choice_bet .kof_can {
-    color: #fafafa !important;
+    color: #fff !important;
 }
 
 .marth_choice_this {
@@ -1092,6 +1053,10 @@ form [type="password"] {
 .kof_this_match,
 .delete_this_this_choice {
     width: 20%;
+    text-align: right;
+}
+
+.total_kof_these_matches {
     text-align: right;
 }
 
@@ -1137,8 +1102,6 @@ form [type="password"] {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
-    line-height: 24px;
-    max-height: 24px;
 }
 
 .not_results,
@@ -1162,117 +1125,36 @@ form [type="password"] {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    padding: 10px 0 20px 0;
+    padding: 0 0 20px;
 }
 
 .name_user_info h3 {
-    margin-top: 10px;
+    margin: 0 5px 10px 0;
+}
+
+.name_user_info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .photo_user {
     width: 70px;
     height: 70px;
     overflow: hidden;
-    border-radius: 50%;
-    margin-right: 10px;
+    border-radius: 100%;
+    margin-right: 15px;
 }
 
 .photo_user img {
     width: 100%;
 }
 
-.users_progress {
-    position: relative;
-}
-
-.drop_down_users_results {
-    display: none;
-    position: absolute;
-    top: calc(100% + 7px);
-    left: 0px;
-    background-color: #fafafa;
-    padding: 10px;
-    z-index: 1000;
-    border: 1px solid #CCD1D9;
-    width: 300px;
-    height: auto;
-    max-height: 300px;
-    overflow-y: auto;
-    -webkit-box-shadow: 2px -3px 37px -9px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 2px -3px 37px -9px rgba(0, 0, 0, 0.75);
-    box-shadow: 2px -3px 37px -9px rgba(0, 0, 0, 0.75);
-}
-
-#open_user_results {
-    cursor: pointer;
-}
-
-#open_user_results:hover {
-    text-decoration: underline;
-}
-
-.drop_down_users_results>div {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    min-height: 35px;
-    align-items: center;
-}
-
-.drop_down_users_results>div:nth-last-child(n+2) {
-    padding-bottom: 5px;
-    border-bottom: 1px solid silver;
-}
-
-.drop_down_users_results>div:nth-child(n+2) {
-    padding-top: 5px;
-}
-
-.users_honour {
-    height: auto;
-    width: 100%;
-    display: block !important;
-}
-
-.users_honour>div {
-    width: 100%;
-    text-align: center;
-    height: 40px;
-}
-
-.users_honour>div:first-child {
-    color: #1d71b9;
-    text-align: left !important;
-    text-decoration: underline;
-    line-height: 40px;
-    font-size: 20px;
-}
-
-.users_honour>div {
-    height: 40px !important;
-    font-weight: 900;
-}
-
-.user_best_in_this {
-    font-size: 15px;
-    font-style: italic;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-}
-
-.user_best_in_this:nth-last-child(n+2) {
-    border-bottom: 1px solid silver;
-}
-
 .place_result {
     height: 30px;
     width: 30px;
     background-image: url(../img/Gold_Silver_and_Bronze_Medals_Transparent_PNG_Clip_Art_Image.png);
-    background-size: calc(8000px / 82.5);
+    background-size: calc(155px / 1.6666666666);
 }
 
 .place_result span {
@@ -1280,22 +1162,15 @@ form [type="password"] {
 }
 
 .gold_vedal {
-    background-position: calc(-113px / 82.5) calc(-52px / 82.5);
+    background-position: calc(-2px / 1.666666) calc(-1px / 1.666666);
 }
 
 .sliver_medal {
-    background-position: calc(-2762px / 82.5) calc(-74px / 82.5);
+    background-position: calc(-53px / 1.666666) calc(-1px / 1.666666);
 }
 
 .bronze_medal {
-    background-position: calc(-5402px / 82.5) calc(-74px / 82.5);
-}
-
-.show_all_table_forecasters {
-    flex-grow: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
+    background-position: calc(-104px / 1.666666) calc(-1px / 1.666666);
 }
 
 .show_all_table_forecasters a {
@@ -1305,7 +1180,7 @@ form [type="password"] {
     font-weight: 900;
     text-transform: uppercase;
     font-size: 11px;
-    background-color: red;
+    background-color: #e62117;
     border-radius: 2px;
 }
 
@@ -1314,7 +1189,340 @@ form [type="password"] {
     color: #fff;
 }
 
+
+/*Выбор результата*/
+
+.mathes_can_bet {
+    padding: 4px 10px 10px;
+    width: 100%;
+    background-color: #e6ebf4;
+}
+
+.one_math_can_bet {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.one_math_can_bet>div {
+    padding: 0 5px;
+    height: 24px;
+    border-radius: 2px;
+    margin: 6px 1px;
+    background-color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.result_can {
+    cursor: pointer;
+    line-height: 24px;
+    display: flex;
+    flex-direction: row;
+}
+
+.kof_can {
+    color: #0b68f4;
+    width: 36px;
+    text-align: right;
+}
+
+.team_can {
+    width: calc( 100% - 36px);
+}
+
+.result_can:hover {
+    color: #0b68f4;
+}
+
+.data_time_can {
+    text-align: center;
+    line-height: 30px;
+}
+
+@media screen and (min-width: 970px) {
+    #week_bets_top .modal_dialog {
+        width: 900px;
+        margin: 30px auto;
+    }
+    .bet_in_modal {
+        width: calc( 70% - 20px);
+        margin-right: 20px;
+    }
+    .user_choice {
+        width: 30%;
+    }
+    .one_math_can_bet {
+        height: 30px;
+    }
+    .teams_can {
+        width: calc( 31.5% - 2px);
+    }
+    .data_time_can {
+        width: calc( 25% - 2px);
+    }
+    .draw_can {
+        width: calc( 12% - 2px);
+    }
+    .team_can,
+    .kof_can {
+        line-height: 24px;
+        max-height: 24px;
+    }
+    .name_user_info {
+        width: calc(100% - 85px);
+    }
+}
+
+@media screen and (min-width: 650px) and (max-width: 969px) {
+    #week_bets_top .modal_dialog {
+        width: 600px;
+        margin: 30px auto;
+    }
+    .bet_in_modal {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .user_choice {
+        width: 100%;
+    }
+    .one_math_can_bet {
+        height: 30px;
+    }
+    .teams_can {
+        width: calc( 31.5% - 2px);
+    }
+    .data_time_can {
+        width: calc( 25% - 2px);
+    }
+    .draw_can {
+        width: calc( 12% - 2px);
+    }
+    .team_can,
+    .kof_can {
+        line-height: 24px;
+        max-height: 24px;
+    }
+    .name_user_info {
+        width: calc(100% - 85px);
+    }
+}
+
+@media screen and (max-width: 649px) {
+    #week_bets_top .modal_dialog {
+        width: 95%;
+        margin: 10px 2.5%;
+    }
+    .bet_in_modal {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .user_choice {
+        width: 100%;
+    }
+    .teams_can {
+        width: 100%;
+    }
+    .data_time_can:before {
+        content: 'Начало матча: '
+    }
+    .data_time_can {
+        width: 100%;
+        background-color: #e6ebf4 !important;
+        padding-top: 14px !important;
+        line-height: 20px !important;
+        text-align: left !important;
+    }
+    .draw_can {
+        width: 100%;
+    }
+    .one_math_can_bet>div {
+        height: 34px !important;
+        margin: 3px 0 !important;
+    }
+    .team_can,
+    .kof_can {
+        line-height: 34px;
+        max-height: 34px;
+    }
+    .name_user_info {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .name_user_info {
+        justify-content: center !important;
+        align-items: center;
+    }
+    .name_user_info>div {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .name_user_info h3 {
+        font-size: 18px !important;
+        margin: 0 0 10px 0 !important;
+    }
+    .name_user_info>div {
+        white-space: nowrap;
+    }
+    .table_forecasters_and_user_infa {
+        justify-content: center;
+        align-items: center;
+    }
+    .photo_user {
+        width: 150px !important;
+        height: 150px !important;
+        margin-right: 0px !important;
+    }
+    #hrefMyProfile {
+        display: none;
+    }
+}
+
+#hrefMyProfile {
+    font-size: 16px;
+    font-weight: 600;
+}
+
 .modal_dialog {
-    width: 900px;
-    margin: 50px auto;
+    position: relative;
+}
+
+@media screen and (min-width: 650px) {
+    .close_modal {
+        color: #fff;
+        font-size: 20px;
+        top: -20px;
+        right: 10px;
+    }
+}
+
+@media screen and (max-width: 649px) {
+    .close_modal {
+        color: #222;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        border: 4px solid #222;
+        font-size: 25px;
+        top: 10px;
+        right: calc(2.5% + 10px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .close_modal span {
+        align-self: center;
+    }
+}
+
+.relativeModal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.close_modal {
+    opacity: 0.65;
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.close_modal:hover {
+    opacity: 1;
+}
+
+/*Достижения пользователя*/
+.closedAkardion .glyphicon-minus,
+.openingAkardion .glyphicon-plus {
+    display: none;
+}
+
+.users_progress {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.users_progress section {
+    width: 100%;
+}
+.contentRating {
+    display: none;
+    padding: 0 10px 10px;
+}
+
+.users_progress header,
+.contentRating {
+    width: 100%;
+}
+
+.contentRating span p {
+    margin: 0;
+}
+
+.users_progress .contentRating>span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px 0;
+    border-bottom: 1px solid silver;
+}
+
+.users_progress header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #e62117;
+    cursor: pointer;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.users_progress header span {
+    color: #e62117;
+}
+
+.users_progress header:hover {
+    background-color: #d7d7d7;
+}
+
+.users_progress header h3 {
+    font-size: 18px;
+}
+
+.users_progress header h3,
+.users_progress header p {
+    margin: 0;
+}
+
+
+/*User avatar*/
+
+
+/*Flex img */
+
+.flexImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.flexImg img {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.bigWidth img {
+    height: 100% !important;
+    width: auto !important;
+    /*min-width: 100%;*/
+    align-self: center;
 }
