@@ -86,19 +86,9 @@ def update_results(request):
     users_results = UsersResult.objects.filter(stage=stage_object)
     for user in users_results:
         if user.result_match1.user_bet == result_match_1 and user.result_match1.user_bet == result_match_1 and user.result_match1.user_bet == result_match_1:
-            score = cofs[1][user.result_match1.user_bet] * cofs[2][user.result_match1.user_bet] * cofs[3][
-                user.result_match1.user_bet]
-            print(score, cofs[1][user.result_match1.user_bet], cofs[2][user.result_match1.user_bet], cofs[3][user.result_match1.user_bet])
-        print(user.result_match1, stage_object.match_1)
-        print(coef_match_1.home_coef, coef_match_1.draw_coef, coef_match_1.guest_coef)
-        print(user.result_match1.user_bet == result_match_1)
-
-        print(user.result_match2, stage_object.match_2)
-        print(coef_match_2.home_coef, coef_match_2.draw_coef, coef_match_2.guest_coef)
-        print(user.result_match2.user_bet == result_match_2)
-
-        print(user.result_match3, stage_object.match_3)
-        print(coef_match_3.home_coef, coef_match_3.draw_coef, coef_match_3.guest_coef)
-        print(user.result_match3.user_bet == result_match_3)
-    print("COME TO UPDATE")
+            score = cofs[1][user.result_match1.user_bet] * cofs[2][user.result_match2.user_bet] * cofs[3][
+                user.result_match3.user_bet]
+            score = round(score, 2)
+            user.score += score
+            user.save()
     return Response()
