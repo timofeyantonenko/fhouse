@@ -1,16 +1,10 @@
-import json
-
 from django.core.paginator import Paginator
-from django.http import HttpResponse
-from django.core import serializers
-from django.http import JsonResponse
-from django.forms.models import model_to_dict
-from django.shortcuts import render, get_object_or_404, render_to_response
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
-from .models import GallerySection, SectionAlbum, AlbumPhoto
-from .serializers import AlbumPhotoSerializer, SectionAlbumSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from .models import GallerySection, SectionAlbum, AlbumPhoto
+from .serializers import AlbumPhotoSerializer, SectionAlbumSerializer
 
 
 @api_view(['GET'])

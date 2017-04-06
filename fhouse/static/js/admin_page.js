@@ -482,3 +482,5 @@ $('body').on("click", "#confirmDelTour", function() {
     updateTour();
 });
 
+
+
