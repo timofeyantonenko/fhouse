@@ -1,10 +1,21 @@
+select {
+    height: 30px;
+    border-radius: 3px;
+    padding: 0 10px;
+}
+
+.contentMainBets {
+    width: 100%;
+    padding: 20px;
+}
+
 .comtainer {
     margin: 0px !important;
 }
 
 .preview_main_weeks_matches,
 .div_for_championships_all_prognosis {
-    background-color: #fafafa;
+    background-color: #fff;
     border: 1px solid #CCD1D9;
 }
 
@@ -99,7 +110,7 @@
 }
 
 .active_stat {
-    border-left: 2px solid #e90052;
+    border-left: 2px solid #e62117;
     color: #242424;
     font-weight: 600;
     font-size: 14px;
@@ -108,7 +119,7 @@
 }
 
 .active_stat:hover {
-    border-left: 2px solid #e90052;
+    border-left: 2px solid #e62117;
 }
 
 .match_stats .row {
@@ -169,8 +180,7 @@ h4 {
 /*All reviews */
 
 .container_all_preview {
-    background-color: #fafafa;
-    border: 1px solid #CCD1D9;
+    background-color: #fff;
     padding: 20px;
     overflow: hidden;
 }
@@ -180,20 +190,19 @@ h4 {
 
 #all_bets_nav {
     width: 100%;
-    height: 60px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .change_champ {
-    width: 63px;
-    height: 60px;
+    margin: 0 5px 10px;
     background-image: url(../img/menu_nav.png);
     background-position-y: 0;
     background-repeat: no-repeat;
     cursor: pointer;
     opacity: 0.3;
+    display: none;
 }
 
 .change_champ:hover {
@@ -271,7 +280,7 @@ h4 {
 
 .active_menu {
     top: 46px !important;
-    background-color: #e90052;
+    background-color: #e62117;
 }
 
 
@@ -328,9 +337,9 @@ h4 {
 }
 
 #bets_all_championships {
-    width: 100%;
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 10px 15px 15px;
+    border: 1px solid #afadad;
 }
 
 .bets_one_championship {
@@ -348,10 +357,6 @@ h4 {
 
 .bets_one_championship:hover {
     background-image: url(../img/right_column_bet_hover.png);
-}
-
-#bets_all_championships {
-    border: 1px solid #CCD1D9;
 }
 
 #bets_all_championships>a {
@@ -388,7 +393,6 @@ h4 {
     margin-bottom: 20px;
 }
 
-#table_other_champs,
 .table_rating_forecasters {
     width: 100%;
 }
@@ -396,7 +400,7 @@ h4 {
 .head_table {
     height: 80px;
     width: 100%;
-    background-color: #e90052;
+    background-color: #e62117;
     border-radius: 3px 3px 0 0;
 }
 
@@ -409,7 +413,7 @@ h4 {
 .table_name {
     text-align: center;
     line-height: 40px;
-    color: #fafafa;
+    color: #fff;
     font-weight: 600;
 }
 
@@ -421,17 +425,17 @@ h4 {
 
 .nav_table>div {
     text-align: center;
-    color: #fafafa;
+    color: #fff;
     font-size: 12px;
     line-height: 40px;
-    background-color: #b60040;
+    background-color: #aa0a0c;
     border-radius: 3px 3px 0 0;
     cursor: pointer;
     flex: 1;
 }
 
 .active_tab_section {
-    background-color: #fafafa !important;
+    background-color: #fff !important;
     color: #222 !important;
 }
 
@@ -440,7 +444,7 @@ h4 {
 }
 
 .nav_table>div:hover {
-    background-color: #83002e;
+    background-color: #881012;
 }
 
 .select_tab_conteiner {
@@ -467,12 +471,11 @@ h4 {
 
 .body_table {
     width: 100%;
-    background-color: #fafafa;
+    background-color: #fff;
     padding: 0;
     font-size: 13px;
-    border: 1px solid #CCD1D9;
+    border: 1px solid #afadad;
     border-top: 0px solid silver;
-    margin-bottom: 20px;
 }
 
 .one_position {
@@ -492,19 +495,19 @@ h4 {
 }
 
 #table_rat_forcas span .one_position:first-child {
-    background-color: #fafafa !important;
+    background-color: #fff !important;
 }
 
 #table_rat_forcas span .one_position:nth-child(2) {
-    background-color: #fafafa !important;
+    background-color: #fff !important;
 }
 
 #table_rat_forcas span .one_position:nth-child(3) {
-    background-color: #fafafa !important;
+    background-color: #fff !important;
 }
 
 #table_rat_forcas span .one_position:nth-child(4) {
-    background-color: #fafafa !important;
+    background-color: #fff !important;
 }
 
 span .one_position:first-child {
@@ -574,9 +577,8 @@ span .one_position:first-child {
 }
 
 .after_nav_tour {
-    width: calc(100% + 10px);
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     align-items: flex-start;
 }
 
@@ -613,15 +615,12 @@ span .one_position:first-child {
 /*Футер таблицы*/
 
 footer {
-    height: 40px;
     width: 100%;
-    display: flex;
-    position: relative;
 }
 
 footer>div {
     height: 30px;
-    margin: auto;
+    margin: 5px auto;
     border-radius: 3px;
     text-align: center;
     line-height: 30px;
@@ -634,22 +633,31 @@ footer>div {
     transition: all 0.1s ease-out;
 }
 
+.more_info a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    color: #222;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.more_info a:hover {
+    color: #aa0a0c;
+}
+
 footer>div:hover {
-    background-color: #e90052;
-    color: #fafafa;
+    background-color: #d7d7d7;
 }
 
 
 /*Превью к матчам */
 
-.preview_one_championship {
-    width: calc(100% - 300px);
-    margin-right: 15px;
-}
-
 .preview_one_match {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
     padding: 10px 0px;
     border-top: 1px solid #CCD1D9;
@@ -659,15 +667,11 @@ footer>div:hover {
     padding: 10px 0 0;
 }
 
-.teams_logo_s_time {
-    width: 100px;
-}
-
 .teams_img {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
+    width: 100px;
     height: 45px;
 }
 
@@ -687,8 +691,6 @@ footer>div:hover {
 
 .match_date {
     font-size: 13px;
-    text-align: center;
-    margin-top: 10px;
 }
 
 .match_time {
@@ -700,14 +702,6 @@ footer>div:hover {
     font-weight: 500;
 }
 
-.match_discription {
-    width: calc(100% - 100px);
-}
-
-.match_discription {
-    padding-left: 10px;
-}
-
 .title_match {
     font-weight: 600;
     font-size: 18px;
@@ -716,9 +710,9 @@ footer>div:hover {
 
 .bet_match {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
-    margin: 5px 0px 10px;
+    margin: 5px 0px 0;
 }
 
 .evnt_bet {
@@ -730,6 +724,7 @@ footer>div:hover {
     color: #3c3e41;
     border-radius: 3px;
     height: 24px;
+    margin-bottom: 10px;
 }
 
 .evnt_bet span {
@@ -737,8 +732,8 @@ footer>div:hover {
 }
 
 .admin_bets_one_match {
+    margin-bottom: 10px;
     border: 2px solid #d3d3d3;
-    margin-left: 10px;
     height: 24px;
     font-size: 12px;
     padding: 0px 6px;
@@ -772,12 +767,6 @@ footer>div:hover {
     border-width: 1px 0;
     border-style: solid;
     border-color: #CCD1D9;
-}
-
-.block_comments_for_one_champ {
-    width: 285px;
-    border-left: 1px solid #CCD1D9;
-    padding: 10px 0px 0px 15px;
 }
 
 .line_img_placeholder_comment {
@@ -815,8 +804,8 @@ footer>div:hover {
 }
 
 #type_comment:focus {
-    border-color: #e90052;
-    background-color: #fafafa;
+    border-color: #e62117;
+    background-color: #fff;
 }
 
 .author_comment_prev {
@@ -916,22 +905,27 @@ footer>div:hover {
 }
 
 .more_comment_prev {
-    text-align: center;
-    padding: 3px 8px;
-    margin: 0px auto 10px;
+    padding: 5px 15px;
+    margin: 0px auto;
     text-transform: uppercase;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 14px;
     color: #656D78;
-    background: #fafafa;
-    border: 1px solid #CCD1D9;
+    background: #fff;
+    border: 1px solid #afadad;
     border-radius: 2px;
     cursor: pointer;
-    width: 50%;
+    width: 200px;
+    text-align: center;
 }
 
 .more_comment_prev:hover {
     background: #eee;
+}
+
+.user_comment hr {
+    margin: 20px 0 0;
+    border-top: 1px solid #ccd1d9;
 }
 
 
@@ -940,8 +934,12 @@ footer>div:hover {
 #nav_top_matches {
     width: 100%;
     display: flex;
-    flex-direction: wrap;
+    flex-wrap: wrap;
     justify-content: space-between;
+    padding: 7px;
+    margin-bottom: 15px;
+    background-color: #e4e4e4;
+    align-items: center;
 }
 
 #match_top_nav {
@@ -1004,10 +1002,6 @@ footer>div:hover {
 
 /*Топ 3 матча main */
 
-main {
-    width: 100%;
-}
-
 header {
     margin-bottom: 10px;
     position: relative;
@@ -1041,23 +1035,40 @@ header p {
 }
 
 .make_bet button {
-    color: #fafafa;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 12px;
-    background-color: #e90052;
-    padding: 5px 15px;
-    border-radius: 7px;
-    border: 2px outset #fff;
+    height: 30px !important;
+    padding: 0 16px;
+    font-size: 12.5px;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: none;
+    vertical-align: top;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    border-radius: 2px;
+    background: #e62117;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.make_bet button:hover {
+    background: #881012;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
 }
 
 
 /*ТОП матчи недели правая колонка*/
 
 #top_matches_right {
-    background-color: #fafafa;
-    border: 1px solid #CCD1D9;
-    width: 100%;
+    background-color: #fff;
+    border: 1px solid #afadad;
     margin-bottom: 20px;
 }
 
@@ -1080,15 +1091,38 @@ header p {
     text-align: center;
     height: 100%;
     line-height: 35px;
+    font-weight: 700;
+}
+
+.footer_top_matches_right>div a {
+    color: #222;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.footer_top_matches_right>div a:hover,
+.footer_top_matches_right>div a:focus,
+.footer_top_matches_right>div a:active {
+    color: #aa0a0c;
+    text-decoration: none;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
 }
 
 .footer_top_matches_right>div:first-child {
-    border-right: 1px solid #CCD1D9;
+    border-right: 1px solid #afadad;
 }
 
 .footer_top_matches_right>div:hover {
-    color: #fafafa !important;
-    background-color: #e90052;
+    background-color: #d7d7d7;
+    color: #aa0a0c;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
 }
 
 .body_top_matches_right {
@@ -1100,7 +1134,7 @@ header p {
     flex-direction: row;
     width: 100%;
     height: 35px;
-    border-bottom: 1px solid #CCD1D9;
+    border-bottom: 1px solid #afadad;
 }
 
 .day_one_top_match_right {
@@ -1108,7 +1142,7 @@ header p {
     text-align: center;
     height: 100%;
     line-height: 35px;
-    color: #e90052;
+    color: #e62117;
     font-weight: 600;
 }
 
@@ -1137,17 +1171,16 @@ header p {
 
 .time_one_top_match_right {
     width: 20%;
-    color: #fafafa;
+    color: #000;
     margin: 5px 0;
     height: 25px;
     text-align: center;
-    background-color: #38003c;
+    background-color: #d7d7d7;
     line-height: 25px;
 }
 
 
 /*Ставка в модальном окне*/
-
 
 
 /*Select */
@@ -1165,12 +1198,6 @@ header p {
 
 /*New main bets */
 
-.main {
-    background-color: #fafafa;
-    padding: 20px;
-    border: 1px solid #CCD1D9;
-}
-
 .super_title {
     margin-top: 10px;
     text-align: center;
@@ -1178,12 +1205,7 @@ header p {
     padding: 0 10px;
 }
 
-#nav_top_matches {
-    padding: 5px;
-    margin-bottom: 15px;
-    background-color: #e4e4e4;
-    font-family: 'Anton', sans-serif !important;
-}
+
 
 .title_section_web_site {
     display: flex;
@@ -1228,3 +1250,185 @@ header p {
     width: 100%;
 }
 
+
+/*Responsive*/
+
+.articles {
+    border: 1px solid #afadad;
+}
+
+.infoUserRight {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+@media screen and (min-width: 1170px) {
+    .articles {
+        width: 70%;
+        margin-right: 20px;
+    }
+    .infoUserRight {
+        width: calc(30% - 20px);
+    }
+    .infoUserRight>div {
+        width: 100%;
+    }
+    #bets_all_championships {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .articles {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .infoUserRight {
+        width: 100%;
+    }
+    .infoUserRight>div {
+        width: 350px;
+        margin: 0 5px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .articles {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .infoUserRight {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .infoUserRight>div {
+        width: calc(50% - 10px);
+        
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .articles {
+        width: 100%;
+    }
+    .infoUserRight {
+        width: 100%;
+    }
+    .infoUserRight>div {
+        width: 95%;
+    }
+    #bets_all_championships {
+        margin-top: 20px;
+    }
+}
+
+
+/*Nav responsive bets*/
+
+@media screen and (min-width: 970px) {
+    .change_champ {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media screen and (max-width: 969px) {
+    .change_champ {
+        width: 45px;
+        height: 45px;
+        background-size: 600px;
+    }
+}
+
+
+/*all responsive*/
+
+@media screen and (min-width: 750px) {
+    .articles {
+        border: 1px solid #afadad;
+    }
+    body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
+    /*Прогнозы и комментарии*/
+    .after_nav_tour {
+        width: calc(100% + 10px);
+    }
+    .preview_one_championship {
+        width: calc(100% - 300px);
+        margin-right: 15px;
+    }
+    .block_comments_for_one_champ {
+        width: 285px;
+        border-left: 1px solid #CCD1D9;
+        padding: 10px 0px 0px 15px;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .articles {
+        border: 0px solid #afadad;
+    }
+    body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
+    /*Прогнозы и комментарии*/
+    .after_nav_tour {
+        width: 100%;
+    }
+    .preview_one_championship {
+        width: 100%;
+    }
+    .block_comments_for_one_champ {
+        margin-top: 20px;
+        width: 100%;
+    }
+}
+
+
+/*One match bet */
+
+.teams_logo_s_time {
+    display: flex;
+}
+
+@media screen and (min-width: 550px) {
+    .teams_logo_s_time {
+        width: 100px;
+        flex-direction: column;
+    }
+    .match_discription {
+        width: calc(100% - 100px);
+    }
+    .match_discription {
+        padding-left: 10px;
+    }
+    .match_date {
+        margin-top: 10px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 549px) {
+    .teams_logo_s_time {
+        width: 100%;
+    }
+    .match_discription {
+        width: 100%;
+    }
+    .dateMatchBet {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 5px;
+    }
+    .dateMatchBet>div {
+        margin: 0 5px 5px;
+    }
+    .title_match {
+        margin-top: 5px;
+    }
+}

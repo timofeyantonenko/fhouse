@@ -3,137 +3,133 @@
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-9 ">
-            <!-- Main -->
-            <div class="main">
-                <nav id="nav_top_matches">
-                    <div class="title_section_web_site">
-                        <h2>Анонс ТОП матчей недели. 28 окт - 3 ноя 2010</h2>
-                    </div>
-                    <div class="make_bet">
-                        <button data-toggle="modal">сделать ставку</button>
-                        <!--<button data-toggle="modal" data-target="#week_bets_top">сделать ставку</button>-->
-                    </div>
-                </nav>
-                <!-- Превью к топ матчам  -->
-                <main>
-                    <div id="match_top_nav">
-                        <div class="one_menu_top_match">
-                            <div class="team_top_nav">
-                                <div class="team_top_three">
-                                    <img src="{{ current_week_bet.match_1.home_team.image.url }}" alt="">
-                                </div>
-                                <div class="team_top_three">
-                                    vs
-                                </div>
-                                <div class="team_top_three">
-                                    <img src="{{ current_week_bet.match_1.guest_team.image.url }}" alt="">
-                                </div>
-                            </div>
-                            <div class="super_title">
-                                {{ current_week_bet.match_1.match_name }}
-                            </div>
-                            <div class="read_prev">
-                                Читать превью
-                            </div>
-                            <div class="line_hover_active"></div>
+<main>
+    <div class="articles">
+        <div class="contentMainBets">
+            <nav id="nav_top_matches">
+                <div class="title_section_web_site">
+                    <h2>Анонс ТОП матчей недели. 28 окт - 3 ноя 2010</h2>
+                </div>
+                <div class="make_bet">
+                    <button data-toggle="modal">Cделать ставку</button>
+                    <!--<button data-toggle="modal" data-target="#week_bets_top">сделать ставку</button>-->
+                </div>
+            </nav>
+            <!-- Превью к топ матчам  -->
+            <div id="match_top_nav">
+                <div class="one_menu_top_match">
+                    <div class="team_top_nav">
+                        <div class="team_top_three">
+                            <img src="{{ current_week_bet.match_1.home_team.image.url }}" alt="">
                         </div>
-                        <div class="one_menu_top_match">
-                            <div class="team_top_nav">
-                                <div class="team_top_three">
-                                    <img src="{{ current_week_bet.match_2.home_team.image.url }}" alt="">
-                                </div>
-                                <div class="team_top_three">
-                                    vs
-                                </div>
-                                <div class="team_top_three">
-                                    <img src="{{ current_week_bet.match_2.guest_team.image.url }}" alt="">
-                                </div>
-                            </div>
-                            <div class="super_title">
-                                {{ current_week_bet.match_2.match_name }}
-                            </div>
-                            <div class="read_prev">
-                                Читать превью
-                            </div>
-                            <div class="line_hover_active"></div>
+                        <div class="team_top_three">
+                            vs
                         </div>
-                        <div class="one_menu_top_match">
-                            <div class="team_top_nav">
-                                <div class="team_top_three">
-                                    <img src="{{ current_week_bet.match_3.home_team.image.url }}" alt="">
-                                </div>
-                                <div class="team_top_three">
-                                    vs
-                                </div>
-                                <div class="team_top_three">
-                                    <img src="{{ current_week_bet.match_3.guest_team.image.url }}" alt="">
-                                </div>
-                            </div>
-                            <div class="super_title">
-                                {{ current_week_bet.match_3.match_name }}
-                            </div>
-                            <div class="read_prev">
-                                Читать превью
-                            </div>
-                            <div class="line_hover_active"></div>
+                        <div class="team_top_three">
+                            <img src="{{ current_week_bet.match_1.guest_team.image.url }}" alt="">
                         </div>
                     </div>
-                    <div class="top_match">
-                        <header>
-                            <h2>{{ current_week_bet.match_1.home_team.team_name }} - {{ current_week_bet.match_1.guest_team.team_name }}</h2>
-                            <p>{{ current_week_bet.match_1.stage}} </p>
-                        </header>
-                        <div class="prev_info_text">
-                            {{ current_week_bet.match_1.preview.description }}
+                    <div class="super_title">
+                        {{ current_week_bet.match_1.match_name }}
+                    </div>
+                    <div class="read_prev">
+                        Читать превью
+                    </div>
+                    <div class="line_hover_active"></div>
+                </div>
+                <div class="one_menu_top_match">
+                    <div class="team_top_nav">
+                        <div class="team_top_three">
+                            <img src="{{ current_week_bet.match_2.home_team.image.url }}" alt="">
                         </div>
-                        <div class="time_start">
-                            Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                        <div class="team_top_three">
+                            vs
+                        </div>
+                        <div class="team_top_three">
+                            <img src="{{ current_week_bet.match_2.guest_team.image.url }}" alt="">
                         </div>
                     </div>
-                    <div class="top_match">
-                        <header>
-                            <h2>{{ current_week_bet.match_2.home_team.team_name }} - {{ current_week_bet.match_2.guest_team.team_name }}</h2>
-                            <p>{{ current_week_bet.match_2.stage}} </p>
-                        </header>
-                        <div class="prev_info_text">
-                            {{ current_week_bet.match_2.preview.description }}
+                    <div class="super_title">
+                        {{ current_week_bet.match_2.match_name }}
+                    </div>
+                    <div class="read_prev">
+                        Читать превью
+                    </div>
+                    <div class="line_hover_active"></div>
+                </div>
+                <div class="one_menu_top_match">
+                    <div class="team_top_nav">
+                        <div class="team_top_three">
+                            <img src="{{ current_week_bet.match_3.home_team.image.url }}" alt="">
                         </div>
-                        <div class="time_start">
-                            Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                        <div class="team_top_three">
+                            vs
+                        </div>
+                        <div class="team_top_three">
+                            <img src="{{ current_week_bet.match_3.guest_team.image.url }}" alt="">
                         </div>
                     </div>
-                    <div class="top_match">
-                        <header>
-                            <h2>{{ current_week_bet.match_3.home_team.team_name }} - {{ current_week_bet.match_3.guest_team.team_name }}</h2>
-                            <p>{{ current_week_bet.match_3.stage}} </p>
-                        </header>
-                        <div class="prev_info_text">
-                            {{ current_week_bet.match_3.preview.description }}
-                        </div>
-                        <div class="time_start">
-                            Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
-                        </div>
+                    <div class="super_title">
+                        {{ current_week_bet.match_3.match_name }}
                     </div>
-                </main>
+                    <div class="read_prev">
+                        Читать превью
+                    </div>
+                    <div class="line_hover_active"></div>
+                </div>
+            </div>
+            <div class="top_match">
+                <header>
+                    <h2>{{ current_week_bet.match_1.home_team.team_name }} - {{ current_week_bet.match_1.guest_team.team_name }}</h2>
+                    <p>{{ current_week_bet.match_1.stage}} </p>
+                </header>
+                <div class="prev_info_text">
+                    {{ current_week_bet.match_1.preview.description }}
+                </div>
+                <div class="time_start">
+                    Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                </div>
+            </div>
+            <div class="top_match">
+                <header>
+                    <h2>{{ current_week_bet.match_2.home_team.team_name }} - {{ current_week_bet.match_2.guest_team.team_name }}</h2>
+                    <p>{{ current_week_bet.match_2.stage}} </p>
+                </header>
+                <div class="prev_info_text">
+                    {{ current_week_bet.match_2.preview.description }}
+                </div>
+                <div class="time_start">
+                    Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                </div>
+            </div>
+            <div class="top_match">
+                <header>
+                    <h2>{{ current_week_bet.match_3.home_team.team_name }} - {{ current_week_bet.match_3.guest_team.team_name }}</h2>
+                    <p>{{ current_week_bet.match_3.stage}} </p>
+                </header>
+                <div class="prev_info_text">
+                    {{ current_week_bet.match_3.preview.description }}
+                </div>
+                <div class="time_start">
+                    Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <!-- Таблица рейтинга прогнозистов -->
-            <div calss="table_rating_forecasters" id="table_rat_forcas">
-                <div class="head_table">
-                    <div class="table_name">Рейтинг прогнозистов</div>
-                    <div class="nav_table">
-                        <div class="one_division_nav">Все время</div>
-                        <div class="one_division_nav">Месяц</div>
-                        <div class="one_division_nav">Неделя</div>
-                    </div>
+    </div>
+    <div class="infoUserRight">
+        <!-- Таблица рейтинга прогнозистов -->
+        <div calss="table_rating_forecasters" id="table_rat_forcas">
+            <div class="head_table">
+                <div class="table_name">Рейтинг прогнозистов</div>
+                <div class="nav_table">
+                    <div class="one_division_nav">Все время</div>
+                    <div class="one_division_nav">Месяц</div>
+                    <div class="one_division_nav">Неделя</div>
                 </div>
-                <div class="body_table">
-                    <!-- Подсказки таблица  -->
-                    <span class="time_rating" id="year_rating_forecasters">
+            </div>
+            <div class="body_table">
+                <!-- Подсказки таблица  -->
+                <span class="time_rating" id="year_rating_forecasters">
                                     <div class="all_team_table">
                                         <div class="one_position">
                                             <div class="position">Поз</div>
@@ -174,7 +170,7 @@
                                         </footer>
                                     </div>
                                 </span>
-                    <span class="time_rating" id="month_rating_forecasters">
+                <span class="time_rating" id="month_rating_forecasters">
                                     <div class="all_team_table">
                                         <div class="one_position">
                                             <div class="position">Поз</div>
@@ -215,7 +211,7 @@
                                         </footer>
                                     </div>
                                 </span>
-                    <span class="time_rating" id="weak_rating_forecasters">
+                <span class="time_rating" id="weak_rating_forecasters">
                                         <div class="all_team_table">
                                             <div class="one_position">
                                                 <div class="position">Поз</div>
@@ -256,26 +252,25 @@
                                             </footer>
                                          </div>
                                     </span>
-                </div>
-            </div>
-            <!-- Конец таблицы с прогнозистами  -->
-            <!-- Прогнозы на все матчи в топ-чемпионатах -->
-            <div id="bets_all_championships">
-                <div class="name_right_column">
-                    <a href="all_reviews">Превью и прогнозы</a>
-                </div>
-                {% for league in leagues %}
-                <a href="all_reviews">
-                    <div class="bets_one_championship">
-                        <div class="championat_bet_preview">
-                            <div class="championship_title">{{ league.league_name }}</div>
-                            <div class="current_tour_right">1 тур</div>
-                        </div>
-                    </div>
-                </a>
-                {% endfor %}
             </div>
         </div>
+        <!-- Конец таблицы с прогнозистами  -->
+        <!-- Прогнозы на все матчи в топ-чемпионатах -->
+        <div id="bets_all_championships">
+            <div class="name_right_column">
+                <a href="all_reviews">Превью и прогнозы</a>
+            </div>
+            {% for league in leagues %}
+            <a href="all_reviews">
+                <div class="bets_one_championship">
+                    <div class="championat_bet_preview">
+                        <div class="championship_title">{{ league.league_name }}</div>
+                        <div class="current_tour_right">1 тур</div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
     </div>
-</div>
+</main>
 {% endblock content %}
