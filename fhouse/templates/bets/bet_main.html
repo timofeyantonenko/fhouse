@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load staticfiles %} {% block head_title %}{{ title }} {% endblock head_title %} {% block head_extra %}
+{% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} {% block head_extra %}
 <title>Анонсы ТОП матчей недели</title>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
@@ -123,136 +123,55 @@
                 <div class="table_name">Рейтинг прогнозистов</div>
                 <div class="nav_table">
                     <div class="one_division_nav" id="all_time_rating">Все время</div>
-                    <div class="one_division_nav"id="month_rating">Месяц</div>
-                    <div class="one_division_nav"id="week_rating">Неделя</div>
-
+                    <div class="one_division_nav" id="month_rating">Месяц</div>
+                    <div class="one_division_nav" id="week_rating">Неделя</div>
                 </div>
             </div>
             <div class="body_table">
                 <!-- Подсказки таблица  -->
-                <span class="time_rating" id="year_rating_forecasters">
-                                    <div class="all_team_table">
-                                        <div class="one_position">
-                                            <div class="position">Поз</div>
-                                            <div class="forecasters_name">Имя</div>
-                                            <div class="forecasters_percent">Коэф</div>
-                                            <div class="forecasters_pts">О</div>
-                                        </div>
-                                        <div class="one_position">
-                                            <div class="position">1</div>
-                                            <div class="forecasters_name">
-                                                <div class="team_img">
-                                                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                                </div>
-                                                <div class="team_table">
-                                                    Мангура Дмитрий Николаевич
-                                                </div>
-                                            </div>
-                                            <div class="forecasters_percent">65%</div>
-                                            <div class="forecasters_pts">1230</div>
-                                        </div>
-                                        <div class="one_position">
-                                            <div class="position">1</div>
-                                            <div class="forecasters_name">
-                                                    <div class="team_img">
-                                                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                                </div>
-                                                <div class="team_table">
-                                                    Мангура Дмитрий Николаевич
-                                                </div>
-                                            </div>
-                                            <div class="forecasters_percent">65%</div>
-                                            <div class="forecasters_pts">1230</div>
-                                        </div>
-                                        <footer>
-                                            <div class="more_info">
-                                                <a href="#">Весь список</a>
-                                            </div>
-                                        </footer>
-                                    </div>
-                                </span>
-                <span class="time_rating" id="month_rating_forecasters">
-                                    <div class="all_team_table">
-                                        <div class="one_position">
-                                            <div class="position">Поз</div>
-                                            <div class="forecasters_name">Имя</div>
-                                            <div class="forecasters_percent">Коэф</div>
-                                            <div class="forecasters_pts">О</div>
-                                        </div>
-                                        <div class="one_position">
-                                            <div class="position">1</div>
-                                            <div class="forecasters_name">
-                                                <div class="team_img">
-                                                    <img src="https://s-media-cache-ak0.pinimg.com/236x/41/42/ae/4142ae1faf0ee1b6ca68e3ed9c629bec.jpg" alt="">
-                                                </div>
-                                                <div class="team_table">
-                                                    Мангура Дмитрий Николаевич
-                                                </div>
-                                            </div>
-                                            <div class="forecasters_percent">65%</div>
-                                            <div class="forecasters_pts">1230</div>
-                                        </div>
-                                        <div class="one_position">
-                                            <div class="position">1</div>
-                                            <div class="forecasters_name">
-                                                <div class="team_img">
-                                                    <img src="https://s-media-cache-ak0.pinimg.com/236x/41/42/ae/4142ae1faf0ee1b6ca68e3ed9c629bec.jpg" alt="">
-                                                </div>
-                                                <div class="team_table">
-                                                    Мангура Дмитрий Николаевич
-                                                </div>
-                                            </div>
-                                            <div class="forecasters_percent">65%</div>
-                                            <div class="forecasters_pts">1230</div>
-                                        </div>
-                                        <footer>
-                                            <div class="more_info">
-                                                <a href="#">Весь список</a>
-                                            </div>
-                                        </footer>
-                                    </div>
-                                </span>
-                <span class="time_rating" id="weak_rating_forecasters">
-                                        <div class="all_team_table">
-                                            <div class="one_position">
-                                                <div class="position">Поз</div>
-                                                <div class="forecasters_name">Имя</div>
-                                                <div class="forecasters_percent">Коэф</div>
-                                                <div class="forecasters_pts">О</div>
-                                            </div>
-                                            <div class="one_position">
-                                                <div class="position">1</div>
-                                                <div class="forecasters_name">
-                                                    <div class="team_img">
-                                                        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                                    </div>
-                                                    <div class="team_table">
-                                                        Мангура Дмитрий Николаевич
-                                                    </div>
-                                                </div>
-                                                <div class="forecasters_percent">65%</div>
-                                                <div class="forecasters_pts">1230</div>
-                                            </div>
-                                            <div class="one_position">
-                                                <div class="position">1</div>
-                                                <div class="forecasters_name">
-                                                    <div class="team_img">
-                                                        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                                    </div>
-                                                    <div class="team_table">
-                                                        Мангура Дмитрий Николаевич
-                                                    </div>
-                                                </div>
-                                                <div class="forecasters_percent">65%</div>
-                                                <div class="forecasters_pts">1230</div>
-                                            </div>
-                                            <footer>
-                                                <div class="more_info">
-                                                    <a href="#">Весь список</a>
-                                                </div>      
-                                            </footer>
-                                         </div>
-                                    </span>
+                <div class="time_rating">
+                    <div class="all_team_table">
+                        <div class="one_position">
+                            <div class="position">Поз</div>
+                            <div class="forecasters_name">Имя</div>
+                            <div class="forecasters_percent">Коэф</div>
+                            <div class="forecasters_pts">О</div>
+                        </div>
+                        <div class="one_position">
+                            <div class="position">1</div>
+                            <div class="forecasters_name">
+                                <div class="team_img">
+                                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                                </div>
+                                <div class="team_table">
+                                    Мангура Дмитрий Николаевич
+                                </div>
+                            </div>
+                            <div class="forecasters_pts">1230</div>
+                        </div>
+                        <div class="one_position">
+                            <div class="position">1</div>
+                            <div class="forecasters_name">
+                                <div class="team_img">
+                                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
+                                </div>
+                                <div class="team_table">
+                                    Мангура Дмитрий Николаевич
+                                </div>
+                            </div>
+                            <div class="forecasters_percent">65%</div>
+                            <div class="forecasters_pts">1230</div>
+                        </div>
+                        <div class="loader">
+                            <img src="../../static/img/black_hole_loader.gif" alt="">
+                        </div>
+                        <footer>
+                            <div class="more_info">
+                                <a href="#">Весь список</a>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Конец таблицы с прогнозистами  -->

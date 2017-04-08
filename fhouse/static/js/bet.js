@@ -490,7 +490,6 @@ function get_match_bet_result(match_div) {
         }
     }
     return bet;
-
 }
 
 function propose_bet(stage_id, match_1, match_2, match_3) {
@@ -525,6 +524,9 @@ $(document).on("click", ".one_division_nav", function(e) {
         method: "GET",
         success: function(data, textStatus, xhr) {
             console.log(data[0]['user__avatar']);
+            for ( var i = 0; i < data.length; i++) {
+                console.log( data[i])
+            }
         },
         error: function(xhr, status, error) {
             console.log(error, status, xhr);
