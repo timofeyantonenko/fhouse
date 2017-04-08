@@ -1,5 +1,13 @@
+from datetime import datetime, timedelta
+
+from django.db.models.query import QuerySet
+
+from django.db.models import Sum
+from django.utils import timezone
+
 from django.shortcuts import render, get_object_or_404
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import StageBetSerializer
 from django.views.decorators.csrf import csrf_protect
@@ -40,6 +48,7 @@ def all_reviews(request):
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def get_bet_stage_info(request):
     context = {}
     # we take current bet. BE AWARE - it must be only one object
@@ -50,6 +59,7 @@ def get_bet_stage_info(request):
 
 @csrf_protect
 @api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def make_bet(request):
     print("COME IN")
     response = Response()
@@ -97,3 +107,29 @@ def make_bet(request):
             )
             user_result.save()
         return response
+
+
+@api_view(['GET'])
+def get_bet_result_table(request):
+    period = request.GET.get("period", "week")
+    days = -1
+    if period == "week":
+        days = 7
+    elif period == "month":
+        days = 30
+
+    # today = datetime.today()
+    today = timezone.now()
+    begin_check_date = today - timedelta(days=100)
+    all_stages = StageBet.objects.filter(check_date__gte=begin_check_date)
+    # q = UsersResult.objects.filter(stage__in=all_stages).query
+    # q.group_by = ["result_match1", ]
+    # q.group_by["user", ]
+    # print([ (c.score, c.user.first_name) for c in QuerySet(query=q, model=UsersResult )])
+    user_results = UsersResult.objects.filter(stage__in=all_stages).values("user__first_name",
+                                                                           "user__last_name",
+                                                                           "user__avatar").annotate(
+        score=Sum('score')).order_by('-score')
+    print(user_results)
+
+    return Response(user_results)

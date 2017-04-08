@@ -4,6 +4,7 @@ from .views import (
     all_reviews,
     get_bet_stage_info,
     make_bet,
+    get_bet_result_table,
 )
 
 urlpatterns = [
@@ -11,4 +12,5 @@ urlpatterns = [
     url(r'^make_bet/$', make_bet),
     url(r'^$', main_bet, name="bets"),
     url(r'^all_reviews/$', all_reviews),
+    url(r'^get_rating/$', get_bet_result_table),
 ]
