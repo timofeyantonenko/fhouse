@@ -1,3 +1,8 @@
+from datetime import datetime, timedelta
+
+from django.db.models import Sum
+from django.utils import timezone
+
 from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -97,3 +102,29 @@ def make_bet(request):
             )
             user_result.save()
         return response
+
+
+@api_view(['GET'])
+def get_bet_result_table(request):
+    period = request.GET.get("period", "week")
+    days = -1
+    if period == "week":
+        days = 7
+    elif period == "month":
+        days = 30
+
+    # today = datetime.today()
+    today = timezone.now()
+    begin_check_date = today - timedelta(days=100)
+    all_stages = StageBet.objects.filter(check_date__gte=begin_check_date)
+    user_results = UsersResult.objects.filter(stage__in=all_stages).values('user').annotate(
+        score=Sum('score')).order_by('-score')
+    print("UR: ", user_results)
+    # all_matches = set()
+    # for stage in all_stages:
+    #     all_matches.add(stage.match_1)
+    #     all_matches.add(stage.match_2)
+    #     all_matches.add(stage.match_3)
+    # print(all_stages)
+
+    return Response({'stage_bet': [1, 2, 3]})

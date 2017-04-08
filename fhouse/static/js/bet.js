@@ -12,7 +12,7 @@ function getCookie(name) {
         }
     }
     return cookieValue;
-}
+};
 $(document).ready(function() {
 
     //    $(".make_bet").on("click", function(){
@@ -540,3 +540,22 @@ function propose_bet(stage_id, match_1, match_2, match_3){
         }
     });
 }
+
+$(document).on("click", ".one_division_nav", function(e) {
+        $.ajax({
+        url: 'get_rating/',
+        data: {
+            period: $(this).attr("id"),
+        },
+        method: "GET",
+        success: function(data, textStatus, xhr) {
+            alert("POST sent!");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 409){
+                alert("Exist!")
+            }
+//            console.log(error, status, xhr);
+        }
+    });
+});
