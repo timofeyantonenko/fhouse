@@ -15,7 +15,6 @@ textarea {
     overflow: none;
 }
 
-
 /*textarea search*/
 
 .search_s_head textarea {
@@ -1525,4 +1524,134 @@ form [type="password"] {
     width: auto !important;
     /*min-width: 100%;*/
     align-self: center;
+}
+
+/*Comments*/
+
+.coments_author {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+}
+
+.coments_author img {
+    width: 100%;
+}
+
+.content_coment {
+    margin-left: 60px;
+}
+
+.coment_author_time {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.coment_author_time a {
+    margin-right: 5px;
+
+}
+
+.coment_author_time p {
+    margin: 0;
+    color: #7f8992;
+}
+
+.coment_author_time a {
+    font-weight: 600;
+}
+
+.show_all_coment:hover {
+    background: #eee;
+}
+
+.show_all_coment {
+    margin: 20px auto;
+    cursor: pointer;
+    width: 240px;
+    height: 35px;
+    line-height: 35px;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    color: #656D78;
+    background: #fff;
+    border: 1px solid #afadad;
+    border-radius: 2px;
+}
+
+.btnFhouse {
+    padding: 9px 16px 9px;
+    margin: 0;
+    font-size: 12.5px;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: none;
+    vertical-align: top;
+    line-height: 15px;
+    text-align: center;
+    text-decoration: none;
+    background: none;
+    background-color: #aa0a0c;
+    color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+
+.btnFhouse:hover {
+    background-color: rgba(170, 10, 12, 0.84) !important;
+    color: #fff !important;
+}
+
+
+
+/*Send comments*/
+
+.sendComment {
+    display: flex;
+    width: 100%;
+}
+
+.authorComent {
+    display: block;
+    margin-right: 10px;
+}
+
+.formSendComment {
+    width: calc( 100% - 60px )
+}
+
+.forPlaceholder {
+    width: 100%;
+}
+.formSendComment >input {
+    outline: none;
+    
+}
+
+.sendBtn {
+    padding-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.sendBtn p {
+    color: #ee0221;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.formSendComment >input[type="submit"] {
+    float: right;
 }

@@ -91,36 +91,11 @@
         </div>
         <!-- Комментарии -->
         <div class="comments_base">
-            <!-- <label for="{{comment_form.content.id_for_label}}">
-                <p class="lead">Оставить комментарий</p>
-            </label> -->
             <h3>Оставить комментарий</h3>
             <!-- Нужно вставить ссылку на профиль автора -->
-            <div class="sendComment">
-                {% if request.user.is_authenticated %}
-                <a href="#" class="authorComent">
-                    <div class="coments_author">
-                        <img src="{{ request.user.avatar.url }}" alt="">
-                    </div>
-                </a>
-                {% else %} {% endif %} {% if request.user.is_authenticated %}
-                <form method="POST" action="." class="formSendComment"> {% csrf_token %}
-                    <div class="forPlaceholder">
-                        {{ comment_form.content }}
-                    </div>
-                    <div class="sendBtn">
-                        {% for field, errors in comment_form.errors.items %} {% for error in errors %}
-                        <p>{{error}}</p>
-                        {% endfor %}{% endfor %}
-                        <input type="submit" value="Отправить" class="btn btn-primary">
-                    </div>
-                    {% else %}
-                    <p><a href="/login">Войдите</a> в свой аккаунт или <a href="/register">зарегистрируйтесь</a> чтобы оставлять комментарии</p>
-                </form>
-                {% endif %}
-            </div>
+            {% include "send_comment.html" %}
         </div>
-        <div class="comments_base2" id="without_paddin">
+        <div class="comments_base2">
             {% include "comment_thread.html" %}
         </div>
     </div>

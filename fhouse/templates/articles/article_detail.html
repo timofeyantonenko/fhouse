@@ -78,63 +78,14 @@
                 </div>
             </div>
         </div>
+        <!-- Комментарии -->
         <div class="comments_base">
-            <a href="#">
-                <div class="coments_author">
-                    <img src="{{ request.user.avatar.url }}" alt="">
-                </div>
-            </a>
-            {% if request.user.is_authenticated %}
-            <form method="POST" action="."> {% csrf_token %}
-                <div>
-                    <label for="{{comment_form.content.id_for_label}}">
-                        <p class="lead">Оставить комментарий</p>
-                    </label>
-                    <div class="forPlaceholder">
-                        {{ comment_form.content }}
-                    </div>
-                </div>
-                <input type="submit" value="Post comment" class="btn btn-default">
-            </form>
-            {% for field, errors in comment_form.errors.items %} {% for error in errors %}
-            <p>{{error}}</p>
-            {% endfor %}{% endfor %} {% else %}
-            <p>You must login to comment</p>
-            {% endif %}
+            <h3>Оставить комментарий</h3>
+            <!-- Нужно вставить ссылку на профиль автора -->
+            {% include "send_comment.html" %}
         </div>
         <div class="comments_base2" id="without_paddin">
-            {% for comment in comments %}
-            <div class="blockquote">
-                <a href="#">
-                    <div class="coments_author">
-                        <img src="{{ comment.user.avatar.url }}" alt="">
-                    </div>
-                </a>
-                <div class="content_coment">
-                    <div class="coment_author_time">
-                        <a href="#">{{ comment.user.first_name }} {{ comment.user.last_name }}</a> {{ comment.timestamp|timesince }} ago
-                    </div>
-                    {{ comment.content }}
-                    <footer> {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class="comment-reply-btn" href="#">Ответить</a> </footer>
-                    <div class="comment-reply">
-                        {% for child_comment in comment.children %}
-                        <div class="blockquote">
-                            <p>{{ child_comment.content }}</p>
-                            <footer>{{ child_comment.user.first_name }} {{ child_comment.user.last_name }} | {{ child_comment.timestamp|timesince }} ago</footer>
-                        </div>
-                        {% endfor %} {% if request.user.is_authenticated %}
-                        <form method="POST" action="."> {% csrf_token %} {{ comment_form|crispy }}
-                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                            <input type="submit" value="Ответить" class="btn btn-default">
-                        </form>
-                        {% else %}
-                        <p>You must login to comment</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            <a href="#" class="show_all_coment">Показать все комментарии</a>
+            {% include "comment_thread.html" %}
         </div>
     </div>
     <div class="next_article_container">
