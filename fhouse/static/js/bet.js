@@ -20,6 +20,14 @@ $(document).ready(function() {
     //        show_modal('#week_bets_top');
     //    });
 
+    var $windowWidth;
+    imgNavBet();
+
+    $(window).resize(function() {
+        imgNavBet();
+        imgRightColumnBet();
+    })
+
     // Выбор топ матча
     $(".read_prev").eq(0).hide();
     $(".line_hover_active").eq(0).css({ "opacity": "1" });
@@ -38,32 +46,16 @@ $(document).ready(function() {
 
     // Выбор тура
     // В переменную "load_tour" при переходе с "bet_main.html" попадает индекс выбранного чемпионата
+    
+    var length_li_tour;
+    var index_current_tour = 13;
+    var width_li_nav;
+    var new_margin;
     var load_champ = 6;
-    //
-    var length_li_tour = $("#id_list_tour").children("ul").eq(load_champ).children("li").length;
-    var index_current_tour = $("#id_list_tour").children("ul").eq(load_champ).children("li.current_tour").index();
 
-    function chose_tour() {
-        for (var i = 0; i < length_li_tour; i++) {
-            var load_tour = (length_li_tour - i - 1);
-            var nuber_tour = $("#id_list_tour").children("ul").eq(load_champ).children("li").eq(load_tour).text();
-            var content_tour_active = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu active_menu"></div></li>';
-            var content_tour = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu"></div></li>';
-            if ((length_li_tour - i - 1) == index_current_tour) {
-                $('#tour_other').prepend(content_tour_active);
-            } else {
-                $('#tour_other').prepend(content_tour);
-            }
-        };
-        if (index_current_tour < 7) {
-            $(".nav_ul_tour").css({ "margin-left": "0" })
-        } else {
-            var width_li_nav = $("#tour_other").find("li").eq(0).width();
-            var new_margin = (-(index_current_tour - 7) * width_li_nav);
-            $(".nav_ul_tour").css({ "margin-left": new_margin })
-        }
-    }
-    chose_tour();
+    chose_tour(load_champ);
+
+    
 
     // Выбор лиги
     $("#all_bets_nav .change_champ").eq(load_champ).addClass("active_champ");
@@ -84,24 +76,7 @@ $(document).ready(function() {
         // Подгрузка туров
         $("#tour_other").empty();
 
-        length_li_tour = $("#id_list_tour").children("ul").eq(load_champ).children("li").length;
-        for (var i = 0; i < length_li_tour; i++) {
-            var nuber_tour = $("#id_list_tour").children("ul").eq(load_champ).children("li").eq(length_li_tour - i - 1).text();
-            var content_tour_active = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu active_menu"></div></li>';
-            var content_tour = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu"></div></li>';
-            if ((length_li_tour - i - 1) == index_current_tour) {
-                $('#tour_other').prepend(content_tour_active);
-            } else {
-                $('#tour_other').prepend(content_tour);
-            }
-        };
-        if (index_current_tour < 7) {
-            $(".nav_ul_tour").css({ "margin-left": "0" })
-        } else {
-            var width_li_nav = $("#tour_other").find("li").eq(0).width();
-            var new_margin = (-(index_current_tour - 7) * width_li_nav);
-            $(".nav_ul_tour").css({ "margin-left": new_margin })
-        }
+        chose_tour(load_champ);
     });
 
     // Выбор тура
@@ -489,7 +464,7 @@ $(document).on("click", ".delete_this_this_choice i", function() {
 });
 
 // User make bet
-$(document).on("click", ".btn_success_bet", function(){
+$(document).on("click", ".btn_success_bet", function() {
     var content = $('.mathes_can_bet');
     stage_id = content.attr("stage_id");
     first_match = content.children()[0];
@@ -505,20 +480,20 @@ $(document).on("click", ".btn_success_bet", function(){
 
 });
 
-function get_match_bet_result(match_div){
+function get_match_bet_result(match_div) {
     var bet = -1;
     var result_cans = $(match_div).children();
-    for (var i = 0; i < 3; i++){
-           if ($(result_cans[i+1]).hasClass("active_choice_bet"))
-                {
-                    bet = i;
-                    break;
-                }
+    for (var i = 0; i < 3; i++) {
+        if ($(result_cans[i + 1]).hasClass("active_choice_bet")) {
+            bet = i;
+            break;
+        }
     }
     return bet;
 
 }
-function propose_bet(stage_id, match_1, match_2, match_3){
+
+function propose_bet(stage_id, match_1, match_2, match_3) {
     $.ajax({
         url: 'make_bet/',
         data: {
@@ -533,10 +508,10 @@ function propose_bet(stage_id, match_1, match_2, match_3){
             alert("POST sent!");
         },
         error: function(xhr, status, error) {
-            if (xhr.status === 409){
+            if (xhr.status === 409) {
                 alert("Exist!")
             }
-//            console.log(error, status, xhr);
+            //            console.log(error, status, xhr);
         }
     });
 }
@@ -559,3 +534,47 @@ $(document).on("click", ".one_division_nav", function(e) {
         }
     });
 });
+
+function imgNavBet() {
+    $windowWidth = $(window).width();
+    console.log($windowWidth)
+        // Background position nav all bets
+    for (var i = 0; i < $(".change_champ").length; i++) {
+        if ($windowWidth > 969) {
+            $(".change_champ").eq(i).css({
+                "background-position-x": ((-80 * i) - 10)
+            });
+        } else {
+            $(".change_champ").eq(i).css({
+                "background-position-x": ((-60 * i) - 7.5)
+            });
+        }
+        $(".change_champ").eq(i).show();
+
+    };
+}
+
+function chose_tour(load_championat) {
+    length_li_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li").length;
+    index_current_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li.current_tour").index();
+    for (var i = 0; i < length_li_tour; i++) {
+        var load_tour = (length_li_tour - i - 1);
+        var nuber_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li").eq(load_tour).text();
+        var content_tour_active = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu active_menu"></div></li>';
+        var content_tour = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu"></div></li>';
+        if ((length_li_tour - i - 1) == index_current_tour) {
+            $('#tour_other').prepend(content_tour_active);
+        } else {
+            $('#tour_other').prepend(content_tour);
+        }
+    };
+    $windowWidth = $(".container_tour").width();
+    width_li_nav = $("#tour_other").find("li").eq(0).width();
+    var maxMarginTour = Math.floor((Math.floor($windowWidth/width_li_nav) - 1) / 2);
+    if (index_current_tour < maxMarginTour) {
+        $(".nav_ul_tour").css({ "margin-left": "0" })
+    } else {
+        new_margin = (-(index_current_tour - maxMarginTour) * width_li_nav);
+        $(".nav_ul_tour").css({ "margin-left": new_margin })
+    }
+}

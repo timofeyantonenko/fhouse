@@ -133,20 +133,6 @@ $(document).ready(function() {
         }
     })
 
-    // Background position for img column right
-    for (var i = 0; i < $(".bets_one_championship").length; i++) {
-        $(".bets_one_championship").eq(i).css({
-            "background-position-y": (-60 * i)
-        });
-    };
-
-    // Background position nav all bets
-    for (var i = 0; i < $(".change_champ").length; i++) {
-        $(".change_champ").eq(i).css({
-            "background-position-x": ((-83 * i) - 25)
-        });
-    };
-
     // Стрелки для просмотра туров которые не поместились в основной блок
 
     function left_tour() {
