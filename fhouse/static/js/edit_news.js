@@ -533,8 +533,30 @@ function publishPost(post_id, post_title, post_text, tags){
 
 }
 
+function publishArticle(post_id, article_title, article_text, tags){
+    ajax_url = "";
+    $.ajax({
+        url: ajax_url,
+        data: ajax_data,
+        dataType: "json",
+        success: function(data) {
+        },
+        error: function(xhr, status, error) {
+//             console.log(error, status, xhr);
+        }
+    });
+
+}
+
+
 
 // Confirm delete tour
-$(document).on("click", ".btn-success", function() {
+$(document).on("click", "#approve_news", function() {
     alert('d');
+});
+
+// Confirm delete tour
+$(document).on("click", "#approve_article", function() {
+    input_title = $("#title-suggesting-news").text;
+    alert(input_title);
 });

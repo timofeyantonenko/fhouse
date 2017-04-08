@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from utils.files_preparing import upload_location
 from utils.abstract_classes import CommentedClass
 from django.conf import settings
-
+from django.utils import timezone
 
 # Create your models here.
 from utils.abstract_classes import ForeignContentClass
@@ -34,6 +34,14 @@ class ArticlesSection(models.Model):
         return query_set
 
 
+class SectionArticleManager(models.Manager):
+    def active(self, *args, **kwargs):
+        return super(SectionArticleManager, self).filter(draft=False)
+
+    def non_activated(self, *args, **kwargs):
+        return super(SectionArticleManager, self).filter(draft=True)
+
+
 class SectionArticle(CommentedClass, ForeignContentClass):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -50,7 +58,11 @@ class SectionArticle(CommentedClass, ForeignContentClass):
     # slug for absolute url
     slug = models.SlugField(unique=True)
 
+    draft = models.BooleanField(default=True)
+
     article_section = models.ForeignKey(ArticlesSection, on_delete=models.CASCADE)
+
+    objects = SectionArticleManager()
 
     def __str__(self):
         return self.article_title

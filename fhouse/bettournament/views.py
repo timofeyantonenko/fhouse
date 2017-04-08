@@ -133,3 +133,8 @@ def get_bet_result_table(request):
     print(user_results)
 
     return Response(user_results)
+
+
+def get_all_bet_rating(request):
+    context = {}
+    return render(request, "bets/user_rating_table.html", context)
