@@ -230,7 +230,7 @@ function show_modal(modal_id) {
     $(modal_id).modal();
 }
 
-function load_bet_info() {
+    function load_bet_info() {
     var ajax_url = 'get_bet_stage_info';
     //    var ajax_data = { "section": section_name }
     var state = ""
@@ -524,13 +524,10 @@ $(document).on("click", ".one_division_nav", function(e) {
         },
         method: "GET",
         success: function(data, textStatus, xhr) {
-            alert("POST sent!");
+            console.log(data[0]['user__avatar']);
         },
         error: function(xhr, status, error) {
-            if (xhr.status === 409){
-                alert("Exist!")
-            }
-//            console.log(error, status, xhr);
+            console.log(error, status, xhr);
         }
     });
 });

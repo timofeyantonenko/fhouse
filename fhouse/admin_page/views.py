@@ -51,7 +51,7 @@ def add_photo_page(request):
 @api_view(['POST'])
 def update_results(request):
     # get stage info
-    stage_id = request.POST.get("stage_id", 1)
+    stage_id = 5# request.POST.get("stage_id", 1)
     stage_object = StageBet.objects.get(id=stage_id)
 
     # get matches ingo

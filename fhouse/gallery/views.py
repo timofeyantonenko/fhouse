@@ -1,13 +1,15 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import GallerySection, SectionAlbum, AlbumPhoto
 from .serializers import AlbumPhotoSerializer, SectionAlbumSerializer
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def get_section_information(request):
     count_of_photo_by_pagination = 9
     count_of_albums_to_load = 6
@@ -28,6 +30,7 @@ def get_section_information(request):
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def get_album_photos(request):
     count_of_photo_by_pagination = 9
     page = request.GET.get("page", 1)
