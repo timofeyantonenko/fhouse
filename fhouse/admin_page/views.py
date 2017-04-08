@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # project import
 from posts.models import Post
+from article.models import SectionArticle
 from bettournament.models import StageBet, UsersResult
 
 # Create your views here.
@@ -24,9 +25,10 @@ def show_unaccepted_news(request):
 
 
 def show_articles(request):
-    posts_to_check = Post.objects.non_activated()
+    articles_to_check = SectionArticle.objects.non_activated()
+    print(articles_to_check)
     context = {
-        'posts_to_check': posts_to_check,
+        'articles_to_check': articles_to_check,
     }
     return render(request, "admin_page/admin_article.html", context)
 

@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe
 from django.conf import settings
-from django.contrib.auth.models import User
 
 # Create your models here.
 from markdown_deux import markdown

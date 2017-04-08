@@ -26,28 +26,30 @@
 
                     <!-- Список статей -->
                     <div class="list_article">
-                        <div class="one_suggestion_news thumbnail article">
+                        {% for article in articles_to_check %}
+                        <div class="one_suggestion_news thumbnail">
                             <div class="imgConteinerSuggestion">
-                                <img src="https://pp.vk.me/c637216/v637216085/348ed/aqZ4g7Ns95k.jpg" alt="">
+                                <img src="{{ article.image.url }}" alt="">
                             </div>
                             <div class="thumbNews">
                                 <div class="infoSuggestingPerson">
                                     <div class="photo-user">
-                                        <img src="https://pp.vk.me/c316324/v316324231/9800/QAgNJ3JcXpU.jpg">
+                                        <img src="{{ article.user.avatar.url }}">
                                     </div>
                                     <div class="info-user">
-                                        <h4 class="media-heading"><span class="author_news">Василий Соловьев </span> </h4>
-                                        <div class="author_time">23.10.2012 19:21</div>
+                                        <h4 class="media-heading"><span class="author_news">{{ request.user.first_name }} {{ request.user.last_name }}</span> </h4>
+                                        <div class="author_time">{{ article.timestamp }}</div>
                                     </div>
                                 </div>
-                                <p class="text_suggesting_news">"Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. "Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. "Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. "Селтик" под руководством Брендана Роджерса не проиграл 27-й матч подряд во всех турнирах Шотландии. Предыдущее достижение (26 матчей) датируется сезоном 1966/67. </p>
+                                <p class="text_suggesting_news">{{ article.article_text }}</p>
                                 <div class="more_read">Читать больше...</div>
                                 <p>
                                     <button class="btn btn-warning editNewsBtn" role="button">Редактировать</button>
-                                    <button class="btn btn-default deleteNewsBtn" role="button" data-toggle="modal" data-target="#delteNews">Удалить</button>
+                                    <button class="btn btn-default deleteNewsBtn" role="button" data-toggle="modal" data-target="#delteArticle">Удалить</button>
                                 </p>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="rightColumn">
@@ -76,74 +78,10 @@
                         <div class="titleSuggestingNews">
                             <textarea name="" id="title-suggesting-news" placeholder="Заголовок"></textarea>
                         </div>
-                        <!-- Текст новости -->
-                        <h3>Текст новости</h3>
+                        <!-- Текст статьи -->
+                        <h3>Текст статьи</h3>
                         <div class="textSuggestingNews">
-                            <textarea name="" id="text-suggesting-news" placeholder="Текст новости"></textarea>
-                        </div>
-                        <!-- Теги -->
-                        <div class="tegs">
-                            <h3>Теги:</h3>
-                            <div class="textarea_write_teg">
-                                <textarea name="" id="seachTags" placeholder="Поиск тегов"></textarea>
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                <ul class="list_tegs">
-                                    <!-- Сортированы по количеству постов с этим тегом -->
-                                    <li class="itemTag">
-                                        <p>Динамо</p><span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
-                                    <li class="itemTag">
-                                        <p>Шахтер</p> <span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
-                                    <li class="itemTag">
-                                        <p>ворскла</p> <span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
-                                    <li class="itemTag">
-                                        <p>барса</p> <span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
-                                    <li class="itemTag">
-                                        <p>челси</p> <span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
-                                    <li class="itemTag">
-                                        <p>дрогба</p> <span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
-                                    <li class="itemTag">
-                                        <p>матич</p> <span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
-                                    <li class="itemTag">
-                                        <p>ярмола</p> <span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="addNewTag">
-                                <h3>Добавить новый тег:</h3>
-                                <textarea placeholder="Новый тег"></textarea>
-                                <button type="button" class="btn btn-primary">
-                                    ok
-                                </button>
-                            </div>
-                            <div class="tegs_area">
-                                <div class="oneTeg">
-                                    <div class="nameTeg">Динамо</div>
-                                    <div class="removeTeg">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </div>
-                                </div>
-                                <div class="oneTeg">
-                                    <div class="nameTeg">Динамо</div>
-                                    <div class="removeTeg">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </div>
-                                </div>
-                            </div>
+                            <textarea name="" id="text-suggesting-news" placeholder="Текст статьи"></textarea>
                         </div>
                         <footer>
                             <select name="" id="timePublishing">
@@ -153,7 +91,7 @@
                                 <option value="3">Через 15 часов</option>
                                 <option value="4">Через 20 часов</option>
                             </select>
-                            <button type="button" class="btn btn-success">
+                            <button type="button" class="btn btn-success" id="approve_article">
                                 опубликовать
                             </button>
                         </footer>
