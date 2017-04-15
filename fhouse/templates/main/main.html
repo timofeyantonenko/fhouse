@@ -10,55 +10,42 @@
 <main>
     <!-- Индивидуальный блок новостей  -->
     <div class="articles">
-        <div class="main_news_container">
+        <section class="main_news_container">
             {% include "main/main_posts.html" %}
-        </div>
-        <div class="container_unit">
-            <div class="last_photos">
-                <div class="title_and_all">
-                    <h2><a href='/gallery'>Галерея</a></h2>
-                    <a href="/gallery">
-                        <div class="all_of_units">
-                            <span>Больше</span>
-                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="main_gallery_container">
-                </div>
-            </div>
-        </div>
-        <div class="container_unit">
-            <div class="read_articles">
-                <div class="title_and_all">
-                    <h2><a href='/articles'>Чтиво</a></h2>
-                    <a href="/articles">
-                        <div class="all_of_units">
-                            <span>Больше</span>
-                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="articles_list">
-                </div>
-            </div>
-        </div>
-        <div class="container_unit">
-            <div class="title_and_all">
-                <h2><a href='/records'>Рекорды</a></h2>
-                <a href="/records">
-                    <div class="all_of_units">
-                        <span>Больше</span>
-                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                    </div>
+        </section>
+        <section class="container_unit">
+            <header class="title_and_all">
+                <h2><a href='/gallery'>Галерея</a></h2>
+                <a href="/gallery" class="all_of_units">
+                    <span>Больше</span>
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                 </a>
+            </header>
+            <div class="main_gallery_container">
             </div>
-            <div class="last_records">
-                <!-- 1 рекорд     -->
-                <div class="records_list">
-                </div>
+        </section>
+        <section class="container_unit">
+            <header class="title_and_all">
+                <h2><a href='/articles'>Чтиво</a></h2>
+                <a href="/articles" class="all_of_units">
+                    <span>Больше</span>
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </header>
+            <div class="articles_list">
             </div>
-        </div>
+        </section>
+        <section class="container_unit">
+            <header class="title_and_all">
+                <h2><a href='/records'>Рекорды</a></h2>
+                <a href="/records" class="all_of_units">
+                    <span>Больше</span>
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                </a>
+            </header>
+            <div class="records_list">
+            </div>
+        </section>
     </div>
     {% include "for_user.html" %}
 </main>

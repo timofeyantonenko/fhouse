@@ -10,8 +10,8 @@
                     <!-- Таблица и инфа о юзере  -->
                     <div class="table_forecasters_and_user_infa">
                         <!-- Инфа юзер -->
-                        <div class="photo_user">
-                            <img src="{{ user.avatar.url }}" />
+                        <div class="photo_user containerImgUser">
+                            <img src="{{ user.avatar.url }}" class="imgUser" />
                         </div>
                         <div class="name_user_info">
                             <h3>
@@ -20,7 +20,7 @@
                                 <a href="/user" id="hrefMyProfile">Мой прифиль</a>
                             </h3>
                             <div class="show_all_table_forecasters">
-                                <a href="#">Рейтинг прогнозистов</a>
+                                <a href="/bets/all_bet_rating/">Рейтинг прогнозистов</a>
                             </div>
                         </div>
                         <div class="users_progress">
@@ -73,7 +73,7 @@
                         Экспресс недели
                     </div>
                     <div class="mathes_can_bet">
-                        <div class="one_math_can_bet">
+                        <!-- <div class="one_math_can_bet">
                             <div class="data_time_can">02.01 - 22:30</div>
                             <div class="result_can teams_can">
                                 <div class="team_can">
@@ -153,7 +153,7 @@
                                     101.12
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- Прогноз недели конец   -->
                 </div>

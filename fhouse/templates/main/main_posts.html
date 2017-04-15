@@ -1,44 +1,36 @@
 <div class="container_unit">
-    <div class="main_news">
-        <a href="#">
-            <div class="main_img">
-                <img src="{{ main_post.image.url }}" alt="">
-            </div>
-            <div class="main_news_infa">
-                <h2>{{ main_post.title }}</h2>
-                <p>
-                    {{ main_post.content }}
-                </p>
-            </div>
-        </a>
-    </div>
+    <a href="{{main_post.get_absolute_url}}" class="main_news">
+        <div class="main_img containerImgNews">
+            <img src="{{ main_post.image.url }}" class="imgUser" alt="">
+        </div>
+        <div class="main_news_infa">
+            <h2>{{ main_post.title }}</h2>
+            <p>
+                {{ main_post.content }}
+            </p>
+        </div>
+    </a>
 </div>
 <div class="container_unit">
-    <div class="last_news">
-        <div class="title_and_all">
-            <h2><a href='#'>Новости</a></h2>
-            <a href="/posts">
-                <div class="all_of_units">
-                    <span>Больше</span>
-                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                </div>
-            </a>
-        </div>
-        <div class="container_news">
-            {% for post in post_list %}
-            <div class="one_news">
-                <a href="{{post.get_absolute_url}}">
-                    <div class="one_news_img">
-                        <img src="{{ post.image.url }}" alt="">
-                    </div>
-                    <div class="one_news_info">
-                        {% for tag in post.tags %}
-                        <span>{{ tag.name }}</span> {% endfor %}
-                        <h4>{{ post.title }}</h4>
-                    </div>
-                </a>
+    <header class="title_and_all">
+        <h2>Новости</h2>
+        <a href="/posts" class="all_of_units">
+            <span>Больше</span>
+            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+        </a>
+    </header>
+    <article class="container_news">
+        {% for post in post_list %}
+        <a href="{{post.get_absolute_url}}" class="one_news">
+            <div class="one_news_img containerImgNews">
+                <img src="{{ post.image.url }}" class="imgUser" alt="">
             </div>
-            {% endfor %}
-        </div>
-    </div>
+            <div class="one_news_info">
+                {% for tag in post.tags %}
+                <span>{{ tag.name }}</span> {% endfor %}
+                <h4>{{ post.title }}</h4>
+            </div>
+        </a>
+        {% endfor %}
+    </article>
 </div>

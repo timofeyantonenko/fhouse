@@ -31,25 +31,38 @@
 </head>
 
 <body id='body'>
+    <style id="mainStyle">
+        /*@media screen and (min-width: 1170px) {
+            body.modal-open #menu {
+                padding-left: calc(50% - 583.5px);
+                padding-right: calc(50% - 566.5px);
+            }
+        }
+        
+        @media screen and (min-width: 970px) and (max-width: 1169px) {
+            body.modal-open #menu {
+                padding-right: calc(2.5% + 17px);
+            }
+        }*/
+    </style>
     <!-- Nav -->
-    <section id="menu">
-        <div id="brend">
-            <a href="/" class="navbar-brand">
-                Fhouse
-            </a>
-        </div>
+    <header id="menu">
+        <a href="/" class="navbar-brand" id="brend">
+            {% include "logo.html" %}
+        </a>
         <nav id="mainNav">
             <ul>
                 <li>
                     <a href="/">
-                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-home" aria-hidden="true"></i> -->
+                        {% include "logo.html" %}
                     </a>
                 </li>
                 <li>
                     <a href="/posts">Новости</a>
                 </li>
                 <li>
-                    <a href="/bets">Прогрнозы</a>
+                    <a href="/bets/all_reviews">Прогрнозы</a>
                 </li>
                 <li>
                     <a href="/gallery">Галерея</a>
@@ -74,7 +87,7 @@
                     <div class="user_profile">
                         {% if request.user.is_authenticated %}
                         <div class="name_user_in_menu">{{ request.user.first_name }}</div>
-                        <div class="imgUserNav"><img src="{{ request.user.avatar.url }}" alt=""></div>
+                        <div class="imgUserNav containerImgUser"><img src="{{ request.user.avatar.url }}" alt="Картинка пользователя" class="imgUser"></div>
                         <i class="fa fa-caret-down" aria-hidden="true"></i> {% else %}
                         <div class="name_user_in_menu">Вход</div>
                         <i class="fa fa-sign-in" aria-hidden="true"></i> {% endif %}
@@ -104,7 +117,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </header>
     {% include "messages_display.html" %}
     <div>
         {% block content %} {% endblock content %}

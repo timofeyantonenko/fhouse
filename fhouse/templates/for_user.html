@@ -1,33 +1,33 @@
-<div class="position_relative infoUserRight">
-    <div id="wrap">
-        {% if request.user.is_authenticated %}
-        <div class="user_date">
-            <h3>{{ request.user.first_name }} {{ request.user.last_name }}</h3>
-            <div class="img_flex">
-                <div class="user_date_img">
-                    <img src="{{ request.user.avatar.url }}" alt="">
-                </div>
-            </div>
-            <div class="user_information">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td><a href="#">Рейтинг прогнозистов</a></td>
-                            <td><a href="#">143</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Количество сатей</a></td>
-                            <td><a href="#">3</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Голосов</a></td>
-                            <td><a href="#">53</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+<aside class="position_relative infoUserRight asideRight">
+    {% if request.user.is_authenticated %}
+        <h3>{{ request.user.first_name }} {{ request.user.last_name }}</h3>
+        <div class="img_flex">
+            <div class="user_date_img containerImgUser">
+                <img src="{{ request.user.avatar.url }}" class="imgUser" alt="">
             </div>
         </div>
-        {% else %}
-        <h3>Братан, зарегайся или ввойди в аккаунт</h3> {% endif %}
-    </div>
-</div>
+        <table class="table user_information" >
+            <tbody>
+                <tr>
+                    <td>
+                        <p>Рейтинг прогнозистов</p>
+                        <p>143</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Количество сатей</p>
+                        <p>3</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Голосов</p>
+                        <p>1242</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+    <h3>Братан, зарегайся или ввойди в аккаунт</h3> {% endif %}
+</aside>

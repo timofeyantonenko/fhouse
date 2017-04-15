@@ -13,40 +13,69 @@ function getCookie(name) {
     }
     return cookieValue;
 };
+
+var currentPageLi = 1,
+    lengthPagination,
+    locationLink = window.location.pathname,
+    tableLength = 10
+    indexSection = 0;
+
 $(document).ready(function() {
 
-    //    $(".make_bet").on("click", function(){
-    //    $('#week_bets_top').modal('show');
-    //        show_modal('#week_bets_top');
-    //    });
-
-    var $windowWidth;
-    imgNavBet();
-
-    $(window).resize(function() {
-        imgNavBet();
-        imgRightColumnBet();
-    })
-
-    // Выбор топ матча
-    $(".read_prev").eq(0).hide();
-    $(".line_hover_active").eq(0).css({ "opacity": "1" });
-    $(".top_match").eq(0).show();
-    $(".read_prev").on("click", function() {
-        var index_read = $(this).parent().index();
-        console.log(index_read)
-        $(".line_hover_active").css({ "opacity": "0" })
-        $(this).parent().find(".line_hover_active").css({ "opacity": "1" })
-        $(".read_prev").show();
-        $(this).fadeOut();
-
-        $(".top_match").hide();
-        $(".top_match").eq(index_read).show();
+    var leftNav,
+        center,
+        rightNav;
+    $(".navTopMatches").on("click", function() {
+        if ($(this).hasClass("prevMatch")) {
+            leftNav = 1;
+            center = 2;
+            rightNav = 3;
+        } else {
+            leftNav = 2;
+            center = 3;
+            rightNav = 1;
+        }
+        chooseCurrent(leftNav, center, rightNav);
     });
+
+    var $windowWidth,
+        logoChampionship,
+        sizeImg,
+        sizeImgMobile;
+
+    if (locationLink.indexOf("all_reviews") > 0) {
+        champLogo = $('.change_champ');
+        sizeImg = -80;
+        sizeImgMobile = -60;
+    } else {
+        champLogo = $('.imgChampNav');
+        sizeImg = sizeImgMobile = -80;
+    }
+    // Table rating locationLink
+    if (locationLink.indexOf("all_bet_rating") > 0) {
+        tableLength = 20;
+    }
+
+    ajaxRating(tableLength, 1, indexSection);
+
+    $(".one_division_nav").on("click", function(e) {
+        indexSection = $(this).index();
+        ajaxRating(tableLength, 1, indexSection);
+    });
+
+    $("body").on("click", "#paginationTable li ", function() {
+        var thisLi = $(this).text();
+        goPagination(thisLi, lengthPagination, currentPageLi);
+    });
+
+    imgNavBet(sizeImg, sizeImgMobile);
+    $(window).resize(function() {
+        imgNavBet(sizeImg, sizeImgMobile);
+    })
 
     // Выбор тура
     // В переменную "load_tour" при переходе с "bet_main.html" попадает индекс выбранного чемпионата
-    
+
     var length_li_tour;
     var index_current_tour = 13;
     var width_li_nav;
@@ -55,7 +84,6 @@ $(document).ready(function() {
 
     chose_tour(load_champ);
 
-    
 
     // Выбор лиги
     $("#all_bets_nav .change_champ").eq(load_champ).addClass("active_champ");
@@ -75,7 +103,6 @@ $(document).ready(function() {
         $(".champ").html(name_championship);
         // Подгрузка туров
         $("#tour_other").empty();
-
         chose_tour(load_champ);
     });
 
@@ -90,17 +117,12 @@ $(document).ready(function() {
     });
 
     // Таблицы
-    $(".time_rating").eq(0).show()
     $(".nav_table").children(".one_division_nav").eq(0).addClass("active_tab_section");
 
     // Выбор временного интервала в рейтинге прогнозистов
     $("#table_rat_forcas").find(".one_division_nav").on("click", function() {
         $(this).parent().children().removeClass("active_tab_section");
         $(this).addClass("active_tab_section");
-        $("#table_rat_forcas").find(".time_rating").hide();
-        var inde_nav_time = $(this).index();
-        $("#table_rat_forcas").find(".time_rating").eq(inde_nav_time).show();
-
     });
 
     // Турнирные таблицы 
@@ -211,11 +233,10 @@ $(document).ready(function() {
         $(this).children("figure").show();
         $(this).children(".team_nav, .preview_math_nav_background").hide();
     });
-
 });
 
 $(window).load(function() {
-    $(".make_bet").on("click", function() {
+    $(".makeBetModal").on("click", function() {
         show_modal('#week_bets_top');
     });
 });
@@ -230,8 +251,8 @@ function show_modal(modal_id) {
     $(modal_id).modal();
 }
 
-    function load_bet_info() {
-    var ajax_url = 'get_bet_stage_info';
+function load_bet_info() {
+    var ajax_url = '/bets/get_bet_stage_info';
     //    var ajax_data = { "section": section_name }
     var state = ""
     $.ajax({
@@ -281,7 +302,6 @@ function show_modal(modal_id) {
         }
     });
 }
-
 
 var week_show = 0;
 
@@ -336,7 +356,6 @@ for (var i = 0; i < $(".history_bet").eq(0).children(".one_user_choice").length;
     arr.push(sum++);
 };
 
-
 var quantity_chosen_math = 0;
 
 // Переменная кол-во выбранных матчей
@@ -350,7 +369,6 @@ function arraySum(arr) {
     var text_kof = +$(".history_bet").eq(0).find(".total_kof_these_matches").text();
     var text_kof = text_kof.toFixed(2);
     $(".history_bet").eq(0).find(".total_kof_these_matches").text(text_kof);
-
 }
 
 // Выбор результата матча
@@ -477,7 +495,6 @@ $(document).on("click", ".btn_success_bet", function() {
     third_result = get_match_bet_result(third_match);
 
     propose_bet(stage_id, first_result, second_result, third_result);
-
 });
 
 function get_match_bet_result(match_div) {
@@ -494,7 +511,7 @@ function get_match_bet_result(match_div) {
 
 function propose_bet(stage_id, match_1, match_2, match_3) {
     $.ajax({
-        url: 'make_bet/',
+        url: '/bets/make_bet/',
         data: {
             stage_id: stage_id,
             first_match: match_1,
@@ -515,40 +532,144 @@ function propose_bet(stage_id, match_1, match_2, match_3) {
     });
 }
 
-$(document).on("click", ".one_division_nav", function(e) {
-        $.ajax({
-        url: 'get_rating/',
+function loaderShow() {
+    $('#listForecasters').hide();
+    $("#loader").css({ "display": "flex" });
+}
+
+function ajaxRating(locationLinkHref, page, section) {
+    $.ajax({
+        url: '/bets/get_rating/',
         data: {
-            period: $(this).attr("id"),
+            period: section, //section 0 - все время, 1 - месяц, 2 -сезон
+            pagePaginationTable: page,
         },
         method: "GET",
+        beforeSend: loaderShow(),
         success: function(data, textStatus, xhr) {
-            console.log(data[0]['user__avatar']);
-            for ( var i = 0; i < data.length; i++) {
-                console.log( data[i])
+            lengthPagination = 123 // Нужно еще передать количество пагинаций
+            var contentTable = $('#listForecasters');
+            $('#listForecasters').empty()
+            for (var i = 0; i < data.length && i < locationLinkHref; i++) {
+                var place = i + 1,
+                    imgSrc = '/media/' + data[i]['user__avatar'],
+                    firstName = data[i]['user__first_name'],
+                    lastName = data[i]['user__last_name'],
+                    pointUser = data[i]['__proto__'],
+                    htmlBet =
+                    `<div class="one_position">
+                        <div class="position">` + place + `</div>
+                        <div class="forecasters_name">
+                            <div class="userAvaTable containerImgUser">
+                                <img src="` + imgSrc + `" alt="" class="imgUser">
+                            </div>
+                            <div class="team_table">
+                                ` + firstName + ` ` + lastName +
+                    `
+                            </div>
+                        </div>
+                        <div class="forecasters_pts">` + pointUser + `</div>
+                    </div>
+                    `;
+                contentTable.append(htmlBet);
             }
+            makePagination(lengthPagination, currentPageLi);
+            $('#listForecasters').show();
+            $("#loader").hide();
         },
         error: function(xhr, status, error) {
             console.log(error, status, xhr);
         }
     });
-});
+}
 
-function imgNavBet() {
+
+// Пагинация таблицы прогнозистов Ajax
+
+function makePagination(pageCount, currentPage) {
+    if ( pageCount - 1) {
+        $("#prevPagination").show();
+        $("#nextPagination").show();
+    } else {
+        $("#prevPagination").hide();
+        $("#nextPagination").hide();
+    }
+    $("#prevPagination").nextAll("li.numberLi").remove();
+    var htmlLiConteiner = "",
+        htmlLi,
+        $li = $("#paginationTable").children("ul").children("li"),
+        lastPrev = currentPage - 3,
+        lastNext = currentPage + 3;
+    for (var i = 1; i <= pageCount; i++) {
+        if ($li.eq(lastPrev).text() != "-" && $li.eq(lastPrev).text() != 1) {
+
+        }
+        if ($li.eq(lastNext).text() != "+" && $li.eq(lastNext).text() != pageCount) {
+
+        }
+        if (i > lastPrev && i < lastNext && i != currentPage) {
+            htmlLi = `
+            <li class="numberLi">` + i + ` </li>
+            `;
+        } else if (i == lastPrev && i != "-" && i != 1 ||
+            i == lastNext && i != "+" && i != pageCount) {
+            htmlLi = `
+                <li class="numberLi">...</li>
+                `;
+        } else if (i == currentPage) {
+            htmlLi = `
+            <li class="currentPagination numberLi">` + i + ` </li>
+            `;
+        } else {
+            htmlLi = `
+            <li class="newLi numberLi">` + i + ` </li>
+            `;
+        }
+        htmlLiConteiner += htmlLi;
+    }
+    $("#prevPagination").after(htmlLiConteiner);
+}
+
+
+function goPagination(page, sumPage, curPage) {
+    var numberPage = +page;
+    if ( $.isNumeric(numberPage) ) {
+        currentPageLi = numberPage;
+    } else {
+       if ( page == "...") {
+            return;
+       } else if ( page == "+") {
+            if ( curPage + 1 > sumPage ) {
+                currentPageLi = 1;
+            } else {
+                currentPageLi = curPage + 1
+            }
+       } else if ( page == "-") {
+            if ( curPage - 1 < 1 ) {
+                currentPageLi = sumPage;
+            } else {
+                currentPageLi = curPage - 1;
+            }
+       }
+    }   
+    console.log(tableLength + ' ' + currentPageLi + ' ' + indexSection)
+    return ajaxRating(tableLength, currentPageLi, indexSection);
+}
+
+function imgNavBet(a, b) {
     $windowWidth = $(window).width();
-    console.log($windowWidth)
-        // Background position nav all bets
-    for (var i = 0; i < $(".change_champ").length; i++) {
+    // Background position nav all bets
+    for (var i = 0; i < champLogo.length; i++) {
         if ($windowWidth > 969) {
-            $(".change_champ").eq(i).css({
-                "background-position-x": ((-80 * i) - 10)
+            champLogo.eq(i).css({
+                "background-position-x": ((a * i) + (a / 8))
             });
         } else {
-            $(".change_champ").eq(i).css({
-                "background-position-x": ((-60 * i) - 7.5)
+            $(champLogo).eq(i).css({
+                "background-position-x": ((b * i) + (b / 8))
             });
         }
-        $(".change_champ").eq(i).show();
+        champLogo.eq(i).css({ "opacity": "0.6" });
 
     };
 }
@@ -569,11 +690,20 @@ function chose_tour(load_championat) {
     };
     $windowWidth = $(".container_tour").width();
     width_li_nav = $("#tour_other").find("li").eq(0).width();
-    var maxMarginTour = Math.floor((Math.floor($windowWidth/width_li_nav) - 1) / 2);
+    var maxMarginTour = Math.floor((Math.floor($windowWidth / width_li_nav) - 1) / 2);
     if (index_current_tour < maxMarginTour) {
         $(".nav_ul_tour").css({ "margin-left": "0" })
     } else {
         new_margin = (-(index_current_tour - maxMarginTour) * width_li_nav);
         $(".nav_ul_tour").css({ "margin-left": new_margin })
     }
+}
+
+function chooseCurrent(a, b, c) {
+    var $first = $('.order1TopMatch'),
+        $second = $('.order2TopMatch'),
+        $thirt = $('.order3TopMatch');
+    $first.removeClass('order1TopMatch').addClass('order' + b + 'TopMatch');
+    $second.removeClass('order2TopMatch').addClass('order' + c + 'TopMatch');
+    $thirt.removeClass('order3TopMatch').addClass('order' + a + 'TopMatch');
 }

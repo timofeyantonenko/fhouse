@@ -1,3 +1,8 @@
+.more_records {
+    margin: -50px auto 0px !important;
+
+}
+
 .statsCard {
     background-color: #fff;
     padding: 20px;
@@ -21,7 +26,6 @@
 }
 
 .thumbnails {
-    /*width: 32%;*/
     vertical-align: top;
     border: 1px solid #afadad;
     border-radius: 5px;
@@ -358,72 +362,16 @@ ul#otis {
     padding-bottom: 10%;
 }
 
-.more_records {
-    cursor: pointer;
-    width: 230px;
-    margin: -45px auto 0px;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 14px;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #afadad;
-    border-radius: 2px;
-}
-
-.more_records:hover {
-    background: #eee;
-}
-
-.more_records a {
-    display: block;
-    width: 230px;
-    padding: 5px;
-    text-decoration: none;
-    color: #222;
-}
-
-.more_records a:hover,
-.more_records a:focus,
-.more_records a:active {
-    text-decoration: none;
-    color: #222;
-}
-
 
 /*Navigation records*/
-
-.table_nav_records {
+.tab {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #fff;
-    padding: 0 20px;
-    border-bottom: 0px !important;
-}
-
-.table_nav_records h1 {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    margin-bottom: 0;
-    font-size: 30px;
-    color: #000;
-    font-weight: 900;
-}
-
-.table_nav_records h1 p {
-    margin: 0 0 10px;
-    padding: 0;
 }
 
 .searchRecord {
     width: 250px;
     display: flex;
+    flex-direction: row !important;
     height: 30px;
     margin-bottom: 10px;
 }
@@ -581,6 +529,7 @@ ul#otis {
 /*Responsive other*/
 
 @media screen and (min-width: 970px) {
+    .headerMain,
     .table_nav_records {
         border: 1px solid #afadad;
     }
@@ -598,6 +547,7 @@ ul#otis {
         padding-top: 60px;
         padding-bottom: 0px;
     }
+    .headerMain,
     .table_nav_records {
         border: 0px solid #afadad;
     }

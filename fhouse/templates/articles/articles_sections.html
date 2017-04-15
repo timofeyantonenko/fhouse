@@ -4,29 +4,18 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
 {% endblock head_extra %} {% block content %}
 <main>
-    <!-- <div class="navigation_between_articles">
-        <ul class="nav_ul">
-            <li><a href="#">Все<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></li>
-            {% for section in sections %}
-            <li><a href="#">{{ section.section_title }}<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a></li>
-            {% endfor %}
-        </ul>
-        <button class="btn btn-default" data-toggle="modal" data-target="#offerNewsModal">Предложить статью</button>
-    </div> -->
-    <div class="table_nav_records">
-        <h1 class="search_s_head">
-            <p>Статьи</p>
-            <div class="right_header">
-               <button id="offerNewsBtn" data-toggle="modal" data-target="#offerArticleModal">Предложить статью</button>
-                <div class="searchRecord" id="find_article">
-                    <textarea placeholder="Найти сатью..." ></textarea> 
-                    <button type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    </button>
-                </div> 
+    <header class="headerMain table_nav_records">
+        <h2>Статьи</h2>
+        <aside class="right_header">
+            <button id="offerNewsBtn" data-toggle="modal" data-target="#offerArticleModal">Предложить статью</button>
+            <div class="searchRecord" id="find_article">
+                <textarea placeholder="Найти сатью..."></textarea>
+                <button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
             </div>
-        </h1>
-        <div class="tab">
+        </aside>
+        <nav class="tab">
             <ul class="nav_ul">
                 <!-- <li class="activeRecords">
                     Все
@@ -52,15 +41,16 @@
                 </li>
                 {% endfor %}
             </ul>
-        </div>
+        </nav>
         <hr>
-    </div>
+    </header>
+    
     <div class="container_article" id="wrapper">
         <div class="flex_container" id="list">
         </div>
     </div>
-    <div class="more_article">
-        <a href="3">ПОСМОТРЕТЬ БОЛЬШЕ</a>
+    <div class="more_article otherMore" href="3">
+        ПОСМОТРЕТЬ БОЛЬШЕ
     </div>
 </main>
 {% endblock content %}

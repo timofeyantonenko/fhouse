@@ -2,8 +2,8 @@
 {% for comment in comments %}
     <div class="blockquote">
         <a href="#">
-            <div class="coments_author">
-                <img src="{{ comment.user.avatar.url }}" alt="">
+            <div class="coments_author containerImgUser">
+                <img src="{{ comment.user.avatar.url }}" alt="" class="imgUser">
             </div>
         </a>
         <div class="content_coment">
@@ -31,5 +31,5 @@
         </div>
     </div>
     {% endfor %}
-    <div class="show_all_coment">Показать больше</div>
+    <div class="show_all_coment otherMore">Показать больше</div>
 {% endblock comment_block %}

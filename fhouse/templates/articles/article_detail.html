@@ -3,33 +3,27 @@
 <link rel="stylesheet" href='{% static "css/article_detail.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
 <script src="{% static 'js/post_detail.js'  %}"></script>
 <main>
-    <div class="newsDetail">
+    <article class="newsDetail">
         <div class="article_detail_img">
             {% if instance.image %}
             <img src="{{ instance.image.url }}" class='img-responsive' /> {% endif %}
-            <div class="share_soc">
+            <aside class="share_soc">
                 <a href="#">
-                    <div class="share_vk">
-                        <i class="fa fa-vk" aria-hidden="true"></i>
-                    </div>
+                    <i class="fa fa-vk" aria-hidden="true"></i>
                 </a>
                 <a href="#">
-                    <div class="share_facebook">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                    </div>
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
                 </a>
                 <a href="#">
-                    <div class="share_twitter">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                    </div>
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
                 </a>
-            </div>
+            </aside>
         </div>
         <div class="article_detail">
             <div class="article_author">
                 <a href="#">
-                    <div class="author_img">
-                        <img src="{{ request.user.avatar.url }}" alt="">
+                    <div class="author_img containerImgUser">
+                        <img src="{{ request.user.avatar.url }}" class="imgUser" alt="">
                     </div>
                 </a>
                 <div class="author_name_date">
@@ -50,32 +44,25 @@
                 <div class="article_text">
                     {{ instance.get_markdown }}
                 </div>
-                <!--  <p>
-            <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-            </p> -->
                 <!-- Комментарии -->
-                <div class="footer_post_detail">
-                    <div class="block_like-dislike">
-                        <div class="like_and_dislike">
-                            <a href="{{instance.slug}}" class="like_all">
-                                <div class="like">
-                                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                </div>
-                                <div class="quantity_like">
-                                    {{ instance.positive_likes|length }}
-                                </div>
-                            </a>
-                            <a href="{{instance.slug}}" class="dislike_all">
-                                <div class="dislike">
-                                    <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                </div>
-                                <div class="quantity_dislike">
-                                    {{ instance.negative_likes|length }}
-                                </div>
-                            </a>
+                <footer class="footer_post_detail">
+                    <a href="{{instance.slug}}" class="like_all">
+                        <div class="like">
+                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                         </div>
-                    </div>
-                </div>
+                        <div class="quantity_like">
+                            {{ instance.positive_likes|length }}
+                        </div>
+                    </a>
+                    <a href="{{instance.slug}}" class="dislike_all">
+                        <div class="dislike">
+                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                        </div>
+                        <div class="quantity_dislike">
+                            {{ instance.negative_likes|length }}
+                        </div>
+                    </a>
+                </footer>
             </div>
         </div>
         <!-- Комментарии -->
@@ -87,7 +74,7 @@
         <div class="comments_base2" id="without_paddin">
             {% include "comment_thread.html" %}
         </div>
-    </div>
+    </article>
     <div class="next_article_container">
         <div class="one_read_article">
             <a href="#" class="linkArticle">

@@ -27,13 +27,14 @@ function itemDownload() {
     } else {
         dowloadItem = 1;
     }
-    $(".more_records a").attr("href", dowloadItem); 
+    $(".more_records").attr("href", dowloadItem); 
     console.log(dowloadItem) 
 }
 
 $(document).ready(function() {
 
     // Уникальные таблицы
+    $("#loaderTable").css({"display":"flex"});
 
     var $trTable = $(".tableRecord").children("tr").eq(1).children("th");
     for ( var i = 2; i < 4; i++) {
@@ -56,6 +57,9 @@ $(document).ready(function() {
     } else {
         $(".headTable").children("tr").children("th").eq(1).html("Имя Фамилия") 
     }
+
+    // $("#loaderTable").hide();
+    $(".hiddenTable").removeClass("hiddenTable");
 
     var dowloadItem;
     itemDownload();
@@ -100,7 +104,7 @@ $(document).ready(function() {
 
     //tab click
     $(".table_nav_records .tab ul li").click(function(e) {
-        $(".more_records a").html("Посмотреть больше");
+        $(".more_records").html("Посмотреть больше");
         if ($(this).hasClass('tab_active')) {
             return;
         }
@@ -128,7 +132,7 @@ $(document).ready(function() {
                 content.html(data);
 
                 $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
-                var a_block = $('.more_records a');
+                var a_block = $('.more_records');
                 $(a_block).prop('href', 3);
                 $("#list").masonry('reloadItems');
                 $("#list").masonry('layout');
@@ -138,8 +142,8 @@ $(document).ready(function() {
             }
         });
     });
-    $(".more_records a").click(function(e) {
-        if ( $(".more_records a").text() != "Конец") {
+    $(".more_records").click(function(e) {
+        if ( $(".more_records").text() != "Конец") {
           $(this).html("Загрузка...");  
         }
         e.preventDefault();
@@ -171,10 +175,10 @@ $(document).ready(function() {
                 //            window.history.pushState("object or string", "Title", state);
                 $("#list").masonry('reloadItems');
                 $("#list").masonry('layout');
-                $(".more_records a").html("Посмотреть больше");
+                $(".more_records").html("Посмотреть больше");
             },
             error: function(xhr, status, error) {
-                $(".more_records a").html("Конец");
+                $(".more_records").html("Конец");
                 console.log(error, status, xhr);
             }
         });
