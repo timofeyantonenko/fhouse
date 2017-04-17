@@ -557,6 +557,8 @@ $(document).on("click", "#approve_news", function() {
 
 // Confirm delete tour
 $(document).on("click", "#approve_article", function() {
-    input_title = $("#title-suggesting-news").text;
+    input_title = $("#title-suggesting-news").val();
+    input_text = $("#text-suggesting-news").val();
     alert(input_title);
+    alert(input_text);
 });
