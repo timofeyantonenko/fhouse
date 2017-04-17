@@ -9,10 +9,10 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import StageBetSerializer
+from .serializers import StageBetSerializer, TeamSeasonResultSerializer
 from django.views.decorators.csrf import csrf_protect
 
-from .models import StageBet, League, MatchBetFromUser, UsersResult
+from .models import StageBet, League, MatchBetFromUser, UsersResult, TeamSeasonResult
 
 
 # Create your views here.
@@ -55,6 +55,18 @@ def get_bet_stage_info(request):
     current_week_bet = StageBet.objects.filter(must_be_checked=True).last()
     bet_serializer = StageBetSerializer(current_week_bet, many=False, context={'request': request})
     return Response({'stage_bet': bet_serializer.data})
+
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def get_league_status(request):
+    all_teams = TeamSeasonResult.objects.all()
+    # context = {}
+    # we take current bet. BE AWARE - it must be only one object
+    # current_week_bet = StageBet.objects.filter(must_be_checked=True).last()
+    league_serializer = TeamSeasonResultSerializer(all_teams, many=True, context={'request': request})
+    print(league_serializer)
+    return Response({'league_table': league_serializer.data})
 
 
 @csrf_protect

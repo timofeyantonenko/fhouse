@@ -7,6 +7,15 @@ from utils.files_preparing import upload_location
 # Create your models here.
 
 
+class Continent(models.Model):
+    """
+    One object is South Africa, Europe, etc
+    """
+    name = models.CharField(max_length=120)
+
+    def __str__(self):
+        return self.name
+
 class League(models.Model):
     """
     One object is APL, or Espana Primera
@@ -48,6 +57,20 @@ class Team(models.Model):
 
     def __str__(self):
         return self.team_name
+
+
+class TeamSeasonResult(models.Model):
+    season = models.ForeignKey(Season, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    group = models.PositiveSmallIntegerField(null=True, blank=True)
+    continent = models.ForeignKey(Continent, on_delete=models.CASCADE, null=True, blank=True)
+    games = models.SmallIntegerField(default=0)
+    goals = models.SmallIntegerField(default=0)
+    points = models.SmallIntegerField(default=0)
+
+    def __str__(self):
+        return "{}; {}: games: {}, goals: {}, points: {}".format(self.season, self.team, self.games, self.goals,
+                                                                 self.points)
 
 
 class Match(models.Model):
