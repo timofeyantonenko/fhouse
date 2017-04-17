@@ -21,10 +21,10 @@
         <div class="article_detail">
             <header class="article_author">
                 <a href="#" class="author_img containerImgUser">
-                    <img src="{{ user.avatar.url }}" class="imgUser" alt="Автор новости">
+                    <img src="{{ instance.user.avatar.url }}" class="imgUser" alt="Автор новости">
                 </a>
                 <div class="author_name_date">
-                    <a href="">{{user.first_name}} {{user.last_name}}</a>
+                    <a href="">{{instance.user.first_name}} {{instance.user.last_name}}</a>
                     <p>{% if instance.draft %} </p>
                     {% endif %} {{instance.publish}}
                 </div>
