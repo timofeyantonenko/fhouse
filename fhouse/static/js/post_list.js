@@ -133,7 +133,6 @@ $(document).ready(function() {
             success: function(data) {
                 var content = $('.articles_list');
                 content.html(data);
-                img_norm_size();
                 //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
             },
             error: function(xhr, status, error) {
@@ -215,9 +214,8 @@ $(document).ready(function() {
     });
 
     $(".more_article").click(function(e) {
-        if ($(".more_article").text() != "Конец") {
-            $(this).html("Загрузка...");
-        }
+        var $morePost = $(this);
+            $morePost.addClass('moreLoading');
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
@@ -244,12 +242,11 @@ $(document).ready(function() {
                 $(a_block).prop('href', page);
                 var content = $('.news_stream');
                 content.append(data);
-                img_norm_size();
-                $(".more_article").html("ПОСМОТРЕТЬ БОЛЬШЕ");
-                //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
+                $morePost.addClass('moreLoading');
+                $morePost.removeClass('moreLoading')
             },
             error: function(xhr, status, error) {
-                $(".more_article").html("Конец");
+                $morePost.addClass('endMore').removeClass('moreLoading');
                 console.log(error, status, xhr);
                 if (status = 404) {
                     $(a_block).prop('href', -1);
@@ -458,7 +455,7 @@ function propose_post(text, image) {
 }
 
 $(document).on('click', '.tab', function() {
-    $(".more_article").html("ПОСМОТРЕТЬ БОЛЬШЕ");
+    $('.more_article ').removeClass('endMore')
     var url = '/posts/tabs';
     var parent_div_tab = $(this).parent();
     var tab = $(this).find('div').text();

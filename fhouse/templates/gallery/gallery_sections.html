@@ -1,7 +1,9 @@
-{% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} {% block head_extra %}
+{% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} 
+{% block head_extra %}
 <link rel="stylesheet" href='{% static "css/gallery_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/gallery.js'  %}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
 {% endblock head_extra %} {% block content %}
 <main>
     <div id="containner_all_gallery">
@@ -139,7 +141,6 @@
                 <div class="flex_container_albums" id="list">
                 </div>
                 <div class="more_photo otherMore" href="2">
-                    ПОСМОТРЕТЬ БОЛЬШЕ
                 </div>
             </div>
             <!-- Слайдер в модальном окне для фотографий с плитки -->

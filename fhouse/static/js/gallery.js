@@ -125,12 +125,19 @@ $(document).ready(function() {
     section.addClass("active_nav_ul");
     load_section_info(section_name, undefined);
 
+    $("#list").imagesLoaded(function() {
+        $('#list').masonry({
+            itemSelector: '.item',
+            transitionDuration: 0
+        });
+    });
+
     // Активный раздел меню
     $(".nav_ul li a").click(function(e) {
         // Reset var start foto 
+        $(".more_photo").removeClass("endMore");
         resetFirstLi();
         $(".nav_ul").hide();
-        $(".more_photo").html("ПОСМОТРЕТЬ БОЛЬШЕ");
         $(".photo_row").remove();
         if ($(this).hasClass('active_nav_ul')) {
             return;
@@ -219,7 +226,7 @@ $(document).ready(function() {
         $("#sumCountModal").html("100");
         $('#slaider_modal').on('shown.bs.modal', function() {
             // size_img_slaider(modalPar)
-                // loadModal();
+            // loadModal();
         })
     });
 
@@ -343,11 +350,10 @@ $(document).ready(function() {
     });
 });
 
-
 // выбор альбома
 $(document).on("click", ".list_albums .album_previews", function(e) {
-    $(".more_photo").html("ПОСМОТРЕТЬ БОЛЬШЕ");
     $(".photo_row").remove();
+    $(".more_photo").removeClass("endMore");
     var long_id = $(this).attr("id");
     //    var name_album = $(this).find(".title_album_preview").text();
     values = long_id.split("album_id_");
@@ -377,10 +383,10 @@ $(document).on("click", ".list_albums .album_previews", function(e) {
     }
     $(".more_photo").attr("href", 2);
     return false;
-
 });
 
 $(document).on("click", ".more_photo", function(e) {
+    $(this).addClass("moreLoading");
     page = $(this).attr("href");
     section_name = $(".active_nav_ul");
     section_name = section_name.text().trim();
@@ -395,11 +401,6 @@ $(document).on("click", ".more_photo", function(e) {
         short_id = "all";
     }
     load_tile_photos(section_name, short_id, page);
-    morePhoto();
-});
-
-$(window).load(function() {
-    $('#list').masonry({ itemSelector: '.item' });
 });
 
 function load_tile_photos(section_name, album_id, page) {
@@ -408,7 +409,6 @@ function load_tile_photos(section_name, album_id, page) {
     if (album_id != "all") {
         ajax_data["album_id"] = album_id;
     }
-    console.log(ajax_data);
     $.ajax({
         url: ajax_url,
         data: ajax_data,
@@ -429,10 +429,10 @@ function load_tile_photos(section_name, album_id, page) {
             make_slider();
             more_button = $(".more_photo");
             more_button.attr("href", parseInt(more_button.attr("href")) + 1);
+            $(".more_photo").removeClass("moreLoading");
         },
         error: function(xhr, status, error) {
-            $(".more_photo").html("Конец фотографий");
-            // console.log(error, status, xhr);
+            $(".more_photo").removeClass("moreLoading").addClass("endMore");
         }
     });
 }
@@ -494,7 +494,6 @@ function load_section_info(section_name, album_name) {
         },
         error: function(xhr, status, error) {
             alert("ERROR");
-            $(".more_photo").html("Конец фотограий");
         }
 
     });
@@ -542,14 +541,9 @@ function resetFirstLi() {
     firstFoto = -9;
 }
 
-var firstFoto = -9;
-var lastFoto = 9;
+var firstFoto = -9,
+    lastFoto = 9;
 
-function morePhoto() {
-    if ($(".more_photo").text() != "Конец фотографий") {
-        $(".more_photo").html("Загрузка...")
-    }
-}
 
 function tile_fot() {
     ul_list_length = $(".list_src_slaider").find("li").length;
@@ -558,19 +552,23 @@ function tile_fot() {
     if (firstFoto <= 0) {
         firstFoto = 0;
     }
+    var $listUrl = $(".list_src_slaider").find("li"),
+        url_img,
+        htmlImg = "";
     for (var lim = firstFoto; lim < lastFoto; lim++) {
-        var order = lim;
-        var url_img = $(".list_src_slaider").find("li").eq(order).find(".photo_url").text();
-        var piece_html = '<div class="photo_row item"><img src="' + url_img + '"alt="" class="imgTile" data-toggle="modal" data-target="#slaider_modal"></div>';
-        $('.flex_container_albums').append(piece_html);
+        url_img = $listUrl.eq(lim).find(".photo_url").text();
+        htmlImg += `
+            <div class="photo_row item">
+                <img src="` + url_img + `" alt="" class="imgTile" data-toggle="modal" data-target="#slaider_modal">
+            </div>
+        `;
     };
-    $(".flex_container_albums").find(".imgTile").on("load", function() {
+    $('.flex_container_albums').append(htmlImg);
+    $("#list").imagesLoaded(function() {
         $("#list").masonry('reloadItems');
         $("#list").masonry('layout');
     });
-    if ($(".more_photo").text() != "Конец фотографий") {
-        $(".more_photo").html("ПОСМОТРЕТЬ БОЛЬШЕ");
-    }
+
 }
 
 function make_slider() {
@@ -585,11 +583,11 @@ function make_slider() {
     // Новый слайдер
 
     // При переходе в галерею подгружается список ссылок с первой секции и src последней фото добавляется в img
-    var photo_image_url = $('.list_src_slaider li:first-child span.photo_url').text();
-    var count_of_comments = $('.list_src_slaider li:first-child span.count_of_comments').text();
-    var count_of_pos_likes = $('.list_src_slaider li:first-child span.photo_positive_likes').text();
-    var count_of_neg_likes = $('.list_src_slaider li:first-child span.photo_negative_likes').text();
-    var photo_album_title = $('.list_src_slaider li:first-child span.photo_album_title').text();
+    var photo_image_url = $('.list_src_slaider li:first-child span.photo_url').text(),
+        count_of_comments = $('.list_src_slaider li:first-child span.count_of_comments').text(),
+        count_of_pos_likes = $('.list_src_slaider li:first-child span.photo_positive_likes').text(),
+        count_of_neg_likes = $('.list_src_slaider li:first-child span.photo_negative_likes').text(),
+        photo_album_title = $('.list_src_slaider li:first-child span.photo_album_title').text();
 
     //    var src_first_li_section = $('.list_src_slaider li:first-child span.photo_url').text()
 
@@ -611,7 +609,6 @@ function make_slider() {
         massonryShow();
     });
 }
-
 
 // К-во элементов для подгрузки
 

@@ -1,7 +1,9 @@
 {% extends "base.html" %} {% block head_title %}{{ title }}{% endblock head_title %} {% load staticfiles %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/article.css" %}'>
+<style id="styleArticle"></style>
 <script type="text/javascript" src="{% static 'js/article.js'  %}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
 {% endblock head_extra %} {% block content %}
 <main>
     <header class="headerMain table_nav_records">
@@ -50,7 +52,6 @@
         </div>
     </div>
     <div class="more_article otherMore" href="3">
-        ПОСМОТРЕТЬ БОЛЬШЕ
     </div>
 </main>
 {% endblock content %}
