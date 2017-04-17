@@ -2,142 +2,90 @@
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
 <script src="{% static 'js/post_detail.js'  %}"></script>
 <main>
-    <div class="newsDetail">
+    <article class="newsDetail">
         <div class="article_detail_img">
             {% if instance.image %}
             <img src="{{ instance.image.url }}" class='img-responsive' /> {% endif %}
             <div class="share_soc">
                 <a href="#">
-                    <div class="share_vk">
-                        <i class="fa fa-vk" aria-hidden="true"></i>
-                    </div>
+                    <i class="fa fa-vk" aria-hidden="true"></i>
                 </a>
                 <a href="#">
-                    <div class="share_facebook">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                    </div>
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
                 </a>
                 <a href="#">
-                    <div class="share_twitter">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                    </div>
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
         <div class="article_detail">
-            <div class="article_author">
-                <a href="#">
-                    <div class="author_img">
-                        {% if request.user.is_authenticated %}
-                        <img src="{{ request.user.avatar.url }}" alt=""> {% else %}
-                        <img src="{% static 'img/albert-einstein.jpg' %}"> {% endif %}
-                    </div>
+            <header class="article_author">
+                <a href="#" class="author_img containerImgUser">
+                    <img src="{{ user.avatar.url }}" class="imgUser" alt="Автор новости">
                 </a>
                 <div class="author_name_date">
-                    <a href="">{{request.user.first_name}} {{request.user.last_name}}</a>
+                    <a href="">{{user.first_name}} {{user.last_name}}</a>
                     <p>{% if instance.draft %} </p>
                     {% endif %} {{instance.publish}}
                 </div>
-            </div>
+            </header>
             <div class="article_detail_content">
-                <div class="article_title">
-                    <h2>{{title}}</h2>
-                </div>
-                <!-- Здесь должен быть автор -->
-                <div>
-                    {% if instance.user.get_full_name %}
-                    <p>Author: {{ instance.user.get_full_name }}</p>
-                    {% endif %}
-                </div>
-                <!--  <p>
-            <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-            </p> -->
+                <h2 class="article_title">{{title}}</h2>
                 <!-- Текст новости  -->
                 <div class="article_text">
                     {{ instance.get_markdown }}
                 </div>
-                <div class="footer_post_detail">
-                    <div class="teg_post_detail">
-                        <div class="tagsConteiner">
-                            <h3>Теги:</h3> {% for sub_tag in instance.tag.all %}
-                            <a href="#" class="tags__item js-tags-item">
-                                <span> {{ sub_tag.name }} </span>
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="block_like-dislike">
-                        <div class="like_and_dislike">
-                            <a href="{{instance.slug}}" class="like_all">
-                                <div class="like">
-                                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                </div>
-                                <div class="quantity_like">
-                                    {{ instance.positive_likes|length }}
-                                </div>
-                            </a>
-                            <a href="{{instance.slug}}" class="dislike_all">
-                                <div class="dislike">
-                                    <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                </div>
-                                <div class="quantity_dislike">
-                                    {{ instance.negative_likes|length }}
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <footer class="footer_post_detail">
+                    <section class="teg_post_detail">
+                        <h3>Теги:</h3> {% for sub_tag in instance.tag.all %}
+                        <a href="#" class="tags__item js-tags-item">
+                            <span> {{ sub_tag.name }} </span>
+                        </a>
+                        {% endfor %}
+                    </section>
+                    <section class="block_like-dislike">
+                        <a href="{{instance.slug}}" class="like_all">
+                            <div class="like">
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                            </div>
+                            <div class="quantity_like">
+                                {{ instance.positive_likes|length }}
+                            </div>
+                        </a>
+                        <a href="{{instance.slug}}" class="dislike_all">
+                            <div class="dislike">
+                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                            </div>
+                            <div class="quantity_dislike">
+                                {{ instance.negative_likes|length }}
+                            </div>
+                        </a>
+                    </section>
+                </footer>
             </div>
         </div>
         <!-- Комментарии -->
         <div class="comments_base">
-            <!-- <label for="{{comment_form.content.id_for_label}}">
-                <p class="lead">Оставить комментарий</p>
-            </label> -->
             <h3>Оставить комментарий</h3>
             <!-- Нужно вставить ссылку на профиль автора -->
-            <div class="sendComment">
-                {% if request.user.is_authenticated %}
-                <a href="#" class="authorComent">
-                    <div class="coments_author">
-                        <img src="{{ request.user.avatar.url }}" alt="">
-                    </div>
-                </a>
-                {% else %} {% endif %} {% if request.user.is_authenticated %}
-                <form method="POST" action="." class="formSendComment"> {% csrf_token %}
-                    <div class="forPlaceholder">
-                        {{ comment_form.content }}
-                    </div>
-                    <div class="sendBtn">
-                        {% for field, errors in comment_form.errors.items %} {% for error in errors %}
-                        <p>{{error}}</p>
-                        {% endfor %}{% endfor %}
-                        <input type="submit" value="Отправить" class="btn btn-primary">
-                    </div>
-                    {% else %}
-                    <p><a href="/login">Войдите</a> в свой аккаунт или <a href="/register">зарегистрируйтесь</a> чтобы оставлять комментарии</p>
-                </form>
-                {% endif %}
-            </div>
+            {% include "send_comment.html" %}
         </div>
-        <div class="comments_base2" id="without_paddin">
+        <div class="comments_base2">
             {% include "comment_thread.html" %}
         </div>
-    </div>
-    <div class="next_news_container">
+    </article>
+    <aside class="next_news_container">
         {% for post in additional_posts %}
-        <a href="{{post.get_absolute_url}}" class="next_news_container_href">
-            <div class="next_news">
-                <div class="img_next_news">
-                    <img src="{{ post.image.url }}" alt="">
-                </div>
-                <div class="title_next_news">
-                    {{ post.title }}
-                </div>
-                <span class="date_next_news">{{ post.updated }}</span>
+        <a href="{{post.get_absolute_url}}" class="next_news">
+            <div class="img_next_news containerImgNews">
+                <img src="{{ post.image.url }}" class="imgUser" alt="">
             </div>
+            <h3 class="title_next_news">
+                {{ post.title }}
+            </h3>
+            <time class="date_next_news">{{ post.updated }}</time>
         </a>
         {% endfor %}
-    </div>
+    </aside>
 </main>
 {% endblock content %}

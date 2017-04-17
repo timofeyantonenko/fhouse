@@ -15,8 +15,28 @@ function getCookie(name) {
 }
 $(document).ready(function() {
 
-    // Flex img
-    // flexImg()
+    var documentWidth = parseInt(document.documentElement.clientWidth),
+        windowsWidth = parseInt(window.innerWidth),
+        scrollbarWidth = windowsWidth - documentWidth,
+        paddingLeft1 = 575 + scrollbarWidth/2,
+        paddingRight1 = 575 - scrollbarWidth/2,
+        paddingLittle = scrollbarWidth / 2;
+        styleHtml = `
+            @media screen and (min-width: 1170px) {
+                body.modal-open #menu {
+                    padding-left: calc(50% - ` + paddingLeft1 + `px);
+                    padding-right: calc(50% - ` + paddingRight1 + `px);
+                }
+            }
+            
+            @media screen and (min-width: 970px) and (max-width: 1169px) {
+                body.modal-open #menu {
+                    padding-right: calc(2.5% + ` + scrollbarWidth + `px);
+                }
+            }
+        `;
+
+    $("#mainStyle").html(styleHtml);
 
     $(document).mouseup(function(e) {
         var div = $("#top_profile_menu");
@@ -30,7 +50,7 @@ $(document).ready(function() {
     // Рейтинг посмотреть
     $(".users_progress").children("section").on("click", function() {
         var slideToogleElement = $(this).find(".contentRating");
-        if ( $(this).hasClass("closedAkardion") ) {
+        if ($(this).hasClass("closedAkardion")) {
             slideToogleElement.slideDown();
             $(this).removeClass("closedAkardion").addClass("openingAkardion");
             $(this).siblings().removeClass("openingAkardion").addClass("closedAkardion");
@@ -54,18 +74,6 @@ $(document).ready(function() {
         $('#week_bets_top').modal('hide');
     });
 
-    // $(window).resize(function() {
-    //     flexImg();
-    // });
-
-    // Class users avatar
-    $(".flexImg").children("img").each(function() {
-        $(this).on("load", function() {
-            if ($(this).height() < $(this).parent().height()) {
-                $(this).parent().addClass("bigWidth")
-            }
-        })
-    });
 
     // Offer article
     $(".linkImgArticle").keyup(function() {
@@ -230,15 +238,3 @@ function downloadLinkTosrc() {
     var srcNew = $(this).val();
     $('.imgOfferArticle').attr('src', srcNew);
 }
-
-
-// function flexImg() {
-//     $(".flexImg").children("img").each(function() {
-//         $(this).parent().removeClass("bigWidth");
-//         $(this).on("load", function() {
-//             if ($(this).height() < $(this).parent().height()) {
-//                 $(this).parent().addClass("bigWidth");
-//             }
-//         })
-//     });
-// }

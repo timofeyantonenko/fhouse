@@ -13,27 +13,10 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
-
-// К-во элементов для подгрузки
-
-var dowloadItem;
-
-function itemDownload() {
-  if ($(window).width() >= 1170) {
-        dowloadItem = 3;
-
-    } else if ($(window).width() >= 590 && $(window).width() < 1170) {
-        dowloadItem = 2;
-    } else {
-        dowloadItem = 1;
-    }
-    $(".more_records a").attr("href", dowloadItem); 
-    console.log(dowloadItem) 
-}
-
 $(document).ready(function() {
 
     // Уникальные таблицы
+    $("#loaderTable").css({"display":"flex"});
 
     var $trTable = $(".tableRecord").children("tr").eq(1).children("th");
     for ( var i = 2; i < 4; i++) {
@@ -57,12 +40,7 @@ $(document).ready(function() {
         $(".headTable").children("tr").children("th").eq(1).html("Имя Фамилия") 
     }
 
-    var dowloadItem;
-    itemDownload();
-
-    $(window).resize(function() {
-        itemDownload();
-    });
+    $(".hiddenTable").removeClass("hiddenTable");
 
     var group = getUrlParameter('group');
     if (typeof group != 'undefined') {
@@ -89,8 +67,10 @@ $(document).ready(function() {
             success: function(data) {
                 var content = $('.statsCard .flex_container');
                 content.html(data);
-                $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
-                $('#list').masonry({ itemSelector: '.item' });
+                $('#list').masonry({ 
+                    itemSelector: '.item',
+                    transitionDuration: 0 
+                });
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
@@ -100,7 +80,7 @@ $(document).ready(function() {
 
     //tab click
     $(".table_nav_records .tab ul li").click(function(e) {
-        $(".more_records a").html("Посмотреть больше");
+        massonryEffect(0);
         if ($(this).hasClass('tab_active')) {
             return;
         }
@@ -126,22 +106,20 @@ $(document).ready(function() {
             success: function(data) {
                 var content = $('.flex_container');
                 content.html(data);
-
-                $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
-                var a_block = $('.more_records a');
+                var a_block = $('.more_records');
                 $(a_block).prop('href', 3);
                 $("#list").masonry('reloadItems');
                 $("#list").masonry('layout');
+                a_block.removeClass("moreLoading").removeClass("endMore"); 
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
             }
         });
     });
-    $(".more_records a").click(function(e) {
-        if ( $(".more_records a").text() != "Конец") {
-          $(this).html("Загрузка...");  
-        }
+    $(".more_records").click(function(e) {
+        massonryEffect(1);
+        $(this).addClass("moreLoading");
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
@@ -166,36 +144,16 @@ $(document).ready(function() {
                 $(a_block).prop('href', page);
                 var content = $('.flex_container');
                 content.append(data);
-
-                $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
-                //            window.history.pushState("object or string", "Title", state);
                 $("#list").masonry('reloadItems');
                 $("#list").masonry('layout');
-                $(".more_records a").html("Посмотреть больше");
+                $(a_block).removeClass("moreLoading");
             },
             error: function(xhr, status, error) {
-                $(".more_records a").html("Конец");
+                $(a_block).addClass("endMore").removeClass("moreLoading");
                 console.log(error, status, xhr);
             }
         });
     });
-
-
-
-    $(".statsCard .statsList .statsRow:last-child").css("border-bottom", "3px solid #e8e8e8");
-
-    var width_parent_statinfo = $(".statsHero .statInfo").parent().width() - 120;
-    $(".statsHero .statInfo").css("max-width", width_parent_statinfo);
-
-    $(".nav_ul li a").click(function() {
-        $(".nav_ul li a").removeClass('active_nav_ul');
-        $(this).addClass('active_nav_ul');
-    });
-
-    var width_parent_statinfo = $(".statsHero .statInfo").parent().width() - 150;
-    $(".statsHero .statInfo").css("max-width", width_parent_statinfo);
-
-    $(".table_nav_records .tab ul li:first-child").addClass("tab_active");
 
     $(".tab ul li").click(function() {
         $(".tab ul li").removeClass('activeRecords');
@@ -203,3 +161,17 @@ $(document).ready(function() {
     });
 
 });
+
+function massonryEffect(a) {
+    $("#styleArticle").empty().html(
+        `
+        .thumbnails {
+            -webkit-animation: fadein ` + a + `s ease forwards; 
+               -moz-animation: fadein ` + a + `s ease forwards;
+                -ms-animation: fadein ` + a + `s ease forwards; 
+                 -o-animation: fadein ` + a + `s ease forwards; 
+                    animation: fadein ` + a + `s ease forwards;
+        }
+        `       
+    )
+}

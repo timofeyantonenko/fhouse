@@ -69,9 +69,10 @@ $(document).ready(function() {
             success: function(data) {
                 var content = $('.flex_container');
                 content.html(data);
-                $(".flex_container").find(".one_read_article_img img").on("load", function() {
+                $("#list").imagesLoaded(function() {
                     $('#list').masonry({
-                        itemSelector: '.item'
+                        itemSelector: '.item',
+                        transitionDuration: 0 
                     });
                 });
             },
@@ -84,7 +85,8 @@ $(document).ready(function() {
 
     //tab click
     $(".nav_ul li a").click(function(e) {
-        $(".more_article a").html("ПОСМОТРЕТЬ БОЛЬШЕ");
+        massonryEffect(0)
+        $(".more_article").removeClass("moreLoading").removeClass("endMore");
         if ($(this).hasClass('active_nav_ul')) {
             return;
         }
@@ -111,14 +113,9 @@ $(document).ready(function() {
             success: function(data) {
                 var content = $('.flex_container');
                 content.html(data);
-                var a_block = $('.more_article a');
+                var a_block = $('.more_article');
                 $(a_block).prop('href', 3);
-                $(".flex_container").find(".one_read_article_img img").on("load", function() {
-                    $("#list").masonry('reloadItems');
-                    $("#list").masonry('layout');
-                });
-
-                //            window.history.pushState("object or string", "Title", state);
+                massonryReload();
             },
             error: function(xhr, status, error) {
                 console.log(error, status, xhr);
@@ -126,10 +123,9 @@ $(document).ready(function() {
         });
 
     });
-    $(".more_article a").click(function(e) {
-        if( $(this).text() != "Конец") {
-          $(this).html("Загрузка...")  
-        }
+    $(".more_article").click(function(e) {
+        massonryEffect(1)
+        $(this).addClass("moreLoading");
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
@@ -157,63 +153,30 @@ $(document).ready(function() {
                 $(a_block).prop('href', page);
                 var content = $('.flex_container');
                 content.append(data);
-                $(".flex_container").find(".one_read_article_img img").on("load", function() {
-                    $("#list").masonry('reloadItems');
-                    $("#list").masonry('layout');
-                });
-                $(".more_article a").html("ПОСМОТРЕТЬ БОЛЬШЕ");
-                //            window.history.pushState("object or string", "Title", state);
+                massonryReload()
+                $(".more_article").removeClass("moreLoading");
             },
             error: function(xhr, status, error) {
-                $(".more_article a").html("Конец");
+                $(this).addClass("endMore").removeClass("moreLoading");
                 console.log(error, status, xhr);
                 if (status = 404) {
                     $(a_block).prop('href', -1);
-                }   
+                }
             }
         });
 
     });
-
-
-    //    function renderGrid() {
-    //        var blocks = document.getElementById("grid_container").children;
-    //        var pad = 10,
-    //            cols = 3,
-    //            newleft, newtop;
-    //        for (var i = 1; i < blocks.length; i++) {
-    //            if (i % cols == 0) {
-    //                newtop = (blocks[i - cols].offsetTop + blocks[i - cols].offsetHeight) + pad;
-    //                blocks[i].style.top = newtop + "px";
-    //            } else {
-    //                if (blocks[i - cols]) {
-    //                    newtop = (blocks[i - cols].offsetTop + blocks[i - cols].offsetHeight) + pad;
-    //                    blocks[i].style.top = newtop + "px";
-    //                }
-    //                newleft = (blocks[i - 1].offsetLeft + blocks[i - 1].offsetWidth) + pad;
-    //                blocks[i].style.left = newleft + "px";
-    //            }
-    //        }
-    //    }
-    //    window.addEventListener("load", renderGrid, false);
-    //    window.addEventListener("resize", renderGrid, false);
-
 });
 
-$(window).load(function() {
-
-    // $('#list').masonry({ itemSelector: '.item' });
-
-    // $(window).scroll(function() {
-    //     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-    //         load_more_articles();
-    //     }
-    // });
-
-})
+function massonryReload() {
+    $("#list").imagesLoaded(function() {
+        $("#list").masonry('reloadItems');
+        $("#list").masonry('layout');
+    });
+}
 
 function load_more_articles() {
-    var a_block = $(".more_article a");
+    var a_block = $(".more_article");
     //        alert($(a_block).attr('href'));
     var page = $(a_block).attr('href');
     if (page == -1) {
@@ -241,17 +204,7 @@ function load_more_articles() {
             //                alert(page);
             var content = $('.flex_container');
             content.append(data).masonry('appended', data, true);
-            $(".flex_container").find(".one_read_article_img img").on("load", function() {
-                $("#list").masonry('reloadItems');
-                $("#list").masonry('layout');
-            });
-            //         function (html) {
-            //     if (html.length > 0) {
-            //         var el = jQuery(html);
-            //         jQuery("#content").append(el).masonry( 'appended', el, true );
-            //     }
-            //      });
-            //            window.history.pushState("object or string", "Title", state);
+            massonryReload();
         },
         error: function(xhr, status, error) {
             console.log(error, status, xhr);
@@ -278,4 +231,16 @@ function itemDownload() {
     $(".more_records a").attr("href", dowloadItem);
 }
 
-
+function massonryEffect(a) {
+    $("#styleArticle").empty().html(
+        `
+        .one_read_article {
+            -webkit-animation: fadein ` + a + `s ease forwards; 
+       -moz-animation: fadein ` + a + `s ease forwards;
+        -ms-animation: fadein ` + a + `s ease forwards; 
+         -o-animation: fadein ` + a + `s ease forwards; 
+            animation: fadein ` + a + `s ease forwards;
+        }
+        `       
+    )
+}

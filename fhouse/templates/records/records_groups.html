@@ -5,22 +5,21 @@
 <title>Record</title>
 <link rel="stylesheet" href='{% static "css/record.css" %}'>
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'>
+<style id="styleArticle"></style>
 <script type="text/javascript" src="{% static 'js/record.js'  %}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
 {% endblock head_extra %} {% block content %}
 <main>
     <div class="recordsMain">
-        <div class="table_nav_records">
-            <h1 class="search_s_head">
-                <p>Рекорды</p>
-                <div class="searchRecord" id="find_recors">
-                    <textarea placeholder="Найти рекорд..." ></textarea> 
-                    <button type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    </button>
-                </div>
-            </h1>
-            <div class="tab">
+        <header class="headerMain table_nav_records">
+            <h2>Рекорды</h2>
+            <aside class="searchRecord" id="find_recors">
+                <textarea placeholder="Найти рекорд..."></textarea>
+                <button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+            </aside>
+            <nav class="tab">
                 <ul>
                     <li class="activeRecords">
                         Все
@@ -33,15 +32,14 @@
                     </li>
                     {% endfor %}
                 </ul>
-            </div>
+            </nav>
             <hr>
-        </div>
+        </header>
         <div class="statsCard" id="wrapper">
             <div class="flex_container" id="list">
             </div>
         </div>
-        <div class="more_records">
-            <a href="3">ПОСМОТРЕТЬ БОЛЬШЕ</a>
+        <div class="more_records otherMore" href="3">
         </div>
     </div>
 </main>

@@ -47,8 +47,7 @@
             <div class="news_stream">
             </div>
         </div>
-        <div class="more_article">
-            <a href="2">ПОСМОТРЕТЬ БОЛЬШЕ</a>
+        <div href="2" class="more_article otherMore">
         </div>
     </div>
     <!-- Правая колонка новостей -->
@@ -74,8 +73,8 @@
                             <span class="tag_chosen"></span>
                             <span class="additional_tag">{{ tag }}</span>
                             <span class="close_tag">
-                                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                                </span>
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </span>
                         </a>{% endfor H%}
                     </div>
                 </div>
@@ -102,22 +101,18 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <div class="footer_modal_button">
-                    <span class="modal_cancel" data-dismiss="modal">
-                                                <a href="#">
-                                                    Отмена                                                  
-                                                </a>
-                                            </span>
-                    <span class="modal_save" data-dismiss="modal">
-                                                <a href="#">
-                                                    Сохранить                                                  
-                                                </a>
-                                            </span>
-                </div>
-                <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button> -->
-                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Сохранить</button> -->
-            </div>
+            <footer class="modal-footer">
+                <span class="modal_cancel" data-dismiss="modal">
+                    <a href="#">
+                        Отмена                                                  
+                    </a>
+                </span>
+                <span class="modal_save" data-dismiss="modal">
+                    <a href="#">
+                        Сохранить                                                  
+                    </a>
+                </span>
+            </footer>
         </div>
     </div>
 </div>

@@ -1,12 +1,17 @@
 /*Основные стили*/
 
+html {
+    font-size: 10px;
+}
+
 body {
     color: #222;
-    font-size: 14px;
+    font-size: 1.4rem;
     background-color: #fff;
     overflow-y: scroll;
     padding-top: 70px;
     padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
 }
 
 textarea {
@@ -14,6 +19,191 @@ textarea {
     outline: none;
     overflow: none;
 }
+
+.table {
+    margin-bottom: 0;
+}
+
+
+/*Right column*/
+
+
+/*Loader*/
+
+.loaderGif {
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.loaderGif img {
+    opacity: 0.7;
+}
+
+
+/*More other*/
+
+.otherMore {
+    cursor: pointer;
+    width: 230px;
+    margin: auto;
+    padding: 0.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: #656D78;
+    background: #fff;
+    border: 1px solid #afadad;
+    border-radius: 2px;
+    display: block;
+    text-decoration: none;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+}
+
+@media screen and (max-width: 750px) {
+   .otherMore {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+   } 
+}
+
+.otherMore::before {
+    content: 'Посмотреть больше';
+}
+
+.otherMore.moreLoading::before {
+    content: 'Загрузка...';
+}
+
+.otherMore.endMore {
+    display: none;
+}
+
+.otherMore:hover {
+    background: #eee;
+}
+
+.otherMore:hover,
+.otherMore:focus,
+.otherMore:active {
+    text-decoration: none;
+    color: #656D78;
+}
+
+
+/*Users img*/
+
+.imgUser {
+    object-fit: cover;
+    width: inherit;
+    height: inherit;
+    align-self: center;
+    flex-shrink: 1;
+}
+
+.containerImgNews {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerImgUser {
+    border-radius: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*nav*/
+
+.imgUserNav {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #666;
+}
+
+
+/*offer news*/
+
+.imgAuthorOfferNews {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+
+/*right column*/
+
+.user_date_img {
+    width: 175px;
+    height: 175px;
+    margin-bottom: 20px;
+}
+
+
+/*user profile*/
+
+.user_foto {
+    height: 215px;
+    width: 215px;
+}
+
+
+/*author post*/
+
+.author_img {
+    position: absolute;
+    background-color: #d9dde0;
+    border: 2px solid #d9dde0;
+    left: 30px;
+    font-weight: 200;
+    z-index: 9;
+}
+
+
+/*comment author*/
+
+.coments_author {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+
+/*bet style table right*/
+
+.team_img img {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.userAvaTable {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+
+/*modal make bet*/
+
+.photo_user {
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
+}
+
+
+/*End users img style*/
 
 
 /*textarea search*/
@@ -25,15 +215,6 @@ textarea {
 
 
 /*Content*/
-
-@media screen and (min-width: 1349px) {
-    #menu {
-        padding-left: calc(50% - 674.5px);
-    }
-    body.modal-open #menu {
-        padding-left: calc(50% - 685.5px);
-    }
-}
 
 main {
     margin: auto;
@@ -52,11 +233,11 @@ main {
         width: 1150px;
     }
     #menu {
+        padding-left: calc(50% - 575px);
         padding-right: calc(50% - 575px);
     }
     body.modal-open #menu {
         width: 100%;
-        padding-right: calc(50% - 566.5px);
     }
 }
 
@@ -70,8 +251,6 @@ main {
     }
     body.modal-open #menu {
         width: 100%;
-        padding-right: calc(2.5% + 17px);
-        /*padding-left: calc(2.5% + 8.5px);*/
     }
 }
 
@@ -201,24 +380,40 @@ h1 {
 }
 
 .menuToggle span {
-    font-size: 25px;
+    font-size: 2.5rem;
 }
 
 #brend {
-    background-color: #aa0a0c;
-    width: auto;
-    width: 99.5px;
-}
-
-#brend>a {
+    /*background-color: #aa0a0c;*/
+    padding: 0 10px;
+    color: #fff;
     display: flex;
-    flex-grow: 1;
+    height: 100%;
     justify-content: center;
     align-items: center;
+    border-right: 1px solid #666;
 }
 
-#brend a {
-    color: #fff;
+@media screen and (min-width: 450px) {
+    #brend:after {
+        content: 'Football House';
+    }
+}
+
+#brend:hover {
+    background-color: #d7d7d7;
+    color: #aa0a0c;
+}
+
+#brend #svg-editor-canvas {
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+}
+
+#brend #logoItem {
+    transform: scale(0.33);
+    /*transform: scale(0.3 0.3) !important;*/
 }
 
 .rightMenu {
@@ -228,6 +423,9 @@ h1 {
 }
 
 @media screen and (min-width: 970px) {
+    #brend {
+        display: none;
+    }
     #menu {
         height: 50px;
     }
@@ -245,8 +443,13 @@ h1 {
         display: flex;
         justify-content: center;
         align-items: center;
+        border-right: 1px solid #666;
+    }
+    #mainNav ul li:first-child {
+        border-left: 1px solid #666;
+    }
+    #mainNav ul li a {
         padding: 0 15px;
-        border-right: 1px solid #666666;
     }
     #menuBtn {
         display: none;
@@ -257,6 +460,23 @@ h1 {
 }
 
 @media screen and (max-width: 969px) {
+    #mainNav ul li:first-child {
+        display: none;
+    }
+    #mainNav li #svg-editor-canvas {
+        padding-top: 7px;
+        width: 40px;
+        height: 100%;
+        margin-right: 7px;
+    }
+    #mainNav li #logoItem {
+        transform: scale(0.27);
+        /*transform: scale(0.3 0.3) !important;*/
+    }
+    #logo__item--business {
+        transform: scale(0.4);
+        display: none;
+    }
     .menu_open {
         overflow-y: hidden !important;
     }
@@ -308,7 +528,7 @@ h1 {
 /*Регистрация (кнопки в меню)*/
 
 .loginScheckIn {
-    font-size: 20px;
+    font-size: 2rem;
     cursor: pointer;
     height: 100%;
 }
@@ -318,7 +538,7 @@ h1 {
 
 #LOGIN .modal-body {
     padding: 5%;
-    font-size: 14px;
+    font-size: 1.4rem;
 }
 
 #LOGIN .modal-content {
@@ -460,7 +680,7 @@ form [type="password"] {
 /*Profile user */
 
 .name_user_in_menu {
-    font-size: 12.5px;
+    font-size: 1.25rem;
     font-weight: 700;
 }
 
@@ -471,26 +691,11 @@ form [type="password"] {
 }
 
 .user_profile .fa-sign-in {
-    font-size: 25px;
+    font-size: 2.5rem;
 }
 
 .user_profile .fa-caret-down {
     opacity: 0.5;
-}
-
-.imgUserNav {
-    width: 35px;
-    height: 35px;
-    border-radius: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #666;
-}
-
-.imgUserNav img {
-    width: 100%;
 }
 
 .user_profile {
@@ -512,7 +717,7 @@ form [type="password"] {
     position: absolute;
     right: -1px;
     background-color: #f0f0f0;
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #222;
     line-height: 40px;
     border: 1px solid #666;
@@ -553,7 +758,7 @@ form [type="password"] {
     right: 35px;
     opacity: 1;
     z-index: 10000;
-    font-size: 25px;
+    font-size: 2.5rem;
 }
 
 .active_top_profile_menu {}
@@ -580,20 +785,6 @@ form [type="password"] {
     text-align: center;
 }
 
-.user_date_img {
-    width: 175px;
-    height: 175px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 20px;
-    align-self: center;
-}
-
-.user_date_img img {
-    width: 100%;
-    height: auto;
-}
-
 .position_fixed {
     position: absolute;
 }
@@ -605,6 +796,29 @@ form [type="password"] {
 
 .fixed_col_top {
     position: fixed;
+}
+
+
+/*Header */
+
+.headerMain {
+    padding: 20px 20px 0;
+    width: 100%;
+    border-bottom: 0 solid silver !important;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.headerMain h2 {
+    margin: 0 0 10px;
+    flex-grow: 1;
+    font-weight: 700;
+}
+
+.headerMain hr {
+    width: 100%;
+    border-top: 2px solid #eee;
+    margin: 0 !important;
 }
 
 
@@ -684,6 +898,7 @@ form [type="password"] {
     .loginScheckIn {
         flex-grow: 1 !important;
         align-self: center;
+        border-left: 0;
     }
     #top_profile_menu {
         top: 59px;
@@ -720,18 +935,6 @@ form [type="password"] {
     min-height: 150px;
 }
 
-.imgAuthorOfferNews {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 10px;
-}
-
-.imgAuthorOfferNews img {
-    width: 100%;
-}
-
 .dowPhoto {
     display: flex;
     width: 100%;
@@ -740,7 +943,7 @@ form [type="password"] {
 }
 
 .downloadImg i {
-    font-size: 25px;
+    font-size: 2.5rem;
     cursor: pointer;
 }
 
@@ -814,7 +1017,7 @@ form [type="password"] {
 
 #offerNewsModal header span,
 #offerArticleModal header span {
-    font-size: 18px;
+    font-size: 1.8rem;
     cursor: pointer;
 }
 
@@ -839,7 +1042,7 @@ form [type="password"] {
 .btn-not {
     padding: 9px 16px 9px;
     margin: 0;
-    font-size: 12.5px;
+    font-size: 1.25rem;
     display: inline-block;
     zoom: 1;
     cursor: pointer;
@@ -909,7 +1112,7 @@ form [type="password"] {
 /*Выбор пользователя*/
 
 .user_choice {
-    font-size: 13px;
+    font-size: 1.3rem;
     border-radius: 4px;
 }
 
@@ -1138,18 +1341,6 @@ form [type="password"] {
     flex-wrap: wrap;
 }
 
-.photo_user {
-    width: 70px;
-    height: 70px;
-    overflow: hidden;
-    border-radius: 100%;
-    margin-right: 15px;
-}
-
-.photo_user img {
-    width: 100%;
-}
-
 .place_result {
     height: 30px;
     width: 30px;
@@ -1179,7 +1370,7 @@ form [type="password"] {
     color: #fff;
     font-weight: 900;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 1.1rem;
     background-color: #e62117;
     border-radius: 2px;
 }
@@ -1210,7 +1401,7 @@ form [type="password"] {
     border-radius: 2px;
     margin: 6px 1px;
     background-color: #fff;
-    font-size: 12px;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
@@ -1361,7 +1552,7 @@ form [type="password"] {
         text-align: center;
     }
     .name_user_info h3 {
-        font-size: 18px !important;
+        font-size: 1.8rem !important;
         margin: 0 0 10px 0 !important;
     }
     .name_user_info>div {
@@ -1382,7 +1573,7 @@ form [type="password"] {
 }
 
 #hrefMyProfile {
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 600;
 }
 
@@ -1393,7 +1584,7 @@ form [type="password"] {
 @media screen and (min-width: 650px) {
     .close_modal {
         color: #fff;
-        font-size: 20px;
+        font-size: 2.0rem;
         top: -20px;
         right: 10px;
     }
@@ -1406,7 +1597,7 @@ form [type="password"] {
         height: 50px;
         border-radius: 100%;
         border: 4px solid #222;
-        font-size: 25px;
+        font-size: 2.5rem;
         top: 10px;
         right: calc(2.5% + 10px);
         display: flex;
@@ -1435,7 +1626,9 @@ form [type="password"] {
     opacity: 1;
 }
 
+
 /*Достижения пользователя*/
+
 .closedAkardion .glyphicon-minus,
 .openingAkardion .glyphicon-plus {
     display: none;
@@ -1449,6 +1642,7 @@ form [type="password"] {
 .users_progress section {
     width: 100%;
 }
+
 .contentRating {
     display: none;
     padding: 0 10px 10px;
@@ -1492,7 +1686,7 @@ form [type="password"] {
 }
 
 .users_progress header h3 {
-    font-size: 18px;
+    font-size: 1.8rem;
 }
 
 .users_progress header h3,
@@ -1516,13 +1710,117 @@ form [type="password"] {
 }
 
 .flexImg img {
-    width: 100%;
+    width: inherit;
+    height: inherit;
+    align-self: center;
+    object-fit: cover;
     flex-shrink: 0;
 }
 
-.bigWidth img {
-    height: 100% !important;
-    width: auto !important;
-    /*min-width: 100%;*/
-    align-self: center;
+
+/*Comments*/
+
+.content_coment {
+    margin-left: 60px;
 }
+
+.coment_author_time {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.coment_author_time a {
+    margin-right: 5px;
+}
+
+.coment_author_time p {
+    margin: 0;
+    color: #7f8992;
+}
+
+.coment_author_time a {
+    font-weight: 600;
+}
+
+.show_all_coment:hover {
+    background: #eee;
+}
+
+.btnFhouse {
+    padding: 9px 16px 9px;
+    margin: 0;
+    font-size: 1.25rem;
+    display: inline-block;
+    zoom: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    outline: none;
+    vertical-align: top;
+    line-height: 15px;
+    text-align: center;
+    text-decoration: none;
+    background: none;
+    background-color: #aa0a0c;
+    color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.btnFhouse:hover {
+    background-color: rgba(170, 10, 12, 0.84) !important;
+    color: #fff !important;
+}
+
+
+/*Send comments*/
+
+.sendComment {
+    display: flex;
+    width: 100%;
+}
+
+.authorComent {
+    display: block;
+    margin-right: 10px;
+}
+
+.formSendComment {
+    width: calc( 100% - 60px)
+}
+
+.forPlaceholder {
+    width: 100%;
+}
+
+.formSendComment >input {
+    outline: none;
+}
+
+.sendBtn {
+    padding-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.sendBtn p {
+    color: #ee0221;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.formSendComment >input[type="submit"] {
+    float: right;
+}
+
+.headerMain hr {
+    width: 100%;
+    border-top: 2px solid #eee;
+    margin: 0 !important;
+}
+
+
+/*Logo website*/

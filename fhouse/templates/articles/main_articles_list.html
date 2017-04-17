@@ -1,14 +1,14 @@
 <div class="flex_container">
     {% for article in articles_list %}
     <a href="" class="one_read_article articleSrc">
-        <div class="one_read_article_img">
-            <img src="{{ article.image.url }}" alt="">
+        <div class="one_read_article_img containerImgNews">
+            <img src="{{ article.image.url }}" alt="{{ article.article_title }}" class="imgUser">
         </div>
         <div class="relative_article">
-            <div class="author_img">
-                <img src="{{article.user.avatar.url}}" alt="">
+            <div class="author_img containerImgUser">
+                <img src="{{article.user.avatar.url}}" class="imgUser" alt="{{article.user.last_name}}">
             </div>
-            <p>Мангура Дмитрий</p>
+            <p>{{article.user.first_name}} {{article.user.last_name}}</p>
         </div>
         <div class="info_time_article">
             <div class="before_date"></div>

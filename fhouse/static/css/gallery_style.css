@@ -16,6 +16,10 @@
     display: none;
 }
 
+.more_photo {
+    margin: 20px auto 0;
+}
+
 
 /*Слайдер*/
 
@@ -272,179 +276,6 @@ ul {
 }
 
 
-/* Альбомы */
-
-.color_line {
-    width: 100%;
-    height: 5px;
-    background-color: #267788;
-    position: relative;
-}
-
-.icon_for_album {
-    position: absolute;
-    color: #fff;
-    font-size: 16px;
-    top: -40px;
-    left: 8px;
-    display: flex;
-}
-
-.icon_foto {
-    float: left;
-    height: 35px;
-    width: 35px;
-    background-color: #135965;
-    line-height: 35px;
-    text-align: center;
-}
-
-.quantity_foto_in_album {
-    height: 35px;
-    width: 35px;
-    background-color: #267788;
-    line-height: 35px;
-    text-align: center;
-}
-
-.all_of_units {
-    background-color: #ebebeb;
-    display: inline-block;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    border-radius: 3px;
-    float: right;
-    font-size: 14px;
-    padding: 0px;
-    color: #222;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-}
-
-.all_of_units span:nth-child(1) {
-    margin: 0px 15px 0px 30px;
-    align-self: center;
-}
-
-.all_of_units span:nth-child(2) {
-    float: right;
-    margin-right: 7px;
-    align-self: center;
-}
-
-.all_of_units:hover {
-    background-color: #e90052;
-    color: white;
-}
-
-.div_album h2 {
-    margin-bottom: 0px;
-    margin-top: 0px;
-    font-weight: bold;
-    margin-bottom: 24px;
-    float: left;
-}
-
-.div_album {
-    overflow: hidden;
-    position: relative;
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #CCD1D9;
-}
-
-.container_album {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    align-items: flex-start;
-}
-
-.one_album {
-    width: 250px;
-    height: 270px;
-}
-
-.main_foto_albub {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-}
-
-.main_foto_albub img {
-    width: 100%;
-}
-
-.title_and_all_albums {
-    height: 33px;
-}
-
-.before_current_album {
-    border-bottom: 1px solid #CCD1D9;
-    margin: 0px 5px 15px;
-    width: 100%;
-}
-
-.discription_album {
-    padding: 10px;
-    color: #38003c;
-    ;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.current_album {
-    color: #e90052;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.more_comment {
-    cursor: pointer;
-    width: 25%;
-    margin: 0 auto 20px;
-    padding: 5px;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 14px;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #CCD1D9;
-    border-radius: 2px;
-}
-
-.more_cmment:hover {
-    text-decoration: none!important;
-    background: #eee;
-}
-
-.more_album {
-    cursor: pointer;
-    width: 100%;
-    margin: 0 auto 0px;
-    padding: 5px;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 14px;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #CCD1D9;
-    border-radius: 2px;
-}
-
-.more_album:hover {
-    text-decoration: none!important;
-    background: #eee;
-}
-
-
 /*Для нового слайдера*/
 
 .slider_photo_list {
@@ -620,10 +451,6 @@ ul {
     align-items: center;
 }
 
-.album_previews_img img {
-    width: 100%;
-}
-
 .color_line_preview {
     width: 100%;
     height: 5px;
@@ -728,10 +555,73 @@ ul {
     overflow: hidden;
 }
 
+.photo_row img {
+    -webkit-animation: fadein 1s ease forwards;
+    /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 1s ease forwards;
+    /* Firefox < 16 */
+    -ms-animation: fadein 1s ease forwards;
+    /* Internet Explorer */
+    -o-animation: fadein 1s ease forwards;
+    /* Opera < 12.1 */
+    animation: fadein 1s ease forwards;
+}
 
-/*.photo_row:not(:nth-child(3n+3)) {
-    padding-right: 10px;
-}*/
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Firefox < 16 */
+
+@-moz-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Safari, Chrome and Opera > 12.1 */
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Internet Explorer */
+
+@-ms-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Opera < 12.1 */
+
+@-o-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
 .photo_row img {
     width: 100%;
@@ -744,7 +634,7 @@ ul {
 }
 
 .photo_row img:hover {
-    opacity: 0.6;
+    opacity: 0.6 !important;
 }
 
 .persent-size {
@@ -785,28 +675,6 @@ ul {
     opacity: 0.7;
 }
 
-.more_photo {
-    margin: 20px auto 0;
-    cursor: pointer;
-    width: 240px;
-    height: 35px;
-    line-height: 35px;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 14px;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #afadad;
-    border-radius: 2px;
-}
-
-.more_photo:hover {
-    text-decoration: none!important;
-    background: #eee;
-}
-
 
 /*Модальное окно для слайдера */
 
@@ -830,21 +698,6 @@ ul {
     font-size: 18px;
     font-weight: 600;
     padding: 10px;
-}
-
-#flex_container_img_modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: calc(100% - 70px);
-    overflow: hidden;
-    position: relative;
-}
-
-#flex_container_img_modal img {
-    display: block;
-    flex-shrink: 0;
 }
 
 .load img {
@@ -1082,9 +935,21 @@ ul {
     align-items: center;
 }
 
-#container_img_in_slaider img {
-    display: block;
+#container_img_in_slaider img,
+#flex_container_img_modal img {
+    align-self: center;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
     flex-shrink: 0;
+}
+
+#flex_container_img_modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 70px);
 }
 
 
@@ -1271,79 +1136,6 @@ ul {
     background-color: #fff;
 }
 
-.coments_author {
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    border-radius: 50%;
-    float: left;
-    margin-right: 10px;
-}
-
-.comment_placeholder {
-    flex-grow: 1;
-}
-
-.coments_author img {
-    width: 100%;
-}
-
-.content_coment {
-    margin-left: 50px;
-}
-
-.coment_author_time {
-    min-width: 51%;
-    color: #7f8992;
-}
-
-.coment_author_time a {
-    font-weight: 600;
-}
-
-.blockquote {
-    padding: 3% 3% 0 3%;
-}
-
-.blockquote:hover {
-    background-color: #f0f2f5;
-}
-
-.author_name_date {
-    color: #7f8992;
-    font-weight: 500;
-    font-size: 16px;
-}
-
-.author_name_date a {
-    color: #222;
-    font-size: 24px;
-    font-weight: 600;
-    margin-right: 7px;
-    margin-left: 10px;
-}
-
-.more_comment_photo {
-    cursor: pointer;
-    width: 80%;
-    margin: 10px auto 0;
-    padding: 3px 5px;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 14px;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #CCD1D9;
-    border-radius: 2px;
-}
-
-.more_comment_photo:hover {
-    text-decoration: none!important;
-    background: #eee;
-}
-
 .head_comment_slider {
     height: 43px;
     width: 100%;
@@ -1393,6 +1185,7 @@ ul {
 
 .add_comments {
     width: 100%;
+    padding: 10px;
 }
 
 .all_comment_for_photo {
@@ -1644,6 +1437,14 @@ ul {
 
 /*Mobile section*/
 
+#sectionMobile {
+    order: -1 !important;
+}
+
+#mobileAlnbumShow {
+    order: 3 !important;
+}
+
 @media screen and (min-width: 750px) {
     #sectionMobile {
         display: none;
@@ -1673,6 +1474,7 @@ ul {
         width: 400px;
         background-color: #fff;
         max-width: 100%;
+        left: 0;
     }
     .nav_ul li {
         width: 100%;
@@ -1940,5 +1742,4 @@ ul {
 
 .imgAlbumCover {
     flex-shrink: 0;
-    opacity: 0;
 }

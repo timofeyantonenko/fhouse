@@ -1,60 +1,56 @@
- {% for post in post_list %} {% if forloop.counter == 1 and page == 1 %}
-<div class="oneArticle" id="mainNews">
-    <a href="{{post.get_absolute_url}}" class="goNews imgContainer">
-        <img src="{{ post.image.url }}" alt="">
-    </a>
-    <div class="infoNews">
-        <a href="{{post.get_absolute_url}}" class="titleStext">
+{% for post in post_list %} {% if forloop.counter == 1 and page == 1 %}
+<article class="oneArticle" id="mainNews">
+    <a href="{{post.get_absolute_url}}">
+        <section class="goNews imgContainer containerImgNews">
+            <img src="{{ post.image.url }}" class="imgUser" alt="{{ post.title }}">
+        </section>
+        <section class="infoNews">
             <h3>{{ post.title }}</h3>
-            <span class="timeSpan">{{ post.timestamp }}</span>
+            <time>{{ post.timestamp }}</time>
             <div class="textNews">
                 {{ post.content }}
             </div>
-        </a>
-        <div class="footerNews">
-            <div class="dataCommentsLikes">
-                
-                <div class="tagsConteiner">
+            <footer class="footerNews">
+                <div class="dataCommentsLikes">
                     {% for tag in post.tags %}
-                    <a href="#" class="tags__item js-tags-item">
+                    <div class="tags__item js-tags-item">
                         <span> {{ tag }} </span>
-                    </a>
+                    </div>
                     {% endfor %}
                 </div>
-            </div>
-            <div class="quantityComments">
-                <a href="{{post.get_absolute_url}}">{{ post.comments| length }} <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a> {% include "posts/like_template.html" %}
-            </div>
-        </div>
-    </div>
-</div>
+                <div class="quantityComments">
+                    {{ post.comments| length }} <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> {% include "posts/like_template.html" %}
+                </div>
+            </footer>
+        </section>
+    </a>
+</article>
 {% else %}
-<div class="oneArticle">
-    <a href="{{post.get_absolute_url}}" class="goNews imgContainer">
-        <img src="{{ post.image.url }}" alt="">
-    </a>
-    <div class="infoNews">
-        <a href="{{post.get_absolute_url}}" class="titleStext">
+<article class="oneArticle">
+    <a href="{{post.get_absolute_url}}">
+        <section class="goNews imgContainer containerImgNews">
+            <img src="{{ post.image.url }}" class="imgUser" alt="{{ post.title }}">
+        </section>
+        <section class="infoNews">
             <h3>{{ post.title }}</h3>
+            <time>{{ post.timestamp }}</time>
             <div class="textNews">
                 {{ post.content }}
             </div>
-        </a>
-        <div class="footerNews">
-            <div class="dataCommentsLikes">
-                <span class="timeSpan">{{ post.timestamp }}</span>
-                <div class="tagsConteiner">
+            <footer class="footerNews">
+                <div class="dataCommentsLikes">
                     {% for tag in post.tags %}
-                    <a href="#" class="tags__item js-tags-item">
+                    <div class="tags__item js-tags-item">
                         <span> {{ tag }} </span>
-                    </a>
+                    </div>
                     {% endfor %}
                 </div>
-            </div>
-            <div class="quantityComments">
-                <a href="{{post.get_absolute_url}}">{{ post.comments| length }} <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a> {% include "posts/like_template.html" %}
-            </div>
-        </div>
-    </div>
-</div>
+                <div class="quantityComments">
+                    {{ post.comments| length }} <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 
+                    {% include "posts/like_template.html" %}
+                </div>
+            </footer>
+        </section>
+    </a>
+</article>
 {% endif %} {% endfor %}

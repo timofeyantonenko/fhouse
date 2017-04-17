@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load staticfiles %} {% block head_title %}{{ title }} {% endblock head_title %} {% block head_extra %}
+{% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} {% block head_extra %}
 <title>Анонсы ТОП матчей недели</title>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
@@ -6,114 +6,125 @@
 <main>
     <div class="articles">
         <div class="contentMainBets">
-            <nav id="nav_top_matches">
-                <div class="title_section_web_site">
-                    <h2>Анонс ТОП матчей недели. 28 окт - 3 ноя 2010</h2>
-                </div>
-                <div class="make_bet">
+            <header class="mainBetHeader">
+                <h2>Анонс ТОП матчей недели. 28 окт - 3 ноя 2010</h2>
+                <div class="make_bet makeBetModal">
                     <button data-toggle="modal">Cделать ставку</button>
-                    <!--<button data-toggle="modal" data-target="#week_bets_top">сделать ставку</button>-->
                 </div>
-            </nav>
+            </header>
             <!-- Превью к топ матчам  -->
-            <div id="match_top_nav">
-                <div class="one_menu_top_match">
-                    <div class="team_top_nav">
-                        <div class="team_top_three">
+            <nav id="match_top_nav">
+                <div class="prevMatch navTopMatches">
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                </div>
+                <figure class="order1TopMatch">
+                    <div class="teamsTop">
+                        <div class="teamLogo">
                             <img src="{{ current_week_bet.match_1.home_team.image.url }}" alt="">
                         </div>
-                        <div class="team_top_three">
+                        <div class="teamLogo">
                             vs
                         </div>
-                        <div class="team_top_three">
+                        <div class="teamLogo">
                             <img src="{{ current_week_bet.match_1.guest_team.image.url }}" alt="">
                         </div>
                     </div>
-                    <div class="super_title">
-                        {{ current_week_bet.match_1.match_name }}
-                    </div>
-                    <div class="read_prev">
-                        Читать превью
-                    </div>
-                    <div class="line_hover_active"></div>
-                </div>
-                <div class="one_menu_top_match">
-                    <div class="team_top_nav">
-                        <div class="team_top_three">
+                    <figcaption>
+                        <h4>
+                            {{ current_week_bet.match_1.home_team.team_name }} - 
+                            {{ current_week_bet.match_1.guest_team.team_name }}
+                        </h4>
+                        <p>
+                            {{ current_week_bet.match_1.match_name }}
+                        </p>
+                    </figcaption>
+                </figure>
+                <figure class="order2TopMatch">
+                    <div class="teamsTop">
+                        <div class="teamLogo">
                             <img src="{{ current_week_bet.match_2.home_team.image.url }}" alt="">
                         </div>
-                        <div class="team_top_three">
+                        <div class="teamLogo">
                             vs
                         </div>
-                        <div class="team_top_three">
+                        <div class="teamLogo">
                             <img src="{{ current_week_bet.match_2.guest_team.image.url }}" alt="">
                         </div>
                     </div>
-                    <div class="super_title">
-                        {{ current_week_bet.match_2.match_name }}
-                    </div>
-                    <div class="read_prev">
-                        Читать превью
-                    </div>
-                    <div class="line_hover_active"></div>
-                </div>
-                <div class="one_menu_top_match">
-                    <div class="team_top_nav">
-                        <div class="team_top_three">
+                    <figcaption>
+                        <h4>
+                            {{ current_week_bet.match_2.home_team.team_name }} - 
+                            {{ current_week_bet.match_2.guest_team.team_name }}
+                        </h4>
+                        <p>
+                            {{ current_week_bet.match_2.match_name }}
+                        </p>
+                    </figcaption>
+                </figure>
+                <figure class="order3TopMatch">
+                    <div class="teamsTop">
+                        <div class="teamLogo">
                             <img src="{{ current_week_bet.match_3.home_team.image.url }}" alt="">
                         </div>
-                        <div class="team_top_three">
+                        <div class="teamLogo">
                             vs
                         </div>
-                        <div class="team_top_three">
+                        <div class="teamLogo">
                             <img src="{{ current_week_bet.match_3.guest_team.image.url }}" alt="">
                         </div>
                     </div>
-                    <div class="super_title">
-                        {{ current_week_bet.match_3.match_name }}
+                    <figcaption>
+                        <h4>
+                            {{ current_week_bet.match_3.home_team.team_name }} - 
+                            {{ current_week_bet.match_3.guest_team.team_name }}
+                        </h4>
+                        <p>
+                            {{ current_week_bet.match_3.match_name }}
+                        </p>
+                    </figcaption>
+                </figure>
+                <div class="nextMatch navTopMatches">
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </div>
+            </nav>
+            <article class="infoMatchCurrent ">
+                <section class="top_match order1TopMatch">
+                    <header>
+                        <h2>{{ current_week_bet.match_1.home_team.team_name }} - {{ current_week_bet.match_1.guest_team.team_name }}</h2>
+                        <p>{{ current_week_bet.match_1.stage}} </p>
+                    </header>
+                    <div class="prev_info_text">
+                        {{ current_week_bet.match_1.preview.description }}
                     </div>
-                    <div class="read_prev">
-                        Читать превью
+                    <footer class="time_start">
+                        Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                    </footer>
+                </section>
+                <section class="top_match order2TopMatch">
+                    <header>
+                        <h2>{{ current_week_bet.match_2.home_team.team_name }} - {{ current_week_bet.match_2.guest_team.team_name }}</h2>
+                        <p>{{ current_week_bet.match_2.stage}} </p>
+                    </header>
+                    <div class="prev_info_text">
+                        {{ current_week_bet.match_2.preview.description }}
                     </div>
-                    <div class="line_hover_active"></div>
-                </div>
-            </div>
-            <div class="top_match">
-                <header>
-                    <h2>{{ current_week_bet.match_1.home_team.team_name }} - {{ current_week_bet.match_1.guest_team.team_name }}</h2>
-                    <p>{{ current_week_bet.match_1.stage}} </p>
-                </header>
-                <div class="prev_info_text">
-                    {{ current_week_bet.match_1.preview.description }}
-                </div>
-                <div class="time_start">
-                    Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
-                </div>
-            </div>
-            <div class="top_match">
-                <header>
-                    <h2>{{ current_week_bet.match_2.home_team.team_name }} - {{ current_week_bet.match_2.guest_team.team_name }}</h2>
-                    <p>{{ current_week_bet.match_2.stage}} </p>
-                </header>
-                <div class="prev_info_text">
-                    {{ current_week_bet.match_2.preview.description }}
-                </div>
-                <div class="time_start">
-                    Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
-                </div>
-            </div>
-            <div class="top_match">
-                <header>
-                    <h2>{{ current_week_bet.match_3.home_team.team_name }} - {{ current_week_bet.match_3.guest_team.team_name }}</h2>
-                    <p>{{ current_week_bet.match_3.stage}} </p>
-                </header>
-                <div class="prev_info_text">
-                    {{ current_week_bet.match_3.preview.description }}
-                </div>
-                <div class="time_start">
-                    Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
-                </div>
-            </div>
+                    <footer class="time_start">
+                        Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                    </footer>
+                </section>
+                <section class="top_match order3TopMatch">
+                    <header>
+                        <h2>{{ current_week_bet.match_3.home_team.team_name }} - {{ current_week_bet.match_3.guest_team.team_name }}</h2>
+                        <p>{{ current_week_bet.match_3.stage}} </p>
+                    </header>
+                    <div class="prev_info_text">
+                        {{ current_week_bet.match_3.preview.description }}
+                    </div>
+                    <footer class="time_start">
+                        Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
+                    </footer>
+                </section>
+            </article>
         </div>
     </div>
     <div class="infoUserRight">
@@ -123,136 +134,30 @@
                 <div class="table_name">Рейтинг прогнозистов</div>
                 <div class="nav_table">
                     <div class="one_division_nav" id="all_time_rating">Все время</div>
-                    <div class="one_division_nav"id="month_rating">Месяц</div>
-                    <div class="one_division_nav"id="week_rating">Неделя</div>
-
+                    <div class="one_division_nav" id="month_rating">Месяц</div>
+                    <div class="one_division_nav" id="week_rating">Сезон</div>
                 </div>
             </div>
             <div class="body_table">
                 <!-- Подсказки таблица  -->
-                <span class="time_rating" id="year_rating_forecasters">
-                                    <div class="all_team_table">
-                                        <div class="one_position">
-                                            <div class="position">Поз</div>
-                                            <div class="forecasters_name">Имя</div>
-                                            <div class="forecasters_percent">Коэф</div>
-                                            <div class="forecasters_pts">О</div>
-                                        </div>
-                                        <div class="one_position">
-                                            <div class="position">1</div>
-                                            <div class="forecasters_name">
-                                                <div class="team_img">
-                                                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                                </div>
-                                                <div class="team_table">
-                                                    Мангура Дмитрий Николаевич
-                                                </div>
-                                            </div>
-                                            <div class="forecasters_percent">65%</div>
-                                            <div class="forecasters_pts">1230</div>
-                                        </div>
-                                        <div class="one_position">
-                                            <div class="position">1</div>
-                                            <div class="forecasters_name">
-                                                    <div class="team_img">
-                                                    <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                                </div>
-                                                <div class="team_table">
-                                                    Мангура Дмитрий Николаевич
-                                                </div>
-                                            </div>
-                                            <div class="forecasters_percent">65%</div>
-                                            <div class="forecasters_pts">1230</div>
-                                        </div>
-                                        <footer>
-                                            <div class="more_info">
-                                                <a href="#">Весь список</a>
-                                            </div>
-                                        </footer>
-                                    </div>
-                                </span>
-                <span class="time_rating" id="month_rating_forecasters">
-                                    <div class="all_team_table">
-                                        <div class="one_position">
-                                            <div class="position">Поз</div>
-                                            <div class="forecasters_name">Имя</div>
-                                            <div class="forecasters_percent">Коэф</div>
-                                            <div class="forecasters_pts">О</div>
-                                        </div>
-                                        <div class="one_position">
-                                            <div class="position">1</div>
-                                            <div class="forecasters_name">
-                                                <div class="team_img">
-                                                    <img src="https://s-media-cache-ak0.pinimg.com/236x/41/42/ae/4142ae1faf0ee1b6ca68e3ed9c629bec.jpg" alt="">
-                                                </div>
-                                                <div class="team_table">
-                                                    Мангура Дмитрий Николаевич
-                                                </div>
-                                            </div>
-                                            <div class="forecasters_percent">65%</div>
-                                            <div class="forecasters_pts">1230</div>
-                                        </div>
-                                        <div class="one_position">
-                                            <div class="position">1</div>
-                                            <div class="forecasters_name">
-                                                <div class="team_img">
-                                                    <img src="https://s-media-cache-ak0.pinimg.com/236x/41/42/ae/4142ae1faf0ee1b6ca68e3ed9c629bec.jpg" alt="">
-                                                </div>
-                                                <div class="team_table">
-                                                    Мангура Дмитрий Николаевич
-                                                </div>
-                                            </div>
-                                            <div class="forecasters_percent">65%</div>
-                                            <div class="forecasters_pts">1230</div>
-                                        </div>
-                                        <footer>
-                                            <div class="more_info">
-                                                <a href="#">Весь список</a>
-                                            </div>
-                                        </footer>
-                                    </div>
-                                </span>
-                <span class="time_rating" id="weak_rating_forecasters">
-                                        <div class="all_team_table">
-                                            <div class="one_position">
-                                                <div class="position">Поз</div>
-                                                <div class="forecasters_name">Имя</div>
-                                                <div class="forecasters_percent">Коэф</div>
-                                                <div class="forecasters_pts">О</div>
-                                            </div>
-                                            <div class="one_position">
-                                                <div class="position">1</div>
-                                                <div class="forecasters_name">
-                                                    <div class="team_img">
-                                                        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                                    </div>
-                                                    <div class="team_table">
-                                                        Мангура Дмитрий Николаевич
-                                                    </div>
-                                                </div>
-                                                <div class="forecasters_percent">65%</div>
-                                                <div class="forecasters_pts">1230</div>
-                                            </div>
-                                            <div class="one_position">
-                                                <div class="position">1</div>
-                                                <div class="forecasters_name">
-                                                    <div class="team_img">
-                                                        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/f/f7/FC_Chelsea_Logo.svg/480px-FC_Chelsea_Logo.svg.png" alt="">
-                                                    </div>
-                                                    <div class="team_table">
-                                                        Мангура Дмитрий Николаевич
-                                                    </div>
-                                                </div>
-                                                <div class="forecasters_percent">65%</div>
-                                                <div class="forecasters_pts">1230</div>
-                                            </div>
-                                            <footer>
-                                                <div class="more_info">
-                                                    <a href="#">Весь список</a>
-                                                </div>      
-                                            </footer>
-                                         </div>
-                                    </span>
+                <div class="time_rating">
+                    <div class="all_team_table">
+                        <div class="one_position">
+                            <div class="position">Поз</div>
+                            <div class="forecasters_name">Имя</div>
+                            <div class="forecasters_pts">Очки</div>
+                        </div>
+                        <div id="listForecasters" class="hideAjax">
+                        </div>
+                        <div id="loader" class="loaderGif">
+                            <img src="../../static/img/black_hole_loader.gif" alt="">
+                        </div>
+                        <footer>
+                            <a href="all_bet_rating/" class="otherMore">
+                            </a>
+                        </footer>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Конец таблицы с прогнозистами  -->
@@ -262,12 +167,12 @@
                 <a href="all_reviews">Превью и прогнозы</a>
             </div>
             {% for league in leagues %}
-            <a href="all_reviews">
-                <div class="bets_one_championship">
-                    <div class="championat_bet_preview">
-                        <div class="championship_title">{{ league.league_name }}</div>
-                        <div class="current_tour_right">1 тур</div>
-                    </div>
+            <a href="all_reviews" class="linkOtherBet">
+                <div class="imgChampNav"></div>
+                <div class="championat_bet_preview">
+                    <div class="championship_title">{{ league.league_name }}</div>
+                    <!-- Нужно передать текущий тур -->
+                    <div class="current_tour_right">1 тур</div>
                 </div>
             </a>
             {% endfor %}

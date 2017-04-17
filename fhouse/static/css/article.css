@@ -2,10 +2,20 @@ textarea {
     resize: none !important;
 }
 
+.more_article {
+    clear: both;
+    margin: -50px auto 0px !important;
+}
+
 .right_header {
     display: flex;
     flex-wrap: wrap;
 }
+
+.right_header h2 {
+    flex-grow: 1;
+}
+
 
 #offerNewsBtn {
     height: 30px !important;
@@ -29,8 +39,8 @@ textarea {
     box-sizing: border-box;
 }
 
-#offerNewsBtn:hover{
-   background:  rgba(170, 10, 12, 0.84);
+#offerNewsBtn:hover {
+    background: rgba(170, 10, 12, 0.84);
 }
 
 .searchRecord {
@@ -67,7 +77,7 @@ textarea {
 .searchRecord .btn-primary:hover,
 .searchRecord .btn-primary:focus,
 .searchRecord .btn-primary:visited,
-.searchRecord .btn-primary:active  {
+.searchRecord .btn-primary:active {
     color: #fff;
     background: rgba(170, 10, 12, 0.84);
     border-color: rgba(170, 10, 12, 0.84);
@@ -110,85 +120,44 @@ textarea {
 .one_read_article {
     width: 32%;
     position: relative;
-    background-color: #fff
-    /*    margin-left: 2%;
-    margin-bottom: 25px;*/
+    background-color: #fff;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .date_aritle:nth-child(2) {
     left: 62.5px;
 }
 
-.more_article {
-    cursor: pointer;
-    width: 230px;
-    margin: -50px auto 0px;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 14px;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #afadad;
-    border-radius: 2px;
-}
-
-.more_article:hover {
-    background: #eee;
-}
-
-.more_article a {
-    display: block;
-    padding: 5px;
-    width: 230px;
-    text-decoration: none;
-    color: #222;
-}
-
-.more_article a:hover,
-.more_article a:focus,
-.more_article a:active {
-    text-decoration: none;
-    color: #222;
-}
-
 
 /*Навигация между статьями */
-
-.navigation_between_articles {
-    background-color: #292a2e;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.table_nav_records {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #fff;
-    padding: 0 20px;
-    border-bottom: 0px !important;
-}
-
-.table_nav_records h1 {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    font-size: 30px;
-    color: #000;
-    font-weight: 900;
-    margin-bottom: 0;
-}
-
-.table_nav_records h1 p {
-    margin: 0 0 10px;
-    padding: 0;
-}
 
 .searchRecord {
     width: 250px;
@@ -221,35 +190,39 @@ textarea {
     outline: none !important;
 }
 
-.table_nav_records ul {
+.tab {
+    width: 100%;
+}
+
+.tab ul {
     display: flex;
     overflow: hidden;
     margin: 0 !important;
     padding: 0 !important;
 }
 
-.table_nav_records ul li {
+.tab ul li {
     margin: 0 5px 0 0;
     position: relative;
     cursor: pointer;
     display: block;
 }
 
-.table_nav_records ul li a {
+.tab ul li a {
     color: #222;
     display: block;
     padding: 5px 10px;
 }
 
-.table_nav_records ul li a:active,
-.table_nav_records ul li a:focus,
-.table_nav_records ul li a:hover,
-.table_nav_records ul li a:visited {
+.tab ul li a:active,
+.tab ul li a:focus,
+.tab ul li a:hover,
+.tab ul li a:visited {
     color: #222;
     text-decoration: none;
 }
 
-.table_nav_records ul li:hover .lineHover {
+.tab ul li:hover .lineHover {
     top: calc(100% - 4px);
 }
 
@@ -274,11 +247,6 @@ textarea {
     transition: all 0.1s ease-out;
 }
 
-.table_nav_records hr {
-    width: 100%;
-    border-top: 2px solid #eee;
-    margin: 0 !important;
-}
 
 
 /*Articles main responsive*/
@@ -322,11 +290,6 @@ textarea {
 }
 
 .one_read_article_img {
-    width: 100%;
-    overflow: hidden;
-}
-
-.one_read_article_img img {
     width: 100%;
 }
 
@@ -394,15 +357,6 @@ textarea {
 }
 
 
-/*@media screen  and (min-width: 501px) and (max-width: 749px) {
-     .author_img {
-        width: 70px !important;
-        height: 70px !important;
-    }
-    .author_img {
-        bottom: calc(100% - 35px) !important;
-    }
-}*/
 
 @media screen and (max-width: 749px) {
     .author_img {
@@ -493,13 +447,19 @@ textarea {
         float: left;
         margin: 0 7.5px 15px 7.5px;
     }
+    .one_read_article_img {
+        max-height: 300px;
+    }
 }
 
-@media screen and (min-width: 970px) and (max-width: 1169px) {
+@media screen and (min-width: 970px)  {
     .item {
         width: calc(33.222222% - 15px);
         float: left;
         margin: 0 7.5px 15px 7.5px;
+    }
+    .one_read_article_img {
+        max-height: 250px;
     }
 }
 
@@ -509,6 +469,9 @@ textarea {
         float: left;
         margin: 0 7.5px 15px 7.5px;
     }
+    .one_read_article_img {
+        max-height: 300px;
+    }
 }
 
 @media screen and (min-width: 570px) and (max-width: 749px) {
@@ -516,6 +479,9 @@ textarea {
         width: calc(50% - 15px);
         float: left;
         margin: 0 7.5px 15px 7.5px;
+    }
+    .one_read_article_img {
+        max-height: 250px;
     }
 }
 
@@ -525,28 +491,27 @@ textarea {
         float: left;
         margin: 0 7.5px 15px 7.5px;
     }
+    .one_read_article_img {
+        max-height: calc( 100vw - 40px);
+    }
 }
 
-
 @media screen and (min-width: 970px) {
-    .table_nav_records,
+    .headerMain,
     .container_article {
         border: 1px solid #afadad;
+    }
+    .container_article {
+        border-top: 0 solid silver !important;
     }
     body {
         padding-top: 70px;
         padding-bottom: 20px;
     }
-    .table_nav_records {
-        border-bottom: 0px solid #afadad !important;
-    }
-    .container_article {
-        border-top: 0px solid #666;
-    }
 }
 
 @media screen and (max-width: 969px) {
-    .table_nav_records,
+    .headerMain,
     .container_article {
         border: 0px solid #666;
     }

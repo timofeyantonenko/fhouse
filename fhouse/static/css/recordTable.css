@@ -1,6 +1,8 @@
 .tableInfo {
     border: 1px solid #afadad;
+    padding: 20px;
 }
+
 
 @media screen and (min-width: 1170px) {
     .tableInfo {
@@ -162,20 +164,23 @@ thead {
 
 /*Head table record*/
 
-h1 {
+.search_s_head {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
     font-size: 30px;
     color: #000;
     font-weight: 900;
+    margin-bottom: 10px;
 }
 
-h1 p {
-    margin: 0 0 10px;
+.search_s_head h2 {
+    font-weight: 700;
+    margin: 0 20px 10px 0;
     padding: 0;
+    flex-grow: 1;
 }
 
 .searchRecord {
@@ -283,7 +288,6 @@ h1 p {
     }
     .searchRecord {
         width: 100%;
-        margin-top: 10px;
     }
     .searchRecord textarea {
         width: calc(100% - 25px);
@@ -292,6 +296,10 @@ h1 p {
 
 
 /*Table responsive*/
+
+.hiddenTable {
+    display: none;
+}
 
 .aTable {
     display: flex;
@@ -304,18 +312,14 @@ h1 p {
 }
 
 @media screen and (min-width: 1170px) {
-    h1 {
-        font-size: 1.5vw;
-    }
+
     .nationalHead:before {
         content: "Национальность";
     }
 }
 
 @media screen and (min-width: 970px) and (max-width: 1169px) {
-    h1 {
-        font-size: 2.2vw;
-    }
+
     .infoRecordTable {
         display: none;
     }
@@ -325,9 +329,7 @@ h1 p {
 }
 
 @media screen and (min-width: 750px) and (max-width: 969px) {
-    h1 {
-        font-size: 2.6vw;
-    }
+
     .infoRecordTable {
         display: none;
     }
@@ -337,9 +339,6 @@ h1 p {
 }
 
 @media screen and (max-width: 749px) {
-    h1 {
-        font-size: 4.5vw;
-    }
     .infoRecordTable {
         display: none;
     }
@@ -440,3 +439,14 @@ table {
 .noNational tr th:nth-child(4) {
     display: none;
 }
+
+.mainTable {
+    margin-bottom: 20px;
+}
+
+.mainTable tbody tr:nth-child(2n + 1) {
+    background-color: #e4e4e4;
+}
+
+
+

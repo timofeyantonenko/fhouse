@@ -110,6 +110,7 @@ def make_bet(request):
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def get_bet_result_table(request):
     period = request.GET.get("period", "week")
     days = -1

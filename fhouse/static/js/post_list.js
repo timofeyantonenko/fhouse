@@ -133,7 +133,6 @@ $(document).ready(function() {
             success: function(data) {
                 var content = $('.articles_list');
                 content.html(data);
-                img_norm_size();
                 //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
             },
             error: function(xhr, status, error) {
@@ -214,10 +213,9 @@ $(document).ready(function() {
         });
     });
 
-    $(".more_article a").click(function(e) {
-        if ($(".more_article a").text() != "Конец") {
-            $(this).html("Загрузка...");
-        }
+    $(".more_article").click(function(e) {
+        var $morePost = $(this);
+            $morePost.addClass('moreLoading');
         e.preventDefault();
         var a_block = this;
         var page = $(this).attr('href');
@@ -244,12 +242,11 @@ $(document).ready(function() {
                 $(a_block).prop('href', page);
                 var content = $('.news_stream');
                 content.append(data);
-                img_norm_size();
-                $(".more_article a").html("ПОСМОТРЕТЬ БОЛЬШЕ");
-                //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
+                $morePost.addClass('moreLoading');
+                $morePost.removeClass('moreLoading')
             },
             error: function(xhr, status, error) {
-                $(".more_article a").html("Конец");
+                $morePost.addClass('endMore').removeClass('moreLoading');
                 console.log(error, status, xhr);
                 if (status = 404) {
                     $(a_block).prop('href', -1);
@@ -424,28 +421,6 @@ function page_settings() {
 
 }
 
-// Правильный код для картинок 
-
-var img_norm_size = function() {
-    $('.IMGoneArticle img').each(function(i) {
-        $(this).load(function() {
-            //            console.log($(this).height() + " child");
-            //            console.log($(this).parent().height() + " parent]");
-            if ($(this).css("height") < $(this).parent().css("height")) {
-                $(this).parent().css({ "display": "flex", "justify-content": "center" });
-                $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
-            };
-
-        });
-
-    });
-};
-
-
-// Фиксация блока меньшей высоты
-$(window).load(function() {
-
-});
 
 function show_modal(modal_id) {
     console.log("M IN")
@@ -480,7 +455,7 @@ function propose_post(text, image) {
 }
 
 $(document).on('click', '.tab', function() {
-    $(".more_article a").html("ПОСМОТРЕТЬ БОЛЬШЕ");
+    $('.more_article ').removeClass('endMore')
     var url = '/posts/tabs';
     var parent_div_tab = $(this).parent();
     var tab = $(this).find('div').text();
@@ -499,7 +474,7 @@ $(document).on('click', '.tab', function() {
     //            success: function(data) {
     //                var content = $('.news_stream');
     //                content.html(data);
-    //                $(".more_article a").prop('href', 2);
+    //                $(".more_article").prop('href', 2);
     //                window.history.pushState("object or string", "Title", '?tab=' + tab);
     //            },
     //            error: function(xhr, status, error) {
@@ -518,7 +493,7 @@ function load_posts(url, tab, page) {
             //        alert(url);
             var content = $('.news_stream');
             content.html(data);
-            $(".more_article a").prop('href', 2);
+            $(".more_article").prop('href', 2);
             window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tab);
         },
         error: function(xhr, status, error) {

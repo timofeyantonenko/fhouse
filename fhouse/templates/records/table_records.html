@@ -8,148 +8,183 @@
 <script src="{% static 'js/record.js'  %}"></script> {% endblock head_extra %} {% block content %}
 <main>
     <!-- Table Record -->
-    <div class=" tableInfo ">
-        <div class="block_table">
-            <h1 class="search_s_head">
-                <p>{{record_name}}</p>
-                <div class="searchRecord">
-                    <textarea placeholder="Найти рекорд..." ></textarea> 
-                    <button type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    </button>
-                </div>
-            </h1>
-            <!-- Таблица рекорда -->
-            <div class="divForTable">
-                <table class="table">
-                    <thead class="headTable">
-                        <tr>
-                            <th class="thTableRecord">#</th>
-                            <th></th>
-                            <th>Клуб</th>
-                            <th class="nationalHead"></th>
-                            <th>Стат</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tableRecord">
-                        {% for record in records %}
-                        <tr class="linkRecord">
-                            <th>{{forloop.counter}}</th>
-                            <th><a href="">{{record.content_object.name}}</a></th>
-                            <th>
-                                <a href="" class="aTable">
-                                    <img class="imageTableRecord" src="{{record.content_object.club.image.url}}">
-                                    <p class="infoRecordTable">
-                                        {{record.content_object.club}}
-                                    </p>
-                                </a>
-                            </th>
-                            <th>
-                                <a href="" class="aTable">
-                                    <img class="imageTableRecord" src="{{record.content_object.country.image.url}}">
-                                    <p class="infoRecordTable">
-                                        {{record.content_object.country}}
-                                    </p>
-                                </a>
-                            </th>
-                            <th>{{record.record_value}}</th>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <!-- Дополнительные таблицы -->
-            <div class="moreRecords">
-                <div class="table_allnews_insection">
-                    <table class="table otherRecords">
-                        <thead class="recordNeartableRecord">
-                            <tr>
-                                <th>Клубы</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr class="fullRecord">
-                                <td><a href="#" class="linkTable">Посмотреть все (15)</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table_allnews_insection">
-                    <table class="table otherRecords">
-                        <thead class="recordNeartableRecord">
-                            <tr>
-                                <th>Клубы</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи великого игрока Диег арманды Марадоны</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr class="fullRecord">
-                                <td><a href="#" class="linkTable">Посмотреть все (15)</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table_allnews_insection">
-                    <table class="table otherRecords">
-                        <thead class="recordNeartableRecord">
-                            <tr>
-                                <th>Клубы</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="linkTable"><p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a> </td>
-                            </tr>
-                            <tr class="fullRecord">
-                                <td><a href="#" class="linkTable">Посмотреть все (15)</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <article class=" tableInfo ">
+        <header class="search_s_head">
+            <h2>{{record_name}}</h2>
+            <aside class="searchRecord">
+                <textarea placeholder="Найти рекорд..."></textarea>
+                <button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+            </aside>
+        </header>
+        <!-- Таблица рекорда -->
+        <table class="table hiddenTable mainTable">
+            <thead class="headTable">
+                <tr>
+                    <th class="thTableRecord">#</th>
+                    <th></th>
+                    <th>Клуб</th>
+                    <th class="nationalHead"></th>
+                    <th>Стат</th>
+                </tr>
+            </thead>
+            <tbody class="tableRecord">
+                {% for record in records %}
+                <tr class="linkRecord">
+                    <th>{{forloop.counter}}</th>
+                    <th><a href="">{{record.content_object.name}}</a></th>
+                    <th>
+                        <a href="" class="aTable">
+                            <img class="imageTableRecord" src="{{record.content_object.club.image.url}}">
+                            <p class="infoRecordTable">
+                                {{record.content_object.club}}
+                            </p>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="" class="aTable">
+                            <img class="imageTableRecord" src="{{record.content_object.country.image.url}}">
+                            <p class="infoRecordTable">
+                                {{record.content_object.country}}
+                            </p>
+                        </a>
+                    </th>
+                    <th>{{record.record_value}}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Дополнительные таблицы -->
+        <div class="moreRecords">
+            <table class="table otherRecords table_allnews_insection">
+                <thead class="recordNeartableRecord">
+                    <tr>
+                        <th>Клубы</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr class="fullRecord">
+                        <td><a href="#" class="linkTable">Посмотреть все (15)</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table otherRecords table_allnews_insection">
+                <thead class="recordNeartableRecord">
+                    <tr>
+                        <th>Клубы</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи великого игрока Диег арманды Марадоны</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr class="fullRecord">
+                        <td><a href="#" class="linkTable">Посмотреть все (15)</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table otherRecords table_allnews_insection">
+                <thead class="recordNeartableRecord">
+                    <tr>
+                        <th>Клубы</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" class="linkTable">
+                                <p>Трофеи</p> <span class="glyphicon glyphicon-arrow-right recordArrow" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                    <tr class="fullRecord">
+                        <td><a href="#" class="linkTable">Посмотреть все (15)</a></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
-    <div class="advertising"></div>
+    </article>
+    <aside class="advertising"></aside>
 </main>
 {% endblock content %}

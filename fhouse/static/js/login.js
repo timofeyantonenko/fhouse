@@ -46,11 +46,11 @@ $(document).ready(function() {
     var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
     var triggerError = true;
     $("#registerBtn").on("click", function(event) {
+        $(this).attr("value", "Загрузка...");
         if (triggerError == false) {
             $(this).click();
             return;
         }
-        event.preventDefault();
         if ($('#id_first_name').val().length > 0 &&
             $('#id_last_name').val().length > 0 &&
             $('#id_password').val().length > 7 &&
@@ -101,6 +101,8 @@ $(document).ready(function() {
                 $('#id_email').css({ 'border': '1px solid #e62117' });
                 $('#id_email').parent().find("p").show().text('Поле email не должно быть пустым');
             };
+            $(this).attr("value", "Сохранить");
+            event.preventDefault();
         }
     })
 
@@ -117,11 +119,11 @@ $(document).ready(function() {
 
     var triggerErrorLogin = true;
     $(".btnLogin").on("click", function(event) {
+        $(this).attr("value", "Загрузка...");
         if (triggerErrorLogin == false) {
-            $(this).click();
+            $( this).trigger( "click" );
             return;
         }
-        event.preventDefault();
         var areaName = $("#id_username").val();
         var areaPas = $("#id_password").val();
         $("#id_password").css({ 'border': '1px solid #cccccc' });
@@ -136,6 +138,7 @@ $(document).ready(function() {
                 if (triggerErrorLogin) {
                     triggerErrorLogin = false;
                 }
+
             // } else {
             // Error login message
             // $("#loginWarning").append(pError3);
@@ -146,15 +149,21 @@ $(document).ready(function() {
             $("#div_id_username").append(pError1);
             $("#id_password").css({ 'border': '1px solid #e62117' });
             $("#id_username").css({ 'border': '1px solid #e62117' });
+            $(this).attr("value", "Вход");
+            event.preventDefault();
         } else if (areaName.length > 0 &&
             areaPas.length < 1) {
             $("#div_id_password").append(pError2);
             $("#id_password").css({ 'border': '1px solid #e62117' });
             $("#id_username").css({ 'border': '1px solid #cccccc' });
+            $(this).attr("value", "Вход");
+            event.preventDefault();
         } else {
             $("#div_id_username").append(pError1);
             $("#id_password").css({ 'border': '1px solid #cccccc' });
             $("#id_username").css({ 'border': '1px solid #e62117' });
+            $(this).attr("value", "Вход");
+            event.preventDefault();
         }
     });
 

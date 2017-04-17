@@ -60,12 +60,7 @@
     margin: 0;
 }
 
-.user_foto {
-    height: 215px;
-    width: 215px;
-    overflow: hidden;
-    border-radius: 50%;
-}
+
 
 .user_stat {
     margin-top: 20px;
@@ -73,10 +68,7 @@
     flex-wrap: wrap;
 }
 
-.user_foto img {
-    width: 100%;
-    height: auto;
-}
+
 
 .user_info_desc tr td:nth-child(2) a {
     float: right;
@@ -202,27 +194,6 @@ a #instagram:hover {
 
 .aboutArticle>div>span {
     margin: 0 2.5px;
-}
-
-
-.moreArt {
-    cursor: pointer;
-    width: 230px;
-    margin: 0 auto;
-    padding: 5px;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 14px;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #afadad;
-    border-radius: 2px;
-}
-
-.moreArt:hover {
-    background: #eee;
 }
 
 @media screen and (max-width: 969px) {
