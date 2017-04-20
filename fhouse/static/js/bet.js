@@ -22,6 +22,8 @@ var currentPageLi = 1,
 
 $(document).ready(function() {
 
+    ajaxTableResult(0);
+
     var leftNav,
         center,
         rightNav;
@@ -575,6 +577,26 @@ function ajaxRating(locationLinkHref, page, section) {
             }
             makePagination(lengthPagination, currentPageLi);
             $('#listForecasters').show();
+            $("#loader").hide();
+        },
+        error: function(xhr, status, error) {
+            console.log(error, status, xhr);
+        }
+    });
+}
+
+
+// Таблицы результатов
+
+function ajaxTableResult(leaqueNumber) {
+    $.ajax({
+        url: '/bets/get_league_status/',
+        method: "GET",
+        beforeSend: loaderShow(),
+        success: function(data, textStatus, xhr) {
+            
+                console.log(data.league_table[1].team)
+            
             $("#loader").hide();
         },
         error: function(xhr, status, error) {

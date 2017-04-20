@@ -32,19 +32,6 @@ if (!String.format) {
 var is_load_more_needed = true;
 $(document).ready(function() {
 
-    // Active menu
-    $(".tab ul li").click(function() {
-        $(".tab ul li").removeClass('activeRecords');
-        $(this).addClass('activeRecords');
-    });
-
-    // К-во элементов для подгрузки
-    var dowloadItem;
-    itemDownload();
-    $(window).resize(function() {
-        itemDownload();
-    });
-
     var section = getUrlParameter('section');
     if (typeof section != 'undefined') {
         var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
@@ -56,7 +43,6 @@ $(document).ready(function() {
     } else {
         section = $(".nav_ul li:first-child a");
         section_name = section.text();
-        console.log(section_name);
         // Active section of menu
         section.addClass("active_nav_ul");
         var ajax_url = 'article_list';
@@ -77,7 +63,6 @@ $(document).ready(function() {
                 });
             },
             error: function(xhr, status, error) {
-                console.log(error, status, xhr);
             }
         });
     }
@@ -85,6 +70,9 @@ $(document).ready(function() {
 
     //tab click
     $(".nav_ul li a").click(function(e) {
+        $(".tab ul li").removeClass('activeRecords');
+        $(this).parent().addClass('activeRecords');
+
         massonryEffect(0)
         $(".more_article").removeClass("moreLoading").removeClass("endMore");
         if ($(this).hasClass('active_nav_ul')) {
@@ -94,17 +82,13 @@ $(document).ready(function() {
         $(".nav_ul li a").removeClass('active_nav_ul');
         section = $(this);
         section_name = section.text().trim();
-        console.log(section_name);
         // Active section of menu
         section.addClass("active_nav_ul");
         var ajax_url = 'article_list';
         var ajax_data = { "section": section_name }
         if (section_name == 'Все') {
-            console.log('ВСЕ');
             var ajax_data = {}
         }
-
-        console.log(ajax_data);
         var state = ""
         $.ajax({
             url: ajax_url,
@@ -118,7 +102,6 @@ $(document).ready(function() {
                 massonryReload();
             },
             error: function(xhr, status, error) {
-                console.log(error, status, xhr);
             }
         });
 
@@ -126,8 +109,7 @@ $(document).ready(function() {
     $(".more_article").click(function(e) {
         massonryEffect(1)
         $(this).addClass("moreLoading");
-        e.preventDefault();
-        var a_block = this;
+        var a_block = $(this);
         var page = $(this).attr('href');
         if (page == -1) {
             return;
@@ -135,32 +117,30 @@ $(document).ready(function() {
         var ajax_url = 'article_list';
         var ajax_data = { "section": section_name }
         if (section_name == 'Все') {
-            console.log('ВСЕ');
             var ajax_data = {}
         }
         if (page != null) {
             console.log('HERE PAGE IS: ' + page);
             ajax_data["page"] = page
         }
-        console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['section']);
         var state = ""
         $.ajax({
             url: ajax_url,
             data: ajax_data,
             dataType: "html",
             success: function(data) {
-                page = parseInt(page) + 1;
-                $(a_block).prop('href', page);
+                page = +page + 1;
+                a_block.attr('href', page);
                 var content = $('.flex_container');
                 content.append(data);
                 massonryReload()
                 $(".more_article").removeClass("moreLoading");
             },
             error: function(xhr, status, error) {
+                console.log("pixdos")
                 $(this).addClass("endMore").removeClass("moreLoading");
-                console.log(error, status, xhr);
                 if (status = 404) {
-                    $(a_block).prop('href', -1);
+                    a_block.prop('href', -1);
                 }
             }
         });
@@ -173,62 +153,6 @@ function massonryReload() {
         $("#list").masonry('reloadItems');
         $("#list").masonry('layout');
     });
-}
-
-function load_more_articles() {
-    var a_block = $(".more_article");
-    //        alert($(a_block).attr('href'));
-    var page = $(a_block).attr('href');
-    if (page == -1) {
-        return;
-    }
-    var ajax_url = 'article_list';
-    var ajax_data = { "section": section_name }
-    if (section_name == 'Все') {
-        console.log('ВСЕ');
-        var ajax_data = {}
-    }
-    if (page != null) {
-        console.log('HERE PAGE IS: ' + page);
-        ajax_data["page"] = page
-    }
-    console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['section']);
-    var state = ""
-    $.ajax({
-        url: ajax_url,
-        data: ajax_data,
-        dataType: "html",
-        success: function(data) {
-            page = parseInt(page) + 1;
-            $(a_block).prop('href', page);
-            //                alert(page);
-            var content = $('.flex_container');
-            content.append(data).masonry('appended', data, true);
-            massonryReload();
-        },
-        error: function(xhr, status, error) {
-            console.log(error, status, xhr);
-            if (status = 404) {
-                $(a_block).prop('href', -1);
-            }
-        }
-    });
-}
-
-// К-во элементов для подгрузки
-
-var dowloadItem;
-
-function itemDownload() {
-
-    if ($(window).width() >= 970) {
-        dowloadItem = 3;
-    } else if ($(window).width() >= 570 && $(window).width() < 1170) {
-        dowloadItem = 2;
-    } else {
-        dowloadItem = 1;
-    }
-    $(".more_records a").attr("href", dowloadItem);
 }
 
 function massonryEffect(a) {
