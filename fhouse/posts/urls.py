@@ -10,6 +10,7 @@ from .views import (
     user_tag_delete,
     user_tag_add,
     change_user_tags,
+    add_comment,
 )
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
     url(r'^change_user_tags/$', change_user_tags),
     url(r'^add_user_tag/$', user_tag_add),
     url(r'^tabs/$', show_tabs),
+    url(r'^comment/$', add_comment),
     url(r'^create/$', post_create),
     url(r'^(?P<slug>[\w-]+)/$', post_detail, name='detail'),
     # url(r'^(?P<slug>\d+)/$', post_detail, name='detail'),
