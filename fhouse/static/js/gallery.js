@@ -471,22 +471,33 @@ function load_section_info(section_name, album_name) {
             var albums_container = $('.list_albums');
             insert_data = ""
             $.each(json_request_albums, function(idx, obj) {
-                insert_data += "<div class=\"album_previews\" id=\"album_id_" + obj.id + "\">" +
-                    "<div class=\"album_previews_img\">" +
-                    "<img src=\"" + obj.image + "\" alt=\"\" class='imgAlbumCover imgUser'> </div>" +
-                    " <div class=\"discription_previewws_album\">" +
-                    " <div class=\"title_album_preview\"> " + obj.album_title + " </div>" +
-                    " <div class=\"info_preview_album\"> <span><i class=\"fa fa-camera\" aria-hidden=\"true\"></i>" +
-                    " 48 &nbsp;<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i> 456</span>" +
-                    " <span class=\"date_album_preview\">28 october 2010</span>" +
-                    " </div> </div> </div>"
-                    //                insert_data += "<div class=\"album_previews\"><div class=\"album_previews_img\">" +
-                    //                "<img src=\"https://photo.championat.com/18/18040/full/762888-artjom-rebrov-denis-davydov-i-denis-glushakov.jpg\""  +
-                    //                "alt=\"\"></div><div class=\"discription_previewws_album\"><div class=\"title_album_preview\">Лучшие стадины Украины</div>" +
-                    //                                   +  "<div class=\"info_preview_album\"><span><i class=\"fa fa-camera\" aria-hidden=\"true\">" +
-                    //                                   "</i> 48 &nbsp;<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i> 456</span>" +
-                    //                                   "<span class=\"date_album_preview\">28 october 2010</span></div></div></div>"
-                    //                    insert_data += "<li>" + MEDIA_URL + obj.fields.image + " </li>"
+                insert_data += `
+                    <div class="album_previews" id="album_id_` + obj.id + `">
+                        <section class="album_previews_img">
+                            <img src="` + obj.image + `" class='imgAlbumCover imgUser' alt="" />
+                        </section>
+                        <section class="infoAlbum">
+                            <h3 class="title_album_preview">` + obj.album_title + `</h3>
+                            <div class="quantityAlbum">
+                                <figure>
+                                    <i class="fa fa-camera" aria-hidden="true"></i>
+                                    <figcaption>
+                                        ` + obj.album_photo_count + `
+                                    </figcaption>
+                                </figure>
+                                <figure>
+                                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                    <figcaption>
+                                        ` + obj.album_total_likes + `
+                                    </figcaption>
+                                </figure>
+                            </div>
+                            <time>
+                                ` + obj.photos_time + `
+                            </time>
+                        </section>
+                    </div>
+                `
             });
             albums_container.html(insert_data);
             $('.album_slaider').html(section_name);
