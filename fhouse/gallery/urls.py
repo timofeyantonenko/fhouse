@@ -8,11 +8,13 @@ from .views import (
     LastSectionPhotoList,
     get_section_information,
     get_album_photos,
+    get_photo_comments
     # api_test,
 )
 
 urlpatterns = [  # get_section_information
     # url(r'^slider_photo_list/$', PhotoList.as_view()),
+    url(r'^photo/comments/$', get_photo_comments, name='photo_comments'),
     url(r'^slider_photo_list/$', get_section_information),
     url(r'^album_photo_list/$', get_album_photos),
     url(r'^api/$', get_section_information),

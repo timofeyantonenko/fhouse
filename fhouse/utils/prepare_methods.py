@@ -2,10 +2,8 @@ from django.contrib.contenttypes.models import ContentType
 from comments.models import Comment
 
 
-def create_comment_data(request, content_type, comment_form):
+def create_comment_data(request, content_type, obj_id, content_data):
     content_type = ContentType.objects.get(model=content_type)
-    obj_id = comment_form.cleaned_data.get("object_id")
-    content_data = comment_form.cleaned_data.get("content")
     parent_object = None
     try:
         parent_id = int(request.POST.get("parent_id"))

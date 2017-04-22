@@ -2,6 +2,7 @@ import json
 from urllib.request import urlopen
 from urllib.parse import quote_plus, urlparse
 
+from django.views.decorators.csrf import csrf_protect
 from io import BytesIO
 
 from os.path import basename
@@ -22,6 +23,9 @@ from comments.forms import CommentForm
 from django.utils import timezone
 from django.db.models import Q
 from django.views.generic import ListView
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from .forms import PostForm
 from .models import Post, UserFavoriteTags, PostTag
 
@@ -79,6 +83,8 @@ def post_detail(request, slug=None):  # retrieve
     comment_form = CommentForm(request.POST or None, initial=initial_data)
     if comment_form.is_valid() and request.user.is_authenticated():
         content_type = instance.get_content_type
+        print("CONTENT_TYPE: ", content_type)
+        print("CONTENT_TYPE: ", type(content_type))
         comment_form.cleaned_data['object_id'] = instance.id
         new_comment, created = create_comment_data(request=request, content_type=content_type,
                                                    comment_form=comment_form)
@@ -303,3 +309,16 @@ class PostList(ListView):
         context['post_list'] = posts[1:5]
         context['main_post'] = posts[0]
         return context
+
+
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def add_comment(request):
+    parent_id = request.POST.get("parent_id")
+    content = request.POST.get("content")
+    instance = get_object_or_404(Post, id=parent_id)
+    print(parent_id, content)
+    new_comment, created = create_comment_data(request=request, content_type=instance.get_content_type,
+                                               obj_id=parent_id, content_data=content)
+    return Response(status=200)

@@ -17,9 +17,8 @@
         <footer>
             Коментарии {{ comment.children.count }} {% if request.user.is_authenticated %} 
             | <span class="comment-reply-btn" href="#">Ответить</span> 
-            <form method="POST" action="."> {% csrf_token %}
-                {{ form }}
-                <input type="text" name="parent_id" placeholder="Оставить комментарий...">
+            <form> {% csrf_token %}
+                <input type="text" parent_id="{{ comment.id }}" name="parent_id" class="reply-input" placeholder="Оставить комментарий...">
                 <input type="submit" value="Ответить" class="btn btn-default">
             </form>
             {% else %} {% endif %}
