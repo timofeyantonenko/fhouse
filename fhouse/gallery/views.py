@@ -1,5 +1,7 @@
+from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import ListView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -7,6 +9,7 @@ from rest_framework.response import Response
 from .models import GallerySection, SectionAlbum, AlbumPhoto
 from .serializers import AlbumPhotoSerializer, SectionAlbumSerializer
 from comments.serializers import CommentSerializer
+from utils.prepare_methods import create_comment
 
 
 @api_view(['GET'])
@@ -194,3 +197,13 @@ def get_photo_comments(request):
     comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
     print(comment_serializer)
     return Response(comment_serializer.data)
+
+
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def add_photo_comment(request):
+    content_type = ContentType.objects.get_for_model(AlbumPhoto)
+    content_type = str(content_type).replace(" ", "")
+    new_comment = create_comment(content_type, request)
+    return Response(status=200)

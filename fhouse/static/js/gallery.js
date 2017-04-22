@@ -679,3 +679,52 @@ $(document).on('click', '.block_like', function(){
         }
     });
 })
+
+$(document).on('click', '.block_like', function(){
+        input = $(this).parent().parent().find("#id_content");
+        photo_id = 1;//input.attr("parent_id");
+        type = 0;
+    $.ajax({
+        url: '/likes/photo/modify/',
+        data: {
+            photo_id: photo_id,
+            type: type,
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        method: "POST",
+        success: function(data, textStatus, xhr) {
+            alert("Like added!");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 409) {
+                alert("Error in comment adding!")
+            }
+            //            console.log(error, status, xhr);
+        }
+    });
+})
+
+$(document).on('click', '.btnFhouse', function(e){
+e.preventDefault();
+        input = $(this).parent().parent().find("#id_content");
+        photo_id = 1;//input.attr("parent_id");
+    $.ajax({
+        url: '/gallery/photo/comment/',
+        data: {
+            id: photo_id,
+            content: "other",
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        method: "POST",
+        success: function(data, textStatus, xhr) {
+            alert("Comment added!");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 409) {
+                alert("Error in comment adding!")
+            }
+            //            console.log(error, status, xhr);
+        }
+    });
+})
+

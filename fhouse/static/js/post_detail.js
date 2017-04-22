@@ -189,7 +189,7 @@ $(document).on('click', '.btnFhouse', function(e){
     $.ajax({
         url: '/posts/comment/',
         data: {
-            parent_id: parent,
+            id: parent,
             content: content,
             csrfmiddlewaretoken: getCookie('csrftoken')
         },

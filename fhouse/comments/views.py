@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from .models import Comment
 from .forms import CommentForm
 
-from utils.prepare_methods import create_comment_data
+from utils.prepare_methods import create_comment
 
 
 # Create your views here.
@@ -97,11 +97,8 @@ def comment_thread(request, id):
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def add_comment(request):
-    parent_id = request.POST.get("parent_id")
-    content = request.POST.get("content")
-    instance = get_object_or_404(Comment, id=parent_id)
-    new_comment, created = create_comment_data(request=request, content_type=instance.get_content_type,
-                                               obj_id=parent_id, content_data=content)
+    content_type = ContentType.objects.get_for_model(Comment)
+    new_comment = create_comment(content_type, request)
     return Response(status=200)
 
 
