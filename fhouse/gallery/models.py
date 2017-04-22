@@ -34,7 +34,7 @@ class GallerySection(models.Model):
         return query_set
 
 
-class SectionAlbum(models.Model):
+class SectionAlbum(LikedClass):
     album_title = models.TextField(max_length=120)
     # slug for absolute url
     slug = models.SlugField(unique=True)

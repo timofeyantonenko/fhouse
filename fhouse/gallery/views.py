@@ -1,4 +1,4 @@
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from rest_framework.decorators import api_view, permission_classes
@@ -6,10 +6,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import GallerySection, SectionAlbum, AlbumPhoto
 from .serializers import AlbumPhotoSerializer, SectionAlbumSerializer
+from comments.serializers import CommentSerializer
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def get_section_information(request):
     count_of_photo_by_pagination = 9
     count_of_albums_to_load = 6
@@ -25,12 +26,12 @@ def get_section_information(request):
     photos = paginator.page(page)
     photo_serializer = AlbumPhotoSerializer(photos, many=True, context={'request': request})
     album_serializer = SectionAlbumSerializer(albums[
-             :count_of_albums_to_load], many=True, context={'request': request})
+                                              :count_of_albums_to_load], many=True, context={'request': request})
     return Response({"photo_list": photo_serializer.data, 'albums': album_serializer.data})
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def get_album_photos(request):
     count_of_photo_by_pagination = 9
     page = request.GET.get("page", 1)
@@ -175,3 +176,21 @@ class LastSectionPhotoList(ListView):
         else:
             photos = AlbumPhoto.objects.all()
         return photos
+
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def get_photo_comments(request):
+    count_of_comments_per_page = 10
+    photo_id = request.GET.get("id_img")
+    page = request.GET.get("p")
+    instance = get_object_or_404(AlbumPhoto, id=photo_id)
+    comments = instance.comments
+    paginator = Paginator(comments, count_of_comments_per_page)  # Show n posts per page
+    try:
+        comments = paginator.page(page)
+    except EmptyPage:
+        comments = paginator.page(paginator.num_pages)
+    comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
+    print(comment_serializer)
+    return Response(comment_serializer.data)

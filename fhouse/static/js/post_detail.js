@@ -182,6 +182,7 @@ $(document).ready(function() {
 
 $(document).on('click', '.btnFhouse', function(e){
         e.preventDefault();
+        alert(getCookie('csrftoken'));
         input = $(this).parent().parent().find("#id_content");
         parent = input.attr("parent_id");
         content = input.val();

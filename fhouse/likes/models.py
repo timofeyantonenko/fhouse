@@ -30,7 +30,7 @@ class Like(models.Model):
     objects = LikesManager()
 
     def __str__(self):
-        return "user: {}, like: ".format(self.user, self.like)
+        return "user: {}, like: {}".format(self.user, self.like)
 
     def __unicode__(self):
-        return "user: {}, like: ".format(self.user, self.like)
+        return "user: {}, like: {}".format(self.user, self.like)

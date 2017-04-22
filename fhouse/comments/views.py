@@ -103,3 +103,6 @@ def add_comment(request):
     new_comment, created = create_comment_data(request=request, content_type=instance.get_content_type,
                                                obj_id=parent_id, content_data=content)
     return Response(status=200)
+
+
+
