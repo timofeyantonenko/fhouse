@@ -172,9 +172,6 @@ $(document).ready(function() {
                 }
             });
         }
-
-
-
     });
 
     // End dimas script

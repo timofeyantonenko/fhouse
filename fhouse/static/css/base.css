@@ -28,6 +28,7 @@ textarea {
     display: block !important;
 }
 
+
 /*Right column*/
 
 
@@ -70,10 +71,10 @@ textarea {
 }
 
 @media screen and (max-width: 750px) {
-   .otherMore {
-    padding-top: 0.75rem !important;
-    padding-bottom: 0.75rem !important;
-   } 
+    .otherMore {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+    }
 }
 
 .otherMore::before {
@@ -85,7 +86,12 @@ textarea {
 }
 
 .otherMore.endMore {
-    display: none;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.otherMore.endMore::before {
+    content: 'Конец';
 }
 
 .otherMore:hover {

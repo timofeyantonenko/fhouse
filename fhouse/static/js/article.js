@@ -1,26 +1,6 @@
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
+var is_load_more_needed = true,
+    section_name;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-};
-
-function isEmpty(obj) {
-    for (var prop in obj) {
-        if (obj.hasOwnProperty(prop))
-            return false;
-    }
-
-    return true;
-}
 if (!String.format) {
     String.format = function(format) {
         var args = Array.prototype.slice.call(arguments, 1);
@@ -29,9 +9,15 @@ if (!String.format) {
         });
     };
 }
-var is_load_more_needed = true;
-$(document).ready(function() {
 
+$(document).ready(function() {
+    massonryEffect(0);
+    $("#list").imagesLoaded(function() {
+        $('#list').masonry({
+            itemSelector: '.item',
+            transitionDuration: 0
+        });
+    });
     var section = getUrlParameter('section');
     if (typeof section != 'undefined') {
         var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
@@ -41,112 +27,72 @@ $(document).ready(function() {
         var new_active_tab = $(str_to_find);
         new_active_tab.addClass('menu_individualNews_active');
     } else {
-        section = $(".nav_ul li:first-child a");
-        section_name = section.text();
-        // Active section of menu
-        section.addClass("active_nav_ul");
-        var ajax_url = 'article_list';
-        var ajax_data = {}
-        var state = ""
-        $.ajax({
-            url: ajax_url,
-            data: ajax_data,
-            dataType: "html",
-            success: function(data) {
-                var content = $('.flex_container');
-                content.html(data);
-                $("#list").imagesLoaded(function() {
-                    $('#list').masonry({
-                        itemSelector: '.item',
-                        transitionDuration: 0 
-                    });
-                });
-            },
-            error: function(xhr, status, error) {
-            }
-        });
+        section_name = $("#navAjax").children("li").eq(0).text().trim();
+        ajaxPage(false);
     }
 
 
     //tab click
-    $(".nav_ul li a").click(function(e) {
-        $(".tab ul li").removeClass('activeRecords');
-        $(this).parent().addClass('activeRecords');
-
+    $("#navAjax").children("li").click(function(e) {
         massonryEffect(0)
         $(".more_article").removeClass("moreLoading").removeClass("endMore");
-        if ($(this).hasClass('active_nav_ul')) {
-            return;
-        }
-        e.preventDefault();
-        $(".nav_ul li a").removeClass('active_nav_ul');
-        section = $(this);
-        section_name = section.text().trim();
-        // Active section of menu
-        section.addClass("active_nav_ul");
-        var ajax_url = 'article_list';
-        var ajax_data = { "section": section_name }
-        if (section_name == 'Все') {
-            var ajax_data = {}
-        }
-        var state = ""
-        $.ajax({
-            url: ajax_url,
-            data: ajax_data,
-            dataType: "html",
-            success: function(data) {
-                var content = $('.flex_container');
-                content.html(data);
-                var a_block = $('.more_article');
-                $(a_block).prop('href', 3);
-                massonryReload();
-            },
-            error: function(xhr, status, error) {
-            }
-        });
-
+        if ($(this).hasClass('active_nav_ul')) return;
+        $(".tab ul li").removeClass('activeRecords');
+        $(this).addClass('activeRecords');
+        section_name = $(this).text().trim();
+        ajaxPage(false);
     });
+
     $(".more_article").click(function(e) {
         massonryEffect(1)
         $(this).addClass("moreLoading");
-        var a_block = $(this);
-        var page = $(this).attr('href');
-        if (page == -1) {
-            return;
+        ajaxPage(true);
+    });
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+            massonryEffect(1)
+            $(".more_article").addClass("moreLoading");
+            ajaxPage(true);
         }
-        var ajax_url = 'article_list';
-        var ajax_data = { "section": section_name }
-        if (section_name == 'Все') {
-            var ajax_data = {}
-        }
-        if (page != null) {
-            console.log('HERE PAGE IS: ' + page);
-            ajax_data["page"] = page
-        }
-        var state = ""
+    });
+
+});
+
+function ajaxPage(pageCount) {
+    var page = parseInt($(".more_article").attr("data-page"));
+    var f = function() {
+        var ajax_url = 'article_list',
+            ajax_data = { "section": section_name },
+            content = $('.flex_container'),
+            state = "",
+            $moreArt = $(".more_article");
+        pageCount ? page += 1 : page = 2;
+        if (section_name == 'Все') ajax_data = {};
+        if (pageCount) ajax_data["page"] = page;
+        console.log(section_name)
         $.ajax({
             url: ajax_url,
             data: ajax_data,
             dataType: "html",
-            success: function(data) {
-                page = +page + 1;
-                a_block.attr('href', page);
-                var content = $('.flex_container');
-                content.append(data);
+            cache: true,
+            success: function(data) { //parametr:lastPage - true/false
+                // if (lastPage) {
+                pageCount ? content.append(data) : content.html(data);
+                $moreArt.attr("data-page", page);
                 massonryReload()
-                $(".more_article").removeClass("moreLoading");
+                $moreArt.removeClass("moreLoading");
+                // } else {
+                //     return $moreArt.addClass("endMore").removeClass("moreLoading");
+                // }
             },
-            error: function(xhr, status, error) {
-                console.log("pixdos")
-                $(this).addClass("endMore").removeClass("moreLoading");
-                if (status = 404) {
-                    a_block.prop('href', -1);
-                }
-            }
+            error: function(xhr, status, error) {}
         });
+    }
+    return f();
+}
 
-    });
-});
+
 
 function massonryReload() {
     $("#list").imagesLoaded(function() {
@@ -165,6 +111,28 @@ function massonryEffect(a) {
          -o-animation: fadein ` + a + `s ease forwards; 
             animation: fadein ` + a + `s ease forwards;
         }
-        `       
+        `
     )
+}
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+function isEmpty(obj) {
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop))
+            return false;
+    }
+    return true;
 }

@@ -206,21 +206,9 @@ textarea {
     position: relative;
     cursor: pointer;
     display: block;
-}
-
-.tab ul li a {
-    color: #222;
-    display: block;
     padding: 5px 10px;
 }
 
-.tab ul li a:active,
-.tab ul li a:focus,
-.tab ul li a:hover,
-.tab ul li a:visited {
-    color: #222;
-    text-decoration: none;
-}
 
 .tab ul li:hover .lineHover {
     top: calc(100% - 4px);

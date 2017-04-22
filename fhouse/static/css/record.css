@@ -434,15 +434,15 @@ ul#otis {
     display: block;
 }
 
-.table_nav_records ul li:hover .lineHover {
+.tab_active:hover .lineHover {
     top: calc(100% - 4px);
 }
 
-.activeRecords {
+.tab_active {
     font-weight: 900;
 }
 
-.activeRecords .lineHover {
+.tab_active .lineHover {
     top: calc(100% - 4px);
 }
 

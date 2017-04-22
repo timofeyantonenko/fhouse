@@ -1,5 +1,4 @@
-{% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} 
-{% block head_extra %}
+{% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/gallery_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/gallery.js'  %}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
@@ -10,12 +9,9 @@
         <div class="container_slaider_albums" id="slaider_and_albums">
             <div id="slaider_foto">
                 <div class="head_nav">
-                    <ul class="nav_ul">
+                    <ul class="nav_ul" id="sectionGallery">
                         {% for section in sections %}
-                        <li class="reset_variable">
-                            <a href="#">
-                                {{ section.section_title }}
-                            </a>
+                        <li class="reset_variable">> {{ section.section_title }}
                         </li>
                         {% endfor %}
                     </ul>
@@ -36,24 +32,17 @@
                     <!-- div.img_slaider -->
                     <div id="flex_container_img_slaider">
                         <div id="container_img_in_slaider">
-                            <img src="" alt="">
-                            <div id="beforeSliderLoading"></div>
+                            <img src="" id="imgSlider">
                         </div>
                         <div class="slider_click" id="area_for_left_arrow_slaider">
-                            <div class="container_arow_slaider">
-                                <i class="fa fa-chevron-left slider_click" id="icon_left" aria-hidden="true"></i>
-                            </div>
+                            <i class="fa fa-chevron-left slider_click" id="icon_left" aria-hidden="true"></i>
                         </div>
                         <div class="slider_click" id="area_for_right_arrow_slaider">
-                            <div class="container_arow_slaider">
-                                <i class="fa fa-chevron-right slider_click" id="icon_right" aria-hidden="true"></i>
-                            </div>
+                            <i class="fa fa-chevron-right slider_click" id="icon_right" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <div class="url_list">
-                        <ul class="list_src_slaider">
-                        </ul>
-                    </div>
+                    <ul id="list_src_slaider">
+                    </ul>
                     <!-- Право-лево фото -->
                     <div class="footer_slaider">
                         <div class="slaider_footer_left">
@@ -75,11 +64,11 @@
                                 <span id="sumCommentSlider"></span>
                             </div>
                             <div class="slaider_photo_like">
-                                <div class="block_like">
+                                <div class="block_like" id="likeSlider">
                                     <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                                     <div class="votes"></div>
                                 </div>
-                                <div class="block_dislike">
+                                <div class="block_dislike" id="dislikeSlider">
                                     <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
                                     <div class="votes"></div>
                                 </div>
@@ -140,7 +129,7 @@
             <div id="wrapper">
                 <div class="flex_container_albums" id="list">
                 </div>
-                <div class="more_photo otherMore" href="2">
+                <div class="more_photo otherMore" data-page="2">
                 </div>
             </div>
             <!-- Слайдер в модальном окне для фотографий с плитки -->

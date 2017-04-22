@@ -18,40 +18,26 @@
             </div>
         </aside>
         <nav class="tab">
-            <ul class="nav_ul">
-                <!-- <li class="activeRecords">
+            <ul class="nav_ul" id="navAjax">
+                <li class="activeRecords">
                     Все
                     <div class="lineHover"></div>
-                </li> -->
-                {% for record_group in groups_tables %}
-                <li>
-                    {{ record_group.group }}
-                    <div class="lineHover"></div>
-                </li>
-                {% endfor %}
-                <li class="activeRecords">
-                    <a href="#">
-                        Все
-                        <div class="lineHover"></div>
-                    </a>
                 </li>
                 {% for section in sections %}
                 <li>
-                    <a href="#">
-                        {{ section.section_title }} <div class="lineHover"></div>
-                    </a>
+                    {{ section.section_title }}
+                    <div class="lineHover"></div>
                 </li>
                 {% endfor %}
             </ul>
         </nav>
         <hr>
     </header>
-    
     <div class="container_article" id="wrapper">
         <div class="flex_container" id="list">
         </div>
     </div>
-    <div class="more_article otherMore" data-page="3">
+    <div class="more_article otherMore" data-page="2">
     </div>
 </main>
 {% endblock content %}

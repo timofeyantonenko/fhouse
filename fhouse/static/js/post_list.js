@@ -1,42 +1,3 @@
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-};
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-function isEmpty(obj) {
-    for (var prop in obj) {
-        if (obj.hasOwnProperty(prop))
-            return false;
-    }
-
-    return true;
-}
 if (!String.format) {
     String.format = function(format) {
         var args = Array.prototype.slice.call(arguments, 1);
@@ -45,6 +6,7 @@ if (!String.format) {
         });
     };
 }
+
 $(document).ready(function() {
     var tab = getUrlParameter('tab')
     if (typeof tab != 'undefined') {
@@ -56,16 +18,15 @@ $(document).ready(function() {
         new_active_tab.addClass('menu_individualNews_active');
     }
     if (window.history && window.history.pushState) {
-        //    window.history.pushState({}, '', window.history.state);
         $(window).on('popstate', function() {
-            //    alert('test');
 
             var url = window.location.href;
-            //    window.history.pushState({}, '', url);
-            var ajax_url = '/posts'
-            var ajax_data = {}
-            var state = ""
-            var tab = getUrlParameter('tab')
+            tab = getUrlParameter('tab');
+
+            var ajax_url = '/posts';
+            var ajax_data = {};
+            var state = "";
+
             var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
             var previous_active_tab = $('div .menu_individualNews_active');
             previous_active_tab.removeClass('menu_individualNews_active');
@@ -97,9 +58,7 @@ $(document).ready(function() {
                     content.html(data);
                     //                window.history.pushState("object or string", "Title", state);
                 },
-                error: function(xhr, status, error) {
-                    console.log(error, status, xhr);
-                }
+                error: function(xhr, status, error) {}
             });
         });
 
@@ -135,11 +94,10 @@ $(document).ready(function() {
                 content.html(data);
                 //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
             },
-            error: function(xhr, status, error) {
-                console.log(error, status, xhr);
-            }
+            error: function(xhr, status, error) {}
         });
     });
+
     $(document).on('click', '.positive_like', function(e) {
         e.preventDefault();
         var like_url = "/likes/post/modify";
@@ -171,9 +129,7 @@ $(document).ready(function() {
                 }
                 count_block.html(pos_likes_count.toString());
             },
-            error: function(xhr, status, error) {
-                console.log(error, status, xhr);
-            }
+            error: function(xhr, status, error) {}
         });
     });
     $(document).on('click', '.negative_like', function(e) {
@@ -207,52 +163,27 @@ $(document).ready(function() {
                 }
                 count_block.html(neg_likes_count.toString());
             },
-            error: function(xhr, status, error) {
-                console.log(error, status, xhr);
-            }
+            error: function(xhr, status, error) {}
         });
     });
 
     $(".more_article").click(function(e) {
-        var $morePost = $(this);
-            $morePost.addClass('moreLoading');
-        e.preventDefault();
-        var a_block = this;
-        var page = $(this).attr('href');
-        if (page == -1) {
-            return;
-        }
-        var state = ""
-        var tab = $('div .menu_individualNews_active li').find('div').text();
+        $(this).addClass("moreLoading");
+        ajaxPage(true)
+    });
+
+    $('.tab').click( function(e) {
+        $('.more_article ').removeClass('endMore')
+        var parent_div_tab = $(this).parent();
+        var tab = $(this).text().trim();
+        var previous_active_tab = $('div .menu_individualNews_active');
+        previous_active_tab.removeClass('menu_individualNews_active');
+        previous_active_tab.find('li').removeAttr('id');
+        parent_div_tab.addClass('menu_individualNews_active');
         if (tab === 'Все') {
             tab = 'all';
         }
-        var ajax_data = { "tab": tab }
-        if (page != null) {
-            //            console.log('HERE PAGE IS: ' + page);
-            ajax_data["page"] = page
-        }
-        //        console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['tab']);
-        $.ajax({
-            url: '/posts/tabs',
-            data: ajax_data,
-            dataType: "html",
-            success: function(data) {
-                page = parseInt(page) + 1;
-                $(a_block).prop('href', page);
-                var content = $('.news_stream');
-                content.append(data);
-                $morePost.addClass('moreLoading');
-                $morePost.removeClass('moreLoading')
-            },
-            error: function(xhr, status, error) {
-                $morePost.addClass('endMore').removeClass('moreLoading');
-                console.log(error, status, xhr);
-                if (status = 404) {
-                    $(a_block).prop('href', -1);
-                }
-            }
-        });
+        load_posts(url, tab, 2);
     });
 
     // Модальное окно 
@@ -308,58 +239,16 @@ $(document).ready(function() {
                 location.reload();
             },
             error: function(xhr, status, error) {
-                console.log(error, status, xhr);
+
             }
         });
-        //        $.ajax({
-        //            url: 'delete_user_tag/',
-        //            data: {'tag_name': tags_to_delete[0],
-        //            csrfmiddlewaretoken: getCookie('csrftoken')},
-        ////            dataType: "json",
-        //            method: "POST",
-        //            success: function(data, textStatus, xhr) {
-        //                remove = true;
-        //            console.log('OOO1' + remove);
-        //            },
-        //            error: function(xhr, status, error) {
-        //                console.log(error, status, xhr);
-        //            }
-        //        });
-        //        $.ajax({
-        //            url: 'add_user_tag/',
-        //            data: {'tag_name': tags_to_add[0],
-        //            csrfmiddlewaretoken: getCookie('csrftoken')},
-        ////            dataType: "json",
-        //            method: "POST",
-        //            success: function(data, textStatus, xhr) {
-        //                add = true;
-        //                console.log('OOO' + add);
-        //            },
-        //            error: function(xhr, status, error) {
-        //                console.log(error, status, xhr);
-        //            }
-        //        });
-        //        console.log(add + ' ' + remove)
-        //        if (add || remove){
-        //
-        //            console.log('true');
-        //            location.reload();
-        //        }
-        //        else{
-        //            console.log('false');
-        //        }
     });
 
     $(".for_tag").on("click", ".close_tag", function() {
         $(this).parent().remove();
-        //        var close_tag_text = $(this).parent().children(".tag_chosen").text();
         var close_tag_text = $(this).parent().children(".additional_tag").text();
-
         $('.simple_tag').each(function(i) {
-            // alert(close_tag_text)
             if ($(this).text() == close_tag_text) {
-                // console.log($(this).text() + "закрывающего тега");
-                // console.log(close_tag_text + "где нужно убрать класс");
                 $(this).parent().parent().children(".flex_right").find(".choose_tag_success").removeClass("success_tag");
             };
         });
@@ -368,6 +257,41 @@ $(document).ready(function() {
     page_settings();
 
 });
+
+function ajaxPage(pageCount) {
+    var page = parseInt($(".more_article").attr("data-page"));
+    var tab = 'Все';
+    var f = function() {
+        var ajax_data = { "tab": tab },
+            content = $('.news_stream'),
+            state = "",
+            $moreArt = $(".more_article");
+        pageCount ? page += 1 : page = 2;
+        if (tab === 'Все') tab = 'all';
+        if (pageCount) ajax_data["page"] = page;
+
+        $.ajax({
+            url: '/posts/tabs',
+            data: ajax_data,
+            dataType: "html",
+            cache: true,
+            success: function(data) { //parametr:lastPage - true/false
+                // if (lastPage) {
+                pageCount ? content.append(data) : content.html(data);
+                $moreArt.attr("data-page", page);
+                $moreArt.removeClass("moreLoading");
+                // } else {
+                //     return $moreArt.addClass("endMore").removeClass("moreLoading");
+                // }
+                alert("Ura")
+            },
+            error: function(xhr, status, error) {
+                alert("Error")
+            }
+        });
+    }
+    return f();
+}
 
 // Download photo
 function readURLoffer(input) {
@@ -418,21 +342,17 @@ function page_settings() {
         $('html, body').animate({ scrollTop: 0 }, '0');
 
     });
-
 }
 
 
 function show_modal(modal_id) {
-    console.log("M IN")
     $(modal_id).modal('toggle');
-    console.log("M L");
 }
 
 $(document).on("click", ".btn-ok", function(e) {
     var input_text = $('.textOfferNews').find('textarea').val();
     var input_image_url = $('.linkImg').val();
     propose_post(input_text, input_image_url);
-    console.log("PROPOSED")
     show_modal('#offerNewsModal');
 });
 
@@ -446,43 +366,15 @@ function propose_post(text, image) {
         },
         method: "POST",
         success: function(data, textStatus, xhr) {
-            //            location.reload();
+
         },
         error: function(xhr, status, error) {
-            console.log(error, status, xhr);
+
         }
     });
 }
 
-$(document).on('click', '.tab', function() {
-    $('.more_article ').removeClass('endMore')
-    var url = '/posts/tabs';
-    var parent_div_tab = $(this).parent();
-    var tab = $(this).find('div').text();
-    var previous_active_tab = $('div .menu_individualNews_active');
-    previous_active_tab.removeClass('menu_individualNews_active');
-    previous_active_tab.find('li').removeAttr('id');
-    parent_div_tab.addClass('menu_individualNews_active');
-    if (tab === 'Все') {
-        tab = 'all';
-    }
-    load_posts(url, tab, 2);
-    //        $.ajax({
-    //            url: url,
-    //            data: { 'tab': tab },
-    //            dataType: "html",
-    //            success: function(data) {
-    //                var content = $('.news_stream');
-    //                content.html(data);
-    //                $(".more_article").prop('href', 2);
-    //                window.history.pushState("object or string", "Title", '?tab=' + tab);
-    //            },
-    //            error: function(xhr, status, error) {
-    //                console.log(error, status, xhr);
-    //            }
-    //        });
-
-});
+var url = window.location.href;
 
 function load_posts(url, tab, page) {
     $.ajax({
@@ -490,14 +382,50 @@ function load_posts(url, tab, page) {
         data: { 'tab': tab },
         dataType: "html",
         success: function(data) {
-            //        alert(url);
             var content = $('.news_stream');
             content.html(data);
-            $(".more_article").prop('href', 2);
+            $(".more_article").attr('data-page', 2);
             window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tab);
         },
-        error: function(xhr, status, error) {
-            console.log(error, status, xhr);
-        }
+        error: function(xhr, status, error) {}
     });
+}
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function isEmpty(obj) {
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop))
+            return false;
+    }
+    return true;
 }

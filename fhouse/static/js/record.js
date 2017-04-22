@@ -1,28 +1,19 @@
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-};
+var section_name;
 
 $(document).ready(function() {
-
+    massonryEffect(0);
+    $('#list').masonry({
+        itemSelector: '.item',
+        transitionDuration: 0
+    });
     // Уникальные таблицы
-    $("#loaderTable").css({"display":"flex"});
+    $("#loaderTable").css({ "display": "flex" });
 
     var $trTable = $(".tableRecord").children("tr").eq(1).children("th");
-    for ( var i = 2; i < 4; i++) {
-        var indexTh = $(this).eq(i).index() 
-        if ( $trTable.find("img").attr('src') == ""  ) {
-            if ( i == 2) {
+    for (var i = 2; i < 4; i++) {
+        var indexTh = $(this).eq(i).index()
+        if ($trTable.find("img").attr('src') == "") {
+            if (i == 2) {
                 $(".tableRecord").addClass("noClub")
                 $(".headTable").addClass("noClub")
             } else {
@@ -32,12 +23,12 @@ $(document).ready(function() {
         }
     }
 
-    if ( $(".headTable").hasClass("noClub") && !$(".headTable").hasClass("noNational") ) {
+    if ($(".headTable").hasClass("noClub") && !$(".headTable").hasClass("noNational")) {
         $(".headTable").children("tr").children("th").eq(1).html("Клуб")
-    } else if ( $(".headTable").hasClass("noClub") && $(".headTable").hasClass("noNational") ) {
+    } else if ($(".headTable").hasClass("noClub") && $(".headTable").hasClass("noNational")) {
         $(".headTable").children("tr").children("th").eq(1).html("Страна")
     } else {
-        $(".headTable").children("tr").children("th").eq(1).html("Имя Фамилия") 
+        $(".headTable").children("tr").children("th").eq(1).html("Имя Фамилия")
     }
 
     $(".hiddenTable").removeClass("hiddenTable");
@@ -52,115 +43,69 @@ $(document).ready(function() {
         var new_active_tab = $(str_to_find);
         new_active_tab.addClass('menu_individualNews_active');
     } else {
-        group = $(".table_nav_records .tab ul li a");
-        group_name = group.text();
-        console.log(group_name);
-        // Active group of menu
-        group.addClass("active_nav_ul");
-        var ajax_url = 'table_list';
-        var ajax_data = {}
-        var state = ""
-        $.ajax({
-            url: ajax_url,
-            data: ajax_data,
-            dataType: "html",
-            success: function(data) {
-                var content = $('.statsCard .flex_container');
-                content.html(data);
-                $('#list').masonry({ 
-                    itemSelector: '.item',
-                    transitionDuration: 0 
-                });
-            },
-            error: function(xhr, status, error) {
-                console.log(error, status, xhr);
-            }
-        });
+        section_name = $("#recordTab").children("li").eq(0).text().trim();
+        ajaxPage(false);
     }
 
     //tab click
-    $(".table_nav_records .tab ul li").click(function(e) {
+    $("#recordTab").children("li").click(function(e) {
         massonryEffect(0);
-        if ($(this).hasClass('tab_active')) {
-            return;
-        }
-        e.preventDefault();
-        $(".table_nav_records .tab ul li").removeClass('tab_active');
-        group = $(this);
-        group_name = group.text().trim();
-        // Active group of menu
-        group.addClass("tab_active");
-        var ajax_url = 'table_list';
-        var ajax_data = { "group": group_name }
-        if (group_name == 'Все') {
-            console.log('ВСЕ');
-            var ajax_data = {}
-        }
-
-        console.log(ajax_data);
-        var state = ""
-        $.ajax({
-            url: ajax_url,
-            data: ajax_data,
-            dataType: "html",
-            success: function(data) {
-                var content = $('.flex_container');
-                content.html(data);
-                var a_block = $('.more_records');
-                $(a_block).prop('href', 3);
-                $("#list").masonry('reloadItems');
-                $("#list").masonry('layout');
-                a_block.removeClass("moreLoading").removeClass("endMore"); 
-            },
-            error: function(xhr, status, error) {
-                console.log(error, status, xhr);
-            }
-        });
+        if ($(this).hasClass('tab_active')) return;
+        $("#recordTab li").removeClass('tab_active');
+        $(this).addClass("tab_active");
+        section_name = $(this).text().trim();
+        ajaxPage(false);
     });
+
     $(".more_records").click(function(e) {
         massonryEffect(1);
         $(this).addClass("moreLoading");
-        e.preventDefault();
-        var a_block = this;
-        var page = $(this).attr('href');
-        var ajax_url = 'table_list';
-        var ajax_data = { "group": group_name }
-        if (group_name == 'Все') {
-            console.log('ВСЕ');
-            var ajax_data = {}
+        ajaxPage(true);
+    });
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+            massonryEffect(1)
+            $(".more_records").addClass("moreLoading");
+            ajaxPage(true);
         }
-        if (page != null) {
-            console.log('HERE PAGE IS: ' + page);
-            ajax_data["page"] = page
-        }
-        console.log("AJAX DATA: " + ajax_data['page'] + ' ' + ajax_data['group']);
-        var state = ""
+    });
+
+});
+
+function ajaxPage(pageCount) {
+    var page = parseInt($(".more_records").attr("data-page"));
+    var f = function() {
+        var ajax_url = 'table_list',
+            ajax_data = { "group": section_name },
+            content = $('.flex_container'),
+            state = "",
+            $moreArt = $(".more_records");
+        pageCount ? page += 1 : page = 2;
+        if (section_name == 'Все') ajax_data = {};
+        if (pageCount) ajax_data["page"] = page;
         $.ajax({
             url: ajax_url,
             data: ajax_data,
             dataType: "html",
-            success: function(data) {
-                page = parseInt(page) + 1;
-                $(a_block).prop('href', page);
-                var content = $('.flex_container');
-                content.append(data);
+            cache: true,
+            success: function(data) { //parametr:lastPage - true/false
+                // if (lastPage) {
+                console.log(data);
+                pageCount ? content.append(data) : content.html(data);
+                $moreArt.attr("data-page", page);
                 $("#list").masonry('reloadItems');
                 $("#list").masonry('layout');
-                $(a_block).removeClass("moreLoading");
+                $moreArt.removeClass("moreLoading");
+                // } else {
+                //     return $moreArt.addClass("endMore").removeClass("moreLoading");
+                // }
             },
-            error: function(xhr, status, error) {
-                $(a_block).addClass("endMore").removeClass("moreLoading");
-                console.log(error, status, xhr);
-            }
+            error: function(xhr, status, error) {}
         });
-    });
-
-    $(".tab ul li").click(function() {
-        $(".tab ul li").removeClass('activeRecords');
-        $(this).addClass('activeRecords');
-    });
-
-});
+    }
+    return f();
+}
 
 function massonryEffect(a) {
     $("#styleArticle").empty().html(
@@ -172,6 +117,21 @@ function massonryEffect(a) {
                  -o-animation: fadein ` + a + `s ease forwards; 
                     animation: fadein ` + a + `s ease forwards;
         }
-        `       
+        `
     )
 }
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
