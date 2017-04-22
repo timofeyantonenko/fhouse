@@ -318,11 +318,7 @@ def add_comment(request):
     parent_id = request.POST.get("parent_id")
     content = request.POST.get("content")
     instance = get_object_or_404(Post, id=parent_id)
-    new_comment, created = Comment.objects.get_or_create(
-        user=request.user,
-        content_type=instance.get_content_type,
-        object_id=parent_id,
-        content=content,
-        parent=None
-    )
+    print(parent_id, content)
+    new_comment, created = create_comment_data(request=request, content_type=instance.get_content_type,
+                                               obj_id=parent_id, content_data=content)
     return Response(status=200)
