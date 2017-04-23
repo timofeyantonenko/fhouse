@@ -18,7 +18,7 @@ def get_section_information(request):
     page = request.GET.get("page", 1)
     # page = request.GET.page
     # print("page is {}".format(page))
-    section = request.GET.get('section', "Soccer")
+    section = request.GET.get('section', "Stadium")
     albums = SectionAlbum.objects.filter(album_section__section_title=section).order_by('-updated')
     print("PAGE IS: {}".format(page))
     photos = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-updated')

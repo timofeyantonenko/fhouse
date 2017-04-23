@@ -6,13 +6,22 @@ if (!String.format) {
         });
     };
 }
+var ListPhotos = {};
 
 $(document).ready(function() {
-
-    // Size img in slider
-
     var sliderPar = '#container_img_in_slaider';
     var modalPar = '#flex_container_img_modal';
+    var urlReq = 'slider_photo_list';
+    var section_name = $("#sectionGallery").children("li").eq(0).text().trim();
+    var start_foto = -1;
+
+    ajaxGallery(section_name, undefined, undefined, 1, true, true, urlReq)
+    slider(1, 0, start_foto, 1);
+
+    $("#area_for_right_arrow_slaider").on("click", function(event) {
+        slider(1, 0, start_foto, 1);
+        start_foto++;
+    });
 
     $(window).resize(function() {
         if ($(window).width() >= 970) {
@@ -55,7 +64,6 @@ $(document).ready(function() {
         $('#slaider_modal').modal('hide');
     });
 
-    load_section_info(section_name, undefined);
 
     $("#list").imagesLoaded(function() {
         $('#list').masonry({
@@ -65,21 +73,32 @@ $(document).ready(function() {
     });
 
     // Секции
-    $("#sectionGallery").children("li").click(function(e) {
+    var $sectionLi = $("#sectionGallery").children("li");
+    $sectionLi.eq(0).addClass('active_nav_ul');
+    $sectionLi.click(function(e) {
         if ($(this).hasClass('active_nav_ul')) return;
         $(".more_photo").removeClass("endMore");
         $(".active_nav_ul").removeClass('active_nav_ul');
         $(this).addClass("active_nav_ul");
-        section_name = section.text().trim();
-        ajaxGallery(section_name, undefined, 1, true, true)
+        section_name = $(this).text().trim();
+        urlReq = 'slider_photo_list'
+        ListPhotos = {};
+        ajaxGallery(section_name, undefined, 1, true, true, true, urlReq);
+        slider(1, 0, start_foto, 1);
+        console.log(ListPhotos);
     });
 
     // Альбомы
     $(document).on("click", ".list_albums .album_previews", function(e) {
-        var long_id = $(this).attr("id");
-        values = long_id.split("album_id_");
-        short_id = values[1];
-        ajaxGallery(section_name, short_id, 1, true, false);
+        $(".active_selected_album").removeClass("active_selected_album");
+        $(this).addClass("active_selected_album");
+        var long_id = $(this).attr("id"),
+            values = long_id.split("album_id_"),
+            short_id = values[1],
+            urlReq = 'album_photo_list';
+            ListPhotos = {};
+        ajaxGallery(section_name, short_id, 1, true, true, false, urlReq);
+        console.log(ListPhotos)
         if ($(window).width() <= 969) $("#albums_right").slideUp();
     });
 
@@ -87,146 +106,58 @@ $(document).ready(function() {
     $(document).on("click", ".more_photo", function(e) {
         $(this).addClass("moreLoading");
         data_page = $(this).attr("data-page");
-        ajaxGallery(section_name, short_id, data_page, false, false);
+        ajaxGallery(section_name, short_id, data_page, false, false, urlReq);
     });
 
-    // Преключения между фотками в слайдере
-    var index_photo_slaider = 0;
-
-    $(".reset_variable").on("click", function() {
-        index_photo_slaider = 0;
-        index_photo_modal = 0;
-    });
-
-    $('.list_albums').delegate('.album_previews ', 'click', function() {
-        index_photo_slaider = 0;
-        index_photo_modal = 0;
-    });
-
-    index_photo_slaider = index_photo_slaider;
-
-
-    $(".slider_click").on("click", function(event) {
-        var click_element_id = event.target.id;
-        var quantity_foto_li = $(".url_list #list_src_slaider li").length;
-        var id_left = "area_for_left_arrow_slaider";
-        var id_right = "area_for_right_arrow_slaider";
-        var id_icon_left = "icon_left";
-        var id_icon_right = "icon_right";
-        if (click_element_id == id_left || click_element_id == id_icon_left) {
-            index_photo_slaider--;
-            if (index_photo_slaider == -1) {
-                index_photo_slaider = (quantity_foto_li - 1);
-            }
-        } else if (click_element_id == id_right || click_element_id == id_icon_right) {
-            index_photo_slaider++;
-            if (index_photo_slaider == quantity_foto_li) {
-                index_photo_slaider = 0;
-            }
-        }
-        var indexFoto = index_photo_slaider + 1;
-        $("#indexCount").html(indexFoto);
-        // Нужно передать к-во фото в данном альбоме или секции
-        $("#sumCount").html();
-        var new_src = $(".url_list #list_src_slaider li").eq(index_photo_slaider).children(".photo_url").text()
-        var new_count_comments = $(".url_list #list_src_slaider li").eq(index_photo_slaider).children(".count_of_comments").text()
-        var new_album_title = $(".url_list #list_src_slaider li").eq(index_photo_slaider).children(".photo_album_title").text()
-        var new_posit_like = $(".url_list #list_src_slaider li").eq(index_photo_slaider).children(".photo_positive_likes").text()
-        var new_negat_like = $(".url_list #list_src_slaider li").eq(index_photo_slaider).children(".photo_negative_likes").text()
-        $("#slaider_and_albums").find('#container_img_in_slaider img').attr("src", new_src);
-        $("#slaider_and_albums").find('.block_like div.votes').text(new_posit_like);
-        $("#slaider_and_albums").find('.block_dislike div.votes').text(new_negat_like);
-        // $("#slaider_and_albums").find('.button_show_comments').children("span").text(new_count_comments);
-        $("#slaider_and_albums").find('.album_slaider').text(new_album_title);
-        return false;
-    });
-
-    // При отрытии модального окна
-
-    var body_width = $('#slaider_modal .modal-dialog').width();
-    var index_photo_modal;
-
-    $('.flex_container_albums').delegate('.photo_row', 'click', function(evt) {
-        index_photo_modal = $(this).index();
-        make_modal_slider();
-        var indexModalPhoto = index_photo_modal + 1;
-        $("#indexCountModal").html(indexModalPhoto);
-        // Нужно передать к-во фото в данном альбоме или секции
-        $("#sumCountModal").html("100");
-    });
-
-    function make_modal_slider() {
-        var new_src = $(".url_list #list_src_slaider li").eq(index_photo_modal).children(".photo_url").text()
-        var new_count_comments = $(".url_list #list_src_slaider li").eq(index_photo_modal).children(".count_of_comments").text();
-        var new_album_title = $(".url_list #list_src_slaider li").eq(index_photo_modal).children(".photo_album_title").text()
-        var new_posit_like = $(".url_list #list_src_slaider li").eq(index_photo_modal).children(".photo_positive_likes").text()
-        var new_negat_like = $(".url_list #list_src_slaider li").eq(index_photo_modal).children(".photo_negative_likes").text()
-        $("#slaider_modal").find('#flex_container_img_modal img').attr("src", new_src);
-        $("#slaider_modal").find('.block_like div.votes').text(new_posit_like);
-        $("#slaider_modal").find('.block_dislike div.votes').text(new_negat_like);
-        $("#modalCountComment").text(new_count_comments);
-        if (new_count_comments == 0) {
-            $("#comments_photo_modal").find(".not_comments").css({ "display": "flex" });
-            $("#comments_photo_modal").find(".user_comment").hide()
-        } else {
-            $("#comments_photo_modal").find(".not_comments").css({ "display": "none" });
-            $("#comments_photo_modal").find(".user_comment").show();
-        }
-        $("#slaider_modal").find('.album_slaider').text(new_album_title);
-    }
 
     // Преключения между фотками в модальном окне
 
-    $(".modal_slider_click").on("click", function(evt) {
-        loadModal()
-        var click_element_id = evt.target.id;
-        var quantity_foto_li = $(".url_list #list_src_slaider li").length;
-        var id_left = "modal_left";
-        var id_right = "modal_right";
-        var id_icon_left = "modal_left_icon";
-        var id_icon_right = "modal_right_icon";
-        if (click_element_id == id_left || click_element_id == id_icon_left) {
-            index_photo_modal--;
-            if (index_photo_modal == -1) {
-                index_photo_modal = (quantity_foto_li - 1);
-            }
-        } else if (click_element_id == id_right || click_element_id == id_icon_right) {
-            index_photo_modal++;
-            if (index_photo_modal == quantity_foto_li) {
-                index_photo_modal = 0;
-            }
-        }
-        var indexModalPhoto = index_photo_modal + 1;
-        $("#indexCountModal").html(indexModalPhoto);
-        make_modal_slider();
-        return false;
-    });
+    // $(".modal_slider_click").on("click", function(evt) {
+    //     var click_element_id = evt.target.id;
+    //     var quantity_foto_li = $(".url_list #list_src_slaider li").length;
+    //     var id_left = "modal_left";
+    //     var id_right = "modal_right";
+    //     var id_icon_left = "modal_left_icon";
+    //     var id_icon_right = "modal_right_icon";
+    //     if (click_element_id == id_left || click_element_id == id_icon_left) {
+    //         index_photo_modal--;
+    //         if (index_photo_modal == -1) {
+    //             index_photo_modal = (quantity_foto_li - 1);
+    //         }
+    //     } else if (click_element_id == id_right || click_element_id == id_icon_right) {
+    //         index_photo_modal++;
+    //         if (index_photo_modal == quantity_foto_li) {
+    //             index_photo_modal = 0;
+    //         }
+    //     }
+    //     $("#indexCountModal").html(indexModalPhoto);
+    // });
 
-    $('html').keydown(function(eventObject) {
-        loadModal()
-        if ($('#slaider_modal').hasClass('in')) {
-            var click_element_id = eventObject.target.id;
-            var quantity_foto_li = $(".url_list #list_src_slaider li").length;
-            var id_left = "modal_left";
-            var id_right = "modal_right";
-            var id_icon_left = "modal_left_icon";
-            var id_icon_right = "modal_right_icon";
-            if (eventObject.keyCode == 37) {
-                index_photo_modal--;
-                if (index_photo_modal == -1) {
-                    index_photo_modal = (quantity_foto_li - 1);
-                }
-            } else if (eventObject.keyCode == 39) {
-                index_photo_modal++;
-                if (index_photo_modal == quantity_foto_li) {
-                    index_photo_modal = 0;
-                }
-            }
-            var indexModalPhoto = index_photo_modal + 1;
-            $("#indexCountModal").html(indexModalPhoto);
-            make_modal_slider();
-        }
-    });
+    // $('html').keydown(function(eventObject) {
+    //     loadModal()
+    //     if ($('#slaider_modal').hasClass('in')) {
+    //         var click_element_id = eventObject.target.id;
+    //         var quantity_foto_li = $(".url_list #list_src_slaider li").length;
+    //         var id_left = "modal_left";
+    //         var id_right = "modal_right";
+    //         var id_icon_left = "modal_left_icon";
+    //         var id_icon_right = "modal_right_icon";
+    //         if (eventObject.keyCode == 37) {
+    //             index_photo_modal--;
+    //             if (index_photo_modal == -1) {
+    //                 index_photo_modal = (quantity_foto_li - 1);
+    //             }
+    //         } else if (eventObject.keyCode == 39) {
+    //             index_photo_modal++;
+    //             if (index_photo_modal == quantity_foto_li) {
+    //                 index_photo_modal = 0;
+    //             }
+    //         }
+    //         var indexModalPhoto = index_photo_modal + 1;
+    //         $("#indexCountModal").html(indexModalPhoto);
+    //         make_modal_slider();
+    //     }
+    // });
 
     // Лайк-Дислйк
     $(".modal_photo_like>div").on("click", function() {
@@ -273,40 +204,42 @@ $(document).ready(function() {
             $("#albums_right").hide();
         }
     });
+
 });
 
-function ajaxGallery(section, album, page, newUl, newAlbum, newFoto) {
-    var f = function() {
-        var ajax_url = 'album_photo_list',
-            ajax_data,
-            state = "";
+function ajaxGallery(section, album, page, newUl, newAlbum, newFoto, urlRequest) {
+    var ajax_url = urlRequest,
+        ajax_data,
+        state = "";
 
-        if (!album && !page) {
-            ajax_data = { "section": section_name };
-        } else if (!section && !page) {
-            ajax_data = { "album_id": album_id };
-        } else if (!section && page && album) {
-            ajax_data = { "album_id": album_id, "page": page };
-        } else if (section && page && !album) {
-            ajax_data = { "section": section_name, "page": page };
-        }
+    if (!album && !page) {
+        ajax_data = { "section": section };
+    } else if (!section && !page) {
+        ajax_data = { "album_id": album };
+    } else if (!section && page && album) {
+        ajax_data = { "album_id": album, "page": page };
+    } else if (section && page && !album) {
+        ajax_data = { "section": section, "page": page };
+    }
 
-        if (album_id != "all") ajax_data = ["album_id"] = album_id;
+    // if (album_id != "all") ajax_data = {["album_id"] = album_id};
 
-        $.ajax({
-            url: ajax_url,
-            data: ajax_data,
-            dataType: "json",
-            success: function(data) {
-                if (newAlbum) {
-                    var json_request_albums = data['albums'];
-                    var albums_count_block = $('.quantity_album');
-                    albums_count_block.html(json_request_albums.length + " альбомов");
-                    $("#albumsMobile").html("(" + json_request_albums.length + ")");
-                    var albums_container = $('.list_albums');
-                    insert_data = ""
-                    $.each(json_request_albums, function(idx, obj) {
-                        insert_data += `
+    $.ajax({
+        url: ajax_url,
+        data: ajax_data,
+        dataType: "json",
+        success: function(data) {
+            if (newAlbum) {
+                var json_request_albums = data['albums'];
+                var albums_count_block = $('.quantity_album');
+                albums_count_block.html(json_request_albums.length + " альбомов");
+                $("#albumsMobile").html("(" + json_request_albums.length + ")");
+                var albums_container = $('.list_albums');
+                insert_data = ""
+                $.each(json_request_albums, function(idx, obj) {
+                    var lastDate = 212;
+                    // "" + getDate(obj["updated"]) + " " + getMonth(obj["updated"]) + " " + getFullYear(obj["updated"]);
+                    insert_data += `
                         <div class="album_previews" id="album_id_` + obj.id + `">
                             <section class="album_previews_img">
                                 <img src="` + obj.image + `" class='imgAlbumCover imgUser' alt="" />
@@ -328,63 +261,60 @@ function ajaxGallery(section, album, page, newUl, newAlbum, newFoto) {
                                     </figure>
                                 </div>
                                 <time>
-                                    ` + obj.photos_time + `
+                                    ` + lastDate + `
                                 </time>
                             </section>
                         </div>
                     `
-                    });
-                    albums_container.html(insert_data);
-                }
-                var content = $('#list_src_slaider'),
-                    insert_data = foto_tile = "",
-                    json_request_photos = data['photo_list'];
-
-                $.each(json_request_photos, function(idx, obj) {
-                    obj_comments = obj.comments;
-                    list_li += `
-                        <li>
-                            <span class="photo_url">` + obj.image + `</span>
-                            <span class="count_of_comments">` + obj_comments.length + `</span>
-                            <span class="photo_album_title">` + obj.album_title + `</span>
-                            <span class="photo_positive_likes">` + obj.positive_likes.length + `</span>
-                            <span class="photo_negative_likes">` + obj.negative_likes.length + `</span>
-                            <span class="photo_id">` + obj.data_id + `</span>
-                            <span class="photo_page">` + obj.data_page + `</span>
-                         </li>
-                     `;
-
-                    if (newFoto) {
-                        foto_tile += `
-                        <div class="photo_row item">
-                            <img src="` + obj.image + `" alt="" class="imgTile" 
-                            data-id="` + obj.data_id + `" data-page="` + obj.data_page + `"
-                            data-toggle="modal" data-target="#slaider_modal">
-                        </div>
-                    `;
-                    }
-
                 });
-                if (newUl) {
-                    content.html(insert_data);
-                } else {
-                    content.html(insert_data);
-                }
-
-                make_slider();
-            },
-            error: function(xhr, status, error) {
-                // console.log(error, status, xhr);
+                albums_container.html(insert_data);
             }
-        });
-    }
-    return f()
-}
+            var json_request_photos = data['photo_list'];
+            if (!ListPhotos.hasOwnProperty(newUl)) {
+                var arr = [];
+                $.each(json_request_photos, function(idx, obj) {
+                    arr.push({
+                        "urlObj": obj.image,
+                        "idObj": obj.id,
+                        "likeObj": obj.positive_likes,
+                        "dislikeObj": obj.negative_likes.length,
+                        "pageObj": obj.data_page,
+                        "lengthComObj": 123,
+                        "albumObj": obj.album_title
+                    })
+                });
+            }
 
-$("#list").imagesLoaded(function() {
-    $("#list").masonry('reloadItems');
-    $("#list").masonry('layout');
-});
+            ListPhotos[newUl] = arr;
+
+            if (newFoto) {
+                var foto_tile = "",
+                    $content = $('#list');
+                for (var i = 0; i < 9; i++) {
+                    var urlTile = ListPhotos[newUl][i].urlObj,
+                        idTile = ListPhotos[newUl][i].urlObj,
+                        dataPage = ListPhotos[newUl][i].urlObj;
+                    foto_tile += `
+                                <div class="photo_row item">
+                                    <img src="` + urlTile + `" alt="" class="imgTile" 
+                                    data-id="` + idTile + `" data-page="` + dataPage + `"
+                                    data-toggle="modal" data-target="#slaider_modal">
+                                </div>
+                            `;
+                }
+                $content.append(foto_tile);
+                $("#list").imagesLoaded(function() {
+                    $("#list").masonry('reloadItems');
+                    $("#list").masonry('layout');
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            // console.log(error, status, xhr);
+        }
+    });
+
+}
 
 
 
@@ -393,7 +323,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
         sURLVariables = sPageURL.split('&'),
         sParameterName,
         i;
-
     for (i = 0; i < sURLVariables.length; i++) {
         sParameterName = sURLVariables[i].split('=');
 
@@ -412,95 +341,105 @@ function isEmpty(obj) {
     return true;
 }
 
-var ListPhotos = {
-    
-}
-
-
-function slider(counterPage, resetIndexPhoto) {
-    try {
-        ListPhotos[page][n]
-        indexPhoto++
-    } catch (e) {
-        page += counterPage;
-        n = resetIndexPhoto;
-        if (!ListPhotos.hasOwnProperty(prop)) ajaxGallery(section, album, page, newUl, false, false);
-        return slider(counterPage, resetIndexPhoto)
+function slider(counterPage, resetIndexPhoto, indexPhoto, deadline) {
+    indexPhoto++;
+    console.log(indexPhoto)
+    if (indexPhoto > 8) {
+        counterPage += counterPage;
+        if (counterPage < 1 || counterPage > 5) counterPage = deadline;
+        indexPhoto = resetIndexPhoto;
+        var section_name = $("#sectionGallery").children("li").eq(0).text().trim();
+        var urlReq = 'slider_photo_list';
+        
+        if (!ListPhotos.hasOwnProperty(counterPage)) {
+            ajaxGallery(section_name, undefined, undefined, counterPage, false, false, urlReq);
+        }
+        return makeSlider(counterPage, indexPhoto)
+    } else {
+        return makeSlider(counterPage, indexPhoto)
     }
 }
 
 function makeSlider(page, n) {
-    var objectImg = ListPhotos[page][n],
-        urlImg = objectImg["urlObj"],
-        id_img = objectImg["idObj"],
-        like = objectImg["likeObj"],
-        dislike = objectImg["dislikeObj"],
-        pageImg = objectImg["pageObj"],
-        length_comment = "";
-        number = (pageImg - 1) * 9 + n + 1;
-    var $img = $("#imgSlider");
-    $img.attr({
-        href: urlImg,
-        data - page: pageImg,
-        data - id: id_img
-    });
-    $("#indexCount").html(number)
-    $("#likeSlider").children(".votes").html(like);
-    $("#dislikeSlider").children(".votes").html(dislike);
-    makeComments(id_img, 0);
-    
-    var $blComments = $("#comments_photo_slider").find(".not_comments"),
-        $blWithoutCom = $("#comments_photo_slider").find(".user_comment");
-    if (lengthComment) {
-        $blComments.css({ "display": "flex" });
-        $blWithoutCom.hide()
-    } else {
-        $blComments.css({ "display": "none" });
-        $blWithoutCom.show();
+    try {
+        var objectImg = ListPhotos[page][n],
+            urlImg = objectImg["urlObj"],
+            id_img = objectImg["idObj"],
+            like = objectImg["likeObj"],
+            dislike = objectImg["dislikeObj"],
+            pageImg = page,
+            length_comment = objectImg["lengthComObj"],
+            numberFoto = (pageImg - 1) * 9 + parseInt(n) + 1,
+            $img = $("#imgSlider");
+        $img.attr({
+            "src": urlImg,
+            "data-page": pageImg,
+            "data-id": id_img
+        });
+        $img.attr("href", urlImg)
+        var $blComments = $("#comments_photo_slider").find(".not_comments"),
+            $blWithoutCom = $("#comments_photo_slider").find(".user_comment");
+        if (length_comment) {
+            $blComments.css({ "display": "flex" });
+            $blWithoutCom.hide()
+        } else {
+            $blComments.css({ "display": "none" });
+            $blWithoutCom.show();
+        }
+        $("#indexCount").html(numberFoto)
+        $("#likeSlider").children(".votes").html(like);
+        $("#dislikeSlider").children(".votes").html(dislike);
+        $("#sumCommentSlider").html(length_comment);
+        // makeComments(id_img, 0);
+    } catch (e) {
+        $(document).ajaxStop(function() {
+            return makeSlider(page, n);
+        });
     }
 }
 
-function makeComments(albumId, page) {
-    $.ajax({
-        url: '/gallery/photo/comments',
-        data: { "id_img": albumId, "p": page },
-        dataType: "json",
-        success: function(data) {
-            length_comment = data.length - 1;
-            var commentsHtml = "";
-            for ( var i = commentsHtml ; i <= 0; i++ ) {
-                commetId = data[i];
-                dateComment = "" + getDate(commetId["timestamp"]) + " " + getMonth(commetId["timestamp"]) + " " + getFullYear(commetId["timestamp"]);
-                comments += `
-                    <div class="blockquote">
-                        <a href="#">
-                            <div class="coments_author containerImgUser">
-                                <img src="` + commetId["user"]["avatar"] + `" alt="" class="imgUser">
-                            </div>
-                        </a>
-                        <div class="coment_author_time">
-                            <a href="#">
-                                ` + commetId["user"]["first_name"]  + ` ` + commetId["user"]["last_name"]  `
-                            </a>
-                            <p>` + dateComment + `</p>
-                        </div>
-                        <p>` + commetId["content"] + `</p>
-                    </div>
-                    
-                `
-            }
+// function makeComments(albumId, page) {
+//     $.ajax({
+//         url: '/gallery/photo/comment',
+//         data: { "id_img": albumId, "p": page },
+//         dataType: "json",
+//         success: function(data) {
+//             length_comment = data.length - 1;
+//             var commentsHtml = "";
+//             for (var i = commentsHtml; i <= 0; i++) {
+//                 commetId = data[i];
+//                 dateComment = "" + getDate(commetId["timestamp"]) + " " + getMonth(commetId["timestamp"]) + " " + getFullYear(commetId["timestamp"]);
+//                 comments += `
+//                     <div class="blockquote">
+//                         <a href="#">
+//                             <div class="coments_author containerImgUser">
+//                                 <img src="` + commetId["user"]["avatar"] + `" alt="" class="imgUser">
+//                             </div>
+//                         </a>
+//                         <div class="coment_author_time">
+//                             <a href="#">
+//                                 ` + commetId["user"]["first_name"] + ` ` + commetId["user"]["last_name"]
+//                 `
+//                             </a>
+//                             <p>` + dateComment + `</p>
+//                         </div>
+//                         <p>` + commetId["content"] + `</p>
+//                     </div>
+//                 `
+//                 $(".all_comment_for_photo").append(comments)
+//             }
 
-        }
-        error: function(xhr, status, error) {
-            // console.log(error, status, xhr);
-        }
-    });
-}
+//         }
+//         error: function(xhr, status, error) {
+//             // console.log(error, status, xhr);
+//         }
+//     });
+// }
 
-$(document).on('click', '.block_like', function(){
-        input = $(this).parent().parent().find("#id_content");
-        photo_id = 1;//input.attr("parent_id");
-        type = 0;
+$(document).on('click', '.block_like', function() {
+    input = $(this).parent().parent().find("#id_content");
+    photo_id = 1; //input.attr("parent_id");
+    type = 0;
     $.ajax({
         url: '/likes/photo/modify/',
         data: {
@@ -516,7 +455,6 @@ $(document).on('click', '.block_like', function(){
             if (xhr.status === 409) {
                 alert("Error in comment adding!")
             }
-            //            console.log(error, status, xhr);
         }
     });
-})
+});

@@ -11,7 +11,8 @@
                 <div class="head_nav">
                     <ul class="nav_ul" id="sectionGallery">
                         {% for section in sections %}
-                        <li class="reset_variable">> {{ section.section_title }}
+                        <li> 
+                            {{ section.section_title }}
                         </li>
                         {% endfor %}
                     </ul>
@@ -34,15 +35,13 @@
                         <div id="container_img_in_slaider">
                             <img src="" id="imgSlider">
                         </div>
-                        <div class="slider_click" id="area_for_left_arrow_slaider">
+                        <div class="slider_click area_for_left_arrow" id="area_for_left_arrow_slaider">
                             <i class="fa fa-chevron-left slider_click" id="icon_left" aria-hidden="true"></i>
                         </div>
-                        <div class="slider_click" id="area_for_right_arrow_slaider">
+                        <div class="slider_click area_for_right_arrow" id="area_for_right_arrow_slaider">
                             <i class="fa fa-chevron-right slider_click" id="icon_right" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <ul id="list_src_slaider">
-                    </ul>
                     <!-- Право-лево фото -->
                     <div class="footer_slaider">
                         <div class="slaider_footer_left">
@@ -103,7 +102,6 @@
                             {% include "send_comment.html" %}
                         </div>
                     </div>
-                    <!-- Show/hide on click -->
                 </div>
                 <div class="selected_album">
                     <div class="quantity_album"></div>
@@ -142,18 +140,13 @@
                         <!-- Modal content-->
                         <div class="modal_photos">
                             <div id="flex_container_img_modal">
-                                <div id="beforeLoadModal"></div>
                                 <img src="" alt="">
-                            </div>
-                            <!-- Право-лево фото -->
-                            <div class="area_for_left_arrow modal_slider_click" id="modal_left">
-                                <div class="container_arow">
-                                    <i class="fa fa-chevron-left modal_slider_click" id="modal_left_icon" aria-hidden="true"></i>
+                                <!-- Право-лево фото -->
+                                <div class="area_for_left_arrow modal_slider_click" id="modal_left">
+                                    <i class="fa fa-chevron-left " id="modal_left_icon" aria-hidden="true"></i>
                                 </div>
-                            </div>
-                            <div class="area_for_right_arrow modal_slider_click" id="modal_right">
-                                <div class="container_arow">
-                                    <i class="fa fa-chevron-right modal_slider_click" aria-hidden="true" id="modal_right_icon"></i>
+                                <div class="area_for_right_arrow modal_slider_click" id="modal_right">
+                                    <i class="fa fa-chevron-right" aria-hidden="true" id="modal_right_icon"></i>
                                 </div>
                             </div>
                             <div class="modal_footer">
