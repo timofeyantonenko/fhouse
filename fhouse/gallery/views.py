@@ -27,6 +27,7 @@ def get_section_information(request):
     photos = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-updated')
     paginator = Paginator(photos, count_of_photo_by_pagination)  # Show n posts per page
     photos = paginator.page(page)
+    print("count is: ", albums[0].likes)
     photo_serializer = AlbumPhotoSerializer(photos, many=True, context={'request': request})
     album_serializer = SectionAlbumSerializer(albums[
                                               :count_of_albums_to_load], many=True, context={'request': request})

@@ -3,9 +3,19 @@ from .models import AlbumPhoto, SectionAlbum, GallerySection
 
 
 class SectionAlbumSerializer(serializers.ModelSerializer):
+    # photos = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    photos_count = serializers.SerializerMethodField()
+    positive_likes_count = serializers.SerializerMethodField()
+
     class Meta:
         model = SectionAlbum
         fields = '__all__'
+
+    def get_photos_count(self, obj):
+        return obj.photos.count()
+
+    def get_positive_likes_count(self, obj):
+        return obj.positive_likes.count()
 
 
 class GallerySectionSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,15 +25,27 @@ class GallerySectionSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class AlbumPhotoSerializer(serializers.ModelSerializer):
-    comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    positive_likes = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    negative_likes = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    # comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    comments_count = serializers.SerializerMethodField()
+    positive_likes_count = serializers.SerializerMethodField()
+    negative_likes_count = serializers.SerializerMethodField()
+    # positive_likes = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    # negative_likes = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
     album_title = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
     # photo_album = serializers.RelatedField(read_only=True)
 
     class Meta:
         model = AlbumPhoto
         fields = '__all__'
+
+    def get_comments_count(self, obj):
+        return obj.comments.count()
+
+    def get_positive_likes_count(self, obj):
+        return obj.comments.count()
+
+    def get_negative_likes_count(self, obj):
+        return obj.comments.count()
 
 
 # class AlbumPhotoRelatedField(serializers.RelatedField):
