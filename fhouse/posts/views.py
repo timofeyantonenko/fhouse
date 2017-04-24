@@ -29,7 +29,7 @@ from rest_framework.response import Response
 from .forms import PostForm
 from .models import Post, UserFavoriteTags, PostTag
 
-from utils.prepare_methods import create_comment_data
+from utils.prepare_methods import create_comment
 
 
 def post_create(request):
@@ -315,10 +315,6 @@ class PostList(ListView):
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def add_comment(request):
-    parent_id = request.POST.get("parent_id")
-    content = request.POST.get("content")
-    instance = get_object_or_404(Post, id=parent_id)
-    print(parent_id, content)
-    new_comment, created = create_comment_data(request=request, content_type=instance.get_content_type,
-                                               obj_id=parent_id, content_data=content)
+    content_type = ContentType.objects.get_for_model(Post)
+    new_comment = create_comment(content_type, request)
     return Response(status=200)

@@ -81,13 +81,14 @@ textarea {
     content: 'Посмотреть больше';
 }
 
-.otherMore.moreLoading::before {
-    content: 'Загрузка...';
-}
-
+.otherMore.moreLoading,
 .otherMore.endMore {
     pointer-events: none;
     opacity: 0.5;
+}
+
+.otherMore.moreLoading::before {
+    content: 'Загрузка...';
 }
 
 .otherMore.endMore::before {
@@ -1729,28 +1730,52 @@ form [type="password"] {
 
 /*Comments*/
 
-.content_coment {
-    margin-left: 60px;
+.commentsWraper {
+    width: 100%;
+    overflow-y: auto;
+}
+
+.commentBody {
+    width: 100%;
+    display: flex;
+}
+
+
+.paginatonComments>div {
+    margin: auto;
+}
+
+.commentBody:nth-last-child(n+2) {
+    margin-bottom: 15px;
 }
 
 .coment_author_time {
-    width: 100%;
+    width: calc(100% - 60px);
     display: flex;
     flex-wrap: wrap;
+    align-items:flex-start;
+    padding-left: 10px;
 }
 
-.coment_author_time a {
-    margin-right: 5px;
+.coment_author_time h5 {
+    font-weight: 600;
+    color: #1d71b9;
+    margin:  0 5px 0 0;
+    font-size: 1.6rem;
+    line-height: 1.5;
+}
+
+.coment_author_time time {
+    margin: 0;
+    color: #7f8992;
+    font-size: 1.6rem;
+    line-height: 1.5;
 }
 
 .coment_author_time p {
-    margin: 0;
-    color: #7f8992;
+    width: 100%;
 }
 
-.coment_author_time a {
-    font-weight: 600;
-}
 
 .show_all_coment:hover {
     background: #eee;

@@ -3,6 +3,10 @@
 <script type="text/javascript" src="{% static 'js/gallery.js'  %}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
+<script type="text/javascript"> 
+   var first_name = "{{request.user.first_name|escapejs|safe}}";
+   console.log(first_name);
+</script>
 {% endblock head_extra %} {% block content %}
 <main>
     <div id="containner_all_gallery">
@@ -11,7 +15,7 @@
                 <div class="head_nav">
                     <ul class="nav_ul" id="sectionGallery">
                         {% for section in sections %}
-                        <li> 
+                        <li>
                             {{ section.section_title }}
                         </li>
                         {% endfor %}
@@ -79,7 +83,8 @@
             <div id="albums_right">
                 <!-- Комментарии -->
                 <div class="head_comment_slider">
-                    <p>Комментарии <span id="sumCommentSliderRight"></span> </p><i class="fa fa-times" aria-hidden="true"></i></span>
+                    <p>Комментарии <span id="sumCommentSliderRight"></span> </p>
+                    <i class="fa fa-times" aria-hidden="true"></i>
                 </div>
                 <div id="comments_photo_slider">
                     <div class="block_comments">
@@ -91,13 +96,13 @@
                             <div class="show_user_not_comments">Будьте первым, кто оставит комментарий к этой фотографии.</div>
                         </div>
                         <!-- If there are several comments -->
-                        <div class="user_comment">
-                            <div class="comments_base2" id="without_paddin">
-                                <div class="all_comment_for_photo">
-                                    {% include "comment_thread.html" %}
-                                </div>
+                        <div class="commentsWraper">
+                            <div class="otherMore" id="loadCommentsSlider" data-page="2">
+                            </div>
+                            <div id="all_comment_slider">
                             </div>
                         </div>
+                        
                         <div class="add_comments">
                             {% include "send_comment.html" %}
                         </div>
@@ -120,14 +125,13 @@
                 </span>
                 <span>
                     <p id="lastTimeFoto">
-                        <!-- 28 october 1995 -->
                     </p>
                 </span>
             </div>
             <div id="wrapper">
                 <div class="flex_container_albums" id="list">
                 </div>
-                <div class="more_photo otherMore" data-page="2">
+                <div class="more_photo otherMore" id="loadTile" data-page="2">
                 </div>
             </div>
             <!-- Слайдер в модальном окне для фотографий с плитки -->
