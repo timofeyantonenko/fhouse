@@ -4,9 +4,9 @@
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
 <!-- Таблица рейтинга прогнозистов -->
-<main>
+<main class="mainContainer">
     <section class="tableAllusers">
-        <div calss="table_rating_forecasters" id="table_rat_forcas">
+        <div calss="table_rating_forecasters all_team_table" id="table_rat_forcas">
             <div class="head_table">
                 <div class="table_name">Рейтинг прогнозистов</div>
                 <div class="nav_table">
@@ -15,32 +15,25 @@
                     <div class="one_division_nav" id="week_rating">Сезон</div>
                 </div>
             </div>
-            <div class="body_table">
-                <!-- Подсказки таблица  -->
-                <div class="time_rating">
-                    <div class="all_team_table">
-                        <div class="one_position">
-                            <div class="position">Поз</div>
-                            <div class="forecasters_name">Имя</div>
-                            <div class="forecasters_pts">Очки</div>
-                        </div>
-                        <div id="listForecasters">
-                        </div>
-                        <div id="loader" class="loaderGif">
-                            <img src="../../static/img/black_hole_loader.gif" alt="">
-                        </div>
-                        <footer>
-                            <aside id="paginationTable">
-                                <ul>
-                                    <li id="prevPagination">-</li>
-
-                                    
-                                    <li id="nextPagination">+</li>
-                                </ul>
-                            </aside>
-                        </footer>
-                    </div>
+            <div class="all_team_table">
+                <div class="one_position">
+                    <div class="position">Поз</div>
+                    <div class="forecasters_name">Имя</div>
+                    <div class="forecasters_pts">Очки</div>
                 </div>
+                <main id="listForecasters">
+                </main>
+                <footer id="tableLoadForecasters">
+                    <img src="../../static/img/loadGallery.gif" alt="loader">
+                </footer>
+                <aside>
+                    <div id="paginationTable">
+                        <ul>
+                            <li id="prevPagination">-</li>
+                            <li id="nextPagination">+</li>
+                        </ul>
+                    </div>
+                </aside>
             </div>
         </div>
     </section>

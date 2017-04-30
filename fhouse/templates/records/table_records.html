@@ -6,7 +6,7 @@
 <link rel="stylesheet" href='{% static "css/recordTable.css" %}'>
 <link rel="stylesheet" href='{% static "css/record.css" %}'>
 <script src="{% static 'js/record.js'  %}"></script> {% endblock head_extra %} {% block content %}
-<main>
+<main class="mainContainer">
     <!-- Table Record -->
     <article class=" tableInfo ">
         <header class="search_s_head">
@@ -19,7 +19,7 @@
             </aside>
         </header>
         <!-- Таблица рекорда -->
-        <table class="table hiddenTable mainTable">
+        <table class="table mainTable">
             <thead class="headTable">
                 <tr>
                     <th class="thTableRecord">#</th>

@@ -1,218 +1,166 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/gallery_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/gallery.js'  %}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
-<script type="text/javascript"> 
-   var first_name = "{{request.user.first_name|escapejs|safe}}";
-   console.log(first_name);
+<script type="text/javascript">
+var first_name = "{{request.user.first_name|escapejs|safe}}",
+    last_name = "{{request.user.first_name|escapejs|safe}}",
+    avatar_user = "{{request.user.avatar.url|escapejs|safe}}";
 </script>
 {% endblock head_extra %} {% block content %}
-<main>
-    <div id="containner_all_gallery">
-        <div class="container_slaider_albums" id="slaider_and_albums">
-            <div id="slaider_foto">
-                <div class="head_nav">
-                    <ul class="nav_ul" id="sectionGallery">
+<style id="styleArticle"></style>
+<main class="mainContainer">
+    <article id="slider_slider" class="slider">
+        <main class="mainSlider">
+            <header class="navigation_slider mobileEvent">
+                <nav id="nav_section">
+                    <ul>
                         {% for section in sections %}
                         <li>
                             {{ section.section_title }}
                         </li>
                         {% endfor %}
                     </ul>
-                    <div id="sectionMobile" class="responsiveNavGallery">
-                        <p>Секции</p>
-                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                        <!-- <i class="fa fa-angle-right" aria-hidden="true"></i> -->
+                </nav>
+                <aside class="section_title">
+                    <h3>Секции</h3>
+                    <span id="section_mobile" class="glyphicon glyphicon-menu-hamburger mobile_menu" aria-hidden="true"></span>
+                    <!-- glyphicon glyphicon-remove -->
+                </aside>
+            </header>
+            <article class="img_slider">
+                <img src="" alt="" class="imgSlider">
+                <div class="progressPhoto">
+                    <img src="../../static/img/loadGallery.gif" alt="loader">
+                </div>
+                <div class="carousel" id="carousel_slider_slider_left" data-count="-1" data-reset="-1" data-obj="0">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </div>
+                <div class="carousel" id="carousel_slider_slider_right" data-count="1" data-reset="9" data-obj="0">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </div>
+            </article>
+            <footer class="slider_footer">
+                <section class="photo_info">
+                    <h3></h3>
+                    <ul class="index_photo">
+                        <li></li>
+                        <li>из</li>
+                        <li></li>
+                    </ul>
+                </section>
+                <section class="mark_info">
+                    <div class="open_modal" data-toggle="modal" data-target="#slaider_modal">
+                        <h3>Комментарии:</h3>
+                        <span class="commes_photo_slider">4</span>
                     </div>
-                    <div id="mobileAlnbumShow" class="responsiveNavGallery">
-                        <p>Альбомы</p>
-                        <span style="margin-left: 5px">
-                            <p id="albumsMobile"></p>
-                        </span>
-                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                    <div class="mark_btn block_like" data-like="1">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        <div class="votes"></div>
                     </div>
-                </div>
-                <div class="dialog_slaider">
-                    <!-- div.img_slaider -->
-                    <div id="flex_container_img_slaider">
-                        <div id="container_img_in_slaider">
-                            <img src="" id="imgSlider">
-                        </div>
-                        <div class="slider_click area_for_left_arrow" id="area_for_left_arrow_slaider">
-                            <i class="fa fa-chevron-left slider_click" id="icon_left" aria-hidden="true"></i>
-                        </div>
-                        <div class="slider_click area_for_right_arrow" id="area_for_right_arrow_slaider">
-                            <i class="fa fa-chevron-right slider_click" id="icon_right" aria-hidden="true"></i>
-                        </div>
+                    <div class="mark_btn block_dislike" data-like="0">
+                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                        <div class="votes"></div>
                     </div>
-                    <!-- Право-лево фото -->
-                    <div class="footer_slaider">
-                        <div class="slaider_footer_left">
-                            <div class="album_slaider">
-                                Название альбома
-                            </div>
-                            <div class="countPhoto">
-                                <p id="indexCount">1</p>
-                                <p>из</p>
-                                <p id="sumCount">34</p>
-                            </div>
-                        </div>
-                        <div class="slaider_footer_right">
-                            <div class="button_show_comments">
-                                <span class="commentItem">
-                                    <p>Комментарии</p>
-                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                </span>
-                                <span id="sumCommentSlider"></span>
-                            </div>
-                            <div class="slaider_photo_like">
-                                <div class="block_like" id="likeSlider">
-                                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                    <div class="votes"></div>
-                                </div>
-                                <div class="block_dislike" id="dislikeSlider">
-                                    <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                    <div class="votes"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="albums_right">
-                <!-- Комментарии -->
-                <div class="head_comment_slider">
-                    <p>Комментарии <span id="sumCommentSliderRight"></span> </p>
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </div>
-                <div id="comments_photo_slider">
-                    <div class="block_comments">
-                        <!-- if there are not comments -->
-                        <div class="not_comments">
-                            <div class="icon_comment">
-                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                            </div>
-                            <div class="show_user_not_comments">Будьте первым, кто оставит комментарий к этой фотографии.</div>
-                        </div>
-                        <!-- If there are several comments -->
-                        <div class="commentsWraper">
-                            <div class="otherMore" id="loadCommentsSlider" data-page="2">
-                            </div>
-                            <div id="all_comment_slider">
-                            </div>
-                        </div>
-                        
-                        <div class="add_comments">
-                            {% include "send_comment.html" %}
-                        </div>
-                    </div>
-                </div>
-                <div class="selected_album">
-                    <div class="quantity_album"></div>
-                    <div class="arrow-right"><i class="fa fa-times" aria-hidden="true"></i></div>
-                </div>
-                <div class="color_line_before_album"></div>
-                <div class="list_albums">
-                </div>
-            </div>
+                </section>
+            </footer>
+        </main>
+        <aside class="albums mobileEventAlbums">
+            <header>
+                <h3>Альбомы: <span id="albums_section"></span></h3>
+                <span id="album_mobile" class="glyphicon glyphicon-menu-hamburger mobile_menu" aria-hidden="true"></span>
+            </header>
+            <main id="albumsContainer">
+            </main>
+        </aside>
+    </article>
+    <article class="tile_albums_foto">
+        <header>
+            <h2>Футбольчик</h2> &nbsp;|&nbsp;
+            <time>23 апр 2014</time>
+        </header>
+        <main id="tile_img">
+        </main>
+        <div id="progressTile">
+            <img src="../../static/img/loadGallery.gif" alt="loader">
         </div>
-        <div class="tile_albums_foto">
-            <div class="section_album">
-                <span class="color_line_album"></span>
-                <span class="flex">
-                    <p id="maneAlbumSelect"></p> &nbsp;|&nbsp;
-                </span>
-                <span>
-                    <p id="lastTimeFoto">
-                    </p>
-                </span>
+        <footer>
+            <div class="more_photo otherMore" id="loadTile" data-page="1">
             </div>
-            <div id="wrapper">
-                <div class="flex_container_albums" id="list">
-                </div>
-                <div class="more_photo otherMore" id="loadTile" data-page="2">
-                </div>
-            </div>
-            <!-- Слайдер в модальном окне для фотографий с плитки -->
-            <div id="slaider_modal" class="modal" role="dialog">
-                <div id="closeModalDialog">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </div>
-                <div class="modal-dialog">
-                    <div class="flex_modal">
-                        <!-- Modal content-->
-                        <div class="modal_photos">
-                            <div id="flex_container_img_modal">
-                                <img src="" alt="">
-                                <!-- Право-лево фото -->
-                                <div class="area_for_left_arrow modal_slider_click" id="modal_left">
-                                    <i class="fa fa-chevron-left " id="modal_left_icon" aria-hidden="true"></i>
-                                </div>
-                                <div class="area_for_right_arrow modal_slider_click" id="modal_right">
-                                    <i class="fa fa-chevron-right" aria-hidden="true" id="modal_right_icon"></i>
-                                </div>
-                            </div>
-                            <div class="modal_footer">
-                                <div class="slaider_footer_left">
-                                    <div class="album_slaider">Название альбома
-                                        <span id="number_photo">1</span> <span>of</span> <span id="quantity_photo_in_album">42</span>
-                                    </div>
-                                    <div class="countPhotoModal">
-                                        <p id="indexCountModal">1</p>
-                                        <p>из</p>
-                                        <p id="sumCountModal">34</p>
-                                    </div>
-                                </div>
-                                <div class="slaider_footer_right">
-                                    <div class="button_show_comments">
-                                        <span class="commentItem">
-                                           <p>Комментарии</p>
-                                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                        </span>
-                                        <span id="modalCountComment"></span>
-                                    </div>
-                                    <div class="slaider_photo_like">
-                                        <div class="block_like">
-                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                            <div class="votes"></div>
-                                        </div>
-                                        <div class="block_dislike">
-                                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                            <div class="votes"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="comments_photo_modal">
-                            <div class="block_comments">
-                                <!-- if there are not comments -->
-                                <div class="not_comments">
-                                    <div class="icon_comment">
-                                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="show_user_not_comments">Будьте первым, кто оставит комментарий к этой фотографии.
-                                    </div>
-                                </div>
-                                <!-- If there are several comments -->
-                                <div class="user_comment">
-                                    <div class="comments_base2" id="without_paddin">
-                                        <div class="all_comment_for_photo">
-                                            {% include "comment_thread.html" %}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="add_comments">
-                                    {% include "send_comment.html" %}
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Конец слайдера  модльном окне -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        </footer>
+    </article>
 </main>
+<!-- Слайдер в модальном окне для фотографий с плитки -->
+<div id="slaider_modal" class="modal" role="dialog">
+    <div id="closeModalDialog" data-dismiss="modal">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <article id="slider_modal" class="slider">
+        <main class="mainSlider">
+            <article class="img_slider">
+                <img src="" alt="" class="imgSlider">
+                <div class="progressPhoto">
+                    <img src="../../static/img/loadGallery.gif" alt="loader">
+                </div>
+                <div class="carousel" id="carousel_slider_modal_left" data-count="-1" data-reset="-1" data-obj="1">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </div>
+                <div class="carousel" id="carousel_slider_modal_right" data-count="1" data-reset="9" data-obj="1">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </div>
+            </article>
+            <footer class="slider_footer">
+                <section class="photo_info">
+                    <h3></h3>
+                    <ul class="index_photo">
+                        <li></li>
+                        <li>из</li>
+                        <li></li>
+                    </ul>
+                </section>
+                <section class="mark_info">
+                    <div class="open_modal" disable>
+                        <h3>Комментарии:</h3>
+                        <span class="commes_photo_slider"></span>
+                    </div>
+                    <div class="mark_btn block_like" data-like="1">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        <div class="votes"></div>
+                    </div>
+                    <div class="mark_btn block_dislike" data-like="0">
+                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                        <div class="votes"></div>
+                    </div>
+                </section>
+            </footer>
+        </main>
+        <aside class="comments">
+            <header>
+                <div class="img_author">
+                    <img src="http://images.performgroup.com/di/library/GOAL_INTERNATIONAL/c2/97/hd-lionel-messi-barcelona_5toanmhsh09f11z1b8ucasj4p.jpg?t=1838656488&w=620&h=430" alt="author_football_house" class="imgUser">
+                </div>
+                <aside>
+                    <h3 class="title_photo_author">Василий Уткин</h3>
+                    <time class="time_add_photo"></time>
+                </aside>
+            </header>
+            <section>
+                <div class="comments_photo">
+                    <h3>Комментарии: </h3>
+                    <span class="commes_photo_slider"></span>
+                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                </div>
+                <p class="discription_photo"></p>
+            </section>
+            <main id="comment_slider_slider">
+                <div class="more_photo otherMore" id="load_coments" data-page="1">
+                </div>
+                <div class="comments_modal"></div>
+            </main>
+            <footer>
+                {% include "send_comment.html" %}
+            </footer>
+        </aside>
+    </article>
+</div>
 {% endblock content %}

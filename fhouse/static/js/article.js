@@ -11,13 +11,14 @@ if (!String.format) {
 }
 
 $(document).ready(function() {
-    massonryEffect(0);
-    $("#list").imagesLoaded(function() {
-        $('#list').masonry({
-            itemSelector: '.item',
-            transitionDuration: 0
-        });
+
+    add_effect(0);
+
+    $('#list').masonry({
+        itemSelector: '.item',
+        transitionDuration: 0
     });
+
     var section = getUrlParameter('section');
     if (typeof section != 'undefined') {
         var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
@@ -34,7 +35,7 @@ $(document).ready(function() {
 
     //tab click
     $("#navAjax").children("li").click(function(e) {
-        massonryEffect(0)
+        add_effect(0);
         $(".more_article").removeClass("moreLoading").removeClass("endMore");
         if ($(this).hasClass('active_nav_ul')) return;
         $(".tab ul li").removeClass('activeRecords');
@@ -44,18 +45,18 @@ $(document).ready(function() {
     });
 
     $(".more_article").click(function(e) {
-        massonryEffect(1)
+        add_effect(1);
         $(this).addClass("moreLoading");
         ajaxPage(true);
     });
 
-    $(window).scroll(function() {
-        if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-            massonryEffect(1)
-            $(".more_article").addClass("moreLoading");
-            ajaxPage(true);
-        }
-    });
+    // $(window).scroll(function() {
+    //     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    //         add_effect(1);
+    //         $(".more_article").addClass("moreLoading");
+    //         ajaxPage(true);
+    //     }
+    // });
 
 });
 
@@ -92,28 +93,33 @@ function ajaxPage(pageCount) {
     return f();
 }
 
-
+function add_effect(a) {
+    var styleHtml = `
+        #list .donaMassonry {
+            -webkit-transition-duration: ` + a + `s;
+            -moz-transition-duration: ` + a + `s;
+            -o-transition-duration: ` + a + `s;
+            transition-duration: ` + a + `s;
+        }
+    `
+    $("#mainStyle").html(styleHtml);
+}
 
 function massonryReload() {
-    $("#list").imagesLoaded(function() {
+    $("#progressTile").show();
+    $("#list").find(".containerImgNews").children("img").imagesLoaded(function() {
         $("#list").masonry('reloadItems');
         $("#list").masonry('layout');
+    }).done(function(instance) {
+        var newlength = instance['progressedCount'],
+            lengthItem = $("#list").children(".item").length;
+        for (var i = lengthItem - newlength; i < lengthItem; i++) {
+            $("#list").children(".item").eq(i).children("a").addClass("donaMassonry");
+        };
+        $("#progressTile").hide();
     });
 }
 
-function massonryEffect(a) {
-    $("#styleArticle").empty().html(
-        `
-        .one_read_article {
-            -webkit-animation: fadein ` + a + `s ease forwards; 
-       -moz-animation: fadein ` + a + `s ease forwards;
-        -ms-animation: fadein ` + a + `s ease forwards; 
-         -o-animation: fadein ` + a + `s ease forwards; 
-            animation: fadein ` + a + `s ease forwards;
-        }
-        `
-    )
-}
 
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),

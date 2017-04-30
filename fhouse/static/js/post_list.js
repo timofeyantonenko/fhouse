@@ -112,6 +112,7 @@ $(document).ready(function() {
             data: { 'slug': like_slug, 'type': 0 },
             dataType: "json",
             success: function(data, textStatus, xhr) {
+                console.log(data)
                 var check_list = data['add_result']
                 for (var i = 0; i < check_list.length; i++) {
                     var operation_result = check_list[i];

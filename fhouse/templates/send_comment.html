@@ -1,17 +1,15 @@
 <div class="sendComment">
     {% if request.user.is_authenticated %}
-    <a href="#" class="authorComent">
-        <div class="coments_author containerImgUser">
-            <img src="{{ request.user.avatar.url }}" class="imgUser" alt="">
-        </div>
-    </a>
+    <div class="coments_author containerImgUser">
+        <img src="{{ request.user.avatar.url }}" class="imgUser" alt="">
+    </div>
     {% else %} {% endif %} {% if request.user.is_authenticated %}
     <form method="POST" action="." class="formSendComment"> {% csrf_token %}
         <!--<div class="forPlaceholder">-->
-            <div class="forPlaceholder">
-                <input id="id_content" parent_id="{{ instance.id }}" name="content" placeholder="Оставить комментарий..." type="text">
-            </div>
-            <!--{{ comment_form.content }}-->
+        <div class="forPlaceholder">
+            <input id="id_content" parent_id="{{ instance.id }}" name="content" placeholder="Оставить комментарий..." type="text">
+        </div>
+        <!--{{ comment_form.content }}-->
         <!--</div>-->
         <div class="sendBtn">
             <input type="submit" value="Отправить" class="btnFhouse">
