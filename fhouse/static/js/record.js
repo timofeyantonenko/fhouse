@@ -51,28 +51,30 @@ $(document).ready(function() {
 });
 
 function set_type_table() {
-    alert();
-    var $trTable = $(".tableRecord").children("tr").eq(1).children("th");
+    var $main_table = $("#tableMain"),
+        $headTable = $main_table.find(".headTable"),
+        $table = $main_table.find(".tableRecord"),
+        $trTable = $main_table.find(".tableRecord").children("tr").eq(1).children("th");
     for (var i = 2; i < 4; i++) {
         var indexTh = $(this).eq(i).index()
         if (!$trTable.find("img").attr('src')) {
             if (i == 2) {
-                $(".tableRecord").addClass("noClub")
-                $(".headTable").addClass("noClub")
+                $table.addClass("noClub")
+                $headTable.addClass("noClub")
             } else {
-                $(".tableRecord").addClass("noNational")
-                $(".headTable").addClass("noNational")
+                $table.addClass("noNational")
+                $headTable.addClass("noNational")
             }
         }
     }
-
-    if ($(".headTable").hasClass("noClub") && !$(".headTable").hasClass("noNational")) {
-        $(".headTable").children("tr").children("th").eq(1).html("Клуб")
-    } else if ($(".headTable").hasClass("noClub") && $(".headTable").hasClass("noNational")) {
-        $(".headTable").children("tr").children("th").eq(1).html("Страна")
+    if ($headTable.hasClass("noClub") && !$headTable.hasClass("noNational")) {
+        $headTable.children("tr").children("th").eq(1).html("Клуб")
+    } else if ($headTable.hasClass("noClub") && $headTable.hasClass("noNational")) {
+        $headTable.children("tr").children("th").eq(1).html("Страна")
     } else {
-        $(".headTable").children("tr").children("th").eq(1).html("Имя Фамилия")
+        $headTable.children("tr").children("th").eq(1).html("Имя Фамилия")
     }
+    $main_table.removeClass("hiddenTable");
 }
 
 function ajaxPage(pageCount) {

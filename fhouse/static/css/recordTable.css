@@ -3,6 +3,10 @@
     padding: 20px;
 }
 
+#tableMain tr>th:first-child {
+    max-width: 50px;
+}
+
 
 @media screen and (min-width: 1170px) {
     .tableInfo {
