@@ -78,9 +78,7 @@ def photo_change_like(request):
         content_type = photo.get_content_type
         likes = Like.objects.filter_by_instance(photo).filter(user=request.user)
         like_type = request.POST.get("type")
-        print(type(like_type))
         if like_type == '0':
-            print(likes)
             if not likes:
                 like = Like(content_type=content_type, object_id=photo_id, user=request.user, like=True)
                 like.save()
@@ -96,7 +94,6 @@ def photo_change_like(request):
                     like = Like(content_type=content_type, object_id=photo_id, user=request.user, like=True)
                     like.save()
         elif like_type == '1':
-            print(likes)
             if not likes:
                 like = Like(content_type=content_type, object_id=photo_id, user=request.user, like=False)
                 like.save()
@@ -112,7 +109,8 @@ def photo_change_like(request):
                     like = Like(content_type=content_type, object_id=photo_id, user=request.user, like=False)
                     like.save()
         context['add_result'] = modifying_list
-        return Response(json.dumps(context), content_type="application/json")
+        print(context)
+        return Response(context, content_type="application/json")
 
 
 class LikeVIew(TemplateView):

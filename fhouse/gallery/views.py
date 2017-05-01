@@ -196,7 +196,6 @@ def get_photo_comments(request):
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
     comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
-    print(comment_serializer)
     return Response(comment_serializer.data)
 
 
