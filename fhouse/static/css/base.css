@@ -33,8 +33,12 @@ textarea {
 .loaderGif {
     width: 100%;
     display: none;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding: 20px;
 }
 
@@ -60,8 +64,6 @@ textarea {
     border-radius: 2px;
     display: block;
     text-decoration: none;
-    -moz-transition: all 0.1s ease-out;
-    -o-transition: all 0.1s ease-out;
     -webkit-transition: all 0.1s ease-out;
     transition: all 0.1s ease-out;
 }
@@ -81,26 +83,42 @@ textarea {
 /*Users img*/
 
 .imgUser {
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     width: inherit;
     height: inherit;
-    align-self: center;
-    flex-shrink: 1;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    -ms-flex-negative: 1;
+        flex-shrink: 1;
 }
 
 .containerImgNews {
     overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .containerImgUser {
     border-radius: 100%;
     overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 
@@ -199,9 +217,14 @@ textarea {
 
 main {
     margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
     background-color: #fff;
 }
 
@@ -268,6 +291,8 @@ h1 {
 
 #menu {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     position: fixed;
     top: 0;
@@ -311,6 +336,8 @@ h1 {
 }
 
 #mainNav ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 0;
     margin: 0;
@@ -323,11 +350,15 @@ h1 {
 }
 
 #mainNav ul li a {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
     height: 100%;
     cursor: pointer;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 #menuBtn {
@@ -368,10 +399,16 @@ h1 {
     /*background-color: #aa0a0c;*/
     padding: 0 10px;
     color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     height: 100%;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     border-right: 1px solid #666;
 }
 
@@ -393,11 +430,14 @@ h1 {
 }
 
 #brend #logoItem {
-    transform: scale(0.33);
+    -webkit-transform: scale(0.33);
+            transform: scale(0.33);
     /*transform: scale(0.3 0.3) !important;*/
 }
 
 .rightMenu {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     height: 100%;
     border-left: 1px solid #666;
@@ -417,13 +457,23 @@ h1 {
         border-bottom: 1px solid #666 !important;
     }
     #mainNav {
-        flex-grow: 1;
+        -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+                flex-grow: 1;
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
         display: flex !important;
     }
     #mainNav ul li {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         border-right: 1px solid #666;
     }
     #mainNav ul li:first-child {
@@ -451,11 +501,13 @@ h1 {
         margin-right: 7px;
     }
     #mainNav li #logoItem {
-        transform: scale(0.27);
+        -webkit-transform: scale(0.27);
+                transform: scale(0.27);
         /*transform: scale(0.3 0.3) !important;*/
     }
     #logo__item--business {
-        transform: scale(0.4);
+        -webkit-transform: scale(0.4);
+                transform: scale(0.4);
         display: none;
     }
     .menu_open {
@@ -465,7 +517,9 @@ h1 {
         border-bottom: 2px solid #aa0a0c !important;
     }
     #menu {
-        justify-content: space-between;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
         height: 60px !important;
     }
     #mainNav {
@@ -482,7 +536,10 @@ h1 {
         background-color: #f0f0f0;
     }
     #mainNav ul {
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
         width: 100%;
     }
     #mainNav ul li {
@@ -491,14 +548,22 @@ h1 {
         border-bottom: 1px solid #666;
     }
     #mainNav ul li a {
-        align-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         width: 100%;
         padding: 0 20px;
     }
     #menuBtn {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
     }
     #top_profile_menu {
         top: 59px;
@@ -545,7 +610,8 @@ h1 {
     height: 34px;
     line-height: 34px;
     border-radius: 3px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
 }
 
 #LOGIN .modal-dialog {
@@ -668,7 +734,9 @@ form [type="password"] {
 .user_profile>div,
 .user_profile>i {
     margin: 0 5px;
-    align-self: center;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
 }
 
 .user_profile .fa-sign-in {
@@ -682,9 +750,14 @@ form [type="password"] {
 .user_profile {
     /*min-width: 99.5px;*/
     height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
     /*align-items: center;*/
     padding-left: 10px;
     padding-right: 10px;
@@ -705,7 +778,8 @@ form [type="password"] {
     border-top: 0 solid silver;
     width: 200px;
     padding: 4px 0px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
     display: none;
 }
 
@@ -761,8 +835,12 @@ form [type="password"] {
 /*Инфа юзер правая колонка */
 
 .img_flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     text-align: center;
 }
 
@@ -786,13 +864,18 @@ form [type="password"] {
     padding: 20px 20px 0;
     width: 100%;
     border-bottom: 0 solid silver !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .headerMain h2 {
     margin: 0 0 10px;
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     font-weight: 700;
 }
 
@@ -815,8 +898,11 @@ form [type="password"] {
     }
     .table_nav_records .tab ul {
         width: 100%;
-        flex-wrap: wrap;
-        justify-content: center;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
         height: 100%;
     }
     .table_nav_records .lineHover {
@@ -844,8 +930,11 @@ form [type="password"] {
     }
     .menu_individualNews ul {
         width: 100% !important;
-        flex-wrap: wrap;
-        justify-content: center;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
         height: auto;
     }
     .menu_individualNews .hover_menu {
@@ -873,12 +962,18 @@ form [type="password"] {
         display: none;
     }
     .user_profile {
-        align-items: center !important;
+        -webkit-box-align: center !important;
+            -ms-flex-align: center !important;
+                align-items: center !important;
     }
     .rightMenu,
     .loginScheckIn {
-        flex-grow: 1 !important;
-        align-self: center;
+        -webkit-box-flex: 1 !important;
+            -ms-flex-positive: 1 !important;
+                flex-grow: 1 !important;
+        -ms-flex-item-align: center;
+            -ms-grid-row-align: center;
+            align-self: center;
         border-left: 0;
     }
     #top_profile_menu {
@@ -889,8 +984,12 @@ form [type="password"] {
 @media screen and (max-width: 400px) {
     .rightMenu,
     .loginScheckIn {
-        flex-grow: 1 !important;
-        align-self: center;
+        -webkit-box-flex: 1 !important;
+            -ms-flex-positive: 1 !important;
+                flex-grow: 1 !important;
+        -ms-flex-item-align: center;
+            -ms-grid-row-align: center;
+            align-self: center;
     }
 }
 
@@ -901,14 +1000,20 @@ form [type="password"] {
 /*Offer news*/
 
 .content_author {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
     width: 100%;
 }
 
 .content_author .textOfferNews,
 .content_author .textOfferArticle {
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
 }
 
 .content_author textarea {
@@ -917,10 +1022,16 @@ form [type="password"] {
 }
 
 .dowPhoto {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
-    align-items: center;
-    justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
 }
 
 .downloadImg i {
@@ -967,9 +1078,15 @@ form [type="password"] {
 #offerNewsModal footer,
 #offerArticleModal footer {
     height: 60px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
     border-top: 1px solid silver;
     padding: 0 20px;
 }
@@ -989,9 +1106,15 @@ form [type="password"] {
     width: 100%;
     background-color: #aa0a0c;
     height: 50px;
-    align-items: center;
-    justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     padding: 0 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     color: #fff;
 }
@@ -1036,7 +1159,8 @@ form [type="password"] {
     background: none;
     border: 0;
     border-radius: 2px;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 .btn-ok {
@@ -1066,14 +1190,19 @@ form [type="password"] {
 /*Модальное окно ставка недели */
 
 .modal_dialog {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
 #my_weeks_bets {
     /*margin: 15vh auto;*/
     background-color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     padding: 20px;
 }
 
@@ -1246,7 +1375,9 @@ form [type="password"] {
 
 .total_kof_these_matches,
 .win_points {
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
 }
 
 .kof_this_match,
@@ -1259,8 +1390,13 @@ form [type="password"] {
 .match_bet_choice,
 .user_match_bet_choice,
 .total_kof {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
 }
 
 .marth_choice_this,
@@ -1297,8 +1433,13 @@ form [type="password"] {
 
 .your_result_after {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     padding-bottom: 7px;
 }
 
@@ -1307,8 +1448,11 @@ form [type="password"] {
 
 .table_forecasters_and_user_infa {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     padding: 0 0 20px;
 }
 
@@ -1317,9 +1461,14 @@ form [type="password"] {
 }
 
 .name_user_info {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .place_result {
@@ -1372,8 +1521,11 @@ form [type="password"] {
 
 .one_math_can_bet {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .one_math_can_bet>div {
@@ -1389,8 +1541,13 @@ form [type="password"] {
 .result_can {
     cursor: pointer;
     line-height: 24px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
 }
 
 .kof_can {
@@ -1522,14 +1679,24 @@ form [type="password"] {
         margin-top: 20px;
     }
     .name_user_info {
-        justify-content: center !important;
-        align-items: center;
+        -webkit-box-pack: center !important;
+            -ms-flex-pack: center !important;
+                justify-content: center !important;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
     }
     .name_user_info>div {
         width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         text-align: center;
     }
     .name_user_info h3 {
@@ -1540,8 +1707,12 @@ form [type="password"] {
         white-space: nowrap;
     }
     .table_forecasters_and_user_infa {
-        justify-content: center;
-        align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
     }
     .photo_user {
         width: 150px !important;
@@ -1581,12 +1752,20 @@ form [type="password"] {
         font-size: 2.5rem;
         top: 10px;
         right: calc(2.5% + 10px);
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
     }
     .close_modal span {
-        align-self: center;
+        -ms-flex-item-align: center;
+            -ms-grid-row-align: center;
+            align-self: center;
     }
 }
 
@@ -1639,18 +1818,30 @@ form [type="password"] {
 }
 
 .users_progress .contentRating>span {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     width: 100%;
     padding: 5px 0;
     border-bottom: 1px solid silver;
 }
 
 .users_progress header {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     border: 2px solid #e62117;
     cursor: pointer;
     align-items: center;
@@ -1682,9 +1873,15 @@ form [type="password"] {
 /*Flex img */
 
 .flexImg {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     overflow: hidden;
     width: 100%;
     height: 100%;
@@ -1693,9 +1890,13 @@ form [type="password"] {
 .flexImg img {
     width: inherit;
     height: inherit;
-    align-self: center;
-    object-fit: cover;
-    flex-shrink: 0;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
 }
 
 
@@ -1707,8 +1908,11 @@ form [type="password"] {
 
 .coment_author_time {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .coment_author_time a {
@@ -1746,7 +1950,8 @@ form [type="password"] {
     color: #fff;
     border: 0;
     border-radius: 2px;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 .btnFhouse:hover {
@@ -1758,6 +1963,8 @@ form [type="password"] {
 /*Send comments*/
 
 .sendComment {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
 }
@@ -1781,16 +1988,25 @@ form [type="password"] {
 
 .sendBtn {
     padding-top: 8px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .sendBtn p {
     color: #ee0221;
     margin: 0;
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
 }
 
 .formSendComment >input[type="submit"] {
