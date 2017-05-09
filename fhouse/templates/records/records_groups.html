@@ -5,10 +5,10 @@
 <title>Record</title>
 <link rel="stylesheet" href='{% static "css/record.css" %}'>
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'>
+<style id="styleArticle"></style>
 <script type="text/javascript" src="{% static 'js/record.js'  %}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
 {% endblock head_extra %} {% block content %}
-<main>
+<main class="mainContainer">
     <div class="recordsMain">
         <header class="headerMain table_nav_records">
             <h2>Рекорды</h2>
@@ -19,8 +19,8 @@
                 </button>
             </aside>
             <nav class="tab">
-                <ul>
-                    <li class="activeRecords">
+                <ul id="recordTab">
+                    <li class="tab_active">
                         Все
                         <div class="lineHover"></div>
                     </li>
@@ -34,13 +34,12 @@
             </nav>
             <hr>
         </header>
-        <div class="statsCard" id="wrapper">
-            <div class="flex_container" id="list">
+        <article class="flex_container" id="list">
+        </article>
+        <footer>
+            <div class="more_records otherMore" data-page="2">
             </div>
-        </div>
-        <div class="more_records otherMore" href="3">
-            ПОСМОТРЕТЬ БОЛЬШЕ
-        </div>
+        </footer>
     </div>
 </main>
 {% endblock content %}

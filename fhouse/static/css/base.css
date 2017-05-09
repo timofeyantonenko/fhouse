@@ -24,6 +24,10 @@ textarea {
     margin-bottom: 0;
 }
 
+.comment-reply {
+    display: block !important;
+}
+
 
 /*Right column*/
 
@@ -53,7 +57,7 @@ textarea {
     cursor: pointer;
     width: 230px;
     margin: auto;
-    padding: 5px;
+    padding: 0.5rem;
     text-align: center;
     text-transform: uppercase;
     font-weight: 900;
@@ -66,6 +70,35 @@ textarea {
     text-decoration: none;
     -webkit-transition: all 0.1s ease-out;
     transition: all 0.1s ease-out;
+}
+
+@media screen and (max-width: 750px) {
+    .otherMore {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+    }
+}
+
+.otherMore::before {
+    content: 'Посмотреть больше';
+}
+
+.otherMore.moreLoading,
+.otherMore.endMore {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.otherMore.moreLoading::before {
+    content: 'Загрузка...';
+}
+
+.otherMore.endMore::before {
+    content: 'Конец';
+}
+
+.otherMore.noMore {
+    display: none;
 }
 
 .otherMore:hover {
@@ -105,6 +138,13 @@ textarea {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+}
+
+.coverImg {
+    -o-object-fit: cover;
+       object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .containerImgUser {
@@ -175,15 +215,21 @@ textarea {
     width: 50px;
     height: 50px;
     float: left;
+    margin-right: 10px;
 }
 
 
 /*bet style table right*/
 
-.team_img img {
+.team_img {
     width: 25px;
     height: 25px;
     margin-right: 5px;
+}
+
+.team_img img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .userAvaTable {
@@ -215,7 +261,7 @@ textarea {
 
 /*Content*/
 
-main {
+main.mainContainer {
     margin: auto;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -233,7 +279,7 @@ main {
         padding-top: 70px;
         padding-bottom: 20px;
     }
-    main {
+    main.mainContainer {
         width: 1150px;
     }
     #menu {
@@ -246,7 +292,7 @@ main {
 }
 
 @media screen and (min-width: 970px) and (max-width: 1169px) {
-    main {
+    main.mainContainer {
         width: 95% !important;
     }
     #menu {
@@ -259,13 +305,13 @@ main {
 }
 
 @media screen and (min-width: 750px) and (max-width: 969px) {
-    main {
+    main.mainContainer {
         width: 95% !important;
     }
 }
 
 @media screen and (max-width: 749px) {
-    main {
+    main.mainContainer {
         width: 100% !important;
     }
 }
@@ -1902,11 +1948,12 @@ form [type="password"] {
 
 /*Comments*/
 
-.content_coment {
-    margin-left: 60px;
+.commentsWraper {
+    width: 100%;
+    overflow-y: auto;
 }
 
-.coment_author_time {
+.commentBody {
     width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1915,17 +1962,45 @@ form [type="password"] {
         flex-wrap: wrap;
 }
 
-.coment_author_time a {
-    margin-right: 5px;
+.paginatonComments>div {
+    margin: auto;
+}
+
+.commentBody:nth-last-child(n+2) {
+    margin-bottom: 15px;
+}
+
+.coment_author_time {
+    width: calc(100% - 50px);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+}
+
+.coment_author_time h5,
+.title_photo_author {
+    font-weight: 600;
+    color: #1d71b9;
+    margin: 0 5px 0 0;
+    font-size: 1.45rem;
+    line-height: 1.2;
+}
+
+.coment_author_time time,
+.time_add_photo {
+    margin: 0;
+    color: #7f8992;
+    font-size: 1.45rem;
+    line-height: 1.2;
 }
 
 .coment_author_time p {
-    margin: 0;
-    color: #7f8992;
-}
-
-.coment_author_time a {
-    font-weight: 600;
+    width: 100%;
 }
 
 .show_all_coment:hover {

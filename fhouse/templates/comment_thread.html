@@ -1,35 +1,49 @@
-{% block comment_block %}
-{% for comment in comments %}
-    <div class="blockquote">
-        <a href="#">
-            <div class="coments_author containerImgUser">
-                <img src="{{ comment.user.avatar.url }}" alt="" class="imgUser">
-            </div>
-        </a>
-        <div class="content_coment">
-            <div class="coment_author_time">
-                <a href="#">{{ comment.user.first_name }} {{ comment.user.last_name }}</a> 
-                <p>{{ comment.timestamp|timesince }} назад</p>
-            </div>
-            {{ comment.content }}
-            <footer> {% if comment.children.count > 0 %}{{ comment.children.count }} Comment{% if comment.children.count > 1 %}s{% endif %} | {% endif %} <a class="comment-reply-btn" href="#">Ответить</a> </footer>
-            <div class="comment-reply">
-                {% for child_comment in comment.children %}
-                <div class="blockquote">
-                    <p>{{ child_comment.content }}</p>
-                    <footer>{{ child_comment.user.first_name }} {{ child_comment.user.last_name }} | {{ child_comment.timestamp|timesince }} назад</footer>
+<!-- {% block comment_block %} {% for comment in comments %}
+<div class="blockquote">
+    <a href="#">
+        <div class="coments_author containerImgUser">
+            <img src="{{ comment.user.avatar.url }}" alt="" class="imgUser">
+        </div>
+    </a>
+    <div class="content_coment">
+        <div class="coment_author_time">
+            <a href="#">
+                {{ comment.user.first_name }} 
+                {{ comment.user.last_name }}
+            </a>
+            <p>{{ comment.timestamp|timesince }} назад</p>
+        </div>
+        <p>{{ comment.content }}</p>
+        <footer>
+            Коментарии {{ comment.children.count }} {% if request.user.is_authenticated %} 
+            | <span class="comment-reply-btn" href="#">Ответить</span> 
+            <form> {% csrf_token %}
+                <input type="text" parent_id="{{ comment.id }}" name="parent_id" class="reply-input" placeholder="Оставить комментарий...">
+                <input type="submit" value="Ответить" class="btn btn-default">
+            </form>
+            {% else %} {% endif %}
+        </footer>
+        <div class="comment-reply">
+            {% for child_comment in comment.children %}
+            <div class="blockquote">
+                <a href="#">
+                    <div class="coments_author containerImgUser">
+                        <img src="{{ child_comment.user.avatar.url }}" alt="" class="imgUser">
+                    </div>
+                </a>
+                <div class="coment_author_time">
+                    <a href="#">
+                        {{ child_comment.user.first_name }} 
+                        {{ child_comment.user.last_name }}
+                    </a>
+                    <p>{{ child_comment.timestamp|timesince }} назад</p>
                 </div>
-                {% endfor %} {% if request.user.is_authenticated %}
-                <form method="POST" action="."> {% csrf_token %}
-                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                    <input type="submit" value="Ответить" class="btn btn-default">
-                </form>
-                {% else %}
-                <p><a href="/login">Войдите</a> в свой аккаунт или <a href="/register">зарегистрируйтесь</a> чтобы оставлять комментарии</p>
-                {% endif %}
+                <p>{{ child_comment.content }}</p>
             </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-    <div class="show_all_coment otherMore">Показать больше</div>
-{% endblock comment_block %}
+</div>
+{% endfor %}
+<div class="show_all_coment otherMore"></div>
+{% endblock comment_block %} -->

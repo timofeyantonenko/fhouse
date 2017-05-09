@@ -3,8 +3,15 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
+from rest_framework.decorators import api_view
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from .models import Comment
 from .forms import CommentForm
+
+from utils.prepare_methods import create_comment
 
 
 # Create your views here.
@@ -84,3 +91,15 @@ def comment_thread(request, id):
         "form": form,
     }
     return render(request, "comment_thread.html", context)
+
+
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def add_comment(request):
+    content_type = ContentType.objects.get_for_model(Comment)
+    new_comment = create_comment(content_type, request)
+    return Response(status=200)
+
+
+

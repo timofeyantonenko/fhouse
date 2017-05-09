@@ -172,13 +172,61 @@ $(document).ready(function() {
                 }
             });
         }
-
-
-
     });
 
     // End dimas script
 });
+
+$(document).on('click', '.btnFhouse', function(e){
+        e.preventDefault();
+        alert(getCookie('csrftoken'));
+        input = $(this).parent().parent().find("#id_content");
+        parent = input.attr("parent_id");
+        content = input.val();
+    $.ajax({
+        url: '/posts/comment/',
+        data: {
+            id: parent,
+            content: content,
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        method: "POST",
+        success: function(data, textStatus, xhr) {
+            alert("Comment added!");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 409) {
+                alert("Error in comment adding!")
+            }
+            //            console.log(error, status, xhr);
+        }
+    });
+})
+
+$(document).on('click', '.btn-default', function(e){
+        e.preventDefault();
+        input = $(this).parent().find(".reply-input");
+        parent = input.attr("parent_id");
+        content = input.val();
+    $.ajax({
+        url: '/comments/comment/',
+        data: {
+            parent_id: parent,
+            content: content,
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        method: "POST",
+        success: function(data, textStatus, xhr) {
+            alert("Comment added!");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 409) {
+                alert("Error in comment adding!")
+            }
+            //            console.log(error, status, xhr);
+        }
+    });
+})
 
 
 // Script author: Dima

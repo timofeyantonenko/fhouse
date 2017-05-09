@@ -2,7 +2,7 @@
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'>
 <script type="text/javascript" src="{% static 'js/post_list.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
-<main>
+<main class="mainContainer">
     <!-- Индивидуальный блок новостей  -->
     <div class="articles">
         <div class="headerAllnews search_s_head">
@@ -47,8 +47,7 @@
             <div class="news_stream">
             </div>
         </div>
-        <div href="2" class="more_article otherMore">
-           ПОСМОТРЕТЬ БОЛЬШЕ
+        <div class="more_article otherMore" data-page="2">
         </div>
     </div>
     <!-- Правая колонка новостей -->

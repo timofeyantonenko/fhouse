@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
 <script src="{% static 'js/post_detail.js'  %}"></script>
-<main>
+<main class="mainContainer">
     <article class="newsDetail">
         <div class="article_detail_img">
             {% if instance.image %}
@@ -21,10 +21,10 @@
         <div class="article_detail">
             <header class="article_author">
                 <a href="#" class="author_img containerImgUser">
-                    <img src="{{ user.avatar.url }}" class="imgUser" alt="Автор новости">
+                    <img src="{{ instance.user.avatar.url }}" class="imgUser" alt="Автор новости">
                 </a>
                 <div class="author_name_date">
-                    <a href="">{{user.first_name}} {{user.last_name}}</a>
+                    <a href="">{{instance.user.first_name}} {{instance.user.last_name}}</a>
                     <p>{% if instance.draft %} </p>
                     {% endif %} {{instance.publish}}
                 </div>

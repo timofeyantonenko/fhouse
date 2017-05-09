@@ -1,9 +1,10 @@
 {% extends "base.html" %} {% block head_title %}{{ title }}{% endblock head_title %} {% load staticfiles %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/article.css" %}'>
+<style id="styleArticle"></style>
 <script type="text/javascript" src="{% static 'js/article.js'  %}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.1.1/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
 {% endblock head_extra %} {% block content %}
-<main>
+<main class="mainContainer">
     <header class="headerMain table_nav_records">
         <h2>Статьи</h2>
         <aside class="right_header">
@@ -16,41 +17,29 @@
             </div>
         </aside>
         <nav class="tab">
-            <ul class="nav_ul">
-                <!-- <li class="activeRecords">
+            <ul class="nav_ul" id="navAjax">
+                <li class="activeRecords">
                     Все
                     <div class="lineHover"></div>
-                </li> -->
-                {% for record_group in groups_tables %}
-                <li>
-                    {{ record_group.group }}
-                    <div class="lineHover"></div>
-                </li>
-                {% endfor %}
-                <li class="activeRecords">
-                    <a href="#">
-                        Все
-                        <div class="lineHover"></div>
-                    </a>
                 </li>
                 {% for section in sections %}
                 <li>
-                    <a href="#">
-                        {{ section.section_title }} <div class="lineHover"></div>
-                    </a>
+                    {{ section.section_title }}
+                    <div class="lineHover"></div>
                 </li>
                 {% endfor %}
             </ul>
         </nav>
         <hr>
     </header>
-    
-    <div class="container_article" id="wrapper">
-        <div class="flex_container" id="list">
+    <div class="flex_container" id="list">
+    </div>
+    <div id="progressTile">
+        <img src="../../static/img/loadGallery.gif" alt="loader">
+    </div>
+    <footer class="articleFooter">
+        <div class="more_article otherMore" data-page="2">
         </div>
-    </div>
-    <div class="more_article otherMore" href="3">
-        ПОСМОТРЕТЬ БОЛЬШЕ
-    </div>
+    </footer>
 </main>
 {% endblock content %}

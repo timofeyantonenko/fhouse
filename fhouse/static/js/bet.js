@@ -1,26 +1,12 @@
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-};
-
 var currentPageLi = 1,
     lengthPagination,
     locationLink = window.location.pathname,
-    tableLength = 10
+    tableLength = 10,
     indexSection = 0;
 
 $(document).ready(function() {
+
+    get_table(1);
 
     var leftNav,
         center,
@@ -74,7 +60,6 @@ $(document).ready(function() {
     })
 
     // Выбор тура
-    // В переменную "load_tour" при переходе с "bet_main.html" попадает индекс выбранного чемпионата
 
     var length_li_tour;
     var index_current_tour = 13;
@@ -83,156 +68,6 @@ $(document).ready(function() {
     var load_champ = 6;
 
     chose_tour(load_champ);
-
-
-    // Выбор лиги
-    $("#all_bets_nav .change_champ").eq(load_champ).addClass("active_champ");
-    $(".championat").eq(load_champ).children(".tours").eq(index_current_tour).show();
-    $(".championat").eq(load_champ).eq(0).show();
-    var name_championship = $(".championat").eq(load_champ).find(".title_hide").text();
-    $(".champ").html(name_championship);
-    $("#all_bets_nav").children(".change_champ").on("click", function() {
-        $(".championat").children(".tours").hide();
-        $(".change_champ").removeClass("active_champ");
-        $(this).addClass("active_champ");
-        var index_menu_li = $(this).index();
-        load_champ = $(this).index();
-        var index_current_tour = $("#id_list_tour").children("ul").eq(load_champ).children("li.current_tour").index();
-        $(".championat").eq(index_menu_li).children(".tours").eq(index_current_tour).show();
-        var name_championship = $(".championat").eq(index_menu_li).find(".title_hide").text();
-        $(".champ").html(name_championship);
-        // Подгрузка туров
-        $("#tour_other").empty();
-        chose_tour(load_champ);
-    });
-
-    // Выбор тура
-
-    $('#tour_other').delegate('li', 'click', function() {
-        $(".nav_ul_tour li div").removeClass('active_menu');
-        $(this).children("div").addClass('active_menu');
-        $(".championat").children(".tours").hide();
-        var inde_menu_tour = $(this).index();
-        $(".championat").eq(load_champ).children(".tours").eq(inde_menu_tour).show();
-    });
-
-    // Таблицы
-    $(".nav_table").children(".one_division_nav").eq(0).addClass("active_tab_section");
-
-    // Выбор временного интервала в рейтинге прогнозистов
-    $("#table_rat_forcas").find(".one_division_nav").on("click", function() {
-        $(this).parent().children().removeClass("active_tab_section");
-        $(this).addClass("active_tab_section");
-    });
-
-    // Турнирные таблицы 
-    // Выбор турниров (между чемпионатами, сборными, еврокубками)
-
-    $(".select_table").eq(0).show();
-    $(".section_tournament").eq(0).children("span").eq(0).show();
-
-    $("#table_other_champs").find(".one_division_nav").on("click", function() {
-        $(this).parent().children().removeClass("active_tab_section");
-        $(this).addClass("active_tab_section");
-        $(".select_table").each(function(i) {
-            $(this).hide();
-        });
-        var inde_nav_time = $(this).index();
-        $(".select_table").eq(inde_nav_time).show();
-
-        if (inde_nav_time == 0) {
-            $(".section_tournament").eq(1).children(".type_euro_champ").children("span").hide();
-            $(".section_tournament").eq(2).children(".continent_sel").children("span").hide();
-            $(".section_tournament").eq(inde_nav_time).children("span").eq(0).show();
-        } else if (inde_nav_time == 1) {
-            $(".section_tournament").eq(2).children(".continent_sel").children("span").hide();
-            $(".section_tournament").eq(0).children("span").hide();
-            $(".section_tournament").eq(inde_nav_time).children(".type_euro_champ").eq(0).children("span").eq(0).show();
-            $("#select_group_LC").show();
-            $("#select_group_LE").hide();
-        } else if (inde_nav_time == 2) {
-            $(".section_tournament").eq(0).children("span").hide();
-            $(".section_tournament").eq(1).children(".type_euro_champ").children("span").hide();
-            $(".section_tournament").eq(inde_nav_time).children(".continent_sel").eq(0).children("span").eq(0).show();
-            $("#select_group_CM").show();
-        };
-        $("#select_group_CM").prop('selectedIndex', 0);
-        $("#select_continent").prop('selectedIndex', 0);
-        $("#select_nation_tournament").prop('selectedIndex', 0);
-        $("#select_group_LE").prop('selectedIndex', 0);
-        $("#select_group_LC").prop('selectedIndex', 0);
-        $("#select_championship").prop('selectedIndex', 0);
-        $("#select_championship_euro").prop('selectedIndex', 0);
-    });
-
-    // Изменения в селектах
-    // Выбор страны чемпионата
-    $('#select_championship').change(function() {
-        $(".section_tournament").eq(0).children("span").hide();
-        var val_select = parseInt($(this).val());
-        $(".section_tournament").eq(0).children("span").eq(val_select).show();
-    });
-
-    // Выбор еврокубкам
-    $("#select_group_LE").hide();
-    $('#select_championship_euro').change(function() {
-        var val_select = parseInt($(this).val());
-        if ($(this).val() == '0') {
-            $("#select_group_LE").hide();
-            $("#select_group_LC").show();
-            $(".section_tournament").eq(1).children(".type_euro_champ").eq(1).children("span").hide();
-            $(".section_tournament").eq(1).children(".type_euro_champ").eq(0).children("span").eq(0).show();
-
-        } else if ($(this).val() == '1') {
-            $("#select_group_LE").show();
-            $("#select_group_LC").hide();
-            $(".section_tournament").eq(1).children(".type_euro_champ").eq(0).children("span").hide();
-            $(".section_tournament").eq(1).children(".type_euro_champ").eq(1).children("span").eq(0).show();
-        }
-    });
-
-    // Выбор группы в лиге чемпионов
-    $('#select_group_LC').change(function() {
-        $(".section_tournament").eq(1).children(".type_euro_champ").eq(0).children("span").hide();
-        var val_select = parseInt($(this).val())
-        $(".section_tournament").eq(1).children(".type_euro_champ").eq(0).children("span").eq(val_select).show();
-    });
-
-    // Выбор группы в лиге европы
-    $('#select_group_LE').change(function() {
-        $(".section_tournament").eq(1).children(".type_euro_champ").eq(1).children("span").hide();
-        var val_select = parseInt($(this).val());
-        $(".section_tournament").eq(1).children(".type_euro_champ").eq(1).children("span").eq(val_select).show();
-    });
-
-    // Выбор континента отбор ЧМ
-    $('#select_continent').change(function() {
-        var val_select = parseInt($(this).val())
-        if ($(this).val() == '0') {
-            $("#select_group_CM").show();
-            $(".section_tournament").eq(2).children(".continent_sel").eq(1).children("span").hide();
-            $(".section_tournament").eq(2).children(".continent_sel").eq(0).children("span").eq(0).show();
-        } else if ($(this).val() == '1') {
-            $("#select_group_CM").hide();
-            $(".section_tournament").eq(2).children(".continent_sel").eq(0).children("span").hide();
-            $(".section_tournament").eq(2).children(".continent_sel").eq(1).children("span").show();
-        }
-    });
-
-    // Выбор группы ЧМ Европа
-    $('#select_group_CM').change(function() {
-        $(".section_tournament").eq(2).children(".continent_sel").eq(0).children("span").hide();
-        var val_select = parseInt($(this).val());
-        $(".section_tournament").eq(2).children(".continent_sel").eq(0).children("span").eq(val_select).show();
-    });
-
-    // Выбор топ матча 
-    $(".li_img__top_match").click(function() {
-        $(".li_img__top_match").children("figure").hide();
-        $(".li_img__top_match").children(".team_nav, .preview_math_nav_background").show();
-        $(this).children("figure").show();
-        $(this).children(".team_nav, .preview_math_nav_background").hide();
-    });
 });
 
 $(window).load(function() {
@@ -532,12 +367,11 @@ function propose_bet(stage_id, match_1, match_2, match_3) {
     });
 }
 
-function loaderShow() {
-    $('#listForecasters').hide();
-    $("#loader").css({ "display": "flex" });
-}
-
 function ajaxRating(locationLinkHref, page, section) {
+    var $loaderTable = $("#tableLoadForecasters"),
+        contentTable = $('#listForecasters');
+    contentTable.empty();
+    $loaderTable.show();
     $.ajax({
         url: '/bets/get_rating/',
         data: {
@@ -545,18 +379,16 @@ function ajaxRating(locationLinkHref, page, section) {
             pagePaginationTable: page,
         },
         method: "GET",
-        beforeSend: loaderShow(),
         success: function(data, textStatus, xhr) {
             lengthPagination = 123 // Нужно еще передать количество пагинаций
-            var contentTable = $('#listForecasters');
-            $('#listForecasters').empty()
+            var htmlBet = "";
             for (var i = 0; i < data.length && i < locationLinkHref; i++) {
                 var place = i + 1,
                     imgSrc = '/media/' + data[i]['user__avatar'],
                     firstName = data[i]['user__first_name'],
                     lastName = data[i]['user__last_name'],
-                    pointUser = data[i]['__proto__'],
-                    htmlBet =
+                    pointUser = data[i]['__proto__'];
+                htmlBet +=
                     `<div class="one_position">
                         <div class="position">` + place + `</div>
                         <div class="forecasters_name">
@@ -571,11 +403,11 @@ function ajaxRating(locationLinkHref, page, section) {
                         <div class="forecasters_pts">` + pointUser + `</div>
                     </div>
                     `;
-                contentTable.append(htmlBet);
+
             }
+            $loaderTable.hide();
+            contentTable.html(htmlBet);
             makePagination(lengthPagination, currentPageLi);
-            $('#listForecasters').show();
-            $("#loader").hide();
         },
         error: function(xhr, status, error) {
             console.log(error, status, xhr);
@@ -583,11 +415,230 @@ function ajaxRating(locationLinkHref, page, section) {
     });
 }
 
+// Таблицы результатов
 
+function sort(first, second) {
+    return second - first
+}
+
+function get_table(ajax_data) {
+    var $loaderTable = $("#tableLoad"),
+        $tableINherit = $("#table_rating");
+    $tableINherit.empty();
+    $loaderTable.show();
+    $.ajax({
+        url: '/bets/get_league_status/',
+        data: ajax_data,
+        method: "GET",
+        success: function(data, textStatus, xhr) {
+            var newData = data.league_table;
+            lengthArray = newData.length;
+            for (var i = 0; i < lengthArray; i++) {
+                newData[i].valueOf = function() {
+                    return this.points
+                }
+            };
+            var newDataSort = newData.sort(sort);
+            htmlTable = "";
+            for (var i = 0; i < lengthArray; i++) {
+                var position = i + 1,
+                    team = newDataSort[i],
+                    img = team['team']['image'],
+                    name = team['team']['team_name'],
+                    games = team['games'],
+                    goals = team['goals'],
+                    points = team['points'];
+                htmlTable += `
+                    <div class="one_position">
+                        <div class="position">` + position + `</div>
+                        <div class="team_name">
+                            <div class="team_img containerImgNews">
+                                <img src="` + img + `" alt="` + name + `" class="coverImg">
+                            </div>
+                            <div class="team_table">
+                                ` + name + `
+                            </div>
+                        </div>
+                        <div class="team_games">` + games + `</div>
+                        <div class="team_goals">` + goals + `</div>
+                        <div class="team_pts">` + points + `</div>
+                    </div>
+                `
+            }
+            $loaderTable.hide();
+            $tableINherit.html(htmlTable);
+        },
+        error: function(xhr, status, error) {
+            console.log(error, status, xhr);
+        }
+    });
+}
+
+// Превью к матчам
+
+function make_preview(ajax_data) {
+    var $loaderTable = $("#loaderMatches"),
+        $tableINherit = $("#container_preview_match");
+    $tableINherit.empty();
+    $loaderTable.show();
+    $.ajax({
+        url: 'some',
+        data: ajax_data,
+        method: "GET",
+        success: function(data, textStatus, xhr) {
+            var objectMatch = data['match'],
+                lengthMatches = objectMatch.lenght,
+                htmlMatch = "";
+            for (var i = 0; i < lengthMatches; i++) {
+                var img1 = objectMatch[i]['teams']['first_team']['url'],
+                    img2 = objectMatch[i]['teams']['second_team']['url'],
+                    time = objectMatch[i][''],
+                    team1 = objectMatch[i]['teams']['first_team']['name'],
+                    team2 = objectMatch[i]['teams']['second_team']['name'],
+                    kof1 = objectMatch[i]['coefficients']['first'],
+                    kof2 = objectMatch[i]['coefficients']['second'],
+                    kofDraw = objectMatch[i]['coefficients']['draw'],
+                    forecast1 = objectMatch[i]['forecast']['first_goal'],
+                    forecast2 = objectMatch[i]['forecast']['second_goal'],
+                    discription = objectMatch[i]['text'];
+                // result = objectMatch[i][''];
+                htmlMatch += `
+                    <article class="preview_one_match">
+                        <section class="teams_logo_s_time">
+                            <div class="teams_img">
+                                <div class="img_logo_one_team">
+                                    <img src="` + img1 + `" alt="">
+                                </div>
+                                <div class="img_logo_one_team">
+                                    <img src="` + img2 + `" alt="">
+                                </div>
+                            </div>
+                            <div class="dateMatchBet">
+                                <time class="match_date">` + +`</time>
+                                <time class="match_time">Москва: ` + +`</time>
+                                <time class="match_time">Киев: ` + +`</time>
+                            </div>
+                        </section>
+                        <section class="match_discription">
+                            <h3>` + team1 + ` - ` + team2 + `</h3>
+                            <div class="bet_match">
+                                <div class="evnt_bet">
+                                    П1 (` + kof1 + `) Х (` + kofDraw + `) П2 (` + kof2 + `)
+                                </div>
+                                <div class="admin_bets_one_match">Наш прогноз: ` + forecast1 + ` : ` + forecast2 + `</div>
+                            </div>
+                            <p class="match_preview_discription">
+                                ` + discription + `
+                            </p>
+                            <div class="result_match">
+                                Сыграли: ` + +`
+                            </div>
+                        </section>
+                    </article>
+                `
+            }
+            $loaderTable.hide();
+            $tableINherit.html();
+        },
+        error: function(xhr, status, error) {
+            console.log(error, status, xhr);
+        }
+    });
+}
+
+function make_comments(ajax_data, page) {
+    var $blComments = $("#comments_tour");
+    $.ajax({
+        url: '/some',
+        data: { "tour_id": id_img, "page": page },
+        dataType: "json",
+        cache: false,
+        success: function(data) {
+            var commentsHtml = "";
+            for (var i = data.length - 1; i >= 0; i--) {
+                dateComment = get_date(data[i]["timestamp"]);
+                commentsHtml += `
+                    <div class="blockquote commentBody">
+                        <div class="coments_author containerImgUser">
+                            <img src="` + data[i]["user"]["avatar"] + `" alt="" class="imgUser">
+                        </div>
+                        <div class="coment_author_time">
+                            <h5>
+                                ` + data[i]["user"]["first_name"] + ` ` + data[i]["user"]["last_name"] +
+                    `
+                            </h5>
+                            <time>` + dateComment + `</time>
+                            <p>` + data[i]["content"] + `</p>
+                        </div>
+
+                    </div>
+                `
+            };
+            if (page != 1) {
+                $blComments.append(commentsHtml);
+            } else {
+                $blComments.html(commentsHtml);
+                // if ($moreCom.attr("data-page") == Math.ceil(objectImg["lengthComObj"] / 10) - 1) {
+                //     $moreCom.addClass("endMore");
+                // }
+            }
+            // $moreCom = $("#load_coments");
+            // $moreCom.removeClass("moreLoading");
+        },
+        error: function(xhr, status, error) {
+            // console.log(error, status, xhr);
+        }
+    });
+};
+
+// Send comments
+
+$(document).on('click', '.btnFhouse', function(e) {
+    e.preventDefault();
+    var $inputText = $("#id_content"),
+        commentText = $inputText.val(),
+        $blComments = $("#comments_tour");
+    // photo_id = objSlider[1]["idImg"];
+    $.ajax({
+        url: 'some',
+        data: {
+            id: tour_id,
+            content: commentText,
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        method: "POST",
+        success: function(data, textStatus, xhr) {
+            dateComment = get_date(new Date());
+            var commentsHtml = `
+                    <div class="blockquote commentBody">
+                        <div class="coments_author containerImgUser">
+                            <img src="` + avatar_user + `" alt="" class="imgUser">
+                        </div>
+                        <div class="coment_author_time">
+                            <h5>
+                                ` + first_name + ` ` + last_name + `
+                            </h5>
+                            <time>` + dateComment + `</time>
+                            <p>` + commentText + `</p>
+                        </div>
+
+                    </div>
+                `;
+            $blComments.prepend(commentsHtml);
+            focusInput();
+            $inputText.val("");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 409) {
+                alert("Error in comment adding!")
+            }
+        }
+    });
+});
 // Пагинация таблицы прогнозистов Ajax
 
 function makePagination(pageCount, currentPage) {
-    if ( pageCount - 1) {
+    if (pageCount - 1) {
         $("#prevPagination").show();
         $("#nextPagination").show();
     } else {
@@ -633,32 +684,30 @@ function makePagination(pageCount, currentPage) {
 
 function goPagination(page, sumPage, curPage) {
     var numberPage = +page;
-    if ( $.isNumeric(numberPage) ) {
+    if ($.isNumeric(numberPage)) {
         currentPageLi = numberPage;
     } else {
-       if ( page == "...") {
+        if (page == "...") {
             return;
-       } else if ( page == "+") {
-            if ( curPage + 1 > sumPage ) {
+        } else if (page == "+") {
+            if (curPage + 1 > sumPage) {
                 currentPageLi = 1;
             } else {
                 currentPageLi = curPage + 1
             }
-       } else if ( page == "-") {
-            if ( curPage - 1 < 1 ) {
+        } else if (page == "-") {
+            if (curPage - 1 < 1) {
                 currentPageLi = sumPage;
             } else {
                 currentPageLi = curPage - 1;
             }
-       }
-    }   
-    console.log(tableLength + ' ' + currentPageLi + ' ' + indexSection)
+        }
+    }
     return ajaxRating(tableLength, currentPageLi, indexSection);
 }
 
 function imgNavBet(a, b) {
     $windowWidth = $(window).width();
-    // Background position nav all bets
     for (var i = 0; i < champLogo.length; i++) {
         if ($windowWidth > 969) {
             champLogo.eq(i).css({
@@ -670,7 +719,6 @@ function imgNavBet(a, b) {
             });
         }
         champLogo.eq(i).css({ "opacity": "0.6" });
-
     };
 }
 
@@ -707,3 +755,19 @@ function chooseCurrent(a, b, c) {
     $second.removeClass('order2TopMatch').addClass('order' + c + 'TopMatch');
     $thirt.removeClass('order3TopMatch').addClass('order' + a + 'TopMatch');
 }
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+};

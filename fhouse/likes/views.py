@@ -1,12 +1,17 @@
 import json
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.csrf import csrf_protect
+from rest_framework.decorators import permission_classes, api_view
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from .models import Like
 
 # Create your views here.
 from django.views.generic import TemplateView
 from posts.models import Post
+from gallery.models import AlbumPhoto
 
 ADD_POSITIVE_LIKE = 0
 ADD_NEGATIVE_LIKE = 1
@@ -61,8 +66,53 @@ def post_change_like(request):
             return HttpResponse(json.dumps(context), content_type="application/json")
 
 
-def post_remove_like(request):
-    pass
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def photo_change_like(request):
+    photo_id = request.POST.get("photo_id")
+    modifying_list = []
+    context = {}
+    if photo_id:
+        photo = get_object_or_404(AlbumPhoto, id=photo_id)
+        content_type = photo.get_content_type
+        likes = Like.objects.filter_by_instance(photo).filter(user=request.user)
+        like_type = request.POST.get("type")
+        print(type(like_type))
+        if like_type == '0':
+            print(likes)
+            if not likes:
+                like = Like(content_type=content_type, object_id=photo_id, user=request.user, like=True)
+                like.save()
+                modifying_list.append(ADD_POSITIVE_LIKE)
+            else:
+                if likes.first().like:
+                    likes.first().delete()
+                    modifying_list.append(REMOVE_POSITIVE_LIKE)
+                else:
+                    modifying_list.append(REMOVE_NEGATIVE_LIKE)
+                    modifying_list.append(ADD_POSITIVE_LIKE)
+                    likes.first().delete()
+                    like = Like(content_type=content_type, object_id=photo_id, user=request.user, like=True)
+                    like.save()
+        elif like_type == '1':
+            print(likes)
+            if not likes:
+                like = Like(content_type=content_type, object_id=photo_id, user=request.user, like=False)
+                like.save()
+                modifying_list.append(ADD_NEGATIVE_LIKE)
+            else:
+                if not likes.first().like:
+                    likes.first().delete()
+                    modifying_list.append(REMOVE_NEGATIVE_LIKE)
+                else:
+                    modifying_list.append(REMOVE_POSITIVE_LIKE)
+                    modifying_list.append(ADD_NEGATIVE_LIKE)
+                    likes.first().delete()
+                    like = Like(content_type=content_type, object_id=photo_id, user=request.user, like=False)
+                    like.save()
+        context['add_result'] = modifying_list
+        return Response(json.dumps(context), content_type="application/json")
 
 
 class LikeVIew(TemplateView):

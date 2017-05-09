@@ -2,7 +2,7 @@
 <link rel="stylesheet" href='{% static "css/main_user.css" %}'>
 <script type="text/javascript" src="{% static 'js/main_user.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
-<main>
+<main class="mainContainer">
     <div class="user_page">
         <h2>
             {{ first_name }} {{ last_name }}
@@ -159,7 +159,6 @@
                 </li>
             </ol>
             <div class="otherMore">
-                Посмотреть больше
             </div>
         </div>
     </div>

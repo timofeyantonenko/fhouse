@@ -490,15 +490,12 @@ h4 {
     flex-direction: row;
     height: 35px;
     border-bottom: 1px solid #CCD1D9;
+    align-items: center;
 }
 
 #loader img {
     width: 35px;
     height: 35px;
-}
-
-.time_rating footer a {
-    margin-top: 10px;
 }
 
 .time_rating .one_position:nth-child(1) {
@@ -592,16 +589,34 @@ h4 {
     text-align: center;
 }
 
-.hideAjax {
-    display: none;
-}
-
 
 /*Футер таблицы*/
 
-.all_team_table footer {
+.body_table .all_team_table {
+    border: 0px solid #fff !important;
+}
+
+.all_team_table {
+    border: 1px solid silver;
+    border-top: 0 solid #fff;
+}
+
+.loader {
     width: 100%;
-    padding-bottom: 10px;
+    padding: 10px;
+    display: none;
+}
+
+.loader>img {
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+}
+
+.all_team_table aside {
+    display: block;
+    padding: 10px 0;
 }
 
 
@@ -942,7 +957,6 @@ figure.order2TopMatch figcaption {
 figure.order1TopMatch {
     order: 1;
 }
-
 
 figure.order3TopMatch {
     order: 3;
@@ -1398,6 +1412,11 @@ section.order3TopMatch {
 
 /*One match bet */
 
+.preview_one_championship>main,
+.preview_one_championship>footer {
+    width: 100%;
+}
+
 .teams_logo_s_time {
     display: flex;
 }
@@ -1491,10 +1510,10 @@ section.order3TopMatch {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    width: calc(100% - 20px);
+    width: 100%;
     justify-content: center;
     align-items: center;
-    margin: 10px 10px;
+    margin: 0;
     padding: 0;
 }
 
@@ -1514,18 +1533,16 @@ section.order3TopMatch {
 
 #paginationTable ul li.newLi:nth-child(2),
 #paginationTable ul li.newLi:nth-last-child(2) {
-    display: block !important; 
+    display: block !important;
 }
 
 #paginationTable ul li.newLi {
     display: none;
 }
 
-
 #paginationTable.showLi .newLi {
     display: block !important;
 }
-
 
 #paginationTable ul li.currentPagination {
     background: #d8d8d8 !important;

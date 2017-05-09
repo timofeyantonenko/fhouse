@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.core.urlresolvers import reverse
 
@@ -9,6 +10,7 @@ from utils.files_preparing import upload_location
 from utils.abstract_classes import CommentedClass
 from utils.abstract_classes import LikedClass
 from utils.abstract_classes import ForeignContentClass
+from likes.models import Like
 
 
 class GallerySection(models.Model):
@@ -34,7 +36,7 @@ class GallerySection(models.Model):
         return query_set
 
 
-class SectionAlbum(models.Model):
+class SectionAlbum(LikedClass):
     album_title = models.TextField(max_length=120)
     # slug for absolute url
     slug = models.SlugField(unique=True)
@@ -61,6 +63,13 @@ class SectionAlbum(models.Model):
     def photos(self):
         query_set = AlbumPhoto.objects.filter(photo_album=self)
         return query_set
+
+    @property
+    def positive_likes(self):
+        photos = AlbumPhoto.objects.filter(photo_album=self)
+        content_type = ContentType.objects.get_for_model(AlbumPhoto)
+        likes = Like.objects.filter(object_id__in=photos, content_type=content_type).filter(like=True)
+        return likes
 
     class Meta:
         unique_together = ('album_title', 'image')

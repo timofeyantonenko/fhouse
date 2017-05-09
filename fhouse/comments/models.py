@@ -36,7 +36,7 @@ class Comment(models.Model):
     objects = CommentManager()
 
     def __str__(self):
-        return str(self.user)
+        return str(self.user) + ", " + str(self.content)
 
     def children(self):
         """
@@ -50,6 +50,18 @@ class Comment(models.Model):
         if self.parent is not None:
             return False
         return True
+
+    @property
+    def comments(self):
+        instance = self
+        query_set = Comment.objects.filter_by_instance(instance)
+        return query_set
+
+    @property
+    def get_content_type(self):
+        instance = self
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        return content_type
 
     def get_absolute_url(self):
         return reverse("comments:thread", kwargs={"id": self.id})

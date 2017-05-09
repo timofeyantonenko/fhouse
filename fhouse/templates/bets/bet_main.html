@@ -3,7 +3,7 @@
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
-<main>
+<main class="mainContainer">
     <div class="articles">
         <div class="contentMainBets">
             <header class="mainBetHeader">
@@ -128,8 +128,7 @@
         </div>
     </div>
     <div class="infoUserRight">
-        <!-- Таблица рейтинга прогнозистов -->
-        <div calss="table_rating_forecasters" id="table_rat_forcas">
+        <div calss="table_rating_forecasters all_team_table" id="table_rat_forcas">
             <div class="head_table">
                 <div class="table_name">Рейтинг прогнозистов</div>
                 <div class="nav_table">
@@ -138,30 +137,23 @@
                     <div class="one_division_nav" id="week_rating">Сезон</div>
                 </div>
             </div>
-            <div class="body_table">
-                <!-- Подсказки таблица  -->
-                <div class="time_rating">
-                    <div class="all_team_table">
-                        <div class="one_position">
-                            <div class="position">Поз</div>
-                            <div class="forecasters_name">Имя</div>
-                            <div class="forecasters_pts">Очки</div>
-                        </div>
-                        <div id="listForecasters" class="hideAjax">
-                        </div>
-                        <div id="loader" class="loaderGif">
-                            <img src="../../static/img/black_hole_loader.gif" alt="">
-                        </div>
-                        <footer>
-                            <a href="all_bet_rating/" class="otherMore">
-                                Весь список
-                            </a>
-                        </footer>
-                    </div>
+            <div class="all_team_table">
+                <div class="one_position">
+                    <div class="position">Поз</div>
+                    <div class="forecasters_name">Имя</div>
+                    <div class="forecasters_pts">Очки</div>
                 </div>
+                <main id="listForecasters">
+                </main>
+                <footer id="tableLoadForecasters" class="loader">
+                    <img src="../../static/img/loadGallery.gif" alt="loader">
+                </footer>
+                <aside>
+                    <a href="all_bet_rating/" class="otherMore">
+                    </a>
+                </aside>
             </div>
         </div>
-        <!-- Конец таблицы с прогнозистами  -->
         <!-- Прогнозы на все матчи в топ-чемпионатах -->
         <div id="bets_all_championships">
             <div class="name_right_column">
