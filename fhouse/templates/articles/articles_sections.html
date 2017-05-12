@@ -25,7 +25,7 @@
                 {% for section in sections %}
                 <li>
                     {{ section.section_title }}
-                    <div class="lineHover"></div>
+                    <div class="lineHover" section-id="{{section.id}}"></div>
                 </li>
                 {% endfor %}
             </ul>

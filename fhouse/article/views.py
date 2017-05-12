@@ -2,10 +2,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .models import SectionArticle, ArticlesSection
 from django.http import HttpResponseRedirect
 
 from comments.models import Comment
+from .serializers import SectionArticleSerializer
 from comments.forms import CommentForm
 from utils.prepare_methods import create_comment_data
 
@@ -123,3 +126,30 @@ class MainPageArticlesList(ListView):
         for section in sections:
             last_articles.append(section.articles.order_by('-timestamp')[0])
         return last_articles
+
+
+@api_view(['GET'])
+def get_section_articles(request):
+    first_paginate = 6
+    paginate_by = 3
+    page = request.GET.get("page", 1)
+    section = request.GET.get('section', -1)  # get section id
+    if section != -1:
+        articles = SectionArticle.objects.filter(article_section__id=section)
+    else:
+        articles = SectionArticle.objects.all()
+    paginator = Paginator(articles, first_paginate if page == 1 else paginate_by)
+    try:
+        articles = paginator.page(page)
+        print(len(articles))
+        print('done1')
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+        print('done2')
+    except EmptyPage:
+        articles = []
+        # articles = paginator.page(paginator.num_pages)
+        print('done3')
+
+    article_serializer = SectionArticleSerializer(articles, many=True, context={'request': request})
+    return Response(article_serializer.data)
