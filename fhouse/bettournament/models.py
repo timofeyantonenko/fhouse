@@ -2,6 +2,8 @@ from django.conf import settings
 from django.db import models
 
 from utils.files_preparing import upload_location
+from utils.abstract_classes import CommentedClass
+from utils.abstract_classes import ForeignContentClass
 
 
 # Create your models here.
@@ -15,6 +17,7 @@ class Continent(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class League(models.Model):
     """
@@ -37,7 +40,7 @@ class Season(models.Model):
         return "{}: {}".format(self.season_league, self.season_name)
 
 
-class SeasonStage(models.Model):
+class SeasonStage(CommentedClass, ForeignContentClass):
     """
     Analog of a tour, semi-final etc.
     """
@@ -127,7 +130,8 @@ class Match(models.Model):
         return MatchPreview.objects.filter(match=self).first()
 
     def __str__(self):
-        return '{} vs {}::{}'.format(self.home_team, self.guest_team, self.stage)
+        return '{} vs {}::{}-{}'.format(self.home_team, self.guest_team, self.stage.stage_season.season_league,
+                                        self.stage)
 
 
 class Coefficient(models.Model):

@@ -11,9 +11,11 @@ from .views import (
     user_tag_add,
     change_user_tags,
     add_comment,
+    search_post,
 )
 
 urlpatterns = [
+    url(r'^search/$', search_post),
     url(r'^$', post_list, name="list"),
     url(r'^ajax_post_list/$', PostList.as_view()),
     url(r'^delete_user_tag/$', user_tag_delete),

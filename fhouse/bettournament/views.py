@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 
+from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator, EmptyPage
 from django.db.models.query import QuerySet
 
 from django.db.models import Sum
@@ -9,10 +11,12 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import StageBetSerializer, TeamSeasonResultSerializer
+from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSerializer
 from django.views.decorators.csrf import csrf_protect
 
-from .models import StageBet, League, MatchBetFromUser, UsersResult, TeamSeasonResult
+from .models import StageBet, League, MatchBetFromUser, UsersResult, TeamSeasonResult, Match, SeasonStage
+from utils.prepare_methods import create_comment
+from comments.serializers import CommentSerializer
 
 
 # Create your views here.
@@ -148,6 +152,51 @@ def get_bet_result_table(request):
     return Response(user_results)
 
 
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def get_stage_matches(request):
+    league_id = request.GET.get("league_id")
+    tour_id = request.GET.get("tour_id")
+
+    tour_matches = Match.objects.filter(stage__stage_season__season_league__id=league_id)
+
+    if not tour_id:
+        tour_matches = tour_matches.filter(stage__is_current=True)
+    else:
+        tour_matches = tour_matches.filter(stage__id=tour_id)
+
+    match_serializer = MatchSerializer(tour_matches, many=True, context={'request': request})
+    return Response(match_serializer.data)
+
+
 def get_all_bet_rating(request):
     context = {}
     return render(request, "bets/user_rating_table.html", context)
+
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
+def get_stage_comments(request):
+    count_of_comments_per_page = 10
+    stage_name = request.GET.get("stage_name", "1 tour")
+    season_id = request.GET.get("season_id", 2)
+    page = request.GET.get("p", 1)
+    instance = SeasonStage.objects.filter(stage_name=stage_name).filter(stage_season__id=season_id).first()
+    comments = instance.comments
+    paginator = Paginator(comments, count_of_comments_per_page)  # Show n posts per page
+    try:
+        comments = paginator.page(page)
+    except EmptyPage:
+        comments = paginator.page(paginator.num_pages)
+    comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
+    return Response(comment_serializer.data)
+
+
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def add_stage_comment(request):
+    content_type = ContentType.objects.get_for_model(SeasonStage)
+    content_type = str(content_type).replace(" ", "")
+    new_comment = create_comment(content_type, request)
+    return Response(status=200)
