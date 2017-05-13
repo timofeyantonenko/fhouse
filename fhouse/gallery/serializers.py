@@ -42,10 +42,10 @@ class AlbumPhotoSerializer(serializers.ModelSerializer):
         return obj.comments.count()
 
     def get_positive_likes_count(self, obj):
-        return obj.comments.count()
+        return obj.positive_likes.count()
 
     def get_negative_likes_count(self, obj):
-        return obj.comments.count()
+        return obj.negative_likes.count()
 
 
 # class AlbumPhotoRelatedField(serializers.RelatedField):

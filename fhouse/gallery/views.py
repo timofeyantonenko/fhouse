@@ -187,7 +187,7 @@ class LastSectionPhotoList(ListView):
 def get_photo_comments(request):
     count_of_comments_per_page = 10
     photo_id = request.GET.get("id_img")
-    page = request.GET.get("p")
+    page = request.GET.get("p", 1)
     instance = get_object_or_404(AlbumPhoto, id=photo_id)
     comments = instance.comments
     paginator = Paginator(comments, count_of_comments_per_page)  # Show n posts per page
@@ -196,7 +196,6 @@ def get_photo_comments(request):
     except EmptyPage:
         comments = paginator.page(paginator.num_pages)
     comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
-    print(comment_serializer)
     return Response(comment_serializer.data)
 
 

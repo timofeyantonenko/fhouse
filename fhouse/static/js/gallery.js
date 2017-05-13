@@ -480,9 +480,12 @@ $(document).on("click", "#slider_slider .open_modal ", function() {
 });
 
 $(document).on('click', '.mark_btn', function() {
-    var photo_id = +$(this).attr("data-id");
-    var type = +$(this).attr("data-like");
-    console.log(photo_id)
+    var photo_id = $(this).attr("data-id");
+    var type = $(this).attr("data-like");
+    var $positiveLikesBlock = $(this).parent().find(".block_like").find(".votes");
+    var positiveCount = parseInt($positiveLikesBlock.html());
+    var $negativeLikesBlock = $(this).parent().find(".block_dislike").find(".votes");
+    var negativeCount = parseInt($negativeLikesBlock.html());
     $.ajax({
         url: '/likes/photo/modify/',
         data: {
@@ -492,7 +495,23 @@ $(document).on('click', '.mark_btn', function() {
         },
         method: "POST",
         success: function(data, textStatus, xhr) {
-            console.log(data);
+//            console.log(JSON.parse(data)["add_result"]);
+            $.each(data["add_result"], function(idx, obj) {
+            switch (obj){
+                case 0:
+                    $positiveLikesBlock.html(positiveCount += 1);
+                break;
+                case 1:
+                    $negativeLikesBlock.html(negativeCount += 1);
+                break;
+                case 2:
+                    $positiveLikesBlock.html(positiveCount -= 1);
+                break;
+                case 3:
+                    $negativeLikesBlock.html(negativeCount -= 1);
+                break;
+            }
+            });
             // alert("Like added!");
         },
         error: function(xhr, status, error) {

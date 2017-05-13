@@ -12,7 +12,7 @@
                     Предложить новость
                 </button>
                 <div class="searchRecord" id="find_news">
-                    <textarea placeholder="Поиск новости..."></textarea>
+                    <input id="post_search" placeholder="Поиск новости..."></input>
                     <button type="button" class="btn btn-primary">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </button>
@@ -23,14 +23,14 @@
             <ul>
                 <div class="changeNews menu_individualNews_active ">
                     <li class="tab tabResponsive" id="main_tab">
-                        <div>Все</div>
+                        <div class="tab_name">Все</div>
                         <div class="hover_menu"></div>
                     </li>
                 </div>
                 {% for tag in user_tags %}
                 <div class="changeNews ">
                     <li class="tab tabResponsive">
-                        <div>{{ tag }}</div>
+                        <div class="tab_name">{{ tag }}</div>
                         <div class="hover_menu"></div>
                     </li>
                 </div>

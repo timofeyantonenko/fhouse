@@ -28,6 +28,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .forms import PostForm
 from .models import Post, UserFavoriteTags, PostTag
+from .serializers import PostTitleSerializer, PostSerializer
 
 from utils.prepare_methods import create_comment
 
@@ -318,3 +319,33 @@ def add_comment(request):
     content_type = ContentType.objects.get_for_model(Post)
     new_comment = create_comment(content_type, request)
     return Response(status=200)
+
+
+@api_view(['GET'])
+def search_post(request):
+    limit = 10
+    tag = request.GET['tab']
+    user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
+    user_tags = user_tags.tags.all()
+    if tag == 'all':
+        print('IN ALL')
+        queryset_list = Post.objects.all()
+    elif request.user.is_staff or request.user.is_superuser:
+        tag = user_tags.filter(name=tag)
+        queryset_list = Post.objects.filter(tag=tag)
+    else:
+        queryset_list = Post.objects.active()  # .order_by("-timestamp")
+    query = request.GET.get('q')
+    if query:
+        queryset_list = queryset_list.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(user__first_name__icontains=query) |
+            Q(user__last_name__icontains=query)
+        ).distinct()[:limit]
+    else:
+        queryset_list = queryset_list[:10]
+
+    title_serializer = PostTitleSerializer(queryset_list, many=True, context={'request': request})
+    print(queryset_list)
+    return Response(title_serializer.data)

@@ -392,6 +392,28 @@ function load_posts(url, tab, page) {
     });
 }
 
+
+$(document).on("keyup", "#post_search", function(e){
+    var page = parseInt($(".more_article").attr("data-page"));
+    var $activeTab = $('div .menu_individualNews_active');
+    var tabName = $activeTab.find(".tab_name").html();
+    var searchTab = (tabName == 'Все' || typeof tabName == 'undefined') ? 'all' : tab;
+    var query = $(this).val();
+    var ajax_data = { "tab": searchTab, "q": query };
+    $.ajax({
+        url: '/posts/search/',
+        data: ajax_data,
+        dataType: "json",
+        cache: true,
+        success: function(data) {
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            console.log("Error");
+        }
+    });
+});
+
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
