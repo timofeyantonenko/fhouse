@@ -190,9 +190,14 @@ h4 {
 
 #all_bets_nav {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .change_champ {
@@ -220,7 +225,8 @@ h4 {
     margin-left: -22.25px;
     padding: 0px 20px;
     height: 50px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, .1);
     position: relative;
     overflow: hidden;
 }
@@ -233,13 +239,18 @@ h4 {
 }
 
 .nav_ul_tour {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     height: 50px;
     padding: 0px;
     margin-bottom: 0px;
     overflow: hidden;
     width: auto;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
 }
 
 #id_list_tour {
@@ -255,8 +266,6 @@ h4 {
 
 .nav_ul_tour li:hover .hover_menu {
     top: 46px !important;
-    -moz-transition: all 0.15s ease-out;
-    -o-transition: all 0.15s ease-out;
     -webkit-transition: all 0.15s ease-out;
     transition: all 0.15s ease-out;
 }
@@ -343,6 +352,8 @@ h4 {
 
 .linkOtherBet {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -424,8 +435,13 @@ h4 {
 }
 
 .nav_table {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     padding: 0 5px;
 }
 
@@ -437,7 +453,9 @@ h4 {
     background-color: #aa0a0c;
     border-radius: 3px 3px 0 0;
     cursor: pointer;
-    flex: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
 }
 
 .active_tab_section {
@@ -454,17 +472,25 @@ h4 {
 }
 
 .select_tab_conteiner {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     width: 100%;
     padding: 5px 10px 0 10px;
 }
 
 .select_table {
     display: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     display: none;
 }
 
@@ -486,11 +512,18 @@ h4 {
 
 .one_position {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     height: 35px;
     border-bottom: 1px solid #CCD1D9;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 #loader img {
@@ -516,8 +549,12 @@ h4 {
 
 .team_name {
     width: 45%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .team_table {
@@ -553,9 +590,14 @@ h4 {
 }
 
 .after_nav_tour {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
 }
 
 .championat {
@@ -576,8 +618,12 @@ h4 {
 .forecasters_name {
     width: calc( 100% - 110px);
     height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .position {
@@ -623,8 +669,11 @@ h4 {
 /*Превью к матчам */
 
 .preview_one_match {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     width: 100%;
     padding: 10px 0px;
     border-top: 1px solid #CCD1D9;
@@ -635,14 +684,23 @@ h4 {
 }
 
 .teams_img {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     width: 100px;
     height: 45px;
 }
 
 .teams_img>div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -676,9 +734,14 @@ h4 {
 }
 
 .bet_match {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     margin: 5px 0px 0;
 }
 
@@ -704,9 +767,15 @@ h4 {
     height: 24px;
     font-size: 12px;
     padding: 0px 6px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     font-weight: 600;
 }
 
@@ -738,9 +807,16 @@ h4 {
 
 .line_img_placeholder_comment {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
 }
 
 .title_comments {
@@ -784,8 +860,12 @@ h4 {
 
 .send_comment_prev {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: flex-end;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
     margin-top: 5px;
 }
 
@@ -808,7 +888,9 @@ h4 {
 }
 
 .comment_placeholder {
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
 }
 
 .content_coment {
@@ -899,11 +981,15 @@ h4 {
 /*Навигация три топовые матчи */
 
 #match_top_nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
     padding: 10px 40px;
     position: relative;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     margin-bottom: 15px;
 }
 
@@ -915,9 +1001,15 @@ h4 {
     color: #222;
     height: 100%;
     width: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     font-size: 20px;
     cursor: pointer;
 }
@@ -937,17 +1029,30 @@ h4 {
 
 #match_top_nav figure {
     padding: 0 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     opacity: 0.7;
 }
 
 figure.order2TopMatch {
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     opacity: 1 !important;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
     display: flex !important;
-    order: 2;
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
 }
 
 figure.order2TopMatch figcaption {
@@ -955,11 +1060,15 @@ figure.order2TopMatch figcaption {
 }
 
 figure.order1TopMatch {
-    order: 1;
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
 }
 
 figure.order3TopMatch {
-    order: 3;
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
 }
 
 section.order2TopMatch {
@@ -999,25 +1108,41 @@ section.order3TopMatch {
 }
 
 #match_top_nav .teamsTop {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 #match_top_nav .teamLogo {
     width: 40px;
     height: 40px;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-self: center;
+    -ms-flex-item-align: center;
+        align-self: center;
     color: #bbb;
     font-weight: 700;
 }
 
 .teamLogo img {
-    align-self: center;
-    object-fit: contain;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
+    -o-object-fit: contain;
+       object-fit: contain;
     max-height: 100%;
     max-width: 100%;
 }
@@ -1080,13 +1205,12 @@ section.order3TopMatch {
     border-radius: 2px;
     background: #e62117;
     color: #fff;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 .make_bet button:hover {
     background: #881012;
-    -moz-transition: all 0.1s ease-out;
-    -o-transition: all 0.1s ease-out;
     -webkit-transition: all 0.1s ease-out;
     transition: all 0.1s ease-out;
 }
@@ -1107,9 +1231,14 @@ section.order3TopMatch {
 }
 
 .footer_top_matches_right {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     height: 35px;
 }
 
@@ -1134,8 +1263,6 @@ section.order3TopMatch {
 .footer_top_matches_right>div a:active {
     color: #aa0a0c;
     text-decoration: none;
-    -moz-transition: all 0.1s ease-out;
-    -o-transition: all 0.1s ease-out;
     -webkit-transition: all 0.1s ease-out;
     transition: all 0.1s ease-out;
 }
@@ -1147,8 +1274,6 @@ section.order3TopMatch {
 .footer_top_matches_right>div:hover {
     background-color: #d7d7d7;
     color: #aa0a0c;
-    -moz-transition: all 0.1s ease-out;
-    -o-transition: all 0.1s ease-out;
     -webkit-transition: all 0.1s ease-out;
     transition: all 0.1s ease-out;
 }
@@ -1158,8 +1283,13 @@ section.order3TopMatch {
 }
 
 .body_top_matches_right>div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     width: 100%;
     height: 35px;
     border-bottom: 1px solid #afadad;
@@ -1176,9 +1306,13 @@ section.order3TopMatch {
 
 .team_one_top_match_right {
     width: 32.5%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     height: 100%;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .logo_one_top_match_right {
@@ -1238,10 +1372,17 @@ section.order3TopMatch {
 }
 
 .mainBetHeader {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-bottom: 15px;
     padding: 10px 20px 0;
 }
@@ -1253,7 +1394,9 @@ section.order3TopMatch {
 .mainBetHeader h2 {
     margin: 0 20px 10px 0;
     text-transform: uppercase;
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     font-size: 1.5rem;
     color: #222;
 }
@@ -1279,10 +1422,17 @@ section.order3TopMatch {
 }
 
 .infoUserRight {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
 }
 
 @media screen and (min-width: 1170px) {
@@ -1322,7 +1472,9 @@ section.order3TopMatch {
     }
     .infoUserRight {
         width: 100%;
-        justify-content: space-between;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
     }
     .infoUserRight>div {
         width: calc(50% - 10px);
@@ -1418,13 +1570,18 @@ section.order3TopMatch {
 }
 
 .teams_logo_s_time {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
 @media screen and (min-width: 550px) {
     .teams_logo_s_time {
         width: 100px;
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
     }
     .match_discription {
         width: calc(100% - 100px);
@@ -1446,8 +1603,11 @@ section.order3TopMatch {
         width: 100%;
     }
     .dateMatchBet {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
         margin-left: 5px;
     }
     .dateMatchBet>div {
@@ -1507,12 +1667,19 @@ section.order3TopMatch {
 /*Pagination*/
 
 #paginationTable ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     list-style: none;
     width: 100%;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin: 0;
     padding: 0;
 }
@@ -1525,8 +1692,6 @@ section.order3TopMatch {
     background: #fff;
     border: 1px solid #afadad;
     border-radius: 2px;
-    -moz-transition: all 0.1s ease-out;
-    -o-transition: all 0.1s ease-out;
     -webkit-transition: all 0.1s ease-out;
     transition: all 0.1s ease-out;
 }

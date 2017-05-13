@@ -1971,7 +1971,7 @@ form [type="password"] {
 }
 
 .coment_author_time {
-    width: calc(100% - 50px);
+    width: calc(100% - 60px);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

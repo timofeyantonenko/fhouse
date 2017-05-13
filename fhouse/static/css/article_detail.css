@@ -16,8 +16,12 @@
 }
 
 .infoAricleDate {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .one_read_article_info h3 {
@@ -50,12 +54,11 @@
 }
 
 .linkArticle:hover .one_read_article_img img {
-    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
 }
 
 .linkArticle .one_read_article_img img {
-    -moz-transition: all 0.15s ease-out;
-    -o-transition: all 0.15s ease-out;
     -webkit-transition: all 0.15s ease-out;
     transition: all 0.15s ease-out;
 }

@@ -1,8 +1,13 @@
 main {
     width: 100%;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
     display: flex !important;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
 }
 
 main>div {
@@ -55,9 +60,16 @@ nav {
 
 .infoSuggestingPerson {
     margin-bottom: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .photo-user {
@@ -87,9 +99,15 @@ nav {
 .imgConteinerSuggestion {
     max-height: 300px;
     overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     position: relative;
 }
 
@@ -141,9 +159,15 @@ nav {
 }
 
 footer {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
     display: flex !important;
-    justify-content: flex-end;
-    align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -220,7 +244,6 @@ footer select {
     font-size: 16px;
     padding-top: 4px;
     -webkit-box-shadow: 0px 0px 12px -3px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 12px -3px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 12px -3px rgba(0, 0, 0, 0.75);
     outline: none;
 }
@@ -241,15 +264,23 @@ ul {
 }
 
 .list_tegs>li {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     padding: 4px 5px;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .list_tegs>li span {
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     margin-left: 5px;
 }
 
@@ -263,9 +294,15 @@ ul {
 }
 
 .addNewTag {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-top: 15px;
 }
 
@@ -273,7 +310,9 @@ ul {
     resize: none;
     overflow: hidden;
     height: 25px;
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     margin: 0 5px;
 }
 
@@ -282,13 +321,20 @@ ul {
 }
 
 .tegs_area {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     margin: 10px 0;
 }
 
 .oneTeg {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin: 2.5px;
 }
@@ -308,9 +354,15 @@ ul {
     width: 25px;
     height: 25px;
     color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     background-color: #d9534f;
     cursor: pointer;
 }
@@ -340,9 +392,14 @@ ul {
 /*Add photo*/
 
 .sectionPhoto {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .sectionPhoto h3 {
@@ -351,7 +408,9 @@ ul {
 }
 
 #selectSectiom {
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     margin-right: 5px;
     height: 25px;
 }
@@ -366,10 +425,14 @@ ul {
 }
 
 .titlePhoto {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin-top: 15px;
     margin-bottom: 10px;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .titlePhoto h4 {
@@ -377,7 +440,9 @@ ul {
 }
 
 .titlePhoto textarea {
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     height: 25px;
     resize: none;
     overflow: hidden;
@@ -401,6 +466,8 @@ form img {
 /*Modal add album*/
 
 #add-album .addAlbum {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -411,9 +478,13 @@ form img {
 }
 
 #add-album .addAlbum .titleAlbum {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin: 10px 0;
 }
 
@@ -425,7 +496,9 @@ form img {
     height: 25px;
     resize: none;
     overflow: hidden;
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
 }
 
 
@@ -477,8 +550,11 @@ form img {
 }
 
 .choseTeams {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .choseTeams select {
@@ -515,18 +591,28 @@ form img {
 
 .addNewWeek {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .selectWeek {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .weekChose {
@@ -550,9 +636,14 @@ form img {
 
 .chooseTour>div {
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-bottom: 10px;
 }
 
@@ -560,8 +651,12 @@ form img {
 /*Ul */
 
 .changeOrAddNewPhoto {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-bottom: 10px;
 }
 
@@ -570,7 +665,9 @@ form img {
     resize: none;
     overflow: hidden;
     margin-right: 5px;
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
     padding: 6px;
     white-space: nowrap;
 }

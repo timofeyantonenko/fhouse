@@ -3,7 +3,9 @@
         width: 60%;
     }
     .user_stat {
-        justify-content: space-between;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
     }
     .user_info_desc {
         width: calc(100% - 235px);
@@ -15,7 +17,9 @@
         width: 60%;
     }
     .user_stat {
-        justify-content: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
     }
     .user_info_desc {
         margin-top: 20px;
@@ -26,10 +30,14 @@
 @media screen and (min-width: 750px) and (max-width: 969px) {
     .user_page {
         width: 100%;
-        justify-content: space-between;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
     }
     .user_stat {
-        justify-content: space-between;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
     }
     .user_info_desc {
         width: calc(100% - 235px);
@@ -39,10 +47,14 @@
 @media screen and (max-width: 749px) {
     .user_page {
         width: 100%;
-        justify-content: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
     }
     .user_stat {
-        justify-content: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
     }
     .user_info_desc {
         margin-top: 20px;
@@ -64,8 +76,11 @@
 
 .user_stat {
     margin-top: 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 
@@ -89,8 +104,12 @@
 }
 
 .user_stat .row .col-lg-7:nth-child(2) {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 
@@ -103,12 +122,18 @@
     width: 21px;
     margin-left: 5px;
     text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .soc_user div i {
-    align-self: center;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
 }
 
 .soc_user a div {
@@ -140,11 +165,18 @@ a #instagram:hover {
 /*Suggesting articles*/
 
 .headerArticle {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     margin: 20px 0 10px;
-    align-items: center;
-    flex-wrap: wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .headerArticle h3 {
@@ -162,8 +194,12 @@ a #instagram:hover {
 }
 
 #authorArticles li {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     padding: 10px 0 !important;
 }
 
@@ -182,14 +218,20 @@ a #instagram:hover {
 }
 
 .aboutArticle {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
 .aboutArticle>div {
     margin: 0 2.5px;
     font-size: 12px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .aboutArticle>div>span {
@@ -205,7 +247,8 @@ a #instagram:hover {
 
 @media screen and (max-width: 600px) {
     #authorArticles li {
-        flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
     }
     .titleLink {
         width: 100%;
@@ -221,7 +264,8 @@ a #instagram:hover {
 
 @media screen and (max-width: 749px) {
     #authorArticles li {
-        flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
     }
     .titleLink {
         width: 100%;
