@@ -13,7 +13,6 @@ from utils.prepare_methods import create_comment
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
 def get_section_information(request):
     count_of_photo_by_pagination = 9
     count_of_albums_to_load = 6
@@ -35,7 +34,6 @@ def get_section_information(request):
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
 def get_album_photos(request):
     count_of_photo_by_pagination = 9
     page = request.GET.get("page", 1)
@@ -183,7 +181,6 @@ class LastSectionPhotoList(ListView):
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
 def get_photo_comments(request):
     count_of_comments_per_page = 10
     photo_id = request.GET.get("id_img")
