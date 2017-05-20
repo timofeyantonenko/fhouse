@@ -147,10 +147,10 @@ def get_bet_result_table(request):
 
 @api_view(['GET'])
 def get_stage_matches(request):
-    league_id = request.GET.get("league_id")
+
     tour_id = request.GET.get("tour_id")
 
-    tour_matches = Match.objects.filter(stage__stage_season__season_league__id=league_id)
+    tour_matches = Match.objects.filter(stage__id=tour_id)
 
     if not tour_id:
         tour_matches = tour_matches.filter(stage__is_current=True)
