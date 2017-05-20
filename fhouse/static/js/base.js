@@ -1,18 +1,3 @@
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
 $(document).ready(function() {
 
     var documentWidth = parseInt(document.documentElement.clientWidth),
@@ -139,48 +124,7 @@ $(document).ready(function() {
         } else {
             console.log("pizdos")
         }
-    })
-
-    // Стрелки для просмотра туров которые не поместились в основной блок
-
-    function left_tour() {
-        var width_li_tour = $(".nav_ul_tour li").width();
-        var margin_left_ul = parseInt($(".nav_ul_tour").css('margin-left'));
-
-        if (margin_left_ul < 0) {
-            $(this).unbind('click');
-            $(".nav_ul_tour").animate({ 'margin-left': '+=' + width_li_tour }, 300, function() {
-                $('#arrow_left_tour').bind('click', left_tour);
-            });
-        } else {
-            return;
-        };
-    }
-
-    function right_tour() {
-        var width_li_tour = $(".nav_ul_tour li").width();
-        var li_lenght = $(".nav_ul_tour li").length;
-        var margin_left_ul = parseInt($(".nav_ul_tour").css('margin-left'));
-        var width_ul = $(".nav_ul_tour").width();
-        if ((li_lenght * width_li_tour) <= width_ul) {
-            return;
-        } else {
-            var max_click_right = ((li_lenght * width_li_tour) - width_ul - width_li_tour);
-            if ((margin_left_ul - max_click_right) == 0) {
-                return;
-            } else {
-                $(this).unbind('click');
-                $(".nav_ul_tour").animate({ 'margin-left': '-=' + width_li_tour }, 300, function() {
-                    $('#arrow_right_tour').bind('click', right_tour);
-                });
-            }
-        }
-        return;
-    }
-
-    $("#arrow_left_tour").bind('click', left_tour);
-
-    $("#arrow_right_tour").bind('click', right_tour);
+    });
 
     // Выбор недели в модальном окне
     $(".body_user_choice").children(".history_bet").eq(0).show();
@@ -200,7 +144,6 @@ $(document).ready(function() {
     arraySum(arr);
 
 });
-
 
 
 // Menu toggle
@@ -237,4 +180,20 @@ function readURLoffer(input) {
 function downloadLinkTosrc() {
     var srcNew = $(this).val();
     $('.imgOfferArticle').attr('src', srcNew);
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

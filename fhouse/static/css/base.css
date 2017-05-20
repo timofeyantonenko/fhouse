@@ -2055,8 +2055,7 @@ More item
     background: #eee;
 }
 
-#progress button.more_active i,
-#progress button.more_active .loadText {
+#progress button.more_active i {
     display: none;
 }
 

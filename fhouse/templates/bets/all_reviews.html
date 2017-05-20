@@ -1,15 +1,15 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %}{{ title }}{% endblock head_title %} {% block head_extra %}
 <title>Prognosis Fhouse</title>
 <script type="text/javascript">
-    var first_season = {{ seasons.0.id }},
-        first_name = "{{request.user.first_name|escapejs|safe}}",
-        last_name = "{{request.user.first_name|escapejs|safe}}",
-        avatar_user = "{{request.user.avatar.url|escapejs|safe}}";
+var first_season = {{ seasons.0.id }},
+    first_name = "{{request.user.first_name|escapejs|safe}}",
+    last_name = "{{request.user.first_name|escapejs|safe}}",
+    avatar_user = "{{request.user.avatar.url|escapejs|safe}}";
 </script>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
-<!-- <link rel="stylesheet" href='{% static "css/jquery.formstyler.css" %}'> -->
+
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
-<!-- <script type="text/javascript" src="{% static 'js/jquery.formstyler.min.js'  %}"></script> -->
+<script type="text/javascript" src="{% static 'js/bet_all_reviews.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
 <main class="mainContainer">
     <!-- Превью тура -->
@@ -36,7 +36,7 @@
                 Превью и прогноз <span class="champ"></span>
             </div>
             <div class="after_nav_tour">
-                <div  class="preview_one_championship">
+                <div class="preview_one_championship">
                     <header id="loaderMatches" class="loader">
                         <div></div>
                     </header>
@@ -45,17 +45,21 @@
                 </div>
                 <!-- Комментарии к превью -->
                 <div class="block_comments_for_one_champ">
-                    <div class="title_comments">
-                        Комментарии 
-                    </div>
+                    <h2 class="title_comments">
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Комментарии <span id="countComments"></span>
+                    </h2>
                     <!-- Комментарии -->
                     <div class="comments_base">
                         {% include "send_comment.html" %}
                     </div>
                     <div class="comments_base2" id="comments_tour">
-                
                     </div>
-                    <hr>
+                    <footer id="progress" class="articleFooter">
+                        <button id="loadTile" class="loading" data-page="1" data-count-page="1">
+                            <i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+                            <span class="doneMore">Посмотреть больше</span>
+                        </button>
+                    </footer>
                 </div>
             </div>
         </div>
@@ -63,7 +67,18 @@
     <!-- Прогнозы на все матчи от администраторов  -->
     <div class="infoUserRight">
         <!-- ТОП матчи недели правая колонка -->
-        {% include "bets/top_week_matches.html" %}
+        <div id="top_matches_right">
+            <div class="header_top_matches_right">
+                Ставка недели. 12-19 Сен. 2017
+            </div>
+            <div id="topMathRight" class="body_top_matches_right">
+
+            </div>
+            <div class="footer_top_matches_right">
+                <div id="read_preview"><a href="/bets">Читать превью</a></div>
+                <div id="bet_right" class="makeBetModal" data-toggle="modal">Сделать ставку</div>
+            </div>
+        </div>
         <!-- Турнирная таблица -->
         <div id="table_other_champs">
             <div class="head_table">

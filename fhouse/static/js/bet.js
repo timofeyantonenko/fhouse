@@ -2,37 +2,11 @@ var currentPageLi = 1,
     lengthPagination,
     locationLink = window.location.pathname,
     tableLength = 10,
-    indexSection = 0,
-    objBets = {};
+    indexSection = 0;
 
 $(document).ready(function() {
 
-    objBets.currentLeague = first_season;
-
-    get_table(1);
-    get_tours(first_season);
-
-    // Active first league_table
-    $("#all_bets_nav").children("div").eq(0).addClass("active_champ");
-
-    $(document).on("click", "#all_bets_nav .change_champ", function(e) {
-        if ($(this).hasClass('active_champ')) return;
-        $('.active_champ').removeClass('active_champ');
-        $(this).addClass('active_champ');
-        var idSeason = +$(this).attr("data-id");
-        objBets.currentLeague = idSeason;
-        get_tours(idSeason);
-    })
-
-    $(document).on("click", "#tour_other li", function() {
-        var $lineHover = $(this).find('.hover_menu')
-        if ($lineHover.hasClass('active_menu')) return;
-        $('.active_menu').removeClass('active_menu');
-        $lineHover.addClass('active_menu');
-        var idTour = +$(this).attr("id");
-        objBets.currentTour = idTour;
-        make_preview(idTour);
-    })
+    load_bet_info(); 
 
     var leftNav,
         center,
@@ -49,11 +23,6 @@ $(document).ready(function() {
         }
         chooseCurrent(leftNav, center, rightNav);
     });
-
-    var $windowWidth,
-        logoChampionship,
-        sizeImg,
-        sizeImgMobile;
 
     // Table rating locationLink
     if (locationLink.indexOf("all_bet_rating") > 0) {
@@ -81,7 +50,7 @@ $(document).ready(function() {
     var new_margin;
     var load_champ = 6;
 
-    chose_tour(load_champ);
+    // chose_tour(load_champ);
 });
 
 $(window).load(function() {
@@ -90,37 +59,26 @@ $(window).load(function() {
     });
 });
 
-var first_open = true;
 
 function show_modal(modal_id) {
-    if (first_open) {
-        load_bet_info();
-        first_open = false;
-    }
     $(modal_id).modal();
 }
 
 function load_bet_info() {
     var ajax_url = '/bets/get_bet_stage_info';
-    //    var ajax_data = { "section": section_name }
     var state = ""
     $.ajax({
         url: ajax_url,
-        //        data: ajax_data,
         dataType: "json",
         success: function(data) {
-            //        console.log(data["stage_bet"]["match_1"]);
+            topMatchRight(data);
             var content = $('.mathes_can_bet');
             var insert_data = "";
-            //          console.log(data);
-            //          json_data = JSON.parse(data);
             var json_stage_matches = data['stage_bet'];
             var stage_id = json_stage_matches["id"];
-            console.log("DATA IS: " + data);
             for (var i = 1; i < 4; i++) {
                 match_i = "match_" + i;
                 match_json = json_stage_matches[match_i];
-                console.log(match_json);
 
                 home_team_name = match_json["home_team"]["team_name"];
                 home_team_coef = match_json["coefficient"]["home_coef"];
@@ -150,6 +108,47 @@ function load_bet_info() {
             console.log(error, status, xhr);
         }
     });
+}
+
+
+function topMatchRight(objectMatches) {
+    console.log(objectMatches)
+    var objMatch = objectMatches['stage_bet'],
+        htmlMatch = "";
+    for (var i = 1; i < 4; i++) {
+        var matchNumber = "match_" + i,
+            thisMatch = objMatch[matchNumber],
+            times = new Date(thisMatch["match_time"]),
+            minuteMatch = "0" + times.getMinutes(),
+            minute =  minuteMatch.slice(-2),
+            timeMatch = times.getHours() + ":" + minute,
+            dayOfWeek = getWeekDay(times.getDay());
+        htmlMatch += `
+            <div class="one_top_match_right">
+                <div class="day_one_top_match_right">` + dayOfWeek +`</div>
+                <div class="team_one_top_match_right">
+                    <div class="logo_one_top_match_right">
+                        <img src="` + thisMatch["home_team"]["image"] + `" alt="">
+                    </div>
+                    <div class="name_team_one_top_match_right">` + thisMatch["home_team"]["team_name"] + `</div>
+                </div>
+                <div class="time_one_top_match_right">` + timeMatch +`</div>
+                <div class="team_one_top_match_right">
+                    <div class="logo_one_top_match_right">
+                        <img src="` + thisMatch["guest_team"]["image"] + `" alt="">
+                    </div>
+                    <div class="name_team_one_top_match_right">` + thisMatch["guest_team"]["team_name"] + `</div>
+                </div>
+            </div>
+            
+        `;
+    };
+    $("#topMathRight").html(htmlMatch);
+}
+
+function getWeekDay (numDay) {
+    var daysOfweek = [ 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+    return daysOfweek[numDay];
 }
 
 var week_show = 0;
@@ -259,8 +258,6 @@ $(document).on("click", ".result_can", function(e) {
         arr.push(sum++);
     };
 
-    console.log(arr)
-
     function arraySum(arr) {
         var umno = 1;
         for (var i = 0; i < arr.length; i++) {
@@ -288,7 +285,6 @@ $(document).on("click", ".result_can", function(e) {
 
 // Удаление выбранного матча
 $(document).on("click", ".delete_this_this_choice i", function() {
-    console.log("sdadas")
     $(this).parents(".one_user_choice").fadeOut();
     if ($(this).parents(".one_user_choice").index() == 0) {
         var one_result = $(".one_math_can_bet").eq(0);
@@ -429,252 +425,6 @@ function ajaxRating(locationLinkHref, page, section) {
     });
 }
 
-// Таблицы результатов
-
-function sort(first, second) {
-    return second - first
-}
-
-function get_table(ajax_data) {
-    var $loaderTable = $("#tableLoad"),
-        $tableINherit = $("#table_rating");
-    $tableINherit.empty();
-    $loaderTable.show();
-    $.ajax({
-        url: '/bets/get_league_status/',
-        data: ajax_data,
-        method: "GET",
-        success: function(data, textStatus, xhr) {
-            var newData = data.league_table;
-            lengthArray = newData.length;
-            for (var i = 0; i < lengthArray; i++) {
-                newData[i].valueOf = function() {
-                    return this.points
-                }
-            };
-            var newDataSort = newData.sort(sort);
-            htmlTable = "";
-            for (var i = 0; i < lengthArray; i++) {
-                var position = i + 1,
-                    team = newDataSort[i],
-                    img = team['team']['image'],
-                    name = team['team']['team_name'],
-                    games = team['games'],
-                    goals = team['goals'],
-                    points = team['points'];
-                htmlTable += `
-                    <div class="one_position">
-                        <div class="position">` + position + `</div>
-                        <div class="team_name">
-                            <div class="team_img containerImgNews">
-                                <img src="` + img + `" alt="` + name + `" class="coverImg">
-                            </div>
-                            <div class="team_table">
-                                ` + name + `
-                            </div>
-                        </div>
-                        <div class="team_games">` + games + `</div>
-                        <div class="team_goals">` + goals + `</div>
-                        <div class="team_pts">` + points + `</div>
-                    </div>
-                `
-            }
-            $loaderTable.hide();
-            $tableINherit.html(htmlTable);
-        },
-        error: function(xhr, status, error) {
-            console.log(error, status, xhr);
-        }
-    });
-}
-
-// Get tours
-
-function get_tours(idSeason) {
-    var $container = $('#tour_other');
-    $.ajax({
-        url: '/bets/get_season_tours/',
-        data: { 'season_id': idSeason },
-        method: "GET",
-        success: function(data, textStatus, xhr) {
-            var htmlTour = "",
-                content;
-            for (var i = 0; i < data.length; i++) {
-                var nameTour = data[i]['stage_name'],
-                    id_tour = data[i]['id'];
-                if (data[i]['is_current']) {
-                    make_preview(id_tour);
-                    make_comments(id_tour, 1);
-                    objBets.currentTour = id_tour;
-                    htmlTour += `
-                        <li id="` + id_tour + `">
-                            <span>` + nameTour + `</span>
-                            <div class="hover_menu active_menu"></div>
-                        </li>
-                    `
-                } else {
-                    htmlTour += `
-                        <li id="` + id_tour + `">
-                            <span>` + nameTour + `</span>
-                            <div class="hover_menu"></div>
-                        </li>
-                    `
-                }
-            }
-            $container.html(htmlTour);
-        },
-        error: function(xhr, status, error) {
-            console.log(error, status, xhr);
-        }
-    });
-}
-
-// Превью к матчам
-
-function make_preview(idTour) {
-    var $loader = $("#loaderMatches"),
-        $containerMatches = $("#container_preview_match");
-    $loader.show();
-    $containerMatches.hide();
-    $.ajax({
-        url: '/bets/get_stage_matches/',
-        data: { 'tour_id': idTour },
-        method: "GET",
-        success: function(data, textStatus, xhr) {
-            console.log(data);
-            var htmlMatches = "",
-                arrMatches = data['matches'],
-                lengthMatches = arrMatches.length;
-
-            for (var i = 0; i < lengthMatches; i++) {
-                var match = arrMatches[i],
-                    dateMatch = new Date(match.match_time),
-                    dayMatch = dateMatch.getDate() + ' ' + month_convert(dateMatch.getMonth()),
-                    time1 = dateMatch.getHours() + ':' + dateMatch.getMinutes();
-                    var time2 = toTimeZone(match.match_time);
-                htmlMatches += `
-                    <article class="preview_one_match">
-                        <section class="teams_logo_s_time">
-                            <div class="teams_img">
-                                <div class="img_logo_one_team">
-                                    <img src="` + match['home_team']['image'] + `" alt="">
-                                </div>
-                                <div class="img_logo_one_team">
-                                    <img src="` + match['guest_team']['image'] + `" alt="">
-                                </div>
-                            </div>
-                            <div class="dateMatchBet">
-                                <time class="match_date">` + dayMatch + `</time>
-                                <time class="match_time">Москва: ` + time2 + `</time>
-                                <time class="match_time">Киев: ` + time1 + `</time>
-                            </div>
-                        </section>
-                        <section class="match_discription">
-                            <h3>` + match['home_team']['team_name'] + ` - ` + match['guest_team']['team_name'] + `</h3>
-                            <div class="bet_match">
-                                <div class="evnt_bet">
-                                    П1 (` + match['coefficient']['home_coef'] + `) Х (` + match['coefficient']['draw_coef'] + `) П2 (` + match['coefficient']['guest_coef'] + `)
-                                </div>
-                                <div class="admin_bets_one_match">Наш прогноз: ` + match['home_goals'] + `:` + match['guest_goals'] + ` </div>
-                            </div>
-                            <p class="match_preview_discription">
-                                ` + match['preview'] + `
-                            </p>
-                        </section>
-                    </article>
-                `
-            }
-            $loader.hide();
-            $containerMatches.show();
-            $containerMatches.html(htmlMatches);
-        },
-        error: function(xhr, status, error) {
-            console.log(error, status, xhr);
-        }
-    });
-}
-
-function make_comments(idTour, page) {
-    var $blComments = $("#comments_tour");
-    $.ajax({
-        url: '/bets/get_stage_comments',
-        data: { "tour_id": idTour, "p": page },
-        dataType: "json",
-        cache: false,
-        success: function(data) {
-            var commentsHtml = "";
-            for (var i = data.length - 1; i >= 0; i--) {
-                dateComment = get_date(data[i]["timestamp"]);
-                commentsHtml += `
-                    <div class="blockquote commentBody">
-                        <div class="coments_author containerImgUser">
-                            <img src="` + data[i]["user"]["avatar"] + `" alt="" class="imgUser">
-                        </div>
-                        <div class="coment_author_time">
-                            <h5>
-                                ` + data[i]["user"]["first_name"] + ` ` + data[i]["user"]["last_name"] + `
-                            </h5>
-                            <time>` + dateComment + `</time>
-                            <p>` + data[i]["content"] + `</p>
-                        </div>
-
-                    </div>
-                `
-            };
-            if (page != 1) {
-                $blComments.append(commentsHtml);
-            } else {
-                $blComments.html(commentsHtml);
-            }
-        },
-        error: function(xhr, status, error) {
-            // console.log(error, status, xhr);
-        }
-    });
-};
-
-// Send comments
-
-$(document).on('click', '.btnFhouse', function(e) {
-    e.preventDefault();
-    var $inputText = $("#id_content"),
-        commentText = $inputText.val();
-    $.ajax({
-        url: '/bets/add_stage_comment/',
-        data: {
-            id: objBets.currentTour,
-            content: commentText,
-            csrfmiddlewaretoken: getCookie('csrftoken')
-        },
-        method: "POST",
-        success: function(data, textStatus, xhr) {
-            dateComment = get_date(new Date());
-            var commentsHtml = `
-                    <div class="blockquote commentBody">
-                        <div class="coments_author containerImgUser">
-                            <img src="` + avatar_user + `" alt="" class="imgUser">
-                        </div>
-                        <div class="coment_author_time">
-                            <h5>
-                                ` + first_name + ` ` + last_name + `
-                            </h5>
-                            <time>` + dateComment + `</time>
-                            <p>` + commentText + `</p>
-                        </div>
-
-                    </div>
-                `;
-            $("#comments_tour").append(commentsHtml);
-            $inputText.val("");
-        },
-        error: function(xhr, status, error) {
-            if (xhr.status === 409) {
-                alert("Error in comment adding!")
-            }
-        }
-    });
-});
-
 // Пагинация таблицы прогнозистов Ajax
 
 function makePagination(pageCount, currentPage) {
@@ -746,30 +496,30 @@ function goPagination(page, sumPage, curPage) {
     return ajaxRating(tableLength, currentPageLi, indexSection);
 }
 
-function chose_tour(load_championat) {
-    length_li_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li").length;
-    index_current_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li.current_tour").index();
-    for (var i = 0; i < length_li_tour; i++) {
-        var load_tour = (length_li_tour - i - 1);
-        var nuber_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li").eq(load_tour).text();
-        var content_tour_active = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu active_menu"></div></li>';
-        var content_tour = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu"></div></li>';
-        if ((length_li_tour - i - 1) == index_current_tour) {
-            $('#tour_other').prepend(content_tour_active);
-        } else {
-            $('#tour_other').prepend(content_tour);
-        }
-    };
-    $windowWidth = $(".container_tour").width();
-    width_li_nav = $("#tour_other").find("li").eq(0).width();
-    var maxMarginTour = Math.floor((Math.floor($windowWidth / width_li_nav) - 1) / 2);
-    if (index_current_tour < maxMarginTour) {
-        $(".nav_ul_tour").css({ "margin-left": "0" })
-    } else {
-        new_margin = (-(index_current_tour - maxMarginTour) * width_li_nav);
-        $(".nav_ul_tour").css({ "margin-left": new_margin })
-    }
-}
+// function chose_tour(load_championat) {
+//     length_li_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li").length;
+//     index_current_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li.current_tour").index();
+//     for (var i = 0; i < length_li_tour; i++) {
+//         var load_tour = (length_li_tour - i - 1);
+//         var nuber_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li").eq(load_tour).text();
+//         var content_tour_active = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu active_menu"></div></li>';
+//         var content_tour = '<li><a href="# ">' + nuber_tour + '</a><div class="hover_menu"></div></li>';
+//         if ((length_li_tour - i - 1) == index_current_tour) {
+//             $('#tour_other').prepend(content_tour_active);
+//         } else {
+//             $('#tour_other').prepend(content_tour);
+//         }
+//     };
+//     $windowWidth = $(".container_tour").width();
+//     width_li_nav = $("#tour_other").find("li").eq(0).width();
+//     var maxMarginTour = Math.floor((Math.floor($windowWidth / width_li_nav) - 1) / 2);
+//     if (index_current_tour < maxMarginTour) {
+//         $(".nav_ul_tour").css({ "margin-left": "0" })
+//     } else {
+//         new_margin = (-(index_current_tour - maxMarginTour) * width_li_nav);
+//         $(".nav_ul_tour").css({ "margin-left": new_margin })
+//     }
+// }
 
 function chooseCurrent(a, b, c) {
     var $first = $('.order1TopMatch'),
@@ -795,32 +545,3 @@ function getCookie(name) {
     }
     return cookieValue;
 };
-
-function get_date(date) {
-    var dateToString = "" + date,
-        dateDate = new Date(dateToString),
-        today = new Date();
-    timeLong = (today - dateDate) / (60000 * 24);
-    minuteAgo = Math.round((today - dateDate) / 60000);
-    if (timeLong > 1 && timeLong < 24) {
-        makeDate = "Сегодня в " + ("0" + dateDate.getHours()).slice(-2) + ":" + ("0" + dateDate.getMonth()).slice(-2);
-    } else if (timeLong < 1) {
-        makeDate = minuteAgo + " мин. назад"
-    } else {
-        makeDate = ("0" + dateDate.getDate()).slice(-2) + " " + arrMonth[dateDate.getMonth()] + " " + dateDate.getFullYear();
-    }
-    return makeDate;
-}
-
-function month_convert(month) {
-    var arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
-    return arrMonth[month]
-}
-
-
-function toTimeZone(time) {
-    var timeZ = new Date (time);
-    var newTime = timeZ.toLocaleString('ru-Ru', { timeZone: 'Europe/Moscow'});
-    var newTime2 = newTime.split(", ").slice(1).join("").split(":").slice(0, 2).join(":");
-    return newTime2;
-}

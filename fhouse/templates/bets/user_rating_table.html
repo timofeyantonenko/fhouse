@@ -38,7 +38,18 @@
         </div>
     </section>
     <section class="rightTable">
-        {% include "bets/top_week_matches.html" %}
+        <!-- ТОП матчи недели правая колонка -->
+        <div id="top_matches_right">
+            <div class="header_top_matches_right">
+                Ставка недели. 12-19 Сен. 2017
+            </div>
+            <div id="topMathRight" class="body_top_matches_right">
+            </div>
+            <div class="footer_top_matches_right">
+                <div id="read_preview"><a href="/bets">Читать превью</a></div>
+                <div id="bet_right" class="makeBetModal" data-toggle="modal">Сделать ставку</div>
+            </div>
+        </div>
     </section>
 </main>
 {% endblock content %}

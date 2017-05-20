@@ -800,6 +800,12 @@ h4 {
 
 /*Комментарии превью матчей */
 
+.comments_base2 {
+    max-height: 2000px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
 .add_comment_prev {
     padding: 10px 0;
     padding-bottom: 10px;
@@ -829,158 +835,20 @@ h4 {
     font-size: 18px;
     font-weight: 600;
     padding-bottom: 10px;
+    margin-top: 0;
 }
 
-.text_area_comment_prev {
-    width: calc(100% - 45px);
-    min-height: 35px;
+.comments_base {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #CCD1D9;
 }
 
-#type_comment {
-    height: 35px;
-    min-height: 35px;
-    overflow-y: hidden;
-    width: 100%;
-    outline: none;
-    resize: none;
-    font-size: 12px;
-    border-width: 0 0 1px;
-    background-color: #E8E8E8;
-    border-color: #76766f;
-    padding: 10px;
+#comments_tour,
+#comments_tour time,
+#comments_tour h3 {
+    font-size: 1.2rem !important;
 }
-
-#type_comment:focus {
-    border-color: #e62117;
-    background-color: #fff;
-}
-
-.author_comment_prev {
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.send_comment_prev {
-    width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
-    margin-top: 5px;
-}
-
-.author_comment_prev img {
-    width: 100%;
-}
-
-.author_comment_prev {
-    float: left;
-}
-
-.block_comments_preview {
-    font-size: 12px;
-    overflow-y: auto;
-}
-
-.user_comment {
-    overflow-y: auto;
-    padding: 0px;
-}
-
-.comment_placeholder {
-    -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
-}
-
-.content_coment {
-    margin-left: 50px;
-    padding-bottom: 10px;
-}
-
-.coment_author_time {
-    min-width: 51%;
-    color: #7f8992;
-}
-
-.coment_author_time a {
-    font-weight: 600;
-}
-
-.blockquote {
-    padding: 3% 3% 0 3%;
-}
-
-.blockquote:hover {
-    background-color: #f0f2f5;
-}
-
-.author_name_date {
-    color: #7f8992;
-    font-weight: 500;
-    font-size: 16px;
-}
-
-.author_name_date a {
-    color: #222;
-    font-size: 24px;
-    font-weight: 600;
-    margin-right: 7px;
-    margin-left: 10px;
-}
-
-.all_comment_for_preview {
-    overflow: hidden;
-}
-
-.user_comment_preview:first-child {
-    padding-top: 10px;
-}
-
-.block_comments_preview::-webkit-scrollbar {
-    width: 10px;
-}
-
-.block_comments_preview::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.block_comments_preview::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.block_comments_preview::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.more_comment_prev {
-    padding: 5px 15px;
-    margin: 0px auto;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 14px;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #afadad;
-    border-radius: 2px;
-    cursor: pointer;
-    width: 200px;
-    text-align: center;
-}
-
-.more_comment_prev:hover {
-    background: #eee;
-}
-
-.user_comment hr {
-    margin: 20px 0 0;
-    border-top: 1px solid #ccd1d9;
-}
-
 
 /*Навигация три топовые матчи */
 
@@ -1320,13 +1188,16 @@ section.order3TopMatch {
 }
 
 .logo_one_top_match_right {
-    width: 35px;
-    float: left;
+    width: 25px;
+    height: 25px;
+    float: right;
 }
 
 .logo_one_top_match_right img {
-    max-width: 25px;
-    max-height: 25px;
+    height: inherit;
+    width: inherit;
+    -o-object-fit: contain;
+       object-fit: contain;
     margin: 5px 0;
 }
 
