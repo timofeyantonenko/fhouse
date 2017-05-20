@@ -2,12 +2,37 @@ var currentPageLi = 1,
     lengthPagination,
     locationLink = window.location.pathname,
     tableLength = 10,
-    indexSection = 0;
+    indexSection = 0,
+    objBets = {};
 
 $(document).ready(function() {
 
+    objBets.currentLeague = first_season;
+
     get_table(1);
     get_tours(first_season);
+
+    // Active first league_table
+    $("#all_bets_nav").children("div").eq(0).addClass("active_champ");
+
+    $(document).on("click", "#all_bets_nav .change_champ", function(e) {
+        if ($(this).hasClass('active_champ')) return;
+        $('.active_champ').removeClass('active_champ');
+        $(this).addClass('active_champ');
+        var idSeason = +$(this).attr("data-id");
+        objBets.currentLeague = idSeason;
+        get_tours(idSeason);
+    })
+
+    $(document).on("click", "#tour_other li", function() {
+        var $lineHover = $(this).find('.hover_menu')
+        if ($lineHover.hasClass('active_menu')) return;
+        $('.active_menu').removeClass('active_menu');
+        $lineHover.addClass('active_menu');
+        var idTour = +$(this).attr("id");
+        objBets.currentTour = idTour;
+        make_preview(idTour);
+    })
 
     var leftNav,
         center,
@@ -47,10 +72,6 @@ $(document).ready(function() {
         goPagination(thisLi, lengthPagination, currentPageLi);
     });
 
-    imgNavBet(sizeImg, sizeImgMobile);
-    $(window).resize(function() {
-        imgNavBet(sizeImg, sizeImgMobile);
-    })
 
     // Выбор тура
 
@@ -469,10 +490,6 @@ function get_table(ajax_data) {
 
 // Get tours
 
-// var objTour = {
-//     current_tour:
-// }
-
 function get_tours(idSeason) {
     var $container = $('#tour_other');
     $.ajax({
@@ -480,7 +497,6 @@ function get_tours(idSeason) {
         data: { 'season_id': idSeason },
         method: "GET",
         success: function(data, textStatus, xhr) {
-            console.log(data);
             var htmlTour = "",
                 content;
             for (var i = 0; i < data.length; i++) {
@@ -488,6 +504,8 @@ function get_tours(idSeason) {
                     id_tour = data[i]['id'];
                 if (data[i]['is_current']) {
                     make_preview(id_tour);
+                    make_comments(id_tour, 1);
+                    objBets.currentTour = id_tour;
                     htmlTour += `
                         <li id="` + id_tour + `">
                             <span>` + nameTour + `</span>
@@ -495,12 +513,12 @@ function get_tours(idSeason) {
                         </li>
                     `
                 } else {
-                   htmlTour += `
+                    htmlTour += `
                         <li id="` + id_tour + `">
                             <span>` + nameTour + `</span>
                             <div class="hover_menu"></div>
                         </li>
-                    ` 
+                    `
                 }
             }
             $container.html(htmlTour);
@@ -514,69 +532,61 @@ function get_tours(idSeason) {
 // Превью к матчам
 
 function make_preview(idTour) {
-    var $loaderTable = $("#loaderMatches"),
-        $tableINherit = $("#container_preview_match");
-    $tableINherit.empty();
-    $loaderTable.show();
+    var $loader = $("#loaderMatches"),
+        $containerMatches = $("#container_preview_match");
+    $loader.show();
+    $containerMatches.hide();
     $.ajax({
         url: '/bets/get_stage_matches/',
-        data: { 'data_id':idTour },
+        data: { 'tour_id': idTour },
         method: "GET",
         success: function(data, textStatus, xhr) {
-            console.log(data);
-            var objectMatch = data['match'],
-                lengthMatches = objectMatch.lenght,
-                htmlMatch = "";
-            // for (var i = 0; i < lengthMatches; i++) {
-            //     var img1 = objectMatch[i]['teams']['first_team']['url'],
-            //         img2 = objectMatch[i]['teams']['second_team']['url'],
-            //         time = objectMatch[i][''],
-            //         team1 = objectMatch[i]['teams']['first_team']['name'],
-            //         team2 = objectMatch[i]['teams']['second_team']['name'],
-            //         kof1 = objectMatch[i]['coefficients']['first'],
-            //         kof2 = objectMatch[i]['coefficients']['second'],
-            //         kofDraw = objectMatch[i]['coefficients']['draw'],
-            //         forecast1 = objectMatch[i]['forecast']['first_goal'],
-            //         forecast2 = objectMatch[i]['forecast']['second_goal'],
-            //         discription = objectMatch[i]['text'];
-            //     // result = objectMatch[i][''];
-            //     htmlMatch += `
-            //         <article class="preview_one_match">
-            //             <section class="teams_logo_s_time">
-            //                 <div class="teams_img">
-            //                     <div class="img_logo_one_team">
-            //                         <img src="` + img1 + `" alt="">
-            //                     </div>
-            //                     <div class="img_logo_one_team">
-            //                         <img src="` + img2 + `" alt="">
-            //                     </div>
-            //                 </div>
-            //                 <div class="dateMatchBet">
-            //                     <time class="match_date">` + +`</time>
-            //                     <time class="match_time">Москва: ` + +`</time>
-            //                     <time class="match_time">Киев: ` + +`</time>
-            //                 </div>
-            //             </section>
-            //             <section class="match_discription">
-            //                 <h3>` + team1 + ` - ` + team2 + `</h3>
-            //                 <div class="bet_match">
-            //                     <div class="evnt_bet">
-            //                         П1 (` + kof1 + `) Х (` + kofDraw + `) П2 (` + kof2 + `)
-            //                     </div>
-            //                     <div class="admin_bets_one_match">Наш прогноз: ` + forecast1 + ` : ` + forecast2 + `</div>
-            //                 </div>
-            //                 <p class="match_preview_discription">
-            //                     ` + discription + `
-            //                 </p>
-            //                 <div class="result_match">
-            //                     Сыграли: ` + +`
-            //                 </div>
-            //             </section>
-            //         </article>
-            //     `
-            // }
-            $loaderTable.hide();
-            $tableINherit.html();
+            var lengthMatches = data.length,
+                htmlMatches = ""
+            for (var i = 0; i < lengthMatches; i++) {
+                var match = data[i],
+                    dateMatch = new Date(match.match_time),
+                    dayMatch = dateMatch.getDate() + ' ' + month_convert(dateMatch.getMonth()),
+                    time1 = dateMatch.getHours() + ':' + dateMatch.getMinutes();
+                    var time2 = toTimeZone(match.match_time);
+                htmlMatches += `
+                    <article class="preview_one_match">
+                        <section class="teams_logo_s_time">
+                            <div class="teams_img">
+                                <div class="img_logo_one_team">
+                                    <img src="` + match['home_team']['image'] + `" alt="">
+                                </div>
+                                <div class="img_logo_one_team">
+                                    <img src="` + match['guest_team']['image'] + `" alt="">
+                                </div>
+                            </div>
+                            <div class="dateMatchBet">
+                                <time class="match_date">` + dayMatch + `</time>
+                                <time class="match_time">Москва: ` + time2 + `</time>
+                                <time class="match_time">Киев: ` + time1 + `</time>
+                            </div>
+                        </section>
+                        <section class="match_discription">
+                            <h3>` + match['home_team']['team_name'] + ` - ` + match['guest_team']['team_name'] + `</h3>
+                            <div class="bet_match">
+                                <div class="evnt_bet">
+                                    П1 (` + match['coefficient']['home_coef'] + `) Х (` + match['coefficient']['draw_coef'] + `) П2 (` + match['coefficient']['guest_coef'] + `)
+                                </div>
+                                <div class="admin_bets_one_match">Наш прогноз: 1:1 </div>
+                            </div>
+                            <p class="match_preview_discription">
+                                description
+                            </p>
+                            <div class="result_match">
+                                Сыграли: 2:3
+                            </div>
+                        </section>
+                    </article>
+                `
+            }
+            $loader.hide();
+            $containerMatches.show();
+            $containerMatches.html(htmlMatches);
         },
         error: function(xhr, status, error) {
             console.log(error, status, xhr);
@@ -584,11 +594,11 @@ function make_preview(idTour) {
     });
 }
 
-function make_comments(ajax_data, page) {
+function make_comments(idTour, page) {
     var $blComments = $("#comments_tour");
     $.ajax({
-        url: '/some',
-        data: { "tour_id": id_img, "page": page },
+        url: '/bets/get_stage_comments',
+        data: { "tour_id": idTour, "p": page },
         dataType: "json",
         cache: false,
         success: function(data) {
@@ -602,8 +612,7 @@ function make_comments(ajax_data, page) {
                         </div>
                         <div class="coment_author_time">
                             <h5>
-                                ` + data[i]["user"]["first_name"] + ` ` + data[i]["user"]["last_name"] +
-                    `
+                                ` + data[i]["user"]["first_name"] + ` ` + data[i]["user"]["last_name"] + `
                             </h5>
                             <time>` + dateComment + `</time>
                             <p>` + data[i]["content"] + `</p>
@@ -616,12 +625,7 @@ function make_comments(ajax_data, page) {
                 $blComments.append(commentsHtml);
             } else {
                 $blComments.html(commentsHtml);
-                // if ($moreCom.attr("data-page") == Math.ceil(objectImg["lengthComObj"] / 10) - 1) {
-                //     $moreCom.addClass("endMore");
-                // }
             }
-            // $moreCom = $("#load_coments");
-            // $moreCom.removeClass("moreLoading");
         },
         error: function(xhr, status, error) {
             // console.log(error, status, xhr);
@@ -634,13 +638,11 @@ function make_comments(ajax_data, page) {
 $(document).on('click', '.btnFhouse', function(e) {
     e.preventDefault();
     var $inputText = $("#id_content"),
-        commentText = $inputText.val(),
-        $blComments = $("#comments_tour");
-    // photo_id = objSlider[1]["idImg"];
+        commentText = $inputText.val();
     $.ajax({
-        url: 'some',
+        url: '/bets/add_stage_comment/',
         data: {
-            id: tour_id,
+            id: objBets.currentTour,
             content: commentText,
             csrfmiddlewaretoken: getCookie('csrftoken')
         },
@@ -662,8 +664,7 @@ $(document).on('click', '.btnFhouse', function(e) {
 
                     </div>
                 `;
-            $blComments.prepend(commentsHtml);
-            focusInput();
+            $("#comments_tour").append(commentsHtml);
             $inputText.val("");
         },
         error: function(xhr, status, error) {
@@ -673,6 +674,7 @@ $(document).on('click', '.btnFhouse', function(e) {
         }
     });
 });
+
 // Пагинация таблицы прогнозистов Ajax
 
 function makePagination(pageCount, currentPage) {
@@ -744,22 +746,6 @@ function goPagination(page, sumPage, curPage) {
     return ajaxRating(tableLength, currentPageLi, indexSection);
 }
 
-function imgNavBet(a, b) {
-    $windowWidth = $(window).width();
-    for (var i = 0; i < champLogo.length; i++) {
-        if ($windowWidth > 969) {
-            champLogo.eq(i).css({
-                "background-position-x": ((a * i) + (a / 8))
-            });
-        } else {
-            $(champLogo).eq(i).css({
-                "background-position-x": ((b * i) + (b / 8))
-            });
-        }
-        champLogo.eq(i).css({ "opacity": "0.6" });
-    };
-}
-
 function chose_tour(load_championat) {
     length_li_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li").length;
     index_current_tour = $("#id_list_tour").children("ul").eq(load_championat).children("li.current_tour").index();
@@ -809,3 +795,32 @@ function getCookie(name) {
     }
     return cookieValue;
 };
+
+function get_date(date) {
+    var dateToString = "" + date,
+        dateDate = new Date(dateToString),
+        today = new Date();
+    timeLong = (today - dateDate) / (60000 * 24);
+    minuteAgo = Math.round((today - dateDate) / 60000);
+    if (timeLong > 1 && timeLong < 24) {
+        makeDate = "Сегодня в " + ("0" + dateDate.getHours()).slice(-2) + ":" + ("0" + dateDate.getMonth()).slice(-2);
+    } else if (timeLong < 1) {
+        makeDate = minuteAgo + " мин. назад"
+    } else {
+        makeDate = ("0" + dateDate.getDate()).slice(-2) + " " + arrMonth[dateDate.getMonth()] + " " + dateDate.getFullYear();
+    }
+    return makeDate;
+}
+
+function month_convert(month) {
+    var arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+    return arrMonth[month]
+}
+
+
+function toTimeZone(time) {
+    var timeZ = new Date (time);
+    var newTime = timeZ.toLocaleString('ru-Ru', { timeZone: 'Europe/Moscow'});
+    var newTime2 = newTime.split(", ").slice(1).join("").split(":").slice(0, 2).join(":");
+    return newTime2;
+}

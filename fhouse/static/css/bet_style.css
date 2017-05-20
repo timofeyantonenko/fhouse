@@ -201,11 +201,15 @@ h4 {
 }
 
 .change_champ {
-    opacity: 0;
+    opacity: 0.6;
+    margin: 0 2.5px;
+    cursor: pointer;
 }
-
 .change_champ img {
-    
+    -o-object-fit: contain;
+       object-fit: contain;
+    width: inherit;
+    height: inherit;
 }
 
 .change_champ:hover {
@@ -261,6 +265,7 @@ h4 {
     text-align: center;
     position: relative;
     line-height: 50px;
+    cursor: pointer;
 }
 
 .nav_ul_tour li:hover .hover_menu {
@@ -269,7 +274,7 @@ h4 {
     transition: all 0.15s ease-out;
 }
 
-.nav_ul_tour li a {
+.nav_ul_tour li span {
     width: 60px;
     display: block;
     color: #76766f;
@@ -674,7 +679,7 @@ h4 {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     width: 100%;
-    padding: 10px 0px;
+    padding: 20px 0px;
     border-top: 1px solid #CCD1D9;
 }
 
@@ -1509,7 +1514,6 @@ section.order3TopMatch {
     .change_champ {
         width: 45px;
         height: 45px;
-        background-size: 600px;
     }
 }
 
@@ -1592,6 +1596,16 @@ section.order3TopMatch {
         margin-top: 10px;
         text-align: center;
     }
+    .match_discription h3 {
+        margin-top: 0;
+    }
+    .dateMatchBet {
+        margin-top: 10px;
+    }
+    .dateMatchBet time {
+        width: 100%;
+        display: block;
+    }
 }
 
 @media screen and (max-width: 549px) {
@@ -1609,7 +1623,7 @@ section.order3TopMatch {
             flex-wrap: wrap;
         margin-left: 5px;
     }
-    .dateMatchBet>div {
+    .dateMatchBet>time {
         margin: 0 5px 5px;
     }
     .title_match {
@@ -1746,4 +1760,47 @@ section.order3TopMatch {
 
 .currentLast #lastDot {
     display: none;
+}
+
+
+/**************************
+Loader
+**************************/
+
+#loaderMatches {
+    width: 100%;
+    padding: 20px;
+}
+
+#loaderMatches>div {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: 2px solid #A4A4A4;
+    border-top: 2px solid #BB3434;
+    margin: 0 auto;
+    -webkit-animation: loadingPage 1s linear infinite;
+    animation: loadingPage 1s linear infinite;
+}
+
+@-webkit-keyframes loadingPage {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes loadingPage {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }

@@ -1,7 +1,10 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %}{{ title }}{% endblock head_title %} {% block head_extra %}
 <title>Prognosis Fhouse</title>
 <script type="text/javascript">
-    var first_season = {{ seasons.0.id }};
+    var first_season = {{ seasons.0.id }},
+        first_name = "{{request.user.first_name|escapejs|safe}}",
+        last_name = "{{request.user.first_name|escapejs|safe}}",
+        avatar_user = "{{request.user.avatar.url|escapejs|safe}}";
 </script>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <!-- <link rel="stylesheet" href='{% static "css/jquery.formstyler.css" %}'> -->
@@ -15,8 +18,8 @@
             <!-- Навигация по чемпионатам  -->
             <div id="all_bets_nav">
                 {% for season in seasons %}
-                <div class="change_champ" season_id="{{ season.id }}">
-                    <img style="width: 50px; height:50px" src="{{ season.season_league.image.url }}">
+                <div class="change_champ" data-id="{{ season.id }}">
+                    <img src="{{ season.season_league.image.url }}">
                 </div>
                 {% endfor %}
             </div>
@@ -34,12 +37,11 @@
             </div>
             <div class="after_nav_tour">
                 <div  class="preview_one_championship">
+                    <header id="loaderMatches" class="loader">
+                        <div></div>
+                    </header>
                     <main id="container_preview_match">
-                        
                     </main>
-                    <footer id="loaderMatches" class="loader">
-                        <img src="../../static/img/loadGallery.gif" alt="loader">
-                    </footer>
                 </div>
                 <!-- Комментарии к превью -->
                 <div class="block_comments_for_one_champ">
