@@ -541,10 +541,13 @@ function make_preview(idTour) {
         data: { 'tour_id': idTour },
         method: "GET",
         success: function(data, textStatus, xhr) {
-            var lengthMatches = data.length,
-                htmlMatches = ""
+            console.log(data);
+            var htmlMatches = "",
+                arrMatches = data['matches'],
+                lengthMatches = arrMatches.length;
+
             for (var i = 0; i < lengthMatches; i++) {
-                var match = data[i],
+                var match = arrMatches[i],
                     dateMatch = new Date(match.match_time),
                     dayMatch = dateMatch.getDate() + ' ' + month_convert(dateMatch.getMonth()),
                     time1 = dateMatch.getHours() + ':' + dateMatch.getMinutes();
@@ -572,14 +575,11 @@ function make_preview(idTour) {
                                 <div class="evnt_bet">
                                     П1 (` + match['coefficient']['home_coef'] + `) Х (` + match['coefficient']['draw_coef'] + `) П2 (` + match['coefficient']['guest_coef'] + `)
                                 </div>
-                                <div class="admin_bets_one_match">Наш прогноз: 1:1 </div>
+                                <div class="admin_bets_one_match">Наш прогноз: ` + match['home_goals'] + `:` + match['guest_goals'] + ` </div>
                             </div>
                             <p class="match_preview_discription">
-                                description
+                                ` + match['preview'] + `
                             </p>
-                            <div class="result_match">
-                                Сыграли: 2:3
-                            </div>
                         </section>
                     </article>
                 `
