@@ -18,16 +18,13 @@ def get_section_information(request):
     count_of_albums_to_load = 6
 
     page = request.GET.get("page", 1)
-    # page = request.GET.page
-    # print("page is {}".format(page))
     section = request.GET.get('section', "Stadium")
     albums = SectionAlbum.objects.filter(album_section__section_title=section).order_by('-updated')
-    print("PAGE IS: {}".format(page))
     photos = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-updated')
     paginator = Paginator(photos, count_of_photo_by_pagination)  # Show n posts per page
     photos = paginator.page(page)
-    print("count is: ", albums[0].likes)
     photo_serializer = AlbumPhotoSerializer(photos, many=True, context={'request': request})
+    print(photo_serializer.data)
     album_serializer = SectionAlbumSerializer(albums[
                                               :count_of_albums_to_load], many=True, context={'request': request})
     return Response({"photo_list": photo_serializer.data, 'albums': album_serializer.data})

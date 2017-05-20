@@ -486,7 +486,6 @@ h4 {
 }
 
 .select_table {
-    display: none;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -495,7 +494,6 @@ h4 {
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-    display: none;
 }
 
 .select_table>div {

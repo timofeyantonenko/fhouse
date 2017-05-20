@@ -9,16 +9,6 @@ from utils.abstract_classes import ForeignContentClass
 # Create your models here.
 
 
-class Continent(models.Model):
-    """
-    One object is South Africa, Europe, etc
-    """
-    name = models.CharField(max_length=120)
-
-    def __str__(self):
-        return self.name
-
-
 class League(models.Model):
     """
     One object is APL, or Espana Primera
@@ -62,6 +52,7 @@ class SeasonStage(CommentedClass, ForeignContentClass):
 
 class Team(models.Model):
     team_name = models.CharField(max_length=80)
+    team_short_name = models.CharField(max_length=10, null=True, blank=True)
     team_league = models.ManyToManyField(Season)
     image = models.ImageField(upload_to=upload_location,
                               null=True, blank=True)
@@ -70,18 +61,43 @@ class Team(models.Model):
         return self.team_name
 
 
+class ChampionatType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Championat(models.Model):
+
+    name = models.CharField(max_length=100)
+    have_groups = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    championat_type = models.ForeignKey(ChampionatType, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class ChampionatGroup(models.Model):
+    name = models.CharField(max_length=100)
+    championat = models.ForeignKey(Championat, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{}:{}".format(self.championat.name, self.name)
+
+
 class TeamSeasonResult(models.Model):
-    season = models.ForeignKey(Season, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    group = models.PositiveSmallIntegerField(null=True, blank=True)
-    continent = models.ForeignKey(Continent, on_delete=models.CASCADE, null=True, blank=True)
+    group = models.ForeignKey(ChampionatGroup, on_delete=models.CASCADE, null=True, blank=True)
+    championat = models.ForeignKey(Championat, on_delete=models.CASCADE, null=True, blank=True)
     games = models.SmallIntegerField(default=0)
     goals = models.SmallIntegerField(default=0)
     points = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return "{}; {}: games: {}, goals: {}, points: {}".format(self.season, self.team, self.games, self.goals,
-                                                                 self.points)
+        return "{}: games: {}, goals: {}, points: {}".format(self.team, self.games,
+                                                                 self.goals, self.points)
 
 
 class Match(models.Model):
@@ -193,6 +209,7 @@ class StageBet(models.Model):
     match_2 = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='%(class)s_match2_stage', default=1)
     match_3 = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='%(class)s_match3_stage', default=1)
 
+    start_date = models.DateTimeField()
     check_date = models.DateTimeField()
     must_be_checked = models.BooleanField(default=True)
 
