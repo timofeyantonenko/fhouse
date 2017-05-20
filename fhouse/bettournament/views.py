@@ -157,8 +157,11 @@ def get_stage_matches(request):
     else:
         tour_matches = tour_matches.filter(stage__id=tour_id)
 
+    comments = SeasonStage.objects.get(id=tour_id).comments.count()
+
     match_serializer = MatchSerializer(tour_matches, many=True, context={'request': request})
-    return Response(match_serializer.data)
+    return Response({"matches": match_serializer.data,
+                     "comments_count": comments})
 
 
 @api_view(['GET'])
@@ -177,10 +180,9 @@ def get_all_bet_rating(request):
 @api_view(['GET'])
 def get_stage_comments(request):
     count_of_comments_per_page = 10
-    stage_name = request.GET.get("stage_name", "1 tour")
-    season_id = request.GET.get("season_id", 2)
+    stage_id = request.GET.get("stage_id", 2)
     page = request.GET.get("p", 1)
-    instance = SeasonStage.objects.filter(stage_name=stage_name).filter(stage_season__id=season_id).first()
+    instance = SeasonStage.objects.get(id=stage_id)
     comments = instance.comments
     paginator = Paginator(comments, count_of_comments_per_page)  # Show n posts per page
     try:
