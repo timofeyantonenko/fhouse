@@ -18,7 +18,7 @@
             <!-- Навигация по чемпионатам  -->
             <div id="all_bets_nav">
                 {% for season in seasons %}
-                <div class="change_champ" data-id="{{ season.id }}">
+                <div class="change_champ" data-id="{{ season.id }}" data-name="{{season.season_league.league_name}}">
                     <img src="{{ season.season_league.image.url }}">
                 </div>
                 {% endfor %}
@@ -69,92 +69,31 @@
             <div class="head_table">
                 <div class="table_name">Турнирная таблица</div>
                 <div class="nav_table">
-                    <div class="one_division_nav">Чемпионаты</div>
-                    <div class="one_division_nav">Еврокубки</div>
-                    <div class="one_division_nav">Сборные</div>
+                    {% for championat_type_name in championats_dict.keys %}
+                    <div class="one_division_nav" data-active="{{ forloop.counter }}">{{ championat_type_name }}</div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="body_table">
                 <div class="select_tab_conteiner">
-                    <!-- Если чемпионаты -->
-                    <div id="selection_champ" class="select_table">
-                        <div class="select_championship_selector">
-                            <select name="select_championship" id="select_championship">
-                                <option value="0">FA Premier League</option>
-                                <option value="1">Liga BBVA</option>
-                                <option value="2">Serie A</option>
-                                <option value="3">Bundesliga 1</option>
-                                <option value="4">Ligue 1</option>
-                                <option value="5">Российская Премьер-Лига</option>
-                                <option value="6">Украинская Премьер-лига</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- Если Еврокубки  -->
-                    <div id="selection_tournament" class="select_table">
-                        <div class="select_championship_selector">
-                            <select name="select_championship" id="select_championship_euro">
-                                <option value="0">Лига Чемпионов</option>
-                                <option value="1">Лига Европы</option>
-                            </select>
-                        </div>
-                        <!-- if champions league -->
-                        <div class="select_championship_selector">
-                            <select name="select_championship" id="select_group_LC">
-                                <option value="0">Группа 1</option>
-                                <option value="1">Группа 2</option>
-                                <option value="2">Группа 3</option>
-                                <option value="3">Группа 4</option>
-                                <option value="4">Группа 5</option>
-                                <option value="5">Группа 6</option>
-                                <option value="6">Группа 7</option>
-                                <option value="7">Группа 8</option>
-                            </select>
-                        </div>
-                        <!-- if Europa League    -->
-                        <div class="select_championship_selector">
-                            <select name="select_championship" id="select_group_LE">
-                                <option value="0">Группа 1</option>
-                                <option value="1">Группа 2</option>
-                                <option value="2">Группа 3</option>
-                                <option value="3">Группа 4</option>
-                                <option value="4">Группа 5</option>
-                                <option value="5">Группа 6</option>
-                                <option value="6">Группа 7</option>
-                                <option value="7">Группа 8</option>
-                                <option value="8">Группа 9</option>
-                                <option value="9">Группа 10</option>
-                                <option value="10">Группа 11</option>
-                                <option value="11">Группа 12</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- Если сборные -->
-                    <div id="nation_selection_tournament" class="select_table">
-                        <div class="select_championship_selector">
-                            <select name="select_championship" id="select_nation_tournament">
-                                <option value="">Квалиффикация к ЧМ 2018 Европа</option>
-                            </select>
-                        </div>
-                        <div class="select_championship_selector">
-                            <select name="select_championship" id="select_continent">
-                                <option value="0">Европа</option>
-                                <option value="1">Южная Америка</option>
-                            </select>
-                        </div>
-                        <div class="select_championship_selector">
-                            <select name="select_championship" id="select_group_CM">
-                                <option value="0">Группа 1</option>
-                                <option value="1">Группа 2</option>
-                                <option value="2">Группа 3</option>
-                                <option value="3">Группа 4</option>
-                                <option value="4">Группа 5</option>
-                                <option value="5">Группа 6</option>
-                                <option value="6">Группа 7</option>
-                                <option value="7">Группа 8</option>
-                            </select>
-                        </div>
-                    </div>
+                    {% for championat_type_name, championat_type_leagues in championats_dict.items %}
+                    <section data-active="{{ forloop.counter }}">
+                            <select>
+                                {% for championat_name, championat_detail in championat_type_leagues.items %}
+                                <option value="{{ championat_detail.id }}">{{championat_name}}</option>
+                                {% endfor %}
+                                </select>
+                            {% for championat_name, championat_detail in  championat_type_leagues.items %}
+                                {% if championat_detail.groups %}
+                                    <select class="group_select" data-parent-id="{{championat_detail.id}}">
+                                    {% for group in championat_detail.groups %}
+                                        <option value="{{group.id}}">{{ group.name }}</option>
+                                    {% endfor %}
+                                    </select>
+                                {% endif %}
+                            {% endfor %}
+                        </section>
+                    {% endfor %}
                 </div>
                 <!-- Подсказки таблица  -->
                 <div class="all_team_table">

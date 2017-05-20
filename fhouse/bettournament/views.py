@@ -13,7 +13,8 @@ from rest_framework.response import Response
 from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSerializer, SeasonStageSerializer
 from django.views.decorators.csrf import csrf_protect
 
-from .models import StageBet, League, MatchBetFromUser, UsersResult, TeamSeasonResult, Match, SeasonStage, Season
+from .models import StageBet, League, MatchBetFromUser, UsersResult, TeamSeasonResult, Match, SeasonStage, Season, \
+    ChampionatType, Championat, ChampionatGroup
 from utils.prepare_methods import create_comment
 from comments.serializers import CommentSerializer
 
@@ -45,6 +46,26 @@ def all_reviews(request):
     context = {}
     active_seasons = Season.objects.active()
     context["seasons"] = active_seasons
+
+    championats_dict = {}
+    championat_types = ChampionatType.objects.all()
+    for championat_type in championat_types:
+        championats_dict[championat_type.name] = {}
+        championats = Championat.objects.filter(championat_type=championat_type)
+        for championat in championats:
+            championats_dict[championat_type.name][championat.name] = {"id": championat.id}
+            if championat.have_groups:
+                groups = ChampionatGroup.objects.filter(championat=championat)
+                championats_dict[championat_type.name][championat.name]["groups"] = []
+                for group in groups:
+                    championats_dict[championat_type.name][championat.name]["groups"].append({
+                        "name": group.name,
+                        "id": group.id,
+                    })
+
+    print(championats_dict)
+    context["championats_dict"] = championats_dict
+
     if request.user.is_authenticated():
         context['user'] = request.user
     else:
@@ -65,8 +86,6 @@ def get_bet_stage_info(request):
 def get_league_status(request):
     all_teams = TeamSeasonResult.objects.all()
     # context = {}
-    # we take current bet. BE AWARE - it must be only one object
-    # current_week_bet = StageBet.objects.filter(must_be_checked=True).last()
     league_serializer = TeamSeasonResultSerializer(all_teams, many=True, context={'request': request})
     print(league_serializer)
     return Response({'league_table': league_serializer.data})
@@ -147,7 +166,6 @@ def get_bet_result_table(request):
 
 @api_view(['GET'])
 def get_stage_matches(request):
-
     tour_id = request.GET.get("tour_id")
 
     tour_matches = Match.objects.filter(stage__id=tour_id)
