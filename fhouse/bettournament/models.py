@@ -32,9 +32,17 @@ class League(models.Model):
         return self.league_name
 
 
+class SeasonManager(models.Manager):
+    def active(self, *args, **kwargs):
+        return super(SeasonManager, self).filter(is_active=True)
+
+
 class Season(models.Model):
     season_name = models.CharField(max_length=50)
     season_league = models.ForeignKey(League, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+
+    objects = SeasonManager()
 
     def __str__(self):
         return "{}: {}".format(self.season_league, self.season_name)

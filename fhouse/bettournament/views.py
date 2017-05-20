@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage
-from django.db.models.query import QuerySet
 
 from django.db.models import Sum
 from django.utils import timezone
@@ -11,10 +10,10 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSerializer
+from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSerializer, SeasonStageSerializer
 from django.views.decorators.csrf import csrf_protect
 
-from .models import StageBet, League, MatchBetFromUser, UsersResult, TeamSeasonResult, Match, SeasonStage
+from .models import StageBet, League, MatchBetFromUser, UsersResult, TeamSeasonResult, Match, SeasonStage, Season
 from utils.prepare_methods import create_comment
 from comments.serializers import CommentSerializer
 
@@ -44,6 +43,8 @@ def main_bet(request):
 
 def all_reviews(request):
     context = {}
+    active_seasons = Season.objects.active()
+    context["seasons"] = active_seasons
     if request.user.is_authenticated():
         context['user'] = request.user
     else:
@@ -52,7 +53,6 @@ def all_reviews(request):
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
 def get_bet_stage_info(request):
     context = {}
     # we take current bet. BE AWARE - it must be only one object
@@ -62,7 +62,6 @@ def get_bet_stage_info(request):
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
 def get_league_status(request):
     all_teams = TeamSeasonResult.objects.all()
     # context = {}
@@ -126,7 +125,6 @@ def make_bet(request):
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
 def get_bet_result_table(request):
     period = request.GET.get("period", "week")
     days = -1
@@ -139,21 +137,15 @@ def get_bet_result_table(request):
     today = timezone.now()
     begin_check_date = today - timedelta(days=100)
     all_stages = StageBet.objects.filter(check_date__gte=begin_check_date)
-    # q = UsersResult.objects.filter(stage__in=all_stages).query
-    # q.group_by = ["result_match1", ]
-    # q.group_by["user", ]
-    # print([ (c.score, c.user.first_name) for c in QuerySet(query=q, model=UsersResult )])
     user_results = UsersResult.objects.filter(stage__in=all_stages).values("user__first_name",
                                                                            "user__last_name",
                                                                            "user__avatar").annotate(
         score=Sum('score')).order_by('-score')
-    print(user_results)
 
     return Response(user_results)
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
 def get_stage_matches(request):
     league_id = request.GET.get("league_id")
     tour_id = request.GET.get("tour_id")
@@ -169,13 +161,20 @@ def get_stage_matches(request):
     return Response(match_serializer.data)
 
 
+@api_view(['GET'])
+def get_season_tours(request):
+    season_id = request.GET.get("season_id")
+    stages = SeasonStage.objects.filter(stage_season__id=season_id)
+    stages_serializer = SeasonStageSerializer(stages, many=True, context={'request': request})
+    return Response(stages_serializer.data)
+
+
 def get_all_bet_rating(request):
     context = {}
     return render(request, "bets/user_rating_table.html", context)
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated,))
 def get_stage_comments(request):
     count_of_comments_per_page = 10
     stage_name = request.GET.get("stage_name", "1 tour")

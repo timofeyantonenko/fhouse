@@ -10,6 +10,7 @@ from .views import (
     get_stage_matches,
     get_stage_comments,
     add_stage_comment,
+    get_season_tours,
 )
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
     url(r'^all_bet_rating/$', get_all_bet_rating),
     url(r'^get_stage_matches/$', get_stage_matches),
     url(r'^get_stage_comments/$', get_stage_comments),
+    url(r'^get_season_tours/$', get_season_tours),
     url(r'^add_stage_comment/$', add_stage_comment),
     url(r'^make_bet/$', make_bet),
     url(r'^$', main_bet, name="bets"),

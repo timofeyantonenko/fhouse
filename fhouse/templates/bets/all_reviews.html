@@ -1,5 +1,8 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %}{{ title }}{% endblock head_title %} {% block head_extra %}
 <title>Prognosis Fhouse</title>
+<script type="text/javascript">
+    var first_season = {{ seasons.0.id }};
+</script>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <!-- <link rel="stylesheet" href='{% static "css/jquery.formstyler.css" %}'> -->
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
@@ -11,26 +14,11 @@
         <div class="container_all_preview ">
             <!-- Навигация по чемпионатам  -->
             <div id="all_bets_nav">
-                <div class="change_champ">
+                {% for season in seasons %}
+                <div class="change_champ" season_id="{{ season.id }}">
+                    <img style="width: 50px; height:50px" src="{{ season.season_league.image.url }}">
                 </div>
-                <div class="change_champ">
-                </div>
-                <div class="change_champ">
-                </div>
-                <div class="change_champ">
-                </div>
-                <div class="change_champ">
-                </div>
-                <div class="change_champ">
-                </div>
-                <div class="change_champ">
-                </div>
-                <div class="change_champ">
-                </div>
-                <div class="change_champ">
-                </div>
-                <div class="change_champ">
-                </div>
+                {% endfor %}
             </div>
             <!-- Переключатель между турами -->
             <div class="navigation_between_tour ">
