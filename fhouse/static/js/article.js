@@ -1,5 +1,7 @@
 var is_load_more_needed = true,
-    section_name;
+    section_name,
+    articles = {},
+    arrMonth = ['Янв', 'Фев', 'Марта', 'Апр', 'Мая', 'Июня', 'Июля', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 
 if (!String.format) {
     String.format = function(format) {
@@ -19,35 +21,61 @@ $(document).ready(function() {
         transitionDuration: 0
     });
 
-    var section = getUrlParameter('section');
-    if (typeof section != 'undefined') {
-        var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
-        var previous_active_tab = $('div .menu_individualNews_active');
-        previous_active_tab.removeClass('menu_individualNews_active');
-        var str_to_find = String.format("div.changeNews:contains('{0}')", search_tab);
-        var new_active_tab = $(str_to_find);
-        new_active_tab.addClass('menu_individualNews_active');
-    } else {
-        section_name = $("#navAjax").children("li").eq(0).text().trim();
-        ajaxPage(false);
-    }
-
+    // var section = getUrlParameter('section');
+    // if (typeof section != 'undefined') {
+    //     var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
+    //     var previous_active_tab = $('div .menu_individualNews_active');
+    //     previous_active_tab.removeClass('menu_individualNews_active');
+    //     var str_to_find = String.format("div.changeNews:contains('{0}')", search_tab);
+    //     var new_active_tab = $(str_to_find);
+    //     new_active_tab.addClass('menu_individualNews_active');
+    // } else {
+    //     section_name = $("#navAjax").children("li").eq(0).text().trim();
+    //     ajaxPage(false);
+    // }
+    ajaxPage(0, 1);
 
     //tab click
     $("#navAjax").children("li").click(function(e) {
+        if ($(this).hasClass('activeRecords')) return;
+        $("#list").empty().css({"height":"0px"});
         add_effect(0);
         $(".more_article").removeClass("moreLoading").removeClass("endMore");
-        if ($(this).hasClass('active_nav_ul')) return;
         $(".tab ul li").removeClass('activeRecords');
         $(this).addClass('activeRecords');
-        section_name = $(this).text().trim();
-        ajaxPage(false);
+        section_name = +$(this).attr("section-id");
+        if (!articles.hasOwnProperty(section_name)) {
+            return {
+                ajax: ajaxPage(section_name, 1),
+                page: $(".more_article").attr("data-page", 2),
+                section: $(".more_article").attr("data-section", section_name)
+            }
+        } else {
+            $("#list").html(articles[section_name]["html"]);
+            $(".more_article").attr("data-page", articles[section_name]["page"] + 1);
+            $(".more_article").attr("data-section", section_name);
+            $("#list").find(".containerImgNews").children("img").imagesLoaded(function() {
+                    $("#list").masonry('reloadItems');
+                    $("#list").masonry('layout');
+                }).done(function() {
+                    var lenArt = $("#list").children().length,
+                        $artItem = $("#list").children().children("a");
+                    for (var i = 0; i < lenArt; i++) {
+                        $artItem.eq(i).addClass("donaMassonry").addClass("opacityEffect");
+                    }
+                })
+        }
     });
 
     $(".more_article").click(function(e) {
         add_effect(1);
         $(this).addClass("moreLoading");
-        ajaxPage(true);
+        var newPage = (+$(this).attr("data-page")) + 1,
+            sectionCurrent = +$(this).attr("data-section");
+        $(this).attr("data-page", newPage);
+        articles[sectionCurrent]["page"] = newPage;
+        console.log(newPage)
+        ajaxPage(sectionCurrent, newPage);
     });
 
     // $(window).scroll(function() {
@@ -60,37 +88,65 @@ $(document).ready(function() {
 
 });
 
-function ajaxPage(pageCount) {
-    var page = parseInt($(".more_article").attr("data-page"));
-    var f = function() {
-        var ajax_url = 'article_list',
-            ajax_data = { "section": section_name },
-            content = $('.flex_container'),
-            state = "",
-            $moreArt = $(".more_article");
-        pageCount ? page += 1 : page = 2;
-        if (section_name == 'Все') ajax_data = {};
-        if (pageCount) ajax_data["page"] = page;
-        console.log(section_name)
-        $.ajax({
-            url: ajax_url,
-            data: ajax_data,
-            dataType: "html",
-            cache: true,
-            success: function(data) { //parametr:lastPage - true/false
-                // if (lastPage) {
-                pageCount ? content.append(data) : content.html(data);
-                $moreArt.attr("data-page", page);
-                massonryReload()
-                $moreArt.removeClass("moreLoading");
-                // } else {
-                //     return $moreArt.addClass("endMore").removeClass("moreLoading");
-                // }
-            },
-            error: function(xhr, status, error) {}
-        });
-    }
-    return f();
+function ajaxPage(section, page) {
+    $("#progress").children("button").removeClass("more_active").addClass("loading");
+    var ajax_data = { "section": section, "page": page },
+        content = $('.flex_container'),
+        state = "",
+        $moreArt = $(".more_article");
+    if (section == "0") delete ajax_data.section;
+    if (page == 1) delete ajax_data.page
+    $.ajax({
+        url: 'get_section_articles',
+        data: ajax_data,
+        dataType: "json",
+        success: function(data) {
+            console.log(data)
+            var arcticle_html = "",
+                lenData = data.length;
+            for (var i = 0; i < lenData; i++) {
+                var currentArt = data[i];
+                arcticle_html += `
+                    <div class="one_read_article item">
+                        <a href="` + currentArt['slug'] + `/" class="articleSrc">
+                            <div class="one_read_article_img containerImgNews">
+                                <img src="` + currentArt['image'] + `" class="imgUser" alt="">
+                            </div>
+                            <div class="relative_article">
+                                <div class="author_img containerImgUser">
+                                    <img src="` + currentArt['image'] + `" alt="FH" class="imgUser">
+                                </div>
+                                <p>Dima Manhura</p>
+                            </div>
+                            <div class="info_time_article">
+                                <div class="before_date"></div>
+                                <span class="date_aritle">` + get_date(currentArt['timestamp']) + `</span>
+                            </div>
+                            <div class="one_read_article_info">
+                                <h3>` + currentArt['article_title'] + `</h3>
+                                <p>
+                                    ` + currentArt['article_description'] + `
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                `
+            }
+            if (articles.hasOwnProperty(section)) {
+                articles[section]["html"] += arcticle_html
+                $("#list").append(arcticle_html);
+            } else {
+                articles[section] = {};
+                articles[section]["html"] = arcticle_html;
+                articles[section]["page"] = page++;
+                $("#list").html(arcticle_html);
+            }
+            massonryReload()
+            $moreArt.removeClass("moreLoading");
+        },
+        error: function(xhr, status, error) {}
+    });
+
 }
 
 function add_effect(a) {
@@ -106,7 +162,6 @@ function add_effect(a) {
 }
 
 function massonryReload() {
-    $("#progressTile").show();
     $("#list").find(".containerImgNews").children("img").imagesLoaded(function() {
         $("#list").masonry('reloadItems');
         $("#list").masonry('layout');
@@ -116,7 +171,7 @@ function massonryReload() {
         for (var i = lengthItem - newlength; i < lengthItem; i++) {
             $("#list").children(".item").eq(i).children("a").addClass("donaMassonry");
         };
-        $("#progressTile").hide();
+        $("#progress").children("button").removeClass("loading").addClass("more_active")
     });
 }
 
@@ -141,4 +196,20 @@ function isEmpty(obj) {
             return false;
     }
     return true;
+}
+
+function get_date(date) {
+    var dateToString = "" + date,
+        dateDate = new Date(dateToString),
+        today = new Date();
+    timeLong = (today - dateDate) / (60000 * 24);
+    minuteAgo = Math.round((today - dateDate) / 60000);
+    if (timeLong > 1 && timeLong < 24) {
+        makeDate = "Сегодня в " + ("0" + dateDate.getHours()).slice(-2) + ":" + ("0" + dateDate.getMonth()).slice(-2);
+    } else if (timeLong < 1) {
+        makeDate = minuteAgo + " мин. назад"
+    } else {
+        makeDate = ("0" + dateDate.getDate()).slice(-2) + " " + arrMonth[dateDate.getMonth()] + " " + dateDate.getFullYear();
+    }
+    return makeDate;
 }

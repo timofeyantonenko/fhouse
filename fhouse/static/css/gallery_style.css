@@ -104,7 +104,7 @@ Slider
 
 @media screen and (max-width: 749px) {
     #slider_slider {
-        width: 95%;
+        width: 100%;
         margin: auto;
     }
     #slider_slider>main>article {
@@ -915,10 +915,14 @@ Tile
 
 @media screen and (max-width: 499px) {
     #tile_img {
-        padding: 0 20px;
+        padding: 0;
+        width: 100%;
+        margin: 0;
+        margin-bottom: 10px !important;
     }
     .item {
-        width: calc(100% - 20px);
+        width: 100%;
         margin: 0 0 10px 0;
     }
 }
+

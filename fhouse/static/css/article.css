@@ -118,36 +118,6 @@ textarea {
     padding: 10px;
 }
 
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-
-/* Firefox < 16 */
-
-
-/* Safari, Chrome and Opera > 12.1 */
-
-@-webkit-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-
-/* Internet Explorer */
-
-
-/* Opera < 12.1 */
-
 .date_aritle:nth-child(2) {
     left: 62.5px;
 }
@@ -520,3 +490,42 @@ a.donaMassonry {
 .more_article {
     margin: 0 auto;
 }
+
+/*Effect*/
+
+.opacityEffect {
+    animation-name: slideDown;
+    -webkit-animation-name: slideDown;  
+ 
+    animation-duration: 1s; 
+    -webkit-animation-duration: 1s;
+ 
+    animation-timing-function: ease;    
+    -webkit-animation-timing-function: ease;    
+ 
+    visibility: visible !important;                     
+}
+ 
+@-webkit-keyframes slideDown {
+    0% {
+        -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
+    }          
+    100% {
+        -webkit-transform: translateY(0%);
+                transform: translateY(0%);
+    }       
+}
+ 
+@keyframes slideDown {
+    0% {
+        -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
+    }          
+    100% {
+        -webkit-transform: translateY(0%);
+                transform: translateY(0%);
+    }       
+}
+ 
+

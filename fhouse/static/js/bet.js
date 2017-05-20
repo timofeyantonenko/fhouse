@@ -474,6 +474,50 @@ function get_table(ajax_data) {
     });
 }
 
+// Get tours
+
+var objTour = {
+    current_tour:
+}
+
+get_tours(first_season);
+
+function get_tours(idSeason) {
+    var $container = $('#tour_other');
+    $.ajax({
+        url: 'some',
+        data: { 'season_id': idSeason },
+        method: "GET",
+        success: function(data, textStatus, xhr) {
+            var htmlTour = "",
+                content;
+            for (var i = 0; i < data.length; i++) {
+                var nameTour = data[i]['stage_name'],
+                    id_tour = data[i]['id'];
+                if (data[i]['is_current']) {
+                    htmlTour += `
+                        <li id="` + id_tour + `">
+                            <span>` + nameTour + `</span>
+                            <div class="hover_menu active_menu"></div>
+                        </li>
+                    `
+                } else {
+                   htmlTour += `
+                        <li id="` + id_tour + `">
+                            <span>` + nameTour + `</span>
+                            <div class="hover_menu"></div>
+                        </li>
+                    ` 
+                }
+            }
+            $container.html(htmlTour);
+        },
+        error: function(xhr, status, error) {
+            console.log(error, status, xhr);
+        }
+    });
+}
+
 // Превью к матчам
 
 function make_preview(ajax_data) {

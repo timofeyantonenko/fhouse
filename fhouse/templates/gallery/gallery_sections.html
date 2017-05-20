@@ -52,7 +52,7 @@ var first_name = "{{request.user.first_name|escapejs|safe}}",
                 <section class="mark_info">
                     <div class="open_modal" data-toggle="modal" data-target="#slaider_modal">
                         <h3>Комментарии:</h3>
-                        <span class="commes_photo_slider">4</span>
+                        <span class="commes_photo_slider"></span>
                     </div>
                     <div class="mark_btn block_like" data-like="0">
                         <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
@@ -81,12 +81,12 @@ var first_name = "{{request.user.first_name|escapejs|safe}}",
         </header>
         <main id="tile_img">
         </main>
-        <div id="progressTile">
-            <img src="../../static/img/loadGallery.gif" alt="loader">
-        </div>
-        <footer>
-            <div class="more_photo otherMore" id="loadTile" data-page="1">
-            </div>
+        <footer id="progress" class="articleFooter">
+            <button id="loadTile" class="more_active loading" data-page="1">
+                <i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+                <span class="loadText">Загрузка...</span>
+                <span class="doneMore">Посмотреть больше</span>
+            </button>
         </footer>
     </article>
 </main>

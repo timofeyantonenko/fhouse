@@ -68,7 +68,7 @@ $(document).ready(function() {
     $sectionLi.eq(0).addClass('active_nav_ul');
     $sectionLi.click(function(e) {
         if ($(this).hasClass('active_nav_ul')) return;
-        $("#loadTile").removeClass("endMore");
+        $("#loadTile").removeClass("more_active").removeClass("finish_more").addClass("loading");
         $(".active_nav_ul").removeClass('active_nav_ul');
         $(this).addClass("active_nav_ul");
         objSlider[0]['currentPage'] = 1;
@@ -84,7 +84,7 @@ $(document).ready(function() {
     // Альбомы
     $("#albumsContainer").on("click", ".album_previews", function(e) {
         $(".active_selected_album").removeClass("active_selected_album");
-        $("#loadTile").removeClass("endMore");
+        $("#loadTile").removeClass("more_active").removeClass("finish_more").addClass("loading");
         $(this).addClass("active_selected_album");
         var long_id = $(this).attr("id").split("album_id_"),
             urlReq = 'album_photo_list';
@@ -105,6 +105,7 @@ $(document).ready(function() {
 
     // Новые фото
     $(document).on("click", "#loadTile", function(e) {
+        $("#loadTile").removeClass("more_active").addClass("loading");
         scrollPagination($(this))
     });
 
@@ -139,6 +140,9 @@ function show_menu_mobile(widthWindow, spanId, thisToogle) {
 }
 
 function ajaxGallery(ajxData, ajaxUrl, method, page) { //method 0: make all, method 1: get pagination tile, method 3: get pagination slider
+    if (method == 1) {
+        $("#loadTile").removeClass("more_active").addClass("loading");
+    }
     $.ajax({
         url: ajaxUrl,
         data: ajxData,
@@ -217,9 +221,7 @@ function ajaxGallery(ajxData, ajaxUrl, method, page) { //method 0: make all, met
                     objSlider[0].html();
                     makeTile(false, 1);
                     if (objSlider[1]["quantityPagination"] == 1) {
-                        $("#loadTile").removeClass('moreLoading').addClass('endMore');
-                    } else {
-                        $('#loadTile').removeClass('endMore').removeClass('moreLoading');
+                        $("#loadTile").addClass("finish_more");
                     }
                 }
             } else if (method == 1) {
@@ -239,7 +241,6 @@ function makeTile(append, page) {
     var foto_tile = "",
         $content = $('#tile_img'),
         $clickMore = $("#loadTile");
-    $("#progressTile").show();
     lengthPagination = ListPhotos[page].length;
     for (var i = 0; i < lengthPagination; i++) {
         var urlTile = ListPhotos[page][i].urlObj,
@@ -273,7 +274,8 @@ function makeTile(append, page) {
             for (var i = lengthItem - newlength; i < lengthItem; i++) {
                 $("#tile_img").children(".item").eq(i).addClass("donaMassonry");
             };
-            $("#progressTile").hide();
+            if (page == objSlider[1]["quantityPagination"]) $("#progress").children("button").addClass("finish_more");
+            $("#progress").children("button").removeClass("loading").addClass("more_active");
         }),
         2: $clickMore.removeClass("moreLoading")
     }
@@ -281,7 +283,6 @@ function makeTile(append, page) {
 
 function scrollPagination(eventObj) {
     var nextPage = +eventObj.attr("data-page");
-    if (nextPage + 1 == objSlider[1]["quantityPagination"]) eventObj.removeClass("moreLoading").addClass("endMore");
     eventObj.addClass("moreLoading");
     nextPage++;
     ajax_data['page'] = nextPage;
@@ -495,22 +496,22 @@ $(document).on('click', '.mark_btn', function() {
         },
         method: "POST",
         success: function(data, textStatus, xhr) {
-//            console.log(JSON.parse(data)["add_result"]);
+            //            console.log(JSON.parse(data)["add_result"]);
             $.each(data["add_result"], function(idx, obj) {
-            switch (obj){
-                case 0:
-                    $positiveLikesBlock.html(positiveCount += 1);
-                break;
-                case 1:
-                    $negativeLikesBlock.html(negativeCount += 1);
-                break;
-                case 2:
-                    $positiveLikesBlock.html(positiveCount -= 1);
-                break;
-                case 3:
-                    $negativeLikesBlock.html(negativeCount -= 1);
-                break;
-            }
+                switch (obj) {
+                    case 0:
+                        $positiveLikesBlock.html(positiveCount += 1);
+                        break;
+                    case 1:
+                        $negativeLikesBlock.html(negativeCount += 1);
+                        break;
+                    case 2:
+                        $positiveLikesBlock.html(positiveCount -= 1);
+                        break;
+                    case 3:
+                        $negativeLikesBlock.html(negativeCount -= 1);
+                        break;
+                }
             });
             // alert("Like added!");
         },
@@ -555,6 +556,14 @@ $(document).on('click', '.btnFhouse', function(e) {
             $("#comment_slider_slider").find(".comments_modal").append(commentsHtml);
             focusInput();
             $inputText.val("");
+            ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj']++;
+            var newLengthComment = ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'];
+            // Updating comments
+            $("#slider_modal").find(".commes_photo_slider").html(newLengthComment); 
+            if (objSlider[0]['currentPage'] == objSlider[1]['currentPage'] 
+                && objSlider[0]['currentIndexImg'] == objSlider[1]['currentIndexImg']) {
+                $("#slider_slider").find(".commes_photo_slider").html(newLengthComment);
+            }
         },
         error: function(xhr, status, error) {
             if (xhr.status === 409) {
@@ -585,9 +594,3 @@ function isEmpty(obj) {
     }
     return true;
 };
-
-
-
-
-
-

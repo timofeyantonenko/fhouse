@@ -38,11 +38,11 @@ textarea {
     width: 100%;
     display: none;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     padding: 20px;
 }
 
@@ -51,80 +51,18 @@ textarea {
 }
 
 
-/*More other*/
-
-.otherMore {
-    cursor: pointer;
-    width: 230px;
-    margin: auto;
-    padding: 0.5rem;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 1.4rem;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #afadad;
-    border-radius: 2px;
-    display: block;
-    text-decoration: none;
-    -webkit-transition: all 0.1s ease-out;
-    transition: all 0.1s ease-out;
-}
-
-@media screen and (max-width: 750px) {
-    .otherMore {
-        padding-top: 0.75rem !important;
-        padding-bottom: 0.75rem !important;
-    }
-}
-
-.otherMore::before {
-    content: 'Посмотреть больше';
-}
-
-.otherMore.moreLoading,
-.otherMore.endMore {
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-.otherMore.moreLoading::before {
-    content: 'Загрузка...';
-}
-
-.otherMore.endMore::before {
-    content: 'Конец';
-}
-
-.otherMore.noMore {
-    display: none;
-}
-
-.otherMore:hover {
-    background: #eee;
-}
-
-.otherMore:hover,
-.otherMore:focus,
-.otherMore:active {
-    text-decoration: none;
-    color: #656D78;
-}
-
-
 /*Users img*/
 
 .imgUser {
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     width: inherit;
     height: inherit;
     -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center;
+    -ms-grid-row-align: center;
+    align-self: center;
     -ms-flex-negative: 1;
-        flex-shrink: 1;
+    flex-shrink: 1;
 }
 
 .containerImgNews {
@@ -133,16 +71,16 @@ textarea {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 .coverImg {
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     max-width: 100%;
     max-height: 100%;
 }
@@ -154,11 +92,11 @@ textarea {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 
@@ -267,10 +205,10 @@ main.mainContainer {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
     background-color: #fff;
 }
 
@@ -293,7 +231,7 @@ main.mainContainer {
 
 @media screen and (min-width: 970px) and (max-width: 1169px) {
     main.mainContainer {
-        width: 95% !important;
+        width: calc(95% - 20px) !important;
     }
     #menu {
         width: calc( 100% - 5%);
@@ -306,13 +244,13 @@ main.mainContainer {
 
 @media screen and (min-width: 750px) and (max-width: 969px) {
     main.mainContainer {
-        width: 95% !important;
+        width: calc(95% - 20px) !important;
     }
 }
 
 @media screen and (max-width: 749px) {
     main.mainContainer {
-        width: 100% !important;
+        width: calc(100% - 20px)!important;
     }
 }
 
@@ -403,8 +341,8 @@ h1 {
     height: 100%;
     cursor: pointer;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 #menuBtn {
@@ -450,11 +388,11 @@ h1 {
     display: flex;
     height: 100%;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     border-right: 1px solid #666;
 }
 
@@ -477,7 +415,7 @@ h1 {
 
 #brend #logoItem {
     -webkit-transform: scale(0.33);
-            transform: scale(0.33);
+    transform: scale(0.33);
     /*transform: scale(0.3 0.3) !important;*/
 }
 
@@ -504,8 +442,8 @@ h1 {
     }
     #mainNav {
         -webkit-box-flex: 1;
-            -ms-flex-positive: 1;
-                flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
         display: -webkit-box !important;
         display: -ms-flexbox !important;
         display: flex !important;
@@ -515,11 +453,11 @@ h1 {
         display: -ms-flexbox;
         display: flex;
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
         border-right: 1px solid #666;
     }
     #mainNav ul li:first-child {
@@ -548,12 +486,12 @@ h1 {
     }
     #mainNav li #logoItem {
         -webkit-transform: scale(0.27);
-                transform: scale(0.27);
+        transform: scale(0.27);
         /*transform: scale(0.3 0.3) !important;*/
     }
     #logo__item--business {
         -webkit-transform: scale(0.4);
-                transform: scale(0.4);
+        transform: scale(0.4);
         display: none;
     }
     .menu_open {
@@ -564,8 +502,8 @@ h1 {
     }
     #menu {
         -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-                justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
         height: 60px !important;
     }
     #mainNav {
@@ -584,8 +522,8 @@ h1 {
     #mainNav ul {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
         width: 100%;
     }
     #mainNav ul li {
@@ -595,8 +533,8 @@ h1 {
     }
     #mainNav ul li a {
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
         width: 100%;
         padding: 0 20px;
     }
@@ -605,11 +543,11 @@ h1 {
         display: -ms-flexbox;
         display: flex;
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
     }
     #top_profile_menu {
         top: 59px;
@@ -657,7 +595,7 @@ h1 {
     line-height: 34px;
     border-radius: 3px;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
 }
 
 #LOGIN .modal-dialog {
@@ -781,8 +719,8 @@ form [type="password"] {
 .user_profile>i {
     margin: 0 5px;
     -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center;
+    -ms-grid-row-align: center;
+    align-self: center;
 }
 
 .user_profile .fa-sign-in {
@@ -800,10 +738,10 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -ms-flex-line-pack: center;
-        align-content: center;
+    align-content: center;
     /*align-items: center;*/
     padding-left: 10px;
     padding-right: 10px;
@@ -825,7 +763,7 @@ form [type="password"] {
     width: 200px;
     padding: 4px 0px;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
     display: none;
 }
 
@@ -885,8 +823,8 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     text-align: center;
 }
 
@@ -914,14 +852,14 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .headerMain h2 {
     margin: 0 0 10px;
     -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
     font-weight: 700;
 }
 
@@ -945,10 +883,10 @@ form [type="password"] {
     .table_nav_records .tab ul {
         width: 100%;
         -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
+        flex-wrap: wrap;
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         height: 100%;
     }
     .table_nav_records .lineHover {
@@ -977,10 +915,10 @@ form [type="password"] {
     .menu_individualNews ul {
         width: 100% !important;
         -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
+        flex-wrap: wrap;
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         height: auto;
     }
     .menu_individualNews .hover_menu {
@@ -1009,17 +947,17 @@ form [type="password"] {
     }
     .user_profile {
         -webkit-box-align: center !important;
-            -ms-flex-align: center !important;
-                align-items: center !important;
+        -ms-flex-align: center !important;
+        align-items: center !important;
     }
     .rightMenu,
     .loginScheckIn {
         -webkit-box-flex: 1 !important;
-            -ms-flex-positive: 1 !important;
-                flex-grow: 1 !important;
+        -ms-flex-positive: 1 !important;
+        flex-grow: 1 !important;
         -ms-flex-item-align: center;
-            -ms-grid-row-align: center;
-            align-self: center;
+        -ms-grid-row-align: center;
+        align-self: center;
         border-left: 0;
     }
     #top_profile_menu {
@@ -1031,11 +969,11 @@ form [type="password"] {
     .rightMenu,
     .loginScheckIn {
         -webkit-box-flex: 1 !important;
-            -ms-flex-positive: 1 !important;
-                flex-grow: 1 !important;
+        -ms-flex-positive: 1 !important;
+        flex-grow: 1 !important;
         -ms-flex-item-align: center;
-            -ms-grid-row-align: center;
-            align-self: center;
+        -ms-grid-row-align: center;
+        align-self: center;
     }
 }
 
@@ -1050,16 +988,16 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
     width: 100%;
 }
 
 .content_author .textOfferNews,
 .content_author .textOfferArticle {
     -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
 }
 
 .content_author textarea {
@@ -1073,11 +1011,11 @@ form [type="password"] {
     display: flex;
     width: 100%;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
 
 .downloadImg i {
@@ -1128,11 +1066,11 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
     border-top: 1px solid silver;
     padding: 0 20px;
 }
@@ -1153,11 +1091,11 @@ form [type="password"] {
     background-color: #aa0a0c;
     height: 50px;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     padding: 0 20px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1206,7 +1144,7 @@ form [type="password"] {
     border: 0;
     border-radius: 2px;
     -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .btn-ok {
@@ -1248,7 +1186,7 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     padding: 20px;
 }
 
@@ -1422,8 +1360,8 @@ form [type="password"] {
 .total_kof_these_matches,
 .win_points {
     -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
 }
 
 .kof_this_match,
@@ -1441,8 +1379,8 @@ form [type="password"] {
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
 }
 
 .marth_choice_this,
@@ -1484,8 +1422,8 @@ form [type="password"] {
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
     padding-bottom: 7px;
 }
 
@@ -1498,7 +1436,7 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     padding: 0 0 20px;
 }
 
@@ -1511,10 +1449,10 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .place_result {
@@ -1571,7 +1509,7 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .one_math_can_bet>div {
@@ -1592,8 +1530,8 @@ form [type="password"] {
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
 }
 
 .kof_can {
@@ -1726,11 +1664,11 @@ form [type="password"] {
     }
     .name_user_info {
         -webkit-box-pack: center !important;
-            -ms-flex-pack: center !important;
-                justify-content: center !important;
+        -ms-flex-pack: center !important;
+        justify-content: center !important;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
     }
     .name_user_info>div {
         width: 100%;
@@ -1738,11 +1676,11 @@ form [type="password"] {
         display: -ms-flexbox;
         display: flex;
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
         text-align: center;
     }
     .name_user_info h3 {
@@ -1754,11 +1692,11 @@ form [type="password"] {
     }
     .table_forecasters_and_user_infa {
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
     }
     .photo_user {
         width: 150px !important;
@@ -1802,16 +1740,16 @@ form [type="password"] {
         display: -ms-flexbox;
         display: flex;
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
     }
     .close_modal span {
         -ms-flex-item-align: center;
-            -ms-grid-row-align: center;
-            align-self: center;
+        -ms-grid-row-align: center;
+        align-self: center;
     }
 }
 
@@ -1868,11 +1806,11 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     width: 100%;
     padding: 5px 0;
     border-bottom: 1px solid silver;
@@ -1883,11 +1821,11 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     border: 2px solid #e62117;
     cursor: pointer;
     align-items: center;
@@ -1923,11 +1861,11 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     overflow: hidden;
     width: 100%;
     height: 100%;
@@ -1937,12 +1875,12 @@ form [type="password"] {
     width: inherit;
     height: inherit;
     -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center;
+    -ms-grid-row-align: center;
+    align-self: center;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     -ms-flex-negative: 0;
-        flex-shrink: 0;
+    flex-shrink: 0;
 }
 
 
@@ -1959,7 +1897,7 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .paginatonComments>div {
@@ -1976,10 +1914,10 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
 }
 
 .coment_author_time h5,
@@ -2026,7 +1964,7 @@ form [type="password"] {
     border: 0;
     border-radius: 2px;
     -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .btnFhouse:hover {
@@ -2067,21 +2005,21 @@ form [type="password"] {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 .sendBtn p {
     color: #ee0221;
     margin: 0;
     -webkit-box-flex: 1;
-        -ms-flex-positive: 1;
-            flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
 }
 
 .formSendComment >input[type="submit"] {
@@ -2095,4 +2033,47 @@ form [type="password"] {
 }
 
 
-/*Logo website*/
+/****************
+More item
+****************/
+
+#progress button {
+    display: block;
+    padding: 5px 25px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 14px;
+    color: #656D78;
+    background: #fff;
+    border: 1px solid #CCD1D9;
+    border-radius: 2px;
+    margin: auto;
+}
+
+#progress button:hover {
+    background: #eee;
+}
+
+#progress button.more_active i,
+#progress button.more_active .loadText {
+    display: none;
+}
+
+
+/*if loading*/
+
+#progress button.loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+#progress button.loading .doneMore {
+    display: none;
+}
+
+/*if finish*/
+
+#progress button.finish_more {
+    display: none;
+}
