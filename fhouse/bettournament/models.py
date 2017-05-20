@@ -87,6 +87,11 @@ class TeamSeasonResult(models.Model):
 class Match(models.Model):
     stage = models.ForeignKey(SeasonStage, on_delete=models.CASCADE)
 
+    preview = models.TextField(null=True, blank=True)
+
+    home_goals = models.IntegerField(default=0)
+    guest_goals = models.IntegerField(default=0)
+
     home_team = models.ForeignKey(Team, related_name='match_home_team', on_delete=models.CASCADE)
     guest_team = models.ForeignKey(Team, related_name='match_guest_team', on_delete=models.CASCADE)
 
@@ -132,11 +137,6 @@ class Match(models.Model):
     # if we want to give for match name
     match_name = models.CharField(max_length=120, blank=True, null=True)
 
-    @property
-    def preview(self):
-        print('preview:', MatchPreview.objects.filter(match=self))
-        return MatchPreview.objects.filter(match=self).first()
-
     def __str__(self):
         return '{} vs {}::{}-{}'.format(self.home_team, self.guest_team, self.stage.stage_season.season_league,
                                         self.stage)
@@ -151,21 +151,6 @@ class Coefficient(models.Model):
 
     def __str__(self):
         return '{} :: h: {}; d: {}, g: {}'.format(self.match, self.home_coef, self.draw_coef, self.guest_coef)
-
-
-class MatchPreview(models.Model):
-    # who added a match preview
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
-    # when match preview was added and updated
-    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-
-    match = models.OneToOneField(Match, on_delete=models.CASCADE)
-
-    description = models.TextField()
-
-    def __str__(self):
-        return 'preview: {}'.format(self.match)
 
 
 # class BetFromUser(models.Model):
