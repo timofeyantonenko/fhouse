@@ -201,12 +201,11 @@ h4 {
 }
 
 .change_champ {
-    margin: 0 5px 10px;
-    background-image: url(../img/menu_nav.png);
-    background-position-y: 0;
-    background-repeat: no-repeat;
-    cursor: pointer;
     opacity: 0;
+}
+
+.change_champ img {
+    
 }
 
 .change_champ:hover {

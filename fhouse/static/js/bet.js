@@ -7,6 +7,7 @@ var currentPageLi = 1,
 $(document).ready(function() {
 
     get_table(1);
+    get_tours(first_season);
 
     var leftNav,
         center,
@@ -29,14 +30,6 @@ $(document).ready(function() {
         sizeImg,
         sizeImgMobile;
 
-    if (locationLink.indexOf("all_reviews") > 0) {
-        champLogo = $('.change_champ');
-        sizeImg = -80;
-        sizeImgMobile = -60;
-    } else {
-        champLogo = $('.imgChampNav');
-        sizeImg = sizeImgMobile = -80;
-    }
     // Table rating locationLink
     if (locationLink.indexOf("all_bet_rating") > 0) {
         tableLength = 20;
@@ -476,25 +469,25 @@ function get_table(ajax_data) {
 
 // Get tours
 
-var objTour = {
-    current_tour:
-}
-
-get_tours(first_season);
+// var objTour = {
+//     current_tour:
+// }
 
 function get_tours(idSeason) {
     var $container = $('#tour_other');
     $.ajax({
-        url: 'some',
+        url: '/bets/get_season_tours/',
         data: { 'season_id': idSeason },
         method: "GET",
         success: function(data, textStatus, xhr) {
+            console.log(data);
             var htmlTour = "",
                 content;
             for (var i = 0; i < data.length; i++) {
                 var nameTour = data[i]['stage_name'],
                     id_tour = data[i]['id'];
                 if (data[i]['is_current']) {
+                    make_preview(id_tour);
                     htmlTour += `
                         <li id="` + id_tour + `">
                             <span>` + nameTour + `</span>
@@ -520,67 +513,68 @@ function get_tours(idSeason) {
 
 // Превью к матчам
 
-function make_preview(ajax_data) {
+function make_preview(idTour) {
     var $loaderTable = $("#loaderMatches"),
         $tableINherit = $("#container_preview_match");
     $tableINherit.empty();
     $loaderTable.show();
     $.ajax({
-        url: 'some',
-        data: ajax_data,
+        url: '/bets/get_stage_matches/',
+        data: { 'data_id':idTour },
         method: "GET",
         success: function(data, textStatus, xhr) {
+            console.log(data);
             var objectMatch = data['match'],
                 lengthMatches = objectMatch.lenght,
                 htmlMatch = "";
-            for (var i = 0; i < lengthMatches; i++) {
-                var img1 = objectMatch[i]['teams']['first_team']['url'],
-                    img2 = objectMatch[i]['teams']['second_team']['url'],
-                    time = objectMatch[i][''],
-                    team1 = objectMatch[i]['teams']['first_team']['name'],
-                    team2 = objectMatch[i]['teams']['second_team']['name'],
-                    kof1 = objectMatch[i]['coefficients']['first'],
-                    kof2 = objectMatch[i]['coefficients']['second'],
-                    kofDraw = objectMatch[i]['coefficients']['draw'],
-                    forecast1 = objectMatch[i]['forecast']['first_goal'],
-                    forecast2 = objectMatch[i]['forecast']['second_goal'],
-                    discription = objectMatch[i]['text'];
-                // result = objectMatch[i][''];
-                htmlMatch += `
-                    <article class="preview_one_match">
-                        <section class="teams_logo_s_time">
-                            <div class="teams_img">
-                                <div class="img_logo_one_team">
-                                    <img src="` + img1 + `" alt="">
-                                </div>
-                                <div class="img_logo_one_team">
-                                    <img src="` + img2 + `" alt="">
-                                </div>
-                            </div>
-                            <div class="dateMatchBet">
-                                <time class="match_date">` + +`</time>
-                                <time class="match_time">Москва: ` + +`</time>
-                                <time class="match_time">Киев: ` + +`</time>
-                            </div>
-                        </section>
-                        <section class="match_discription">
-                            <h3>` + team1 + ` - ` + team2 + `</h3>
-                            <div class="bet_match">
-                                <div class="evnt_bet">
-                                    П1 (` + kof1 + `) Х (` + kofDraw + `) П2 (` + kof2 + `)
-                                </div>
-                                <div class="admin_bets_one_match">Наш прогноз: ` + forecast1 + ` : ` + forecast2 + `</div>
-                            </div>
-                            <p class="match_preview_discription">
-                                ` + discription + `
-                            </p>
-                            <div class="result_match">
-                                Сыграли: ` + +`
-                            </div>
-                        </section>
-                    </article>
-                `
-            }
+            // for (var i = 0; i < lengthMatches; i++) {
+            //     var img1 = objectMatch[i]['teams']['first_team']['url'],
+            //         img2 = objectMatch[i]['teams']['second_team']['url'],
+            //         time = objectMatch[i][''],
+            //         team1 = objectMatch[i]['teams']['first_team']['name'],
+            //         team2 = objectMatch[i]['teams']['second_team']['name'],
+            //         kof1 = objectMatch[i]['coefficients']['first'],
+            //         kof2 = objectMatch[i]['coefficients']['second'],
+            //         kofDraw = objectMatch[i]['coefficients']['draw'],
+            //         forecast1 = objectMatch[i]['forecast']['first_goal'],
+            //         forecast2 = objectMatch[i]['forecast']['second_goal'],
+            //         discription = objectMatch[i]['text'];
+            //     // result = objectMatch[i][''];
+            //     htmlMatch += `
+            //         <article class="preview_one_match">
+            //             <section class="teams_logo_s_time">
+            //                 <div class="teams_img">
+            //                     <div class="img_logo_one_team">
+            //                         <img src="` + img1 + `" alt="">
+            //                     </div>
+            //                     <div class="img_logo_one_team">
+            //                         <img src="` + img2 + `" alt="">
+            //                     </div>
+            //                 </div>
+            //                 <div class="dateMatchBet">
+            //                     <time class="match_date">` + +`</time>
+            //                     <time class="match_time">Москва: ` + +`</time>
+            //                     <time class="match_time">Киев: ` + +`</time>
+            //                 </div>
+            //             </section>
+            //             <section class="match_discription">
+            //                 <h3>` + team1 + ` - ` + team2 + `</h3>
+            //                 <div class="bet_match">
+            //                     <div class="evnt_bet">
+            //                         П1 (` + kof1 + `) Х (` + kofDraw + `) П2 (` + kof2 + `)
+            //                     </div>
+            //                     <div class="admin_bets_one_match">Наш прогноз: ` + forecast1 + ` : ` + forecast2 + `</div>
+            //                 </div>
+            //                 <p class="match_preview_discription">
+            //                     ` + discription + `
+            //                 </p>
+            //                 <div class="result_match">
+            //                     Сыграли: ` + +`
+            //                 </div>
+            //             </section>
+            //         </article>
+            //     `
+            // }
             $loaderTable.hide();
             $tableINherit.html();
         },
