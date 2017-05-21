@@ -14,7 +14,7 @@ from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSe
 from django.views.decorators.csrf import csrf_protect
 
 from .models import StageBet, League, MatchBetFromUser, UsersResult, TeamSeasonResult, Match, SeasonStage, Season, \
-    ChampionatType, Championat, ChampionatGroup
+    LeagueType, SeasonGroup
 from utils.prepare_methods import create_comment
 from comments.serializers import CommentSerializer
 
@@ -48,18 +48,18 @@ def all_reviews(request):
     context["seasons"] = active_seasons
 
     championats_dict = {}
-    championat_types = ChampionatType.objects.all()
+    championat_types = LeagueType.objects.all()
     for championat_type in championat_types:
         championats_dict[championat_type.name] = {}
-        championats = Championat.objects.filter(championat_type=championat_type)
-        for championat in championats:
-            championats_dict[championat_type.name][championat.name] = {"id": championat.id}
-            if championat.have_groups:
-                groups = ChampionatGroup.objects.filter(championat=championat)
-                championats_dict[championat_type.name][championat.name]["groups"] = []
+        seasons = Season.objects.filter(season_league__league_type=championat_type)
+        for season in seasons:
+            championats_dict[championat_type.name][season.season_league.league_name] = {"id": season.id}
+            groups = SeasonGroup.objects.filter(season=season)
+            if groups:
+                championats_dict[championat_type.name][season.season_league.league_name]["groups"] = []
                 for group in groups:
-                    championats_dict[championat_type.name][championat.name]["groups"].append({
-                        "name": group.name,
+                    championats_dict[championat_type.name][season.season_league.league_name]["groups"].append({
+                        "name": group.group_name,
                         "id": group.id,
                     })
 
