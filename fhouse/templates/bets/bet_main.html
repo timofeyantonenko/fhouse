@@ -1,5 +1,14 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} {% block head_extra %}
 <title>Анонсы ТОП матчей недели</title>
+<script type="text/javascript">
+    var week_start = new Date("{{current_week_bet.start_date.isoformat}}");
+    var week_end = new Date("{{current_week_bet.check_date.isoformat}}");
+    var matches_time = [
+        new Date("{{current_week_bet.match_1.match_time.isoformat}}"),
+        new Date("{{current_week_bet.match_2.match_time.isoformat}}"),
+        new Date("{{current_week_bet.match_3.match_time.isoformat}}"),
+    ];
+</script>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
@@ -159,14 +168,14 @@
             <div class="name_right_column">
                 <a href="all_reviews">Превью и прогнозы</a>
             </div>
-            {% for league in leagues %}
+            {% for season in active_seasons %}
             <a href="all_reviews" class="linkOtherBet">
-                <div class="imgChampNav"></div>
-                <div class="championat_bet_preview">
-                    <div class="championship_title">{{ league.league_name }}</div>
-                    <!-- Нужно передать текущий тур -->
-                    <div class="current_tour_right">1 тур</div>
+                <div class="imgChampNav">
+                    <img src="{{ season.img }}" alt="">
                 </div>
+                    <h2 data-id="{{ season.id }}">{{ season.name }}</h2>
+                    <!-- Нужно передать текущий тур -->
+                    <p data-id="{{ season.tour.id }}">{{ season.tour.name }}</p>
             </a>
             {% endfor %}
         </div>

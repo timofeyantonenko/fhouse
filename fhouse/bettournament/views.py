@@ -37,8 +37,22 @@ def main_bet(request):
     context['current_week_bet'] = current_week_bet
 
     # Lat's take all of leagues
-    leagues = League.objects.all()
-    context['leagues'] = leagues
+    seasons_list = []
+    seasons = Season.objects.filter(is_active=True)
+    for season in seasons:
+        seasons_list.append({
+            "id": season.id,
+            "name": season.season_league.league_name,
+            "img": season.season_league.image.url,
+        })
+        active_tour = SeasonStage.objects.filter(is_current=True).filter(stage_season=season).first()
+        if active_tour:
+            seasons_list[-1]["tour"] = {
+                "id": active_tour.id,
+                "name": active_tour.stage_name
+            }
+    print(seasons_list)
+    context['active_seasons'] = seasons_list
     return render(request, "bets/bet_main.html", context)
 
 
