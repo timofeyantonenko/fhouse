@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.contrib.contenttypes.models import ContentType
-from django.core.paginator import Paginator, EmptyPage
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.db.models import Sum
 from django.utils import timezone
@@ -10,10 +10,11 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSerializer, SeasonStageSerializer
+from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSerializer, SeasonStageSerializer,\
+    UsersResultSerializer
 from django.views.decorators.csrf import csrf_protect
 
-from .models import StageBet, League, MatchBetFromUser, UsersResult, TeamSeasonResult, Match, SeasonStage, Season, \
+from .models import StageBet, MatchBetFromUser, UsersResult, TeamSeasonResult, Match, SeasonStage, Season, \
     LeagueType, SeasonGroup
 from utils.prepare_methods import create_comment
 from comments.serializers import CommentSerializer
@@ -165,23 +166,30 @@ def make_bet(request):
 
 @api_view(['GET'])
 def get_bet_result_table(request):
-    period = request.GET.get("period", "week")
-    days = -1
+    period = request.GET.get("period", "all")
+    page = request.GET.get("p", 1)
+    pagination = request.GET.get("offset", 10)
+    days = None
     if period == "week":
         days = 7
     elif period == "month":
         days = 30
 
-    # today = datetime.today()
-    today = timezone.now()
-    begin_check_date = today - timedelta(days=100)
-    all_stages = StageBet.objects.filter(check_date__gte=begin_check_date)
-    user_results = UsersResult.objects.filter(stage__in=all_stages).values("user__first_name",
-                                                                           "user__last_name",
-                                                                           "user__avatar").annotate(
-        score=Sum('score')).order_by('-score')
-
-    return Response(user_results)
+    if days:
+        today = timezone.now()
+        begin_check_date = today - timedelta(days=days)
+        all_stages = StageBet.objects.filter(check_date__gte=begin_check_date)
+        user_results = UsersResult.objects.filter(stage__in=all_stages).values("user__first_name",
+                                                                               "user__last_name",
+                                                                               "user__avatar").annotate(
+            score=Sum('score')).order_by('-score')
+    else:
+        user_results = UsersResult.objects.all().values("user__first_name",
+                                                        "user__last_name",
+                                                        "user__avatar").annotate(
+            score=Sum('score')).order_by('-score')
+    result = user_results[(page-1)*pagination:page*pagination]
+    return Response(result)
 
 
 @api_view(['GET'])

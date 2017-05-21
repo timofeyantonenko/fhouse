@@ -29,7 +29,7 @@
                 </div>
                 {% for tag in user_tags %}
                 <div class="changeNews ">
-                    <li class="tab tabResponsive">
+                    <li class="tab tabResponsive" data-id="{{ tag.id }}">
                         <div class="tab_name">{{ tag }}</div>
                         <div class="hover_menu"></div>
                     </li>
