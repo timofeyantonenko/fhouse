@@ -70,14 +70,14 @@
                 <div class="table_name">Турнирная таблица</div>
                 <div class="nav_table">
                     {% for championat_type_name in championats_dict.keys %}
-                    <div class="one_division_nav" data-active="{{ forloop.counter }}">{{ championat_type_name }}</div>
+                    <div class="one_division_nav {% if forloop.counter == 1%}activeTab{% endif %}" data-active="{{ forloop.counter }}">{{ championat_type_name }}</div>
                     {% endfor %}
                 </div>
             </div>
             <div class="body_table">
                 <div class="select_tab_conteiner">
                     {% for championat_type_name, championat_type_leagues in championats_dict.items %}
-                    <section data-active="{{ forloop.counter }}">
+                    <section data-active="{{ forloop.counter }}" {% if forloop.counter == 1%}class="activeSectionSelect"{% endif %}>
                             <select>
                                 {% for championat_name, championat_detail in championat_type_leagues.items %}
                                 <option value="{{ championat_detail.id }}">{{championat_name}}</option>

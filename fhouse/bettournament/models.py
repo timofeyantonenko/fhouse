@@ -9,11 +9,19 @@ from utils.abstract_classes import ForeignContentClass
 # Create your models here.
 
 
+class LeagueType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class League(models.Model):
     """
     One object is APL, or Espana Primera
     """
     league_name = models.CharField(max_length=80)
+    league_type = models.ForeignKey(LeagueType, on_delete=models.CASCADE)
     league_description = models.TextField()
     image = models.ImageField(upload_to=upload_location,
                               null=True, blank=True)
@@ -36,6 +44,14 @@ class Season(models.Model):
 
     def __str__(self):
         return "{}: {}".format(self.season_league, self.season_name)
+
+
+class SeasonGroup(models.Model):
+    group_name = models.CharField(max_length=120)
+    season = models.ForeignKey(Season, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{}:{}:{}".format(self.season.season_league, self.season.season_name, self.group_name)
 
 
 class SeasonStage(CommentedClass, ForeignContentClass):
@@ -61,42 +77,16 @@ class Team(models.Model):
         return self.team_name
 
 
-class ChampionatType(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-
-class Championat(models.Model):
-
-    name = models.CharField(max_length=100)
-    have_groups = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    championat_type = models.ForeignKey(ChampionatType, on_delete=models.CASCADE, null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-
-class ChampionatGroup(models.Model):
-    name = models.CharField(max_length=100)
-    championat = models.ForeignKey(Championat, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "{}:{}".format(self.championat.name, self.name)
-
-
 class TeamSeasonResult(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    group = models.ForeignKey(ChampionatGroup, on_delete=models.CASCADE, null=True, blank=True)
-    championat = models.ForeignKey(Championat, on_delete=models.CASCADE, null=True, blank=True)
+    group = models.ForeignKey(SeasonGroup, on_delete=models.CASCADE, null=True, blank=True)
+    season = models.ForeignKey(Season, on_delete=models.CASCADE, null=True, blank=True)
     games = models.SmallIntegerField(default=0)
     goals = models.SmallIntegerField(default=0)
     points = models.SmallIntegerField(default=0)
 
     def __str__(self):
-        return "{}: games: {}, goals: {}, points: {}".format(self.team, self.games,
+        return "{}, {}: games: {}, goals: {}, points: {}".format(self.season, self.team, self.games,
                                                                  self.goals, self.points)
 
 
