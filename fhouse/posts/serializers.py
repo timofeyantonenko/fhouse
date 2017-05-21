@@ -12,3 +12,8 @@ class PostTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ("title", "id")
+
+class PostTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostTag
+        fields = "__all__"

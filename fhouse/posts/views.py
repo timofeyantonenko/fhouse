@@ -28,7 +28,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .forms import PostForm
 from .models import Post, UserFavoriteTags, PostTag
-from .serializers import PostTitleSerializer, PostSerializer
+from .serializers import PostTagSerializer, PostSerializer, PostTitleSerializer
 
 from utils.prepare_methods import create_comment
 
@@ -310,6 +310,28 @@ class PostList(ListView):
         context['post_list'] = posts[1:5]
         context['main_post'] = posts[0]
         return context
+
+
+@api_view(['GET'])
+def api_get_posts(request):
+    tag = request.GET.get("tag", None)
+    page = request.GET.get("p", 1)
+    if tag:
+        post_queryset = Post.objects.filter(tag__id=tag)
+    else:
+        post_queryset = Post.objects.all()
+
+    post_queryset = Post.objects.get_only_active(post_queryset)
+    paginator = Paginator(post_queryset, 5)  # Show 5 posts per page
+    try:
+        post_queryset = paginator.page(page)
+    except PageNotAnInteger:
+        post_queryset = paginator.page(1)
+    except EmptyPage:
+        post_queryset = []
+
+    post_serializer = PostSerializer(post_queryset, many=True, context={"request": request})
+    return Response(post_serializer.data)
 
 
 @csrf_protect

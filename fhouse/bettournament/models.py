@@ -81,6 +81,7 @@ class TeamSeasonResult(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
     group = models.ForeignKey(SeasonGroup, on_delete=models.CASCADE, null=True, blank=True)
     season = models.ForeignKey(Season, on_delete=models.CASCADE, null=True, blank=True)
+    place = models.SmallIntegerField(default=0)
     games = models.SmallIntegerField(default=0)
     goals = models.SmallIntegerField(default=0)
     points = models.SmallIntegerField(default=0)
