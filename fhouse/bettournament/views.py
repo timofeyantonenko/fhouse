@@ -98,11 +98,17 @@ def get_bet_stage_info(request):
 
 @api_view(['GET'])
 def get_league_status(request):
-    all_teams = TeamSeasonResult.objects.all()
+    if "season" in request.GET:
+        season_id = request.GET.get("season")
+        season = Season.objects.filter(id=season_id)
+        all_teams = TeamSeasonResult.objects.filter(season=season)
+    else:
+        group_id = request.GET.get("group")
+        group = SeasonGroup.objects.filter(id=group_id)
+        all_teams = TeamSeasonResult.objects.filter(group=group)
     # context = {}
     league_serializer = TeamSeasonResultSerializer(all_teams, many=True, context={'request': request})
-    print(league_serializer)
-    return Response({'league_table': league_serializer.data})
+    return Response(league_serializer.data)
 
 
 @csrf_protect
