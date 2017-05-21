@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import StageBet, SeasonStage, Match, Team, Coefficient, TeamSeasonResult
+from .models import StageBet, SeasonStage, Match, Team, Coefficient, TeamSeasonResult, UsersResult
 
 
 class TeamSerializer(serializers.ModelSerializer):
@@ -39,6 +39,13 @@ class StageBetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = StageBet
+        fields = '__all__'
+
+
+class UsersResultSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UsersResult
         fields = '__all__'
 
 
