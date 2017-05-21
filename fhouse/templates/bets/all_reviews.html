@@ -2,9 +2,11 @@
 <title>Prognosis Fhouse</title>
 <script type="text/javascript">
 var first_season = {{ seasons.0.id }},
+    first_season_name = "{{ seasons.0.season_league.league_name }}",
     first_name = "{{request.user.first_name|escapejs|safe}}",
     last_name = "{{request.user.first_name|escapejs|safe}}",
     avatar_user = "{{request.user.avatar.url|escapejs|safe}}";
+console.log(first_season_name);
 </script>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 
@@ -33,7 +35,7 @@ var first_season = {{ seasons.0.id }},
                 </div>
             </div>
             <div class="choosen_championship">
-                Превью и прогноз <span class="champ"></span>
+                Превью и прогноз <span id="titleLeague"></span>
             </div>
             <div class="after_nav_tour">
                 <div class="preview_one_championship">

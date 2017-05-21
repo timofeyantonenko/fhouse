@@ -1,8 +1,8 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_title %} {{ title }} {% endblock head_title %} {% block head_extra %}
 <title>Анонсы ТОП матчей недели</title>
 <script type="text/javascript">
-    var week_start = new Date("{{current_week_bet.start_date.isoformat}}");
-    var week_end = new Date("{{current_week_bet.check_date.isoformat}}");
+    // var week_start = new Date("{{current_week_bet.start_date.isoformat}}");
+    // var week_end = new Date("{{current_week_bet.check_date.isoformat}}");
     var matches_time = [
         new Date("{{current_week_bet.match_1.match_time.isoformat}}"),
         new Date("{{current_week_bet.match_2.match_time.isoformat}}"),
@@ -11,12 +11,13 @@
 </script>
 <link rel="stylesheet" href='{% static "css/bet_style.css" %}'>
 <script type="text/javascript" src="{% static 'js/bet.js'  %}"></script>
+<script type="text/javascript" src="{% static 'js/bet_main.js'  %}"></script>
 {% endblock head_extra %} {% block content %}
 <main class="mainContainer">
     <div class="articles">
         <div class="contentMainBets">
             <header class="mainBetHeader">
-                <h2>Анонс ТОП матчей недели. 28 окт - 3 ноя 2010</h2>
+                <h2>Анонс ТОП матчей недели. <span id="weekName"></span></h2>
                 <div class="make_bet makeBetModal">
                     <button data-toggle="modal">Cделать ставку</button>
                 </div>
@@ -96,7 +97,7 @@
                     <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                 </div>
             </nav>
-            <article class="infoMatchCurrent ">
+            <article id="article_top_match" class="infoMatchCurrent">
                 <section class="top_match order1TopMatch">
                     <header>
                         <h2>{{ current_week_bet.match_1.home_team.team_name }} - {{ current_week_bet.match_1.guest_team.team_name }}</h2>
@@ -106,8 +107,13 @@
                         {{ current_week_bet.match_1.preview }}
                     </div>
                     <footer class="time_start">
-                        Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
-                    </footer>
+                        <section>
+                            <h3>Начало по Киеву: <time class="timeKiev"></time></h3>
+                        </section>
+                        <section>
+                            <h3>Начало по Москве: <time class="timeMoscow"></time></h3>
+                        </section>
+                    </footer>        
                 </section>
                 <section class="top_match order2TopMatch">
                     <header>
@@ -118,8 +124,13 @@
                         {{ current_week_bet.match_2.preview }}
                     </div>
                     <footer class="time_start">
-                        Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
-                    </footer>
+                        <section>
+                            <h3>Начало по Киеву: <time class="timeKiev"></time></h3>
+                        </section>
+                        <section>
+                            <h3>Начало по Москве: <time class="timeMoscow"></time></h3>
+                        </section>
+                    </footer>        
                 </section>
                 <section class="top_match order3TopMatch">
                     <header>
@@ -130,8 +141,13 @@
                         {{ current_week_bet.match_3.preview }}
                     </div>
                     <footer class="time_start">
-                        Начало матча: Москва <span> 21:45</span>, Киев <span> 20:45</span>
-                    </footer>
+                        <section>
+                            <h3>Начало по Киеву: <time class="timeKiev"></time></h3>
+                        </section>
+                        <section>
+                            <h3>Начало по Москве: <time class="timeMoscow"></time></h3>
+                        </section>
+                    </footer>                
                 </section>
             </article>
         </div>
@@ -165,17 +181,18 @@
         </div>
         <!-- Прогнозы на все матчи в топ-чемпионатах -->
         <div id="bets_all_championships">
-            <div class="name_right_column">
+            <h2>
                 <a href="all_reviews">Превью и прогнозы</a>
-            </div>
+            </h2>
             {% for season in active_seasons %}
             <a href="all_reviews" class="linkOtherBet">
                 <div class="imgChampNav">
                     <img src="{{ season.img }}" alt="">
                 </div>
-                    <h2 data-id="{{ season.id }}">{{ season.name }}</h2>
-                    <!-- Нужно передать текущий тур -->
+                <div class="infoChamp">
+                    <h3 data-id="{{ season.id }}">{{ season.name }}</h3>
                     <p data-id="{{ season.tour.id }}">{{ season.tour.name }}</p>
+                </div>
             </a>
             {% endfor %}
         </div>

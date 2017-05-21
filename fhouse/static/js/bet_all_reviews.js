@@ -13,12 +13,15 @@ $(document).ready(function() {
 
     // Active first league_table
     $("#all_bets_nav").children("div").eq(0).addClass("active_champ");
+    $("#titleLeague").html(first_season_name)
 
     $(document).on("click", "#all_bets_nav .change_champ", function(e) {
         if ($(this).hasClass('active_champ')) return;
         $('.active_champ').removeClass('active_champ');
         $(this).addClass('active_champ');
         var idSeason = +$(this).attr("data-id");
+        var nameLeague = $(this).attr("data-name");
+        $("#titleLeague").html(nameLeague);
         objBets.currentLeague = idSeason;
         get_tours(idSeason);
     });
