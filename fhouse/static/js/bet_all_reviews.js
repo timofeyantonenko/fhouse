@@ -21,7 +21,7 @@ $(document).ready(function() {
         var idSeason = +$(this).attr("data-id");
         objBets.currentLeague = idSeason;
         get_tours(idSeason);
-    })
+    });
 
     $(document).on("click", "#tour_other li", function() {
         var $lineHover = $(this).find('.hover_menu')
@@ -31,8 +31,29 @@ $(document).ready(function() {
         var idTour = +$(this).attr("id");
         objBets.currentTour = idTour;
         make_preview(idTour);
-    })
+    });
 
+    // Show group
+
+    var groupShow = +$("#table_other_champs").find(".activeSectionSelect .select_championship").children("option").eq(0).attr("value");
+    show_select_group(groupShow);
+
+    $(document).on("click", "#table_other_champs .one_division_nav", function() {
+        var index = +$(this).attr("data-active");
+        var indexActive = index - 1,
+            $table = $("#table_other_champs");
+        $table.find(".activeTab").removeClass("activeTab");
+        $table.find(".activeSectionSelect").removeClass("activeSectionSelect");
+        $(this).addClass("activeTab");
+        $table.find("section[data-active=" + index + "]").addClass("activeSectionSelect");
+        var group = +$table.find(".activeSectionSelect .select_championship").children("option").eq(0).attr("value");
+        show_select_group(group);
+    });
+
+    $("#table_other_champs").find("select.select_championship").on("change", function() {
+        var indChamp = +$(this).children("option:selected").attr("value");
+        show_select_group(indChamp);
+    })
 
 });
 
@@ -45,10 +66,10 @@ function get_tours(idSeason) {
         data: { 'season_id': idSeason },
         method: "GET",
         success: function(data, textStatus, xhr) {
-        	console.log(data);
+            console.log(data);
             var htmlTour = "",
                 content;
-            for (var i = data.length - 1; i >= 0 ; i--) {
+            for (var i = data.length - 1; i >= 0; i--) {
                 var nameTour = data[i]['stage_name'],
                     id_tour = data[i]['id'];
                 if (data[i]['is_current']) {
@@ -366,4 +387,14 @@ function right_tour() {
 function month_convert(month) {
     var arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
     return arrMonth[month]
+}
+
+// Select championships
+
+
+
+function show_select_group(indexChamp) {
+    var $table = $("#table_other_champs");
+    $table.find(".activeGroup").removeClass("activeGroup");
+    $table.find("select[data-parent-id=" + indexChamp + "]").addClass("activeGroup");
 }

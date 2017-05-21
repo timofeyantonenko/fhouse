@@ -476,16 +476,43 @@ h4 {
 }
 
 .select_tab_conteiner {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
     width: 100%;
-    padding: 5px 10px 0 10px;
+    padding: 10px 10px 5px 10px;
+}
+
+.one_division_nav.activeTab {
+    background-color: #fff !important;
+    color: #222 !important;
 }
 
 
+
+.select_tab_conteiner>section {
+    display: none;
+}
+
+.select_tab_conteiner>section.activeSectionSelect {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+
+.select_tab_conteiner>section select {
+    margin-bottom: 5px;
+}
+
+.group_select {
+    display: none;
+}
+
+.group_select.activeGroup {
+    display: block !important;
+}
 
 
 /*Body table*/

@@ -93,7 +93,7 @@ var first_season = {{ seasons.0.id }},
                 <div class="select_tab_conteiner">
                     {% for championat_type_name, championat_type_leagues in championats_dict.items %}
                     <section data-active="{{ forloop.counter }}" {% if forloop.counter == 1%}class="activeSectionSelect"{% endif %}>
-                            <select>
+                            <select class="select_championship">
                                 {% for championat_name, championat_detail in championat_type_leagues.items %}
                                 <option value="{{ championat_detail.id }}">{{championat_name}}</option>
                                 {% endfor %}
