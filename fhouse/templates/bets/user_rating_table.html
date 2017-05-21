@@ -10,9 +10,9 @@
             <div class="head_table">
                 <div class="table_name">Рейтинг прогнозистов</div>
                 <div class="nav_table">
-                    <div class="one_division_nav" id="all_time_rating">Все время</div>
-                    <div class="one_division_nav" id="month_rating">Месяц</div>
-                    <div class="one_division_nav" id="week_rating">Сезон</div>
+                    <div class="one_division_nav tabForecast" data-period="all">Все время</div>
+                    <div class="one_division_nav tabForecast" data-period="month">Месяц</div>
+                    <div class="one_division_nav tabForecast" data-period="season">Сезон</div>
                 </div>
             </div>
             <div class="all_team_table">
@@ -23,8 +23,8 @@
                 </div>
                 <main id="listForecasters">
                 </main>
-                <footer id="tableLoadForecasters">
-                    <img src="../../static/img/loadGallery.gif" alt="loader">
+                <footer id="loaderMatches" class="loader">
+                        <div></div>
                 </footer>
                 <aside>
                     <div id="paginationTable">

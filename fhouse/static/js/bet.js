@@ -30,11 +30,11 @@ $(document).ready(function() {
         tableLength = 20;
     }
 
-    ajaxRating(tableLength, 1, indexSection);
+    ajaxRating(tableLength, 1, "all");
 
-    $(".one_division_nav").on("click", function(e) {
-        indexSection = $(this).index();
-        ajaxRating(tableLength, 1, indexSection);
+    $(".tabForecast").on("click", function(e) {
+        var periodRating = $(this).attr("data-period");
+        ajaxRating(tableLength, 1, periodRating);
     });
 
     $("body").on("click", "#paginationTable li ", function() {
@@ -388,7 +388,8 @@ function sort(first, second) {
     return second - first
 }
 
-function ajaxRating(locationLinkHref, page, section) {
+function ajaxRating(count_pagination, page, section) {
+    console.log(arguments);
     var $loaderTable = $("#tableLoadForecasters"),
         contentTable = $('#listForecasters');
     contentTable.empty();
@@ -396,14 +397,15 @@ function ajaxRating(locationLinkHref, page, section) {
     $.ajax({
         url: '/bets/get_rating/',
         data: {
-            period: section, //section 0 - все время, 1 - месяц, 2 -сезон
-            pagePaginationTable: page,
+            period: section,
+            p: page,
+            offset: count_pagination
         },
         method: "GET",
         success: function(data, textStatus, xhr) {
-            lengthPagination = 123 // Нужно еще передать количество пагинаций
+            lengthPagination = 123 
             var htmlBet = "";
-            for (var i = 0; i < data.length && i < locationLinkHref; i++) {
+            for (var i = 0; i < data.length && i < count_pagination; i++) {
                 var place = i + 1,
                     imgSrc = '/media/' + data[i]['user__avatar'],
                     firstName = data[i]['user__first_name'],
