@@ -5,7 +5,7 @@ $(document).ready(function() {
     objBets.currentLeague = first_season;
     get_tours(first_season);
 
-    get_table(1);
+    // get_table(1);
 
     $("#arrow_left_tour").bind('click', left_tour);
 
@@ -40,6 +40,7 @@ $(document).ready(function() {
 
     var groupShow = +$("#table_other_champs").find(".activeSectionSelect .select_championship").children("option").eq(0).attr("value");
     show_select_group(groupShow);
+    set_ajax_data();
 
     $(document).on("click", "#table_other_champs .one_division_nav", function() {
         var index = +$(this).attr("data-active");
@@ -69,7 +70,6 @@ function get_tours(idSeason) {
         data: { 'season_id': idSeason },
         method: "GET",
         success: function(data, textStatus, xhr) {
-            console.log(data);
             var htmlTour = "",
                 content;
             for (var i = data.length - 1; i >= 0; i--) {
@@ -297,6 +297,18 @@ function sort(first, second) {
     return second - first
 }
 
+function  set_ajax_data () {
+	var ajax_data = $(".activeSectionSelect").children(".activeGroup").children("option").eq(0).attr("value") || $(".activeSectionSelect").children(".select_championship").children("option").eq(0).attr("value");
+	if ( $(".activeSectionSelect").children(".select_championship").children("option").eq(0).attr("value") ) {
+		var ajax_data = { "group": ajax_data }
+
+	} else {
+		var ajax_data = { "season": ajax_data }
+	}
+	console.log(ajax_data)
+	get_table(ajax_data);
+}
+
 function get_table(ajax_data) {
     var $loaderTable = $("#tableLoad"),
         $tableINherit = $("#table_rating");
@@ -307,15 +319,16 @@ function get_table(ajax_data) {
         data: ajax_data,
         method: "GET",
         success: function(data, textStatus, xhr) {
-            var newData = data.league_table;
-            lengthArray = newData.length;
+        	// console.log(data);
+            var lengthArray = data.length;
             for (var i = 0; i < lengthArray; i++) {
-                newData[i].valueOf = function() {
+                newData[i].place = function() {
                     return this.points
                 }
             };
             var newDataSort = newData.sort(sort);
             htmlTable = "";
+            var htmlTable = "";
             for (var i = 0; i < lengthArray; i++) {
                 var position = i + 1,
                     team = newDataSort[i],
