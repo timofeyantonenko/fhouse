@@ -111,7 +111,6 @@ function load_bet_info() {
     });
 }
 
-
 function topMatchRight(objectMatches) {
     var objMatch = objectMatches['stage_bet'],
         htmlMatch = "",
@@ -385,6 +384,10 @@ function propose_bet(stage_id, match_1, match_2, match_3) {
     });
 }
 
+function sort(first, second) {
+    return second - first
+}
+
 function ajaxRating(locationLinkHref, page, section) {
     var $loaderTable = $("#tableLoadForecasters"),
         contentTable = $('#listForecasters');
@@ -405,7 +408,7 @@ function ajaxRating(locationLinkHref, page, section) {
                     imgSrc = '/media/' + data[i]['user__avatar'],
                     firstName = data[i]['user__first_name'],
                     lastName = data[i]['user__last_name'],
-                    pointUser = data[i]['__proto__'];
+                    pointUser = data[i]['score'];
                 htmlBet +=
                     `<div class="one_position">
                         <div class="position">` + place + `</div>

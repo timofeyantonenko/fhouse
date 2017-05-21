@@ -40,7 +40,7 @@ $(document).ready(function() {
 
     var groupShow = +$("#table_other_champs").find(".activeSectionSelect .select_championship").children("option").eq(0).attr("value");
     show_select_group(groupShow);
-    set_ajax_data();
+    set_ajax_data (0, 0);
 
     $(document).on("click", "#table_other_champs .one_division_nav", function() {
         var index = +$(this).attr("data-active");
@@ -52,11 +52,20 @@ $(document).ready(function() {
         $table.find("section[data-active=" + index + "]").addClass("activeSectionSelect");
         var group = +$table.find(".activeSectionSelect .select_championship").children("option").eq(0).attr("value");
         show_select_group(group);
+        set_ajax_data (0, 0);
     });
 
     $("#table_other_champs").find("select.select_championship").on("change", function() {
         var indChamp = +$(this).children("option:selected").attr("value");
         show_select_group(indChamp);
+        var ind = $(this).children("option:selected").index();
+        set_ajax_data (ind, 0);
+    })
+
+    $("#table_other_champs").find("select.group_select").on("change", function() {
+        var indChamp = +$(this).children("option:selected").attr("value");
+        var ind = $(this).children("option:selected").index();
+        set_ajax_data (undefined, ind);
     })
 
 });
@@ -297,13 +306,14 @@ function sort(first, second) {
     return second - first
 }
 
-function  set_ajax_data () {
-	var ajax_data = $(".activeSectionSelect").children(".activeGroup").children("option").eq(0).attr("value") || $(".activeSectionSelect").children(".select_championship").children("option").eq(0).attr("value");
-	if ( $(".activeSectionSelect").children(".select_championship").children("option").eq(0).attr("value") ) {
-		var ajax_data = { "group": ajax_data }
-
+function  set_ajax_data (indexSeason, indexGroup) {
+	var attrGroup = $(".activeSectionSelect").children(".activeGroup").children("option").eq(indexGroup).attr("value"),
+		attrSeason = $(".activeSectionSelect").children(".select_championship").children("option").eq(indexSeason).attr("value"),
+		ajax_data =  attrGroup || attrSeason;
+	if ( attrGroup ) {
+		ajax_data = { "group": ajax_data }
 	} else {
-		var ajax_data = { "season": ajax_data }
+		ajax_data = { "season": ajax_data }
 	}
 	console.log(ajax_data)
 	get_table(ajax_data);
@@ -322,16 +332,16 @@ function get_table(ajax_data) {
         	// console.log(data);
             var lengthArray = data.length;
             for (var i = 0; i < lengthArray; i++) {
-                newData[i].place = function() {
+                data[i].place = function() {
                     return this.points
                 }
             };
-            var newDataSort = newData.sort(sort);
+            var newDataSort = data.sort(sort);
             htmlTable = "";
             var htmlTable = "";
             for (var i = 0; i < lengthArray; i++) {
-                var position = i + 1,
-                    team = newDataSort[i],
+                var team = newDataSort[i],
+                    position = i + 1,
                     img = team['team']['image'],
                     name = team['team']['team_name'],
                     games = team['games'],

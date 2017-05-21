@@ -13,7 +13,7 @@ class TeamSeasonResultSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TeamSeasonResult
-        fields = ("team", "games", "goals", "points")
+        fields = ("team", "games", "goals", "points", "place")
 
 
 class CoefficientSerializer(serializers.ModelSerializer):
