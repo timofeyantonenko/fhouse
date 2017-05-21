@@ -2,7 +2,8 @@ var currentPageLi = 1,
     lengthPagination,
     locationLink = window.location.pathname,
     tableLength = 10,
-    indexSection = 0;
+    indexSection = 0,
+    arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 
 $(document).ready(function() {
 
@@ -112,9 +113,14 @@ function load_bet_info() {
 
 
 function topMatchRight(objectMatches) {
-    console.log(objectMatches)
     var objMatch = objectMatches['stage_bet'],
-        htmlMatch = "";
+        htmlMatch = "",
+        startWeek = new Date(objMatch["start_date"]),
+        endWeek = new Date(objMatch["check_date"]),
+        timeStartWeek = startWeek.getDate() + " " + month_convert(startWeek.getMonth()) + " " + startWeek.getFullYear(),
+        timeFinishWeek = endWeek.getDate() + " " + month_convert(endWeek.getMonth()) + " " + endWeek.getFullYear(),
+        htmlWeekName = timeStartWeek + " - " + timeFinishWeek;
+    $("#weekName").html(htmlWeekName);
     for (var i = 1; i < 4; i++) {
         var matchNumber = "match_" + i,
             thisMatch = objMatch[matchNumber],
@@ -122,7 +128,9 @@ function topMatchRight(objectMatches) {
             minuteMatch = "0" + times.getMinutes(),
             minute =  minuteMatch.slice(-2),
             timeMatch = times.getHours() + ":" + minute,
-            dayOfWeek = getWeekDay(times.getDay());
+            dayOfWeek = getWeekDay(times.getDay()),
+            team1 = thisMatch["home_team"]["team_short_name"] || thisMatch["home_team"]["team_name"],
+            team2 = thisMatch["guest_team"]["team_short_name"] || thisMatch["guest_team"]["team_name"];
         htmlMatch += `
             <div class="one_top_match_right">
                 <div class="day_one_top_match_right">` + dayOfWeek +`</div>
@@ -130,14 +138,14 @@ function topMatchRight(objectMatches) {
                     <div class="logo_one_top_match_right">
                         <img src="` + thisMatch["home_team"]["image"] + `" alt="">
                     </div>
-                    <div class="name_team_one_top_match_right">` + thisMatch["home_team"]["team_name"] + `</div>
+                    <div class="name_team_one_top_match_right">` + team1 + `</div>
                 </div>
                 <div class="time_one_top_match_right">` + timeMatch +`</div>
                 <div class="team_one_top_match_right">
                     <div class="logo_one_top_match_right">
                         <img src="` + thisMatch["guest_team"]["image"] + `" alt="">
                     </div>
-                    <div class="name_team_one_top_match_right">` + thisMatch["guest_team"]["team_name"] + `</div>
+                    <div class="name_team_one_top_match_right">` + team2 + `</div>
                 </div>
             </div>
             
@@ -545,3 +553,8 @@ function getCookie(name) {
     }
     return cookieValue;
 };
+
+function month_convert(month) {
+    var arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+    return arrMonth[month]
+}

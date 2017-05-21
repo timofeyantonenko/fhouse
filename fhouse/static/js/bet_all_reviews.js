@@ -45,6 +45,7 @@ function get_tours(idSeason) {
         data: { 'season_id': idSeason },
         method: "GET",
         success: function(data, textStatus, xhr) {
+        	console.log(data);
             var htmlTour = "",
                 content;
             for (var i = data.length - 1; i >= 0 ; i--) {
@@ -258,11 +259,6 @@ function get_date(date) {
     return makeDate;
 }
 
-function month_convert(month) {
-    var arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
-    return arrMonth[month]
-}
-
 
 function toTimeZone(time) {
     var timeZ = new Date(time);
@@ -365,4 +361,9 @@ function right_tour() {
         }
     }
     return;
+}
+
+function month_convert(month) {
+    var arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+    return arrMonth[month]
 }
