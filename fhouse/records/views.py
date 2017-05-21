@@ -2,8 +2,11 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404, render_to_response
 # Create your views here.
 from django.views.generic import ListView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from .models import RecordGroup, RecordTable, Record
+from .serializers import RecordGroupSerializer, RecordSerializer, RecordTableSerializer
 
 
 def record_groups(request):  # list items
@@ -30,6 +33,40 @@ def record_groups(request):  # list items
         "title": title,
     }
     return render(request, "records/records_groups.html", context)
+
+
+@api_view(['GET'])
+def get_group_tables(request):
+    group = request.GET.get("group_id")
+    page = request.GET.get("p")
+    first_paginate = 6
+    paginate_by = 3
+    if group:
+        tables = RecordTable.objects.filter(record_group__title=group)
+        paginator = Paginator(tables, paginate_by)
+        try:
+            tables = paginator.page(page)
+        except PageNotAnInteger:
+            tables = paginator.page(1)
+        except EmptyPage:
+            tables = []
+            # return context
+            print("This except")
+            # tables = paginator.page(paginator.num_pages)
+    else:
+        tables = RecordTable.objects.all()
+        paginator = Paginator(tables, paginate_by)
+        try:
+            tables = paginator.page(page)
+        except PageNotAnInteger:
+            tables = paginator.page(1)
+        except EmptyPage as e:
+            tables = []
+    tables_serializer = RecordTableSerializer(tables, many=True, context={'request': request})
+    return Response(tables_serializer.data)
+    # # context = {}
+    # league_serializer = TeamSeasonResultSerializer(all_teams, many=True, context={'request': request})
+    # return Response(league_serializer.data)
 
 
 def group_tables(request, slug=None):
