@@ -19,85 +19,6 @@ $(document).ready(function() {
         var new_active_tab = $(str_to_find);
         new_active_tab.addClass('menu_individualNews_active');
     }
-    if (window.history && window.history.pushState) {
-        $(window).on('popstate', function() {
-
-            var url = window.location.href;
-            tab = getUrlParameter('tab');
-
-            var ajax_url = '/posts';
-            var ajax_data = {};
-            var state = "";
-
-            var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
-            var previous_active_tab = $('div .menu_individualNews_active');
-            previous_active_tab.removeClass('menu_individualNews_active');
-            var str_to_find = String.format("div.changeNews:contains('{0}')", search_tab);
-            var new_active_tab = $(str_to_find);
-            new_active_tab.addClass('menu_individualNews_active');
-            if (typeof tab != 'undefined') {
-                ajax_data['tab'] = tab;
-                state += 'tab=' + tab;
-            }
-            var page = getUrlParameter('page')
-            if (typeof page != 'undefined') {
-                state += 'page=' + page;
-                ajax_data['page'] = page;
-            }
-            if (!isEmpty(ajax_data)) {
-                state = '?' + state;
-                ajax_url += '/tabs';
-            } else {
-                ajax_url = '/tabs';
-                ajax_data = { 'tab': 'all' }
-            }
-            $.ajax({
-                url: ajax_url,
-                data: ajax_data,
-                dataType: "html",
-                success: function(data) {
-                    var content = $('.articles_list');
-                    content.html(data);
-                },
-                error: function(xhr, status, error) {}
-            });
-        });
-
-    }
-
-    // load_posts('/posts/tabs', 'all', 1);
-
-
-    $(document).on('click', '.pagination_page', function() {
-        if (!$(this).hasClass('active')) {
-            if ($(this).hasClass('pag_page')) {
-                var need_page_number = parseInt($.trim($(this).text()))
-            } else if ($(this).hasClass('prev_pag_page')) {
-                var active_page_number = $.trim($('.active').text())
-                var need_page_number = parseInt(active_page_number) - 1
-            } else if ($(this).hasClass('next_pag_page')) {
-                var active_page_number = $.trim($('.active').text())
-                var need_page_number = parseInt(active_page_number) + 1
-            }
-        } else {
-            return;
-        }
-        var tab = $('div .menu_individualNews_active').find('div').text();
-        if (tab === 'Все') {
-            tab = 'all';
-        }
-        $.ajax({
-            url: '/posts/tabs',
-            data: { 'tab': tab, 'page': need_page_number },
-            dataType: "html",
-            success: function(data) {
-                var content = $('.articles_list');
-                content.html(data);
-                //                window.history.pushState("object or string", "Title", '?tab=' + tab + '&page=' + need_page_number);
-            },
-            error: function(xhr, status, error) {}
-        });
-    });
 
     $(document).on('click', '.positive_like', function(e) {
         e.preventDefault();
@@ -255,12 +176,13 @@ $(document).ready(function() {
     });
 
     var tagLoad = +(window.location.href.split("=").slice(-1).join(""));
+    current_tab = tagLoad;
     get_posts(tagLoad, 1);
     setActiveTab(tagLoad);
+
     $(document).on("click", "#loadTile", function() {
       var currentPage = +$(this).attr("data-page"),
           nextPage = currentPage + 1;
-      console.log(currentPage);
       get_posts(current_tab, nextPage);
       $(this).attr("data-page", nextPage);
     })
@@ -275,7 +197,6 @@ function setActiveTab(tag) {
 
 
 function get_posts(tag, page) {
-    console.log(arguments);
     $("#loadTile").removeClass("more_active").addClass("loading");
     if ( !tag ) {
       var ajaxData = { 'p': page };
@@ -285,7 +206,6 @@ function get_posts(tag, page) {
     var $postsContainer = $("#postList");
     $.ajax({
         url: '/posts/api_get_posts/',
-        // data: { 'tag': tag, 'p': page },
         data: ajaxData,
         dataType: "json",
         success: function(data) {
@@ -299,11 +219,13 @@ function get_posts(tag, page) {
                             <img src="` + data[i]["image"] + `" class="imgUser" alt="">
                         </section>
                         <section class="infoNews">
-                            <h3>` + data[i]["title"] + `</h3>
-                            <time>` + timePost + `</time>
-                            <div class="textNews">
-                                ` + data[i]["content"] + `
-                            </div>
+                            <header>
+                              <h3>` + data[i]["title"] + `</h3>
+                              <time>` + timePost + `</time>
+                              <p class="textNews">
+                                  ` + data[i]["content"] + `
+                              </p>
+                            </header>
                             <footer class="footerNews">
                                 <div class="dataCommentsLikes">
 
@@ -322,13 +244,7 @@ function get_posts(tag, page) {
             };
             window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tag);
             $("#loadTile").removeClass("loading").addClass("more_active");
-            if ( page > 1 ) {
-              $postsContainer.append(htmlPosts);
-            } else {
-              $postsContainer.html(htmlPosts);
-            }
-
-            // window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tab);
+            page > 1 ? $postsContainer.append(htmlPosts) : $postsContainer.html(htmlPosts);
         },
         error: function(xhr, status, error) {}
     });
@@ -358,32 +274,12 @@ function page_settings() {
         var srcNew = $(this).val();
         $('.imgOfferNews').attr('src', srcNew);
     })
-
     // Download photo
     $("#offerImgDownload").change(function() {
-
         readURLoffer(this);
     });
 
-    if ($('*').is('.content_coment')) {
-        $(".comments_base2").show();
-    } else {
-        $(".comments_base2").hide();
-    };
-
-    if ($(".blockquote").length < 6) {
-        $(".show_all_coment").hide();
-        $(".blockquote").css("padding-bottom", "3%")
-    } else {
-        $(".show_all_coment").show();
-    };
-
-    $("body").on("click", ".pagination_page a, .pagination_page span", function() {
-        $('html, body').animate({ scrollTop: 0 }, '0');
-
-    });
 }
-
 
 function show_modal(modal_id) {
     $(modal_id).modal('toggle');
@@ -415,22 +311,6 @@ function propose_post(text, image) {
 }
 
 var url = window.location.href;
-
-// function load_posts(url, tab, page) {
-//     $.ajax({
-//         url: url,
-//         data: { 'tab': tab },
-//         dataType: "html",
-//         success: function(data) {
-//             var content = $('.news_stream');
-//             content.html(data);
-//             $(".more_article").attr('data-page', 2);
-//             window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tab);
-//         },
-//         error: function(xhr, status, error) {}
-//     });
-// }
-
 
 $(document).on("keyup", "#post_search", function(e) {
     var page = parseInt($(".more_article").attr("data-page"));
