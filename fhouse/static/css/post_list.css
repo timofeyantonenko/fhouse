@@ -1,6 +1,7 @@
 /*Header search*/
 
 .right_header {
+  float: right;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -44,8 +45,8 @@
     margin-bottom: 10px;
 }
 
-.searchRecord textarea {
-    width: 225px;
+.searchRecord input[type="text"] {
+    width: calc(100% - 30px);
     height: 100%;
     font-size: 15px;
     overflow: hidden;
@@ -92,7 +93,7 @@
     max-height: 40px;
 }
 
-#mainNews .textNews {
+.oneArticle:first-child .textNews {
     -webkit-line-clamp: 6;
     line-height: 20px;
     max-height: 120px;
@@ -286,29 +287,29 @@ hr {
     padding-bottom: 5px;
 }
 
-.mainNews {
+.oneArticle:first-child {
     height: 350px !important;
     position: relative;
 }
 
-.mainNews .IMGoneArticle {
+.oneArticle:first-child .IMGoneArticle {
     width: 50% !important;
     height: 350px !important;
 }
 
-.mainNews .timeSpan {
+.oneArticle:first-child .timeSpan {
     float: none;
 }
 
-.mainNews h3 {
+.oneArticle:first-child h3 {
     margin-bottom: 0px;
 }
 
-.mainNews .TEXToneArticle {
+.oneArticle:first-child .TEXToneArticle {
     margin: 10px 0px;
 }
 
-.mainNews .dataCommentsLikes {
+.oneArticle:first-child .dataCommentsLikes {
     margin-bottom: 10px;
 }
 
@@ -443,7 +444,7 @@ textarea {
 
 
 /*<a href="#"> <i class="fa fa-comment" aria-hidden="true"> 154</i></a>
-<i class="fa fa-thumbs-up" aria-hidden="true"> 32</i> 
+<i class="fa fa-thumbs-up" aria-hidden="true"> 32</i>
 <i class="fa fa-thumbs-down" aria-hidden="true"> 12</i>*/
 
 
@@ -996,7 +997,7 @@ textarea {
 
 /*new style */
 
-main {
+ {
     max-width: 1170px !important;
     margin: auto;
     display: -webkit-box !important;
@@ -1089,14 +1090,14 @@ main {
 }
 
 @media screen and (min-width: 1170px) {
-    #mainNews {
+    .oneArticle:first-child {
         height: 300px !important;
     }
-    #mainNews .imgContainer {
+    .oneArticle:first-child .imgContainer {
         height: 300px !important;
         width: 400px !important;
     }
-    #mainNews .infoNews {
+    .oneArticle:first-child .infoNews {
         width: calc(100% - 410px) !important;
     }
     .imgContainer {
@@ -1120,14 +1121,14 @@ main {
 }
 
 @media screen and (min-width: 970px) and (max-width: 1169px) {
-    #mainNews {
+    .oneArticle:first-child {
         height: 225px !important;
     }
-    #mainNews .imgContainer {
+    .oneArticle:first-child .imgContainer {
         height: 225px !important;
         width: 300px !important;
     }
-    #mainNews .infoNews {
+    .oneArticle:first-child .infoNews {
         width: calc(100% - 310px) !important;
     }
     .imgContainer {
@@ -1150,14 +1151,14 @@ main {
 }
 
 @media screen and (min-width: 750px) and (max-width: 969px) {
-    #mainNews {
+    .oneArticle:first-child {
         height: 300px !important;
     }
-    #mainNews .imgContainer {
+    .oneArticle:first-child .imgContainer {
         height: 300px !important;
         width: 400px !important;
     }
-    #mainNews .infoNews {
+    .oneArticle:first-child .infoNews {
         width: calc(100% - 410px) !important;
     }
     .imgContainer {
@@ -1498,24 +1499,15 @@ main {
 }
 
 .headerAllnews {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
     margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .headerAllnews h3 {
     font-size: 30px;
     color: #000;
     font-weight: 900;
+    float: left;
 }
 
 

@@ -7,6 +7,8 @@ if (!String.format) {
     };
 }
 
+var current_tab = undefined;
+
 $(document).ready(function() {
     var tab = getUrlParameter('tab')
     if (typeof tab != 'undefined') {
@@ -56,7 +58,6 @@ $(document).ready(function() {
                 success: function(data) {
                     var content = $('.articles_list');
                     content.html(data);
-                    //                window.history.pushState("object or string", "Title", state);
                 },
                 error: function(xhr, status, error) {}
             });
@@ -64,7 +65,7 @@ $(document).ready(function() {
 
     }
 
-    load_posts('/posts/tabs', 'all', 1);
+    // load_posts('/posts/tabs', 'all', 1);
 
 
     $(document).on('click', '.pagination_page', function() {
@@ -173,21 +174,19 @@ $(document).ready(function() {
         ajaxPage(true)
     });
 
-    $('.tab').click( function(e) {
+    $('.tab').click(function(e) {
         $('.more_article ').removeClass('endMore')
         var parent_div_tab = $(this).parent();
-        var tab = $(this).text().trim();
         var previous_active_tab = $('div .menu_individualNews_active');
         previous_active_tab.removeClass('menu_individualNews_active');
         previous_active_tab.find('li').removeAttr('id');
         parent_div_tab.addClass('menu_individualNews_active');
-        if (tab === 'Все') {
-            tab = 'all';
-        }
-        load_posts(url, tab, 2);
+        var dataId = +$(this).attr("data-id");
+        current_tab = dataId || undefined;
+        get_posts(dataId, 1);
     });
 
-    // Модальное окно 
+    // Модальное окно
 
     $(".one_tag_for_choose").on("click", function() {
         $(this).children(".flex_right").find(".choose_tag_success").toggleClass("success_tag");
@@ -255,43 +254,84 @@ $(document).ready(function() {
         });
     });
 
-    page_settings();
+    var tagLoad = +(window.location.href.split("=").slice(-1).join(""));
+    get_posts(tagLoad, 1);
+    setActiveTab(tagLoad);
+    $(document).on("click", "#loadTile", function() {
+      var currentPage = +$(this).attr("data-page"),
+          nextPage = currentPage + 1;
+      console.log(currentPage);
+      get_posts(current_tab, nextPage);
+      $(this).attr("data-page", nextPage);
+    })
 
 });
 
-function ajaxPage(pageCount) {
-    var page = parseInt($(".more_article").attr("data-page"));
-    var tab = 'Все';
-    var f = function() {
-        var ajax_data = { "tab": tab },
-            content = $('.news_stream'),
-            state = "",
-            $moreArt = $(".more_article");
-        pageCount ? page += 1 : page = 2;
-        if (tab === 'Все') tab = 'all';
-        if (pageCount) ajax_data["page"] = page;
+function setActiveTab(tag) {
+  if ( isNaN(tag)) return $("#postTags").children("div").eq(0).addClass("menu_individualNews_active");
+  var $activTag = $("#postTags").find("li[data-id='" + tag + "']");
+  $activTag.parent(".changeNews ").addClass("menu_individualNews_active");
+}
 
-        $.ajax({
-            url: '/posts/tabs',
-            data: ajax_data,
-            dataType: "html",
-            cache: true,
-            success: function(data) { //parametr:lastPage - true/false
-                // if (lastPage) {
-                pageCount ? content.append(data) : content.html(data);
-                $moreArt.attr("data-page", page);
-                $moreArt.removeClass("moreLoading");
-                // } else {
-                //     return $moreArt.addClass("endMore").removeClass("moreLoading");
-                // }
-                alert("Ura")
-            },
-            error: function(xhr, status, error) {
-                alert("Error")
-            }
-        });
+
+function get_posts(tag, page) {
+    console.log(arguments);
+    $("#loadTile").removeClass("more_active").addClass("loading");
+    if ( !tag ) {
+      var ajaxData = { 'p': page };
+    } else {
+      var ajaxData = { 'tag': tag, 'p': page };
     }
-    return f();
+    var $postsContainer = $("#postList");
+    $.ajax({
+        url: '/posts/api_get_posts/',
+        // data: { 'tag': tag, 'p': page },
+        data: ajaxData,
+        dataType: "json",
+        success: function(data) {
+            console.log(data);
+            var htmlPosts = "";
+            for (var i = 0; i < data.length; i++ ) {
+                timePost = get_date(data[i]["timestamp"]);
+                htmlPosts += `
+                    <a href="` + data[i]["slug"] + `" class="oneArticle">
+                        <section class="goNews imgContainer containerImgNews">
+                            <img src="` + data[i]["image"] + `" class="imgUser" alt="">
+                        </section>
+                        <section class="infoNews">
+                            <h3>` + data[i]["title"] + `</h3>
+                            <time>` + timePost + `</time>
+                            <div class="textNews">
+                                ` + data[i]["content"] + `
+                            </div>
+                            <footer class="footerNews">
+                                <div class="dataCommentsLikes">
+
+                                    <div class="tags__item js-tags-item">
+                                        <span>  </span>
+                                    </div>
+
+                                </div>
+                                <div class="quantityComments">
+                                      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                </div>
+                            </footer>
+                        </section>
+                    </a>
+                `;
+            };
+            window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tag);
+            $("#loadTile").removeClass("loading").addClass("more_active");
+            if ( page > 1 ) {
+              $postsContainer.append(htmlPosts);
+            } else {
+              $postsContainer.html(htmlPosts);
+            }
+
+            // window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tab);
+        },
+        error: function(xhr, status, error) {}
+    });
 }
 
 // Download photo
@@ -313,7 +353,6 @@ function downloadLinkTosrc() {
 
 // Script author: Dima
 function page_settings() {
-
     $(".linkImg").keyup(function() {
         // downloadLinkTosrc();
         var srcNew = $(this).val();
@@ -377,23 +416,23 @@ function propose_post(text, image) {
 
 var url = window.location.href;
 
-function load_posts(url, tab, page) {
-    $.ajax({
-        url: url,
-        data: { 'tab': tab },
-        dataType: "html",
-        success: function(data) {
-            var content = $('.news_stream');
-            content.html(data);
-            $(".more_article").attr('data-page', 2);
-            window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tab);
-        },
-        error: function(xhr, status, error) {}
-    });
-}
+// function load_posts(url, tab, page) {
+//     $.ajax({
+//         url: url,
+//         data: { 'tab': tab },
+//         dataType: "html",
+//         success: function(data) {
+//             var content = $('.news_stream');
+//             content.html(data);
+//             $(".more_article").attr('data-page', 2);
+//             window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tab);
+//         },
+//         error: function(xhr, status, error) {}
+//     });
+// }
 
 
-$(document).on("keyup", "#post_search", function(e){
+$(document).on("keyup", "#post_search", function(e) {
     var page = parseInt($(".more_article").attr("data-page"));
     var $activeTab = $('div .menu_individualNews_active');
     var tabName = $activeTab.find(".tab_name").html();
@@ -451,4 +490,21 @@ function isEmpty(obj) {
             return false;
     }
     return true;
+}
+
+function get_date(date) {
+    var dateToString = "" + date,
+        dateDate = new Date(dateToString),
+        today = new Date(),
+        arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Мая', 'Июня', 'Июля', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+    timeLong = (today - dateDate) / (60000 * 24);
+    minuteAgo = Math.round((today - dateDate) / 60000);
+    if (timeLong > 1 && timeLong < 24) {
+        makeDate = "Сегодня в " + ("0" + dateDate.getHours()).slice(-2) + ":" + ("0" + dateDate.getMonth()).slice(-2);
+    } else if (timeLong < 1) {
+        makeDate = minuteAgo + " мин. назад"
+    } else {
+        makeDate = ("0" + dateDate.getDate()).slice(-2) + " " + arrMonth[dateDate.getMonth()] + " " + dateDate.getFullYear();
+    }
+    return makeDate;
 }

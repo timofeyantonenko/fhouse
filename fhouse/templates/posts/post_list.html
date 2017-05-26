@@ -12,7 +12,7 @@
                     Предложить новость
                 </button>
                 <div class="searchRecord" id="find_news">
-                    <input id="post_search" placeholder="Поиск новости..."></input>
+                    <input type="text" id="post_search" placeholder="Поиск новости..."></input>
                     <button type="button" class="btn btn-primary">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </button>
@@ -20,8 +20,8 @@
             </div>
         </div>
         <div class="menu_individualNews">
-            <ul>
-                <div class="changeNews menu_individualNews_active ">
+            <ul id="postTags">
+                <div class="changeNews">
                     <li class="tab tabResponsive" id="main_tab">
                         <div class="tab_name">Все</div>
                         <div class="hover_menu"></div>
@@ -44,11 +44,15 @@
         </div>
         <hr class="postHr">
         <div class="articles_list">
-            <div class="news_stream">
+            <div id="postList" class="news_stream">
             </div>
         </div>
-        <div class="more_article otherMore" data-page="2">
-        </div>
+        <footer id="progress" class="articleFooter">
+            <button id="loadTile" class="more_active loading" data-page="1">
+                <i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+                <span class="doneMore">Посмотреть больше</span>
+            </button>
+        </footer>
     </div>
     <!-- Правая колонка новостей -->
     {% include "for_user.html" %}
@@ -104,12 +108,12 @@
             <footer class="modal-footer">
                 <span class="modal_cancel" data-dismiss="modal">
                     <a href="#">
-                        Отмена                                                  
+                        Отмена
                     </a>
                 </span>
                 <span class="modal_save" data-dismiss="modal">
                     <a href="#">
-                        Сохранить                                                  
+                        Сохранить
                     </a>
                 </span>
             </footer>
