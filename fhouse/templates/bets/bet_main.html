@@ -41,7 +41,7 @@
                     </div>
                     <figcaption>
                         <h4>
-                            {{ current_week_bet.match_1.home_team.team_name }} - 
+                            {{ current_week_bet.match_1.home_team.team_name }} -
                             {{ current_week_bet.match_1.guest_team.team_name }}
                         </h4>
                         <p>
@@ -63,7 +63,7 @@
                     </div>
                     <figcaption>
                         <h4>
-                            {{ current_week_bet.match_2.home_team.team_name }} - 
+                            {{ current_week_bet.match_2.home_team.team_name }} -
                             {{ current_week_bet.match_2.guest_team.team_name }}
                         </h4>
                         <p>
@@ -85,7 +85,7 @@
                     </div>
                     <figcaption>
                         <h4>
-                            {{ current_week_bet.match_3.home_team.team_name }} - 
+                            {{ current_week_bet.match_3.home_team.team_name }} -
                             {{ current_week_bet.match_3.guest_team.team_name }}
                         </h4>
                         <p>
@@ -113,7 +113,7 @@
                         <section>
                             <h3>Начало по Москве: <time class="timeMoscow"></time></h3>
                         </section>
-                    </footer>        
+                    </footer>
                 </section>
                 <section class="top_match order2TopMatch">
                     <header>
@@ -130,7 +130,7 @@
                         <section>
                             <h3>Начало по Москве: <time class="timeMoscow"></time></h3>
                         </section>
-                    </footer>        
+                    </footer>
                 </section>
                 <section class="top_match order3TopMatch">
                     <header>
@@ -147,7 +147,7 @@
                         <section>
                             <h3>Начало по Москве: <time class="timeMoscow"></time></h3>
                         </section>
-                    </footer>                
+                    </footer>
                 </section>
             </article>
         </div>
@@ -157,9 +157,9 @@
             <div class="head_table">
                 <div class="table_name">Рейтинг прогнозистов</div>
                 <div class="nav_table">
-                    <div class="one_division_nav tabForecast" data-period="all">Все время</div>
+                    <div class="one_division_nav tabForecast activeTab" data-period="all">Все время</div>
+                    <div class="one_division_nav tabForecast" data-period="week">Неделя</div>
                     <div class="one_division_nav tabForecast" data-period="month">Месяц</div>
-                    <div class="one_division_nav tabForecast" data-period="season">Сезон</div>
                 </div>
             </div>
             <div class="all_team_table">
@@ -171,10 +171,10 @@
                 <main id="listForecasters">
                 </main>
                 <footer id="tableLoadForecasters" class="loader">
-                    <img src="../../static/img/loadGallery.gif" alt="loader">
+                    <div></div>
                 </footer>
                 <aside>
-                    <a href="all_bet_rating/" class="otherMore">
+                    <a href="all_bet_rating/" class="tableMore">
                         Весь список
                     </a>
                 </aside>

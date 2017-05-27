@@ -2,12 +2,12 @@ var currentPageLi = 1,
     lengthPagination,
     locationLink = window.location.pathname,
     tableLength = 10,
-    indexSection = 0,
+    indexSection = "all",
     arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 
 $(document).ready(function() {
 
-    load_bet_info(); 
+    load_bet_info();
 
     var leftNav,
         center,
@@ -26,15 +26,20 @@ $(document).ready(function() {
     });
 
     // Table rating locationLink
-    if (locationLink.indexOf("all_bet_rating") > 0) {
-        tableLength = 20;
-    }
+    // if (locationLink.indexOf("all_bet_rating") > 0) {
+    //     tableLength = 10;
+    // }
 
-    ajaxRating(tableLength, 1, "all");
+    ajaxRating(10, 1, "all");
 
-    $(".tabForecast").on("click", function(e) {
+    $("#table_rat_forcas").find(".tabForecast").on("click", function(e) {
+      var _this = $(this);
+        if ( _this.hasClass("activeTab")) return false
         var periodRating = $(this).attr("data-period");
-        ajaxRating(tableLength, 1, periodRating);
+        indexSection = periodRating;
+        $(".activeTab").removeClass("activeTab");
+        _this.addClass("activeTab");
+        ajaxRating(10, 1, periodRating);
     });
 
     $("body").on("click", "#paginationTable li ", function() {
@@ -147,7 +152,7 @@ function topMatchRight(objectMatches) {
                     <div class="name_team_one_top_match_right">` + team2 + `</div>
                 </div>
             </div>
-            
+
         `;
     };
     $("#topMathRight").html(htmlMatch);
@@ -389,21 +394,20 @@ function sort(first, second) {
 }
 
 function ajaxRating(count_pagination, page, section) {
-    console.log(arguments);
+    var ajaxData = {};
+    if ( section != "all") ajaxData.period = section;
+    if ( page > 1 ) ajaxData.p = page;
+    if ( count_pagination != 10 ) ajaxData.offset = count_pagination;
     var $loaderTable = $("#tableLoadForecasters"),
         contentTable = $('#listForecasters');
     contentTable.empty();
     $loaderTable.show();
     $.ajax({
         url: '/bets/get_rating/',
-        data: {
-            period: section,
-            p: page,
-            offset: count_pagination
-        },
+        data: ajaxData,
         method: "GET",
         success: function(data, textStatus, xhr) {
-            lengthPagination = 123 
+            lengthPagination = 123;
             var htmlBet = "";
             for (var i = 0; i < data.length && i < count_pagination; i++) {
                 var place = i + 1,
@@ -506,7 +510,7 @@ function goPagination(page, sumPage, curPage) {
             }
         }
     }
-    return ajaxRating(tableLength, currentPageLi, indexSection);
+    return ajaxRating(10, currentPageLi, indexSection);
 }
 
 // function chose_tour(load_championat) {

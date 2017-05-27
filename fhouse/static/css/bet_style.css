@@ -472,6 +472,29 @@ h4 {
     color: #222 !important;
 }
 
+.all_team_table > aside {
+  display: block;
+  width: 100%;
+  padding: 3px 0;
+  text-align: center;
+}
+
+.tableMore {
+  font-size: 1.3rem;
+  color: #fff !important;
+  background-color: #e62117;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 7px 15px;
+  border-radius: 3px;
+  align-self: center;
+}
+
+.tableMore:hover {
+  background-color: #aa0a0c;
+}
+
 .select_tab_conteiner>section {
     display: none;
 }
@@ -1674,12 +1697,14 @@ section.order3TopMatch {
 Loader
 **************************/
 
-#loaderMatches {
+#loaderMatches,
+#tableLoadForecasters {
     width: 100%;
     padding: 20px;
 }
 
-#loaderMatches>div {
+#loaderMatches>div,
+#tableLoadForecasters>div {
     width: 40px;
     height: 40px;
     border-radius: 100%;
