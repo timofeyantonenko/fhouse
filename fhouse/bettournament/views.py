@@ -166,6 +166,7 @@ def make_bet(request):
 
 @api_view(['GET'])
 def get_bet_result_table(request):
+    context = {}
     period = request.GET.get("period", "all")
     page = request.GET.get("p", 1)
     pagination = request.GET.get("offset", 10)
@@ -189,7 +190,9 @@ def get_bet_result_table(request):
                                                         "user__avatar").annotate(
             score=Sum('score')).order_by('-score')
     result = user_results[(page-1)*pagination:page*pagination]
-    return Response(result)
+    context["users_table"] = result
+    context["all_users"] = len(user_results)
+    return Response(context)
 
 
 @api_view(['GET'])
