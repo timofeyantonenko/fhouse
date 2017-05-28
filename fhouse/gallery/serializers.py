@@ -55,7 +55,7 @@ class AlbumPhotoSerializer(serializers.ModelSerializer):
         likes = Like.objects.filter_by_instance(obj).filter(user=request.user)
         result = None
         if likes:
-            if likes.first():
+            if likes.first().like:
                 result = True
             else:
                 result = False
