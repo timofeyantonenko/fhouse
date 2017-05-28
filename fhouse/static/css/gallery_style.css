@@ -372,7 +372,13 @@ Slider
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    align-items: center;
 }
+
+.mark_info h3 {
+  margin-right: 3px;
+}
+
 
 .index_photo {
     margin: 0;
@@ -399,11 +405,47 @@ Slider
             align-items: center;
 }
 
+.mark_info i {
+  display: none;
+}
+
+/*Like active*/
+.mark_info.likeAcive .fa-thumbs-up {
+  display: unset !important;
+}
+
+.mark_info.likeAcive .fa-thumbs-o-down {
+  display: unset !important;
+}
+
+/*Dislike active*/
+
+.mark_info.disLikeAcive .fa-thumbs-o-up {
+  display: unset !important;
+}
+
+.mark_info.disLikeAcive .fa-thumbs-down {
+  display: unset !important;
+}
+
+/*Nothing active*/
+
+.mark_info.nothingAcive .fa-thumbs-o-up {
+  display: unset !important;
+}
+
+.mark_info.nothingAcive .fa-thumbs-o-down {
+  display: unset !important;
+}
+
 .mark_btn {
     margin-left: 10px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    font-size: 1.8rem;
+}
+
+.mark_btn i {
+  cursor: pointer;
+  margin: 3px;
 }
 
 .open_modal {
@@ -925,4 +967,3 @@ Tile
         margin: 0 0 10px 0;
     }
 }
-

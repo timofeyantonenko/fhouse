@@ -148,6 +148,7 @@ function ajaxGallery(ajxData, ajaxUrl, method, page) { //method 0: make all, met
         data: ajxData,
         dataType: "json",
         success: function(data) {
+            console.log(data)
             var json_request_photos = data['photo_list'],
                 arr = [],
                 indexObj = 0;
@@ -162,7 +163,8 @@ function ajaxGallery(ajxData, ajaxUrl, method, page) { //method 0: make all, met
                     "albumObj": obj.album_title,
                     "indexObj": indexObj,
                     "date": get_date(obj.timestamp),
-                    "title": obj.photo_title
+                    "title": obj.photo_title,
+                    "likeState": obj.user_like
                 });
                 indexObj++;
             });
@@ -249,7 +251,7 @@ function makeTile(append, page) {
             dataPage = ListPhotos[page][i]["data_page_comments"];
         foto_tile += `
             <div class="photo_row item">
-                <img src="` + urlTile + `" alt="" class="imgTile" 
+                <img src="` + urlTile + `" alt="" class="imgTile"
                 data-id="` + idTile + `" data-page="` + page + `"
                 data-index="` + data_index + `"
                 data-toggle="modal" data-target="#slaider_modal">
@@ -357,7 +359,7 @@ function htmlObj() {
         $loderComment.removeClass('noMore')
     }
     var $sliderCurrent = this.sliderType;
-    console.log($sliderCurrent)
+    setActiveClassLike(objectImg["likeState"]);
     return {
         1: this.sliderType.find(".img_slider").children("img").attr({
             "src": urlImg,
@@ -379,6 +381,24 @@ function htmlObj() {
         9: this.sliderType.find("aside").find(".discription_photo").html(titleImg),
         10: makeComments(id_img, 1, false)
     }
+}
+
+function setActiveClassLike( state ) {
+  var $likesContainer = $(".mark_info");
+  if (state === false) {
+    $likesContainer.removeClass("likeAcive");
+    $likesContainer.removeClass("nothingAcive");
+    $likesContainer.addClass("disLikeAcive");
+  } else if ( state === true ) {
+    $likesContainer.removeClass("disLikeAcive");
+    $likesContainer.removeClass("nothingAcive");
+    $likesContainer.addClass("likeAcive");
+  } else {
+    $likesContainer.removeClass("disLikeAcive");
+    $likesContainer.removeClass("likeAcive");
+    $likesContainer.addClass("nothingAcive");
+  }
+
 }
 
 function makeComments(id_img, page, append) {
@@ -559,8 +579,8 @@ $(document).on('click', '.btnFhouse', function(e) {
             ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj']++;
             var newLengthComment = ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'];
             // Updating comments
-            $("#slider_modal").find(".commes_photo_slider").html(newLengthComment); 
-            if (objSlider[0]['currentPage'] == objSlider[1]['currentPage'] 
+            $("#slider_modal").find(".commes_photo_slider").html(newLengthComment);
+            if (objSlider[0]['currentPage'] == objSlider[1]['currentPage']
                 && objSlider[0]['currentIndexImg'] == objSlider[1]['currentIndexImg']) {
                 $("#slider_slider").find(".commes_photo_slider").html(newLengthComment);
             }

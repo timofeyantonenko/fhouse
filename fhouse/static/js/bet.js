@@ -407,14 +407,16 @@ function ajaxRating(count_pagination, page, section) {
         data: ajaxData,
         method: "GET",
         success: function(data, textStatus, xhr) {
-            lengthPagination = 123;
-            var htmlBet = "";
-            for (var i = 0; i < data.length && i < count_pagination; i++) {
+            console.log(data)
+            var usersTable = data.users_table,
+                lengthPagination = Math.ceil(data.all_users / 10),
+                htmlBet = "";
+            for (var i = 0; i < usersTable.length && i < count_pagination; i++) {
                 var place = i + 1,
-                    imgSrc = '/media/' + data[i]['user__avatar'],
-                    firstName = data[i]['user__first_name'],
-                    lastName = data[i]['user__last_name'],
-                    pointUser = data[i]['score'];
+                    imgSrc = '/media/' + usersTable[i]['user__avatar'],
+                    firstName = usersTable[i]['user__first_name'],
+                    lastName = usersTable[i]['user__last_name'],
+                    pointUser = usersTable[i]['score'];
                 htmlBet +=
                     `<div class="one_position">
                         <div class="position">` + place + `</div>
