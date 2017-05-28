@@ -383,6 +383,44 @@ function htmlObj() {
     }
 }
 
+function changeObjInfoLikes( index, eventElement ) {
+  var currentList = ListPhotos[objSlider[index]['currentPage']][objSlider[index]['currentIndexImg']];
+  var $parentElem = eventElement.parent(".mark_info");
+  var newState,
+      newLikes = currentList["likeObj"],
+      newDislikes = currentList["dislikeObj"];
+  if ( eventElement.hasClass("block_like") && $parentElem.hasClass("likeAcive")) {
+      newState = null
+      newLikes = currentList["likeObj"] - 1;
+  } else if ( eventElement.hasClass("block_like") && $parentElem.hasClass("nothingAcive")) {
+    newState = true;
+    newLikes = currentList["likeObj"] + 1;
+  } else if ( eventElement.hasClass("block_like") && $parentElem.hasClass("disLikeAcive") ) {
+    newState = true;
+    newLikes = currentList["likeObj"] + 1;
+    newDislikes = currentList["dislikeObj"] - 1;
+  } else if ( eventElement.hasClass("block_dislike") && $parentElem.hasClass("likeAcive")  ) {
+    newState = false;
+    newLikes = currentList["likeObj"] - 1;
+    newDislikes = currentList["dislikeObj"] + 1;
+  } else if (eventElement.hasClass("block_dislike") && $parentElem.hasClass("nothingAcive")) {
+    newState = false;
+    newDislikes = currentList["dislikeObj"] + 1;
+  } else if ( eventElement.hasClass("block_dislike") && $parentElem.hasClass("disLikeAcive")) {
+    newState = null;
+    newDislikes = currentList["dislikeObj"] - 1;
+  }
+  setActiveClassLike( newState );
+  currentList["likeState"] = newState;
+  currentList["likeObj"] = newLikes;
+  currentList["dislikeObj"] = newDislikes;
+  if (objSlider[0]['currentPage'] == objSlider[1]['currentPage']
+      && objSlider[0]['currentIndexImg'] == objSlider[1]['currentIndexImg']) {
+      $("#slider_slider").find(".block_like").children(".votes").html(newLikes);
+      $("#slider_slider").find(".block_dislike").children(".votes").html(newDislikes);
+  }
+};
+
 function setActiveClassLike( state ) {
   var $likesContainer = $(".mark_info");
   if (state === false) {
@@ -402,6 +440,9 @@ function setActiveClassLike( state ) {
 }
 
 function makeComments(id_img, page, append) {
+    var $moreCom = $("#load_coments");
+    $moreCom.removeClass("finish_more");
+    $moreCom.attr("data-page", 1);
     $.ajax({
         url: '/gallery/photo/comments/',
         data: { "id_img": id_img, "p": page },
@@ -433,12 +474,11 @@ function makeComments(id_img, page, append) {
                 $blComments.prepend(commentsHtml);
             } else {
                 $blComments.html(commentsHtml);
-                if ($moreCom.attr("data-page") == Math.ceil(objectImg["lengthComObj"] / 10) - 1) {
-                    $moreCom.addClass("endMore");
-                }
+            };
+            if ($moreCom.attr("data-page") >= Math.ceil(ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'] / 10)) {
+                $moreCom.addClass("finish_more");
             }
-            $moreCom = $("#load_coments");
-            $moreCom.removeClass("moreLoading");
+            $moreCom.removeClass("loading").addClass("more_active");
         },
         error: function(xhr, status, error) {
             // console.log(error, status, xhr);
@@ -475,7 +515,7 @@ $(document).on('click', '#load_coments', function() {
             2: $(this).addClass("endMore")
         }
     };
-    $(this).addClass("moreLoading");
+    $(this).removeClass("finish_more").removeClass("more_active").addClass("loading");
     var albumId = objSlider[1]["idImg"];
     pageCommentCounter++;
     makeComments(albumId, pageCommentCounter, true);
@@ -501,12 +541,20 @@ $(document).on("click", "#slider_slider .open_modal ", function() {
 });
 
 $(document).on('click', '.mark_btn', function() {
-    var photo_id = $(this).attr("data-id");
-    var type = $(this).attr("data-like");
-    var $positiveLikesBlock = $(this).parent().find(".block_like").find(".votes");
-    var positiveCount = parseInt($positiveLikesBlock.html());
-    var $negativeLikesBlock = $(this).parent().find(".block_dislike").find(".votes");
-    var negativeCount = parseInt($negativeLikesBlock.html());
+    var _this = $(this);
+    var photo_id = $(this).attr("data-id"),
+        type = $(this).attr("data-like"),
+        $positiveLikesBlock = $(this).parent().find(".block_like").find(".votes"),
+        positiveCount = parseInt($positiveLikesBlock.html()),
+        $negativeLikesBlock = $(this).parent().find(".block_dislike").find(".votes"),
+        negativeCount = parseInt($negativeLikesBlock.html());
+    _this.parent(".mark_info").addClass("stopEvent");
+    if ( $("#slaider_modal").hasClass("in")) {
+      indexCurrentSlider = 1;
+    } else {
+      indexCurrentSlider = 0;
+    }
+    changeObjInfoLikes( indexCurrentSlider, _this );
     $.ajax({
         url: '/likes/photo/modify/',
         data: {
@@ -516,7 +564,6 @@ $(document).on('click', '.mark_btn', function() {
         },
         method: "POST",
         success: function(data, textStatus, xhr) {
-            //            console.log(JSON.parse(data)["add_result"]);
             $.each(data["add_result"], function(idx, obj) {
                 switch (obj) {
                     case 0:
@@ -533,7 +580,7 @@ $(document).on('click', '.mark_btn', function() {
                         break;
                 }
             });
-            // alert("Like added!");
+            _this.parent(".mark_info").removeClass("stopEvent");
         },
         error: function(xhr, status, error) {
             if (xhr.status === 409) {

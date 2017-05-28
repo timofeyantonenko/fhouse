@@ -2037,7 +2037,7 @@ form [type="password"] {
 More item
 ****************/
 
-#progress button {
+.progressLoad button {
     display: block;
     padding: 5px 25px;
     text-align: center;
@@ -2051,28 +2051,28 @@ More item
     margin: auto;
 }
 
-#progress button:hover {
+.progressLoad button:hover {
     background: #eee;
 }
 
-#progress button.more_active i {
+.progressLoad button.more_active i {
     display: none;
 }
 
 
 /*if loading*/
 
-#progress button.loading {
+.progressLoad button.loading {
     opacity: 0.5;
     pointer-events: none;
 }
 
-#progress button.loading .doneMore {
+.progressLoad button.loading .doneMore {
     display: none;
 }
 
 /*if finish*/
 
-#progress button.finish_more {
+.progressLoad button.finish_more {
     display: none;
 }

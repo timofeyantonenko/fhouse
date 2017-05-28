@@ -405,6 +405,11 @@ Slider
             align-items: center;
 }
 
+
+.mark_info.stopEvent {
+  pointer-events: none;
+}
+
 .mark_info i {
   display: none;
 }
