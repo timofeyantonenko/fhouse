@@ -3,6 +3,7 @@ from comments.models import Comment
 from likes.models import Like
 from records.models import Record
 from django.contrib.contenttypes.models import ContentType
+from rest_framework import serializers
 from .files_preparing import upload_location
 
 
@@ -78,3 +79,34 @@ class FootballObject(models.Model):
 
     class Meta:
         abstract = True
+
+
+class CommentedSerializer(serializers.ModelSerializer):
+    comments_count = serializers.SerializerMethodField()
+
+    def get_comments_count(self, obj):
+        return obj.comments.count()
+
+
+class LikedSerializer(serializers.ModelSerializer):
+    positive_likes_count = serializers.SerializerMethodField()
+    negative_likes_count = serializers.SerializerMethodField()
+    user_like = serializers.SerializerMethodField()
+
+    def get_positive_likes_count(self, obj):
+        return obj.positive_likes.count()
+
+    def get_negative_likes_count(self, obj):
+        return obj.negative_likes.count()
+
+    def get_user_like(self, obj):
+        request = self.context['request']  # get the request
+
+        likes = Like.objects.filter_by_instance(obj).filter(user=request.user)
+        result = None
+        if likes:
+            if likes.first().like:
+                result = True
+            else:
+                result = False
+        return result
