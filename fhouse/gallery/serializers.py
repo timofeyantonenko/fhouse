@@ -5,7 +5,6 @@ from utils.abstract_classes import CommentedSerializer, LikedSerializer
 
 
 class SectionAlbumSerializer(serializers.ModelSerializer):
-    # photos = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     photos_count = serializers.SerializerMethodField()
     positive_likes_count = serializers.SerializerMethodField()
 
@@ -32,23 +31,3 @@ class AlbumPhotoSerializer(CommentedSerializer, LikedSerializer):
     class Meta:
         model = AlbumPhoto
         fields = '__all__'
-
-
-# class AlbumPhotoRelatedField(serializers.RelatedField):
-#     """
-#     A custom field to use for the `tagged_object` generic relationship.
-#     """
-#
-#     def to_internal_value(self, data):
-#         print('Here')
-#         pass
-#
-#     def to_representation(self, value):
-#         """
-#         Serialize tagged objects to a simple textual representation.
-#         """
-#         if isinstance(value, SectionAlbum):
-#             return 'Bookmark: ' + value.album_title
-#         # elif isinstance(value, Note):
-#         #     return 'Note: ' + value.text
-#         raise Exception('Unexpected type of tagged object')

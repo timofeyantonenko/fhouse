@@ -21,6 +21,31 @@ function isEmpty(obj) {
 
     return true;
 }
+
+function loadAdditionalPosts(additional_list){
+    $asideBlock = $(".next_news_container");
+    var htmlToInsert = "";
+    additional_list.forEach(function(item, i, additional_list) {
+        htmlToInsert += "<a href=\"/posts/" + item.slug + "\" class=\"next_news\"><div class=\"img_next_news containerImgNews\"><img src=\"" + item.image + "\" class=\"imgUser\" alt=\"\"></div><h3 class=\"title_next_news\">" + item.title + "</h3><time class=\"date_next_news\">" + item.date + "</time></a>";
+        console.log(htmlToInsert);
+    });
+    $asideBlock.html(htmlToInsert);
+//    <aside class="next_news_container">
+//        {% for post in additional_posts %}
+//        <a href="{{post.get_absolute_url}}" class="next_news">
+//            <div class="img_next_news containerImgNews">
+//                <img src="{{ post.image }}" class="imgUser" alt="">
+//            </div>
+//            <h3 class="title_next_news">
+//                {{ post.title }}
+//            </h3>
+//            <time class="date_next_news">{{ post.updated }}</time>
+//        </a>
+//        {% endfor %}
+//    </aside>
+}
+
+
 if (!String.format) {
     String.format = function(format) {
         var args = Array.prototype.slice.call(arguments, 1);
@@ -102,6 +127,8 @@ $(document).ready(function() {
             }
         });
     });
+    loadAdditionalPosts(additional_posts);
+
 
 
     // Фиксация блока меньшей высоты

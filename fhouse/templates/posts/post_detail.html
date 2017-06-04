@@ -1,5 +1,8 @@
 {% extends "base.html" %} {% load staticfiles %} {% block head_extra %}
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
+<script  type="text/javascript">
+    var additional_posts = {{ additional_posts|safe }};
+</script>
 <script src="{% static 'js/post_detail.js'  %}"></script>
 <main class="mainContainer">
     <article class="newsDetail">
@@ -36,6 +39,7 @@
                     {{ instance.get_markdown }}
                 </div>
                 <footer class="footer_post_detail">
+                    {% if instance.tag.all|length > 0 %}
                     <section class="teg_post_detail">
                         <h3>Теги:</h3> {% for sub_tag in instance.tag.all %}
                         <a href="#" class="tags__item js-tags-item">
@@ -43,6 +47,7 @@
                         </a>
                         {% endfor %}
                     </section>
+                    {% endif %}
                     <section class="block_like-dislike">
                         <a href="{{instance.slug}}" class="like_all">
                             <div class="like">
@@ -65,27 +70,11 @@
             </div>
         </div>
         <!-- Комментарии -->
-        <div class="comments_base">
-            <h3>Оставить комментарий</h3>
-            <!-- Нужно вставить ссылку на профиль автора -->
-            {% include "send_comment.html" %}
-        </div>
-        <div class="comments_base2">
-            {% include "comment_thread.html" %}
-        </div>
+        <!--<div class="comments_base">-->
+            <!--<h3>Оставить комментарий</h3>-->
+            <!--&lt;!&ndash; Нужно вставить ссылку на профиль автора &ndash;&gt;-->
+            <!--{% include "send_comment.html" %}-->
     </article>
-    <aside class="next_news_container">
-        {% for post in additional_posts %}
-        <a href="{{post.get_absolute_url}}" class="next_news">
-            <div class="img_next_news containerImgNews">
-                <img src="{{ post.image.url }}" class="imgUser" alt="">
-            </div>
-            <h3 class="title_next_news">
-                {{ post.title }}
-            </h3>
-            <time class="date_next_news">{{ post.updated }}</time>
-        </a>
-        {% endfor %}
-    </aside>
+    <aside class="next_news_container"></aside>
 </main>
 {% endblock content %}
