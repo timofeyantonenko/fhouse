@@ -1553,3 +1553,60 @@ textarea {
         padding-bottom: 20px;
     }
 }
+
+/*Likes comment */
+
+.mark_info {
+  display: flex;
+}
+
+.mark_info > div {
+  margin: 0 2.5px;
+}
+
+.mark_info.stopEvent {
+  pointer-events: none;
+}
+
+.mark_info i {
+  display: none;
+}
+
+/*Like active*/
+.mark_info.likeAcive .fa-thumbs-up {
+  display: unset !important;
+}
+
+.mark_info.likeAcive .fa-thumbs-o-down {
+  display: unset !important;
+}
+
+/*Dislike active*/
+
+.mark_info.disLikeAcive .fa-thumbs-o-up {
+  display: unset !important;
+}
+
+.mark_info.disLikeAcive .fa-thumbs-down {
+  display: unset !important;
+}
+
+/*Nothing active*/
+
+.mark_info.nothingAcive .fa-thumbs-o-up {
+  display: unset !important;
+}
+
+.mark_info.nothingAcive .fa-thumbs-o-down {
+  display: unset !important;
+}
+
+.mark_btn {
+    margin-left: 10px;
+    font-size: 1.8rem;
+}
+
+.mark_btn i {
+  cursor: pointer;
+  margin: 3px;
+}

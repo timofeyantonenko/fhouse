@@ -7,7 +7,8 @@ if (!String.format) {
     };
 }
 
-var current_tab = undefined;
+var current_tab = undefined,
+    likes = [];
 
 $(document).ready(function() {
     var tab = getUrlParameter('tab')
@@ -210,9 +211,27 @@ function get_posts(tag, page) {
         dataType: "json",
         success: function(data) {
             console.log(data);
+            if (page == 1) likes = [];
             var htmlPosts = "";
             for (var i = 0; i < data.length; i++ ) {
+                var tags = "";
+                data[i].tag.forEach( function(e) {
+                  tags += `
+                      <div class="tags__item js-tags-item">
+                          <span>` + e.name + `</span>
+                      </div>
+                  `
+                });
+                var indexElement = ((page - 1) * 5) + i;
+                likes.push({
+                  likes: data[i]['positive_likes_count'],
+                  dislikes: data[i]['negative_likes_count'],
+                  status: data[i]['user_like'],
+                  index: indexElement,
+                  slug: data[i]["slug"]
+                });
                 timePost = get_date(data[i]["timestamp"]);
+                var classLikes = setStatusLikes(data[i]['user_like']);
                 htmlPosts += `
                     <a href="` + data[i]["slug"] + `" class="oneArticle">
                         <section class="goNews imgContainer containerImgNews">
@@ -228,20 +247,30 @@ function get_posts(tag, page) {
                             </header>
                             <footer class="footerNews">
                                 <div class="dataCommentsLikes">
-
-                                    <div class="tags__item js-tags-item">
-                                        <span>  </span>
-                                    </div>
-
+                                    ` + tags + `
                                 </div>
-                                <div class="quantityComments">
+                                <section class="mark_info ` + classLikes + `">
+                                  <div class="open_modal" data-toggle="modal" data-target="#slaider_modal">
                                       <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                </div>
+                                      <span class="commes_photo_slider">` + data[i]["comments_count"] + `</span>
+                                  </div>
+                                  <div class="mark_btn block_like" data-like="-1" data-index="` + indexElement + `">
+                                      <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                      <span class="votes">` + data[i]["positive_likes_count"] + `</span>
+                                  </div>
+                                  <div class="mark_btn block_dislike" data-like="1" data-index="` + indexElement + `">
+                                      <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                      <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                      <span class="votes">` + data[i]["negative_likes_count"] + `</span>
+                                  </div>
+                              </section>
                             </footer>
                         </section>
                     </a>
                 `;
             };
+            console.log(likes);
             window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tag);
             $("#loadTile").removeClass("loading").addClass("more_active");
             page > 1 ? $postsContainer.append(htmlPosts) : $postsContainer.html(htmlPosts);
@@ -388,3 +417,75 @@ function get_date(date) {
     }
     return makeDate;
 }
+
+function setStatusLikes ( status ) {
+  var thisClass;
+  if ( status === true ) {
+    thisClass = "likeAcive";
+  } else if ( status === false ) {
+    thisClass = "disLikeAcive";
+  } else {
+    thisClass = "nothingAcive";
+  }
+  return thisClass
+};
+
+$(document).on("click", ".footerNews", function(event) {
+  event.preventDefault();
+});
+
+$(document).on("click", ".mark_btn", function(event) {
+  event.preventDefault();
+  var _this = $(this),
+      ind = +(_this.attr("data-index")),
+      typeEv = 0;
+  _this.parent(".mark_info").addClass("stopEvent");
+  if ( _this.hasClass("block_dislike") ) typeEv = 1
+  postLike(ind, typeEv);
+})
+
+function postLike(indexPost, typeEvent) {
+  var slug = likes[indexPost]['slug'],
+      currentState = likes[indexPost]['status'];
+  $.ajax({
+      url: "/likes/post/modify",
+      data: { 'slug': slug, 'type': typeEvent },
+      dataType: "json",
+      success: function(data, textStatus, xhr) {
+        if ( typeEvent === 1 && currentState === false) {
+          likes[indexPost]["dislikes"] = likes[indexPost]["dislikes"] - 1;
+          likes[indexPost]['status'] = null;
+        } else if ( typeEvent === 1 && currentState === true ) {
+          likes[indexPost]["dislikes"] = likes[indexPost]["dislikes"] + 1;
+          likes[indexPost]["likes"] = likes[indexPost]["likes"] - 1;
+          likes[indexPost]['status'] = false;
+        }  else if ( typeEvent === 1 && currentState === null ) {
+          likes[indexPost]["dislikes"] = likes[indexPost]["dislikes"] + 1;
+          likes[indexPost]['status'] = false;
+        }  else if ( typeEvent === 0 && currentState === false ) {
+          likes[indexPost]["dislikes"] = likes[indexPost]["dislikes"] - 1;
+          likes[indexPost]["likes"] = likes[indexPost]["likes"] + 1;
+          likes[indexPost]['status'] = true;
+        }  else if ( typeEvent === 0 && currentState === true) {
+          likes[indexPost]["likes"] = likes[indexPost]["likes"] - 1;
+          likes[indexPost]['status'] = null;
+        }  else if ( typeEvent === 0 && currentState === null ) {
+          likes[indexPost]["likes"] = likes[indexPost]["likes"] + 1;
+          likes[indexPost]['status'] = true;
+        };
+        var $thisPost = $(".oneArticle").eq(indexPost);
+        $thisPost.find(".mark_info").removeClass("disLikeAcive").removeClass("nothingAcive").removeClass("likeAcive");
+        return {
+          setLikes: $thisPost.find(".block_like").find(".votes").html(likes[indexPost]["likes"]),
+          setDislikes: $thisPost.find(".block_dislike").find(".votes").html(likes[indexPost]["dislikes"]),
+          setClassContainer: $thisPost.find(".mark_info").addClass( function() {
+            return setStatusLikes(likes[indexPost]['status'])
+          }),
+          parentAllowEvent: $thisPost.find(".mark_info").removeClass("stopEvent")
+        }
+      },
+      error: function(xhr, status, error) {
+          console.log(error, status, xhr);
+      }
+  });
+};

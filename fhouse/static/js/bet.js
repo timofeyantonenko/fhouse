@@ -3,7 +3,8 @@ var currentPageLi = 1,
     locationLink = window.location.pathname,
     tableLength = 10,
     indexSection = "all",
-    arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+    arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+    lenPagination = 1;
 
 $(document).ready(function() {
 
@@ -44,7 +45,7 @@ $(document).ready(function() {
 
     $("body").on("click", "#paginationTable li ", function() {
         var thisLi = $(this).text();
-        goPagination(thisLi, lengthPagination, currentPageLi);
+        goPagination(thisLi, lenPagination, currentPageLi);
     });
 
 
@@ -436,6 +437,7 @@ function ajaxRating(count_pagination, page, section) {
             }
             $loaderTable.hide();
             contentTable.html(htmlBet);
+            lenPagination = lengthPagination;
             makePagination(lengthPagination, currentPageLi);
         },
         error: function(xhr, status, error) {
@@ -499,11 +501,9 @@ function goPagination(page, sumPage, curPage) {
         if (page == "...") {
             return;
         } else if (page == "+") {
-            if (curPage + 1 > sumPage) {
-                currentPageLi = 1;
-            } else {
-                currentPageLi = curPage + 1
-            }
+            currentPageLi = curPage + 1;
+            console.log(currentPageLi, sumPage)
+            if (currentPageLi - 1 >= sumPage) currentPageLi = 1;
         } else if (page == "-") {
             if (curPage - 1 < 1) {
                 currentPageLi = sumPage;
