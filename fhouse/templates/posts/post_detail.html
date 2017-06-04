@@ -2,6 +2,8 @@
 <link rel="stylesheet" href='{% static "css/post_list.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
 <script  type="text/javascript">
     var additional_posts = {{ additional_posts|safe }};
+    var prefix = "/posts/";
+    var objectPostCondition = {{state|safe}};
 </script>
 <script src="{% static 'js/post_detail.js'  %}"></script>
 <main class="mainContainer">

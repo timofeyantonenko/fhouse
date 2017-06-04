@@ -229,7 +229,7 @@ function loadAdditionalPosts(additional_list){
     $asideBlock = $(".next_news_container");
     var htmlToInsert = "";
     additional_list.forEach(function(item, i, additional_list) {
-        htmlToInsert += "<a href=\"/posts/" + item.slug + "\" class=\"next_news\"><div class=\"img_next_news containerImgNews\"><img src=\"" + item.image + "\" class=\"imgUser\" alt=\"\"></div><h3 class=\"title_next_news\">" + item.title + "</h3><time class=\"date_next_news\">" + item.date + "</time></a>";
+        htmlToInsert += "<a href=\"" + prefix + item.slug + "\" class=\"next_news\"><div class=\"img_next_news containerImgNews\"><img src=\"" + item.image + "\" class=\"imgUser\" alt=\"\"></div><h3 class=\"title_next_news\">" + item.title + "</h3><time class=\"date_next_news\">" + item.date + "</time></a>";
         console.log(htmlToInsert);
     });
     $asideBlock.html(htmlToInsert);

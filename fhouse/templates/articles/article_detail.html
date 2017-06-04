@@ -3,6 +3,7 @@
 <link rel="stylesheet" href='{% static "css/article_detail.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
 <script type="text/javascript">
     var additional_posts = {{ additional_articles|safe }};
+    var prefix = "";
 </script>
 <script src="{% static 'js/post_detail.js'  %}"></script>
 <main class="mainContainer">

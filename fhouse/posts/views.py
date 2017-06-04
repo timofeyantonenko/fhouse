@@ -30,6 +30,7 @@ from .forms import PostForm
 from .models import Post, UserFavoriteTags, PostTag
 from .serializers import PostTagSerializer, PostSerializer, PostTitleSerializer
 from comments.serializers import CommentSerializer
+from likes.models import Like
 
 from utils.prepare_methods import create_comment
 
@@ -104,8 +105,25 @@ def post_detail(request, slug=None):  # retrieve
                          "slug": post.slug, "date": str(post.timestamp)}
                         for post in prepare_additional_posts]
     comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
+
+    likes = Like.objects.filter_by_instance(instance).filter(user=request.user)
+    user_like = None
+    if likes:
+        if likes.first().like:
+            user_like = True
+        else:
+            user_like = False
+
+    state_object = {
+        "state": user_like,
+        "likes":  instance.positive_likes.count(),
+        "dislikes": instance.negative_likes.count(),
+        "slug": instance.slug,
+    }
+
     context = {
         "instance": instance,
+        "state": json.dumps(state_object),
         "additional_posts": json.dumps(additional_posts),
         "title": instance.title,
         "share_string": quote_plus(instance.content),
