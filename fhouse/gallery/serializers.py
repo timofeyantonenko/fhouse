@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import AlbumPhoto, SectionAlbum, GallerySection
 from likes.models import Like
+from utils.abstract_classes import CommentedSerializer, LikedSerializer
 
 
 class SectionAlbumSerializer(serializers.ModelSerializer):
@@ -25,41 +26,12 @@ class GallerySectionSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class AlbumPhotoSerializer(serializers.ModelSerializer):
-    # comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    comments_count = serializers.SerializerMethodField()
-    positive_likes_count = serializers.SerializerMethodField()
-    negative_likes_count = serializers.SerializerMethodField()
-    user_like = serializers.SerializerMethodField()
-    # positive_likes = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    # negative_likes = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+class AlbumPhotoSerializer(CommentedSerializer, LikedSerializer):
     album_title = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    # photo_album = serializers.RelatedField(read_only=True)
 
     class Meta:
         model = AlbumPhoto
         fields = '__all__'
-
-    def get_comments_count(self, obj):
-        return obj.comments.count()
-
-    def get_positive_likes_count(self, obj):
-        return obj.positive_likes.count()
-
-    def get_negative_likes_count(self, obj):
-        return obj.negative_likes.count()
-
-    def get_user_like(self, obj):
-        request = self.context['request']  # get the request
-
-        likes = Like.objects.filter_by_instance(obj).filter(user=request.user)
-        result = None
-        if likes:
-            if likes.first().like:
-                result = True
-            else:
-                result = False
-        return result
 
 
 # class AlbumPhotoRelatedField(serializers.RelatedField):

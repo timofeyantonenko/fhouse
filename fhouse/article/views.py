@@ -143,15 +143,10 @@ def get_section_articles(request):
     paginator = Paginator(articles, first_paginate if page == 1 else paginate_by)
     try:
         articles = paginator.page(page)
-        print(len(articles))
-        print('done1')
     except PageNotAnInteger:
         articles = paginator.page(1)
-        print('done2')
     except EmptyPage:
         articles = []
-        # articles = paginator.page(paginator.num_pages)
-        print('done3')
 
     article_serializer = SectionArticleSerializer(articles, many=True, context={'request': request})
     return Response(
