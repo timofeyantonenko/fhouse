@@ -28,30 +28,34 @@ $(document).ready(function() {
         if ($(this).hasClass('activeRecords')) return;
         $("#list").empty().css({"height":"0px"});
         add_effect(0);
-        $(".more_article").removeClass("moreLoading").removeClass("endMore");
+
         $(".tab ul li").removeClass('activeRecords');
         $(this).addClass('activeRecords');
         section_name = +$(this).attr("section-id");
+        var $moreArticle = $("#progress").find(".more_article");
         if (!articles.hasOwnProperty(section_name)) {
-            return {
-                ajax: ajaxPage(section_name, 1),
-                page: $(".more_article").attr("data-page", 2),
-                section: $(".more_article").attr("data-section", section_name)
-            }
+          ajaxPage(section_name, 1);
+          $moreArticle.attr("data-page", 2);
+          $moreArticle.attr("data-section", section_name);
         } else {
             $("#list").html(articles[section_name]["html"]);
-            $(".more_article").attr("data-page", articles[section_name]["page"] + 1);
-            $(".more_article").attr("data-section", section_name);
+            $moreArticle.attr("data-page", articles[section_name]["page"] + 1);
+            $moreArticle.attr("data-section", section_name);
             $("#list").find(".containerImgNews").children("img").imagesLoaded(function() {
-                    $("#list").masonry('reloadItems');
-                    $("#list").masonry('layout');
-                }).done(function() {
-                    var lenArt = $("#list").children().length,
-                        $artItem = $("#list").children().children("a");
-                    for (var i = 0; i < lenArt; i++) {
-                        $artItem.eq(i).addClass("donaMassonry").addClass("opacityEffect");
-                    }
-                })
+                $("#list").masonry('reloadItems');
+                $("#list").masonry('layout');
+            }).done(function() {
+                var lenArt = $("#list").children().length,
+                    $artItem = $("#list").children().children("a");
+                for (var i = 0; i < lenArt; i++) {
+                    $artItem.eq(i).addClass("donaMassonry").addClass("opacityEffect");
+                }
+            })
+        }
+        if ( articles[section_name]["countPage"] == $moreArticle.attr("data-page") ) {
+          $moreArticle.addClass("finish_more");
+        } else {
+          $moreArticle.removeClass("finish_more");
         }
     });
 
@@ -62,7 +66,6 @@ $(document).ready(function() {
             sectionCurrent = +$(this).attr("data-section");
         $(this).attr("data-page", newPage);
         articles[sectionCurrent]["page"] = newPage;
-        console.log(newPage)
         ajaxPage(sectionCurrent, newPage);
     });
 
@@ -77,7 +80,8 @@ $(document).ready(function() {
 });
 
 function ajaxPage(section, page) {
-    $("#progress").children("button").removeClass("more_active").addClass("loading");
+    var $moreArt = $("#progress").children("button");
+    $moreArt.removeClass("more_active").removeClass("finish_more").addClass("loading");
     var ajax_data = { "section": section, "page": page },
         content = $('.flex_container'),
         state = "",
@@ -91,12 +95,12 @@ function ajaxPage(section, page) {
         success: function(data) {
             console.log(data)
             var arcticle_html = "",
-                lenData = data.length;
+                lenData = data.list.length;
             for (var i = 0; i < lenData; i++) {
-                var currentArt = data[i];
+                var currentArt = data.list[i];
                 arcticle_html += `
                     <div class="one_read_article item">
-                        <a href="` + currentArt['slug'] + `/" class="articleSrc">
+                        <a href="` + currentArt['section_slug'] + `/` + currentArt['slug'] + `/" class="articleSrc">
                             <div class="one_read_article_img containerImgNews">
                                 <img src="` + currentArt['image'] + `" class="imgUser" alt="">
                             </div>
@@ -128,9 +132,14 @@ function ajaxPage(section, page) {
                 articles[section]["html"] = arcticle_html;
                 articles[section]["page"] = page++;
                 $("#list").html(arcticle_html);
+                articles[section]["countPage"] = Math.ceil(data.amount / 3);
             }
-            massonryReload()
+            massonryReload();
+            var countPage = articles[section]["countPage"],
+                currentPage = $moreArt.attr("data-page");
             $moreArt.removeClass("moreLoading");
+            if ( countPage == currentPage ) $moreArt.addClass("finish_more");
+
         },
         error: function(xhr, status, error) {}
     });
