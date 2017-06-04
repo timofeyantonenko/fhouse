@@ -29,6 +29,7 @@ from rest_framework.response import Response
 from .forms import PostForm
 from .models import Post, UserFavoriteTags, PostTag
 from .serializers import PostTagSerializer, PostSerializer, PostTitleSerializer
+from comments.serializers import CommentSerializer
 
 from utils.prepare_methods import create_comment
 
@@ -94,25 +95,21 @@ def post_detail(request, slug=None):  # retrieve
     tagged_posts = Post.objects.filter(tag__in=instance.tag.all()).order_by('-updated')
     elder_additional_posts = tagged_posts.filter(updated__lt=instance.updated)
 
-    # if len(elder_additional_posts) < count_of_additional_posts and len(tagged_posts) != 0:
-    #     prepare_additional_posts = list(elder_additional_posts) + list(
-    #         tagged_posts[:(count_of_additional_posts - len(elder_additional_posts))])
-    # elif len(tagged_posts) != 0:
-    #     prepare_additional_posts = list(elder_additional_posts[:count_of_additional_posts])
-    # else:
-    #     prepare_additional_posts = Post.objects.active().order_by('-updated')[:count_of_additional_posts]
-
     if len(elder_additional_posts) > count_of_additional_posts:
         prepare_additional_posts = list(elder_additional_posts[:count_of_additional_posts])
     else:
-        prepare_additional_posts = Post.objects.active().filter(updated__lt=instance.updated).order_by('-updated')[:count_of_additional_posts]
-    additional_posts = prepare_additional_posts
+        prepare_additional_posts = Post.objects.active().filter(updated__lt=instance.updated).order_by('-updated')[
+                                   :count_of_additional_posts]
+    additional_posts = [{"title": post.title, "image": post.image.url,
+                         "slug": post.slug, "date": str(post.timestamp)}
+                        for post in prepare_additional_posts]
+    comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
     context = {
         "instance": instance,
-        "additional_posts": additional_posts,
+        "additional_posts": json.dumps(additional_posts),
         "title": instance.title,
         "share_string": quote_plus(instance.content),
-        'comments': comments,
+        'comments': comment_serializer.data,
         'comment_form': comment_form,
     }
     return render(request, "posts/post_detail.html", context)
@@ -239,14 +236,12 @@ def show_tabs(request):
     :param request:
     :return:
     """
-    print("IN SHOW TABS")
     if not request.is_ajax():
         return post_list(request)
     tag = request.GET['tab']
     user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
     user_tags = user_tags.tags.all()
     if tag == 'all':
-        print('IN ALL')
         queryset_list = Post.objects.all()
     elif request.user.is_staff or request.user.is_superuser:
         tag = user_tags.filter(name=tag)
@@ -266,10 +261,6 @@ def show_tabs(request):
             print(queryset[0])
     except EmptyPage:
         raise Http404('No posts on this page')
-        print('Empty')
-        queryset = []
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        # queryset = paginator.page(paginator.num_pages)
     print('page is:', page)
     context = {
         "page": page,
