@@ -52,7 +52,6 @@ def main_bet(request):
                 "id": active_tour.id,
                 "name": active_tour.stage_name
             }
-    print(seasons_list)
     context['active_seasons'] = seasons_list
     return render(request, "bets/bet_main.html", context)
 
@@ -168,8 +167,8 @@ def make_bet(request):
 def get_bet_result_table(request):
     context = {}
     period = request.GET.get("period", "all")
-    page = request.GET.get("p", 1)
-    pagination = request.GET.get("offset", 10)
+    page = int(request.GET.get("p", 1))
+    pagination = int(request.GET.get("offset", 10))
     days = None
     if period == "week":
         days = 7
