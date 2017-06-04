@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from .models import SectionArticle
+from accounts.serializers import FHUserSerializer
 
 
 class SectionArticleSerializer(serializers.ModelSerializer):
+    user = FHUserSerializer(many=False, read_only=True)
     # comments_count = serializers.SerializerMethodField()
     # positive_likes_count = serializers.SerializerMethodField()
     # negative_likes_count = serializers.SerializerMethodField()
