@@ -21,18 +21,6 @@ $(document).ready(function() {
         transitionDuration: 0
     });
 
-    // var section = getUrlParameter('section');
-    // if (typeof section != 'undefined') {
-    //     var search_tab = (tab == 'all' || typeof tab == 'undefined') ? 'Все' : tab;
-    //     var previous_active_tab = $('div .menu_individualNews_active');
-    //     previous_active_tab.removeClass('menu_individualNews_active');
-    //     var str_to_find = String.format("div.changeNews:contains('{0}')", search_tab);
-    //     var new_active_tab = $(str_to_find);
-    //     new_active_tab.addClass('menu_individualNews_active');
-    // } else {
-    //     section_name = $("#navAjax").children("li").eq(0).text().trim();
-    //     ajaxPage(false);
-    // }
     ajaxPage(0, 1);
 
     //tab click
@@ -114,9 +102,9 @@ function ajaxPage(section, page) {
                             </div>
                             <div class="relative_article">
                                 <div class="author_img containerImgUser">
-                                    <img src="` + currentArt['image'] + `" alt="FH" class="imgUser">
+                                    <img src="` + currentArt['user']['avatar'] + `" alt="FH" class="imgUser">
                                 </div>
-                                <p>Dima Manhura</p>
+                                <p>` + currentArt['user']['first_name']  + ` ` +  currentArt['user']['last_name'] + `</p>
                             </div>
                             <div class="info_time_article">
                                 <div class="before_date"></div>
