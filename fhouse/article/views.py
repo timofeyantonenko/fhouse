@@ -138,6 +138,8 @@ def get_section_articles(request):
         articles = SectionArticle.objects.filter(article_section__id=section)
     else:
         articles = SectionArticle.objects.all()
+
+    total_count = articles.count()
     paginator = Paginator(articles, first_paginate if page == 1 else paginate_by)
     try:
         articles = paginator.page(page)
@@ -152,4 +154,9 @@ def get_section_articles(request):
         print('done3')
 
     article_serializer = SectionArticleSerializer(articles, many=True, context={'request': request})
-    return Response(article_serializer.data)
+    return Response(
+        {
+            "amount": total_count,
+            "list": article_serializer.data
+        }
+    )
