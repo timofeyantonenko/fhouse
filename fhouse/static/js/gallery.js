@@ -441,7 +441,6 @@ function setActiveClassLike( state ) {
 
 function makeComments(id_img, page, append) {
     var $moreCom = $("#load_coments");
-    $moreCom.removeClass("finish_more");
     $moreCom.attr("data-page", 1);
     $.ajax({
         url: '/gallery/photo/comments/',
@@ -475,6 +474,7 @@ function makeComments(id_img, page, append) {
             } else {
                 $blComments.html(commentsHtml);
             };
+            $moreCom.removeClass("finish_more");
             if ($moreCom.attr("data-page") >= Math.ceil(ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'] / 10)) {
                 $moreCom.addClass("finish_more");
             }
