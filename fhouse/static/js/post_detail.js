@@ -1,59 +1,3 @@
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-};
-
-function isEmpty(obj) {
-    for (var prop in obj) {
-        if (obj.hasOwnProperty(prop))
-            return false;
-    }
-
-    return true;
-}
-
-function loadAdditionalPosts(additional_list){
-    $asideBlock = $(".next_news_container");
-    var htmlToInsert = "";
-    additional_list.forEach(function(item, i, additional_list) {
-        htmlToInsert += "<a href=\"/posts/" + item.slug + "\" class=\"next_news\"><div class=\"img_next_news containerImgNews\"><img src=\"" + item.image + "\" class=\"imgUser\" alt=\"\"></div><h3 class=\"title_next_news\">" + item.title + "</h3><time class=\"date_next_news\">" + item.date + "</time></a>";
-        console.log(htmlToInsert);
-    });
-    $asideBlock.html(htmlToInsert);
-//    <aside class="next_news_container">
-//        {% for post in additional_posts %}
-//        <a href="{{post.get_absolute_url}}" class="next_news">
-//            <div class="img_next_news containerImgNews">
-//                <img src="{{ post.image }}" class="imgUser" alt="">
-//            </div>
-//            <h3 class="title_next_news">
-//                {{ post.title }}
-//            </h3>
-//            <time class="date_next_news">{{ post.updated }}</time>
-//        </a>
-//        {% endfor %}
-//    </aside>
-}
-
-
-if (!String.format) {
-    String.format = function(format) {
-        var args = Array.prototype.slice.call(arguments, 1);
-        return format.replace(/{(\d+)}/g, function(match, number) {
-            return typeof args[number] != 'undefined' ? args[number] : match;
-        });
-    };
-}
 $(document).ready(function() {
     $(document).on('click', '.like_all', function(e) {
         e.preventDefault();
@@ -278,8 +222,19 @@ $(document).ready(function() {
 
     });
 
-
 });
+
+
+function loadAdditionalPosts(additional_list){
+    $asideBlock = $(".next_news_container");
+    var htmlToInsert = "";
+    additional_list.forEach(function(item, i, additional_list) {
+        htmlToInsert += "<a href=\"/posts/" + item.slug + "\" class=\"next_news\"><div class=\"img_next_news containerImgNews\"><img src=\"" + item.image + "\" class=\"imgUser\" alt=\"\"></div><h3 class=\"title_next_news\">" + item.title + "</h3><time class=\"date_next_news\">" + item.date + "</time></a>";
+        console.log(htmlToInsert);
+    });
+    $asideBlock.html(htmlToInsert);
+
+}
 
 
 // End dimas script

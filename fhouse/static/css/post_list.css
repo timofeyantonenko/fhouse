@@ -1,5 +1,12 @@
 /*Header search*/
 
+a:hover,
+a:active,
+a:focus {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
 .right_header {
   float: right;
     display: -webkit-box;
