@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
@@ -38,6 +40,7 @@ def sections_articles(request, slug=None):  # list items
 
 
 def article_detail(request, section_slug=None, article_slug=None):  # list items
+    count_of_additional_articles = 2
     section = ArticlesSection.objects.filter(slug=section_slug)
     article = SectionArticle.objects.filter(article_section=section, slug=article_slug).first()
     initial_data = {
@@ -55,7 +58,18 @@ def article_detail(request, section_slug=None, article_slug=None):  # list items
     comments = article.comments
     title = article.article_title
 
+    additional_articles = SectionArticle.objects.filter(article_section=section).order_by('-timestamp')
+    elder_additional_articles = additional_articles.filter(timestamp__gt=article.timestamp)
+    if len(elder_additional_articles) > count_of_additional_articles:
+        prepare_additional_articles = list(elder_additional_articles[:count_of_additional_articles])
+    else:
+        prepare_additional_articles = SectionArticle.objects.filter(timestamp__gt=article.timestamp).order_by(
+            '-timestamp')[:count_of_additional_articles]
+    additional_articles = [{"title": article.article_title, "image": article.image.url,
+                            "slug": article.get_absolute_url(), "date": str(article.timestamp)}
+                           for article in prepare_additional_articles]
     context = {
+        "additional_articles": json.dumps(additional_articles),
         "instance": article,
         "title": title,
         'comments': comments,
