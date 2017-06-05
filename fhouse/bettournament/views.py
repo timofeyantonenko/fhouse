@@ -170,9 +170,9 @@ def get_bet_result_table(request):
     page = int(request.GET.get("p", 1))
     pagination = int(request.GET.get("offset", 10))
     days = None
-    if period == "week":
+    if period == "month":
         days = 7
-    elif period == "month":
+    elif period == "season":
         days = 30
 
     if days:

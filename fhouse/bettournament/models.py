@@ -209,6 +209,25 @@ class StageBet(models.Model):
                " id: " + str(self.id)
 
 
+# class BetPeriod(models.Model):
+#     start_date = models.DateField()
+#     gift = models.CharField(blank=True, null=True)
+#     active = models.BooleanField(default=False)
+#
+#     all_time = 0
+#     month = 1
+#     season = 2
+#     BET_TOURNAMENT_CHOICES = (
+#         (all_time, 'all_time'),
+#         (month, 'month'),
+#         (season, 'season'),
+#     )
+#     tournament_length_type = models.IntegerField(
+#         choices=BET_TOURNAMENT_CHOICES,
+#         default=month,
+#     )
+
+
 class UsersResult(models.Model):
     # which user make the bet
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
