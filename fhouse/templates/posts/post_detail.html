@@ -50,32 +50,21 @@
                         {% endfor %}
                     </section>
                     {% endif %}
-                    <section class="block_like-dislike">
-                        <a href="{{instance.slug}}" class="like_all">
-                            <div class="like">
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                            </div>
-                            <div class="quantity_like">
-                                {{ instance.positive_likes|length }}
-                            </div>
-                        </a>
-                        <a href="{{instance.slug}}" class="dislike_all">
-                            <div class="dislike">
-                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                            </div>
-                            <div class="quantity_dislike">
-                                {{ instance.negative_likes|length }}
-                            </div>
-                        </a>
-                    </section>
+                    <section class="mark_info">
+                      <div class="mark_btn block_like" data-like="-1">
+                          <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                          <span class="votes">{{ instance.positive_likes|length }}</span>
+                      </div>
+                      <div class="mark_btn block_dislike" data-like="1">
+                          <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                          <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                          <span class="votes">{{ instance.negative_likes|length }}</span>
+                      </div>
+                  </section>
                 </footer>
             </div>
         </div>
-        <!-- Комментарии -->
-        <!--<div class="comments_base">-->
-            <!--<h3>Оставить комментарий</h3>-->
-            <!--&lt;!&ndash; Нужно вставить ссылку на профиль автора &ndash;&gt;-->
-            <!--{% include "send_comment.html" %}-->
     </article>
     <aside class="next_news_container"></aside>
 </main>
