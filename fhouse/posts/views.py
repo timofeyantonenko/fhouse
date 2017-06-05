@@ -119,6 +119,7 @@ def post_detail(request, slug=None):  # retrieve
         "likes":  instance.positive_likes.count(),
         "dislikes": instance.negative_likes.count(),
         "slug": instance.slug,
+        "id": instance.id,
     }
 
     context = {
