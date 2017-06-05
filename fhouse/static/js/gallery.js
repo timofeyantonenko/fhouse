@@ -436,7 +436,6 @@ function setActiveClassLike( state ) {
     $likesContainer.removeClass("likeAcive");
     $likesContainer.addClass("nothingAcive");
   }
-
 }
 
 function makeComments(id_img, page, append) {

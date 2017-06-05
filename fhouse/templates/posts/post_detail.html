@@ -4,6 +4,9 @@
     var additional_posts = {{ additional_posts|safe }};
     var prefix = "/posts/";
     var objectPostCondition = {{state|safe}};
+    var first_name = "{{request.user.first_name|escapejs|safe}}",
+        last_name = "{{request.user.first_name|escapejs|safe}}",
+        avatar_user = "{{request.user.avatar.url|escapejs|safe}}";
 </script>
 <script src="{% static 'js/post_detail.js'  %}"></script>
 <main class="mainContainer">
@@ -64,6 +67,21 @@
                   </section>
                 </footer>
             </div>
+        </div>
+        <div id="comment" class="postArea">
+          <section class="sendComent">
+            {% include "send_comment.html" %}
+          </section>
+          <section class="comments">
+
+          </section>
+          <section class="progressLoad">
+
+              <button id="load_coments" class="loading" data-page="1">
+                  <i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+                  <span class="doneMore">Посмотреть больше</span>
+              </button>
+          </section>
         </div>
     </article>
     <aside class="next_news_container"></aside>

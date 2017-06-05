@@ -4,37 +4,54 @@ $(document).ready(function() {
 
     // set class likes
     $(".article_detail_content").find(".mark_info").addClass(function() {
-      return setStatusLikes ( additional_posts.status );
-    })
+      console.log(objectPostCondition.state)
+      return setStatusLikes( objectPostCondition.state );
+    });
 
     likes.push(objectPostCondition);
 
     loadAdditionalPosts(additional_posts);
 
+    makeComments(objectPostCondition.id, 1);
+
 });
 
-$(document).on('click', '.btnFhouse', function(e){
-        e.preventDefault();
-        alert(getCookie('csrftoken'));
-        input = $(this).parent().parent().find("#id_content");
-        parent = input.attr("parent_id");
-        content = input.val();
+$(document).on('click', '#comment .btnFhouse', function(e){
+      e.preventDefault();
+      var inputText = $("#id_content"),
+          content = inputText.val(),
+          dateComment = get_date(new Date());
     $.ajax({
         url: '/posts/comment/',
         data: {
-            id: parent,
+            id: objectPostCondition.id,
             content: content,
             csrfmiddlewaretoken: getCookie('csrftoken')
         },
         method: "POST",
         success: function(data, textStatus, xhr) {
-            alert("Comment added!");
+          var commentsHtml = `
+              <div class="blockquote commentBody">
+                  <div class="coments_author containerImgUser">
+                      <img src="` + avatar_user + `" alt="" class="imgUser">
+                  </div>
+                  <div class="coment_author_time">
+                      <h5>
+                          ` + first_name + ` ` + last_name + `
+                      </h5>
+                      <time>` + dateComment + `</time>
+                      <p>` + content + `</p>
+                  </div>
+
+              </div>
+          `;
+          $("#comment").find(".comments").prepend(commentsHtml);
+          inputText.val("");
         },
         error: function(xhr, status, error) {
             if (xhr.status === 409) {
                 alert("Error in comment adding!")
             }
-            //            console.log(error, status, xhr);
         }
     });
 })
@@ -68,7 +85,6 @@ $(document).on("click", ".mark_btn", function(event) {
 function postLike(indexPost, typeEvent) {
   var slug = likes[indexPost]['slug'],
       currentState = likes[indexPost]['state'];
-  console.log(slug, currentState)
   $.ajax({
       url: "/likes/post/modify",
       data: { 'slug': slug, 'type': typeEvent },
@@ -141,3 +157,107 @@ function get_date(date) {
     }
     return makeDate;
 }
+
+$(document).on('click', '#load_coments', function(e) {
+    e.preventDefault();
+    $(this).removeClass("finish_more").removeClass("more_active").addClass("loading");
+    var pageCommentCounter = +$(this).attr("data-page"),
+        pagePost = pageCommentCounter + 1;
+        idPost = objectPostCondition.id;
+    pageCommentCounter++;
+    makeComments(idPost, pagePost);
+    $(this).attr("data-page", pagePost);
+})
+
+function makeComments(id, page) {
+    var $moreCom = $("#load_coments");
+    $moreCom.attr("data-page", 1);
+    $.ajax({
+        url: '/posts/get_comments/',
+        data: { "id": id, "p": page },
+        dataType: "json",
+        cache: false,
+        success: function(data) {
+            var commentsHtml = "";
+            var $blComments = $("#comment").find(".comments");
+            for (var i = 0; i < data.length; i++) {
+                dateComment = get_date(data[i]["timestamp"]);
+                commentsHtml += `
+                    <div class="blockquote commentBody">
+                        <div class="coments_author containerImgUser">
+                            <img src="` + data[i]["user"]["avatar"] + `" alt="" class="imgUser">
+                        </div>
+                        <div class="coment_author_time">
+                            <h5>
+                                ` + data[i]["user"]["first_name"] + ` ` + data[i]["user"]["last_name"] +
+                    `
+                            </h5>
+                            <time>` + dateComment + `</time>
+                            <p>` + data[i]["content"] + `</p>
+                        </div>
+
+                    </div>
+                `
+            };
+            $blComments.append(commentsHtml);
+
+            // if ($moreCom.attr("data-page") >= Math.ceil(ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'] / 10)) {
+            //     return $moreCom.addClass("finish_more");
+            // }
+            $moreCom.removeClass("loading").removeClass("finish_more").addClass("more_active");
+        },
+        error: function(xhr, status, error) {
+            // console.log(error, status, xhr);
+        }
+    });
+};
+
+// $(document).on('click', '.btnFhouse', function(e) {
+//     e.preventDefault();
+//     var $inputText = $("#id_content"),
+//         commentText = $inputText.val();
+//     photo_id = objSlider[1]["idImg"];
+//     $.ajax({
+//         url: '/gallery/photo/comment/',
+//         data: {
+//             id: photo_id,
+//             content: commentText,
+//             csrfmiddlewaretoken: getCookie('csrftoken')
+//         },
+//         method: "POST",
+//         success: function(data, textStatus, xhr) {
+//             dateComment = get_date(new Date());
+//             var commentsHtml = `
+//                     <div class="blockquote commentBody">
+//                         <div class="coments_author containerImgUser">
+//                             <img src="` + avatar_user + `" alt="" class="imgUser">
+//                         </div>
+//                         <div class="coment_author_time">
+//                             <h5>
+//                                 ` + first_name + ` ` + last_name + `
+//                             </h5>
+//                             <time>` + dateComment + `</time>
+//                             <p>` + commentText + `</p>
+//                         </div>
+//
+//                     </div>
+//                 `;
+//             $("#comment_slider_slider").find(".comments_modal").prepend(commentsHtml);
+//             focusInput();
+//             $inputText.val("");
+//             ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj']++;
+//             var newLengthComment = ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'];
+//             // Updating comments
+//             $("#slider_modal").find(".commes_photo_slider").html(newLengthComment);
+//             if (objSlider[0]['currentPage'] == objSlider[1]['currentPage']
+//                 && objSlider[0]['currentIndexImg'] == objSlider[1]['currentIndexImg']) {
+//                 $("#slider_slider").find(".commes_photo_slider").html(newLengthComment);
+//             }
+//         },
+//         error: function(xhr, status, error) {
+//             if (xhr.status === 409) {
+//                 alert("Error in comment adding!")
+//             }
+//         }
+//     });
+// });

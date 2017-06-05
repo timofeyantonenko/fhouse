@@ -446,10 +446,6 @@ textarea {
 /*like and dislike */
 
 
-/*<a href="#"> <i class="fa fa-comment" aria-hidden="true"> 154</i></a>
-<i class="fa fa-thumbs-up" aria-hidden="true"> 32</i>
-<i class="fa fa-thumbs-down" aria-hidden="true"> 12</i>*/
-
 
 /*CSS for POst_detail*/
 
@@ -619,7 +615,6 @@ textarea {
     display: flex;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    width: 100%;
 }
 
 .teg_post_detail h3 {
@@ -1616,4 +1611,26 @@ textarea {
 .mark_btn i {
   cursor: pointer;
   margin: 3px;
+}
+
+/*Footer news*/
+
+.footer_post_detail {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/*Comments post detail*/
+
+.postArea {
+  border: 1px solid #afadad;
+  border-top: 0 solid silver;
+  padding-bottom: 20px;
+}
+
+.sendComent {
+  padding: 20px;
+  border-bottom: 1px solid #afadad;
 }
