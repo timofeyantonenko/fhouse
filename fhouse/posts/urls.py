@@ -13,9 +13,11 @@ from .views import (
     add_comment,
     search_post,
     api_get_posts,
+    get_post_comments,
 )
 
 urlpatterns = [
+    url(r'^get_comments/$', get_post_comments, name='post_comments'),
     url(r'^search/$', search_post),
     url(r'^api_get_posts/$', api_get_posts),
     url(r'^$', post_list, name="list"),
