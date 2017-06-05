@@ -101,8 +101,11 @@ def post_detail(request, slug=None):  # retrieve
     else:
         prepare_additional_posts = Post.objects.active().filter(updated__lt=instance.updated).order_by('-updated')[
                                    :count_of_additional_posts]
+
+    print([tag.name for tag in instance.tags])
     additional_posts = [{"title": post.title, "image": post.image.url,
-                         "slug": post.slug, "date": str(post.timestamp)}
+                         "slug": post.slug, "date": str(post.timestamp),
+                         "tags": [tag.name for tag in post.tags]}
                         for post in prepare_additional_posts]
     comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
 
@@ -150,8 +153,7 @@ def get_post_comments(request):
     return Response(comment_serializer.data)
 
 
-def post_list(request):  # list items
-    print("IN POST LIST")
+def post_list(request):
     today = timezone.now().date()
     try:
         user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
