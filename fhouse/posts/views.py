@@ -60,13 +60,6 @@ def post_create(request):
         # new_post.image.url = post_image_url
         new_post.save()
         print(new_post)
-    # if form.is_valid():
-    #     instance = form.save(commit=False)
-    #     instance.save()
-    #     messages.success(request, "Successfully created")
-    #     return HttpResponseRedirect(instance.get_absolute_url())
-    # elif form.errors:
-    #     messages.error(request, "Fail of created")
     context = {
         "form": post_content,
     }
@@ -102,7 +95,6 @@ def post_detail(request, slug=None):  # retrieve
         prepare_additional_posts = Post.objects.active().filter(updated__lt=instance.updated).order_by('-updated')[
                                    :count_of_additional_posts]
 
-    print([tag.name for tag in instance.tags])
     additional_posts = [{"title": post.title, "image": post.image.url,
                          "slug": post.slug, "date": str(post.timestamp),
                          "tags": [tag.name for tag in post.tags]}
@@ -123,6 +115,7 @@ def post_detail(request, slug=None):  # retrieve
         "dislikes": instance.negative_likes.count(),
         "slug": instance.slug,
         "id": instance.id,
+        "date": str(instance.timestamp),
     }
 
     context = {
