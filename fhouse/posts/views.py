@@ -116,7 +116,7 @@ def post_detail(request, slug=None):  # retrieve
 
     state_object = {
         "state": user_like,
-        "likes":  instance.positive_likes.count(),
+        "likes": instance.positive_likes.count(),
         "dislikes": instance.negative_likes.count(),
         "slug": instance.slug,
         "id": instance.id,
@@ -132,6 +132,22 @@ def post_detail(request, slug=None):  # retrieve
         'comment_form': comment_form,
     }
     return render(request, "posts/post_detail.html", context)
+
+
+@api_view(['GET'])
+def get_post_comments(request):
+    count_of_comments_per_page = 10
+    post_id = request.GET.get("id")
+    page = request.GET.get("p", 1)
+    instance = get_object_or_404(Post, id=post_id)
+    comments = instance.comments
+    paginator = Paginator(comments, count_of_comments_per_page)  # Show n posts per page
+    try:
+        comments = paginator.page(page)
+    except EmptyPage:
+        comments = paginator.page(paginator.num_pages)
+    comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
+    return Response(comment_serializer.data)
 
 
 def post_list(request):  # list items
