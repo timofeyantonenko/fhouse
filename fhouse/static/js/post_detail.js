@@ -60,16 +60,27 @@ $(document).on('click', '#comment .btnFhouse', function(e){
 function loadAdditionalPosts(additional_list){
     $asideBlock = $(".next_news_container");
     var htmlToInsert = "";
-    additional_list.forEach(function(item, i, additional_list) {
-        var urlPost = prefix + item.slug;
-        htmlToInsert += '\
-        <a href="' + urlPost + '" class="next_news">\
-          <div class="img_next_news containerImgNews">\
-            <img src="' + item.image + '" class="imgUser">\
-          </div>\
-          <h3 class="title_next_news">' + item.title + '</h3>\
-          <time class="date_next_news">' + get_date(item.date) + '</time>\
-        </a>';
+    additional_list.forEach(function(item, i) {
+      var tags = "";
+      additional_list[i].tags.forEach( function(e) {
+          tags += `
+            <div class="tags__item js-tags-item">
+                <span>` + e + `</span>
+            </div>
+          `
+      });
+      var urlPost = prefix + item.slug;
+      htmlToInsert += '\
+      <a href="' + urlPost + '" class="next_news">\
+        <div class="img_next_news containerImgNews">\
+          <img src="' + item.image + '" class="imgUser">\
+        </div>\
+        <h3 class="title_next_news">' + item.title + '</h3>\
+        <time class="date_next_news">' + get_date(item.date) + '</time>\
+        <div>\
+        '  + tags + '\
+        </div>\
+      </a>';
     });
     $asideBlock.html(htmlToInsert);
 }
@@ -211,53 +222,3 @@ function makeComments(id, page) {
         }
     });
 };
-
-// $(document).on('click', '.btnFhouse', function(e) {
-//     e.preventDefault();
-//     var $inputText = $("#id_content"),
-//         commentText = $inputText.val();
-//     photo_id = objSlider[1]["idImg"];
-//     $.ajax({
-//         url: '/gallery/photo/comment/',
-//         data: {
-//             id: photo_id,
-//             content: commentText,
-//             csrfmiddlewaretoken: getCookie('csrftoken')
-//         },
-//         method: "POST",
-//         success: function(data, textStatus, xhr) {
-//             dateComment = get_date(new Date());
-//             var commentsHtml = `
-//                     <div class="blockquote commentBody">
-//                         <div class="coments_author containerImgUser">
-//                             <img src="` + avatar_user + `" alt="" class="imgUser">
-//                         </div>
-//                         <div class="coment_author_time">
-//                             <h5>
-//                                 ` + first_name + ` ` + last_name + `
-//                             </h5>
-//                             <time>` + dateComment + `</time>
-//                             <p>` + commentText + `</p>
-//                         </div>
-//
-//                     </div>
-//                 `;
-//             $("#comment_slider_slider").find(".comments_modal").prepend(commentsHtml);
-//             focusInput();
-//             $inputText.val("");
-//             ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj']++;
-//             var newLengthComment = ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'];
-//             // Updating comments
-//             $("#slider_modal").find(".commes_photo_slider").html(newLengthComment);
-//             if (objSlider[0]['currentPage'] == objSlider[1]['currentPage']
-//                 && objSlider[0]['currentIndexImg'] == objSlider[1]['currentIndexImg']) {
-//                 $("#slider_slider").find(".commes_photo_slider").html(newLengthComment);
-//             }
-//         },
-//         error: function(xhr, status, error) {
-//             if (xhr.status === 409) {
-//                 alert("Error in comment adding!")
-//             }
-//         }
-//     });
-// });
