@@ -25,9 +25,9 @@
                     <h2>Предложенные статьи</h2>
 
                     <!-- Список статей -->
-                    <div class="list_article">
+                    <div class="list_article listPosts">
                         {% for article in articles_to_check %}
-                        <div class="one_suggestion_news thumbnail">
+                        <div class="one_suggestion_news thumbnail" data-post-id="{{ article.id }}">
                             <div class="imgConteinerSuggestion">
                                 <img src="{{ article.image.url }}" alt="">
                             </div>
@@ -37,7 +37,7 @@
                                         <img src="{{ article.user.avatar.url }}">
                                     </div>
                                     <div class="info-user">
-                                        <h4 class="media-heading"><span class="author_news">{{ request.user.first_name }} {{ request.user.last_name }}</span> </h4>
+                                        <h4 class="media-heading"><span class="author_news">{{ article.user.first_name }} {{ article.user.last_name }}</span> </h4>
                                         <div class="author_time">{{ article.timestamp }}</div>
                                     </div>
                                 </div>
@@ -53,49 +53,40 @@
                     </div>
                 </div>
                 <div class="rightColumn">
-                    <div class="blockResizeAfterScroll"></div>
-                    <div class="editor thumbnail">
-                        <h2>Редактировать и опубликовать</h2>
-                        <div class="imgCanvasConteiner">
-                            <div class="tableCell box canvasParent">
-                                <canvas id="panel"></canvas>
-                                <p>
-                                    <input type="button" id="cropBttn" class="btn btn-danger" value="Обрезать">
-                                </p>
-                                <div class="changeOrAddNewPhoto">
-                                    <textarea id="newSrcPhoto" placeholder="Ссылка на новое изображения" ></textarea>
-                                    <button class="btn btn-primary" id="newPhotoAdd">Изменить / Добавить</button>
-                                </div>
-                            </div>
-                            <div class="tableCell box">
-                                <h2>Фото для сайта</h2>
-                                <img src="" id="croppedImage">
-                            </div>
-                        </div>
-                        
-                        <!-- Заголовок -->
-                        <h3>Заголовок</h3>
-                        <div class="titleSuggestingNews">
-                            <textarea name="" id="title-suggesting-news" placeholder="Заголовок"></textarea>
-                        </div>
-                        <!-- Текст статьи -->
-                        <h3>Текст статьи</h3>
-                        <div class="textSuggestingNews">
-                            <textarea name="" id="text-suggesting-news" placeholder="Текст статьи"></textarea>
-                        </div>
-                        <footer>
-                            <select name="" id="timePublishing">
-                                <option value="0">Сейчас</option>
-                                <option value="1">Через 5 часов</option>
-                                <option value="2">Через 10 часов</option>
-                                <option value="3">Через 15 часов</option>
-                                <option value="4">Через 20 часов</option>
-                            </select>
-                            <button type="button" class="btn btn-success" id="approve_article">
-                                опубликовать
-                            </button>
-                        </footer>
-                    </div>
+                  <div class="editor thumbnail">
+                      <h2>Редактировать и опубликовать</h2>
+                      <div class="chooseImg">
+                          <div class="imgContainerSuggesting">
+                            <img id="img-suggesting-news" src="">
+                          </div>
+                          <div class="changeOrAddNewPhoto">
+                              <textarea id="newSrcPhoto" placeholder="Ссылка на новое изображения" ></textarea>
+                              <button class="btn btn-primary" id="newPhotoAdd">Изменить / Добавить</button>
+                          </div>
+                      </div>
+                      <!-- Заголовок -->
+                      <h3>Заголовок</h3>
+                      <div class="titleSuggestingNews">
+                          <textarea name="" id="title-suggesting-news" placeholder="Заголовок"></textarea>
+                      </div>
+                      <!-- Текст новости -->
+                      <h3>Текст новости</h3>
+                      <div class="textSuggestingNews">
+                          <textarea name="" id="text-suggesting-news" placeholder="Текст новости"></textarea>
+                      </div>
+                      <footer>
+                          <select name="" id="timePublishing">
+                              <option value="0">Сейчас</option>
+                              <option value="1">Через 5 часов</option>
+                              <option value="2">Через 10 часов</option>
+                              <option value="3">Через 15 часов</option>
+                              <option value="4">Через 20 часов</option>
+                          </select>
+                          <button type="button" class="btn btn-success" id="approve_news" data-post-id="">
+                              опубликовать
+                          </button>
+                      </footer>
+                  </div>
                 </div>
             </main>
         </div>
@@ -178,5 +169,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     <script src='{% static "js/admin_page.js" %}'></script>
+    <script type="text/javascript" src="{% static 'js/edit_news.js'  %}"></script>
+
 {% endblock content %}

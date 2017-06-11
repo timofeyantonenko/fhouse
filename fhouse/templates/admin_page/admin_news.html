@@ -23,9 +23,9 @@
                     </nav>
                     <h2>Предложенные новости</h2>
                     <!-- Cписок новостей -->
-                    <div class="list_news">
+                    <div class="list_news listPosts">
                         {% for post in posts_to_check %}
-                        <div class="one_suggestion_news thumbnail">
+                        <div class="one_suggestion_news thumbnail" data-post-id="{{ post.id }}">
                             <div class="imgConteinerSuggestion">
                                 <img src="{{ post.image.url }}" alt="">
                             </div>
@@ -35,7 +35,7 @@
                                         <img src="{{ post.user.avatar.url }}">
                                     </div>
                                     <div class="info-user">
-                                        <h4 class="media-heading"><span class="author_news">{{ request.user.first_name }} {{ request.user.last_name }}</span> </h4>
+                                        <h4 class="media-heading"><span class="author_news">{{ post.user.first_name }} {{ request.user.last_name }}</span> </h4>
                                         <div class="author_time">{{ post.timestamp }}</div>
                                     </div>
                                 </div>
@@ -51,23 +51,15 @@
                     </div>
                 </div>
                 <div class="rightColumn">
-                    <div class="blockResizeAfterScroll"></div>
                     <div class="editor thumbnail">
                         <h2>Редактировать и опубликовать</h2>
-                        <div class="imgCanvasConteiner">
-                            <div class="tableCell box canvasParent">
-                                <canvas id="panel"></canvas>
-                                <p>
-                                    <input type="button" id="cropBttn" class="btn btn-danger" value="Обрезать">
-                                </p>
-                                <div class="changeOrAddNewPhoto">
-                                    <textarea id="newSrcPhoto" placeholder="Ссылка на новое изображения" ></textarea>
-                                    <button class="btn btn-primary" id="newPhotoAdd">Изменить / Добавить</button>
-                                </div>
+                        <div class="chooseImg">
+                            <div class="imgContainerSuggesting">
+                              <img id="img-suggesting-news" src="">
                             </div>
-                            <div class="tableCell box">
-                                <h2>Фото для сайта</h2>
-                                <img src="" id="croppedImage">
+                            <div class="changeOrAddNewPhoto">
+                                <textarea id="newSrcPhoto" placeholder="Ссылка на новое изображения" ></textarea>
+                                <button class="btn btn-primary" id="newPhotoAdd">Изменить / Добавить</button>
                             </div>
                         </div>
                         <!-- Заголовок -->
@@ -96,14 +88,7 @@
                                     ok
                                 </button>
                             </div>
-                            <div class="tegs_area">
-                                <!-- <div class="oneTeg">
-                                    <div class="nameTeg">Динамо</div>
-                                    <div class="removeTeg">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </div>
-                                </div> -->
-                            </div>
+                            <div id="tags-suggesting-news" class="tegs_area"></div>
                         </div>
                         <footer>
                             <select name="" id="timePublishing">
@@ -113,7 +98,7 @@
                                 <option value="3">Через 15 часов</option>
                                 <option value="4">Через 20 часов</option>
                             </select>
-                            <button type="button" class="btn btn-success" id="approve_news">
+                            <button type="button" class="btn btn-success" id="approve_news" data-post-id="">
                                 опубликовать
                             </button>
                         </footer>
