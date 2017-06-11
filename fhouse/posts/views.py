@@ -371,6 +371,7 @@ def search_post(request):
 
 @api_view(['GET'])
 def search_tags(request):
+    limit = 5
     query = request.GET.get('q')
     page = request.GET.get('p')
     queryset_list = PostTag.objects.all()
@@ -386,7 +387,7 @@ def search_tags(request):
         queryset_list = paginator.page(1)
     except EmptyPage:
         queryset_list = []
-    tags_serializer = PostTagSerializer(queryset_list, many=True, context={'request': request})
+    tags_serializer = PostTagSerializer(queryset_list[:limit], many=True, context={'request': request})
     return Response(tags_serializer.data)
 
 
