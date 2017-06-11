@@ -988,7 +988,6 @@ textarea {
 }
 
 .date_next_news {
-    position: absolute;
     color: #7f8992;
 }
 
@@ -1208,14 +1207,26 @@ textarea {
 
 
 /*Post detail*/
+.tagsRightColumn {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.infoNextPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  height: 100%;
+}
 
 .title_next_news {
-    position: relative;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     color: #222;
     margin: 0;
     font-size: 1.8rem;
@@ -1620,6 +1631,10 @@ textarea {
   width: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.footerNews:not(.mark_btn) {
+  cursor: default;
 }
 
 /*Comments post detail*/

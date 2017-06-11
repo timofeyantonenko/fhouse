@@ -8,6 +8,10 @@ $(document).ready(function() {
       return setStatusLikes( objectPostCondition.state );
     });
 
+    $("#datePost").html(function() {
+      return get_date(objectPostCondition.date)
+    })
+
     likes.push(objectPostCondition);
 
     loadAdditionalPosts(additional_posts);
@@ -19,8 +23,9 @@ $(document).ready(function() {
 $(document).on('click', '#comment .btnFhouse', function(e){
       e.preventDefault();
       var inputText = $("#id_content"),
-          content = inputText.val(),
+          content = content = validationComments(inputText.val()),
           dateComment = get_date(new Date());
+    if ( !content ) return;
     $.ajax({
         url: '/posts/comment/',
         data: {
@@ -75,10 +80,12 @@ function loadAdditionalPosts(additional_list){
         <div class="img_next_news containerImgNews">\
           <img src="' + item.image + '" class="imgUser">\
         </div>\
-        <h3 class="title_next_news">' + item.title + '</h3>\
-        <time class="date_next_news">' + get_date(item.date) + '</time>\
-        <div>\
-        '  + tags + '\
+        <div class="infoNextPost">\
+          <h3 class="title_next_news">' + item.title + '</h3>\
+          <time class="date_next_news">' + get_date(item.date) + '</time>\
+          <div class="tagsRightColumn">\
+          '  + tags + '\
+          </div>\
         </div>\
       </a>';
     });
@@ -222,3 +229,11 @@ function makeComments(id, page) {
         }
     });
 };
+
+function validationComments(val) {
+  var splitValue = $.trim(val);
+  if ( splitValue === "" ) {
+    return undefined;
+  }
+  return val;
+}
