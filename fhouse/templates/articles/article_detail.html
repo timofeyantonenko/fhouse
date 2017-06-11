@@ -3,6 +3,10 @@
 <link rel="stylesheet" href='{% static "css/article_detail.css" %}'> {% endblock head_extra %} {% load urlify %} {% load crispy_forms_tags %} {% block head_title %} {{instance.title}} | {{block.super}} {% endblock head_title %} {% block content %}
 <script type="text/javascript">
     var additional_posts = {{ additional_articles|safe }};
+    var article_id = {{ instance.id }},
+        first_name = "{{request.user.first_name|escapejs|safe}}",
+        last_name = "{{request.user.first_name|escapejs|safe}}",
+        avatar_user = "{{request.user.avatar.url|escapejs|safe}}";
     var prefix = "";
 </script>
 <script src="{% static 'js/article_detail.js'  %}"></script>
@@ -48,38 +52,26 @@
                 <div class="article_text">
                     {{ instance.get_markdown }}
                 </div>
-                <!-- Комментарии -->
-                <footer class="footer_post_detail">
-                    <a href="{{instance.slug}}" class="like_all">
-                        <div class="like">
-                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                        </div>
-                        <div class="quantity_like">
-                            {{ instance.positive_likes|length }}
-                        </div>
-                    </a>
-                    <a href="{{instance.slug}}" class="dislike_all">
-                        <div class="dislike">
-                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                        </div>
-                        <div class="quantity_dislike">
-                            {{ instance.negative_likes|length }}
-                        </div>
-                    </a>
-                </footer>
             </div>
         </div>
         <!-- Комментарии -->
-        <div class="comments_base">
-            <h3>Оставить комментарий</h3>
-            <!-- Нужно вставить ссылку на профиль автора -->
+        <div id="comment" class="postArea">
+          <section class="sendComent">
             {% include "send_comment.html" %}
-        </div>
-        <div class="comments_base2" id="without_paddin">
-            {% include "comment_thread.html" %}
+          </section>
+          <section class="comments">
+
+          </section>
+          <section class="progressLoad">
+
+              <button id="load_coments" class="loading" data-page="1">
+                  <i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+                  <span class="doneMore">Посмотреть больше</span>
+              </button>
+          </section>
         </div>
     </article>
-    <div class="next_news_container">
+    <div class="next_article_container">
     </div>
 </main>
 {% endblock content %}

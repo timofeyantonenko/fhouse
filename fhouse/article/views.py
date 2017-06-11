@@ -3,8 +3,10 @@ import json
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import ListView
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import SectionArticle, ArticlesSection
 from django.http import HttpResponseRedirect
@@ -13,6 +15,7 @@ from comments.models import Comment
 from .serializers import SectionArticleSerializer
 from comments.forms import CommentForm
 from utils.prepare_methods import create_comment_data
+from utils.prepare_methods import create_comment, get_comments
 
 
 # Create your views here.
@@ -59,14 +62,15 @@ def article_detail(request, section_slug=None, article_slug=None):  # list items
     title = article.article_title
 
     additional_articles = SectionArticle.objects.filter(article_section=section).order_by('-timestamp')
-    elder_additional_articles = additional_articles.filter(timestamp__gt=article.timestamp)
+    elder_additional_articles = additional_articles.filter(timestamp__lt=article.timestamp)
     if len(elder_additional_articles) > count_of_additional_articles:
         prepare_additional_articles = list(elder_additional_articles[:count_of_additional_articles])
     else:
-        prepare_additional_articles = SectionArticle.objects.filter(timestamp__gt=article.timestamp).order_by(
+        prepare_additional_articles = SectionArticle.objects.filter(timestamp__lt=article.timestamp).order_by(
             '-timestamp')[:count_of_additional_articles]
     additional_articles = [{"title": article.article_title, "image": article.image.url,
-                            "slug": article.get_absolute_url(), "date": str(article.timestamp)}
+                            "slug": article.get_absolute_url(), "date": str(article.timestamp),
+                            "description": article.article_description}
                            for article in prepare_additional_articles]
     context = {
         "additional_articles": json.dumps(additional_articles),
@@ -140,6 +144,21 @@ class MainPageArticlesList(ListView):
         for section in sections:
             last_articles.append(section.articles.order_by('-timestamp')[0])
         return last_articles
+
+
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def add_comment(request):
+    content_type = ContentType.objects.get_for_model(SectionArticle)
+    content_type = str(content_type).replace(" ", "")
+    new_comment = create_comment(content_type, request)
+    return Response(status=200)
+
+
+@api_view(['GET'])
+def get_article_comments(request):
+    return get_comments(request, SectionArticle)
 
 
 @api_view(['GET'])

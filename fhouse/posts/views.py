@@ -26,13 +26,13 @@ from django.views.generic import ListView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .forms import PostForm
+from .forms import PostForm, PostTagForm
 from .models import Post, UserFavoriteTags, PostTag
 from .serializers import PostTagSerializer, PostSerializer, PostTitleSerializer
 from comments.serializers import CommentSerializer
 from likes.models import Like
 
-from utils.prepare_methods import create_comment
+from utils.prepare_methods import create_comment, get_comments
 
 
 def post_create(request):
@@ -132,18 +132,7 @@ def post_detail(request, slug=None):  # retrieve
 
 @api_view(['GET'])
 def get_post_comments(request):
-    count_of_comments_per_page = 10
-    post_id = request.GET.get("id")
-    page = request.GET.get("p", 1)
-    instance = get_object_or_404(Post, id=post_id)
-    comments = instance.comments
-    paginator = Paginator(comments, count_of_comments_per_page)  # Show n posts per page
-    try:
-        comments = paginator.page(page)
-    except EmptyPage:
-        comments = paginator.page(paginator.num_pages)
-    comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
-    return Response(comment_serializer.data)
+    return get_comments(request, Post)
 
 
 def post_list(request):
@@ -378,3 +367,39 @@ def search_post(request):
     title_serializer = PostTitleSerializer(queryset_list, many=True, context={'request': request})
     print(queryset_list)
     return Response(title_serializer.data)
+
+
+@api_view(['GET'])
+def search_tags(request):
+    limit = 5
+    query = request.GET.get('q')
+    page = request.GET.get('p')
+    queryset_list = PostTag.objects.all()
+    if query:
+        queryset_list = queryset_list.filter(
+            Q(name__icontains=query)
+        ).distinct()
+
+    paginator = Paginator(queryset_list, 5)  # Show 5 tags per page
+    try:
+        queryset_list = paginator.page(page)
+    except PageNotAnInteger:
+        queryset_list = paginator.page(1)
+    except EmptyPage:
+        queryset_list = []
+    tags_serializer = PostTagSerializer(queryset_list[:limit], many=True, context={'request': request})
+    return Response(tags_serializer.data)
+
+
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def att_tag(request):
+    post_tag_form = PostTagForm(request.POST)
+    if post_tag_form.is_valid():
+        post_tag = PostTag.objects.create(name=post_tag_form.cleaned_data["name"])
+        post_tag_serializer = PostTitleSerializer(post_tag, many=False, context={'request': request})
+        return Response(post_tag_serializer.data)
+    else:
+        return Response({'error': post_tag_form.errors})
+
