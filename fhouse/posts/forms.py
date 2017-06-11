@@ -1,7 +1,7 @@
 from django import forms
 from pagedown.widgets import PagedownWidget
 
-from .models import Post
+from .models import Post, PostTag
 
 
 # class PostForm(forms.ModelForm):
@@ -17,6 +17,11 @@ from .models import Post
 #             "draft",
 #             "publish",
 #         ]
+
+class PostTagForm(forms.ModelForm):
+    class Meta:
+        model = PostTag
+        fields = ['name']
 
 
 class PostForm(forms.Form):

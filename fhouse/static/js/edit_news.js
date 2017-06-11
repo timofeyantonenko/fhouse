@@ -79,13 +79,28 @@ $('#seachTags').on("keyup", function() {
     }
 });
 
-// Add tags
 
+// Add tags
 $(".addNewTag").find(".btn").on("click", function() {
     var newTagName = $(".addNewTag").find("textarea").val();
-    var htmlTag = '<div class="oneTeg"><div class="nameTeg">' + newTagName + '</div><div class="removeTeg"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div></div>';
-    $(".tegs_area").append(htmlTag)
-    $(".addNewTag").find("textarea").val("");
+        $.ajax({
+        url: "/posts/create/tag/",
+        data: {
+            name: newTagName,
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            alert(newTagName);
+            var htmlTag = '<div class="oneTeg"><div class="nameTeg">' + newTagName + '</div><div class="removeTeg"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div></div>';
+            $(".tegs_area").append(htmlTag)
+            $(".addNewTag").find("textarea").val("");
+        },
+        error: function(xhr, status, error) {
+             console.log(error, status, xhr);
+        }
+    });
 })
 
 $(".add_tags").on("click", function() {
@@ -552,7 +567,10 @@ function publishArticle(post_id, article_title, article_text, tags){
 
 // Confirm delete tour
 $(document).on("click", "#approve_news", function() {
-    alert('d');
+    input_title = $("#title-suggesting-news").val();
+    input_text = $("#text-suggesting-news").val();
+    alert(input_title);
+    alert(input_text);
 });
 
 // Confirm delete tour
