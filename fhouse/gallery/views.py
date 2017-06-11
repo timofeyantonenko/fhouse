@@ -3,13 +3,19 @@ from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import ListView
+from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from .models import GallerySection, SectionAlbum, AlbumPhoto
-from .serializers import AlbumPhotoSerializer, SectionAlbumSerializer
+from .serializers import AlbumPhotoSerializer, SectionAlbumSerializer, GallerySectionSerializer
 from comments.serializers import CommentSerializer
 from utils.prepare_methods import create_comment
+
+from urllib.request import urlopen
+from urllib.parse import quote_plus
+from io import BytesIO
+from django.core.files.base import File
 
 
 @api_view(['GET'])
@@ -103,36 +109,6 @@ def photo_detail(request, section_slug=None, album_slug=None, photo_slug=None):
     return render(request, "gallery/photo_detail.html", context)
 
 
-# def get_section_information(request):
-#     count_of_photo_to_load = 15
-#     count_of_albums_to_load = 6
-#     section = request.GET.get('section')
-#     if section:
-#
-#         photos_list = []
-#         albums = SectionAlbum.objects.filter(album_section__section_title=section).order_by('-updated')[
-#                  :count_of_albums_to_load]
-#         photos = AlbumPhoto.objects.filter(photo_album__in=albums).order_by('-updated')[:count_of_photo_to_load]
-#         for photo in photos:
-#             photos_list.append(
-#                 {'url': photo.image.url, 'name': photo.photo_title, 'album': photo.photo_album.album_title,
-#                  'comments': serializers.serialize('json', photo.comments),
-#                  'likes': serializers.serialize('json', photo.likes)})
-#         print(photos_list)
-#         print('SECTION: {}, ALBUMS: {}, PHOTOS: {}'.format(section, albums, photos))
-#     else:
-#         photos = AlbumPhoto.objects.all().order_by('-timestamp')[:count_of_photo_to_load]
-#     context = {
-#         'photo_list': photos_list,  # serializers.serialize('json', photos),
-#         'albums': serializers.serialize('json', albums, fields=('image', 'album_title')),
-#     }
-#     context = json.dumps(context)
-#     # return HttpResponse(content=context, content_type='json')
-#     print(json.dumps(context))
-#     return JsonResponse(data=context, safe=False)
-#     # return render_to_response(template_name='gallery/slider_photo_list.html', content_type='html', context=context)
-
-
 class PhotoList(ListView):
     model = AlbumPhoto
     template_name = 'gallery/slider_photo_list.html'
@@ -201,3 +177,31 @@ def add_photo_comment(request):
     content_type = str(content_type).replace(" ", "")
     new_comment = create_comment(content_type, request)
     return Response(status=200)
+
+
+class SectionList(generics.ListCreateAPIView):
+    queryset = GallerySection.objects.all()
+    serializer_class = GallerySectionSerializer
+    permission_classes = (IsAdminUser,)
+
+
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def add_photo(request):
+    album_id = request.POST.get("album_id")
+    photo_title = request.POST.get("title")
+    new_photo = AlbumPhoto(photo_title=photo_title, photo_album_id=album_id)
+    if "i_file" in request.POST:
+        pass
+    elif "i_url" in request.POST:
+        image_url = request.POST.get("i_url")
+        response = urlopen(image_url)
+        io = BytesIO(response.read())
+        new_photo.image.save(quote_plus(image_url), File(io))
+        new_photo.save()
+    else:
+        return Response(data={"answer": "Wrong photo"}, status=403)
+    return Response(status=200)
+
+

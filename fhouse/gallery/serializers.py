@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.relations import PrimaryKeyRelatedField
 from .models import AlbumPhoto, SectionAlbum, GallerySection
 from likes.models import Like
 from utils.abstract_classes import CommentedSerializer, LikedSerializer
@@ -19,15 +20,17 @@ class SectionAlbumSerializer(serializers.ModelSerializer):
         return obj.positive_likes.count()
 
 
-class GallerySectionSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = GallerySection
-        fields = '__all__'
-
-
 class AlbumPhotoSerializer(CommentedSerializer, LikedSerializer):
     album_title = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
 
     class Meta:
         model = AlbumPhoto
+        fields = '__all__'
+
+
+class GallerySectionSerializer(serializers.ModelSerializer):
+    albums = SectionAlbumSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = GallerySection
         fields = '__all__'
