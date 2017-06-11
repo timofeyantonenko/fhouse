@@ -340,7 +340,7 @@ def add_comment(request):
 @api_view(['GET'])
 def search_post(request):
     limit = 10
-    tag = request.GET['tab']
+    tag = request.GET.get('tab', "all")
     user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
     user_tags = user_tags.tags.all()
     if tag == 'all':
@@ -362,7 +362,7 @@ def search_post(request):
     else:
         queryset_list = queryset_list[:10]
 
-    title_serializer = PostTitleSerializer(queryset_list, many=True, context={'request': request})
+    title_serializer = PostSerializer(queryset_list, many=True, context={'request': request})
     print(queryset_list)
     return Response(title_serializer.data)
 
