@@ -1,227 +1,263 @@
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
+var likes = [];
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
+$(document).ready(function() {
 
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
+    // set class likes
+    $(".article_detail_content").find(".mark_info").addClass(function() {
+      console.log(objectPostCondition.state)
+      return setStatusLikes( objectPostCondition.state );
+    });
+
+    likes.push(objectPostCondition);
+
+    loadAdditionalPosts(additional_posts);
+
+    makeComments(objectPostCondition.id, 1);
+
+});
+
+$(document).on('click', '#comment .btnFhouse', function(e){
+      e.preventDefault();
+      var inputText = $("#id_content"),
+          content = inputText.val(),
+          dateComment = get_date(new Date());
+    $.ajax({
+        url: '/posts/comment/',
+        data: {
+            id: objectPostCondition.id,
+            content: content,
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        method: "POST",
+        success: function(data, textStatus, xhr) {
+          var commentsHtml = `
+              <div class="blockquote commentBody">
+                  <div class="coments_author containerImgUser">
+                      <img src="` + avatar_user + `" alt="" class="imgUser">
+                  </div>
+                  <div class="coment_author_time">
+                      <h5>
+                          ` + first_name + ` ` + last_name + `
+                      </h5>
+                      <time>` + dateComment + `</time>
+                      <p>` + content + `</p>
+                  </div>
+
+              </div>
+          `;
+          $("#comment").find(".comments").prepend(commentsHtml);
+          inputText.val("");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 409) {
+                alert("Error in comment adding!")
+            }
         }
-    }
+    });
+})
+
+
+function loadAdditionalPosts(additional_list){
+    $asideBlock = $(".next_news_container");
+    var htmlToInsert = "";
+    additional_list.forEach(function(item, i, additional_list) {
+        var urlPost = prefix + item.slug;
+        htmlToInsert += '\
+        <a href="' + urlPost + '" class="next_news">\
+          <div class="img_next_news containerImgNews">\
+            <img src="' + item.image + '" class="imgUser">\
+          </div>\
+          <h3 class="title_next_news">' + item.title + '</h3>\
+          <time class="date_next_news">' + get_date(item.date) + '</time>\
+        </a>';
+    });
+    $asideBlock.html(htmlToInsert);
+}
+
+$(document).on("click", ".mark_btn", function(event) {
+  var _this = $(this),
+      typeEv = 0;
+  _this.parent(".mark_info").addClass("stopEvent");
+  if ( _this.hasClass("block_dislike") ) typeEv = 1
+  postLike(0, typeEv);
+})
+
+function postLike(indexPost, typeEvent) {
+  var slug = likes[indexPost]['slug'],
+      currentState = likes[indexPost]['state'];
+  $.ajax({
+      url: "/likes/post/modify",
+      data: { 'slug': slug, 'type': typeEvent },
+      dataType: "json",
+      success: function(data, textStatus, xhr) {
+        console.log(likes[indexPost]);
+        if ( typeEvent === 1 && currentState === false) {
+          likes[indexPost]["dislikes"] = likes[indexPost]["dislikes"] - 1;
+          likes[indexPost]['state'] = null;
+        } else if ( typeEvent === 1 && currentState === true ) {
+          likes[indexPost]["dislikes"] = likes[indexPost]["dislikes"] + 1;
+          likes[indexPost]["likes"] = likes[indexPost]["likes"] - 1;
+          likes[indexPost]['state'] = false;
+        }  else if ( typeEvent === 1 && currentState === null ) {
+          likes[indexPost]["dislikes"] = likes[indexPost]["dislikes"] + 1;
+          likes[indexPost]['state'] = false;
+        }  else if ( typeEvent === 0 && currentState === false ) {
+          likes[indexPost]["dislikes"] = likes[indexPost]["dislikes"] - 1;
+          likes[indexPost]["likes"] = likes[indexPost]["likes"] + 1;
+          likes[indexPost]['state'] = true;
+        }  else if ( typeEvent === 0 && currentState === true) {
+          likes[indexPost]["likes"] = likes[indexPost]["likes"] - 1;
+          likes[indexPost]['state'] = null;
+        }  else if ( typeEvent === 0 && currentState === null ) {
+          likes[indexPost]["likes"] = likes[indexPost]["likes"] + 1;
+          likes[indexPost]['state'] = true;
+        };
+        var $thisPost = $(".article_detail_content");
+        $thisPost.find(".mark_info").removeClass("disLikeAcive").removeClass("nothingAcive").removeClass("likeAcive");
+        return {
+          setLikes: $thisPost.find(".block_like").find(".votes").html(likes[indexPost]["likes"]),
+          setDislikes: $thisPost.find(".block_dislike").find(".votes").html(likes[indexPost]["dislikes"]),
+          setClassContainer: $thisPost.find(".mark_info").addClass( function() {
+            return setStatusLikes(likes[indexPost]['state'])
+          }),
+          parentAllowEvent: $thisPost.find(".mark_info").removeClass("stopEvent")
+        }
+      },
+      error: function(xhr, status, error) {
+          console.log(error, status, xhr);
+      }
+  });
 };
 
-function isEmpty(obj) {
-    for (var prop in obj) {
-        if (obj.hasOwnProperty(prop))
-            return false;
+function setStatusLikes ( status ) {
+  var thisClass;
+  if ( status === true ) {
+    thisClass = "likeAcive";
+  } else if ( status === false ) {
+    thisClass = "disLikeAcive";
+  } else {
+    thisClass = "nothingAcive";
+  }
+  return thisClass
+};
+
+function get_date(date) {
+    var dateToString = "" + date,
+        dateDate = new Date(dateToString),
+        today = new Date(),
+        arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Мая', 'Июня', 'Июля', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+    timeLong = (today - dateDate) / (60000 * 24);
+    minuteAgo = Math.round((today - dateDate) / 60000);
+    if (timeLong > 1 && timeLong < 24) {
+        makeDate = "Сегодня в " + ("0" + dateDate.getHours()).slice(-2) + ":" + ("0" + dateDate.getMonth()).slice(-2);
+    } else if (timeLong < 1) {
+        makeDate = minuteAgo + " мин. назад"
+    } else {
+        makeDate = ("0" + dateDate.getDate()).slice(-2) + " " + arrMonth[dateDate.getMonth()] + " " + dateDate.getFullYear();
     }
-
-    return true;
+    return makeDate;
 }
-if (!String.format) {
-    String.format = function(format) {
-        var args = Array.prototype.slice.call(arguments, 1);
-        return format.replace(/{(\d+)}/g, function(match, number) {
-            return typeof args[number] != 'undefined' ? args[number] : match;
-        });
-    };
-}
-$(document).ready(function() {
-    $(document).on('click', '.like_all', function(e) {
-        e.preventDefault();
-        var like_url = "/likes/post/modify";
-        var a_block = $(this);
-        var like_slug = a_block.attr("href");
-        var pos_likes_count = a_block.text();
-        count_block = $(this).find('div.quantity_like');
-        pos_likes_count = parseInt(pos_likes_count);
-        var parent_div_tab = $(this).parent();
-        $.ajax({
-            url: like_url,
-            data: { 'slug': like_slug, 'type': 0 },
-            dataType: "json",
-            success: function(data, textStatus, xhr) {
-                var check_list = data['add_result']
-                for (var i = 0; i < check_list.length; i++) {
-                    var operation_result = check_list[i];
-                    if (operation_result == 0) { // add positive
-                        pos_likes_count = pos_likes_count + 1;
-                    } else if (operation_result == 2) { // remove positive
-                        pos_likes_count = pos_likes_count - 1;
-                    } else if (operation_result == 3) { // remove negative
-                        neg_like_block = $(parent_div_tab).find('a.dislike_all');
-                        neg_count_block = $(neg_like_block).find('div.quantity_dislike');
-                        var neg_likes_count = parseInt(neg_like_block.text());
-                        neg_likes_count = neg_likes_count - 1;
-                        neg_count_block.html(neg_likes_count.toString());
-                    }
-                }
-                count_block.html(pos_likes_count.toString());
-            },
-            error: function(xhr, status, error) {
-                console.log(error, status, xhr);
-            }
-        });
-    });
-    $(document).on('click', '.dislike_all', function(e) {
-        e.preventDefault();
-        var like_url = "/likes/post/modify";
-        var a_block = $(this);
-        var like_slug = a_block.attr("href");
-        var neg_likes_count = a_block.text();
-        count_block = $(this).find('div.quantity_dislike');
-        neg_likes_count = parseInt(neg_likes_count);
-        var parent_div_tab = $(this).parent();
-        $.ajax({
-            url: like_url,
-            data: { 'slug': like_slug, 'type': 1 },
-            dataType: "json",
-            success: function(data, textStatus, xhr) {
-                var check_list = data['add_result']
-                for (var i = 0; i < check_list.length; i++) {
-                    var operation_result = check_list[i];
-                    if (operation_result == 1) { // add negative
-                        neg_likes_count = neg_likes_count + 1;
-                    } else if (operation_result == 3) { // remove negative
-                        neg_likes_count = neg_likes_count - 1;
-                    } else if (operation_result == 2) { // remove positive
-                        pos_like_block = $(parent_div_tab).find('a.like_all');
-                        pos_count_block = $(pos_like_block).find('div.quantity_like');
-                        var pos_likes_count = parseInt(pos_like_block.text());
-                        pos_likes_count = pos_likes_count - 1;
-                        pos_count_block.html(pos_likes_count.toString());
-                    }
-                }
-                count_block.html(neg_likes_count.toString());
-            },
-            error: function(xhr, status, error) {
-                console.log(error, status, xhr);
-            }
-        });
-    });
 
+$(document).on('click', '#load_coments', function(e) {
+    e.preventDefault();
+    $(this).removeClass("finish_more").removeClass("more_active").addClass("loading");
+    var pageCommentCounter = +$(this).attr("data-page"),
+        pagePost = pageCommentCounter + 1;
+        idPost = objectPostCondition.id;
+    pageCommentCounter++;
+    makeComments(idPost, pagePost);
+    $(this).attr("data-page", pagePost);
+})
 
-    // Фиксация блока меньшей высоты
-    $(window).load(function() {
+function makeComments(id, page) {
+    var $moreCom = $("#load_coments");
+    $moreCom.attr("data-page", 1);
+    $.ajax({
+        url: '/posts/get_comments/',
+        data: { "id": id, "p": page },
+        dataType: "json",
+        cache: false,
+        success: function(data) {
+            var commentsHtml = "";
+            var $blComments = $("#comment").find(".comments");
+            for (var i = 0; i < data.length; i++) {
+                dateComment = get_date(data[i]["timestamp"]);
+                commentsHtml += `
+                    <div class="blockquote commentBody">
+                        <div class="coments_author containerImgUser">
+                            <img src="` + data[i]["user"]["avatar"] + `" alt="" class="imgUser">
+                        </div>
+                        <div class="coment_author_time">
+                            <h5>
+                                ` + data[i]["user"]["first_name"] + ` ` + data[i]["user"]["last_name"] +
+                    `
+                            </h5>
+                            <time>` + dateComment + `</time>
+                            <p>` + data[i]["content"] + `</p>
+                        </div>
 
-        var height = $(".colum").height();
-        var biggest_col;
-        $(".colum").each(function(i) {
-
-            if ($(this).height() < height) {
-                height = $(this).height()
-            } else {
-                biggest_col = $(this);
+                    </div>
+                `
             };
+            $blComments.append(commentsHtml);
 
-        });
-
-        var min_height_block;
-
-        $(".colum").each(function(i) {
-
-            if ($(this).height() == height) {
-                min_height_block = $(this);
-            };
-
-        });
-
-        var width_min_height_block = $(min_height_block).width();
-        var height_min_height_block = $(min_height_block).height();
-        $(min_height_block).css({ "width": width_min_height_block, "height": height_min_height_block });
-        $(min_height_block).children().css({ "width": width_min_height_block });
-
-        var left_col = $(min_height_block).offset().left;
-
-        if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
-            $(min_height_block).addClass("fixed_col_top");
-            $(min_height_block).css("bottom", (document.documentElement.clientHeight - min_height_block.height() - 70));
-            $(min_height_block).css("left", left_col);
-
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > ((document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                    var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                    $('.fixed_col_top').css('top', 'inherit');
-                    $(min_height_block).css("bottom", bottom_scroll);
-
-
-                } else {
-                    $('.fixed_col_top').css('top', '70px');
-                    $('.fixed_col_top').css('bottom', 'inherit');
-                };
-            })
-
-        } else {
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > (45 + height - document.documentElement.clientHeight + $(".navbar").height()) && $(this).scrollTop() <= (50 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                    $(min_height_block).addClass("fixed_col");
-                    $(min_height_block).css("left", left_col);
-                    $(min_height_block).css("bottom", "25px")
-
-                } else if ($(this).scrollTop() > (45 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                    var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                    $(min_height_block).css("bottom", bottom_scroll);
-                } else {
-
-
-                    $(min_height_block).removeClass("fixed_col");
-                    $(min_height_block).css({ "left": "0px", "bottom": "0px" });
-                }
-            });
-        }
-
-
-
-    });
-
-    // End dimas script
-});
-
-
-// Script author: Dima
-$(document).ready(function() {
-
-
-    if ($('*').is('.content_coment')) {
-        $(".comments_base2").show();
-    } else {
-        $(".comments_base2").hide();
-    };
-
-    if ($(".blockquote").length < 6) {
-        $(".show_all_coment").hide();
-        $(".blockquote").css("padding-bottom", "3%")
-    } else {
-        $(".show_all_coment").show();
-    };
-
-    $("body").on("click", ".pagination_page a, .pagination_page span", function() {
-        $('html, body').animate({ scrollTop: 0 }, '0');
-
-    });
-
-
-});
-$(window).load(function() {
-    $(document).ajaxComplete(function() {
-        console.log('I am Here');
-        $('.IMGoneArticle img').each(function(i) {
-            if ($(this).css("height") < $(this).parent().css("height")) {
-                $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
-                $(this).parent().css({ "display": "flex", "justify-content": "center" });
-            }
-        });
-    });
-
-    $('.IMGoneArticle img').each(function(i) {
-        if ($(this).css("height") < $(this).parent().css("height")) {
-            $(this).css({ "height": "100%", "width": "auto", "align-self": "center" });
-            $(this).parent().css({ "display": "flex", "justify-content": "center" });
+            // if ($moreCom.attr("data-page") >= Math.ceil(ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'] / 10)) {
+            //     return $moreCom.addClass("finish_more");
+            // }
+            $moreCom.removeClass("loading").removeClass("finish_more").addClass("more_active");
+        },
+        error: function(xhr, status, error) {
+            // console.log(error, status, xhr);
         }
     });
-});
+};
 
-// End dimas script
+// $(document).on('click', '.btnFhouse', function(e) {
+//     e.preventDefault();
+//     var $inputText = $("#id_content"),
+//         commentText = $inputText.val();
+//     photo_id = objSlider[1]["idImg"];
+//     $.ajax({
+//         url: '/gallery/photo/comment/',
+//         data: {
+//             id: photo_id,
+//             content: commentText,
+//             csrfmiddlewaretoken: getCookie('csrftoken')
+//         },
+//         method: "POST",
+//         success: function(data, textStatus, xhr) {
+//             dateComment = get_date(new Date());
+//             var commentsHtml = `
+//                     <div class="blockquote commentBody">
+//                         <div class="coments_author containerImgUser">
+//                             <img src="` + avatar_user + `" alt="" class="imgUser">
+//                         </div>
+//                         <div class="coment_author_time">
+//                             <h5>
+//                                 ` + first_name + ` ` + last_name + `
+//                             </h5>
+//                             <time>` + dateComment + `</time>
+//                             <p>` + commentText + `</p>
+//                         </div>
+//
+//                     </div>
+//                 `;
+//             $("#comment_slider_slider").find(".comments_modal").prepend(commentsHtml);
+//             focusInput();
+//             $inputText.val("");
+//             ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj']++;
+//             var newLengthComment = ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'];
+//             // Updating comments
+//             $("#slider_modal").find(".commes_photo_slider").html(newLengthComment);
+//             if (objSlider[0]['currentPage'] == objSlider[1]['currentPage']
+//                 && objSlider[0]['currentIndexImg'] == objSlider[1]['currentIndexImg']) {
+//                 $("#slider_slider").find(".commes_photo_slider").html(newLengthComment);
+//             }
+//         },
+//         error: function(xhr, status, error) {
+//             if (xhr.status === 409) {
+//                 alert("Error in comment adding!")
+//             }
+//         }
+//     });
+// });

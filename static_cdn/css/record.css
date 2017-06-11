@@ -1,7 +1,12 @@
+.more_records {
+    margin: 0 auto 20px !important;
+
+}
+
 .statsCard {
-    background-color: #fafafa;
-    padding: 20px 20px 20px 10px; 
-    border: 1px solid #CCD1D9;
+    background-color: #fff;
+    padding: 20px;
+    padding-bottom: 70px;
     border-top: 0px !important;
 }
 
@@ -17,29 +22,37 @@
 }
 
 .flex_container {
-    display: flex;
     width: 100%;
-    flex-wrap: wrap;
-    align-items: flex-start;
 }
 
-.statsCard .block_record {
-    padding-left: 10px;
-    margin-bottom: 10px;
-}
-
-.thumbnails {
-    /*width: 32%;*/
+.block_record {
     vertical-align: top;
-    border: 1px solid #ebebeb;
+    border: 1px solid #afadad;
     border-radius: 5px;
 }
 
-.last_records .thumbnails:nth-child(3) {
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+
+/* Opera < 12.1 */
+
+.last_records .block_record:nth-child(3) {
     margin-right: 0 !important;
 }
 
-.thumbnails h3 {
+.block_record h3 {
     margin: 0px;
     padding: 0.3em 0;
     font-size: 16px;
@@ -51,50 +64,66 @@
 
 /*Stats her0*/
 
-.record_hero_img {
-    width: 132px !important;
-}
-
 .statsHero {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 10px;
     height: 150px;
     background: #eaeaea;
     border-bottom: 1px solid #e8e8e8;
-    background-image: url(https://psv4.vk.me/c812128/u75114231/docs/30d69a75a2bd/Bez_Imeni-1.png?extra=SYW47Wen3NkmAmonh54tsnO9puwftUtekKiaH-6QpS-tjC3ueEvIo8VdqWLS85BhwerWsh2Y2pa6WSd2-Kyz8tHBmGWt6v0gFpewH4anMtwFsizF6M1Hzw);
 }
 
 .img_container_hero {
     width: 130px;
     height: 130px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    border-radius: 100%;
     overflow: hidden;
-    border-radius: 50%;
     border: 3px solid #fff;
     background: #fff;
     float: right;
 }
 
 .img_container_hero img {
-    width: 100%;
-    height: auto;
+    -o-object-fit: cover;
+       object-fit: cover;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .statsHero .statInfo {
     float: left;
-    font-weight: 600;
-    flex-grow: 1;
+    width: calc(100% - 130px);
 }
 
-.relative_hero {
-    position: relative;
+.statsHero .statInfo h4 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    word-wrap: break-word;
 }
+
+.statsHero .statInfo p {
+    margin: 5px 0 0;
+    color: #e62117;
+}
+
 
 .statsHero .statInfo a {
     font-size: 18px;
 }
 
 .statsHero .statInfo span {
-    color: #e90052;
+    color: #e62117;
     position: absolute;
     font-size: 18px;
     top: 100%;
@@ -120,10 +149,18 @@
 .statsList .statsRow {
     border-bottom: 1px solid #e8e8e8;
     padding: 0.5em;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .statsList .statsRow a {
@@ -260,7 +297,7 @@
 }
 
 .stat {
-    color: #e90052;
+    color: #e62117;
 }
 
 .btn {
@@ -294,10 +331,6 @@ ul#otis {
     margin-bottom: 0px;
 }
 
-#caption {
-    padding: 0px;
-}
-
 .add_record {
     background-color: #ebebeb;
     display: inline-block;
@@ -308,30 +341,39 @@ ul#otis {
     float: right;
     font-size: 14px;
     padding: 0px;
-    color: #333;
+    color: #222;
     height: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .add_record:hover {
-    background-color: #e90052;
+    background-color: #e62117;
     color: white;
 }
 
 .add_record span:nth-child(1) {
     margin: 0px 15px 0px 30px;
-    align-self: center;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
 }
 
 .add_record span:nth-child(2) {
     float: right;
     margin-right: 7px;
-    align-self: center;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
 }
 
 .full_list_record {
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     float: left;
     background-color: #e8e8e8;
     display: inline-block;
@@ -339,7 +381,8 @@ ul#otis {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    touch-action: manipulation;
+    -ms-touch-action: manipulation;
+        touch-action: manipulation;
     cursor: pointer;
     -webkit-user-select: none;
     margin: 3%;
@@ -350,12 +393,10 @@ ul#otis {
 }
 
 .full_list_record:hover {
-    background-color: #e90052;
-    color: #fafafa;
+    background-color: #c7c7c7;
 }
 
 .full_list_record:hover a {
-    color: #fafafa;
     text-decoration: none;
 }
 
@@ -367,109 +408,185 @@ ul#otis {
     padding-bottom: 10%;
 }
 
-.more_records {
-    cursor: pointer;
-    width: 32%;
-    margin: 0 auto 0px;
-    padding: 5px;
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 14px;
-    color: #656D78;
-    background: #fff;
-    border: 1px solid #CCD1D9;
-    border-radius: 2px;
-}
 
-.more_records:hover {
-    text-decoration: none!important;
-    background: #eee;
-}
-
-
-/*Навигация между пазделами рекордов*/
-
-
-/*Навигация между статьями */
-
-.table > tbody > tr:first-child > td {
-    border-top: 0px !important;
-    font-weight: bold;
-    color: #666;
-}
-
-.table_nav_records a {
-    color: #242424;
-}
-
-.table_nav_records td:nth-child(2+3n) {
-    padding-left: 0px !important;
-}
-
-.table_nav_records td:nth-child(1+3n) {
-    padding-right: 0px !important;
-}
-
-.table_nav_records div:first-child {
-    height: 39px;
-    line-height: 39px;
-    margin-left: 20px;
-    color: #fafafa;
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.table_nav_records tr:nth-child(2) {
-    background-color: #e4e4e4;
-}
-
-.tab ul {
-    display: flex;
+/*Navigation records*/
+.tab {
     width: 100%;
-    padding: 0 50% 0 20px;
+}
+
+.searchRecord {
+    width: 250px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: row !important;
+            flex-direction: row !important;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.searchRecord textarea {
+    width: 225px;
+    height: 100%;
+    font-size: 15px;
+    overflow: hidden;
+    padding: 5px;
+    outline: none;
+    font-weight: 400 !important;
+}
+
+.form-control {
+    outline: none !important;
+}
+
+.table_nav_records ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.table_nav_records ul li {
+    margin: 0 5px 0 0;
+    padding: 5px 10px;
+    position: relative;
+    cursor: pointer;
+    display: block;
+}
+
+.tab_active:hover .lineHover {
+    top: calc(100% - 4px);
 }
 
 .tab_active {
-    background-color: #fafafa !important;
-    color: #1d2f3e !important;
+    font-weight: 900;
 }
 
-.tab ul li {
-    background: #b60040;
-    color: #fff;
-    padding: 1.3rem 1rem;
-    display: block;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    font-size: 1.1rem;
-    position: relative;
-    text-decoration: none;
-    text-align: center;
-    transition: all .2s;
-    border-radius: 3px 3px 0 0;
-    cursor: pointer;
+.tab_active .lineHover {
+    top: calc(100% - 4px);
 }
 
-.tab ul li:hover {
-    background-color: #83002e;
+.lineHover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #e62117;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
 }
 
-.tab ul li:not(:last-child) {
-    margin-right: 10px;
-}
-
-.table_nav_records {
-    height: 80px;
-    background-color: #e90052;
-    border-radius: 7px 7px 0 0;
+.table_nav_records hr {
+    width: 100%;
+    border-top: 2px solid #eee;
+    margin: 0 !important;
 }
 
 
-/*Масонри рекорды */
+/*Responsive*/
 
-.persent-size {
-    width: 33.333333%;
+.recordsMain {
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 1170px) {
+    .recordsMain {
+        width: 70%;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .recordsMain {
+        width: 65%;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .recordsMain {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 749px) {
+    .recordsMain {
+        width: 100%;
+    }
+}
+
+
+/*Masonry*/
+
+#list {
+    width: calc(100% - 30px);
+    overflow: hidden;
+    margin: 20px 15px 10px 15px;
+}
+
+.item {
+    float: left;
+}
+
+@media screen and (min-width: 1170px) {
+    .item {
+        width: calc(33.333% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}
+
+@media screen and (min-width: 970px) and (max-width: 1169px) {
+    .item {
+        width: calc(50% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 969px) {
+    .item {
+        width: calc(50% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}
+
+@media screen and (min-width: 590px) and (max-width: 749px) {
+    .item {
+        width: calc(50% - 10px);
+        margin: 0 5px 10px 5px;
+    }
+}
+
+@media screen and (max-width: 589px) {
+    .item {
+        width: calc(100% - 10px) !important;
+        margin: 0 auto 20px !important;
+    }
+}
+
+
+/*Responsive other*/
+
+@media screen and (min-width: 970px) {
+    .recordsMain {
+        border: 1px solid #afadad;
+    }
+    body {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 969px) {
+    body {
+        padding-top: 60px;
+        padding-bottom: 0px;
+    }
+    .recordsMain {
+        border: 0px solid #afadad;
+    }
 }

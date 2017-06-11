@@ -1,25 +1,3 @@
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-};
-function isEmpty(obj) {
-    for (var prop in obj) {
-        if (obj.hasOwnProperty(prop))
-            return false;
-    }
-
-    return true;
-}
 if (!String.format) {
     String.format = function(format) {
         var args = Array.prototype.slice.call(arguments, 1);
@@ -28,531 +6,657 @@ if (!String.format) {
         });
     };
 }
+
+var objSlider = [{
+        // 'commentsContainer':
+        'currentPage': 1,
+        'currentIndexImg': 0
+    }, {
+        // 'commentsContainer':
+        'currentPage': 1,
+        'currentIndexImg': 0
+    }, { 'globalSlider': 0 }],
+    tile_info_obj = {},
+    htmlObj,
+    ListPhotos = {},
+    ajax_data = {},
+    ajax_url = { 'url': 'slider_photo_list' },
+    arrMonth = ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+
 $(document).ready(function() {
-    section = $(".nav_ul li:first-child a");
-    section_name = section.text().trim();
-    console.log(section_name);
-    // Active section of menu
-    section.addClass("active_nav_ul");
-    load_section_info(section_name, undefined);
 
+    var defaultSection = $("#nav_section").children("ul").children("li").eq(0).text().trim();
+    ajax_data['section'] = defaultSection
+    objSlider[0].sliderType = $("#slider_slider");
+    objSlider[1].sliderType = $("#slider_modal");
 
-    // Активный раздел меню
-    //$(".nav_ul li:first-child a").addClass("active_nav_ul");
+    objSlider[0].html = htmlObj;
+    objSlider[1].html = htmlObj;
 
-    $(".nav_ul li a").click(function(e) {
-        if ($(this).hasClass('active_nav_ul')) {
-            return;
+    ajaxGallery(ajax_data, ajax_url['url'], 0, objSlider[0].currentPage);
+
+    $(".carousel").on("click", function(event) {
+        var $thisArea = $(this),
+            counter = +$thisArea.attr('data-count'),
+            container = +$thisArea.attr('data-obj'),
+            reset = +$thisArea.attr('data-reset');
+        objSlider['globalSlider'] = container;
+        sliderEvent(counter, reset, container);
+    });
+
+    $(document).keydown(function(eventObject) {
+        if ($('#slider_modal').parents().hasClass('in')) {
+            if (eventObject.which == 37) {
+                return $('#carousel_slider_modal_left').click();
+            } else if (eventObject.which == 39) {
+                return $('#carousel_slider_modal_right').click();
+            };
         }
-        e.preventDefault();
-        $(".nav_ul li a").removeClass('active_nav_ul');
-        section = $(this);
-        section_name = section.text().trim();
-        // Active section of menu
-        section.addClass("active_nav_ul");
-        load_section_info(section_name, undefined);
     });
 
+    $('#tile_img').masonry({
+        itemSelector: '.item',
+        transitionDuration: 0
+    });
 
-    size_img_slaider();
+    $('#id_content').focusin(function() {
+        focusInput();
+    });
 
+    // Секции
+    var $sectionLi = $("#nav_section").find("li");
+    $sectionLi.eq(0).addClass('active_nav_ul');
+    $sectionLi.click(function(e) {
+        if ($(this).hasClass('active_nav_ul')) return;
+        $("#loadTile").removeClass("more_active").removeClass("finish_more").addClass("loading");
+        $(".active_nav_ul").removeClass('active_nav_ul');
+        $(this).addClass("active_nav_ul");
+        objSlider[0]['currentPage'] = 1;
+        objSlider[0]['currentIndexImg'] = 0;
+        ajax_data["section"] = $(this).text().trim();
+        delete ajax_data['album_id'];
+        delete ajax_data['page'];
+        ajax_url['url'] = 'slider_photo_list';
+        ListPhotos = {};
+        ajaxGallery(ajax_data, ajax_url['url'], 0, objSlider[0].currentPage);
+    });
 
-    // Размер фото 
-    function size_img_slaider() {
+    // Альбомы
+    $("#albumsContainer").on("click", ".album_previews", function(e) {
+        $(".active_selected_album").removeClass("active_selected_album");
+        $("#loadTile").removeClass("more_active").removeClass("finish_more").addClass("loading");
+        $(this).addClass("active_selected_album");
+        var long_id = $(this).attr("id").split("album_id_"),
+            urlReq = 'album_photo_list';
+        tile_info_obj['last_date'] = $(this).find("time").text();
+        tile_info_obj['name_album'] = $(this).find(".title_album_preview").text();
+        ListPhotos = {};
+        ajax_url['url'] = 'album_photo_list';
+        ajax_data['album_id'] = long_id[1];
+        objSlider[0]['currentPage'] = 1;
+        objSlider[0]['currentIndexImg'] = 0;
+        objSlider[0]["quantityFoto"] = objSlider[1]["quantityFoto"] = +$(this).attr("data-photo");
+        objSlider[0]["quantityPagination"] = objSlider[1]["quantityPagination"] = +$(this).attr("data-pagination");
+        delete ajax_data['section'];
+        delete ajax_data['page'];
+        ajaxGallery(ajax_data, ajax_url['url'], 0, 1);
+        if ($(window).width() <= 969) $("#albums_right").slideUp();
+    });
 
-        var height_container_photo = $('#flex_container_img_slaider').height();
-        var width_container_photo = $('#flex_container_img_slaider').width();
-        var relationship_w_h_container = (width_container_photo / height_container_photo);
+    // Новые фото
+    $(document).on("click", "#loadTile", function(e) {
+        $("#loadTile").removeClass("more_active").addClass("loading");
+        scrollPagination($(this))
+    });
 
-        $('#container_img_in_slaider img').on('load', function() {
+    // $(window).scroll(function() {
+    //     if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+    //         scrollPagination($("#loadTile"))
+    //     }
+    // });
 
-            $(this).css({ "width": "inherit", "height": "inherit" });
-            var width_height_img = ($(this).width() / $(this).height());
-            if (($(this).width() > width_container_photo) && ($(this).height() > height_container_photo) && (relationship_w_h_container > width_height_img)) {
-//                console.log("w>h")
-                $(this).css({ "width": height_container_photo * width_height_img, "height": height_container_photo, "margin": "0 auto" })
-                $(this).show();
-                return true;
-            } else if (($(this).width() > width_container_photo) && ($(this).height() > height_container_photo) && (relationship_w_h_container < width_height_img)) {
-//                console.log("w<h")
-                $(this).css({ "width": width_container_photo, "height": width_container_photo / width_height_img, "margin": "0 auto" })
-                $(this).show();
-                return true;
-            } else if (($(this).width() > width_container_photo) && ($(this).height() < height_container_photo)) {
-                $(this).css({ "width": width_container_photo, "height": "auto", "margin": "0 auto" });
-//                console.log("width >")
-                $(this).show();
-                return true;
-            } else if (($(this).width() < width_container_photo) && ($(this).height() > height_container_photo)) {
-                $(this).css({ "height": height_container_photo, "width": "auto", "margin": "0 auto" });
-//                console.log("height >");
-                $(this).show();
-                return true;
-            } else if (($(this).width() < width_container_photo) && ($(this).height() < height_container_photo)) {
-//                console.log("width and height <");
-                var width_img = $(this).width();
-                var height_img = $(this).height();
-                $(this).css({ "height": "auto", "width": "auto", "margin": "0 auto" });
-                $(this).show();
-                return true;
+    // Mobile section albums
+
+    $(".mobileEventAlbums").on("click", function() {
+        show_menu_mobile(970, $("#album_mobile"), $(this))
+    });
+
+    $(".mobileEvent").on("click", function() {
+        show_menu_mobile(750, $("#section_mobile"), $(this))
+    })
+
+});
+
+function show_menu_mobile(widthWindow, spanId, thisToogle) {
+    var windowWidth = $(window).width();
+    if (windowWidth >= widthWindow) return
+    thisToogle.toggleClass("showAll");
+    var $spanIcon = spanId;
+    if (thisToogle.hasClass("showAll")) {
+        $spanIcon.removeClass("glyphicon-menu-hamburger").addClass("glyphicon-remove");
+    } else {
+        $spanIcon.removeClass("glyphicon-remove").addClass("glyphicon-menu-hamburger");
+    }
+}
+
+function ajaxGallery(ajxData, ajaxUrl, method, page) { //method 0: make all, method 1: get pagination tile, method 3: get pagination slider
+    if (method == 1) {
+        $("#loadTile").removeClass("more_active").addClass("loading");
+    }
+    $.ajax({
+        url: ajaxUrl,
+        data: ajxData,
+        dataType: "json",
+        success: function(data) {
+            console.log(data)
+            var json_request_photos = data['photo_list'],
+                arr = [],
+                indexObj = 0;
+            $.each(json_request_photos, function(idx, obj) {
+                arr.push({
+                    "urlObj": obj.image,
+                    "idObj": obj.id,
+                    "likeObj": obj.positive_likes_count,
+                    "dislikeObj": obj.negative_likes_count,
+                    "pageObj": obj.data_page,
+                    "lengthComObj": obj.comments_count,
+                    "albumObj": obj.album_title,
+                    "indexObj": indexObj,
+                    "date": get_date(obj.timestamp),
+                    "title": obj.photo_title,
+                    "likeState": obj.user_like
+                });
+                indexObj++;
+            });
+            ListPhotos[page] = arr;
+            ajax_url["tile_date"] = json_request_photos[0]['updated'];
+            if (method == 0) {
+                try {
+                    var json_request_albums = data['albums'],
+                        insert_data = "",
+                        albums_count_block = $('#albums_section'),
+                        albums_container = $('#albumsContainer'),
+                        numberOfPagination = 0;
+                    $.each(json_request_albums, function(idx, obj) {
+                        var paginnationPage = Math.ceil(obj.photos_count / 9),
+                            dateNeed = get_date(obj["updated"]);
+                        numberOfPagination += obj.photos_count;
+                        insert_data += `
+                            <div class="album_previews" id="album_id_` + obj.id + `" data-pagination="` + paginnationPage + `" data-photo="` + obj.photos_count + `">
+                                <section class="album_previews_img">
+                                    <img src="` + obj.image + `" class='imgAlbumCover imgUser' alt="" />
+                                </section>
+                                <section class="infoAlbum">
+                                    <h3 class="title_album_preview">` + obj.album_title + `</h3>
+                                    <div class="quantityAlbum">
+                                        <figure>
+                                            <i class="fa fa-camera" aria-hidden="true"></i>
+                                            <figcaption>
+                                                ` + obj.photos_count + `
+                                            </figcaption>
+                                        </figure>
+                                        <figure>
+                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                            <figcaption>
+                                                ` + obj.positive_likes_count + `
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                    <time>
+                                        ` + dateNeed + `
+                                    </time>
+                                </section>
+                            </div>
+                    `
+                    });
+                    albums_count_block.html(json_request_albums.length);
+                    objSlider[0]["quantityFoto"] = objSlider[1]["quantityFoto"] = numberOfPagination;
+                    objSlider[0]["quantityPagination"] = objSlider[1]["quantityPagination"] = Math.ceil(numberOfPagination / 9);
+                    albums_container.html(insert_data);
+                    tile_info_obj['last_date'] = get_date(data['albums'][0]['updated']);
+
+                } finally {
+                    var section_albums = ajax_data['section'] || tile_info_obj['name_album'],
+                        $tileInfo = $(".tile_albums_foto").children("header");
+                    $tileInfo.children("h2").html(section_albums);
+                    $tileInfo.children("time").html(tile_info_obj['last_date']);
+                    objSlider[0].html();
+                    makeTile(false, 1);
+                    if (objSlider[1]["quantityPagination"] == 1) {
+                        $("#loadTile").addClass("finish_more");
+                    }
+                }
+            } else if (method == 1) {
+                var pageTile = +$("#loadTile").attr("data-page");
+                makeTile(true, pageTile);
             } else {
-                console.log("Пиздец")
+                objSlider[objSlider['globalSlider']].html();
             }
+        },
+        error: function(xhr, status, error) {
+            // console.log(error, status, xhr);
+        }
+    });
+}
 
-        });
+function makeTile(append, page) {
+    var foto_tile = "",
+        $content = $('#tile_img'),
+        $clickMore = $("#loadTile");
+    lengthPagination = ListPhotos[page].length;
+    for (var i = 0; i < lengthPagination; i++) {
+        var urlTile = ListPhotos[page][i].urlObj,
+            idTile = ListPhotos[page][i].idObj,
+            data_index = ListPhotos[page][i].indexObj,
+            dataPage = ListPhotos[page][i]["data_page_comments"];
+        foto_tile += `
+            <div class="photo_row item">
+                <img src="` + urlTile + `" alt="" class="imgTile"
+                data-id="` + idTile + `" data-page="` + page + `"
+                data-index="` + data_index + `"
+                data-toggle="modal" data-target="#slaider_modal">
+            </div>
+        `;
     }
 
-    function size_img_modal() {
-        var height_container_photo = $('#flex_container_img_modal').height();
-        var width_container_photo = $('#flex_container_img_modal').width();
-        var relationship_w_h_container = (width_container_photo / height_container_photo);
-
-        $('.container_photo_in_modal img').on('load', function() {
-            $(this).css({ "width": "inherit", "height": "inherit" });
-            if (($(this).width() > width_container_photo) && ($(this).height() > height_container_photo)) {
-                var width_height_img = ($(this).width() / $(this).height());
-                if (relationship_w_h_container > width_height_img) {
-                    // alert("w>h")                  
-                    $(this).css({ "width": height_container_photo * width_height_img, "height": height_container_photo })
-                } else if (relationship_w_h_container < width_height_img) {
-                    // alert("w<h")
-
-                    $(this).css({ "width": width_container_photo, "height": width_container_photo / width_height_img })
-                };
-                // alert("width and height >")
-            } else if (($(this).width() > width_container_photo) && ($(this).height() < height_container_photo)) {
-                $(this).css({ "width": width_container_photo, "height": "auto" });
-                // alert("width >")
-            } else if (($(this).width() < width_container_photo) && ($(this).height() > height_container_photo)) {
-                $(this).css({ "height": height_container_photo, "width": "auto", "margin": "0 auto" });
-                // alert("height >");
-            } else if (($(this).width() < width_container_photo) && ($(this).height() < height_container_photo)) {
-                // alert("width and height <");
-                var width_img = $(this).width();
-                var height_img = $(this).height();
-                $(this).css({ "height": "auto", "width": "auto" });
-            } else {
-                // alert("Пиздец")
-            }
-        });
+    if (append) {
+        $content.append(foto_tile);
+    } else {
+        $content.html(foto_tile);
+        data_page_tile = 1;
+        $clickMore.attr("data-page", 1)
     }
-
-
-    // Преключения между фотками в слайдере
-
-    $('.area_for_right_arrow_slaider').on("click", function() {
-        var now_src_slaider = $('#container_img_in_slaider img').attr('src');
-        var this_src_in_list = $(".list_src_slaider li").find().text(now_src_slaider);
-        var length_li_slaider = $('.list_src_slaider li').length;
-
-        $('.list_src_slaider li').each(function(i) {
-
-
-            if ($(this).text() == now_src_slaider) {
-                // Number foto
-                var index_photo = ($(this).index());
-                $("#number_photo").html(index_photo);
-                console.log(index_photo)
-                if ($(this).index() == (length_li_slaider - 1)) {
-                    var first_child_list_src = $(".list_src_slaider li:first-child").text();
-                    $('#container_img_in_slaider img').attr("src", first_child_list_src);
-                } else {
-                    var next_src_slaider = $(this).next().text();
-                    $('#container_img_in_slaider img').attr("src", next_src_slaider);
-                };
+    return {
+        1: $("#tile_img").imagesLoaded(function() {
+            $("#tile_img").masonry('reloadItems');
+            $("#tile_img").masonry('layout');
+        }).done(function(instance) {
+            var newlength = instance['progressedCount'],
+                lengthItem = $("#tile_img").children(".item").length;
+            for (var i = lengthItem - newlength; i < lengthItem; i++) {
+                $("#tile_img").children(".item").eq(i).addClass("donaMassonry");
             };
-        });
-        size_img_slaider();
-        return false;
-    });
+            if (page == objSlider[1]["quantityPagination"]) $("#progress").children("button").addClass("finish_more");
+            $("#progress").children("button").removeClass("loading").addClass("more_active");
+        }),
+        2: $clickMore.removeClass("moreLoading")
+    }
+}
 
-    // end height-width photo
+function scrollPagination(eventObj) {
+    var nextPage = +eventObj.attr("data-page");
+    eventObj.addClass("moreLoading");
+    nextPage++;
+    ajax_data['page'] = nextPage;
+    eventObj.attr("data-page", nextPage);
+    if (!ListPhotos.hasOwnProperty(nextPage)) return ajaxGallery(ajax_data, ajax_url['url'], 1, nextPage);
+    return makeTile(true, nextPage);
+}
+
+function sliderEvent(counter, reset, container) {
+    var containerSlider = objSlider[container],
+        imgIndex = containerSlider['currentIndexImg'],
+        pageCounter = containerSlider['currentPage'];
+    imgIndex += counter;
+    if (imgIndex + (pageCounter - 1) * 9 == containerSlider["quantityFoto"]) {
+        pageCounter = 1;
+        imgIndex = 0;
+        ajax_data['page'] = pageCounter;
+    } else if (imgIndex == -1 && pageCounter == 1) {
+        pageCounter = containerSlider["quantityPagination"];
+        imgIndex = (containerSlider["quantityFoto"] % 9) - 1;
+        if (!ListPhotos.hasOwnProperty(pageCounter)) {
+            return {
+                1: containerSlider['currentIndexImg'] = imgIndex,
+                2: ajax_data['page'] = pageCounter,
+                3: containerSlider['currentPage'] = pageCounter,
+                4: ajaxGallery(ajax_data, ajax_url['url'], 2, pageCounter)
+            }
+        };
+    } else if (imgIndex === reset) {
+        pageCounter += counter;
+        imgIndex = 8 - (Math.abs(reset) - 1);
+        if (!ListPhotos.hasOwnProperty(pageCounter)) {
+            return {
+                1: containerSlider['currentIndexImg'] = imgIndex,
+                2: ajax_data['page'] = pageCounter,
+                3: containerSlider['currentPage'] = pageCounter,
+                4: ajaxGallery(ajax_data, ajax_url['url'], 2, pageCounter)
+            }
+        };
+    }
+    return {
+        1: containerSlider['currentIndexImg'] = imgIndex % 9,
+        2: containerSlider['currentPage'] = pageCounter,
+        3: objSlider[container].html()
+    }
+}
 
 
-    $('.area_for_left_arrow_slaider').on("click", function() {
-        var now_src_slaider = $('#container_img_in_slaider img').attr('src');
-        var this_src_in_list = $(".list_src_slaider li").find().text(now_src_slaider);
+function htmlObj() {
+    var pageThis = this.currentPage,
+        indexThis = this.currentIndexImg,
+        objectImg = ListPhotos[pageThis][indexThis],
+        urlImg = objectImg["urlObj"],
+        id_img = objectImg["idObj"],
+        like = objectImg["likeObj"],
+        dislike = objectImg["dislikeObj"],
+        length_comment = objectImg["lengthComObj"],
+        data_page_comments = Math.ceil(objectImg["lengthComObj"] / 10),
+        album_title = objectImg["albumObj"],
+        data_reset = objectImg["resetObj"],
+        quantityImg = objSlider[1]["quantityFoto"],
+        dateImg = objectImg["date"],
+        titleImg = objectImg["title"];
+    indexImg = (pageThis - 1) * 9 + indexThis + 1;
+    objSlider[1]["idImg"] = id_img;
+    objSlider[1]["data_page_comments"] = data_page_comments;
+    var $loderComment = $("#load_coments");
+    $loderComment.removeClass('moreLoading').removeClass("endMore");
+    if (length_comment < 11) {
+        $loderComment.addClass('noMore')
+    } else {
+        $loderComment.removeClass('noMore')
+    }
+    var $sliderCurrent = this.sliderType;
+    setActiveClassLike(objectImg["likeState"]);
+    return {
+        1: this.sliderType.find(".img_slider").children("img").attr({
+            "src": urlImg,
+            "data-page": data_page_comments,
+            "data-id": id_img,
+            "data-reset": data_reset,
+            "alt": titleImg
+        }).parent().addClass("notDone").imagesLoaded(function() {
+            $sliderCurrent.find(".img_slider").removeClass("notDone");
+            // .find(".img_slider").removeClass("notDone");
+        }),
+        2: this.sliderType.find(".block_like").attr("data-id", id_img).children(".votes").html(like),
+        3: this.sliderType.find(".block_dislike").attr("data-id", id_img).children(".votes").html(dislike),
+        4: this.sliderType.find(".index_photo").children("li").eq(0).html(indexImg),
+        5: this.sliderType.find(".index_photo").children("li").eq(2).html(quantityImg),
+        6: this.sliderType.find(".commes_photo_slider").html(length_comment),
+        7: this.sliderType.find(".photo_info").children("h3").html(album_title),
+        8: this.sliderType.find("aside").find(".time_add_photo").html(dateImg),
+        9: this.sliderType.find("aside").find(".discription_photo").html(titleImg),
+        10: makeComments(id_img, 1, false)
+    }
+}
 
-        $('.list_src_slaider li').each(function(i) {
+function changeObjInfoLikes( index, eventElement ) {
+  var currentList = ListPhotos[objSlider[index]['currentPage']][objSlider[index]['currentIndexImg']];
+  var $parentElem = eventElement.parent(".mark_info");
+  var newState,
+      newLikes = currentList["likeObj"],
+      newDislikes = currentList["dislikeObj"];
+  if ( eventElement.hasClass("block_like") && $parentElem.hasClass("likeAcive")) {
+      newState = null
+      newLikes = currentList["likeObj"] - 1;
+  } else if ( eventElement.hasClass("block_like") && $parentElem.hasClass("nothingAcive")) {
+    newState = true;
+    newLikes = currentList["likeObj"] + 1;
+  } else if ( eventElement.hasClass("block_like") && $parentElem.hasClass("disLikeAcive") ) {
+    newState = true;
+    newLikes = currentList["likeObj"] + 1;
+    newDislikes = currentList["dislikeObj"] - 1;
+  } else if ( eventElement.hasClass("block_dislike") && $parentElem.hasClass("likeAcive")  ) {
+    newState = false;
+    newLikes = currentList["likeObj"] - 1;
+    newDislikes = currentList["dislikeObj"] + 1;
+  } else if (eventElement.hasClass("block_dislike") && $parentElem.hasClass("nothingAcive")) {
+    newState = false;
+    newDislikes = currentList["dislikeObj"] + 1;
+  } else if ( eventElement.hasClass("block_dislike") && $parentElem.hasClass("disLikeAcive")) {
+    newState = null;
+    newDislikes = currentList["dislikeObj"] - 1;
+  }
+  setActiveClassLike( newState );
+  currentList["likeState"] = newState;
+  currentList["likeObj"] = newLikes;
+  currentList["dislikeObj"] = newDislikes;
+  if (objSlider[0]['currentPage'] == objSlider[1]['currentPage']
+      && objSlider[0]['currentIndexImg'] == objSlider[1]['currentIndexImg']) {
+      $("#slider_slider").find(".block_like").children(".votes").html(newLikes);
+      $("#slider_slider").find(".block_dislike").children(".votes").html(newDislikes);
+  }
+};
 
-            if ($(this).text() == now_src_slaider) {
-                if ($(this).index() == 0) {
-                    var last_child_slaider = $(".list_src_slaider li:last-child").text();
-                    $('#container_img_in_slaider img').attr("src", last_child_slaider);
-                } else {
-                    var next_src_slaider = $(this).prev().text();
-                    $('#container_img_in_slaider img').attr("src", next_src_slaider);
-                };
+function setActiveClassLike( state ) {
+  var $likesContainer = $(".mark_info");
+  if (state === false) {
+    $likesContainer.removeClass("likeAcive");
+    $likesContainer.removeClass("nothingAcive");
+    $likesContainer.addClass("disLikeAcive");
+  } else if ( state === true ) {
+    $likesContainer.removeClass("disLikeAcive");
+    $likesContainer.removeClass("nothingAcive");
+    $likesContainer.addClass("likeAcive");
+  } else {
+    $likesContainer.removeClass("disLikeAcive");
+    $likesContainer.removeClass("likeAcive");
+    $likesContainer.addClass("nothingAcive");
+  }
+}
+
+function makeComments(id_img, page, append) {
+    var $moreCom = $("#load_coments");
+    $moreCom.attr("data-page", 1);
+    $.ajax({
+        url: '/gallery/photo/comments/',
+        data: { "id_img": id_img, "p": page },
+        dataType: "json",
+        cache: false,
+        success: function(data) {
+            var commentsHtml = "";
+            var $blComments = $("#comment_slider_slider").find(".comments_modal");
+            for (var i = data.length - 1; i >= 0; i--) {
+                dateComment = get_date(data[i]["timestamp"]);
+                commentsHtml += `
+                    <div class="blockquote commentBody">
+                        <div class="coments_author containerImgUser">
+                            <img src="` + data[i]["user"]["avatar"] + `" alt="" class="imgUser">
+                        </div>
+                        <div class="coment_author_time">
+                            <h5>
+                                ` + data[i]["user"]["first_name"] + ` ` + data[i]["user"]["last_name"] +
+                    `
+                            </h5>
+                            <time>` + dateComment + `</time>
+                            <p>` + data[i]["content"] + `</p>
+                        </div>
+
+                    </div>
+                `
             };
-        });
-        size_img_slaider();
-
-        return false;
-    });
-
-    // Принцип формирования списков с src: -"li first-child" - last foto.
-    // Конец кода для нового слайдера
-
-
-    // Слайдер в модальном окне
-
-    var body_width = $('#slaider_modal .modal-dialog').width();
-
-
-    // При отрытии модального окна
-    $('.photo_row img').on("click", function() {
-
-
-        var link_photo = $(this).attr('src');
-        $('.container_photo_in_modal img').attr("src", link_photo);
-        // var open_poto = $("#list_src_foto_modal").find("li").text(link_photo);
-        var index_photo = $(open_poto).index();
-        $("#number_photo_modal").html(index_photo);
-        console.log(height_container_photo);
-        console.log(width_container_photo);
-        size_img_modal();
-        return false;
-
-    });
-    // Преключения между фотками в модальном окне
-
-    function modal_right() {
-
-        var this_href = $('.container_photo_in_modal img').attr('src');
-        var this_src = $("#list_src_foto_modal li").find().text(this_href);
-        var length_li = $('#list_src_foto_modal li').length;
-
-        $('#list_src_foto_modal li').each(function(i) {
-
-            if ($(this).text() == this_href) {
-
-                // Number foto 
-                var index_photo = $(this).index();
-                $("#number_photo_modal").html(index_photo);
-
-                if ($(this).index() == (length_li - 1)) {
-                    var first_child = $("#list_src_foto_modal li:first-child").text();
-                    $('.container_photo_in_modal img').attr("src", first_child);
-                } else {
-                    var next_src = $(this).next().text();
-                    $('.container_photo_in_modal img').attr("src", next_src);
-                };
-
+            if (append) {
+                $blComments.prepend(commentsHtml);
+            } else {
+                $blComments.html(commentsHtml);
             };
-        });
+            $moreCom.removeClass("finish_more");
+            if ($moreCom.attr("data-page") >= Math.ceil(ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'] / 10)) {
+                $moreCom.addClass("finish_more");
+            }
+            $moreCom.removeClass("loading").addClass("more_active");
+        },
+        error: function(xhr, status, error) {
+            // console.log(error, status, xhr);
+        }
+    });
+};
+
+function get_date(date) {
+    var dateToString = "" + date,
+        dateDate = new Date(dateToString),
+        today = new Date();
+    timeLong = (today - dateDate) / (60000 * 24);
+    minuteAgo = Math.round((today - dateDate) / 60000);
+    if (timeLong > 1 && timeLong < 24) {
+        makeDate = "Сегодня в " + ("0" + dateDate.getHours()).slice(-2) + ":" + ("0" + dateDate.getMonth()).slice(-2);
+    } else if (timeLong < 1) {
+        makeDate = minuteAgo + " мин. назад"
+    } else {
+        makeDate = ("0" + dateDate.getDate()).slice(-2) + " " + arrMonth[dateDate.getMonth()] + " " + dateDate.getFullYear();
+    }
+    return makeDate;
+}
+
+function focusInput() {
+    var div = $('#comment_slider_slider');
+    div.scrollTop(div.prop('scrollHeight'));
+}
+
+$(document).on('click', '#load_coments', function() {
+    var pageCommentCounter = $(this).attr("data-page");
+    if (pageCommentCounter == objSlider[1]["data_page_comments"]) {
+        return {
+            1: $(this).attr("data-page", 1),
+            2: $(this).addClass("endMore")
+        }
     };
+    $(this).removeClass("finish_more").removeClass("more_active").addClass("loading");
+    var albumId = objSlider[1]["idImg"];
+    pageCommentCounter++;
+    makeComments(albumId, pageCommentCounter, true);
+    $(this).attr("data-page", pageCommentCounter);
+})
 
-    function modal_left() {
-        var this_href = $('.container_photo_in_modal img').attr('src');
-        var this_src = $("#list_src_foto_modal li").find().text(this_href);
+$(document).on("click", ".photo_row ", function() {
+    var $thisRowImg = $(this).find("img"),
+        id_lbums = +$thisRowImg.attr("data-id"),
+        data_page = +$thisRowImg.attr("data-page"),
+        data_index = +$thisRowImg.attr("data-index");
+    objSlider[1]["currentIndexImg"] = data_index;
+    objSlider[1]["currentPage"] = data_page;
+    objSlider[1]["idImg"] = id_lbums;
+    objSlider[1].html();
+});
 
-        $('#list_src_foto_modal li').each(function(i) {
+$(document).on("click", "#slider_slider .open_modal ", function() {
+    objSlider[1]["currentIndexImg"] = objSlider[0]["currentIndexImg"];
+    objSlider[1]["currentPage"] = objSlider[0]["currentPage"];
+    objSlider[1]["idImg"] = objSlider[0]["idImg"];
+    objSlider[1].html();
+});
 
-            if ($(this).text() == this_href) {
-                if ($(this).index() == 0) {
-                    var last_child = $("#list_src_foto_modal li:last-child").text();
-                    $('.container_photo_in_modal img').attr("src", last_child);
-                } else {
-                    var next_src = $(this).prev().text();
-                    $('.container_photo_in_modal img').attr("src", next_src);
-                };
-            };
-        });
+$(document).on('click', '.mark_btn', function() {
+    var _this = $(this);
+    var photo_id = $(this).attr("data-id"),
+        type = $(this).attr("data-like"),
+        $positiveLikesBlock = $(this).parent().find(".block_like").find(".votes"),
+        positiveCount = parseInt($positiveLikesBlock.html()),
+        $negativeLikesBlock = $(this).parent().find(".block_dislike").find(".votes"),
+        negativeCount = parseInt($negativeLikesBlock.html());
+    _this.parent(".mark_info").addClass("stopEvent");
+    if ( $("#slaider_modal").hasClass("in")) {
+      indexCurrentSlider = 1;
+    } else {
+      indexCurrentSlider = 0;
     }
-
-    $('html').keydown(function(eventObject) {
-        if ($('#slaider_modal').hasClass('in') && event.keyCode == 37) {
-            modal_left();
-            size_img_modal();
-            return false;
-        } else if ($('#slaider_modal').hasClass('in') && event.keyCode == 39) {
-            modal_right();
-            size_img_modal();
-            return false;
-        }
-    });
-
-    $('.area_for_right_arrow').on("click", function() {
-        modal_right();
-        size_img_modal();
-        return false;
-    });
-
-    $('.area_for_left_arrow').on("click", function() {
-        modal_left();
-        size_img_modal();
-        return false;
-    });
-
-    // Лайк-Дислйк
-    $(".modal_photo_like>div").on("click", function() {
-        if ($(this).hasClass("active_like")) {
-            $(".modal_photo_like>div").removeClass('active_like');
-            $(this).children(".votes").removeClass("active_votes");
-        } else {
-            $(".modal_photo_like>div").removeClass('active_like');
-            $(".modal_photo_like>div").children(".votes").removeClass("active_votes");
-            $(this).addClass('active_like');
-            $(this).children(".votes").addClass("active_votes");
-        }
-    });
-
-    $(".slaider_photo_like>div").on("click", function() {
-        if ($(this).hasClass("active_like")) {
-            $(".slaider_photo_like>div").removeClass('active_like');
-            $(this).children(".votes").removeClass("active_votes");
-        } else {
-            $(".slaider_photo_like>div").removeClass('active_like');
-            $(".slaider_photo_like>div").children(".votes").removeClass("active_votes");
-            $(this).addClass('active_like');
-            $(this).children(".votes").addClass("active_votes");
-        }
-    });
-
-    // Комментарии в слайдере 
-    $(".footer_slaider .button_show_comments").on("click", function() {
-        $("#comments_photo_slider").slideToggle();
-
-        if ($(".head_comment_slider").hasClass("head_comment_slider_open")) {
-            $(".head_comment_slider").removeClass("head_comment_slider_open");
-        } else {
-            $(".head_comment_slider").addClass("head_comment_slider_open");
-        }
-
-    });
-
-    $(".head_comment_slider").on("click", function() {
-        $("#comments_photo_slider").slideToggle();
-        $(this).delay(1000).removeClass("head_comment_slider_open");
-    });
-
-    // Фиксация блока меньшей высоты
-
-    // Конец фиксации
-
-});
-
-
-// выбор альбома
-$(document).on("click", ".list_albums .album_previews", function(e) {
-    var long_id = $(this).attr("id");
-//    var name_album = $(this).find(".title_album_preview").text();
-    values=long_id.split("album_id_");
-    short_id = values[1];
-    $(".list_albums .album_previews").removeClass('active_selected_album');
-    $(this).addClass('active_selected_album');
-    var name_album = $(this).children(".discription_previewws_album").children(".title_album_preview").text();
-    $('.album_slaider').html(name_album);
-    load_album_photos(short_id, 1);  // load first part of album photos
-    return false;
-});
-
-$(window).load(function() {
-
-        var height = $(".colum").height();
-        var biggest_col;
-        $(".colum").each(function(i) {
-
-            if ($(this).height() < height) {
-                height = $(this).height()
-            } else {
-                biggest_col = $(this);
-            };
-
-        });
-
-        var min_height_block;
-
-        $(".colum").each(function(i) {
-
-            if ($(this).height() == height) {
-                min_height_block = $(this);
-            };
-
-        });
-
-        var width_min_height_block = $(min_height_block).width();
-        var height_min_height_block = $(min_height_block).height();
-        $(min_height_block).css({ "width": width_min_height_block, "height": height_min_height_block });
-        $(min_height_block).children().css({ "width": width_min_height_block });
-
-        var left_col = $(min_height_block).offset().left;
-
-        if (min_height_block.height() + 70 < document.documentElement.clientHeight) {
-            $(min_height_block).addClass("fixed_col_top");
-            $(min_height_block).css("bottom", (document.documentElement.clientHeight - min_height_block.height() - 70));
-            $(min_height_block).css("left", left_col);
-
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > ((document.documentElement.clientHeight - (min_height_block.height() + 50)) + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                    var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                    $('.fixed_col_top').css('top', 'inherit');
-                    $(min_height_block).css("bottom", bottom_scroll);
-
-
-                } else {
-                    $('.fixed_col_top').css('top', '70px');
-                    $('.fixed_col_top').css('bottom', 'inherit');
-                };
-            })
-
-        } else {
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > (45 + height - document.documentElement.clientHeight + $(".navbar").height()) && $(this).scrollTop() <= (50 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                    $(min_height_block).addClass("fixed_col");
-                    $(min_height_block).css("left", left_col);
-                    $(min_height_block).css("bottom", "25px")
-
-                } else if ($(this).scrollTop() > (45 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height())) {
-                    var bottom_scroll = ($(this).scrollTop() - (20 + biggest_col.height() - document.documentElement.clientHeight + $(".navbar").height()));
-                    $(min_height_block).css("bottom", bottom_scroll);
-                } else {
-
-
-                    $(min_height_block).removeClass("fixed_col");
-                    $(min_height_block).css({ "left": "0px", "bottom": "0px" });
+    changeObjInfoLikes( indexCurrentSlider, _this );
+    $.ajax({
+        url: '/likes/photo/modify/',
+        data: {
+            photo_id: photo_id,
+            type: type,
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        method: "POST",
+        success: function(data, textStatus, xhr) {
+            $.each(data["add_result"], function(idx, obj) {
+                switch (obj) {
+                    case 0:
+                        $positiveLikesBlock.html(positiveCount += 1);
+                        break;
+                    case 1:
+                        $negativeLikesBlock.html(negativeCount += 1);
+                        break;
+                    case 2:
+                        $positiveLikesBlock.html(positiveCount -= 1);
+                        break;
+                    case 3:
+                        $negativeLikesBlock.html(negativeCount -= 1);
+                        break;
                 }
             });
+            _this.parent(".mark_info").removeClass("stopEvent");
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status === 409) {
+                alert("Error in comment adding!")
+            }
         }
-
-        // Margin-right for foto in column
-        // $(".photo_row:not(:nth-child(3n+3))").css("padding-right", "10px");
-
-
     });
+});
 
-function load_section_info(section_name, album_name){
-    var ajax_url = 'slider_photo_list';
-    var ajax_data = { "section": section_name }
-    var state = ""
+$(document).on('click', '.btnFhouse', function(e) {
+    e.preventDefault();
+    var $inputText = $("#id_content"),
+        commentText = $inputText.val();
+    photo_id = objSlider[1]["idImg"];
     $.ajax({
-        url: ajax_url,
-        data: ajax_data,
-        dataType: "json",
-        success: function(data) {
-            var content = $('.list_src_slaider');
-            var insert_data = "";
-//          console.log(data);
-//          json_data = JSON.parse(data);
-            var json_request_photos = data['photo_list'];
-            $.each(json_request_photos, function(idx, obj) {
-//              insert_data += "<li>" + obj.image + " </li>";
-                console.log('obj: ' + obj.image);
-                obj_comments = obj.comments;
-                console.log(obj_comments.length);
-                insert_data += "<li>" + "<span class=\"photo_url\">" + obj.image + "</span>"
-                + " <span class=\"count_of_comments\">" + obj_comments.length + "</span>"
-                + " <span class=\"photo_album_title\">" + obj.album_title + "</span>"
-                + " <span class=\"photo_positive_likes\">" + obj.positive_likes.length + "</span>"
-                + " <span class=\"photo_negative_likes\">" + obj.negative_likes.length  + "</span>"
-                + "</li>";
-                try {
-//                    console.log("comments: " + JSON.parse(obj.comments)[0]["fields"]["content"]);
-                    }
-                catch (err){
-                    }
-                });
-            content.html(insert_data);
-            make_slider();
+        url: '/gallery/photo/comment/',
+        data: {
+            id: photo_id,
+            content: commentText,
+            csrfmiddlewaretoken: getCookie('csrftoken')
+        },
+        method: "POST",
+        success: function(data, textStatus, xhr) {
+            dateComment = get_date(new Date());
+            var commentsHtml = `
+                    <div class="blockquote commentBody">
+                        <div class="coments_author containerImgUser">
+                            <img src="` + avatar_user + `" alt="" class="imgUser">
+                        </div>
+                        <div class="coment_author_time">
+                            <h5>
+                                ` + first_name + ` ` + last_name + `
+                            </h5>
+                            <time>` + dateComment + `</time>
+                            <p>` + commentText + `</p>
+                        </div>
 
-            var json_request_albums = data['albums'];
-            var albums_count_block = $('.quantity_album');
-            albums_count_block.html(json_request_albums.length + " альбомов");
-            var albums_container = $('.list_albums');
-            insert_data = ""
-            $.each(json_request_albums, function(idx, obj) {
-                insert_data += "<div class=\"album_previews\" id=\"album_id_" + obj.id + "\">" +
-                "<div class=\"album_previews_img\">" +
-                "<img src=\"" + obj.image + "\" alt=\"\"> </div>" +
-                " <div class=\"discription_previewws_album\">" +
-                " <div class=\"title_album_preview\"> " + obj.album_title + " </div>" +
-                " <div class=\"info_preview_album\"> <span><i class=\"fa fa-camera\" aria-hidden=\"true\"></i>" +
-                " 48 &nbsp;<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i> 456</span>" +
-                " <span class=\"date_album_preview\">28 october 2010</span>" +
-                " </div> </div> </div>"
-//                insert_data += "<div class=\"album_previews\"><div class=\"album_previews_img\">" +
-//                "<img src=\"https://photo.championat.com/18/18040/full/762888-artjom-rebrov-denis-davydov-i-denis-glushakov.jpg\""  +
-//                "alt=\"\"></div><div class=\"discription_previewws_album\"><div class=\"title_album_preview\">Лучшие стадины Украины</div>" +
-//                                   +  "<div class=\"info_preview_album\"><span><i class=\"fa fa-camera\" aria-hidden=\"true\">" +
-//                                   "</i> 48 &nbsp;<i class=\"fa fa-thumbs-o-up\" aria-hidden=\"true\"></i> 456</span>" +
-//                                   "<span class=\"date_album_preview\">28 october 2010</span></div></div></div>"
-//                    insert_data += "<li>" + MEDIA_URL + obj.fields.image + " </li>"
-            });
-            albums_container.html(insert_data);
-            $('.album_slaider').html(section_name);
+                    </div>
+                `;
+            $("#comment_slider_slider").find(".comments_modal").append(commentsHtml);
+            focusInput();
+            $inputText.val("");
+            ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj']++;
+            var newLengthComment = ListPhotos[objSlider[1]['currentPage']][objSlider[1]['currentIndexImg']]['lengthComObj'];
+            // Updating comments
+            $("#slider_modal").find(".commes_photo_slider").html(newLengthComment);
+            if (objSlider[0]['currentPage'] == objSlider[1]['currentPage']
+                && objSlider[0]['currentIndexImg'] == objSlider[1]['currentIndexImg']) {
+                $("#slider_slider").find(".commes_photo_slider").html(newLengthComment);
+            }
         },
         error: function(xhr, status, error) {
-            console.log(error, status, xhr);
+            if (xhr.status === 409) {
+                alert("Error in comment adding!")
+            }
         }
-        });
-}
+    });
+});
 
-function load_album_photos(album_id, page){
-    var ajax_url = 'album_photo_list';
-    var ajax_data = { "album_id": album_id, "page": page }
-    var state = ""
-    $.ajax({
-        url: ajax_url,
-        data: ajax_data,
-        dataType: "json",
-        success: function(data) {
-            var content = $('.list_src_slaider');
-            var insert_data = "";
-//          console.log(data);
-//          json_data = JSON.parse(data);
-            var json_request_photos = data['photo_list'];
-            $.each(json_request_photos, function(idx, obj) {
-//              insert_data += "<li>" + obj.image + " </li>";
-                console.log('obj: ' + obj.image);
-                obj_comments = obj.comments;
-                console.log(obj_comments.length);
-                insert_data += "<li>" + "<span class=\"photo_url\">" + obj.image + "</span>"
-                + " <span class=\"count_of_comments\">" + obj_comments.length + "</span>"
-                + " <span class=\"photo_album_title\">" + obj.album_title + "</span>"
-                + " <span class=\"photo_positive_likes\">" + obj.positive_likes.length + "</span>"
-                + " <span class=\"photo_negative_likes\">" + obj.negative_likes.length  + "</span>"
-                + "</li>";
-                try {
-//                    console.log("comments: " + JSON.parse(obj.comments)[0]["fields"]["content"]);
-                    }
-                catch (err){
-                    }
-                });
-            content.html(insert_data);
-            make_slider();
-        },
-        error: function(xhr, status, error) {
-            console.log(error, status, xhr);
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
         }
-        });
-}
+    }
+};
 
-function make_slider(){
-    // Номер фотографии
-    var quantity_foto_albums = ($(".list_src_slaider").length);
-    $("#quantity_photo_in_album").html(quantity_foto_albums);
-
-    // Номер фото модальное окно
-    var quantity_foto_modal = ($("#list_src_foto_modal li").length);
-    $("#quantity_photo_in_album_modal").html(quantity_foto_modal);
-
-    // Новый слайдер
-
-    // При переходе в галерею подгружается список ссылок с первой секции и src последней фото добавляется в img
-//    alert($('.list_src_slaider li:first-child span.count_of_comments').text());
-    var photo_image_url = $('.list_src_slaider li:first-child span.photo_url').text();
-    var count_of_comments = $('.list_src_slaider li:first-child span.count_of_comments').text();
-    var count_of_pos_likes = $('.list_src_slaider li:first-child span.photo_positive_likes').text();
-    var count_of_neg_likes = $('.list_src_slaider li:first-child span.photo_negative_likes').text();
-    var photo_album_title = $('.list_src_slaider li:first-child span.photo_album_title').text();
-
-//    var src_first_li_section = $('.list_src_slaider li:first-child span.photo_url').text()
-
-    $('#container_img_in_slaider img').attr("src", photo_image_url);
-    $('.block_like div.votes').text(count_of_pos_likes);
-    $('.block_dislike div.votes').text(count_of_neg_likes);
-    $('.button_show_comments').text("Комметарии " + count_of_comments);
-    $('.album_slaider').text(photo_album_title);
-
-
-}
+function isEmpty(obj) {
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop))
+            return false;
+    }
+    return true;
+};
