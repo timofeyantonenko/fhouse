@@ -86,16 +86,7 @@
                             <div class="textarea_write_teg">
                                 <textarea name="" id="seachTags" placeholder="Поиск тегов"></textarea>
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                <ul class="list_tegs">
-                                    <!-- Сортированы по количеству постов с этим тегом -->
-                                    <li class="itemTag">
-                                        <p>Динамо</p><span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
-                                    <li class="itemTag">
-                                        <p>Шахтер</p> <span>(21)</span>
-                                        <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                    </li>
+                                <ul id="tagsList" class="list_tegs">
                                 </ul>
                             </div>
                             <div class="addNewTag">
@@ -106,18 +97,12 @@
                                 </button>
                             </div>
                             <div class="tegs_area">
-                                <div class="oneTeg">
+                                <!-- <div class="oneTeg">
                                     <div class="nameTeg">Динамо</div>
                                     <div class="removeTeg">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </div>
-                                </div>
-                                <div class="oneTeg">
-                                    <div class="nameTeg">Динамо</div>
-                                    <div class="removeTeg">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <footer>
@@ -220,4 +205,3 @@
     <script type="text/javascript" src="{% static 'js/admin_page.js'  %}"></script>
     <script type="text/javascript" src="{% static 'js/edit_news.js'  %}"></script>
 {% endblock content %}
-

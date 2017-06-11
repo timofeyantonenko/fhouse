@@ -312,7 +312,7 @@ hr {
     margin: 10px 0px;
 }
 
-.oneArticle:first-child .dataCommentsLikes {
+.dataCommentsLikes {
     margin-bottom: 10px;
 }
 
@@ -1571,6 +1571,7 @@ textarea {
 
 .mark_info {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .mark_info > div {
@@ -1635,6 +1636,17 @@ textarea {
 
 .footerNews:not(.mark_btn) {
   cursor: default;
+}
+
+/*Comments post*/
+
+.commentContainer {
+  display: flex;
+  align-items: center;
+}
+
+.commentContainer > span {
+  margin: 0 2.5px;
 }
 
 /*Comments post detail*/

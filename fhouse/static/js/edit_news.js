@@ -1,43 +1,18 @@
 $(document).ready(function() {
 
-    // imageCropper.init();
-    // imageCropper.init();
 });
 
 // Variebles
 var imageCropper;
 var imgNewSrc;
 
-// More text 
+// More text
 $(".more_read").on("click", function() {
     $(this).hide();
     $(this).parents(".one_suggestion_news").find(".text_suggesting_news").css({ "-webkit-line-clamp": "1000000", "max-height": "10000px" });
 });
 
-// Chose news for editing
-// $(".editNewsBtn").on("click", function() {
-//     $("body,html").animate({
-//         scrollTop: 0
-//     }, 200);
-//     var src_news = $(this).parents(".one_suggestion_news").find(".imgConteinerSuggestion").children("img").attr("src")
-//     var text_news = $(this).parents(".one_suggestion_news").find(".text_suggesting_news").text();
-
-//     imgNewSrc = src_news;
-//     canvasImg();
-
-//     if ($(this).parents(".one_suggestion_news").hasClass("article")) {
-//         $(".tegs").hide();
-//     } else {
-//         $(".tegs").show();
-//     }
-//     $("#text-suggesting-news").val(text_news)
-//     $(".tegs_area").empty();
-//     $("#seachTags").val("");
-//     $(".addNewTag").find("textarea").val("");
-//     $(".list_tegs").slideUp('fast');
-// });
-
-// Delete news 
+// Delete news
 $(".deleteNewsBtn").on("click", function() {
     $(this).parents(".one_suggestion_news").addClass("forDelete");
     $(this).parents(".one_suggestion_news").clone().appendTo('#delteNews .modal-body');
@@ -62,23 +37,47 @@ $('#delteNews').on('hidden.bs.modal', function() {
 
 // Search tegs
 
-$('#seachTags').on("keyup", function() {
-    var typeTags = $(this).val();
-    if ($.trim(typeTags).length == 0) {
-        $(".list_tegs").slideUp('fast');
-    } else {
-        $(".list_tegs").slideDown('fast');
-    }
-    var findText = typeTags.toLowerCase();
-    for (var i = 0; i < $(".list_tegs").find("li").length; i++) {
-        if ($(".list_tegs").find(".itemTag").eq(i).find("p").text().toLowerCase().indexOf(findText) != -1) {
-            $(".list_tegs").find(".itemTag").eq(i).show();
-        } else {
-            $(".list_tegs").find(".itemTag").eq(i).hide();
-        }
-    }
+$("#seachTags").on("keyup", function() {
+  var _this = $(this);
+      $tagsContainer = $("#tagsList"),
+      title = $.trim(_this.val().toLowerCase());
+  if ( title.length < 1 ) {
+    $tagsContainer.html("").slideUp();
+    return false
+  };
+  $tagsContainer.slideDown('fast');
+  setTimeout( function() {
+    $.ajax({
+      url: "/posts/search/tags/",
+      data: {
+        q: title,
+      },
+      dataType: "json",
+      success: function(data) {
+        if ( data.length < 1 ) {
+          $tagsContainer.html('<div class="errorSearch">Нет тегов с таким именем</div>');
+          return false
+        };
+        if ( $.trim(_this.val().toLowerCase()) < 1 ) {
+          $tagsContainer.html('').slideUp('fast');
+        };
+        var items = "";
+        data.forEach( function(obj) {
+          items += `
+          <li class="itemTag" data-id="` + obj.id + `">
+              <p>` + obj.name  + `</p><span>(` + obj.posts_count + `)</span>
+              <button class="btn btn-primary add_tags" role="button">Добавить <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+          </li>
+          `
+        });
+        $tagsContainer.html(items);
+      },
+      error: function(xhr, status, error) {
+           console.log(error, status, xhr);
+      }
+    });
+  }, 1000);
 });
-
 
 // Add tags
 $(".addNewTag").find(".btn").on("click", function() {
@@ -92,7 +91,15 @@ $(".addNewTag").find(".btn").on("click", function() {
         type: "POST",
         dataType: "json",
         success: function(data) {
-            var htmlTag = '<div class="oneTeg"><div class="nameTeg">' + newTagName + '</div><div class="removeTeg"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div></div>';
+            var tagId = "21321";
+            var htmlTag = `
+              <div class="oneTeg" data-id="` + tagId + `">
+                <div class="nameTeg">` + newTagName + `</div>
+                <div class="removeTeg">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </div>
+              </div>
+            `;
             $(".tegs_area").append(htmlTag)
             $(".addNewTag").find("textarea").val("");
         },
@@ -102,9 +109,18 @@ $(".addNewTag").find(".btn").on("click", function() {
     });
 })
 
-$(".add_tags").on("click", function() {
-    var newTagName = $(this).parents(".itemTag").find("p").text();
-    var htmlTag = '<div class="oneTeg"><div class="nameTeg">' + newTagName + '</div><div class="removeTeg"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div></div>';
+// Add tag from search
+$(document).on("click", ".add_tags", function() {
+    var newTagName = $(this).parents(".itemTag").find("p").text(),
+        dataId = $(this).parents(".itemTag").attr("data-id");
+    var htmlTag = `
+      <div class="oneTeg" data-id="` + dataId + `">
+        <div class="nameTeg">` + newTagName + `</div>
+        <div class="removeTeg">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </div>
+      </div>
+    `;
     $(".tegs_area").append(htmlTag)
     $(".list_tegs").slideUp('fast');
     $("#seachTags").val("");
@@ -118,13 +134,10 @@ $(".tegs_area").delegate(".removeTeg", "click", function() {
 
 // Last  news to editor
 
-
-
 $("#cropBttn").on("click", function() {
     $("#croppedImage").show();
     console.log("tratata")
 });
-
 
 var newHeight;
 var newWidth;
@@ -308,14 +321,6 @@ function implementResize(){
             this.ctx.strokeRect(this.downPointX, this.downPointY, (this.lastPointX - this.downPointX), (this.lastPointY - this.downPointY));
         },
 
-        /**
-         * This method take care of resizeing the selection box.
-         * It does so by looking on (click == true and hover on resize box == true)
-         * if both are true, it adjust the resize.
-         *
-         * @param  {[type]} e [description]
-         * @return {[type]}   [description]
-         */
         onImageResize: function(e) {
             var centerPointX = (this.lastPointX + this.downPointX) / 2;
             var centerPointY = (this.lastPointY + this.downPointY) / 2;
@@ -514,9 +519,7 @@ function implementResize(){
                 imgNewSrc = 'https://pp.vk.me/c638716/v638716438/22852/s-613WAij5o.jpg';
                 $("#text-suggesting-news").val("");
             }
-
             imageCropper.init();
-
         });
     });
 
@@ -561,8 +564,6 @@ function publishArticle(post_id, article_title, article_text, tags){
     });
 
 }
-
-
 
 // Confirm delete tour
 $(document).on("click", "#approve_news", function() {

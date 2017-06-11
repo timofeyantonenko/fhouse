@@ -373,7 +373,7 @@ def search_post(request):
 def search_tags(request):
     limit = 5
     query = request.GET.get('q')
-    page = request.GET.get('p')
+    page = request.GET.get('p', 1)
     queryset_list = PostTag.objects.all()
     if query:
         queryset_list = queryset_list.filter(
@@ -402,4 +402,3 @@ def att_tag(request):
         return Response(post_tag_serializer.data)
     else:
         return Response({'error': post_tag_form.errors})
-

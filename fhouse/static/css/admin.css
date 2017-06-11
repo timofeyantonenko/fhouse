@@ -257,6 +257,12 @@ footer select {
     border: 1px solid silver;
     border-top: 0px solid silver;
     display: none;
+    padding: 0;
+}
+
+.errorSearch {
+  padding: 20px;
+  font-size: 16px;
 }
 
 ul {
@@ -720,3 +726,15 @@ canvas {
     font-size: 13px;
 }
 
+/*modal close*/
+
+.modal-header {
+  position: relative;
+}
+
+.close_modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: rgba(17, 17, 17, 0.72);
+}

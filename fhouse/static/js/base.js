@@ -5,18 +5,18 @@ $(document).ready(function() {
         scrollbarWidth = windowsWidth - documentWidth,
         paddingLeft1 = 575 + scrollbarWidth/2,
         paddingRight1 = 575 - scrollbarWidth/2,
-        paddingLittle = scrollbarWidth / 2;
+        paddingLittle = scrollbarWidth / 2,
         styleHtml = `
             @media screen and (min-width: 1170px) {
                 body.modal-open #menu {
-                    padding-left: calc(50% - ` + paddingLeft1 + `px);
-                    padding-right: calc(50% - ` + paddingRight1 + `px);
+                    padding-left: calc(50% - ` + paddingLeft1 + `px) !important;
+                    padding-right: calc(50% - ` + paddingRight1 + `px) !important;
                 }
             }
-            
+
             @media screen and (min-width: 970px) and (max-width: 1169px) {
                 body.modal-open #menu {
-                    padding-right: calc(2.5% + ` + scrollbarWidth + `px);
+                    padding-right: calc(2.5% + ` + scrollbarWidth + `px) !important;
                 }
             }
         `;
@@ -59,7 +59,6 @@ $(document).ready(function() {
         $('#week_bets_top').modal('hide');
     });
 
-
     // Offer article
     $(".linkImgArticle").keyup(function() {
         // downloadLinkTosrc();
@@ -73,12 +72,8 @@ $(document).ready(function() {
         readURLoffer(this);
     });
 
-
-
     $("nav li a").each(function() {
-        if (this.href == window.location.href) {
-            $(this).addClass("activeNav");
-        }
+        if (this.href == window.location.href) $(this).addClass("activeNav");
     });
 
     // Current link
@@ -87,11 +82,8 @@ $(document).ready(function() {
     }
 
     $('.modal-body').change(function() {
-        console.log("sadasd");
+
     });
-
-    $("body").css({ "padding-right": "0px" });
-
 
     $(".user_profile").click(function() {
         $("#top_profile_menu").slideToggle("fast", function() {
@@ -131,14 +123,14 @@ $(document).ready(function() {
     $(".body_user_choice").children(".history_bet").eq(0).children(".your_result_after").hide();
     var length_history_bet = $(".body_user_choice").children(".history_bet").length;
     for (var i = 1; i < length_history_bet; i++) {
-        $(".body_user_choice").children(".history_bet").eq(i).find(".total_kof").hide();
-        $(".body_user_choice").children(".history_bet").eq(i).find(".delete_this_this_choice").hide();
-        $(".body_user_choice").children(".history_bet").eq(i).find(".success_bet").hide();
-        $(".body_user_choice").children(".history_bet").eq(i).find(".not_results").hide();
+        var $userChoise = $(".body_user_choice").children(".history_bet").eq(i);
+        $userChoise.find(".total_kof").hide();
+        $userChoise.find(".delete_this_this_choice").hide();
+        $userChoise.find(".success_bet").hide();
+        $userChoise.find(".not_results").hide();
     }
 
     $(".next_week_bet").bind('click', prev_week);
-
     $(".prev_week_bet").bind('click', next_week);
 
     arraySum(arr);
@@ -150,8 +142,6 @@ $(document).ready(function() {
 
 $("#menuBtn").on("click", function() {
     $(this).toggleClass("openNav");
-    // $(this).toggleClass("closeNav");
-
     $("#mainNav").slideToggle();
     $("#menu").toggleClass("openMenu");
     $("body").toggleClass("menu_open");
@@ -161,7 +151,7 @@ $("#menuBtn").on("click", function() {
 // For modal
 $(".headerAllnews .btn").on("click", function() {
     $("#offerNewsModal").modal('show')
-})
+});
 
 // Модальное окно предложить артикл
 

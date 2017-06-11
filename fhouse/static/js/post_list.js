@@ -250,7 +250,7 @@ function get_posts(tag, page) {
                                     ` + tags + `
                                 </div>
                                 <section class="mark_info ` + classLikes + `">
-                                  <div class="open_modal" data-toggle="modal" data-target="#slaider_modal">
+                                  <div class="commentContainer">
                                       <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                                       <span class="commes_photo_slider">` + data[i]["comments_count"] + `</span>
                                   </div>
