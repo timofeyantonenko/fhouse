@@ -45,8 +45,6 @@ def post_create(request):
     #     raise Http404
     post_content = request.POST.get("content")
     post_image_url = request.POST.get("image_url")
-    print(request.POST.get("content"))
-    print(request.POST.get("image_url"))
     if request.user.is_authenticated():
         new_post = Post(
             user=request.user,
