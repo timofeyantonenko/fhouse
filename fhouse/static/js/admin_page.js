@@ -92,13 +92,14 @@ $(".betPhoto").change(function() {
 
 
 
-// OPtion to select
-$('#selectSectiom').on('change', function() {
+// Option to select
+$('#selectSection').on('change', function() {
     $(".albumSelect").empty();
-    var class_selected_section = parseInt($("#selectSectiom").val());
+    var class_selected_section = parseInt($("#selectSection").val());
     for (var i = 0; i < $("#listAlumms").find('ul').eq(class_selected_section).children("li").length; i++) {
         var text_li = $("#listAlumms").find('ul').eq(class_selected_section).children("li").eq(i).text();
-        var html_option = '<option value="' + i + '" class="StadiumAlbums">' + text_li + '</option>';
+        var idLi = $("#listAlumms").find('ul').eq(class_selected_section).children("li").eq(i).attr("album-id")
+        var html_option = '<option value="' + i + '" class="StadiumAlbums" album-id="' + idLi + '">' + text_li + '</option>';
         $(".albumSelect").append(html_option);
     }
 });
