@@ -92,7 +92,6 @@ $(".addNewTag").find(".btn").on("click", function() {
         type: "POST",
         dataType: "json",
         success: function(data) {
-            alert(newTagName);
             var htmlTag = '<div class="oneTeg"><div class="nameTeg">' + newTagName + '</div><div class="removeTeg"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div></div>';
             $(".tegs_area").append(htmlTag)
             $(".addNewTag").find("textarea").val("");
