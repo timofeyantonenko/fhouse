@@ -339,12 +339,11 @@ def add_comment(request):
 
 @api_view(['GET'])
 def search_post(request):
-    limit = 10
     tag = request.GET.get('tab', "all")
+    page = int(request.GET.get('p', 1))
     user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
     user_tags = user_tags.tags.all()
     if tag == 'all':
-        print('IN ALL')
         queryset_list = Post.objects.all()
     elif request.user.is_staff or request.user.is_superuser:
         tag = user_tags.filter(name=tag)
@@ -358,13 +357,17 @@ def search_post(request):
             Q(content__icontains=query) |
             Q(user__first_name__icontains=query) |
             Q(user__last_name__icontains=query)
-        ).distinct()[:limit]
-    else:
-        queryset_list = queryset_list[:10]
+        ).distinct()
 
-    title_serializer = PostSerializer(queryset_list, many=True, context={'request': request})
-    print(queryset_list)
-    return Response(title_serializer.data)
+    paginator = Paginator(queryset_list, 10)  # 10 posts per page
+    try:
+        queryset_list = paginator.page(page)
+    except PageNotAnInteger:
+        queryset_list = paginator.page(1)
+    except EmptyPage:
+        queryset_list = []
+    post_serializer = PostSerializer(queryset_list, many=True, context={'request': request})
+    return Response(post_serializer.data)
 
 
 @api_view(['GET'])
