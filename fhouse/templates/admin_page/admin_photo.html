@@ -38,7 +38,7 @@
                         </div>
                         <div class="albumPhoto">
                             <h3>Выбор альбома</h3>
-                            <select class="albumSelect">
+                            <select class="albumSelect" id="albumsGallery">
                             </select>
                             <div id="listAlumms">
                             </div>
@@ -67,42 +67,6 @@
         </div>
     </div>
     <!-- Modal window -->
-    <!-- Delete news -->
-    <div class="modal fade" id="delteWeek" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" class="myModalLabel">Выберете неделю которую хотите удалить</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="selectWeekForDelete">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default " id="refuseDelWeek" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary " id="confirmDelWeek" data-dismiss="modal">Подтвердить</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Delete news -->
-    <div class="modal fade" id="delteNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close close_modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Удалить новость</h4>
-                </div>
-                <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default " id="refuseDel" data-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary " id="confirmDel" data-dismiss="modal">Подтвердить</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Add albums -->
     <div class="modal fade" id="add-album" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -114,10 +78,6 @@
                 <div class="modal-body">
                     <h3>Выбор секции</h3>
                     <select id="selectSectiomModal">
-                        <option value="0">Стадионы</option>
-                        <option value="1">Мемы</option>
-                        <option value="2">Ретро</option>
-                        <option value="3">Матчи</option>
                     </select>
                     <div class="addAlbum">
                         <div class="titleAlbum">
@@ -146,6 +106,5 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src='{% static "js/admin_page.js" %}'></script>
     <script src='{% static "js/admin_gallery.js" %}'></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 {% endblock content %}

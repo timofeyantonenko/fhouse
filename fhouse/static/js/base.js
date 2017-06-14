@@ -149,7 +149,7 @@ $("#menuBtn").on("click", function() {
 });
 
 // For modal
-$(".headerAllnews .btn").on("click", function() {
+$("#offerNewsBtn").on("click", function() {
     $("#offerNewsModal").modal('show')
 });
 

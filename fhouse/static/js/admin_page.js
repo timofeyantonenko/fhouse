@@ -15,8 +15,6 @@ $(document).ready(function() {
     updateSeason();
     updateTour();
 
-
-
     // Add option to select
     for (var i = 0; i < $("#listAlumms").find('ul').eq(0).children("li").length; i++) {
         var text_li = $("#listAlumms").find('ul').eq(0).children("li").eq(i).text();
@@ -35,7 +33,7 @@ $(document).ready(function() {
 });
 
 
-// Menu 
+// Menu
 $(".nav").children("li").on("click", function() {
     $(this).parent().find("li").removeClass("active");
     $(this).addClass("active");
@@ -91,15 +89,13 @@ $(".betPhoto").change(function() {
 });
 
 
-
-// Option to select
-$('#selectSection').on('change', function() {
+// OPtion to select
+$('#selectSectiom').on('change', function() {
     $(".albumSelect").empty();
-    var class_selected_section = parseInt($("#selectSection").val());
+    var class_selected_section = parseInt($("#selectSectiom").val());
     for (var i = 0; i < $("#listAlumms").find('ul').eq(class_selected_section).children("li").length; i++) {
         var text_li = $("#listAlumms").find('ul').eq(class_selected_section).children("li").eq(i).text();
-        var idLi = $("#listAlumms").find('ul').eq(class_selected_section).children("li").eq(i).attr("album-id")
-        var html_option = '<option value="' + i + '" class="StadiumAlbums" album-id="' + idLi + '">' + text_li + '</option>';
+        var html_option = '<option value="' + i + '" class="StadiumAlbums">' + text_li + '</option>';
         $(".albumSelect").append(html_option);
     }
 });
@@ -142,7 +138,7 @@ $('#delteWeek').on('hidden.bs.modal', function() {
     $(this).find(".modal-body").empty();
 })
 
-// Load weeks 
+// Load weeks
 
 function loadWeeks() {
     $(".weekChose").empty();
@@ -158,7 +154,7 @@ function loadWeeks() {
     $(".selectWeek").children('.weekChose').children("option").eq(0).prop('selected', true);
 }
 
-// Add remove one bet 
+// Add remove one bet
 
 $(".addMatchBetForm").on("click", function() {
     var checkedChampionat = $(".allMatchesBet").find(".leagueSelect option:selected").text();
@@ -168,7 +164,7 @@ $(".addMatchBetForm").on("click", function() {
             <span class="glyphicon glyphicon-remove removeMatchBetForm" aria-hidden="true"></span>
             <h2>
             <span class="championatTitle">` + checkedChampionat + `</span>,
-            <span class="tourTitle">` + checkedTour + `</span>    
+            <span class="tourTitle">` + checkedTour + `</span>
         </h2>
             <div class="choseTeams">
                 <h4>Первая команда</h4>
@@ -242,7 +238,7 @@ function loadInfoChampionatTeams() {
 
 function loadInfoChampionatTours() {
     var $currentList = $(".listOtherTeam").children("li").eq(indexChampionat).find(".seasonList").children().eq(indexSeason);
-    // tour 
+    // tour
     for (i = 0; i < $currentList.children(".list-tour").children("li").length; i++) {
         var nameTour = $currentList.children(".list-tour").children("li").eq(i).text();
         var htmlSelectorTour = `
@@ -254,7 +250,7 @@ function loadInfoChampionatTours() {
     }
 }
 
-// Select choose championat 
+// Select choose championat
 
 var seasonNow = 0;
 var $currentSeasonAll;
@@ -286,10 +282,10 @@ function makeSelectSeasons() {
     }
 }
 
-// Make tours for all bets 
+// Make tours for all bets
 function makeToursAll() {
     $(".allMatchesBet").find(".listTour").empty();
-    // tours 
+    // tours
     $currentSeasonForTours = $(".listOtherTeam").children("li").eq(indexChampionat).children(".seasonList").children("li").eq(indexSeason);
     for (var i = 0; i < $currentSeasonForTours.children(".list-tour").children("li").length; i++) {
         var toursNameAll = $currentSeasonForTours.children(".list-tour").children("li").eq(i).text();
@@ -302,7 +298,7 @@ function makeToursAll() {
     }
 }
 
-// Make top match form 
+// Make top match form
 var indexSeasonTopMatch = 0;
 var indexChampionatTopMatch = 0;
 var readyMake = 0;
@@ -354,9 +350,9 @@ function makeTopMatchClubList() {
 
 }
 
-// Add tours 
+// Add tours
 function makeTopMatchTours() {
-    // tours 
+    // tours
     for (var i = 0; i < $currentSeason.eq(indexSeasonTopMatch).children(".list-tour").children("li").length; i++) {
         var toursName = $currentSeason.eq(indexSeasonTopMatch).children(".list-tour").children("li").eq(i).text();
         var optionHtmlTours = `
@@ -387,7 +383,7 @@ $(".topMatchThumb").find('.leagueSelect').on('change', function(e) {
     makeTopMatchClubList();
 });
 
-// Change season top match 
+// Change season top match
 $(".topMatchThumb").find('.seasonSelectTopMatch').on('change', function(e) {
     $parentSelectChange = $(this).parents(".topMatchThumb");
     readyMake = 1;
@@ -398,7 +394,7 @@ $(".topMatchThumb").find('.seasonSelectTopMatch').on('change', function(e) {
     makeTopMatchClubList();
 });
 
-// Delete tour or add tour 
+// Delete tour or add tour
 // add tour event
 var iDelChamp = 0;
 var iDelseason = 0;
@@ -447,7 +443,7 @@ function updateTour() {
     }
 }
 
-// Select champ delete 
+// Select champ delete
 
 $("#championatDeleteTour").on("change", function() {
     iDelChamp = $(this).children("option:checked").index();
@@ -482,6 +478,3 @@ $('body').on("click", "#confirmDelTour", function() {
     $(".listOtherTeam").children("li").eq(iDelChamp).children(".seasonList").children("li").eq(iDelseason).children(".list-tour").children("li").eq(iDelTour).remove();
     updateTour();
 });
-
-
-

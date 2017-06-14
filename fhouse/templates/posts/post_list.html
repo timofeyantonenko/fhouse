@@ -11,12 +11,12 @@
                 <button class="btn btn-primary" id="offerNewsBtn" data-toggle="modal">
                     Предложить новость
                 </button>
-                <div class="searchRecord" id="find_news">
+                <form class="searchRecord" id="find_news">
                     <input type="text" id="post_search" placeholder="Поиск новости..."></input>
-                    <button type="button" class="btn btn-primary">
+                    <button id="serchPost" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </button>
-                </div>
+                </form>
             </div>
         </div>
         <div class="menu_individualNews">
@@ -43,6 +43,7 @@
             </ul>
         </div>
         <hr class="postHr">
+        <a href="#" id="searchTag" class="searchItem hiddenItem">Поиск по ключевому слову <strong></strong><span id="resetSeatch" class="badge">x</span></a>
         <div class="articles_list">
             <div id="postList" class="news_stream">
             </div>

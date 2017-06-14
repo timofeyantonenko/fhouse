@@ -1661,3 +1661,17 @@ textarea {
   padding: 20px;
   border-bottom: 1px solid #afadad;
 }
+
+/*Serch*/
+
+.searchItem {
+  margin-bottom: 20px;
+}
+
+.visibilityItem {
+  display: block;
+}
+
+.hiddenItem {
+  display: none;
+}

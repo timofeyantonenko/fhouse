@@ -9,6 +9,10 @@ if (!String.format) {
 
 var current_tab = undefined,
     likes = [];
+    postObj = {
+      main: [],
+      search: {}
+    };
 
 $(document).ready(function() {
     var tab = getUrlParameter('tab')
@@ -188,6 +192,33 @@ $(document).ready(function() {
       $(this).attr("data-page", nextPage);
     })
 
+    // Serch POST
+    $("#find_news").on("submit", function(e) {
+        e.preventDefault();
+        var page = parseInt($(".more_article").attr("data-page"));
+        var $activeTab = $('div .menu_individualNews_active');
+        var tabName = $activeTab.find(".tab_name").html();
+        var searchTab = (tabName == 'Все' || typeof tabName == 'undefined') ? 'all' : tab;
+        var query = $("#post_search").val();
+        var ajax_data = { "tab": searchTab, "q": query };
+        console.log(ajax_data)
+        $.ajax({
+            url: '/posts/search/',
+            data: ajax_data,
+            dataType: "json",
+            cache: true,
+            success: function(data) {
+                var POSTS = renderPosts(data, 1);
+                $("#searchTag").find("strong").html("#" + query);
+                $("#searchTag").addClass("visibilityItem").removeClass("hiddenItem");
+                $("#postList").html(POSTS);
+            },
+            error: function(xhr, status, error) {
+                console.log("Error");
+            }
+        });
+    });
+
 });
 
 function setActiveTab(tag) {
@@ -210,73 +241,85 @@ function get_posts(tag, page) {
         data: ajaxData,
         dataType: "json",
         success: function(data) {
-            console.log(data);
+            var POSTS = renderPosts(data, page);
             if (page == 1) likes = [];
             var htmlPosts = "";
-            for (var i = 0; i < data.length; i++ ) {
-                var tags = "";
-                data[i].tag.forEach( function(e) {
-                  tags += `
-                      <div class="tags__item js-tags-item">
-                          <span>` + e.name + `</span>
-                      </div>
-                  `
-                });
-                var indexElement = ((page - 1) * 5) + i;
-                likes.push({
-                  likes: data[i]['positive_likes_count'],
-                  dislikes: data[i]['negative_likes_count'],
-                  status: data[i]['user_like'],
-                  index: indexElement,
-                  slug: data[i]["slug"]
-                });
-                timePost = get_date(data[i]["timestamp"]);
-                var classLikes = setStatusLikes(data[i]['user_like']);
-                htmlPosts += `
-                    <a href="` + data[i]["slug"] + `" class="oneArticle">
-                        <section class="goNews imgContainer containerImgNews">
-                            <img src="` + data[i]["image"] + `" class="imgUser" alt="">
-                        </section>
-                        <section class="infoNews">
-                            <header>
-                              <h3>` + data[i]["title"] + `</h3>
-                              <time>` + timePost + `</time>
-                              <p class="textNews">
-                                  ` + data[i]["content"] + `
-                              </p>
-                            </header>
-                            <footer class="footerNews">
-                                <div class="dataCommentsLikes">
-                                    ` + tags + `
-                                </div>
-                                <section class="mark_info ` + classLikes + `">
-                                  <div class="commentContainer">
-                                      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                      <span class="commes_photo_slider">` + data[i]["comments_count"] + `</span>
-                                  </div>
-                                  <div class="mark_btn block_like" data-like="-1" data-index="` + indexElement + `">
-                                      <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                      <span class="votes">` + data[i]["positive_likes_count"] + `</span>
-                                  </div>
-                                  <div class="mark_btn block_dislike" data-like="1" data-index="` + indexElement + `">
-                                      <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                                      <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                      <span class="votes">` + data[i]["negative_likes_count"] + `</span>
-                                  </div>
-                              </section>
-                            </footer>
-                        </section>
-                    </a>
-                `;
-            };
-            console.log(likes);
             window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tag);
             $("#loadTile").removeClass("loading").addClass("more_active");
-            page > 1 ? $postsContainer.append(htmlPosts) : $postsContainer.html(htmlPosts);
+            if (page > 1 ) {
+              $postsContainer.append(POSTS)
+            } else {
+              $postsContainer.html(POSTS);
+              postObj.main = [];
+            }
+            postObj.main.push(...data)
         },
         error: function(xhr, status, error) {}
     });
+}
+
+// Render posts
+
+function renderPosts(data, page) {
+  var htmlPosts = "";
+  for (var i = 0; i < data.length; i++ ) {
+      var tags = "";
+      data[i].tag.forEach( function(e) {
+        tags += `
+            <div class="tags__item js-tags-item">
+                <span>` + e.name + `</span>
+            </div>
+        `
+      });
+      var indexElement = ((page - 1) * 5) + i;
+      likes.push({
+        likes: data[i]['positive_likes_count'],
+        dislikes: data[i]['negative_likes_count'],
+        status: data[i]['user_like'],
+        index: indexElement,
+        slug: data[i]["slug"]
+      });
+      timePost = get_date(data[i]["timestamp"]);
+      var classLikes = setStatusLikes(data[i]['user_like']);
+      htmlPosts += `
+          <a href="` + data[i]["slug"] + `" class="oneArticle">
+              <section class="goNews imgContainer containerImgNews">
+                  <img src="` + data[i]["image"] + `" class="imgUser" alt="">
+              </section>
+              <section class="infoNews">
+                  <header>
+                    <h3>` + data[i]["title"] + `</h3>
+                    <time>` + timePost + `</time>
+                    <p class="textNews">
+                        ` + data[i]["content"] + `
+                    </p>
+                  </header>
+                  <footer class="footerNews">
+                      <div class="dataCommentsLikes">
+                          ` + tags + `
+                      </div>
+                      <section class="mark_info ` + classLikes + `">
+                        <div class="commentContainer">
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                            <span class="commes_photo_slider">` + data[i]["comments_count"] + `</span>
+                        </div>
+                        <div class="mark_btn block_like" data-like="-1" data-index="` + indexElement + `">
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                            <span class="votes">` + data[i]["positive_likes_count"] + `</span>
+                        </div>
+                        <div class="mark_btn block_dislike" data-like="1" data-index="` + indexElement + `">
+                            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                            <span class="votes">` + data[i]["negative_likes_count"] + `</span>
+                        </div>
+                    </section>
+                  </footer>
+              </section>
+          </a>
+      `;
+  };
+  return htmlPosts;
 }
 
 // Download photo
@@ -341,26 +384,6 @@ function propose_post(text, image) {
 
 var url = window.location.href;
 
-$(document).on("keyup", "#post_search", function(e) {
-    var page = parseInt($(".more_article").attr("data-page"));
-    var $activeTab = $('div .menu_individualNews_active');
-    var tabName = $activeTab.find(".tab_name").html();
-    var searchTab = (tabName == 'Все' || typeof tabName == 'undefined') ? 'all' : tab;
-    var query = $(this).val();
-    var ajax_data = { "tab": searchTab, "q": query };
-    $.ajax({
-        url: '/posts/search/',
-        data: ajax_data,
-        dataType: "json",
-        cache: true,
-        success: function(data) {
-            console.log(data);
-        },
-        error: function(xhr, status, error) {
-            console.log("Error");
-        }
-    });
-});
 
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
