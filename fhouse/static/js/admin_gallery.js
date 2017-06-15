@@ -54,7 +54,7 @@ function addPhoto(album_id, photo_title, photo_url){
             "title": photo_title,
             "album_id": album_id,
             "i_url": photo_url,
-            "csrfmiddlewaretoken": getCookie('csrftoken')
+            "csrfmiddlewaretoken": getCookie('csrftoken'),
         },
         type: "POST",
         success: function(data, textStatus, xhr) {

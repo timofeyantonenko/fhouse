@@ -7,12 +7,26 @@ if (!String.format) {
     };
 }
 
-var current_tab = undefined,
-    likes = [];
-    postObj = {
-      main: [],
-      search: {}
+// Constants
+var MAIN_FLOW = 'MAIN_FLOW',
+    SERCH_FLOW = 'SERCH_FLOW';
+
+// Data
+var postObj = {
+      MAIN_FLOW: {
+        posts: [],
+        currentPage: 1,
+        currentTab: undefined,
+      },
+      SERCH_FLOW: {
+        posts: [],
+        currentPage: 1,
+        title: '',
+      },
+      isCurrent: MAIN_FLOW,
     };
+
+var likes = [];
 
 $(document).ready(function() {
     var tab = getUrlParameter('tab')
@@ -25,90 +39,19 @@ $(document).ready(function() {
         new_active_tab.addClass('menu_individualNews_active');
     }
 
-    $(document).on('click', '.positive_like', function(e) {
-        e.preventDefault();
-        var like_url = "/likes/post/modify";
-        var a_block = $(this);
-        var like_slug = a_block.attr("href");
-        var pos_likes_count = a_block.text();
-        count_block = $(this).find('span.likes_count');
-        pos_likes_count = parseInt(pos_likes_count);
-        var parent_div_tab = $(this).parent();
-        $.ajax({
-            url: like_url,
-            data: { 'slug': like_slug, 'type': 0 },
-            dataType: "json",
-            success: function(data, textStatus, xhr) {
-                console.log(data)
-                var check_list = data['add_result']
-                for (var i = 0; i < check_list.length; i++) {
-                    var operation_result = check_list[i];
-                    if (operation_result == 0) { // add positive
-                        pos_likes_count = pos_likes_count + 1;
-                    } else if (operation_result == 2) { // remove positive
-                        pos_likes_count = pos_likes_count - 1;
-                    } else if (operation_result == 3) { // remove negative
-                        neg_like_block = $(parent_div_tab).find('a.negative_like');
-                        neg_count_block = $(neg_like_block).find('span.likes_count');
-                        var neg_likes_count = parseInt(neg_like_block.text());
-                        neg_likes_count = neg_likes_count - 1;
-                        neg_count_block.html(neg_likes_count.toString());
-                    }
-                }
-                count_block.html(pos_likes_count.toString());
-            },
-            error: function(xhr, status, error) {}
-        });
-    });
-    $(document).on('click', '.negative_like', function(e) {
-        e.preventDefault();
-        var like_url = "/likes/post/modify";
-        var a_block = $(this);
-        var like_slug = a_block.attr("href");
-        var neg_likes_count = a_block.text();
-        count_block = $(this).find('span.likes_count');
-        neg_likes_count = parseInt(neg_likes_count);
-        var parent_div_tab = $(this).parent();
-        $.ajax({
-            url: like_url,
-            data: { 'slug': like_slug, 'type': 1 },
-            dataType: "json",
-            success: function(data, textStatus, xhr) {
-                var check_list = data['add_result']
-                for (var i = 0; i < check_list.length; i++) {
-                    var operation_result = check_list[i];
-                    if (operation_result == 1) { // add negative
-                        neg_likes_count = neg_likes_count + 1;
-                    } else if (operation_result == 3) { // remove negative
-                        neg_likes_count = neg_likes_count - 1;
-                    } else if (operation_result == 2) { // remove positive
-                        pos_like_block = $(parent_div_tab).find('a.positive_like');
-                        pos_count_block = $(pos_like_block).find('span.likes_count');
-                        var pos_likes_count = parseInt(pos_like_block.text());
-                        pos_likes_count = pos_likes_count - 1;
-                        pos_count_block.html(pos_likes_count.toString());
-                    }
-                }
-                count_block.html(neg_likes_count.toString());
-            },
-            error: function(xhr, status, error) {}
-        });
-    });
-
-    $(".more_article").click(function(e) {
-        $(this).addClass("moreLoading");
-        ajaxPage(true)
-    });
-
     $('.tab').click(function(e) {
         $('.more_article ').removeClass('endMore')
         var parent_div_tab = $(this).parent();
         var previous_active_tab = $('div .menu_individualNews_active');
+
         previous_active_tab.removeClass('menu_individualNews_active');
         previous_active_tab.find('li').removeAttr('id');
         parent_div_tab.addClass('menu_individualNews_active');
+
         var dataId = +$(this).attr("data-id");
-        current_tab = dataId || undefined;
+        postObj.isCurrent = MAIN_FLOW;
+        postObj.MAIN_FLOW.currentPage = 1;
+        postObj.MAIN_FLOW.currentTab = dataId || undefined;
         get_posts(dataId, 1);
     });
 
@@ -180,46 +123,90 @@ $(document).ready(function() {
         });
     });
 
-    var tagLoad = +(window.location.href.split("=").slice(-1).join(""));
-    current_tab = tagLoad;
-    get_posts(tagLoad, 1);
-    setActiveTab(tagLoad);
+    // Init Page
+    initPage(+(window.location.href.split("=").slice(-1).join("")))
 
+    // Load more posts
     $(document).on("click", "#loadTile", function() {
-      var currentPage = +$(this).attr("data-page"),
-          nextPage = currentPage + 1;
-      get_posts(current_tab, nextPage);
-      $(this).attr("data-page", nextPage);
-    })
+      switch (postObj.isCurrent) {
+
+        case MAIN_FLOW:
+          postObj.MAIN_FLOW.currentPage++;
+          return get_posts(postObj.MAIN_FLOW.currentTab);
+
+        case SERCH_FLOW:
+          postObj.SERCH_FLOW.currentPage++;
+          return serchPosts (postObj.SERCH_FLOW.title, postObj.SERCH_FLOW.currentPage);
+
+        default:
+          return false
+      }
+    });
 
     // Serch POST
     $("#find_news").on("submit", function(e) {
         e.preventDefault();
-        var page = parseInt($(".more_article").attr("data-page"));
-        var $activeTab = $('div .menu_individualNews_active');
-        var tabName = $activeTab.find(".tab_name").html();
-        var searchTab = (tabName == 'Все' || typeof tabName == 'undefined') ? 'all' : tab;
-        var query = $("#post_search").val();
-        var ajax_data = { "tab": searchTab, "q": query };
-        console.log(ajax_data)
-        $.ajax({
-            url: '/posts/search/',
-            data: ajax_data,
-            dataType: "json",
-            cache: true,
-            success: function(data) {
-                var POSTS = renderPosts(data, 1);
-                $("#searchTag").find("strong").html("#" + query);
-                $("#searchTag").addClass("visibilityItem").removeClass("hiddenItem");
-                $("#postList").html(POSTS);
-            },
-            error: function(xhr, status, error) {
-                console.log("Error");
-            }
-        });
+        $("#loadTile").removeClass("more_active").addClass("loading");
+
+        var text = $("#post_search").val();
+
+        postObj.isCurrent = SERCH_FLOW;
+        postObj.SERCH_FLOW.currentPage = 1;
+        postObj.SERCH_FLOW.title = text;
+
+        serchPosts(text, 1);
+
+        $("#post_search").val('');
     });
 
 });
+
+function initPage(tagLoad) {
+  postObj.MAIN_FLOW.currentTab = tagLoad;
+  get_posts(tagLoad, 1);
+  setActiveTab(tagLoad);
+}
+
+$(document).on("click", "#resetSearch", function() {
+  postObj.isCurrent = MAIN_FLOW;
+  $("#postList").html(function() {
+    return renderPosts(postObj.MAIN_FLOW.posts);
+  });
+});
+
+function serchPosts (text, page) {
+  $.ajax({
+      url: '/posts/search/',
+      data: {
+        q: text,
+        p: page,
+      },
+      dataType: "json",
+      cache: true,
+      success: function(data) {
+        if (postObj.SERCH_FLOW.currentPage < 2 ) {
+          postObj.SERCH_FLOW.posts = [];
+        };
+
+        postObj.SERCH_FLOW.posts = postObj.SERCH_FLOW.posts.concat(data);
+        var POSTS = renderPosts(postObj.SERCH_FLOW.posts);
+
+        $("#searchTag")
+          .removeClass("hiddenItem")
+          .addClass("visibilityItem")
+          .find("strong")
+          .html("#" + text);
+
+        console.log($("#searchTag"))
+
+        $("#postList").html(POSTS);
+        $("#loadTile").removeClass("loading").addClass("more_active");
+      },
+      error: function(xhr, status, error) {
+          postObj.SERCH_FLOW.currentPage--;
+      }
+  });
+}
 
 function setActiveTab(tag) {
   if ( isNaN(tag)) return $("#postTags").children("div").eq(0).addClass("menu_individualNews_active");
@@ -228,97 +215,103 @@ function setActiveTab(tag) {
 }
 
 
-function get_posts(tag, page) {
-    $("#loadTile").removeClass("more_active").addClass("loading");
+function get_posts(tag) {
     if ( !tag ) {
-      var ajaxData = { 'p': page };
+      var ajaxData = { p: postObj.MAIN_FLOW.currentPage };
     } else {
-      var ajaxData = { 'tag': tag, 'p': page };
-    }
+      var ajaxData = { tag: tag, p: MAIN_FLOW.currentPage };
+    };
     var $postsContainer = $("#postList");
     $.ajax({
         url: '/posts/api_get_posts/',
         data: ajaxData,
         dataType: "json",
         success: function(data) {
-            var POSTS = renderPosts(data, page);
-            if (page == 1) likes = [];
-            var htmlPosts = "";
-            window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tag);
-            $("#loadTile").removeClass("loading").addClass("more_active");
-            if (page > 1 ) {
-              $postsContainer.append(POSTS)
-            } else {
-              $postsContainer.html(POSTS);
-              postObj.main = [];
-            }
-            postObj.main.push(...data)
+          if (postObj.MAIN_FLOW.currentPage < 2 ) {
+            postObj.MAIN_FLOW.posts = [];
+          };
+          postObj.MAIN_FLOW.posts = postObj.MAIN_FLOW.posts.concat(data);
+          var POSTS = renderPosts(postObj.MAIN_FLOW.posts);
+          window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tag);
+          $postsContainer.html(POSTS);
+          $("#loadTile").removeClass("loading").addClass("more_active");
         },
-        error: function(xhr, status, error) {}
+        error: function(xhr, status, error) {
+          postObj.MAIN_FLOW.currentPage--;
+        }
     });
 }
 
 // Render posts
 
-function renderPosts(data, page) {
+function renderPosts(data) {
   var htmlPosts = "";
+      likes = [];
   for (var i = 0; i < data.length; i++ ) {
-      var tags = "";
-      data[i].tag.forEach( function(e) {
-        tags += `
-            <div class="tags__item js-tags-item">
-                <span>` + e.name + `</span>
-            </div>
-        `
-      });
-      var indexElement = ((page - 1) * 5) + i;
-      likes.push({
-        likes: data[i]['positive_likes_count'],
-        dislikes: data[i]['negative_likes_count'],
-        status: data[i]['user_like'],
-        index: indexElement,
-        slug: data[i]["slug"]
-      });
-      timePost = get_date(data[i]["timestamp"]);
-      var classLikes = setStatusLikes(data[i]['user_like']);
-      htmlPosts += `
-          <a href="` + data[i]["slug"] + `" class="oneArticle">
-              <section class="goNews imgContainer containerImgNews">
-                  <img src="` + data[i]["image"] + `" class="imgUser" alt="">
-              </section>
-              <section class="infoNews">
-                  <header>
-                    <h3>` + data[i]["title"] + `</h3>
-                    <time>` + timePost + `</time>
-                    <p class="textNews">
-                        ` + data[i]["content"] + `
-                    </p>
-                  </header>
-                  <footer class="footerNews">
-                      <div class="dataCommentsLikes">
-                          ` + tags + `
-                      </div>
-                      <section class="mark_info ` + classLikes + `">
-                        <div class="commentContainer">
-                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                            <span class="commes_photo_slider">` + data[i]["comments_count"] + `</span>
-                        </div>
-                        <div class="mark_btn block_like" data-like="-1" data-index="` + indexElement + `">
-                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                            <span class="votes">` + data[i]["positive_likes_count"] + `</span>
-                        </div>
-                        <div class="mark_btn block_dislike" data-like="1" data-index="` + indexElement + `">
-                            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                            <span class="votes">` + data[i]["negative_likes_count"] + `</span>
-                        </div>
-                    </section>
-                  </footer>
-              </section>
-          </a>
+    // Tags
+    var tags = "";
+    data[i].tag.forEach( function(e) {
+      tags += `
+          <div class="tags__item js-tags-item">
+              <span>` + e.name + `</span>
+          </div>
       `;
+    });
+    // Likes
+    likes.push({
+      likes: data[i]['positive_likes_count'],
+      dislikes: data[i]['negative_likes_count'],
+      status: data[i]['user_like'],
+      index: i,
+      slug: data[i]["slug"],
+    });
+    timePost = get_date(data[i]["timestamp"]);
+    var classLikes = setStatusLikes(data[i]['user_like']);
+    htmlPosts += `
+        <a href="` + data[i]["slug"] + `" class="oneArticle">
+            <section class="goNews imgContainer containerImgNews">
+                <img src="` + data[i]["image"] + `" class="imgUser" alt="">
+            </section>
+            <section class="infoNews">
+                <header>
+                  <h3>` + data[i]["title"] + `</h3>
+                  <time>` + timePost + `</time>
+                  <p class="textNews">
+                      ` + data[i]["content"] + `
+                  </p>
+                </header>
+                <footer class="footerNews">
+                    <div class="dataCommentsLikes">
+                        ` + tags + `
+                    </div>
+                    <section class="mark_info ` + classLikes + `">
+                      <div class="commentContainer">
+                          <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                          <span class="commes_photo_slider">` + data[i]["comments_count"] + `</span>
+                      </div>
+                      <div class="mark_btn block_like" data-like="-1" data-index="` + i + `">
+                          <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                          <span class="votes">` + data[i]["positive_likes_count"] + `</span>
+                      </div>
+                      <div class="mark_btn block_dislike" data-like="1" data-index="` + i + `">
+                          <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                          <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                          <span class="votes">` + data[i]["negative_likes_count"] + `</span>
+                      </div>
+                  </section>
+                </footer>
+            </section>
+        </a>
+    `;
   };
+
+  if ( postObj.isCurrent == MAIN_FLOW ) {
+    $("#searchTag")
+      .removeClass("visibilityItem")
+      .addClass("hiddenItem");
+  };
+
   return htmlPosts;
 }
 
@@ -341,20 +334,17 @@ function downloadLinkTosrc() {
 
 // Script author: Dima
 function page_settings() {
-    $(".linkImg").keyup(function() {
-        // downloadLinkTosrc();
-        var srcNew = $(this).val();
-        $('.imgOfferNews').attr('src', srcNew);
-    })
-    // Download photo
-    $("#offerImgDownload").change(function() {
-        readURLoffer(this);
-    });
-
+  $(".linkImg").keyup(function() {
+      var srcNew = $(this).val();
+      $('.imgOfferNews').attr('src', srcNew);
+  });
+  $("#offerImgDownload").change(function() {
+      readURLoffer(this);
+  });
 }
 
 function show_modal(modal_id) {
-    $(modal_id).modal('toggle');
+  $(modal_id).modal('toggle');
 }
 
 $(document).on("click", ".btn-ok", function(e) {
@@ -374,10 +364,8 @@ function propose_post(text, image) {
         },
         method: "POST",
         success: function(data, textStatus, xhr) {
-
         },
         error: function(xhr, status, error) {
-
         }
     });
 }
@@ -459,11 +447,18 @@ $(document).on("click", ".footerNews", function(event) {
 
 $(document).on("click", ".mark_btn", function(event) {
   event.preventDefault();
+
   var _this = $(this),
       ind = +(_this.attr("data-index")),
       typeEv = 0;
+
   _this.parent(".mark_info").addClass("stopEvent");
-  if ( _this.hasClass("block_dislike") ) typeEv = 1
+  if ( _this.hasClass("block_dislike") ) {
+    typeEv = 1;
+  };
+
+  console.log(ind, typeEv)
+
   postLike(ind, typeEv);
 })
 
@@ -475,6 +470,7 @@ function postLike(indexPost, typeEvent) {
       data: { 'slug': slug, 'type': typeEvent },
       dataType: "json",
       success: function(data, textStatus, xhr) {
+        // Set status
         if ( typeEvent === 1 && currentState === false) {
           likes[indexPost]["dislikes"] = likes[indexPost]["dislikes"] - 1;
           likes[indexPost]['status'] = null;
@@ -496,16 +492,24 @@ function postLike(indexPost, typeEvent) {
           likes[indexPost]["likes"] = likes[indexPost]["likes"] + 1;
           likes[indexPost]['status'] = true;
         };
+
+        // Change Main Data
+        postObj[postObj.isCurrent].posts[indexPost].negative_likes_count = likes[indexPost]["dislikes"];
+        postObj[postObj.isCurrent].posts[indexPost].positive_likes_count = likes[indexPost]["likes"];
+        postObj[postObj.isCurrent].posts[indexPost].user_like = likes[indexPost]['status'];
+
+        // Change state in DOM
         var $thisPost = $(".oneArticle").eq(indexPost);
         $thisPost.find(".mark_info").removeClass("disLikeAcive").removeClass("nothingAcive").removeClass("likeAcive");
+
         return {
           setLikes: $thisPost.find(".block_like").find(".votes").html(likes[indexPost]["likes"]),
           setDislikes: $thisPost.find(".block_dislike").find(".votes").html(likes[indexPost]["dislikes"]),
           setClassContainer: $thisPost.find(".mark_info").addClass( function() {
             return setStatusLikes(likes[indexPost]['status'])
           }),
-          parentAllowEvent: $thisPost.find(".mark_info").removeClass("stopEvent")
-        }
+          parentAllowEvent: $thisPost.find(".mark_info").removeClass("stopEvent"),
+        };
       },
       error: function(xhr, status, error) {
           console.log(error, status, xhr);

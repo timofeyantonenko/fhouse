@@ -63,7 +63,7 @@ a.all_of_units {
 }
 
 .all_of_units i {
-    color: #fff !important;  
+    color: #fff !important;
 }
 
 .all_of_units:hover {
@@ -331,7 +331,6 @@ a.all_of_units {
 
 .articles {
     background-color: #fafafa;
-    border: 1px solid #ccd1d9;
     padding: 24px;
 }
 
@@ -604,9 +603,9 @@ a.main_news  {
         width: 100% !important;
         height: 210px !important;
         margin-bottom: 15px !important;
-    } 
+    }
     .main_album_flex {
-      height: 210px !important;  
+      height: 210px !important;
     }
     .main_last_album .album_img {
         height: 210px !important;
@@ -617,10 +616,10 @@ a.main_news  {
     .last_albums {
         width: 100%;
         height: 275px;
-    } 
+    }
     .last_albums .album_img {
         height: 210px;
-    } 
+    }
 }
 
 
