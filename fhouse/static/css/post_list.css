@@ -1656,10 +1656,34 @@ textarea {
 
 .searchItem {
   margin-bottom: 20px;
+  float: left;
+  height: 40px;
+  align-items: center;
+  border: 1px solid rgb(218, 218, 218);
+  border-radius: 4px;
+  clear: both;
+  overflow: hidden;
+}
+
+.searchItem span,
+.searchItem strong {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.searchItem .serachPhrase {
+  padding: 0 10px;
+}
+
+.searchItem .plus_units {
+  width: 40px;
+  border-left: 1px solid rgb(218, 218, 218);
+  justify-content: center;
 }
 
 .visibilityItem {
-  display: block;
+  display: flex;
 }
 
 .hiddenItem {

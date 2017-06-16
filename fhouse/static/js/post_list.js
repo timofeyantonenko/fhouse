@@ -146,9 +146,13 @@ $(document).ready(function() {
     // Serch POST
     $("#find_news").on("submit", function(e) {
         e.preventDefault();
-        $("#loadTile").removeClass("more_active").addClass("loading");
+        var text = $.trim($("#post_search").val());
 
-        var text = $("#post_search").val();
+        if ( text === "" ) {
+          return false;
+        };
+
+        $("#loadTile").removeClass("more_active").addClass("loading");
 
         postObj.isCurrent = SERCH_FLOW;
         postObj.SERCH_FLOW.currentPage = 1;
@@ -245,6 +249,12 @@ function get_posts(tag) {
 // Render posts
 
 function renderPosts(data) {
+  if ( data.length < 1) {
+    var htmlNull = `
+      <h2>Нет постов с таким ключевым словом</h2>
+    `;
+    return htmlNull
+  };
   var htmlPosts = "";
       likes = [];
   for (var i = 0; i < data.length; i++ ) {
