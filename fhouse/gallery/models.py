@@ -112,7 +112,7 @@ def create_slug(instance, new_slug=None):
     if new_slug is not None:
         slug = new_slug
     else:
-        slug = slugify(instance.title)
+        slug = slugify(instance.photo_title)
     qs = GallerySection.objects.filter(slug=slug).order_by("-id")
     exists = qs.exists()
     if exists:
@@ -129,6 +129,8 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
 def pre_save_photo_receiver(sender, instance, *args, **kwargs):
     parent_album = instance.photo_album
     parent_album.updated = instance.timestamp
+    if not instance.slug:
+        instance.slug = create_slug(instance)
     parent_album.save()
     print(parent_album)
     pass

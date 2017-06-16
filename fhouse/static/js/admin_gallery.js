@@ -31,7 +31,7 @@ function loadSections () {
             var sections = "";
             dataGalley.forEach( function(section, index) {
               sections += `
-                <option value="` + index +  `" class="section_"` + section.id + `">
+                <option value="` + index +  `" class="section_` + section.id + `" data-id="` + section.id + `">
                   ` + section.section_title + `
                 </option>
               `;
@@ -66,6 +66,35 @@ function addPhoto(album_id, photo_title, photo_url){
         }
     });
 }
+
+function addAlbum(section_id, section_title, photo_url){
+    $.ajax({
+        url: '/gallery/album/add/',
+        data: {
+            "title": section_title,
+            "section": section_id,
+            "i_url": photo_url,
+            "csrfmiddlewaretoken": getCookie('csrftoken'),
+        },
+        type: "POST",
+        success: function(data, textStatus, xhr) {
+            console.log(data);
+        },
+        error: function(xhr, status, error) {
+            // console.log(error, status, xhr);
+            console.log("pizdec")
+        }
+    });
+}
+
+
+$(document).on("click", "#add-album-btn", function(){
+    var section_id = parseInt($("#selectSectiomModal").children("option:selected").attr("data-id")),
+        title = $.trim($("#album-title-input").val()),
+        imageUrl = $.trim($("#album-photo-input").val());
+        alert(section_id + title + imageUrl)
+    return addAlbum(section_id, title, imageUrl);
+});
 
 $(document).on("click", "#add-photo-button", function(){
     var albumId = parseInt($("#albumsGallery").children("option:selected").attr("data-id")),

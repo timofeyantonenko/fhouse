@@ -12,6 +12,7 @@ from .views import (
     add_photo_comment,
     SectionList,
     add_photo,
+    add_album,
     # api_test,
 )
 
@@ -19,6 +20,7 @@ urlpatterns = [  # get_section_information
     # url(r'^slider_photo_list/$', PhotoList.as_view()),
     url(r'^sections/$', SectionList.as_view(), name='sections_list'),
     url(r'^photo/add/$', add_photo, name='add_photo'),
+    url(r'^album/add/$', add_album, name='add_album'),
     url(r'^photo/comments/$', get_photo_comments, name='photo_comments'),
     url(r'^photo/comment/$', add_photo_comment, name='add_photo_comment'),
     url(r'^slider_photo_list/$', get_section_information),
