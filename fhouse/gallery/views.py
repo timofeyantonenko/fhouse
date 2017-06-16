@@ -205,3 +205,23 @@ def add_photo(request):
     return Response(status=200)
 
 
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def add_album(request):
+    section_id = request.POST.get("section")
+    album_title = request.POST.get("title")
+    new_album = SectionAlbum(album_title=album_title, album_section_id=section_id)
+    if "i_file" in request.POST:
+        pass
+    elif "i_url" in request.POST:
+        image_url = request.POST.get("i_url")
+        response = urlopen(image_url)
+        io = BytesIO(response.read())
+        new_album.image.save(quote_plus(image_url), File(io))
+        new_album.save()
+    else:
+        return Response(data={"answer": "Wrong photo"}, status=403)
+    return Response(status=200)
+
+
