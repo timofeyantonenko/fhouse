@@ -188,6 +188,7 @@ function serchPosts (text, page) {
       dataType: "json",
       cache: true,
       success: function(data) {
+
         if (postObj.SERCH_FLOW.currentPage < 2 ) {
           postObj.SERCH_FLOW.posts = [];
         };
@@ -231,8 +232,10 @@ function get_posts(tag) {
         data: ajaxData,
         dataType: "json",
         success: function(data) {
+          data = data.data;
           if (postObj.MAIN_FLOW.currentPage < 2 ) {
             postObj.MAIN_FLOW.posts = [];
+            postObj.MAIN_FLOW.count = data.count;
           };
           postObj.MAIN_FLOW.posts = postObj.MAIN_FLOW.posts.concat(data);
           var POSTS = renderPosts(postObj.MAIN_FLOW.posts);
