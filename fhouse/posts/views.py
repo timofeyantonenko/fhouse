@@ -343,6 +343,7 @@ def add_comment(request):
 
 @api_view(['GET'])
 def search_post(request):
+    context = {}
     tag = request.GET.get('tab', "all")
     page = int(request.GET.get('p', 1))
     user_tags = UserFavoriteTags.objects.filter(user=request.user).first()
@@ -363,6 +364,8 @@ def search_post(request):
             Q(user__last_name__icontains=query)
         ).distinct()
 
+    if page == 1:
+        context["count"] = queryset_list.count()
     paginator = Paginator(queryset_list, 10)  # 10 posts per page
     try:
         queryset_list = paginator.page(page)
@@ -371,7 +374,8 @@ def search_post(request):
     except EmptyPage:
         queryset_list = []
     post_serializer = PostSerializer(queryset_list, many=True, context={'request': request})
-    return Response(post_serializer.data)
+    context["data"] = post_serializer.data
+    return Response(context)
 
 
 @api_view(['GET'])
