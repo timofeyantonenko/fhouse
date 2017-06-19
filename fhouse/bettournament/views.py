@@ -10,8 +10,9 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSerializer, SeasonStageSerializer,\
-    UsersResultSerializer
+from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSerializer, SeasonStageSerializer, \
+    SeasonSerializer
+from .forms import SeasonStageForm
 from django.views.decorators.csrf import csrf_protect
 
 from .models import StageBet, MatchBetFromUser, UsersResult, TeamSeasonResult, Match, SeasonStage, Season, \
@@ -77,7 +78,6 @@ def all_reviews(request):
                         "id": group.id,
                     })
 
-    print(championats_dict)
     context["championats_dict"] = championats_dict
 
     if request.user.is_authenticated():
@@ -115,7 +115,6 @@ def get_league_status(request):
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def make_bet(request):
-    print("COME IN")
     response = Response()
     if request.user.is_authenticated():
         bet_stage_id = request.POST.get("stage_id")
@@ -188,7 +187,7 @@ def get_bet_result_table(request):
                                                         "user__last_name",
                                                         "user__avatar").annotate(
             score=Sum('score')).order_by('-score')
-    result = user_results[(page-1)*pagination:page*pagination]
+    result = user_results[(page - 1) * pagination:page * pagination]
     context["users_table"] = result
     context["all_users"] = len(user_results)
     return Response(context)
@@ -239,6 +238,46 @@ def get_stage_comments(request):
         comments = paginator.page(paginator.num_pages)
     comment_serializer = CommentSerializer(comments, many=True, context={'request': request})
     return Response(comment_serializer.data)
+
+
+@api_view(['GET'])
+def get_season_weeks(request):
+    season = request.GET.get("season", 1)
+    weeks = SeasonStage.objects.filter(stage_season__id=season)
+    weeks_serializer = SeasonStageSerializer(weeks, many=True)
+    return Response(weeks_serializer.data)
+
+
+@csrf_protect
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def add_season_stage(request):
+    season_stage_form = SeasonStageForm(request.POST)
+    if season_stage_form.is_valid():
+        print(season_stage_form.cleaned_data)
+        season_stage_form.save()
+        # print(season_stage_form.cleaned_data["st"])
+    # season = request.GET.get("season", 1)
+    # start_date = request.GET.get("sd", 1)
+    # end_date = request.GET.get("ed", 1)
+    # name = request.GET.get("name")
+    # weeks = SeasonStage.objects.filter(stage_season__id=season)
+    # weeks_serializer = SeasonStageSerializer(weeks, many=True)
+    return Response({})# weeks_serializer.data)
+
+
+@api_view(['GET'])
+def get_active_seasons(request):
+    active_seasons = Season.objects.active()
+    season_serializers = SeasonSerializer(active_seasons, many=True)
+    return Response(season_serializers.data)
+
+
+@api_view(['GET'])
+def get_active_seasons(request):
+    active_seasons = Season.objects.active()
+    season_serializers = SeasonSerializer(active_seasons, many=True)
+    return Response(season_serializers.data)
 
 
 @csrf_protect
