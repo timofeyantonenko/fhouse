@@ -2,6 +2,11 @@ textarea {
     resize: none !important;
 }
 
+.mainContainer {
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    background-color: #fff !important;
+}
+
 .right_header {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -451,18 +456,12 @@ a.donaMassonry {
         padding-top: 70px;
         padding-bottom: 20px;
     }
-    .mainContainer {
-        border: 1px solid #afadad;
-    }
 }
 
 @media screen and (max-width: 969px) {
     body {
         padding-top: 70px;
         padding-bottom: 20px;
-    }
-    .mainContainer {
-        border: 0 solid silver;
     }
 }
 
@@ -495,37 +494,35 @@ a.donaMassonry {
 
 .opacityEffect {
     animation-name: slideDown;
-    -webkit-animation-name: slideDown;  
- 
-    animation-duration: 1s; 
+    -webkit-animation-name: slideDown;
+
+    animation-duration: 1s;
     -webkit-animation-duration: 1s;
- 
-    animation-timing-function: ease;    
-    -webkit-animation-timing-function: ease;    
- 
-    visibility: visible !important;                     
+
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
+
+    visibility: visible !important;
 }
- 
+
 @-webkit-keyframes slideDown {
     0% {
         -webkit-transform: translateY(-100%);
                 transform: translateY(-100%);
-    }          
+    }
     100% {
         -webkit-transform: translateY(0%);
                 transform: translateY(0%);
-    }       
+    }
 }
- 
+
 @keyframes slideDown {
     0% {
         -webkit-transform: translateY(-100%);
                 transform: translateY(-100%);
-    }          
+    }
     100% {
         -webkit-transform: translateY(0%);
                 transform: translateY(0%);
-    }       
+    }
 }
- 
-

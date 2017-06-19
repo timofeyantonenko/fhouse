@@ -45,13 +45,23 @@
                         </div>
                         <h3>Добавить фото</h3>
                         <div class="addPhoto">
-                            <div class="titlePhoto">
-                                <h4>Подпись фото</h4>
-                                <textarea name="" id="photo_title" placeholder="Подпись фото"></textarea>
+                            <div class="titlePhoto input-group">
+                                <span class="input-group-addon">Подпись фото</span>
+                                <input
+                                  type="text"
+                                  id="photo_title"
+                                  class="form-control"
+                                  placeholder="Подпись фото..."
+                                >
                             </div>
-                            <div class="titlePhoto">
-                                <h4>Сслыка на фото</h4>
-                                <textarea name="" id="photo_url" placeholder="Ссылка на фото"></textarea>
+                            <div class="titlePhoto input-group">
+                                <span class="input-group-addon">Сслыка на фото</span>
+                                <input
+                                  type="text"
+                                  id="photo_url"
+                                  class="form-control"
+                                  placeholder="Ссылка на фото"
+                                >
                             </div>
                             <div class="albumPhoto">
                                 <form id="add-photo-form" runat="server">
@@ -80,13 +90,13 @@
                     <select id="selectSectiomModal">
                     </select>
                     <div class="addAlbum">
-                        <div class="titleAlbum">
-                            <h4>Названия альбома:</h4>
-                            <textarea name="" id="album-title-input" placeholder="Названия альбома"></textarea>
+                        <div class="titleAlbum input-group">
+                            <span class="input-group-addon">Названия альбома:</span>
+                            <input type="text" id="album-title-input" class="form-control" placeholder="Названия альбома">
                         </div>
-                        <div class="photoAlbum">
-                            <h4>Ссылка на фото для альбома:</h4>
-                            <textarea name="" id="album-photo-input" placeholder="Ссылка на фото альбома"></textarea>
+                        <div class="photoAlbum input-group">
+                            <span class="input-group-addon">Ссылка на фото для альбома:</span>
+                            <input type="text" id="album-photo-input" class="form-control" placeholder="Ссылка на фото альбома">
                         </div>
                     </div>
                     <div class="albumPhoto">
