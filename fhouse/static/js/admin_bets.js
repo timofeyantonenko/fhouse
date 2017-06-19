@@ -29,3 +29,28 @@ $("#update_results").on("click", function(){
             }
         });
 });
+
+$(document).ready(function() {
+    addTour(6, "2017-06-20", "2017-06-22", "1 tour", true)
+});
+
+function addTour(stage_season, start_date, end_date, stage_name, is_current){
+    $.ajax({
+            url: '/bets/add_season_stage/',
+            data: {
+                stage_season: stage_season,
+                start_date: start_date,
+                end_date: end_date,
+                stage_name: stage_name,
+                is_current: is_current,
+                csrfmiddlewaretoken: getCookie('csrftoken')
+            },
+            method: "POST",
+            success: function(data, textStatus, xhr) {
+                console.log(textStatus);
+            },
+            error: function(xhr, status, error) {
+                console.log(error, status, xhr);
+            }
+        });
+}

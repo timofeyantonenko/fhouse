@@ -7,6 +7,7 @@ from utils.abstract_classes import ForeignContentClass
 
 
 # Create your models here.
+from django.db.models.signals import pre_save
 
 
 class LeagueType(models.Model):
@@ -45,6 +46,10 @@ class Season(models.Model):
     def __str__(self):
         return "{}: {}".format(self.season_league, self.season_name)
 
+    @property
+    def active(self):
+        return settings
+
 
 class SeasonGroup(models.Model):
     group_name = models.CharField(max_length=120)
@@ -61,6 +66,9 @@ class SeasonStage(CommentedClass, ForeignContentClass):
     stage_name = models.CharField(max_length=80)
     stage_season = models.ForeignKey(Season, on_delete=models.CASCADE)
     is_current = models.BooleanField(default=False)
+
+    # start_date = models.DateTimeField(null=True, blank=True)
+    # end_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return '{}: {}'.format(self.stage_season, self.stage_name)
@@ -139,7 +147,7 @@ class Match(models.Model):
     )
 
     # if match used for bet and if we want to give some specific bonus for this match
-    match_bonus = models.IntegerField(blank=True, null=True)
+    match_bonus = models.FloatField(blank=True, null=True)
 
     # if we want to give for match name
     match_name = models.CharField(max_length=120, blank=True, null=True)
@@ -200,8 +208,9 @@ class StageBet(models.Model):
     match_2 = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='%(class)s_match2_stage', default=1)
     match_3 = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='%(class)s_match3_stage', default=1)
 
-    start_date = models.DateTimeField()
-    check_date = models.DateTimeField()
+    # start_date = models.DateTimeField(null=True, blank=True)
+    # end_date = models.DateTimeField(null=True, blank=True)
+
     must_be_checked = models.BooleanField(default=True)
 
     def __str__(self):
@@ -246,3 +255,13 @@ class UsersResult(models.Model):
 
     def __str__(self):
         return 'user: {}, score: {}'.format(self.user, self.score)
+
+
+def pre_save_season_stage_receiver(sender, instance, *args, **kwargs):
+    if instance.is_current:
+        stages = SeasonStage.objects.filter(stage_season__id=instance.stage_season.id).filter(is_current=True)
+        stages.exclude(id=instance.id)
+        stages.update(is_current=False)
+
+
+pre_save.connect(pre_save_season_stage_receiver, sender=SeasonStage)

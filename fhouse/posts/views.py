@@ -309,6 +309,7 @@ class PostList(ListView):
 @api_view(['GET'])
 def api_get_posts(request):
     context = {}
+    limit = 10
     tag = request.GET.get("tag", None)
     page = request.GET.get("p", 1)
     if tag:
@@ -319,7 +320,7 @@ def api_get_posts(request):
     post_queryset = Post.objects.get_only_active(post_queryset)
     if page == 1:
         context["count"] = post_queryset.count()
-    paginator = Paginator(post_queryset, 5)  # Show 5 posts per page
+    paginator = Paginator(post_queryset, limit)  # Show 10 posts per page
     try:
         post_queryset = paginator.page(page)
     except PageNotAnInteger:
