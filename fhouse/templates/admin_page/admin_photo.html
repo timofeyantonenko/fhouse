@@ -29,7 +29,7 @@
                     </nav>
                     <h2>Добавить фото</h2>
                     <!-- Добавить фото -->
-                    <div class="addPhoto thumbnail">
+                    <form class="addPhoto thumbnail">
                         <div class="sectionPhoto">
                             <h3>Выбор секции</h3>
                             <select id="selectSection" name="selectSection">
@@ -63,15 +63,13 @@
                                   placeholder="Ссылка на фото"
                                 >
                             </div>
-                            <div class="albumPhoto">
-                                <form id="add-photo-form" runat="server">
-                                    <input type='file' id="newImg" />
-                                    <img id="imgToThis" src="" />
-                                </form>
+                            <div class="form-group">
+                              <label for="exampleInputFile">Загрузить фото</label>
+                              <input type="file" id="imgLoad">
                             </div>
                             <button id="add-photo-button" class="btn btn-success add_album" role="button">Добавить</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </main>
         </div>

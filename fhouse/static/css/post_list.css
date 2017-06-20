@@ -1,3 +1,7 @@
+.articles_list {
+  clear: both;
+}
+
 /*Header search*/
 
 a:hover,
@@ -1665,8 +1669,8 @@ textarea {
   overflow: hidden;
 }
 
-.searchItem span,
-.searchItem strong {
+.searchItem  span,
+.searchItem  strong {
   display: flex;
   align-items: center;
   height: 100%;
