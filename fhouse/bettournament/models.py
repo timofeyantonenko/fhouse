@@ -67,8 +67,8 @@ class SeasonStage(CommentedClass, ForeignContentClass):
     stage_season = models.ForeignKey(Season, on_delete=models.CASCADE)
     is_current = models.BooleanField(default=False)
 
-    # start_date = models.DateTimeField(null=True, blank=True)
-    # end_date = models.DateTimeField(null=True, blank=True)
+    start = models.DateTimeField(null=True, blank=True)
+    end = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return '{}: {}'.format(self.stage_season, self.stage_name)
@@ -208,8 +208,8 @@ class StageBet(models.Model):
     match_2 = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='%(class)s_match2_stage', default=1)
     match_3 = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='%(class)s_match3_stage', default=1)
 
-    # start_date = models.DateTimeField(null=True, blank=True)
-    # end_date = models.DateTimeField(null=True, blank=True)
+    start = models.DateTimeField(null=True, blank=True)
+    end = models.DateTimeField(null=True, blank=True)
 
     must_be_checked = models.BooleanField(default=True)
 

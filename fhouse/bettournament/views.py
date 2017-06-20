@@ -11,7 +11,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import StageBetSerializer, TeamSeasonResultSerializer, MatchSerializer, SeasonStageSerializer, \
-    SeasonSerializer
+    SeasonSerializer, UsersResultSerializer, StageBetListSerializer
 from .forms import SeasonStageForm
 from django.views.decorators.csrf import csrf_protect
 
@@ -263,7 +263,7 @@ def add_season_stage(request):
     # name = request.GET.get("name")
     # weeks = SeasonStage.objects.filter(stage_season__id=season)
     # weeks_serializer = SeasonStageSerializer(weeks, many=True)
-    return Response({})# weeks_serializer.data)
+    return Response({})  # weeks_serializer.data)
 
 
 @api_view(['GET'])
@@ -288,3 +288,20 @@ def add_stage_comment(request):
     content_type = str(content_type).replace(" ", "")
     new_comment = create_comment(content_type, request)
     return Response(status=200)
+
+
+@api_view(["GET"])
+def get_user_stage_bet_info(request):
+    bet_stage_id = request.GET.get("stage_id", 1)
+    stage_user_result = UsersResult.objects.filter(stage__id=bet_stage_id, user=request.user).first()
+    if stage_user_result:
+        result_serializer = UsersResultSerializer(stage_user_result, many=False)
+        return Response(result_serializer.data)
+    else:
+        return get_bet_stage_info(request)
+
+
+@api_view(["GET"])
+def get_bet_stages(request):
+    stages = StageBet.objects.all()
+    return Response(stages.values_list("id", flat=True))

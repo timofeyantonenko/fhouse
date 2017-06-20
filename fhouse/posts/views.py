@@ -311,7 +311,7 @@ def api_get_posts(request):
     context = {}
     limit = 10
     tag = request.GET.get("tag", None)
-    page = request.GET.get("p", 1)
+    page = int(request.GET.get("p", 1))
     if tag:
         post_queryset = Post.objects.filter(tag__id=tag)
     else:
