@@ -186,6 +186,7 @@ function serchPosts (text, page) {
       dataType: "json",
       cache: true,
       success: function(data) {
+        console.log(data);
         if (postObj.SERCH_FLOW.currentPage < 2 ) {
           postObj.SERCH_FLOW.count = Math.ceil(data.count / 10);
           postObj.SERCH_FLOW.posts = [];
@@ -220,7 +221,7 @@ function get_posts(tag) {
     if ( !tag ) {
       var ajaxData = { p: postObj.MAIN_FLOW.currentPage };
     } else {
-      var ajaxData = { tag: tag, p: MAIN_FLOW.currentPage };
+      var ajaxData = { tag: tag, p: parseInt(postObj.MAIN_FLOW.currentPage) };
     };
     var $postsContainer = $("#postList");
     $.ajax({
@@ -228,14 +229,13 @@ function get_posts(tag) {
         data: ajaxData,
         dataType: "json",
         success: function(data) {
+          console.log(data, ajaxData);
           if (postObj.MAIN_FLOW.currentPage < 2 ) {
             postObj.MAIN_FLOW.posts = [];
             postObj.MAIN_FLOW.count = Math.ceil(data.count / 10);
           };
 
-          data = data.data;
-
-          postObj.MAIN_FLOW.posts = postObj.MAIN_FLOW.posts.concat(data);
+          postObj.MAIN_FLOW.posts = postObj.MAIN_FLOW.posts.concat(data.data);
           var POSTS = renderPosts(postObj.MAIN_FLOW.posts);
           window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tag);
           $postsContainer.html(POSTS);
@@ -250,11 +250,14 @@ function get_posts(tag) {
 // Render posts
 function renderPosts(data) {
   if ( data.length < 1) {
+    $("#loadTile").addClass("finish_more")
     var htmlNull = `
       <h2>Нет постов с таким ключевым словом</h2>
     `;
     return htmlNull
-  };
+  } else {
+    $("#loadTile").removeClass("finish_more");
+  }
   var htmlPosts = "";
       likes = [];
   for (var i = 0; i < data.length; i++ ) {
@@ -316,8 +319,11 @@ function renderPosts(data) {
     `;
   };
 
+  // Toggle more posts
   if ( postObj[postObj.isCurrent].count == postObj[postObj.isCurrent].currentPage) {
-    alert("dima")
+    $("#loadTile").addClass("finish_more");
+  } else {
+    $("#loadTile").removeClass("finish_more");
   }
 
   if ( postObj.isCurrent == MAIN_FLOW ) {
@@ -473,7 +479,7 @@ $(document).on("click", ".mark_btn", function(event) {
     typeEv = 1;
   };
 
-  console.log(ind, typeEv)
+  // console.log(ind, typeEv)
 
   postLike(ind, typeEv);
 })
