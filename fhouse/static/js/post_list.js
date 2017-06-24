@@ -124,12 +124,16 @@ $(document).ready(function() {
     });
 
     // Init Page
-    initPage(+(window.location.href.split("=").slice(-1).join("")))
+    (function() {
+      var location = +(window.location.href.split("=").slice(-1).join(""));
+      postObj.MAIN_FLOW.currentTab = location;
+      get_posts(location, 1);
+      setActiveTab(location);
+    }());
 
     // Load more posts
     $(document).on("click", "#loadTile", function() {
       switch (postObj.isCurrent) {
-
         case MAIN_FLOW:
           postObj.MAIN_FLOW.currentPage++;
           return get_posts(postObj.MAIN_FLOW.currentTab);
@@ -146,9 +150,13 @@ $(document).ready(function() {
     // Serch POST
     $("#find_news").on("submit", function(e) {
         e.preventDefault();
-        $("#loadTile").removeClass("more_active").addClass("loading");
+        var text = $.trim($("#post_search").val());
 
-        var text = $("#post_search").val();
+        if ( text === "" ) {
+          return false;
+        };
+
+        $("#loadTile").removeClass("more_active").addClass("loading");
 
         postObj.isCurrent = SERCH_FLOW;
         postObj.SERCH_FLOW.currentPage = 1;
@@ -160,12 +168,6 @@ $(document).ready(function() {
     });
 
 });
-
-function initPage(tagLoad) {
-  postObj.MAIN_FLOW.currentTab = tagLoad;
-  get_posts(tagLoad, 1);
-  setActiveTab(tagLoad);
-}
 
 $(document).on("click", "#resetSearch", function() {
   postObj.isCurrent = MAIN_FLOW;
@@ -184,10 +186,13 @@ function serchPosts (text, page) {
       dataType: "json",
       cache: true,
       success: function(data) {
+        console.log(data);
         if (postObj.SERCH_FLOW.currentPage < 2 ) {
+          postObj.SERCH_FLOW.count = Math.ceil(data.count / 10);
           postObj.SERCH_FLOW.posts = [];
         };
 
+        data = data.data;
         postObj.SERCH_FLOW.posts = postObj.SERCH_FLOW.posts.concat(data);
         var POSTS = renderPosts(postObj.SERCH_FLOW.posts);
 
@@ -196,8 +201,6 @@ function serchPosts (text, page) {
           .addClass("visibilityItem")
           .find("strong")
           .html("#" + text);
-
-        console.log($("#searchTag"))
 
         $("#postList").html(POSTS);
         $("#loadTile").removeClass("loading").addClass("more_active");
@@ -214,12 +217,11 @@ function setActiveTab(tag) {
   $activTag.parent(".changeNews ").addClass("menu_individualNews_active");
 }
 
-
 function get_posts(tag) {
     if ( !tag ) {
       var ajaxData = { p: postObj.MAIN_FLOW.currentPage };
     } else {
-      var ajaxData = { tag: tag, p: MAIN_FLOW.currentPage };
+      var ajaxData = { tag: tag, p: parseInt(postObj.MAIN_FLOW.currentPage) };
     };
     var $postsContainer = $("#postList");
     $.ajax({
@@ -227,10 +229,13 @@ function get_posts(tag) {
         data: ajaxData,
         dataType: "json",
         success: function(data) {
+          console.log(data, ajaxData);
           if (postObj.MAIN_FLOW.currentPage < 2 ) {
             postObj.MAIN_FLOW.posts = [];
+            postObj.MAIN_FLOW.count = Math.ceil(data.count / 10);
           };
-          postObj.MAIN_FLOW.posts = postObj.MAIN_FLOW.posts.concat(data);
+
+          postObj.MAIN_FLOW.posts = postObj.MAIN_FLOW.posts.concat(data.data);
           var POSTS = renderPosts(postObj.MAIN_FLOW.posts);
           window.history.pushState("object or string", "Title", '/posts/tabs?tab=' + tag);
           $postsContainer.html(POSTS);
@@ -243,8 +248,16 @@ function get_posts(tag) {
 }
 
 // Render posts
-
 function renderPosts(data) {
+  if ( data.length < 1) {
+    $("#loadTile").addClass("finish_more")
+    var htmlNull = `
+      <h2>Нет постов с таким ключевым словом</h2>
+    `;
+    return htmlNull
+  } else {
+    $("#loadTile").removeClass("finish_more");
+  }
   var htmlPosts = "";
       likes = [];
   for (var i = 0; i < data.length; i++ ) {
@@ -268,43 +281,50 @@ function renderPosts(data) {
     timePost = get_date(data[i]["timestamp"]);
     var classLikes = setStatusLikes(data[i]['user_like']);
     htmlPosts += `
-        <a href="` + data[i]["slug"] + `" class="oneArticle">
-            <section class="goNews imgContainer containerImgNews">
-                <img src="` + data[i]["image"] + `" class="imgUser" alt="">
-            </section>
-            <section class="infoNews">
-                <header>
-                  <h3>` + data[i]["title"] + `</h3>
-                  <time>` + timePost + `</time>
-                  <p class="textNews">
-                      ` + data[i]["content"] + `
-                  </p>
-                </header>
-                <footer class="footerNews">
-                    <div class="dataCommentsLikes">
-                        ` + tags + `
+      <a href="` + data[i]["slug"] + `" class="oneArticle">
+          <section class="goNews imgContainer containerImgNews">
+              <img src="` + data[i]["image"] + `" class="imgUser" alt="">
+          </section>
+          <section class="infoNews">
+              <header>
+                <h3>` + data[i]["title"] + `</h3>
+                <time>` + timePost + `</time>
+                <p class="textNews">
+                    ` + data[i]["content"] + `
+                </p>
+              </header>
+              <footer class="footerNews">
+                  <div class="dataCommentsLikes">
+                      ` + tags + `
+                  </div>
+                  <section class="mark_info ` + classLikes + `">
+                    <div class="commentContainer">
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        <span class="commes_photo_slider">` + data[i]["comments_count"] + `</span>
                     </div>
-                    <section class="mark_info ` + classLikes + `">
-                      <div class="commentContainer">
-                          <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                          <span class="commes_photo_slider">` + data[i]["comments_count"] + `</span>
-                      </div>
-                      <div class="mark_btn block_like" data-like="-1" data-index="` + i + `">
-                          <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                          <span class="votes">` + data[i]["positive_likes_count"] + `</span>
-                      </div>
-                      <div class="mark_btn block_dislike" data-like="1" data-index="` + i + `">
-                          <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                          <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                          <span class="votes">` + data[i]["negative_likes_count"] + `</span>
-                      </div>
-                  </section>
-                </footer>
-            </section>
-        </a>
+                    <div class="mark_btn block_like" data-like="-1" data-index="` + i + `">
+                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                        <span class="votes">` + data[i]["positive_likes_count"] + `</span>
+                    </div>
+                    <div class="mark_btn block_dislike" data-like="1" data-index="` + i + `">
+                        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                        <span class="votes">` + data[i]["negative_likes_count"] + `</span>
+                    </div>
+                </section>
+              </footer>
+          </section>
+      </a>
     `;
   };
+
+  // Toggle more posts
+  if ( postObj[postObj.isCurrent].count == postObj[postObj.isCurrent].currentPage) {
+    $("#loadTile").addClass("finish_more");
+  } else {
+    $("#loadTile").removeClass("finish_more");
+  }
 
   if ( postObj.isCurrent == MAIN_FLOW ) {
     $("#searchTag")
@@ -314,6 +334,8 @@ function renderPosts(data) {
 
   return htmlPosts;
 }
+
+
 
 // Download photo
 function readURLoffer(input) {
@@ -457,7 +479,7 @@ $(document).on("click", ".mark_btn", function(event) {
     typeEv = 1;
   };
 
-  console.log(ind, typeEv)
+  // console.log(ind, typeEv)
 
   postLike(ind, typeEv);
 })
