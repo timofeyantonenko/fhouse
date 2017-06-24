@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'pagedown',
     'markdown_deux',
     'rest_framework',
+    'autofixture',
 
     # local apps
     'admin_page',
