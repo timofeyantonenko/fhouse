@@ -24,7 +24,7 @@ from django.utils import timezone
 from django.db.models import Q
 from django.views.generic import ListView
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from .forms import PostForm, PostTagForm
 from .models import Post, UserFavoriteTags, PostTag
@@ -206,6 +206,26 @@ def post_update(request, slug=None):
         "form": form,
     }
     return render(request, "posts/post_form.html", context)
+
+
+@api_view(["POST"])
+@csrf_protect
+@permission_classes((IsAdminUser,))
+def update_post(request):
+    post_id = int(request.POST.get("id"))
+    tags_id = request.POST.getlist("tags[]")
+    tags_id = [int(tag_id) for tag_id in tags_id]
+    text = request.POST.get("text")
+    title = request.POST.get("title")
+    post = Post.objects.get(id=post_id)
+    post.title = title
+    post.content = text
+    post.draft = False
+    post.publish = timezone.now()
+    for tag_id in tags_id:
+        post.tag.add(tag_id)
+    post.save()
+    return Response()
 
 
 def post_delete(request, slug=None):

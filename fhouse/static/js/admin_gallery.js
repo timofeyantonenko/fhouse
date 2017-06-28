@@ -43,7 +43,6 @@ function loadSections () {
                 </option>
               `;
             });
-            console.log(dataGalley)
             $("#selectSection").html(sections);
             $("#selectSectiomModal").html(sections);
             createAlbumsSelect(0);
@@ -55,26 +54,27 @@ function loadSections () {
 }
 
 function addPhoto(album_id, photo_title, image, type_img){
-    var ajaxData = {
-        "title": photo_title,
-        "album_id": album_id,
-        "csrfmiddlewaretoken": getCookie('csrftoken'),
-    };
+    var data = new FormData();
+    data.append("title", photo_title);
+    data.append("album_id", album_id),
+    data.append("csrfmiddlewaretoken", getCookie('csrftoken'));
     if (type_img === 0) {
-      ajaxData.i_url = image;
+      data.append("i_url", image)
     } else {
-      ajaxData.i_file = image;
+      data.append("i_file",image.get("img"));
     };
     $.ajax({
         url: '/gallery/photo/add/',
-        data: ajaxData,
+        data: data, //ajaxData.i_file,
         type: "POST",
+//        cache: false,
+        processData: false,
+        contentType: false,
         success: function(data, textStatus, xhr) {
             console.log(data);
         },
         error: function(xhr, status, error) {
-            // console.log(error, status, xhr);
-            console.log("pizdec")
+             console.log(error, status, xhr);
         }
     });
 }
@@ -93,11 +93,15 @@ function addAlbum(section_id, section_title, photo_url){
             console.log(data);
         },
         error: function(xhr, status, error) {
-            // console.log(error, status, xhr);
-            console.log("pizdec")
+             console.log(error, status, xhr);
         }
     });
 }
+
+$('.add_album').on('click', function(e) {
+    e.preventDefault();
+    $('#add-album').show();
+});
 
 $(document).on("click", "#add-album-btn", function(){
     var section_id = parseInt($("#selectSectiomModal").children("option:selected").attr("data-id")),
@@ -109,8 +113,9 @@ $(document).on("click", "#add-album-btn", function(){
 
 $(document).on("click", "#add-photo-button", function(e) {
     e.preventDefault();
+    title = $("#photo_title").val();
     var albumId = parseInt($("#albumsGallery").children("option:selected").attr("data-id")),
-        title = $.trim($("#photo_title").val());
+        title = $.trim(title);
     return addPhoto(albumId, title, IMG_UPLOAD.image, IMG_UPLOAD.type);
 });
 
@@ -118,13 +123,14 @@ $(document).on("click", "#add-photo-button", function(e) {
 $(document).on("change", "#photo_url", function() {
   var imageUrl = $.trim($(this).val());
   IMG_UPLOAD.image = imageUrl;
-  IMG_UPLOAD.type = 1;
+  IMG_UPLOAD.type = 0;
 })
 
 // Upload file
 function uploadFile() {
     $("#photo_url").val("");
     var inputFile = document.getElementById("imgLoad");
+    var reader = new FileReader();
     var fileImg = inputFile.files[0];
     var fd = new FormData();
     fd.append('img', fileImg);

@@ -187,12 +187,13 @@ $(document).on("click", "#approve_news", function() {
     urlPOst = "someUrl";
   } else {
     typePost = "POST";
-    urlPOst = "someUrl";
+    urlPOst = "/posts/update/";
   }
-  var ajaxData =  publishPost(typePost);
+  var ajaxData = publishPost(typePost);
   $.ajax({
       url: urlPOst,
       data: ajaxData,
+      type: "POST",
       dataType: "json",
       success: function(data) {
         alert("Новость опубликованно");
@@ -220,10 +221,12 @@ function getTags() {
 function publishPost(type) {
     var ajaxData = {
       image: $("#img-suggesting-news").attr("src"),
-      title: $("#title-suggesting-news").text(),
+      title: $("#title-suggesting-news").val(),
       text: $("#text-suggesting-news").text(),
-      id: parseInt($("#approve_news").attr("data-post-id"))
+      id: parseInt($("#approve_news").attr("data-post-id")),
+      csrfmiddlewaretoken: getCookie('csrftoken')
     }
+    alert(ajaxData.title)
     if ( type !== "ARTICLE" ) ajaxData.tags = getTags();
     return ajaxData
 }

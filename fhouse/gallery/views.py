@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_protect
@@ -7,6 +8,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from .models import GallerySection, SectionAlbum, AlbumPhoto
 from .serializers import AlbumPhotoSerializer, SectionAlbumSerializer, GallerySectionSerializer
 from comments.serializers import CommentSerializer
@@ -192,8 +194,10 @@ def add_photo(request):
     album_id = request.POST.get("album_id")
     photo_title = request.POST.get("title")
     new_photo = AlbumPhoto(photo_title=photo_title, photo_album_id=album_id)
-    if "i_file" in request.POST:
-        pass
+    if "i_file" in request.FILES:
+        file = request.FILES.get("i_file")
+        new_photo.image.save(quote_plus(file.name), File(file))
+        # print(files)
     elif "i_url" in request.POST:
         image_url = request.POST.get("i_url")
         response = urlopen(image_url)
@@ -212,6 +216,7 @@ def add_album(request):
     section_id = request.POST.get("section")
     album_title = request.POST.get("title")
     new_album = SectionAlbum(album_title=album_title, album_section_id=section_id)
+    print(dir(new_album))
     if "i_file" in request.POST:
         pass
     elif "i_url" in request.POST:
@@ -223,5 +228,3 @@ def add_album(request):
     else:
         return Response(data={"answer": "Wrong photo"}, status=403)
     return Response(status=200)
-
-

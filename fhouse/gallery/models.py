@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 
-from utils.files_preparing import upload_location
+from utils.files_preparing import upload_location, upload_photo_photo, upload_album_photo
 from utils.abstract_classes import CommentedClass
 from utils.abstract_classes import LikedClass
 from utils.abstract_classes import ForeignContentClass
@@ -14,9 +14,7 @@ from likes.models import Like
 
 
 class GallerySection(models.Model):
-    section_title = models.TextField(max_length=120)
-    # slug for absolute url
-    slug = models.SlugField(unique=True)
+    section_title = models.TextField(max_length=20)
 
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -37,15 +35,13 @@ class GallerySection(models.Model):
 
 
 class SectionAlbum(LikedClass):
-    album_title = models.TextField(max_length=120)
-    # slug for absolute url
-    slug = models.SlugField(unique=True)
+    album_title = models.TextField(max_length=45)
 
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     album_section = models.ForeignKey(GallerySection, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=upload_location,
+    image = models.ImageField(upload_to=upload_album_photo,
                               null=True, blank=True)
 
     def __str__(self):
@@ -77,14 +73,12 @@ class SectionAlbum(LikedClass):
 
 
 class AlbumPhoto(CommentedClass, LikedClass, ForeignContentClass):
-    photo_title = models.TextField(max_length=120)
-    # slug for absolute url
-    slug = models.SlugField(unique=True)
+    photo_title = models.TextField(max_length=40)
 
     photo_album = models.ForeignKey(SectionAlbum, on_delete=models.CASCADE)
 
     # one photo
-    image = models.ImageField(upload_to=upload_location,
+    image = models.ImageField(upload_to=upload_photo_photo,
                               null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
@@ -129,12 +123,8 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
 def pre_save_photo_receiver(sender, instance, *args, **kwargs):
     parent_album = instance.photo_album
     parent_album.updated = instance.timestamp
-    if not instance.slug:
-        instance.slug = create_slug(instance)
     parent_album.save()
-    print(parent_album)
-    pass
 
 
 pre_save.connect(pre_save_photo_receiver, sender=AlbumPhoto)
-pre_save.connect(pre_save_post_receiver, sender=GallerySection)
+# pre_save.connect(pre_save_post_receiver, sender=GallerySection)

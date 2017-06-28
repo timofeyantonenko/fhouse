@@ -16,11 +16,13 @@ from .views import (
     get_post_comments,
     search_tags,
     att_tag,
+    update_post,
 )
 
 urlpatterns = [
     url(r'^get_comments/$', get_post_comments, name='post_comments'),
     url(r'^search/$', search_post),
+    url(r'^update/$', update_post, name="update_post"),
     url(r'^search/tags/$', search_tags),
     url(r'^api_get_posts/$', api_get_posts),
     url(r'^$', post_list, name="list"),

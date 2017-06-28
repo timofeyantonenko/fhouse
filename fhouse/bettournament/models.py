@@ -257,6 +257,11 @@ class UsersResult(models.Model):
         return 'user: {}, score: {}'.format(self.user, self.score)
 
 
+class Achievement(models.Model):
+    place = models.PositiveIntegerField(null=True, blank=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, default=1)
+
+
 def pre_save_season_stage_receiver(sender, instance, *args, **kwargs):
     if instance.is_current:
         stages = SeasonStage.objects.filter(stage_season__id=instance.stage_season.id).filter(is_current=True)
